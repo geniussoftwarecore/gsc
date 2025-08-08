@@ -11,9 +11,11 @@ import { ScrollIndicator, ScrollToTop } from "@/components/ui/scroll-indicator";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
+import ServiceDetail from "@/pages/service-detail";
 import Portfolio from "@/pages/portfolio";
 import Frameworks from "@/pages/frameworks";
 import Contact from "@/pages/contact";
+import Dashboard from "@/pages/dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,9 +24,11 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
+      <Route path="/services/:id" component={ServiceDetail} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/frameworks" component={Frameworks} />
       <Route path="/contact" component={Contact} />
+      <Route path="/dashboard" component={Dashboard} />
       <Route component={NotFound} />
     </Switch>
   );

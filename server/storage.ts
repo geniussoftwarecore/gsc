@@ -8,7 +8,13 @@ import {
   type Service,
   type InsertService,
   type Testimonial,
-  type InsertTestimonial
+  type InsertTestimonial,
+  type SubscriptionPlan,
+  type InsertSubscriptionPlan,
+  type UserSubscription,
+  type InsertUserSubscription,
+  type ServiceRequest,
+  type InsertServiceRequest
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -25,10 +31,21 @@ export interface IStorage {
   createPortfolioItem(item: InsertPortfolioItem): Promise<PortfolioItem>;
   
   getAllServices(): Promise<Service[]>;
+  getServiceById(id: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
   
   getAllTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
+  
+  getAllSubscriptionPlans(): Promise<SubscriptionPlan[]>;
+  getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]>;
+  createSubscriptionPlan(plan: InsertSubscriptionPlan): Promise<SubscriptionPlan>;
+  
+  getUserSubscriptions(userId: string): Promise<UserSubscription[]>;
+  createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription>;
+  
+  getServiceRequests(userId?: string): Promise<ServiceRequest[]>;
+  createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest>;
 }
 
 export class MemStorage implements IStorage {
@@ -37,6 +54,9 @@ export class MemStorage implements IStorage {
   private portfolioItems: Map<string, PortfolioItem>;
   private services: Map<string, Service>;
   private testimonials: Map<string, Testimonial>;
+  private subscriptionPlans: Map<string, SubscriptionPlan>;
+  private userSubscriptions: Map<string, UserSubscription>;
+  private serviceRequests: Map<string, ServiceRequest>;
 
   constructor() {
     this.users = new Map();
@@ -44,6 +64,9 @@ export class MemStorage implements IStorage {
     this.portfolioItems = new Map();
     this.services = new Map();
     this.testimonials = new Map();
+    this.subscriptionPlans = new Map();
+    this.userSubscriptions = new Map();
+    this.serviceRequests = new Map();
     
     // Initialize with sample data
     this.initializeSampleData();
@@ -99,6 +122,14 @@ export class MemStorage implements IStorage {
         icon: "settings",
         category: "erp",
         featured: "true"
+      },
+      {
+        id: randomUUID(),
+        title: "تطبيقات سطح المكتب",
+        description: "تطوير تطبيقات سطح المكتب المتقدمة لأنظمة Windows وmacOS وLinux بتقنيات حديثة",
+        icon: "monitor",
+        category: "desktop",
+        featured: "false"
       }
     ];
 
@@ -199,6 +230,9 @@ export class MemStorage implements IStorage {
     ];
 
     sampleTestimonials.forEach(testimonial => this.testimonials.set(testimonial.id, testimonial));
+
+    // Initialize subscription plans after services are created
+    this.initializeSubscriptionPlans();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -223,6 +257,8 @@ export class MemStorage implements IStorage {
     const contactSubmission: ContactSubmission = { 
       ...submission, 
       id, 
+      phone: submission.phone || null,
+      service: submission.service || null,
       createdAt: new Date() 
     };
     this.contactSubmissions.set(id, contactSubmission);
@@ -245,7 +281,13 @@ export class MemStorage implements IStorage {
 
   async createPortfolioItem(item: InsertPortfolioItem): Promise<PortfolioItem> {
     const id = randomUUID();
-    const portfolioItem: PortfolioItem = { ...item, id };
+    const portfolioItem: PortfolioItem = { 
+      ...item, 
+      id,
+      projectUrl: item.projectUrl || null,
+      technologies: item.technologies || null,
+      featured: item.featured || null
+    };
     this.portfolioItems.set(id, portfolioItem);
     return portfolioItem;
   }
@@ -254,9 +296,17 @@ export class MemStorage implements IStorage {
     return Array.from(this.services.values());
   }
 
+  async getServiceById(id: string): Promise<Service | undefined> {
+    return this.services.get(id);
+  }
+
   async createService(service: InsertService): Promise<Service> {
     const id = randomUUID();
-    const newService: Service = { ...service, id };
+    const newService: Service = { 
+      ...service, 
+      id,
+      featured: service.featured || null
+    };
     this.services.set(id, newService);
     return newService;
   }
@@ -267,9 +317,207 @@ export class MemStorage implements IStorage {
 
   async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
     const id = randomUUID();
-    const newTestimonial: Testimonial = { ...testimonial, id };
+    const newTestimonial: Testimonial = { 
+      ...testimonial, 
+      id,
+      rating: testimonial.rating || null
+    };
     this.testimonials.set(id, newTestimonial);
     return newTestimonial;
+  }
+
+  async getAllSubscriptionPlans(): Promise<SubscriptionPlan[]> {
+    return Array.from(this.subscriptionPlans.values());
+  }
+
+  async getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]> {
+    return Array.from(this.subscriptionPlans.values()).filter(
+      plan => plan.serviceId === serviceId
+    );
+  }
+
+  async createSubscriptionPlan(plan: InsertSubscriptionPlan): Promise<SubscriptionPlan> {
+    const id = randomUUID();
+    const newPlan: SubscriptionPlan = { 
+      ...plan, 
+      id,
+      serviceId: plan.serviceId || null,
+      features: plan.features || null,
+      popular: plan.popular || null,
+      active: plan.active || null
+    };
+    this.subscriptionPlans.set(id, newPlan);
+    return newPlan;
+  }
+
+  async getUserSubscriptions(userId: string): Promise<UserSubscription[]> {
+    return Array.from(this.userSubscriptions.values()).filter(
+      subscription => subscription.userId === userId
+    );
+  }
+
+  async createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription> {
+    const id = randomUUID();
+    const newSubscription: UserSubscription = { 
+      ...subscription, 
+      id,
+      userId: subscription.userId || null,
+      planId: subscription.planId || null,
+      startDate: subscription.startDate || null,
+      endDate: subscription.endDate || null,
+      autoRenew: subscription.autoRenew || null,
+      paymentMethod: subscription.paymentMethod || null
+    };
+    this.userSubscriptions.set(id, newSubscription);
+    return newSubscription;
+  }
+
+  async getServiceRequests(userId?: string): Promise<ServiceRequest[]> {
+    if (userId) {
+      return Array.from(this.serviceRequests.values()).filter(
+        request => request.userId === userId
+      );
+    }
+    return Array.from(this.serviceRequests.values());
+  }
+
+  async createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest> {
+    const id = randomUUID();
+    const newRequest: ServiceRequest = { 
+      ...request, 
+      id,
+      userId: request.userId || null,
+      serviceId: request.serviceId || null,
+      requirements: request.requirements || null,
+      status: request.status || null,
+      priority: request.priority || null,
+      estimatedCost: request.estimatedCost || null,
+      actualCost: request.actualCost || null,
+      startDate: request.startDate || null,
+      endDate: request.endDate || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.serviceRequests.set(id, newRequest);
+    return newRequest;
+  }
+
+  private initializeSubscriptionPlans() {
+    const servicesArray = Array.from(this.services.values());
+    const mobileService = servicesArray.find(s => s.category === "mobile");
+    const webService = servicesArray.find(s => s.category === "web");
+    const desktopService = servicesArray.find(s => s.category === "desktop");
+    const designService = servicesArray.find(s => s.category === "design");
+    const marketingService = servicesArray.find(s => s.category === "marketing");
+
+    const samplePlans: SubscriptionPlan[] = [
+      // Mobile App Development Plans
+      {
+        id: randomUUID(),
+        name: "تطبيق بسيط",
+        description: "تطبيق موبايل بسيط بوظائف أساسية",
+        serviceId: mobileService?.id || "",
+        price: "15000",
+        duration: "one-time",
+        features: ["تصميم واجهة مستخدم بسيطة", "3 شاشات رئيسية", "قاعدة بيانات محلية", "دعم فني لمدة 3 أشهر"],
+        popular: "false",
+        active: "true"
+      },
+      {
+        id: randomUUID(),
+        name: "تطبيق متقدم",
+        description: "تطبيق موبايل متقدم بوظائف شاملة",
+        serviceId: mobileService?.id || "",
+        price: "35000",
+        duration: "one-time",
+        features: ["تصميم واجهة مستخدم متقدمة", "10+ شاشات", "API متكامل", "نظام دفع", "إشعارات فورية", "دعم فني لمدة سنة"],
+        popular: "true",
+        active: "true"
+      },
+      // Web Development Plans
+      {
+        id: randomUUID(),
+        name: "موقع تعريفي",
+        description: "موقع إلكتروني تعريفي احترافي",
+        serviceId: webService?.id || "",
+        price: "8000",
+        duration: "one-time",
+        features: ["تصميم متجاوب", "5 صفحات", "نموذج تواصل", "تحسين SEO أساسي", "استضافة سنة مجانية"],
+        popular: "false",
+        active: "true"
+      },
+      {
+        id: randomUUID(),
+        name: "منصة إلكترونية",
+        description: "منصة إلكترونية متكاملة",
+        serviceId: webService?.id || "",
+        price: "25000",
+        duration: "one-time",
+        features: ["تصميم مخصص", "لوحة تحكم", "نظام إدارة المحتوى", "تكامل مع وسائل الدفع", "تحليلات متقدمة", "دعم فني سنة"],
+        popular: "true",
+        active: "true"
+      },
+      // Desktop Development Plans
+      {
+        id: randomUUID(),
+        name: "تطبيق سطح مكتب بسيط",
+        description: "تطبيق سطح مكتب بوظائف أساسية",
+        serviceId: desktopService?.id || "",
+        price: "20000",
+        duration: "one-time",
+        features: ["واجهة مستخدم بسيطة", "قاعدة بيانات محلية", "تقارير أساسية", "دعم Windows وmacOS", "دعم فني 6 أشهر"],
+        popular: "false",
+        active: "true"
+      },
+      {
+        id: randomUUID(),
+        name: "نظام إدارة متكامل",
+        description: "نظام إدارة سطح مكتب شامل",
+        serviceId: desktopService?.id || "",
+        price: "50000",
+        duration: "one-time",
+        features: ["واجهة متقدمة", "قاعدة بيانات سحابية", "تقارير متقدمة", "نظام صلاحيات", "تكامل مع APIs", "دعم جميع الأنظمة", "دعم فني سنة"],
+        popular: "true",
+        active: "true"
+      },
+      // Design Plans
+      {
+        id: randomUUID(),
+        name: "هوية بصرية أساسية",
+        description: "تصميم هوية بصرية بسيطة",
+        serviceId: designService?.id || "",
+        price: "5000",
+        duration: "one-time",
+        features: ["تصميم شعار", "بطاقة أعمال", "ورقة رسمية", "3 مراجعات مجانية"],
+        popular: "false",
+        active: "true"
+      },
+      {
+        id: randomUUID(),
+        name: "هوية بصرية شاملة",
+        description: "تصميم هوية بصرية متكاملة",
+        serviceId: designService?.id || "",
+        price: "12000",
+        duration: "one-time",
+        features: ["تصميم شعار متقدم", "دليل الهوية البصرية", "قوالب تسويقية", "تصميم لافتات", "مراجعات غير محدودة"],
+        popular: "true",
+        active: "true"
+      },
+      // Marketing Plans
+      {
+        id: randomUUID(),
+        name: "حملة تسويقية شهرية",
+        description: "إدارة حملات التسويق الرقمي",
+        serviceId: marketingService?.id || "",
+        price: "3000",
+        duration: "monthly",
+        features: ["إدارة وسائل التواصل", "إعلانات مدفوعة", "تقارير أسبوعية", "استشارات تسويقية"],
+        popular: "true",
+        active: "true"
+      }
+    ];
+
+    samplePlans.forEach(plan => this.subscriptionPlans.set(plan.id, plan));
   }
 }
 

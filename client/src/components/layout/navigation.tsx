@@ -51,6 +51,11 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
+              <Link href="/dashboard">
+                <Button variant="outline" className="ml-2">
+                  لوحة التحكم
+                </Button>
+              </Link>
               <Link href="/contact">
                 <Button className="btn-primary">
                   تواصل معنا
@@ -92,6 +97,11 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
+              <Link href="/dashboard" onClick={closeMobileMenu}>
+                <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+                  لوحة التحكم
+                </span>
+              </Link>
               <Link href="/contact" onClick={closeMobileMenu}>
                 <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
                   تواصل معنا

@@ -144,15 +144,15 @@ export default function Services() {
                   {category.services.length > 0 ? (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {category.services.map((service, serviceIndex) => (
-                        <AnimatedCard
-                          key={service.id}
-                          delay={serviceIndex * 0.1}
-                          className={`p-6 group cursor-pointer ${
-                            service.featured === "true"
-                              ? "gradient-primary text-white"
-                              : "bg-white hover:shadow-xl"
-                          }`}
-                        >
+                        <Link key={service.id} href={`/services/${service.id}`}>
+                          <AnimatedCard
+                            delay={serviceIndex * 0.1}
+                            className={`p-6 group cursor-pointer transition-all duration-300 ${
+                              service.featured === "true"
+                                ? "gradient-primary text-white"
+                                : "bg-white hover:shadow-xl"
+                            }`}
+                          >
                           <CardContent className="p-0">
                             <motion.div
                               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -205,6 +205,7 @@ export default function Services() {
                             </motion.div>
                           </CardContent>
                         </AnimatedCard>
+                        </Link>
                       ))}
                     </div>
                   ) : (
