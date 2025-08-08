@@ -1,8 +1,8 @@
 # Overview
 
-This is a professional company website for "Genius Software Core" - a software development company specializing in mobile apps, web development, graphic design, digital marketing, smart solutions, and ERPNext systems. The platform is built as a modern, Arabic-language (RTL) corporate website to showcase services, portfolio items, client testimonials, and provide contact functionality.
+This is a professional company website for "Genius Software Core" - a software development company specializing in mobile apps, web development, graphic design, digital marketing, smart solutions, and ERPNext systems. The platform is built as a modern, Arabic-language (RTL) corporate website with advanced interactive animations and micro-interactions to showcase services, portfolio items, client testimonials, and provide contact functionality.
 
-The application follows a full-stack architecture with a React frontend and Express.js backend, using PostgreSQL for data persistence and a clean, component-based design system.
+The application follows a full-stack architecture with a React frontend and Express.js backend, using PostgreSQL for data persistence and a clean, component-based design system enhanced with Framer Motion for smooth animations.
 
 # User Preferences
 
@@ -40,11 +40,14 @@ Preferred communication style: Simple, everyday language.
 - **Code Quality**: ESLint and TypeScript strict mode
 
 ## Key Features
+- **Interactive Animations**: Smooth transitions and micro-interactions using Framer Motion
 - **Responsive Design**: Mobile-first approach with RTL support
+- **Advanced Navigation**: Sticky navigation with scroll indicators and back-to-top functionality
 - **Form Handling**: Contact forms with validation and toast notifications
 - **Content Management**: Dynamic services and portfolio display
 - **Performance**: Optimized images, lazy loading, and query caching
 - **SEO**: Meta tags and Open Graph support
+- **Frameworks Showcase**: Dedicated page for internal R&D tools and open-source frameworks
 
 # External Dependencies
 
@@ -61,6 +64,8 @@ Preferred communication style: Simple, everyday language.
 - **tailwindcss**: Utility-first CSS framework
 - **lucide-react**: Icon library
 - **class-variance-authority**: Component variant management
+- **framer-motion**: Advanced animation library for React
+- **react-intersection-observer**: Viewport intersection detection for animations
 
 ## Development Dependencies
 - **vite**: Build tool and dev server

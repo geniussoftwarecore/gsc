@@ -1,42 +1,119 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { COMPANY_INFO } from "@/lib/constants";
+import { motion } from "framer-motion";
+import { InteractiveButton } from "@/components/ui/interactive-button";
 
 export default function Hero() {
   return (
-    <section className="gradient-light py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="gradient-light py-16 lg:py-24 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-10">
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 bg-primary rounded-full"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-24 h-24 bg-primary-dark rounded-full"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -10, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-right">
-            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-center lg:text-right"
+          >
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight"
+            >
               حلول برمجية{" "}
-              <span className="text-gradient">ذكية</span>
+              <motion.span
+                initial={{ backgroundPosition: "0% 50%" }}
+                animate={{ backgroundPosition: "100% 50%" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                className="bg-gradient-to-r from-primary via-primary-dark to-primary bg-300% bg-clip-text text-transparent"
+              >
+                ذكية
+              </motion.span>
               <br />
               لأعمالك
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed animate-fade-in animation-delay-200">
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl text-gray-600 mb-8 leading-relaxed"
+            >
               {COMPANY_INFO.description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in animation-delay-400">
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            >
               <Link href="/contact">
-                <Button className="btn-primary transform hover:-translate-y-1">
+                <InteractiveButton
+                  className="btn-primary shadow-lg hover:shadow-xl"
+                  icon={<i className="fas fa-rocket"></i>}
+                >
                   ابدأ مشروعك الآن
-                </Button>
+                </InteractiveButton>
               </Link>
               <Link href="/portfolio">
-                <Button variant="outline" className="btn-secondary">
+                <InteractiveButton
+                  variant="outline"
+                  className="btn-secondary"
+                  icon={<i className="fas fa-eye"></i>}
+                >
                   استعرض أعمالنا
-                </Button>
+                </InteractiveButton>
               </Link>
-            </div>
-          </div>
-          <div className="lg:order-first order-last animate-fade-in animation-delay-600">
-            <img
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-              alt="Modern office workspace with computers and design tools"
-              className="rounded-2xl shadow-2xl w-full h-auto hover:scale-105 transition-transform duration-300"
-            />
-          </div>
+            </motion.div>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="lg:order-first order-last"
+          >
+            <motion.div
+              whileHover={{ scale: 1.02, rotateY: 5 }}
+              transition={{ duration: 0.3 }}
+            >
+              <img
+                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                alt="Modern office workspace with computers and design tools"
+                className="rounded-2xl shadow-2xl w-full h-auto"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

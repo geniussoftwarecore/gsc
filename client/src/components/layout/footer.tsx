@@ -93,6 +93,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/frameworks">
+                  <span className="text-gray-300 hover:text-primary transition-colors duration-300 cursor-pointer">
+                    أطرنا التقنية
+                  </span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact">
                   <span className="text-gray-300 hover:text-primary transition-colors duration-300 cursor-pointer">
                     تواصل معنا

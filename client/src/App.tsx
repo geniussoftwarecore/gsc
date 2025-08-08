@@ -5,10 +5,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
+import { ScrollIndicator, ScrollToTop } from "@/components/ui/scroll-indicator";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
 import Portfolio from "@/pages/portfolio";
+import Frameworks from "@/pages/frameworks";
 import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 
@@ -19,6 +21,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
       <Route path="/portfolio" component={Portfolio} />
+      <Route path="/frameworks" component={Frameworks} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
@@ -30,11 +33,13 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen font-cairo" dir="rtl">
+          <ScrollIndicator />
           <Navigation />
           <main className="scroll-smooth">
             <Router />
           </main>
           <Footer />
+          <ScrollToTop />
           <Toaster />
         </div>
       </TooltipProvider>

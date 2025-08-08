@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Service } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AnimatedCard, AnimatedText } from "@/components/ui/animated-card";
+import { InteractiveButton } from "@/components/ui/interactive-button";
+import { motion } from "framer-motion";
 
 interface ServicesOverviewProps {
   limit?: number;
@@ -41,14 +44,14 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <AnimatedText className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
             خدماتنا المتخصصة
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             نقدم مجموعة شاملة من الحلول البرمجية والتقنية المتطورة
           </p>
-        </div>
+        </AnimatedText>
 
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -66,25 +69,28 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services?.slice(0, limit).map((service) => (
-              <Card
+            {services?.slice(0, limit).map((service, index) => (
+              <AnimatedCard
                 key={service.id}
-                className={`p-8 card-hover group cursor-pointer ${
+                delay={index * 0.1}
+                className={`p-8 group cursor-pointer ${
                   service.featured === "true"
                     ? "gradient-primary text-white"
                     : "bg-white"
                 }`}
               >
                 <CardContent className="p-0">
-                  <div
-                    className={`text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 ${
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className={`text-5xl mb-6 ${
                       service.featured === "true"
                         ? "text-white"
                         : "text-primary"
                     }`}
                   >
                     <i className={service.icon}></i>
-                  </div>
+                  </motion.div>
                   <h3
                     className={`text-2xl font-bold mb-4 ${
                       service.featured === "true"
@@ -103,7 +109,8 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
                   >
                     {service.description}
                   </p>
-                  <div
+                  <motion.div
+                    whileHover={{ x: 5 }}
                     className={`font-semibold cursor-pointer flex items-center ${
                       service.featured === "true"
                         ? "text-white hover:text-gray-200"
@@ -112,20 +119,29 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
                   >
                     اعرف المزيد
                     <i className="fas fa-arrow-left mr-2"></i>
-                  </div>
+                  </motion.div>
                 </CardContent>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
         )}
 
-        <div className="text-center mt-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
           <Link href="/services">
-            <Button className="btn-primary">
+            <InteractiveButton
+              className="btn-primary shadow-lg hover:shadow-xl"
+              icon={<i className="fas fa-arrow-left"></i>}
+            >
               استعرض جميع الخدمات
-            </Button>
+            </InteractiveButton>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

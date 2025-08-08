@@ -13,6 +13,7 @@ export default function Navigation() {
     { href: "/about", label: "من نحن" },
     { href: "/services", label: "خدماتنا" },
     { href: "/portfolio", label: "أعمالنا" },
+    { href: "/frameworks", label: "أطرنا التقنية" },
   ];
 
   const toggleMobileMenu = () => {
