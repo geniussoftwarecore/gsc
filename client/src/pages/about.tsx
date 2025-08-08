@@ -1,111 +1,260 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
+import { InteractiveButton } from "@/components/ui/interactive-button";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { STATS, COMPANY_INFO } from "@/lib/constants";
+import { COMPANY_INFO, STATS } from "@/lib/constants";
+import { motion } from "framer-motion";
 
 export default function About() {
+  const teamMembers = [
+    {
+      name: "أحمد محمد",
+      role: "المدير التقني",
+      bio: "خبرة +8 سنوات في تطوير التطبيقات والأنظمة",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      skills: ["React", "Node.js", "Python", "AWS"],
+    },
+    {
+      name: "سارة أحمد",
+      role: "مصممة UI/UX",
+      bio: "متخصصة في تصميم تجربة المستخدم وواجهات التطبيقات",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      skills: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
+    },
+    {
+      name: "محمد علي",
+      role: "مطور تطبيقات محمولة",
+      bio: "خبير في تطوير التطبيقات للأندرويد و iOS",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      skills: ["React Native", "Flutter", "Swift", "Kotlin"],
+    },
+    {
+      name: "فاطمة خالد",
+      role: "أخصائية تسويق رقمي",
+      bio: "خبيرة في استراتيجيات التسويق الرقمي وإدارة وسائل التواصل",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      skills: ["Google Ads", "Social Media", "SEO", "Analytics"],
+    },
+  ];
+
+  const timeline = [
+    {
+      year: "2024",
+      title: "تأسيس الشركة",
+      description: "انطلاق رحلتنا في عالم التكنولوجيا مع رؤية واضحة",
+    },
+    {
+      year: "2024",
+      title: "أول مشروع كبير",
+      description: "تطوير نظام ERP متكامل لشركة رائدة في المنطقة",
+    },
+    {
+      year: "2024",
+      title: "توسع الفريق",
+      description: "انضمام خبراء جدد في التصميم والتطوير",
+    },
+    {
+      year: "2025",
+      title: "إطلاق أطرنا المفتوحة",
+      description: "مشاركة أدواتنا التقنية مع مجتمع المطورين",
+    },
+  ];
+
+  const values = [
+    {
+      icon: "fas fa-lightbulb",
+      title: "الابتكار",
+      description: "نسعى دائماً لإيجاد حلول مبتكرة تلبي احتياجات العملاء",
+    },
+    {
+      icon: "fas fa-users",
+      title: "التعاون",
+      description: "نؤمن بقوة العمل الجماعي وأهمية التعاون مع عملائنا",
+    },
+    {
+      icon: "fas fa-star",
+      title: "الجودة",
+      description: "نلتزم بأعلى معايير الجودة في جميع مشاريعنا",
+    },
+    {
+      icon: "fas fa-heart",
+      title: "التركيز على العميل",
+      description: "رضا العميل هو أولويتنا القصوى في كل ما نقوم به",
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="gradient-light py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <AnimatedText delay={0.2}>
+            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6">
               من نحن
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              تعرف على قصتنا ورؤيتنا في تطوير الحلول البرمجية المبتكرة
+            <p className="text-xl text-gray-600 leading-relaxed">
+              فريق من المبدعين والمتخصصين في مجال التكنولوجيا، نسعى لتقديم حلول مبتكرة تساعد الأعمال على النمو والازدهار
             </p>
-          </div>
+          </AnimatedText>
         </div>
       </section>
 
-      {/* About Content */}
+      {/* Company Story */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional team working together on software development"
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
-            </div>
-            <div>
+            <AnimatedSection delay={0.3}>
               <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-                رؤيتنا ورسالتنا
+                قصتنا
               </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                نحن في{" "}
-                <span className="text-primary font-semibold">
-                  {COMPANY_INFO.name}
-                </span>{" "}
-                فريق من المطورين والمصممين المبدعين الذين يسعون لتقديم حلول
-                برمجية متطورة ومبتكرة تساعد عملاءنا على تحقيق أهدافهم وتطوير
-                أعمالهم.
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                تأسست {COMPANY_INFO.name} من رؤية واضحة: تمكين الأعمال من خلال التكنولوجيا المتطورة. بدأنا كفريق صغير من المطورين المتحمسين وتطورنا لنصبح شريكاً تقنياً موثوقاً للعديد من الشركات.
               </p>
-
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                {STATS.map((stat, index) => (
-                  <Card key={index} className="text-center p-6 card-hover">
-                    <CardContent className="p-0">
-                      <div className="text-3xl font-bold text-primary mb-2">
-                        {stat.value}
-                      </div>
-                      <div className="text-gray-600">{stat.label}</div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button className="btn-primary w-full sm:w-auto">
-                    ابدأ مشروعك معنا
-                  </Button>
-                </Link>
-                <Link href="/portfolio">
-                  <Button variant="outline" className="btn-secondary w-full sm:w-auto">
-                    شاهد أعمالنا
-                  </Button>
-                </Link>
-              </div>
-            </div>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                نحن لا نكتفي ببناء البرمجيات فحسب، بل نسعى لفهم احتياجات عملائنا بعمق وتقديم حلول تتماشى مع أهدافهم الاستراتيجية. كل مشروع نعمل عليه هو فرصة لإحداث تأثير إيجابي حقيقي.
+              </p>
+              <Link href="/contact">
+                <InteractiveButton
+                  className="btn-primary shadow-lg hover:shadow-xl"
+                  icon={<i className="fas fa-handshake"></i>}
+                >
+                  ابدأ شراكتك معنا
+                </InteractiveButton>
+              </Link>
+            </AnimatedSection>
+            <AnimatedSection delay={0.5}>
+              <motion.div
+                whileHover={{ scale: 1.02, rotateY: 5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                  alt="فريق العمل يتعاون على مشروع تقني"
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+              </motion.div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Timeline */}
+      <section className="py-16 lg:py-24 bg-light-gray">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedText className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+              رحلتنا عبر الزمن
+            </h2>
+            <p className="text-xl text-gray-600">
+              المحطات المهمة في تطور شركتنا
+            </p>
+          </AnimatedText>
+
+          <div className="space-y-8">
+            {timeline.map((item, index) => (
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6">
+                <CardContent className="p-0">
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg">
+                        {item.year}
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-secondary mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </AnimatedCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedText className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+              إنجازاتنا بالأرقام
+            </h2>
+          </AnimatedText>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {STATS.map((stat, index) => (
+              <AnimatedCard key={index} delay={index * 0.1} className="text-center p-8">
+                <CardContent className="p-0">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="text-4xl font-bold text-primary mb-4"
+                  >
+                    {stat.value}
+                  </motion.div>
+                  <h3 className="text-lg font-semibold text-secondary mb-2">
+                    {stat.label}
+                  </h3>
+                </CardContent>
+              </AnimatedCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
       <section className="py-16 lg:py-24 bg-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="p-8 card-hover">
-              <CardContent className="p-0">
-                <div className="text-primary text-5xl mb-6">
-                  <i className="fas fa-eye"></i>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary mb-4">رؤيتنا</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  أن نكون الشريك المفضل للشركات والأفراد في رحلتهم الرقمية، ونساعدهم
-                  على تحقيق النجاح من خلال حلول برمجية مبتكرة وعالية الجودة تلبي
-                  احتياجاتهم المتنوعة.
-                </p>
-              </CardContent>
-            </Card>
+          <AnimatedText className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+              فريقنا المميز
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              مجموعة من الخبراء والمتخصصين الذين يعملون بشغف لتحقيق رؤيتنا
+            </p>
+          </AnimatedText>
 
-            <Card className="p-8 card-hover">
-              <CardContent className="p-0">
-                <div className="text-primary text-5xl mb-6">
-                  <i className="fas fa-bullseye"></i>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary mb-4">رسالتنا</h3>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  نلتزم بتقديم حلول برمجية متطورة ومخصصة تساعد عملاءنا على تحسين
-                  أدائهم وزيادة كفاءتهم. نسعى لبناء علاقات طويلة المدى مع عملائنا
-                  من خلال الجودة والابتكار والدعم المستمر.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, index) => (
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
+                <CardContent className="p-0">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative mb-6"
+                  >
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg"
+                    />
+                  </motion.div>
+                  <h3 className="text-xl font-bold text-secondary mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-primary font-semibold mb-3">
+                    {member.role}
+                  </p>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    {member.bio}
+                  </p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {member.skills.map((skill, idx) => (
+                      <Badge key={idx} variant="secondary" className="text-xs">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </AnimatedCard>
+            ))}
           </div>
         </div>
       </section>
@@ -113,53 +262,26 @@ export default function About() {
       {/* Values */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-              قيمنا
+              قيمنا الأساسية
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              القيم التي نؤمن بها وتوجه عملنا اليومي
+              المبادئ التي توجه عملنا وتشكل ثقافتنا المؤسسية
             </p>
-          </div>
+          </AnimatedText>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "fas fa-star",
-                title: "الجودة",
-                description: "نلتزم بأعلى معايير الجودة في كل ما نقدمه",
-              },
-              {
-                icon: "fas fa-lightbulb",
-                title: "الابتكار",
-                description: "نسعى دائماً لإيجاد حلول مبتكرة وإبداعية",
-              },
-              {
-                icon: "fas fa-users",
-                title: "التعاون",
-                description: "نؤمن بقوة العمل الجماعي والتعاون المثمر",
-              },
-              {
-                icon: "fas fa-clock",
-                title: "الالتزام بالمواعيد",
-                description: "نحترم وقت عملائنا ونلتزم بالمواعيد المحددة",
-              },
-              {
-                icon: "fas fa-handshake",
-                title: "الشفافية",
-                description: "نتعامل مع عملائنا بشفافية تامة ومصداقية",
-              },
-              {
-                icon: "fas fa-chart-line",
-                title: "التطوير المستمر",
-                description: "نسعى للتحسين والتطوير المستمر في خدماتنا",
-              },
-            ].map((value, index) => (
-              <Card key={index} className="p-6 text-center card-hover">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
                 <CardContent className="p-0">
-                  <div className="text-primary text-4xl mb-4">
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-4xl text-primary mb-4"
+                  >
                     <i className={value.icon}></i>
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold text-secondary mb-3">
                     {value.title}
                   </h3>
@@ -167,9 +289,42 @@ export default function About() {
                     {value.description}
                   </p>
                 </CardContent>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 lg:py-24 gradient-primary text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <AnimatedSection delay={0.3}>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              جاهزون للعمل معك
+            </h2>
+            <p className="text-xl mb-8 leading-relaxed opacity-90">
+              دعنا نتعاون معاً لتحويل رؤيتك إلى واقع رقمي مبهر
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <InteractiveButton
+                  className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl"
+                  icon={<i className="fas fa-comment"></i>}
+                >
+                  ابدأ محادثة
+                </InteractiveButton>
+              </Link>
+              <Link href="/portfolio">
+                <InteractiveButton
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-primary"
+                  icon={<i className="fas fa-eye"></i>}
+                >
+                  اطلع على أعمالنا
+                </InteractiveButton>
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>

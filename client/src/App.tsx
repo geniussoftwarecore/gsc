@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import { MetaTags } from "@/components/seo/meta-tags";
 import { ScrollIndicator, ScrollToTop } from "@/components/ui/scroll-indicator";
 import Home from "@/pages/home";
 import About from "@/pages/about";
@@ -33,8 +35,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen font-cairo" dir="rtl">
+          <MetaTags />
           <ScrollIndicator />
           <Navigation />
+          <Breadcrumbs />
           <main className="scroll-smooth">
             <Router />
           </main>

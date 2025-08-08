@@ -1,37 +1,87 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
 import { Service } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
+import { InteractiveButton } from "@/components/ui/interactive-button";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "wouter";
+import { motion } from "framer-motion";
 
 export default function Services() {
-  const {
-    data: services,
-    isLoading,
-    error,
-  } = useQuery<Service[]>({
+  const { data: services, isLoading, error } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
+
+  const serviceCategories = [
+    {
+      id: "development",
+      title: "التطوير والبرمجة",
+      description: "حلول برمجية شاملة من التطبيقات المحمولة إلى الأنظمة المعقدة",
+      icon: "fas fa-code",
+      services: services?.filter(s => 
+        s.category === "web" || s.category === "mobile" || s.category === "desktop"
+      ) || [],
+    },
+    {
+      id: "design",
+      title: "التصميم وتجربة المستخدم",
+      description: "تصميم واجهات مستخدم جذابة وتجارب تفاعلية مميزة",
+      icon: "fas fa-paint-brush",
+      services: services?.filter(s => s.category === "design") || [],
+    },
+    {
+      id: "marketing",
+      title: "التسويق الرقمي",
+      description: "استراتيجيات تسويقية متطورة لنمو أعمالك الرقمية",
+      icon: "fas fa-bullhorn",
+      services: services?.filter(s => s.category === "marketing") || [],
+    },
+    {
+      id: "business",
+      title: "حلول الأعمال",
+      description: "أنظمة إدارة الأعمال والتحليلات الذكية",
+      icon: "fas fa-chart-line",
+      services: services?.filter(s => s.category === "erp" || s.category === "consulting") || [],
+    },
+  ];
+
+  const processes = [
+    {
+      step: "01",
+      title: "الاستشارة والتحليل",
+      description: "نبدأ بفهم احتياجاتك وتحليل متطلبات المشروع بدقة",
+      icon: "fas fa-search",
+    },
+    {
+      step: "02",
+      title: "التخطيط والتصميم",
+      description: "وضع خطة شاملة وتصميم النماذج الأولية للمشروع",
+      icon: "fas fa-drafting-compass",
+    },
+    {
+      step: "03",
+      title: "التطوير والبناء",
+      description: "تطوير الحل باستخدام أحدث التقنيات وأفضل الممارسات",
+      icon: "fas fa-hammer",
+    },
+    {
+      step: "04",
+      title: "الاختبار والتسليم",
+      description: "اختبار شامل للجودة ثم تسليم المشروع مع التدريب والدعم",
+      icon: "fas fa-check-circle",
+    },
+  ];
 
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-full max-w-md mx-4">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <div className="text-red-500 text-4xl mb-4">
-                <i className="fas fa-exclamation-triangle"></i>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                خطأ في تحميل البيانات
-              </h2>
-              <p className="text-gray-600">
-                حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة مرة أخرى.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="text-center">
+          <p className="text-red-500 text-xl mb-4">حدث خطأ في تحميل الخدمات</p>
+          <InteractiveButton onClick={() => window.location.reload()}>
+            إعادة المحاولة
+          </InteractiveButton>
+        </div>
       </div>
     );
   }
@@ -40,146 +90,160 @@ export default function Services() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="gradient-light py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <AnimatedText delay={0.2}>
+            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6">
               خدماتنا المتخصصة
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              نقدم مجموعة شاملة من الحلول البرمجية والتقنية المتطورة لتلبية جميع احتياجاتك الرقمية
+            <p className="text-xl text-gray-600 leading-relaxed">
+              نقدم مجموعة شاملة من الخدمات التقنية والإبداعية لتلبية جميع احتياجات أعمالك الرقمية
             </p>
-          </div>
+          </AnimatedText>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Service Categories */}
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {isLoading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, index) => (
-                <Card key={index} className="p-8">
-                  <CardContent className="p-0">
-                    <Skeleton className="h-12 w-12 mb-6" />
-                    <Skeleton className="h-6 w-3/4 mb-4" />
-                    <Skeleton className="h-4 w-full mb-2" />
-                    <Skeleton className="h-4 w-5/6 mb-6" />
-                    <Skeleton className="h-4 w-24" />
-                  </CardContent>
-                </Card>
+            <div className="space-y-16">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="space-y-8">
+                  <div className="text-center">
+                    <Skeleton className="h-12 w-64 mx-auto mb-4" />
+                    <Skeleton className="h-6 w-96 mx-auto" />
+                  </div>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[1, 2, 3].map((j) => (
+                      <Skeleton key={j} className="h-80 rounded-xl" />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services?.map((service) => (
-                <Card
-                  key={service.id}
-                  className={`p-8 card-hover group cursor-pointer ${
-                    service.featured === "true"
-                      ? "gradient-primary text-white"
-                      : "bg-white"
-                  }`}
-                >
-                  <CardContent className="p-0">
-                    <div
-                      className={`text-5xl mb-6 group-hover:scale-110 transition-transform duration-300 ${
-                        service.featured === "true"
-                          ? "text-white"
-                          : "text-primary"
-                      }`}
-                    >
-                      <i className={service.icon}></i>
+            <div className="space-y-20">
+              {serviceCategories.map((category, categoryIndex) => (
+                <div key={category.id}>
+                  <AnimatedText delay={categoryIndex * 0.1} className="text-center mb-12">
+                    <div className="flex items-center justify-center gap-4 mb-4">
+                      <div className="text-primary text-4xl">
+                        <i className={category.icon}></i>
+                      </div>
+                      <h2 className="text-3xl lg:text-4xl font-bold text-secondary">
+                        {category.title}
+                      </h2>
                     </div>
-                    <h3
-                      className={`text-2xl font-bold mb-4 ${
-                        service.featured === "true"
-                          ? "text-white"
-                          : "text-secondary"
-                      }`}
-                    >
-                      {service.title}
-                    </h3>
-                    <p
-                      className={`mb-6 leading-relaxed ${
-                        service.featured === "true"
-                          ? "text-gray-100"
-                          : "text-gray-600"
-                      }`}
-                    >
-                      {service.description}
+                    <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                      {category.description}
                     </p>
-                    <div
-                      className={`font-semibold cursor-pointer flex items-center ${
-                        service.featured === "true"
-                          ? "text-white hover:text-gray-200"
-                          : "text-primary hover:text-primary-dark"
-                      }`}
-                    >
-                      اعرف المزيد
-                      <i className="fas fa-arrow-left mr-2"></i>
+                  </AnimatedText>
+
+                  {category.services.length > 0 ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      {category.services.map((service, serviceIndex) => (
+                        <AnimatedCard
+                          key={service.id}
+                          delay={serviceIndex * 0.1}
+                          className={`p-6 group cursor-pointer ${
+                            service.featured === "true"
+                              ? "gradient-primary text-white"
+                              : "bg-white hover:shadow-xl"
+                          }`}
+                        >
+                          <CardContent className="p-0">
+                            <motion.div
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              transition={{ duration: 0.3 }}
+                              className={`text-4xl mb-4 ${
+                                service.featured === "true"
+                                  ? "text-white"
+                                  : "text-primary"
+                              }`}
+                            >
+                              <i className={service.icon}></i>
+                            </motion.div>
+                            
+                            <h3
+                              className={`text-xl font-bold mb-3 ${
+                                service.featured === "true"
+                                  ? "text-white"
+                                  : "text-secondary"
+                              }`}
+                            >
+                              {service.title}
+                            </h3>
+                            
+                            <p
+                              className={`mb-4 leading-relaxed ${
+                                service.featured === "true"
+                                  ? "text-gray-100"
+                                  : "text-gray-600"
+                              }`}
+                            >
+                              {service.description}
+                            </p>
+                            
+                            {service.featured === "true" && (
+                              <Badge className="bg-white text-primary mb-4">
+                                الأكثر طلباً
+                              </Badge>
+                            )}
+                            
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              className={`font-semibold cursor-pointer flex items-center ${
+                                service.featured === "true"
+                                  ? "text-white hover:text-gray-200"
+                                  : "text-primary hover:text-primary-dark"
+                              }`}
+                            >
+                              تعرف على التفاصيل
+                              <i className="fas fa-arrow-left mr-2"></i>
+                            </motion.div>
+                          </CardContent>
+                        </AnimatedCard>
+                      ))}
                     </div>
-                  </CardContent>
-                </Card>
+                  ) : (
+                    <div className="text-center py-12">
+                      <p className="text-gray-500">لا توجد خدمات في هذه الفئة حالياً</p>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           )}
-
-          <div className="text-center mt-12">
-            <Link href="/contact">
-              <Button className="btn-primary text-lg">
-                اطلب خدمتك الآن
-              </Button>
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* Process Section */}
       <section className="py-16 lg:py-24 bg-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-              كيف نعمل
+              عملية العمل
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              عمليتنا المنهجية لضمان تقديم أفضل النتائج
+              نتبع منهجية مدروسة لضمان تسليم مشاريع عالية الجودة في الوقت المحدد
             </p>
-          </div>
+          </AnimatedText>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "التحليل والفهم",
-                description: "نستمع لاحتياجاتك ونحلل متطلبات مشروعك بعناية",
-                icon: "fas fa-search"
-              },
-              {
-                step: "02",
-                title: "التخطيط والتصميم",
-                description: "نضع خطة مفصلة ونصمم الحلول المناسبة لك",
-                icon: "fas fa-drafting-compass"
-              },
-              {
-                step: "03",
-                title: "التطوير والتنفيذ",
-                description: "نطور المشروع باستخدام أحدث التقنيات والمعايير",
-                icon: "fas fa-code"
-              },
-              {
-                step: "04",
-                title: "الاختبار والتسليم",
-                description: "نختبر المشروع بدقة ونسلمه لك مع الدعم الكامل",
-                icon: "fas fa-check-circle"
-              }
-            ].map((process, index) => (
-              <Card key={index} className="p-6 text-center card-hover">
+            {processes.map((process, index) => (
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
                 <CardContent className="p-0">
-                  <div className="text-primary text-4xl mb-4">
-                    <i className={process.icon}></i>
-                  </div>
-                  <div className="text-2xl font-bold text-primary mb-2">
-                    {process.step}
+                  <div className="relative mb-6">
+                    <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-2xl font-bold">{process.step}</span>
+                    </div>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                      className="text-primary text-3xl"
+                    >
+                      <i className={process.icon}></i>
+                    </motion.div>
                   </div>
                   <h3 className="text-xl font-bold text-secondary mb-3">
                     {process.title}
@@ -188,9 +252,82 @@ export default function Services() {
                     {process.description}
                   </p>
                 </CardContent>
-              </Card>
+              </AnimatedCard>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedText className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+              التقنيات التي نستخدمها
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              نعمل بأحدث التقنيات والأدوات لضمان تقديم حلول متطورة وموثوقة
+            </p>
+          </AnimatedText>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: "React", icon: "fab fa-react", color: "text-blue-500" },
+              { name: "Node.js", icon: "fab fa-node-js", color: "text-green-500" },
+              { name: "Python", icon: "fab fa-python", color: "text-yellow-500" },
+              { name: "Flutter", icon: "fas fa-mobile-alt", color: "text-blue-400" },
+              { name: "AWS", icon: "fab fa-aws", color: "text-orange-500" },
+              { name: "Docker", icon: "fab fa-docker", color: "text-blue-600" },
+              { name: "MongoDB", icon: "fas fa-database", color: "text-green-600" },
+              { name: "PostgreSQL", icon: "fas fa-server", color: "text-blue-700" },
+            ].map((tech, index) => (
+              <AnimatedCard key={index} delay={index * 0.05} className="p-6 text-center">
+                <CardContent className="p-0">
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className={`text-4xl mb-4 ${tech.color}`}
+                  >
+                    <i className={tech.icon}></i>
+                  </motion.div>
+                  <h3 className="font-semibold text-secondary">{tech.name}</h3>
+                </CardContent>
+              </AnimatedCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 lg:py-24 gradient-primary text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <AnimatedSection delay={0.3}>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              هل أنت جاهز للبدء؟
+            </h2>
+            <p className="text-xl mb-8 leading-relaxed opacity-90">
+              دعنا نناقش مشروعك ونقدم لك استشارة مجانية حول أفضل الحلول التقنية
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact">
+                <InteractiveButton
+                  className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl"
+                  icon={<i className="fas fa-phone"></i>}
+                >
+                  احصل على استشارة مجانية
+                </InteractiveButton>
+              </Link>
+              <Link href="/portfolio">
+                <InteractiveButton
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-primary"
+                  icon={<i className="fas fa-briefcase"></i>}
+                >
+                  شاهد مشاريعنا السابقة
+                </InteractiveButton>
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
     </div>

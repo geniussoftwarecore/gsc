@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Testimonial } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
+import { TestimonialCard } from "@/components/ui/testimonial-card";
+import { AnimatedText, AnimatedCard } from "@/components/ui/animated-card";
 
 export default function Testimonials() {
   const {
@@ -35,14 +37,14 @@ export default function Testimonials() {
   return (
     <section className="py-16 lg:py-24 bg-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <AnimatedText className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
             آراء عملائنا
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             شهادات حقيقية من عملاء راضين عن خدماتنا
           </p>
-        </div>
+        </AnimatedText>
 
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -63,31 +65,16 @@ export default function Testimonials() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials?.map((testimonial) => (
-              <Card key={testimonial.id} className="p-8 card-hover">
-                <CardContent className="p-0">
-                  <div className="flex items-center mb-6">
-                    <div className="text-yellow-400 text-2xl mr-4">
-                      {[...Array(5)].map((_, index) => (
-                        <i key={index} className="fas fa-star"></i>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-6 leading-relaxed text-lg">
-                    "{testimonial.content}"
-                  </p>
-                  <div className="flex items-center">
-                    <div>
-                      <h4 className="font-bold text-secondary">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-gray-500">
-                        {testimonial.position} - {testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            {testimonials?.map((testimonial, index) => (
+              <TestimonialCard
+                key={testimonial.id}
+                name={testimonial.name || "عميل مجهول"}
+                role={testimonial.position || "عميل"}
+                company={testimonial.company}
+                content={testimonial.content}
+                rating={5}
+                delay={index * 0.1}
+              />
             ))}
           </div>
         )}
