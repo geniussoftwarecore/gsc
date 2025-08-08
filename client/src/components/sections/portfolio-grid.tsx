@@ -6,6 +6,7 @@ import { Link } from "wouter";
 import { PortfolioItem } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PORTFOLIO_CATEGORIES } from "@/lib/constants";
+import { DynamicIcon, IconName } from "@/lib/icons";
 
 interface PortfolioGridProps {
   showFilter?: boolean;
@@ -100,11 +101,13 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                 data-category={item.category}
               >
                 <div className="relative overflow-hidden">
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
+                  <div className="w-full h-64 bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/30 transition-colors duration-300">
+                    <DynamicIcon 
+                      name={item.imageUrl as IconName} 
+                      className="text-primary group-hover:scale-110 transition-transform duration-300" 
+                      size={80} 
+                    />
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
                       <h3 className="text-white text-xl font-bold mb-2">

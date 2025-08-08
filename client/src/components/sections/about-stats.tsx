@@ -5,6 +5,7 @@ import { STATS, COMPANY_INFO } from "@/lib/constants";
 import { AnimatedCard, AnimatedSection } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
+import { Target, Award, Clock, TrendingUp } from "lucide-react";
 
 export default function AboutStats() {
   return (
@@ -15,12 +16,50 @@ export default function AboutStats() {
             <motion.div
               whileHover={{ scale: 1.02, rotateY: 5 }}
               transition={{ duration: 0.3 }}
+              className="bg-gradient-to-br from-primary/10 to-primary/25 rounded-2xl shadow-2xl p-16 flex items-center justify-center"
             >
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Professional team working together on software development"
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
+              <div className="grid grid-cols-2 gap-6">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 10, 0]
+                  }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <Target size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    y: [0, -10, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <Award size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    x: [0, 8, 0],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                  className="text-primary"
+                >
+                  <Clock size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.3, 1],
+                    rotate: [0, -180, 0]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <TrendingUp size={60} />
+                </motion.div>
+              </div>
             </motion.div>
           </AnimatedSection>
           <AnimatedSection delay={0.4}>

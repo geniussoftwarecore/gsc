@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { COMPANY_INFO } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { InteractiveButton } from "@/components/ui/interactive-button";
+import { Monitor, Code, Smartphone, Zap } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -106,12 +107,50 @@ export default function Hero() {
             <motion.div
               whileHover={{ scale: 1.02, rotateY: 5 }}
               transition={{ duration: 0.3 }}
+              className="bg-gradient-to-br from-primary/10 to-primary/30 rounded-2xl shadow-2xl p-16 flex items-center justify-center"
             >
-              <img
-                src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Modern office workspace with computers and design tools"
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
+              <div className="grid grid-cols-2 gap-8">
+                <motion.div
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  className="text-primary"
+                >
+                  <Monitor size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    y: [0, -10, 0],
+                    rotate: [0, 180, 360]
+                  }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <Smartphone size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    x: [0, 10, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <Code size={60} />
+                </motion.div>
+                <motion.div
+                  animate={{ 
+                    rotate: [0, -360],
+                    scale: [1, 1.3, 1]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                  className="text-primary"
+                >
+                  <Zap size={60} />
+                </motion.div>
+              </div>
             </motion.div>
           </motion.div>
         </div>

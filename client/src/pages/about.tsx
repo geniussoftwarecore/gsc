@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { COMPANY_INFO, STATS } from "@/lib/constants";
 import { motion } from "framer-motion";
+import { Users, User, Palette, Smartphone, TrendingUp } from "lucide-react";
 
 export default function About() {
   const teamMembers = [
@@ -12,28 +13,28 @@ export default function About() {
       name: "أحمد محمد",
       role: "المدير التقني",
       bio: "خبرة +8 سنوات في تطوير التطبيقات والأنظمة",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      icon: User,
       skills: ["React", "Node.js", "Python", "AWS"],
     },
     {
       name: "سارة أحمد",
       role: "مصممة UI/UX",
       bio: "متخصصة في تصميم تجربة المستخدم وواجهات التطبيقات",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b1e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      icon: Palette,
       skills: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
     },
     {
       name: "محمد علي",
       role: "مطور تطبيقات محمولة",
       bio: "خبير في تطوير التطبيقات للأندرويد و iOS",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      icon: Smartphone,
       skills: ["React Native", "Flutter", "Swift", "Kotlin"],
     },
     {
       name: "فاطمة خالد",
       role: "أخصائية تسويق رقمي",
       bio: "خبيرة في استراتيجيات التسويق الرقمي وإدارة وسائل التواصل",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400",
+      icon: TrendingUp,
       skills: ["Google Ads", "Social Media", "SEO", "Analytics"],
     },
   ];
@@ -127,12 +128,18 @@ export default function About() {
               <motion.div
                 whileHover={{ scale: 1.02, rotateY: 5 }}
                 transition={{ duration: 0.3 }}
+                className="bg-gradient-to-br from-primary/10 to-primary/25 rounded-2xl shadow-2xl p-20 flex items-center justify-center"
               >
-                <img
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                  alt="فريق العمل يتعاون على مشروع تقني"
-                  className="rounded-2xl shadow-2xl w-full h-auto"
-                />
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-primary"
+                >
+                  <Users size={120} />
+                </motion.div>
               </motion.div>
             </AnimatedSection>
           </div>
@@ -230,11 +237,9 @@ export default function About() {
                     transition={{ duration: 0.3 }}
                     className="relative mb-6"
                   >
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg"
-                    />
+                    <div className="w-32 h-32 rounded-full mx-auto bg-gradient-to-br from-primary/20 to-primary/40 shadow-lg flex items-center justify-center">
+                      <member.icon className="text-primary" size={48} />
+                    </div>
                   </motion.div>
                   <h3 className="text-xl font-bold text-secondary mb-2">
                     {member.name}

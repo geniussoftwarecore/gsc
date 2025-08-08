@@ -89,7 +89,7 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
                         : "text-primary"
                     }`}
                   >
-                    <i className={service.icon}></i>
+                    <DynamicIcon name={service.icon as IconName} size={60} />
                   </motion.div>
                   <h3
                     className={`text-2xl font-bold mb-4 ${
@@ -118,7 +118,7 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
                     }`}
                   >
                     اعرف المزيد
-                    <i className="fas fa-arrow-left mr-2"></i>
+                    <ArrowLeft className="mr-2" size={18} />
                   </motion.div>
                 </CardContent>
               </AnimatedCard>

@@ -56,7 +56,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "تطبيقات الهواتف الذكية",
         description: "تطوير تطبيقات احترافية لأنظمة Android و iOS بأحدث التقنيات والمعايير العالمية",
-        icon: "fas fa-mobile-alt",
+        icon: "smartphone",
         category: "mobile",
         featured: "false"
       },
@@ -64,7 +64,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "تطوير المواقع والمنصات",
         description: "إنشاء مواقع ومنصات إلكترونية متطورة وسريعة الاستجابة بتقنيات حديثة",
-        icon: "fas fa-code",
+        icon: "code",
         category: "web",
         featured: "false"
       },
@@ -72,7 +72,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "تصميم الجرافيكس",
         description: "تصميم الشعارات والهوية البصرية والمواد التسويقية بأسلوب إبداعي ومميز",
-        icon: "fas fa-palette",
+        icon: "palette",
         category: "design",
         featured: "false"
       },
@@ -80,7 +80,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "التسويق الإلكتروني",
         description: "استراتيجيات تسويق رقمية متقدمة وحملات إعلانية فعالة لزيادة المبيعات",
-        icon: "fas fa-bullhorn",
+        icon: "megaphone",
         category: "marketing",
         featured: "false"
       },
@@ -88,7 +88,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "الحلول الذكية",
         description: "حلول برمجية خاصة ومخصصة للهواتف الذكية باستخدام الذكاء الاصطناعي",
-        icon: "fas fa-brain",
+        icon: "brain",
         category: "smart",
         featured: "false"
       },
@@ -96,7 +96,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "أنظمة ERPNext",
         description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم أعمالك",
-        icon: "fas fa-cogs",
+        icon: "settings",
         category: "erp",
         featured: "true"
       }
@@ -111,7 +111,7 @@ export class MemStorage implements IStorage {
         title: "تطبيق التجارة الإلكترونية",
         description: "تطبيق شامل للتسوق الإلكتروني بواجهة حديثة",
         category: "mobile",
-        imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "shopping-cart",
         projectUrl: "",
         technologies: ["React Native", "Node.js", "MongoDB"],
         featured: "true"
@@ -121,7 +121,7 @@ export class MemStorage implements IStorage {
         title: "موقع شركة مؤسسية",
         description: "موقع إلكتروني احترافي لشركة عقارية كبرى",
         category: "web",
-        imageUrl: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "building",
         projectUrl: "",
         technologies: ["React", "TypeScript", "Tailwind CSS"],
         featured: "false"
@@ -131,7 +131,7 @@ export class MemStorage implements IStorage {
         title: "هوية بصرية متكاملة",
         description: "تصميم هوية بصرية شاملة لمطعم فاخر",
         category: "design",
-        imageUrl: "https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "palette",
         projectUrl: "",
         technologies: ["Adobe Illustrator", "Photoshop", "Figma"],
         featured: "false"
@@ -141,7 +141,7 @@ export class MemStorage implements IStorage {
         title: "نظام ERP متقدم",
         description: "نظام إدارة موارد مؤسسية لشركة صناعية",
         category: "erp",
-        imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "database",
         projectUrl: "",
         technologies: ["ERPNext", "Python", "PostgreSQL"],
         featured: "true"
@@ -151,7 +151,7 @@ export class MemStorage implements IStorage {
         title: "تطبيق الرعاية الصحية",
         description: "تطبيق طبي لحجز المواعيد والاستشارات",
         category: "mobile",
-        imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "heart-pulse",
         projectUrl: "",
         technologies: ["Flutter", "Firebase", "Node.js"],
         featured: "false"
@@ -161,7 +161,7 @@ export class MemStorage implements IStorage {
         title: "منصة التعلم الإلكتروني",
         description: "منصة شاملة للكورسات والتدريب أونلاين",
         category: "web",
-        imageUrl: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+        imageUrl: "graduation-cap",
         projectUrl: "",
         technologies: ["Vue.js", "Laravel", "MySQL"],
         featured: "false"

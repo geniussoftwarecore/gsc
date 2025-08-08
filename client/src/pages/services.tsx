@@ -7,6 +7,8 @@ import { InteractiveButton } from "@/components/ui/interactive-button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { Code, Palette, Megaphone, TrendingUp, Search, Compass, Hammer, CheckCircle } from "lucide-react";
+import { DynamicIcon, IconName } from "@/lib/icons";
 
 export default function Services() {
   const { data: services, isLoading, error } = useQuery<Service[]>({
