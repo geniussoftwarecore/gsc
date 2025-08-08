@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { AnimatedCard } from "./animated-card";
+import { Quote, Star, User } from "lucide-react";
 
 interface TestimonialCardProps {
   name: string;
@@ -26,21 +27,23 @@ export function TestimonialCard({
       <CardContent className="p-0">
         {/* Quote icon */}
         <div className="absolute -top-2 -right-2 text-primary text-4xl opacity-20">
-          <i className="fas fa-quote-right"></i>
+          <Quote size={48} />
         </div>
 
         {/* Rating stars */}
         <div className="flex gap-1 mb-4">
           {Array.from({ length: 5 }).map((_, i) => (
-            <motion.i
+            <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: delay + i * 0.1 }}
-              className={`fas fa-star text-lg ${
+              className={`${
                 i < rating ? "text-yellow-400" : "text-gray-300"
               }`}
-            />
+            >
+              <Star size={18} fill={i < rating ? "currentColor" : "none"} />
+            </motion.div>
           ))}
         </div>
 
@@ -60,7 +63,7 @@ export function TestimonialCard({
             />
           ) : (
             <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center">
-              <i className="fas fa-user"></i>
+              <User size={20} />
             </div>
           )}
           <div>

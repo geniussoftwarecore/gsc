@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { COMPANY_INFO, STATS } from "@/lib/constants";
 import { motion } from "framer-motion";
-import { Users, User, Palette, Smartphone, TrendingUp } from "lucide-react";
+import { Users, User, Palette, Smartphone, TrendingUp, MessageCircle, Eye, Heart, Target, Lightbulb, Shield, Zap } from "lucide-react";
 
 export default function About() {
   const teamMembers = [
@@ -64,22 +64,22 @@ export default function About() {
 
   const values = [
     {
-      icon: "fas fa-lightbulb",
+      icon: Lightbulb,
       title: "الابتكار",
       description: "نسعى دائماً لإيجاد حلول مبتكرة تلبي احتياجات العملاء",
     },
     {
-      icon: "fas fa-users",
+      icon: Users,
       title: "التعاون",
       description: "نؤمن بقوة العمل الجماعي وأهمية التعاون مع عملائنا",
     },
     {
-      icon: "fas fa-star",
+      icon: Target,
       title: "الجودة",
       description: "نلتزم بأعلى معايير الجودة في جميع مشاريعنا",
     },
     {
-      icon: "fas fa-heart",
+      icon: Heart,
       title: "التركيز على العميل",
       description: "رضا العميل هو أولويتنا القصوى في كل ما نقوم به",
     },
@@ -285,7 +285,7 @@ export default function About() {
                     transition={{ duration: 0.3 }}
                     className="text-4xl text-primary mb-4"
                   >
-                    <i className={value.icon}></i>
+                    <value.icon size={48} />
                   </motion.div>
                   <h3 className="text-xl font-bold text-secondary mb-3">
                     {value.title}
@@ -314,7 +314,7 @@ export default function About() {
               <Link href="/contact">
                 <InteractiveButton
                   className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl"
-                  icon={<i className="fas fa-comment"></i>}
+                  icon={<MessageCircle size={20} />}
                 >
                   ابدأ محادثة
                 </InteractiveButton>
@@ -323,7 +323,7 @@ export default function About() {
                 <InteractiveButton
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-primary"
-                  icon={<i className="fas fa-eye"></i>}
+                  icon={<Eye size={20} />}
                 >
                   اطلع على أعمالنا
                 </InteractiveButton>

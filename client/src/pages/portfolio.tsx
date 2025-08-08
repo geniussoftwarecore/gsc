@@ -8,6 +8,7 @@ import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/ani
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
+import { Grid, Globe, Smartphone, Monitor, Settings, Megaphone, CheckCircle, Heart, Headphones, Award } from "lucide-react";
 
 export default function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -17,12 +18,12 @@ export default function Portfolio() {
   });
 
   const categories = [
-    { id: "all", label: "جميع المشاريع", icon: "fas fa-th" },
-    { id: "web", label: "تطبيقات الويب", icon: "fas fa-globe" },
-    { id: "mobile", label: "التطبيقات المحمولة", icon: "fas fa-mobile-alt" },
-    { id: "desktop", label: "تطبيقات سطح المكتب", icon: "fas fa-desktop" },
-    { id: "erp", label: "أنظمة ERP", icon: "fas fa-cogs" },
-    { id: "marketing", label: "التسويق الرقمي", icon: "fas fa-bullhorn" },
+    { id: "all", label: "جميع المشاريع", icon: Grid },
+    { id: "web", label: "تطبيقات الويب", icon: Globe },
+    { id: "mobile", label: "التطبيقات المحمولة", icon: Smartphone },
+    { id: "desktop", label: "تطبيقات سطح المكتب", icon: Monitor },
+    { id: "erp", label: "أنظمة ERP", icon: Settings },
+    { id: "marketing", label: "التسويق الرقمي", icon: Megaphone },
   ];
 
   const filteredPortfolio = portfolio?.filter(
@@ -30,10 +31,10 @@ export default function Portfolio() {
   );
 
   const stats = [
-    { value: "50+", label: "مشروع مكتمل", icon: "fas fa-check-circle" },
-    { value: "98%", label: "رضا العملاء", icon: "fas fa-heart" },
-    { value: "24/7", label: "دعم متواصل", icon: "fas fa-headset" },
-    { value: "5+", label: "سنوات خبرة", icon: "fas fa-award" },
+    { value: "50+", label: "مشروع مكتمل", icon: CheckCircle },
+    { value: "98%", label: "رضا العملاء", icon: Heart },
+    { value: "24/7", label: "دعم متواصل", icon: Headphones },
+    { value: "5+", label: "سنوات خبرة", icon: Award },
   ];
 
   if (error) {
@@ -77,7 +78,7 @@ export default function Portfolio() {
                     transition={{ duration: 0.3 }}
                     className="text-primary text-4xl mb-4"
                   >
-                    <i className={stat.icon}></i>
+                    <stat.icon size={48} />
                   </motion.div>
                   <motion.div
                     initial={{ scale: 0 }}
@@ -116,7 +117,7 @@ export default function Portfolio() {
                       : "bg-white text-gray-600 hover:bg-gray-50"
                   }`}
                 >
-                  <i className={category.icon}></i>
+                  <category.icon size={20} />
                   {category.label}
                 </motion.button>
               ))}

@@ -7,7 +7,7 @@ import { InteractiveButton } from "@/components/ui/interactive-button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Code, Palette, Megaphone, TrendingUp, Search, Compass, Hammer, CheckCircle } from "lucide-react";
+import { Code, Palette, Megaphone, TrendingUp, Search, Compass, Hammer, CheckCircle, ArrowLeft, Smartphone, Cloud, Package, Database, Server, Phone } from "lucide-react";
 import { DynamicIcon, IconName } from "@/lib/icons";
 
 export default function Services() {
@@ -20,7 +20,7 @@ export default function Services() {
       id: "development",
       title: "التطوير والبرمجة",
       description: "حلول برمجية شاملة من التطبيقات المحمولة إلى الأنظمة المعقدة",
-      icon: "fas fa-code",
+      icon: Code,
       services: services?.filter(s => 
         s.category === "web" || s.category === "mobile" || s.category === "desktop"
       ) || [],
@@ -29,21 +29,21 @@ export default function Services() {
       id: "design",
       title: "التصميم وتجربة المستخدم",
       description: "تصميم واجهات مستخدم جذابة وتجارب تفاعلية مميزة",
-      icon: "fas fa-paint-brush",
+      icon: Palette,
       services: services?.filter(s => s.category === "design") || [],
     },
     {
       id: "marketing",
       title: "التسويق الرقمي",
       description: "استراتيجيات تسويقية متطورة لنمو أعمالك الرقمية",
-      icon: "fas fa-bullhorn",
+      icon: Megaphone,
       services: services?.filter(s => s.category === "marketing") || [],
     },
     {
       id: "business",
       title: "حلول الأعمال",
       description: "أنظمة إدارة الأعمال والتحليلات الذكية",
-      icon: "fas fa-chart-line",
+      icon: TrendingUp,
       services: services?.filter(s => s.category === "erp" || s.category === "consulting") || [],
     },
   ];
@@ -53,25 +53,25 @@ export default function Services() {
       step: "01",
       title: "الاستشارة والتحليل",
       description: "نبدأ بفهم احتياجاتك وتحليل متطلبات المشروع بدقة",
-      icon: "fas fa-search",
+      icon: Search,
     },
     {
       step: "02",
       title: "التخطيط والتصميم",
       description: "وضع خطة شاملة وتصميم النماذج الأولية للمشروع",
-      icon: "fas fa-drafting-compass",
+      icon: Compass,
     },
     {
       step: "03",
       title: "التطوير والبناء",
       description: "تطوير الحل باستخدام أحدث التقنيات وأفضل الممارسات",
-      icon: "fas fa-hammer",
+      icon: Hammer,
     },
     {
       step: "04",
       title: "الاختبار والتسليم",
       description: "اختبار شامل للجودة ثم تسليم المشروع مع التدريب والدعم",
-      icon: "fas fa-check-circle",
+      icon: CheckCircle,
     },
   ];
 
@@ -130,7 +130,7 @@ export default function Services() {
                   <AnimatedText delay={categoryIndex * 0.1} className="text-center mb-12">
                     <div className="flex items-center justify-center gap-4 mb-4">
                       <div className="text-primary text-4xl">
-                        <i className={category.icon}></i>
+                        <category.icon size={48} />
                       </div>
                       <h2 className="text-3xl lg:text-4xl font-bold text-secondary">
                         {category.title}
@@ -163,7 +163,7 @@ export default function Services() {
                                   : "text-primary"
                               }`}
                             >
-                              <i className={service.icon}></i>
+                              <DynamicIcon name={service.icon as IconName} size={48} />
                             </motion.div>
                             
                             <h3
@@ -201,7 +201,7 @@ export default function Services() {
                               }`}
                             >
                               تعرف على التفاصيل
-                              <i className="fas fa-arrow-left mr-2"></i>
+                              <ArrowLeft className="mr-2" size={16} />
                             </motion.div>
                           </CardContent>
                         </AnimatedCard>
@@ -244,7 +244,7 @@ export default function Services() {
                       transition={{ duration: 0.3 }}
                       className="text-primary text-3xl"
                     >
-                      <i className={process.icon}></i>
+                      <process.icon size={48} />
                     </motion.div>
                   </div>
                   <h3 className="text-xl font-bold text-secondary mb-3">
@@ -274,14 +274,14 @@ export default function Services() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "React", icon: "fab fa-react", color: "text-blue-500" },
-              { name: "Node.js", icon: "fab fa-node-js", color: "text-green-500" },
-              { name: "Python", icon: "fab fa-python", color: "text-yellow-500" },
-              { name: "Flutter", icon: "fas fa-mobile-alt", color: "text-blue-400" },
-              { name: "AWS", icon: "fab fa-aws", color: "text-orange-500" },
-              { name: "Docker", icon: "fab fa-docker", color: "text-blue-600" },
-              { name: "MongoDB", icon: "fas fa-database", color: "text-green-600" },
-              { name: "PostgreSQL", icon: "fas fa-server", color: "text-blue-700" },
+              { name: "React", icon: Code, color: "text-blue-500" },
+              { name: "Node.js", icon: Code, color: "text-green-500" },
+              { name: "Python", icon: Code, color: "text-yellow-500" },
+              { name: "Flutter", icon: Smartphone, color: "text-blue-400" },
+              { name: "AWS", icon: Cloud, color: "text-orange-500" },
+              { name: "Docker", icon: Package, color: "text-blue-600" },
+              { name: "MongoDB", icon: Database, color: "text-green-600" },
+              { name: "PostgreSQL", icon: Server, color: "text-blue-700" },
             ].map((tech, index) => (
               <AnimatedCard key={index} delay={index * 0.05} className="p-6 text-center">
                 <CardContent className="p-0">
@@ -290,7 +290,7 @@ export default function Services() {
                     transition={{ duration: 0.3 }}
                     className={`text-4xl mb-4 ${tech.color}`}
                   >
-                    <i className={tech.icon}></i>
+                    <tech.icon size={48} />
                   </motion.div>
                   <h3 className="font-semibold text-secondary">{tech.name}</h3>
                 </CardContent>
@@ -314,7 +314,7 @@ export default function Services() {
               <Link href="/contact">
                 <InteractiveButton
                   className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl"
-                  icon={<i className="fas fa-phone"></i>}
+                  icon={<Phone size={20} />}
                 >
                   احصل على استشارة مجانية
                 </InteractiveButton>

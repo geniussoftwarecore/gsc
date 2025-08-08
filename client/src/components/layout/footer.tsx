@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { COMPANY_INFO, SERVICES } from "@/lib/constants";
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -21,25 +22,25 @@ export default function Footer() {
                 href={COMPANY_INFO.socialMedia.facebook}
                 className="text-gray-300 hover:text-primary transition-colors duration-300"
               >
-                <i className="fab fa-facebook-f text-xl"></i>
+                <Facebook size={20} />
               </a>
               <a
                 href={COMPANY_INFO.socialMedia.twitter}
                 className="text-gray-300 hover:text-primary transition-colors duration-300"
               >
-                <i className="fab fa-twitter text-xl"></i>
+                <Twitter size={20} />
               </a>
               <a
                 href={COMPANY_INFO.socialMedia.instagram}
                 className="text-gray-300 hover:text-primary transition-colors duration-300"
               >
-                <i className="fab fa-instagram text-xl"></i>
+                <Instagram size={20} />
               </a>
               <a
                 href={COMPANY_INFO.socialMedia.linkedin}
                 className="text-gray-300 hover:text-primary transition-colors duration-300"
               >
-                <i className="fab fa-linkedin-in text-xl"></i>
+                <Linkedin size={20} />
               </a>
             </div>
           </div>

@@ -7,6 +7,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedCard, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
+import { DynamicIcon, IconName } from "@/lib/icons";
+import { ArrowLeft, AlertTriangle } from "lucide-react";
 
 interface ServicesOverviewProps {
   limit?: number;
@@ -27,7 +29,7 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="text-red-500 text-4xl mb-4">
-              <i className="fas fa-exclamation-triangle"></i>
+              <AlertTriangle size={48} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               خطأ في تحميل الخدمات

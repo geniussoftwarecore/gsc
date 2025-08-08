@@ -1,4 +1,5 @@
 import { motion, useScroll, useSpring } from "framer-motion";
+import { ArrowUp } from "lucide-react";
 
 export function ScrollIndicator() {
   const { scrollYProgress } = useScroll();
@@ -36,7 +37,7 @@ export function ScrollToTop() {
       whileTap={{ scale: 0.9 }}
       transition={{ duration: 0.3 }}
     >
-      <i className="fas fa-arrow-up"></i>
+      <ArrowUp size={20} />
     </motion.button>
   );
 }
