@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { COMPANY_INFO, SERVICES } from "@/lib/constants";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import gscLogo from "@assets/gsc-logo.png";
 
 export default function Footer() {
   return (
@@ -9,9 +10,16 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <div className="text-3xl font-bold mb-4">
-              <span className="text-primary">GENIUS</span>
-              <div className="text-xl text-gray-300">SOFTWARE CORE</div>
+            <div className="flex items-center gap-4 mb-6">
+              <img 
+                src={gscLogo} 
+                alt="GSC Digital Services" 
+                className="w-16 h-16 object-contain"
+              />
+              <div className="text-3xl font-bold">
+                <span className="text-primary">GSC</span>
+                <div className="text-xl text-gray-300">DIGITAL SERVICES</div>
+              </div>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
               نحن شركة برمجيات متخصصة في تقديم حلول تقنية متطورة ومبتكرة تساعد

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { COMPANY_INFO } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { InteractiveButton } from "@/components/ui/interactive-button";
-import { Monitor, Code, Smartphone, Zap } from "lucide-react";
+import { Monitor, Code, Smartphone, Zap, Star } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -78,6 +78,14 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
+              <Link href="/contact">
+                <InteractiveButton
+                  className="btn-primary shadow-lg hover:shadow-xl"
+                  icon={<Star className="w-4 h-4" />}
+                >
+                  اشتراك مميز
+                </InteractiveButton>
+              </Link>
               <Link href="/contact">
                 <InteractiveButton
                   className="btn-primary shadow-lg hover:shadow-xl"

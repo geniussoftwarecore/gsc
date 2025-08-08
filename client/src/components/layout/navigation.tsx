@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, UserPlus, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import gscLogo from "@assets/gsc-logo.png";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,9 +32,11 @@ export default function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">GSC</span>
-              </div>
+              <img 
+                src={gscLogo} 
+                alt="GSC Digital Services" 
+                className="w-12 h-12 object-contain"
+              />
               <div className="text-xl font-bold">
                 <span className="text-blue-600">GSC</span>
                 <div className="text-sm text-gray-600 font-medium">DIGITAL SERVICES</div>
@@ -56,14 +59,22 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              <Link href="/dashboard">
+              <Link href="/login">
                 <Button variant="outline" className="ml-2">
-                  لوحة التحكم
+                  <User className="w-4 h-4 ml-2" />
+                  تسجيل الدخول
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button variant="outline" className="ml-2">
+                  <UserPlus className="w-4 h-4 ml-2" />
+                  إنشاء حساب
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button className="btn-primary">
-                  تواصل معنا
+                <Button className="btn-primary ml-2">
+                  <Star className="w-4 h-4 ml-2" />
+                  اشتراك
                 </Button>
               </Link>
             </div>
@@ -102,14 +113,19 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              <Link href="/dashboard" onClick={closeMobileMenu}>
+              <Link href="/login" onClick={closeMobileMenu}>
                 <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
-                  لوحة التحكم
+                  تسجيل الدخول
+                </span>
+              </Link>
+              <Link href="/register" onClick={closeMobileMenu}>
+                <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+                  إنشاء حساب
                 </span>
               </Link>
               <Link href="/contact" onClick={closeMobileMenu}>
                 <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
-                  تواصل معنا
+                  اشتراك
                 </span>
               </Link>
             </div>
