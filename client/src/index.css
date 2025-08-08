@@ -11,9 +11,11 @@
   --card-foreground: hsl(210, 25%, 7.8431%);
   --popover: hsl(0, 0%, 100%);
   --popover-foreground: hsl(210, 25%, 7.8431%);
-  --primary: hsl(203.8863, 88.2845%, 53.1373%);
+  --primary: hsl(213, 94%, 68%); /* GSC Light Blue */
   --primary-foreground: hsl(0, 0%, 100%);
-  --primary-dark: hsl(202.8169, 89.1213%, 53.1373%);
+  --primary-dark: hsl(213, 87%, 60%); /* GSC Darker Blue */
+  --gsc-blue: hsl(213, 94%, 68%);
+  --gsc-light: hsl(213, 100%, 96%);
   --secondary: hsl(210, 25%, 7.8431%);
   --secondary-foreground: hsl(0, 0%, 100%);
   --muted: hsl(240, 1.9608%, 90%);
@@ -83,6 +85,14 @@
 
   .gradient-primary {
     background: linear-gradient(to bottom right, var(--primary), var(--primary-dark));
+  }
+
+  .gradient-gsc {
+    background: linear-gradient(135deg, hsl(213, 94%, 68%) 0%, hsl(213, 87%, 60%) 100%);
+  }
+
+  .bg-gsc-light {
+    background-color: hsl(213, 100%, 96%);
   }
 
   .gradient-light {

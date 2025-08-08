@@ -16,6 +16,9 @@ import Portfolio from "@/pages/portfolio";
 import Frameworks from "@/pages/frameworks";
 import Contact from "@/pages/contact";
 import Dashboard from "@/pages/dashboard";
+import Login from "@/pages/login";
+import Register from "@/pages/register";
+import AdminPanel from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -29,6 +32,9 @@ function Router() {
       <Route path="/frameworks" component={Frameworks} />
       <Route path="/contact" component={Contact} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/admin" component={AdminPanel} />
       <Route component={NotFound} />
     </Switch>
   );

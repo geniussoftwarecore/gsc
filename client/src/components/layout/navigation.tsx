@@ -30,9 +30,14 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="text-2xl font-bold text-secondary">
-              <span className="text-primary">GENIUS</span>
-              <div className="text-sm text-gray-600">SOFTWARE CORE</div>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-lg">GSC</span>
+              </div>
+              <div className="text-xl font-bold">
+                <span className="text-blue-600">GSC</span>
+                <div className="text-sm text-gray-600 font-medium">DIGITAL SERVICES</div>
+              </div>
             </div>
           </Link>
 
