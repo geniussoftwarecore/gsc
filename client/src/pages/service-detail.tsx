@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator, Database, Users, ShoppingCart, FileText, BarChart3, Settings2, Shield, Globe } from "lucide-react";
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { Service, SubscriptionPlan } from "@shared/schema";
 import { Link } from "wouter";
@@ -306,6 +306,189 @@ export default function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {/* ERPNext V15 Details Section - Only show for ERP service */}
+      {service.category === "erp" && (
+        <section className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedText className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+                نظام ERPNext الإصدار 15
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                أحدث إصدار من نظام إدارة الموارد المؤسسية الشامل مع ميزات متطورة وتحسينات جوهرية
+              </p>
+            </AnimatedText>
+
+            {/* Key Features */}
+            <div className="grid lg:grid-cols-2 gap-12 mb-16">
+              <AnimatedSection delay={0.2}>
+                <h3 className="text-3xl font-bold text-secondary mb-8">
+                  الميزات الرئيسية لـ ERPNext V15
+                </h3>
+                <div className="space-y-6">
+                  {[
+                    {
+                      title: "واجهة مستخدم محدثة",
+                      description: "تصميم عصري ومحسن لتجربة مستخدم أفضل وأكثر سهولة",
+                      icon: Globe
+                    },
+                    {
+                      title: "أداء محسن",
+                      description: "تحسينات جوهرية في السرعة والاستجابة مع تحميل أسرع للصفحات",
+                      icon: BarChart3
+                    },
+                    {
+                      title: "أمان معزز",
+                      description: "بروتوكولات أمان متقدمة مع تشفير أقوى وحماية البيانات",
+                      icon: Shield
+                    },
+                    {
+                      title: "تقارير متقدمة",
+                      description: "محرك تقارير جديد مع قوالب محسنة ورسوم بيانية تفاعلية",
+                      icon: FileText
+                    }
+                  ].map((feature, index) => (
+                    <AnimatedCard key={index} delay={index * 0.1} className="flex items-start space-x-4 space-x-reverse p-6">
+                      <motion.div
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-primary text-2xl mt-1"
+                      >
+                        <feature.icon size={32} />
+                      </motion.div>
+                      <div>
+                        <h4 className="text-xl font-bold text-secondary mb-2">
+                          {feature.title}
+                        </h4>
+                        <p className="text-gray-600 leading-relaxed">
+                          {feature.description}
+                        </p>
+                      </div>
+                    </AnimatedCard>
+                  ))}
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection delay={0.4}>
+                <h3 className="text-3xl font-bold text-secondary mb-8">
+                  الوحدات المتوفرة
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { name: "المحاسبة المالية", icon: Calculator },
+                    { name: "إدارة المبيعات", icon: ShoppingCart },
+                    { name: "إدارة المشتريات", icon: Database },
+                    { name: "إدارة المخزون", icon: Database },
+                    { name: "الموارد البشرية", icon: Users },
+                    { name: "إدارة المشاريع", icon: Settings2 },
+                    { name: "التصنيع", icon: Settings2 },
+                    { name: "إدارة الأصول", icon: Database },
+                    { name: "نقاط البيع", icon: ShoppingCart },
+                    { name: "إدارة العملاء", icon: Users },
+                    { name: "الجودة", icon: CheckCircle },
+                    { name: "التعليم", icon: FileText }
+                  ].map((module, index) => (
+                    <AnimatedCard 
+                      key={index} 
+                      delay={index * 0.05} 
+                      className="p-4 text-center hover:bg-primary hover:text-white transition-colors duration-300 group"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-primary group-hover:text-white text-xl mb-2"
+                      >
+                        <module.icon size={24} />
+                      </motion.div>
+                      <p className="text-sm font-medium group-hover:text-white">
+                        {module.name}
+                      </p>
+                    </AnimatedCard>
+                  ))}
+                </div>
+              </AnimatedSection>
+            </div>
+
+            {/* ERPNext V15 Improvements */}
+            <AnimatedSection delay={0.6}>
+              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl p-8 mb-16">
+                <h3 className="text-3xl font-bold text-secondary text-center mb-8">
+                  التحسينات الجديدة في الإصدار 15
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[
+                    "محرك بحث محسن للعثور السريع على البيانات",
+                    "تكامل محسن مع الخدمات السحابية",
+                    "واجهات برمجية (APIs) أكثر مرونة",
+                    "دعم متعدد العملات محسن",
+                    "أتمتة محسنة للعمليات المحاسبية",
+                    "تقارير الذكاء الاصطناعي والتحليلات التنبؤية",
+                    "تحسينات في أداء قواعد البيانات",
+                    "واجهة موبايل محسنة ومتجاوبة",
+                    "إدارة محسنة للصلاحيات والمستخدمين"
+                  ].map((improvement, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-center space-x-3 space-x-reverse"
+                    >
+                      <CheckCircle className="text-green-500 flex-shrink-0" size={20} />
+                      <span className="text-gray-700">{improvement}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Implementation Benefits */}
+            <AnimatedSection delay={0.8}>
+              <div className="text-center">
+                <h3 className="text-3xl font-bold text-secondary mb-8">
+                  فوائد التطبيق
+                </h3>
+                <div className="grid md:grid-cols-4 gap-8">
+                  {[
+                    {
+                      title: "توفير التكاليف",
+                      description: "تقليل التكاليف التشغيلية بنسبة تصل إلى 40%",
+                      icon: "💰"
+                    },
+                    {
+                      title: "زيادة الكفاءة",
+                      description: "تحسين الإنتاجية وتسريع العمليات التجارية",
+                      icon: "⚡"
+                    },
+                    {
+                      title: "رؤى أعمق",
+                      description: "تقارير تحليلية شاملة لاتخاذ قرارات مدروسة",
+                      icon: "📊"
+                    },
+                    {
+                      title: "نمو مستدام",
+                      description: "نظام قابل للتوسع ينمو مع نمو أعمالك",
+                      icon: "🚀"
+                    }
+                  ].map((benefit, index) => (
+                    <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
+                      <div className="text-4xl mb-4">{benefit.icon}</div>
+                      <h4 className="text-xl font-bold text-secondary mb-3">
+                        {benefit.title}
+                      </h4>
+                      <p className="text-gray-600 leading-relaxed">
+                        {benefit.description}
+                      </p>
+                    </AnimatedCard>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 lg:py-24 gradient-primary text-white">
