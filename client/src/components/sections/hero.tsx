@@ -50,17 +50,17 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight"
             >
-              حلول برمجية{" "}
+              حول فكرتك إلى{" "}
               <motion.span
                 initial={{ backgroundPosition: "0% 50%" }}
                 animate={{ backgroundPosition: "100% 50%" }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 className="bg-gradient-to-r from-primary via-primary-dark to-primary bg-300% bg-clip-text text-transparent"
               >
-                ذكية
+                منتج رقمي
               </motion.span>
               <br />
-              لأعمالك
+              يصنع فرقًا
             </motion.h1>
             
             <motion.p
@@ -69,7 +69,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-gray-600 mb-8 leading-relaxed"
             >
-              {COMPANY_INFO.description}
+              نساعدك في تحويل أفكارك إلى حلول رقمية مبتكرة ومتطورة تواكب احتياجات عملك وتحقق أهدافك التجارية بأحدث التقنيات والمعايير العالمية
             </motion.p>
             
             <motion.div
