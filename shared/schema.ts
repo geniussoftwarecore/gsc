@@ -37,6 +37,9 @@ export const services = pgTable("services", {
   icon: text("icon").notNull(),
   category: text("category").notNull(),
   featured: text("featured").default("false"),
+  technologies: jsonb("technologies").$type<string[]>(),
+  deliveryTime: text("delivery_time"),
+  startingPrice: text("starting_price"),
 });
 
 export const testimonials = pgTable("testimonials", {

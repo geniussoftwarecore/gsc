@@ -72,58 +72,120 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services?.slice(0, limit).map((service, index) => (
-              <AnimatedCard
-                key={service.id}
-                delay={index * 0.1}
-                className={`p-8 group cursor-pointer ${
-                  service.featured === "true"
-                    ? "gradient-primary text-white"
-                    : "bg-white"
-                }`}
-              >
-                <CardContent className="p-0">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ duration: 0.3 }}
-                    className={`text-5xl mb-6 ${
-                      service.featured === "true"
-                        ? "text-white"
-                        : "text-primary"
-                    }`}
-                  >
-                    <DynamicIcon name={service.icon as IconName} size={60} />
-                  </motion.div>
-                  <h3
-                    className={`text-2xl font-bold mb-4 ${
-                      service.featured === "true"
-                        ? "text-white"
-                        : "text-secondary"
-                    }`}
-                  >
-                    {service.title}
-                  </h3>
-                  <p
-                    className={`mb-6 leading-relaxed ${
-                      service.featured === "true"
-                        ? "text-gray-100"
-                        : "text-gray-600"
-                    }`}
-                  >
-                    {service.description}
-                  </p>
-                  <motion.div
-                    whileHover={{ x: 5 }}
-                    className={`font-semibold cursor-pointer flex items-center ${
-                      service.featured === "true"
-                        ? "text-white hover:text-gray-200"
-                        : "text-primary hover:text-primary-dark"
-                    }`}
-                  >
-                    اعرف المزيد
-                    <ArrowLeft className="mr-2" size={18} />
-                  </motion.div>
-                </CardContent>
-              </AnimatedCard>
+              <Link key={service.id} href={`/services/${service.id}`}>
+                <AnimatedCard
+                  delay={index * 0.1}
+                  className={`p-8 group cursor-pointer h-full relative overflow-hidden ${
+                    service.featured === "true"
+                      ? "gradient-primary text-white shadow-2xl scale-105"
+                      : "bg-white hover:shadow-xl"
+                  }`}
+                >
+                  {service.featured === "true" && (
+                    <div className="absolute top-4 right-4 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
+                      مميز
+                    </div>
+                  )}
+                  
+                  <CardContent className="p-0 h-full flex flex-col">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.3 }}
+                      className={`text-5xl mb-6 ${
+                        service.featured === "true"
+                          ? "text-white"
+                          : "text-primary"
+                      }`}
+                    >
+                      <DynamicIcon name={service.icon as IconName} size={60} />
+                    </motion.div>
+                    
+                    <h3
+                      className={`text-2xl font-bold mb-4 ${
+                        service.featured === "true"
+                          ? "text-white"
+                          : "text-secondary"
+                      }`}
+                    >
+                      {service.title}
+                    </h3>
+                    
+                    <p
+                      className={`mb-6 leading-relaxed flex-grow ${
+                        service.featured === "true"
+                          ? "text-gray-100"
+                          : "text-gray-600"
+                      }`}
+                    >
+                      {service.description}
+                    </p>
+
+                    <div className={`space-y-3 mb-6 ${
+                      service.featured === "true" ? "text-gray-100" : "text-gray-700"
+                    }`}>
+                      {service.startingPrice && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">يبدأ من:</span>
+                          <span className={`font-bold ${
+                            service.featured === "true" ? "text-white" : "text-primary"
+                          }`}>
+                            {service.startingPrice}
+                          </span>
+                        </div>
+                      )}
+                      
+                      {service.deliveryTime && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm">مدة التسليم:</span>
+                          <span className={`font-semibold ${
+                            service.featured === "true" ? "text-white" : "text-secondary"
+                          }`}>
+                            {service.deliveryTime}
+                          </span>
+                        </div>
+                      )}
+
+                      {service.technologies && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {service.technologies.slice(0, 3).map((tech) => (
+                            <span
+                              key={tech}
+                              className={`text-xs px-2 py-1 rounded-full ${
+                                service.featured === "true"
+                                  ? "bg-white/20 text-white"
+                                  : "bg-primary/10 text-primary"
+                              }`}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                          {service.technologies.length > 3 && (
+                            <span className={`text-xs px-2 py-1 rounded-full ${
+                              service.featured === "true"
+                                ? "bg-white/20 text-white"
+                                : "bg-primary/10 text-primary"
+                            }`}>
+                              +{service.technologies.length - 3}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      className={`font-semibold cursor-pointer flex items-center mt-auto ${
+                        service.featured === "true"
+                          ? "text-white hover:text-gray-200"
+                          : "text-primary hover:text-primary-dark"
+                      }`}
+                    >
+                      اعرف المزيد
+                      <ArrowLeft className="mr-2" size={18} />
+                    </motion.div>
+                  </CardContent>
+                </AnimatedCard>
+              </Link>
             ))}
           </div>
         )}

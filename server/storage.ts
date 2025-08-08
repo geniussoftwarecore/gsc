@@ -76,60 +76,70 @@ export class MemStorage implements IStorage {
     // Sample services
     const sampleServices: Service[] = [
       {
-        id: randomUUID(),
+        id: "66b131cc-ccec-49a7-b832-972f4ba29a7b",
         title: "تطبيقات الهواتف الذكية",
-        description: "تطوير تطبيقات احترافية لأنظمة Android و iOS بأحدث التقنيات والمعايير العالمية",
+        description: "نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة",
         icon: "smartphone",
         category: "mobile",
-        featured: "false"
+        featured: "false",
+        technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
+        deliveryTime: "4-8 أسابيع",
+        startingPrice: "15,000 ريال"
       },
       {
-        id: randomUUID(),
+        id: "562fce34-abbd-4ba9-abc5-bc6b4afe61c7",
         title: "تطوير المواقع والمنصات",
-        description: "إنشاء مواقع ومنصات إلكترونية متطورة وسريعة الاستجابة بتقنيات حديثة",
+        description: "إنشاء مواقع ومنصات إلكترونية متطورة وسريعة الاستجابة بتصميم جذاب وأداء عالي مع أنظمة إدارة محتوى سهلة الاستخدام",
         icon: "code",
         category: "web",
-        featured: "false"
+        featured: "true",
+        technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL"],
+        deliveryTime: "3-6 أسابيع",
+        startingPrice: "8,000 ريال"
       },
       {
-        id: randomUUID(),
-        title: "تصميم الجرافيكس",
-        description: "تصميم الشعارات والهوية البصرية والمواد التسويقية بأسلوب إبداعي ومميز",
+        id: "9a6c839d-2a5c-4418-832a-2a5bd14dcf7e",
+        title: "تصميم الجرافيكس والهوية البصرية",
+        description: "تصميم الشعارات والهوية البصرية والمواد التسويقية الإبداعية التي تعكس قيم علامتك التجارية وتجذب العملاء",
         icon: "palette",
         category: "design",
-        featured: "false"
+        featured: "false",
+        technologies: ["Adobe Creative Suite", "Figma", "Sketch", "Illustrator", "Photoshop"],
+        deliveryTime: "1-3 أسابيع",
+        startingPrice: "2,500 ريال"
       },
       {
-        id: randomUUID(),
-        title: "التسويق الإلكتروني",
-        description: "استراتيجيات تسويق رقمية متقدمة وحملات إعلانية فعالة لزيادة المبيعات",
+        id: "e4f7b3d1-8c9a-4b5d-9e2f-1a3c5d7e9f1b",
+        title: "التسويق الرقمي والإعلانات",
+        description: "استراتيجيات تسويق رقمية شاملة وحملات إعلانية مدروسة على منصات التواصل الاجتماعي ومحركات البحث لزيادة المبيعات والوصول",
         icon: "megaphone",
         category: "marketing",
-        featured: "false"
+        featured: "false",
+        technologies: ["Google Ads", "Facebook Ads", "Instagram", "LinkedIn", "Analytics"],
+        deliveryTime: "مستمر",
+        startingPrice: "3,000 ريال/شهرياً"
       },
       {
-        id: randomUUID(),
-        title: "الحلول الذكية",
-        description: "حلول برمجية خاصة ومخصصة للهواتف الذكية باستخدام الذكاء الاصطناعي",
+        id: "f5a8c2b4-7d6e-4c9f-8a1b-3e5g7h9i2j4k",
+        title: "الحلول الذكية والذكاء الاصطناعي",
+        description: "تطوير حلول برمجية ذكية ومتقدمة باستخدام تقنيات الذكاء الاصطناعي والتعلم الآلي لأتمتة العمليات وتحسين الكفاءة",
         icon: "brain",
         category: "smart",
-        featured: "false"
+        featured: "true",
+        technologies: ["Python", "TensorFlow", "OpenAI API", "Machine Learning", "Computer Vision"],
+        deliveryTime: "6-12 أسبوع",
+        startingPrice: "25,000 ريال"
       },
       {
-        id: randomUUID(),
-        title: "أنظمة ERPNext",
-        description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم أعمالك",
+        id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
+        title: "أنظمة إدارة الموارد ERPNext",
+        description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم جميع جوانب أعمالك من المحاسبة إلى إدارة المخزون والموارد البشرية",
         icon: "settings",
         category: "erp",
-        featured: "true"
-      },
-      {
-        id: randomUUID(),
-        title: "تطبيقات سطح المكتب",
-        description: "تطوير تطبيقات سطح المكتب المتقدمة لأنظمة Windows وmacOS وLinux بتقنيات حديثة",
-        icon: "monitor",
-        category: "desktop",
-        featured: "false"
+        featured: "false",
+        technologies: ["ERPNext", "Python", "Frappe Framework", "MariaDB", "Redis"],
+        deliveryTime: "8-16 أسبوع",
+        startingPrice: "20,000 ريال"
       }
     ];
 
@@ -305,7 +315,10 @@ export class MemStorage implements IStorage {
     const newService: Service = { 
       ...service, 
       id,
-      featured: service.featured || null
+      featured: service.featured || null,
+      technologies: service.technologies || null,
+      deliveryTime: service.deliveryTime || null,
+      startingPrice: service.startingPrice || null
     };
     this.services.set(id, newService);
     return newService;
