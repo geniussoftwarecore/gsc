@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { InteractiveButton } from "@/components/ui/interactive-button";
@@ -16,9 +16,16 @@ export default function Login() {
     password: ""
   });
   
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const [location, setLocation] = useLocation();
   const { toast } = useToast();
+
+  // إعادة توجيه تلقائية للداشبورد عند نجاح المصادقة
+  useEffect(() => {
+    if (isAuthenticated) {
+      setLocation("/dashboard");
+    }
+  }, [isAuthenticated, setLocation]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,8 +53,7 @@ export default function Login() {
         description: `أهلاً وسهلاً ${userData.name}`,
       });
       
-      // Navigate to dashboard
-      setLocation("/dashboard");
+      // لا حاجة لاستدعاء setLocation هنا - سيتم التوجيه تلقائياً عبر useEffect
     }, 1500);
   };
 
