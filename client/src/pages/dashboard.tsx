@@ -34,6 +34,22 @@ export default function Dashboard() {
   const { user, isAuthenticated, loading } = useAuth();
   const userId = user?.id;
 
+  // جميع الـ hooks يجب أن تكون في الأعلى قبل أي conditional returns
+  const { data: subscriptions, isLoading: subsLoading } = useQuery<UserSubscription[]>({
+    queryKey: ['/api/user-subscriptions', userId],
+    enabled: !!userId && isAuthenticated, // تشغيل الاستعلام فقط عند المصادقة ووجود معرف المستخدم
+  });
+
+  const { data: serviceRequests, isLoading: requestsLoading } = useQuery<ServiceRequest[]>({
+    queryKey: ['/api/service-requests', userId],
+    enabled: !!userId && isAuthenticated, // تشغيل الاستعلام فقط عند المصادقة ووجود معرف المستخدم
+  });
+
+  const { data: services } = useQuery<Service[]>({
+    queryKey: ["/api/services"],
+    enabled: isAuthenticated, // تشغيل الاستعلام فقط عند المصادقة
+  });
+
   // التحقق من المصادقة - إعادة التوجيه للدخول إذا لم يكن مصادق عليه
   // استخدام useEffect لتجنب تحديث الحالة أثناء الرندر
   useEffect(() => {
@@ -58,20 +74,6 @@ export default function Dashboard() {
   if (!isAuthenticated) {
     return null;
   }
-
-  const { data: subscriptions, isLoading: subsLoading } = useQuery<UserSubscription[]>({
-    queryKey: ['/api/user-subscriptions', userId],
-    enabled: !!userId, // تشغيل الاستعلام فقط عند وجود معرف المستخدم
-  });
-
-  const { data: serviceRequests, isLoading: requestsLoading } = useQuery<ServiceRequest[]>({
-    queryKey: ['/api/service-requests', userId],
-    enabled: !!userId, // تشغيل الاستعلام فقط عند وجود معرف المستخدم
-  });
-
-  const { data: services } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
-  });
 
   const getStatusBadge = (status: string) => {
     const statusMap = {
