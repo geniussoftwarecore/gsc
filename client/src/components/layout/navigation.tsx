@@ -71,7 +71,7 @@ export default function Navigation() {
                   إنشاء حساب
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href="/services">
                 <Button className="btn-primary ml-2">
                   <Star className="w-4 h-4 ml-2" />
                   اشتراك
@@ -123,7 +123,7 @@ export default function Navigation() {
                   إنشاء حساب
                 </span>
               </Link>
-              <Link href="/contact" onClick={closeMobileMenu}>
+              <Link href="/services" onClick={closeMobileMenu}>
                 <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
                   اشتراك
                 </span>
