@@ -4,13 +4,44 @@ import { Link } from "wouter";
 import { STATS, COMPANY_INFO } from "@/lib/constants";
 import { AnimatedCard, AnimatedSection } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Target, Award, Clock, TrendingUp } from "lucide-react";
+import { AnimatedCounter, StaggerContainer, StaggerItem } from "@/components/ui/enhanced-scroll-effects";
+import { useRef } from "react";
 
 export default function AboutStats() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+
   return (
-    <section className="py-16 lg:py-24 bg-light-gray">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="py-16 lg:py-24 bg-light-gray relative overflow-hidden">
+      {/* Enhanced animated background */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-10 pointer-events-none"
+      >
+        <div className="absolute top-10 right-20 w-32 h-32 bg-primary rounded-full blur-2xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-24 h-24 bg-primary-dark rounded-full blur-xl animate-pulse delay-1000"></div>
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-40 h-40 bg-gradient-to-r from-primary to-primary-dark rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <AnimatedSection delay={0.2}>
             <motion.div
@@ -88,24 +119,42 @@ export default function AboutStats() {
               أعمالهم.
             </motion.p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 gap-6 mb-8">
               {STATS.map((stat, index) => (
-                <AnimatedCard key={index} delay={index * 0.1} className="text-center p-6">
-                  <CardContent className="p-0">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      viewport={{ once: true }}
-                      className="text-3xl font-bold text-primary mb-2"
-                    >
-                      {stat.value}
-                    </motion.div>
-                    <div className="text-gray-600">{stat.label}</div>
-                  </CardContent>
-                </AnimatedCard>
+                <StaggerItem key={index}>
+                  <Card className="text-center p-6 bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                    <CardContent className="p-0">
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        transition={{ 
+                          duration: 0.8, 
+                          delay: index * 0.1,
+                          type: "spring",
+                          stiffness: 100
+                        }}
+                        viewport={{ once: true }}
+                        className="text-4xl font-bold text-primary mb-2"
+                      >
+                        <AnimatedCounter 
+                          target={parseInt(stat.value)} 
+                          duration={2 + index * 0.5}
+                          suffix={stat.value.includes("+") ? "+" : ""}
+                        />
+                      </motion.div>
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+                        className="text-gray-600"
+                      >
+                        {stat.label}
+                      </motion.div>
+                    </CardContent>
+                  </Card>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerContainer>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
