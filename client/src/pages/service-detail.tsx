@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -8,19 +12,51 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator, Database, Users, ShoppingCart, FileText, BarChart3, Settings2, Shield, Globe } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator, Database, Users, ShoppingCart, FileText, BarChart3, Settings2, Shield, Globe, Send, AlertCircle } from "lucide-react";
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { Service, SubscriptionPlan } from "@shared/schema";
 import { Link } from "wouter";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNotifications } from "@/contexts/NotificationContext";
+import { addClientRequest } from "@/data/clientRequests";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { QuoteCalculator } from "@/components/ui/quote-calculator";
 import { SubscriptionModal } from "@/components/ui/subscription-modal";
 import { dummyProjects, getProjectsByCategory } from "@/data/dummyProjects";
+
+// Custom request form schema
+const customRequestSchema = z.object({
+  title: z.string().min(5, "العنوان يجب أن يكون أكثر من 5 أحرف"),
+  description: z.string().min(20, "الوصف يجب أن يكون أكثر من 20 حرف"),
+  budget: z.string().optional(),
+  timeline: z.string().optional(),
+  requirements: z.string().optional(),
+});
+
+type CustomRequestFormData = z.infer<typeof customRequestSchema>;
 
 export default function ServiceDetail() {
   const [match, params] = useRoute("/services/:id");
   const serviceId = params?.id;
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(null);
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState(false);
+  const [showRequestForm, setShowRequestForm] = useState(false);
+  const { user } = useAuth();
+  const { addNotification } = useNotifications();
+  const { toast } = useToast();
+  
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setValue,
+  } = useForm<CustomRequestFormData>({
+    resolver: zodResolver(customRequestSchema),
+  });
 
   const { data: service, isLoading: serviceLoading, error: serviceError } = useQuery<Service>({
     queryKey: [`/api/services/${serviceId}`],
@@ -181,6 +217,7 @@ export default function ServiceDetail() {
               ))}
             </div>
 
+            {/* Custom Project Request CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -188,9 +225,37 @@ export default function ServiceDetail() {
               viewport={{ once: true }}
               className="text-center mt-12"
             >
+              <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-2xl p-8 mb-8">
+                <h3 className="text-2xl font-bold text-secondary mb-4">
+                  هل تريد مشروعاً مخصصاً؟
+                </h3>
+                <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                  احصل على حل مخصص يناسب احتياجاتك بالضبط. أخبرنا عن متطلباتك وسنقوم بإعداد عرض سعر خاص لك
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <InteractiveButton
+                    onClick={() => setShowRequestForm(true)}
+                    className="bg-primary text-white hover:bg-primary-dark"
+                    icon={<Plus size={16} />}
+                  >
+                    طلب مشروع مخصص
+                  </InteractiveButton>
+                  <Link href="/contact">
+                    <InteractiveButton
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-white"
+                      icon={<MessageCircle size={16} />}
+                    >
+                      تواصل معنا أولاً
+                    </InteractiveButton>
+                  </Link>
+                </div>
+              </div>
+              
               <Link href="/portfolio">
                 <InteractiveButton
-                  className="bg-primary text-white hover:bg-primary-dark"
+                  variant="outline"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
                   icon={<ArrowRight size={16} />}
                 >
                   عرض جميع الأعمال
@@ -308,12 +373,47 @@ export default function ServiceDetail() {
             ) : (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">لا توجد باقات متاحة لهذه الخدمة حالياً</p>
-                <Link href="/contact">
-                  <InteractiveButton className="mt-4">
-                    تواصل معنا للحصول على عرض مخصص
+                <div className="flex gap-4 justify-center mt-4">
+                  <InteractiveButton 
+                    onClick={() => setShowRequestForm(true)}
+                    className="bg-primary text-white"
+                  >
+                    طلب عرض سعر مخصص
                   </InteractiveButton>
-                </Link>
+                  <Link href="/contact">
+                    <InteractiveButton variant="outline">
+                      تواصل معنا
+                    </InteractiveButton>
+                  </Link>
+                </div>
               </div>
+            )}
+
+            {/* Custom Project Request CTA for Services with Plans */}
+            {plans && plans.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-center mt-12"
+              >
+                <div className="bg-gradient-to-r from-secondary/5 to-secondary/10 rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold text-secondary mb-4">
+                    تحتاج شيئاً مختلفاً؟
+                  </h3>
+                  <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+                    إذا لم تجد ما يناسبك من الباقات المعروضة، يمكننا إعداد حل مخصص يناسب احتياجاتك الخاصة
+                  </p>
+                  <InteractiveButton
+                    onClick={() => setShowRequestForm(true)}
+                    className="bg-secondary text-white hover:bg-secondary/90"
+                    icon={<Plus size={16} />}
+                  >
+                    طلب حل مخصص
+                  </InteractiveButton>
+                </div>
+              </motion.div>
             )}
           </div>
         </section>
@@ -620,6 +720,179 @@ export default function ServiceDetail() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* Custom Request Form */}
+      {showRequestForm && (
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedCard>
+              <CardHeader>
+                <CardTitle className="text-2xl font-bold text-secondary text-center">
+                  طلب مشروع مخصص
+                </CardTitle>
+                <p className="text-center text-gray-600">
+                  أخبرنا عن متطلباتك وسنقوم بإعداد عرض سعر مخصص لك
+                </p>
+              </CardHeader>
+              <CardContent>
+                <form
+                  onSubmit={handleSubmit((data) => {
+                    if (!user) {
+                      toast({
+                        title: "يجب تسجيل الدخول",
+                        description: "يرجى تسجيل الدخول أولاً لإرسال طلب مخصص",
+                        variant: "destructive",
+                      });
+                      return;
+                    }
+                    
+                    try {
+                      addClientRequest({
+                        userId: user.id,
+                        serviceId: serviceId || null,
+                        type: "request",
+                        title: data.title,
+                        description: data.description,
+                        attachments: null,
+                        status: "new",
+                        budget: data.budget || null,
+                        timeline: data.timeline || null,
+                        serviceType: service?.category || null,
+                      });
+                      
+                      // Add notification for admin
+                      addNotification({
+                        title: "طلب مشروع مخصص جديد",
+                        message: `طلب مشروع مخصص جديد لخدمة ${service?.title} من ${user.name}`,
+                        type: "new-request",
+                        category: "project",
+                        actionUrl: "/admin/dashboard",
+                      });
+                      
+                      toast({
+                        title: "تم إرسال الطلب بنجاح!",
+                        description: "سنتواصل معك خلال 24 ساعة لمناقشة التفاصيل",
+                      });
+                      
+                      reset();
+                      setShowRequestForm(false);
+                    } catch (error) {
+                      toast({
+                        title: "خطأ في الإرسال",
+                        description: "حدث خطأ أثناء إرسال الطلب، يرجى المحاولة مرة أخرى",
+                        variant: "destructive",
+                      });
+                    }
+                  })}
+                  className="space-y-6"
+                >
+                  <div>
+                    <Label htmlFor="title">عنوان المشروع *</Label>
+                    <Input
+                      id="title"
+                      {...register("title")}
+                      placeholder="مثال: تطوير تطبيق إدارة المخزون"
+                      className="mt-2"
+                    />
+                    {errors.title && (
+                      <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="description">وصف المشروع والمتطلبات *</Label>
+                    <Textarea
+                      id="description"
+                      {...register("description")}
+                      placeholder="اكتب وصفاً مفصلاً عن المشروع والوظائف المطلوبة..."
+                      rows={5}
+                      className="mt-2"
+                    />
+                    {errors.description && (
+                      <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
+                    )}
+                  </div>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="budget">الميزانية المتوقعة</Label>
+                      <Select onValueChange={(value) => setValue("budget", value)}>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="اختر نطاق الميزانية" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="10000-50000">10,000 - 50,000 ر.ي</SelectItem>
+                          <SelectItem value="50000-100000">50,000 - 100,000 ر.ي</SelectItem>
+                          <SelectItem value="100000-300000">100,000 - 300,000 ر.ي</SelectItem>
+                          <SelectItem value="300000+">أكثر من 300,000 ر.ي</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="timeline">المدة المتوقعة</Label>
+                      <Select onValueChange={(value) => setValue("timeline", value)}>
+                        <SelectTrigger className="mt-2">
+                          <SelectValue placeholder="اختر المدة" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1-month">أقل من شهر</SelectItem>
+                          <SelectItem value="1-3-months">1-3 أشهر</SelectItem>
+                          <SelectItem value="3-6-months">3-6 أشهر</SelectItem>
+                          <SelectItem value="6-12-months">6-12 شهر</SelectItem>
+                          <SelectItem value="12+-months">أكثر من سنة</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="requirements">متطلبات إضافية أو ملاحظات</Label>
+                    <Textarea
+                      id="requirements"
+                      {...register("requirements")}
+                      placeholder="أي متطلبات تقنية خاصة أو ملاحظات إضافية..."
+                      rows={3}
+                      className="mt-2"
+                    />
+                  </div>
+                  
+                  {!user && (
+                    <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <AlertCircle className="w-5 h-5 text-blue-600" />
+                        <p className="font-semibold text-blue-800">يجب تسجيل الدخول</p>
+                      </div>
+                      <p className="text-sm text-blue-700">
+                        يرجى تسجيل الدخول أولاً لإرسال طلب مشروع مخصص
+                      </p>
+                      <Link href="/login">
+                        <Button className="mt-2" size="sm">
+                          تسجيل الدخول
+                        </Button>
+                      </Link>
+                    </div>
+                  )}
+                  
+                  <div className="flex gap-3">
+                    <Button type="submit" className="flex-1" disabled={!user}>
+                      <Send className="w-4 h-4 ml-2" />
+                      إرسال الطلب
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowRequestForm(false)}
+                    >
+                      إلغاء
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </AnimatedCard>
+          </div>
+        </section>
+      )}
 
       {/* Subscription Modal */}
       {selectedPlan && (

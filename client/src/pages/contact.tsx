@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,10 @@ import { useToast } from "@/hooks/use-toast";
 import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
+import { Upload, File, X, AlertCircle } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNotifications } from "@/contexts/NotificationContext";
+import { addClientRequest } from "@/data/clientRequests";
 
 const contactSchema = z.object({
   name: z.string().min(2, "الاسم يجب أن يكون أكثر من حرفين"),
@@ -21,14 +25,21 @@ const contactSchema = z.object({
   company: z.string().optional(),
   service: z.string().min(1, "يرجى اختيار نوع الخدمة"),
   message: z.string().min(10, "الرسالة يجب أن تكون أكثر من 10 أحرف"),
+  budget: z.string().optional(),
+  timeline: z.string().optional(),
+  serviceType: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const { addNotification } = useNotifications();
 
   const {
     register,
@@ -73,6 +84,40 @@ export default function Contact() {
 
   const onSubmit = (data: ContactFormData) => {
     setIsSubmitting(true);
+    
+    // Create client request if user is logged in
+    if (user) {
+      try {
+        const attachmentUrls = uploadedFiles.map(file => URL.createObjectURL(file));
+        
+        addClientRequest({
+          userId: user.id,
+          serviceId: null, // Will be linked based on service selection
+          type: "request",
+          title: `طلب ${data.service} من ${data.name}`,
+          description: data.message,
+          attachments: attachmentUrls,
+          status: "new",
+          budget: data.budget || null,
+          timeline: data.timeline || null,
+          serviceType: data.serviceType || data.service,
+        });
+        
+        // Add notification for admin
+        addNotification({
+          title: "طلب جديد",
+          message: `تم استلام طلب جديد من ${data.name} لخدمة ${data.service}`,
+          type: "new-request",
+          category: "general",
+          actionUrl: "/admin/dashboard",
+        });
+        
+        console.log("Client request created successfully");
+      } catch (error) {
+        console.error("Error creating client request:", error);
+      }
+    }
+    
     mutation.mutate(data);
   };
 
@@ -118,6 +163,58 @@ export default function Contact() {
     "استشارات تقنية",
     "أخرى",
   ];
+  
+  const budgetRanges = [
+    "أقل من 10,000 ر.ي",
+    "10,000 - 50,000 ر.ي",
+    "50,000 - 100,000 ر.ي",
+    "100,000 - 500,000 ر.ي",
+    "أكثر من 500,000 ر.ي",
+  ];
+  
+  const timelineOptions = [
+    "أقل من شهر",
+    "1-3 أشهر",
+    "3-6 أشهر",
+    "6-12 شهر",
+    "أكثر من سنة",
+  ];
+  
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    const validFiles = files.filter(file => {
+      const validTypes = [".pdf", ".doc", ".docx", ".png", ".jpg", ".jpeg"];
+      const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+      const isValidType = validTypes.includes(fileExtension);
+      const isValidSize = file.size <= 10 * 1024 * 1024; // 10MB
+      
+      if (!isValidType) {
+        toast({
+          title: "نوع ملف غير مدعوم",
+          description: `الملف ${file.name} غير مدعوم. الأنواع المدعومة: PDF, DOC, DOCX, PNG, JPG`,
+          variant: "destructive",
+        });
+        return false;
+      }
+      
+      if (!isValidSize) {
+        toast({
+          title: "حجم الملف كبير",
+          description: `الملف ${file.name} أكبر من 10MB`,
+          variant: "destructive",
+        });
+        return false;
+      }
+      
+      return true;
+    });
+    
+    setUploadedFiles(prev => [...prev, ...validFiles]);
+  };
+  
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
   const faqs = [
     {
@@ -271,6 +368,39 @@ export default function Contact() {
                         <p className="text-red-500 text-sm mt-1">{errors.service.message}</p>
                       )}
                     </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="budget">الميزانية المتوقعة</Label>
+                        <Select onValueChange={(value) => setValue("budget", value)}>
+                          <SelectTrigger className="mt-2">
+                            <SelectValue placeholder="اختر نطاق الميزانية" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {budgetRanges.map((range) => (
+                              <SelectItem key={range} value={range}>
+                                {range}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="timeline">مدة التنفيذ المتوقعة</Label>
+                        <Select onValueChange={(value) => setValue("timeline", value)}>
+                          <SelectTrigger className="mt-2">
+                            <SelectValue placeholder="اختر المدة" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {timelineOptions.map((timeline) => (
+                              <SelectItem key={timeline} value={timeline}>
+                                {timeline}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
                     <div>
                       <Label htmlFor="message">تفاصيل المشروع *</Label>
@@ -285,6 +415,77 @@ export default function Contact() {
                         <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
                       )}
                     </div>
+                    
+                    {/* File Upload Section */}
+                    <div>
+                      <Label>إرفاق ملفات (اختياري)</Label>
+                      <div className="mt-2 space-y-4">
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors">
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            multiple
+                            accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                            onChange={handleFileUpload}
+                            className="hidden"
+                          />
+                          <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                          <p className="text-lg font-semibold text-gray-700 mb-2">اسحب الملفات هنا أو انقر للاختيار</p>
+                          <p className="text-sm text-gray-500 mb-4">
+                            الأنواع المدعومة: PDF, DOC, DOCX, PNG, JPG (حد أقصى 10MB لكل ملف)
+                          </p>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="mx-auto"
+                          >
+                            <Upload className="w-4 h-4 ml-2" />
+                            اختيار الملفات
+                          </Button>
+                        </div>
+                        
+                        {uploadedFiles.length > 0 && (
+                          <div className="space-y-2">
+                            <Label>الملفات المرفقة ({uploadedFiles.length})</Label>
+                            {uploadedFiles.map((file, index) => (
+                              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div className="flex items-center gap-3">
+                                  <File className="w-5 h-5 text-primary" />
+                                  <div>
+                                    <p className="font-medium text-sm">{file.name}</p>
+                                    <p className="text-xs text-gray-500">
+                                      {(file.size / 1024 / 1024).toFixed(2)} MB
+                                    </p>
+                                  </div>
+                                </div>
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => removeFile(index)}
+                                  className="text-red-500 hover:text-red-700"
+                                >
+                                  <X className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    {!user && (
+                      <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div className="flex items-center gap-2 mb-2">
+                          <AlertCircle className="w-5 h-5 text-blue-600" />
+                          <p className="font-semibold text-blue-800">نصيحة</p>
+                        </div>
+                        <p className="text-sm text-blue-700">
+                          سجل دخولك لمتابعة طلبك وإدارة مشاريعك من لوحة التحكم الشخصية
+                        </p>
+                      </div>
+                    )}
 
                     <InteractiveButton
                       type="submit"

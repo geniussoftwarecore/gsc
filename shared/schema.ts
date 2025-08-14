@@ -7,6 +7,7 @@ export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
+  role: text("role").default("client"), // client, admin
 });
 
 export const contactSubmissions = pgTable("contact_submissions", {
@@ -157,7 +158,7 @@ export const notifications = pgTable("notifications", {
   userId: varchar("user_id").references(() => users.id),
   title: text("title").notNull(),
   message: text("message").notNull(),
-  type: text("type").default("info"), // info, success, warning, error
+  type: text("type").default("new-request"), // new-request, reply, payment, general
   category: text("category").default("general"), // general, project, payment, system
   read: text("read").default("false"),
   actionUrl: text("action_url"),
@@ -170,13 +171,30 @@ export const invoices = pgTable("invoices", {
   projectId: varchar("project_id").references(() => projects.id),
   invoiceNumber: text("invoice_number").notNull().unique(),
   amount: text("amount").notNull(),
-  currency: text("currency").default("SAR"),
+  currency: text("currency").default("YER"), // YER (Yemeni Rial), USD, SAR
   status: text("status").default("pending"), // pending, paid, overdue, cancelled
   description: text("description"),
   items: jsonb("items").$type<Array<{description: string, quantity: number, rate: string, amount: string}>>(),
   dueDate: timestamp("due_date"),
   paidDate: timestamp("paid_date"),
-  paymentMethod: text("payment_method"),
+  paymentMethod: text("payment_method"), // credit_card, jaib, cash, jawali, floosak, onecash
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Client Requests table for enhanced request management
+export const clientRequests = pgTable("client_requests", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id),
+  serviceId: varchar("service_id").references(() => services.id),
+  type: text("type").notNull(), // request, suggestion, comment
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  attachments: jsonb("attachments").$type<string[]>(), // file URLs
+  status: text("status").default("new"), // new, in-progress, answered
+  budget: text("budget"),
+  timeline: text("timeline"),
+  serviceType: text("service_type"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -251,6 +269,12 @@ export const insertInvoiceSchema = createInsertSchema(invoices).omit({
   updatedAt: true,
 });
 
+export const insertClientRequestSchema = createInsertSchema(clientRequests).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
@@ -292,3 +316,6 @@ export type Notification = typeof notifications.$inferSelect;
 
 export type InsertInvoice = z.infer<typeof insertInvoiceSchema>;
 export type Invoice = typeof invoices.$inferSelect;
+
+export type InsertClientRequest = z.infer<typeof insertClientRequestSchema>;
+export type ClientRequest = typeof clientRequests.$inferSelect;

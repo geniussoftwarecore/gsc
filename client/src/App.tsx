@@ -3,7 +3,8 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { NotificationProvider } from "@/contexts/NotificationContext";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -20,6 +21,7 @@ import Dashboard from "@/pages/dashboard";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import AdminPanel from "@/pages/admin";
+import AdminDashboard from "@/pages/admin/dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -36,6 +38,7 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/admin" component={AdminPanel} />
+      <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -45,22 +48,33 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TooltipProvider>
-          <div className="min-h-screen font-cairo" dir="rtl">
-            <MetaTags />
-            <ScrollIndicator />
-            <Navigation />
-            <Breadcrumbs />
-            <main className="scroll-smooth">
-              <Router />
-            </main>
-            <Footer />
-            <ScrollToTop />
-            <Toaster />
-          </div>
-        </TooltipProvider>
+        <NotificationProviderWrapper>
+          <TooltipProvider>
+            <div className="min-h-screen font-cairo" dir="rtl">
+              <MetaTags />
+              <ScrollIndicator />
+              <Navigation />
+              <Breadcrumbs />
+              <main className="scroll-smooth">
+                <Router />
+              </main>
+              <Footer />
+              <ScrollToTop />
+              <Toaster />
+            </div>
+          </TooltipProvider>
+        </NotificationProviderWrapper>
       </AuthProvider>
     </QueryClientProvider>
+  );
+}
+
+function NotificationProviderWrapper({ children }: { children: React.ReactNode }) {
+  const { user } = useAuth();
+  return (
+    <NotificationProvider userId={user?.id}>
+      {children}
+    </NotificationProvider>
   );
 }
 

@@ -10,12 +10,14 @@ export interface User {
   name: string;
   email: string;
   phone?: string;
+  role?: 'admin' | 'client';  // User role for access control
   token?: string;  // JWT token للتحقق من المصادقة في الطلبات المستقبلية
 }
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   login: (userData: User) => void;
   logout: () => void;
   loading: boolean;
@@ -101,6 +103,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
+    isAdmin: user?.role === 'admin',
     login,
     logout,
     loading,

@@ -126,13 +126,17 @@ export default function Dashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 size={16} />
               نظرة عامة
             </TabsTrigger>
-            <TabsTrigger value="subscriptions" className="flex items-center gap-2">
+            <TabsTrigger value="transactions" className="flex items-center gap-2">
               <CreditCard size={16} />
+              المعاملات
+            </TabsTrigger>
+            <TabsTrigger value="subscriptions" className="flex items-center gap-2">
+              <Calendar size={16} />
               الاشتراكات
             </TabsTrigger>
             <TabsTrigger value="requests" className="flex items-center gap-2">
@@ -243,6 +247,122 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </AnimatedCard>
+          </TabsContent>
+
+          {/* Transactions Tab */}
+          <TabsContent value="transactions" className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-secondary">المعاملات والمدفوعات</h2>
+            </div>
+            
+            <div className="space-y-6">
+              {/* Transactions Table */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>سجل المعاملات</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {/* Sample transaction data */}
+                    {[
+                      {
+                        id: "txn-1",
+                        serviceName: "تطوير تطبيق جوال",
+                        amount: "50000",
+                        currency: "YER",
+                        paymentMethod: "credit_card",
+                        status: "paid",
+                        date: "2024-08-10",
+                        subscriptionStart: "2024-08-10",
+                        subscriptionEnd: "2024-11-10"
+                      },
+                      {
+                        id: "txn-2",
+                        serviceName: "تصميم موقع ويب",
+                        amount: "25000",
+                        currency: "YER",
+                        paymentMethod: "jaib",
+                        status: "pending",
+                        date: "2024-08-14",
+                        subscriptionStart: "2024-08-14",
+                        subscriptionEnd: "2024-09-14"
+                      }
+                    ].map((transaction) => (
+                      <div key={transaction.id} className="border border-gray-200 rounded-lg p-4">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h3 className="font-semibold text-lg">{transaction.serviceName}</h3>
+                            <p className="text-gray-600">#{transaction.id}</p>
+                          </div>
+                          <Badge className={transaction.status === "paid" ? "bg-green-500" : "bg-yellow-500"}>
+                            {transaction.status === "paid" ? "مدفوع" : "قيد المراجعة"}
+                          </Badge>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                          <div>
+                            <span className="text-gray-500">المبلغ:</span>
+                            <p className="font-semibold">{formatPrice(transaction.amount)}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-500">طريقة الدفع:</span>
+                            <p className="font-semibold">
+                              {transaction.paymentMethod === "credit_card" ? "بطاقة ائتمانية" :
+                               transaction.paymentMethod === "jaib" ? "محفظة جيب" :
+                               transaction.paymentMethod === "cash" ? "كاش" :
+                               transaction.paymentMethod}
+                            </p>
+                          </div>
+                          <div>
+                            <span className="text-gray-500">تاريخ الدفع:</span>
+                            <p className="font-semibold">{formatDate(transaction.date)}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-500">مدة الاشتراك:</span>
+                            <p className="font-semibold">
+                              {formatDate(transaction.subscriptionStart)} - {formatDate(transaction.subscriptionEnd)}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex gap-2 mt-4">
+                          <Button variant="outline" size="sm">
+                            <Download size={14} className="ml-1" />
+                            تحميل الفاتورة
+                          </Button>
+                          <Button variant="outline" size="sm">
+                            <Eye size={14} className="ml-1" />
+                            تفاصيل المعاملة
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              {/* Payment Summary */}
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <h3 className="font-semibold text-gray-600 mb-2">إجمالي المدفوعات</h3>
+                    <p className="text-2xl font-bold text-primary">75,000 ر.ي</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <h3 className="font-semibold text-gray-600 mb-2">المدفوعات المعلقة</h3>
+                    <p className="text-2xl font-bold text-yellow-600">25,000 ر.ي</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <h3 className="font-semibold text-gray-600 mb-2">الاشتراكات النشطة</h3>
+                    <p className="text-2xl font-bold text-green-600">2</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </TabsContent>
 
           {/* Subscriptions Tab */}
