@@ -14,6 +14,7 @@ import { Service, SubscriptionPlan } from "@shared/schema";
 import { Link } from "wouter";
 import { QuoteCalculator } from "@/components/ui/quote-calculator";
 import { SubscriptionModal } from "@/components/ui/subscription-modal";
+import { dummyProjects, getProjectsByCategory } from "@/data/dummyProjects";
 
 export default function ServiceDetail() {
   const [match, params] = useRoute("/services/:id");
@@ -78,39 +79,13 @@ export default function ServiceDetail() {
   const showProjectsInsteadOfPlans = 
     service?.category === "mobile" || service?.category === "web";
 
-  // Dummy projects data for mobile and web services
-  const dummyProjects = [
-    {
-      id: "proj1",
-      title: service?.category === "mobile" ? "تطبيق التسوق الإلكتروني" : "منصة التجارة الإلكترونية",
-      description: service?.category === "mobile" 
-        ? "تطبيق جوال شامل للتسوق الإلكتروني مع واجهة عصرية وميزات متقدمة"
-        : "موقع تجارة إلكترونية متكامل مع لوحة إدارة شاملة ونظام دفع آمن",
-      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
-      technologies: service?.category === "mobile" ? ["React Native", "Firebase", "Redux"] : ["React", "Node.js", "PostgreSQL"],
-      duration: "3 أشهر"
-    },
-    {
-      id: "proj2", 
-      title: service?.category === "mobile" ? "تطبيق إدارة المهام" : "نظام إدارة المحتوى",
-      description: service?.category === "mobile"
-        ? "تطبيق لإدارة المهام والمشاريع مع إشعارات ذكية وتتبع الإنجاز"
-        : "نظام إدارة محتوى مخصص مع محرر متقدم وإدارة مستخدمين",
-      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
-      technologies: service?.category === "mobile" ? ["Flutter", "Node.js", "MongoDB"] : ["Vue.js", "Laravel", "MySQL"],
-      duration: "2 أشهر"
-    },
-    {
-      id: "proj3",
-      title: service?.category === "mobile" ? "تطبيق الخدمات المصرفية" : "منصة التعليم الإلكتروني",
-      description: service?.category === "mobile"
-        ? "تطبيق مصرفي آمن مع خدمات التحويل والدفع والاستثمار"
-        : "منصة تعليمية شاملة مع دورات تفاعلية ونظام اختبارات",
-      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
-      technologies: service?.category === "mobile" ? ["Swift", "Kotlin", "Spring Boot"] : ["Angular", "Express.js", "PostgreSQL"],
-      duration: "4 أشهر"
-    },
-  ];
+  // الحصول على المشاريع المناسبة بناءً على فئة الخدمة
+  // يتم استخدام البيانات المنظمة من ملف منفصل لتسهيل الصيانة والتحديث
+  const projectsToShow = service?.category === "mobile" 
+    ? getProjectsByCategory("mobile")
+    : service?.category === "web" 
+    ? getProjectsByCategory("web")
+    : [];
 
   return (
     <div className="min-h-screen">
@@ -157,7 +132,7 @@ export default function ServiceDetail() {
             </AnimatedText>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {dummyProjects.map((project, index) => (
+              {projectsToShow.map((project, index) => (
                 <AnimatedCard
                   key={project.id}
                   delay={index * 0.1}

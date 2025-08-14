@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useLocation } from "wouter";
+import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,16 +28,27 @@ import { UserSubscription, ServiceRequest, Service } from "@shared/schema";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
+  const [location, setLocation] = useLocation();
+  
+  // استخدام سياق المصادقة للحصول على بيانات المستخدم الحقيقية
+  const { user, isAuthenticated } = useAuth();
+  const userId = user?.id;
 
-  // Mock user ID - in real app this would come from auth
-  const userId = "user-1";
+  // التحقق من المصادقة - إعادة التوجيه للدخول إذا لم يكن مصادق عليه
+  // هذا يحمي صفحات الداشبورد من الوصول غير المصرح به
+  if (!isAuthenticated) {
+    setLocation("/login");
+    return null;
+  }
 
   const { data: subscriptions, isLoading: subsLoading } = useQuery<UserSubscription[]>({
-    queryKey: [`/api/user-subscriptions?userId=${userId}`],
+    queryKey: ['/api/user-subscriptions', userId],
+    enabled: !!userId, // تشغيل الاستعلام فقط عند وجود معرف المستخدم
   });
 
   const { data: serviceRequests, isLoading: requestsLoading } = useQuery<ServiceRequest[]>({
-    queryKey: [`/api/service-requests?userId=${userId}`],
+    queryKey: ['/api/service-requests', userId],
+    enabled: !!userId, // تشغيل الاستعلام فقط عند وجود معرف المستخدم
   });
 
   const { data: services } = useQuery<Service[]>({
@@ -82,7 +95,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <AnimatedText>
             <h1 className="text-3xl lg:text-4xl font-bold text-secondary mb-2">
-              لوحة التحكم
+              مرحباً {user?.name || "المستخدم"}
             </h1>
             <p className="text-gray-600">
               إدارة اشتراكاتك وطلبات الخدمات من مكان واحد

@@ -16,7 +16,7 @@ import gscLogo from "@assets/gsc-logo.png";
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, loading, logout } = useAuth();
 
   const navigationItems = [
     { href: "/", label: "الرئيسية" },
@@ -69,8 +69,10 @@ export default function Navigation() {
                 </Link>
               ))}
               
-              {/* Authentication UI - Show different content based on auth state */}
-              {!isAuthenticated ? (
+              {/* Authentication UI - Show loading or auth content based on state */}
+              {loading ? (
+                <span className="text-gray-500 text-sm">جارٍ التحميل...</span>
+              ) : !isAuthenticated ? (
                 <>
                   <Link href="/login">
                     <Button variant="outline" className="ml-2">
@@ -103,14 +105,18 @@ export default function Navigation() {
                       </div>
                     </div>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => setLocation("/dashboard")}>
-                      <HomeIcon className="mr-2 h-4 w-4" />
-                      <span>الداشبورد</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLocation("/dashboard")}>
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>الإعدادات</span>
-                    </DropdownMenuItem>
+                    <Link href="/dashboard">
+                      <DropdownMenuItem onSelect={closeMobileMenu}>
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        <span>الداشبورد</span>
+                      </DropdownMenuItem>
+                    </Link>
+                    <Link href="/settings">
+                      <DropdownMenuItem onSelect={closeMobileMenu}>
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>الإعدادات</span>
+                      </DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={logout}>
                       <LogOut className="mr-2 h-4 w-4" />
@@ -164,7 +170,9 @@ export default function Navigation() {
               ))}
               
               {/* Mobile Authentication UI */}
-              {!isAuthenticated ? (
+              {loading ? (
+                <div className="px-3 py-2 text-gray-500 text-sm">جارٍ التحميل...</div>
+              ) : !isAuthenticated ? (
                 <>
                   <Link href="/login" onClick={closeMobileMenu}>
                     <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">

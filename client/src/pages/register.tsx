@@ -56,7 +56,8 @@ export default function Register() {
         id: "newuser123",
         name: formData.name,
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
+        token: "mock-jwt-token-register" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من الخادم
       };
       
       // Use AuthContext to log in user after registration
@@ -80,6 +81,7 @@ export default function Register() {
       id: "google123",
       name: "مستخدم Google",
       email: "user@gmail.com",
+      token: "mock-jwt-token-google-register" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من Google OAuth
     };
     
     login(userData);

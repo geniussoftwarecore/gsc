@@ -34,7 +34,8 @@ export default function Login() {
         id: "user123",
         name: formData.email.split('@')[0], // Extract name from email
         email: formData.email,
-        phone: "+966 50 123 4567"
+        phone: "+966 50 123 4567",
+        token: "mock-jwt-token-login" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من الخادم
       };
       
       // Use AuthContext to log in user
@@ -58,6 +59,7 @@ export default function Login() {
       id: "google123",
       name: "مستخدم Google",
       email: "user@gmail.com",
+      token: "mock-jwt-token-google" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من Google OAuth
     };
     
     login(userData);
