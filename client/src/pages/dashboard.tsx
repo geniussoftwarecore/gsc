@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useAuth } from "@/contexts/AuthContext";
@@ -31,13 +31,31 @@ export default function Dashboard() {
   const [location, setLocation] = useLocation();
   
   // استخدام سياق المصادقة للحصول على بيانات المستخدم الحقيقية
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading } = useAuth();
   const userId = user?.id;
 
   // التحقق من المصادقة - إعادة التوجيه للدخول إذا لم يكن مصادق عليه
-  // هذا يحمي صفحات الداشبورد من الوصول غير المصرح به
+  // استخدام useEffect لتجنب تحديث الحالة أثناء الرندر
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      setLocation("/login");
+    }
+  }, [isAuthenticated, loading, setLocation]);
+
+  // عرض loading أثناء التحقق من المصادقة
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-gray-600">جارٍ التحميل...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // إذا لم يكن مصادق عليه، لا تعرض المحتوى
   if (!isAuthenticated) {
-    setLocation("/login");
     return null;
   }
 
