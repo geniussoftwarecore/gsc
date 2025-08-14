@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { AnimatedCard, AnimatedText } from "@/components/ui/animated-card";
 import { Eye, EyeOff, Mail, Lock, User, Phone, UserPlus } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,14 +21,26 @@ export default function Register() {
     agreeToTerms: false
   });
 
+  const { login } = useAuth();
+  const [location, setLocation] = useLocation();
+  const { toast } = useToast();
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("كلمات المرور غير متطابقة");
+      toast({
+        title: "خطأ في كلمة المرور",
+        description: "كلمات المرور غير متطابقة",
+        variant: "destructive",
+      });
       return;
     }
     if (!formData.agreeToTerms) {
-      alert("يجب الموافقة على الشروط والأحكام");
+      toast({
+        title: "يجب الموافقة على الشروط",
+        description: "يجب الموافقة على الشروط والأحكام للمتابعة",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -36,15 +50,46 @@ export default function Register() {
     setTimeout(() => {
       setIsLoading(false);
       console.log("Registration attempt:", formData);
-      // Handle successful registration
-      window.location.href = "/dashboard";
+      
+      // Mock user data after registration
+      const userData = {
+        id: "newuser123",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone
+      };
+      
+      // Use AuthContext to log in user after registration
+      login(userData);
+      
+      toast({
+        title: "تم إنشاء الحساب بنجاح",
+        description: `أهلاً وسهلاً ${userData.name}`,
+      });
+      
+      // Navigate to dashboard
+      setLocation("/dashboard");
     }, 2000);
   };
 
   const handleGoogleRegister = () => {
     console.log("Google OAuth registration");
-    // In real implementation, this would trigger Google OAuth
-    window.location.href = "/dashboard";
+    
+    // Mock Google registration
+    const userData = {
+      id: "google123",
+      name: "مستخدم Google",
+      email: "user@gmail.com",
+    };
+    
+    login(userData);
+    
+    toast({
+      title: "تم إنشاء الحساب بنجاح",
+      description: `أهلاً وسهلاً ${userData.name}`,
+    });
+    
+    setLocation("/dashboard");
   };
 
   return (

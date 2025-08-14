@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { AnimatedCard, AnimatedText } from "@/components/ui/animated-card";
 import { Eye, EyeOff, Mail, Lock, LogIn } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,10 @@ export default function Login() {
     email: "",
     password: ""
   });
+  
+  const { login } = useAuth();
+  const [location, setLocation] = useLocation();
+  const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,15 +28,46 @@ export default function Login() {
     setTimeout(() => {
       setIsLoading(false);
       console.log("Login attempt:", formData);
-      // Handle successful login
-      window.location.href = "/dashboard";
+      
+      // Mock user data - in real app this would come from API response
+      const userData = {
+        id: "user123",
+        name: formData.email.split('@')[0], // Extract name from email
+        email: formData.email,
+        phone: "+966 50 123 4567"
+      };
+      
+      // Use AuthContext to log in user
+      login(userData);
+      
+      toast({
+        title: "تم تسجيل الدخول بنجاح",
+        description: `أهلاً وسهلاً ${userData.name}`,
+      });
+      
+      // Navigate to dashboard
+      setLocation("/dashboard");
     }, 1500);
   };
 
   const handleGoogleLogin = () => {
     console.log("Google OAuth login");
-    // In real implementation, this would trigger Google OAuth
-    window.location.href = "/dashboard";
+    
+    // Mock Google login
+    const userData = {
+      id: "google123",
+      name: "مستخدم Google",
+      email: "user@gmail.com",
+    };
+    
+    login(userData);
+    
+    toast({
+      title: "تم تسجيل الدخول بنجاح",
+      description: `أهلاً وسهلاً ${userData.name}`,
+    });
+    
+    setLocation("/dashboard");
   };
 
   return (

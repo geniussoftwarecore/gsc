@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, User, UserPlus, Star } from "lucide-react";
+import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import gscLogo from "@assets/gsc-logo.png";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const navigationItems = [
     { href: "/", label: "الرئيسية" },
@@ -59,18 +68,58 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              <Link href="/login">
-                <Button variant="outline" className="ml-2">
-                  <User className="w-4 h-4 ml-2" />
-                  تسجيل الدخول
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button variant="outline" className="ml-2">
-                  <UserPlus className="w-4 h-4 ml-2" />
-                  إنشاء حساب
-                </Button>
-              </Link>
+              
+              {/* Authentication UI - Show different content based on auth state */}
+              {!isAuthenticated ? (
+                <>
+                  <Link href="/login">
+                    <Button variant="outline" className="ml-2">
+                      <User className="w-4 h-4 ml-2" />
+                      تسجيل الدخول
+                    </Button>
+                  </Link>
+                  <Link href="/register">
+                    <Button variant="outline" className="ml-2">
+                      <UserPlus className="w-4 h-4 ml-2" />
+                      إنشاء حساب
+                    </Button>
+                  </Link>
+                </>
+              ) : (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="ml-2">
+                      <User className="w-4 h-4 ml-2" />
+                      {user?.name || "المستخدم"}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <div className="flex items-center justify-start gap-2 p-2">
+                      <div className="flex flex-col space-y-1">
+                        <p className="text-sm font-medium leading-none">{user?.name}</p>
+                        <p className="text-xs leading-none text-muted-foreground">
+                          {user?.email}
+                        </p>
+                      </div>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => setLocation("/dashboard")}>
+                      <HomeIcon className="mr-2 h-4 w-4" />
+                      <span>الداشبورد</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLocation("/dashboard")}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>الإعدادات</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={logout}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      <span>تسجيل الخروج</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+              
               <Link href="/services">
                 <Button className="btn-primary ml-2">
                   <Star className="w-4 h-4 ml-2" />
@@ -113,16 +162,44 @@ export default function Navigation() {
                   </span>
                 </Link>
               ))}
-              <Link href="/login" onClick={closeMobileMenu}>
-                <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
-                  تسجيل الدخول
-                </span>
-              </Link>
-              <Link href="/register" onClick={closeMobileMenu}>
-                <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
-                  إنشاء حساب
-                </span>
-              </Link>
+              
+              {/* Mobile Authentication UI */}
+              {!isAuthenticated ? (
+                <>
+                  <Link href="/login" onClick={closeMobileMenu}>
+                    <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+                      تسجيل الدخول
+                    </span>
+                  </Link>
+                  <Link href="/register" onClick={closeMobileMenu}>
+                    <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+                      إنشاء حساب
+                    </span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <div className="px-3 py-2 border-b border-gray-200">
+                    <p className="text-sm font-medium text-secondary">{user?.name}</p>
+                    <p className="text-xs text-gray-500">{user?.email}</p>
+                  </div>
+                  <Link href="/dashboard" onClick={closeMobileMenu}>
+                    <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+                      الداشبورد
+                    </span>
+                  </Link>
+                  <button 
+                    onClick={() => {
+                      logout();
+                      closeMobileMenu();
+                    }}
+                    className="block w-full text-right px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer"
+                  >
+                    تسجيل الخروج
+                  </button>
+                </>
+              )}
+              
               <Link href="/services" onClick={closeMobileMenu}>
                 <span className="block px-3 py-2 text-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
                   اشتراك

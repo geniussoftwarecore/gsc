@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Navigation from "@/components/layout/navigation";
 import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -43,20 +44,22 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen font-cairo" dir="rtl">
-          <MetaTags />
-          <ScrollIndicator />
-          <Navigation />
-          <Breadcrumbs />
-          <main className="scroll-smooth">
-            <Router />
-          </main>
-          <Footer />
-          <ScrollToTop />
-          <Toaster />
-        </div>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <div className="min-h-screen font-cairo" dir="rtl">
+            <MetaTags />
+            <ScrollIndicator />
+            <Navigation />
+            <Breadcrumbs />
+            <main className="scroll-smooth">
+              <Router />
+            </main>
+            <Footer />
+            <ScrollToTop />
+            <Toaster />
+          </div>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
