@@ -74,6 +74,44 @@ export default function ServiceDetail() {
     return `${formattedPrice} ر.س ${durationMap[duration as keyof typeof durationMap] || ""}`;
   };
 
+  // Logic to determine if we should show projects instead of pricing plans
+  const showProjectsInsteadOfPlans = 
+    service?.category === "mobile" || service?.category === "web";
+
+  // Dummy projects data for mobile and web services
+  const dummyProjects = [
+    {
+      id: "proj1",
+      title: service?.category === "mobile" ? "تطبيق التسوق الإلكتروني" : "منصة التجارة الإلكترونية",
+      description: service?.category === "mobile" 
+        ? "تطبيق جوال شامل للتسوق الإلكتروني مع واجهة عصرية وميزات متقدمة"
+        : "موقع تجارة إلكترونية متكامل مع لوحة إدارة شاملة ونظام دفع آمن",
+      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
+      technologies: service?.category === "mobile" ? ["React Native", "Firebase", "Redux"] : ["React", "Node.js", "PostgreSQL"],
+      duration: "3 أشهر"
+    },
+    {
+      id: "proj2", 
+      title: service?.category === "mobile" ? "تطبيق إدارة المهام" : "نظام إدارة المحتوى",
+      description: service?.category === "mobile"
+        ? "تطبيق لإدارة المهام والمشاريع مع إشعارات ذكية وتتبع الإنجاز"
+        : "نظام إدارة محتوى مخصص مع محرر متقدم وإدارة مستخدمين",
+      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
+      technologies: service?.category === "mobile" ? ["Flutter", "Node.js", "MongoDB"] : ["Vue.js", "Laravel", "MySQL"],
+      duration: "2 أشهر"
+    },
+    {
+      id: "proj3",
+      title: service?.category === "mobile" ? "تطبيق الخدمات المصرفية" : "منصة التعليم الإلكتروني",
+      description: service?.category === "mobile"
+        ? "تطبيق مصرفي آمن مع خدمات التحويل والدفع والاستثمار"
+        : "منصة تعليمية شاملة مع دورات تفاعلية ونظام اختبارات",
+      imageUrl: service?.category === "mobile" ? "/api/placeholder/400/300" : "/api/placeholder/400/300",
+      technologies: service?.category === "mobile" ? ["Swift", "Kotlin", "Spring Boot"] : ["Angular", "Express.js", "PostgreSQL"],
+      duration: "4 أشهر"
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -105,121 +143,206 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      {/* Pricing Plans */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedText className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-              باقات الأسعار
-            </h2>
-            <p className="text-xl text-gray-600">
-              اختر الباقة المناسبة لاحتياجاتك
-            </p>
-          </AnimatedText>
+      {/* Projects Section - Show for mobile and web services */}
+      {showProjectsInsteadOfPlans && (
+        <section className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedText className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+                أعمال قمنا بعملها
+              </h2>
+              <p className="text-xl text-gray-600">
+                إليك بعض المشاريع المنجزة في هذا المجال
+              </p>
+            </AnimatedText>
 
-          {plansLoading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <Skeleton key={i} className="h-96 rounded-xl" />
-              ))}
-            </div>
-          ) : plans && plans.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {plans.map((plan, index) => (
+              {dummyProjects.map((project, index) => (
                 <AnimatedCard
-                  key={plan.id}
+                  key={project.id}
                   delay={index * 0.1}
-                  className={`relative overflow-hidden ${
-                    plan.popular === "true"
-                      ? "gradient-primary text-white scale-105 shadow-2xl"
-                      : "bg-white hover:shadow-xl border border-gray-200"
-                  }`}
+                  className="bg-white hover:shadow-xl border border-gray-200 overflow-hidden"
                 >
-                  {plan.popular === "true" && (
-                    <div className="absolute top-0 left-0 right-0 bg-yellow-400 text-center py-2">
-                      <span className="text-sm font-bold text-gray-900">الأكثر شعبية</span>
+                  <CardContent className="p-0">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+                      />
+                      <div className="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
+                        {project.duration}
+                      </div>
                     </div>
-                  )}
-                  
-                  <CardHeader className={`text-center ${plan.popular === "true" ? "pt-12" : ""}`}>
-                    <CardTitle className={`text-2xl font-bold ${
-                      plan.popular === "true" ? "text-white" : "text-secondary"
-                    }`}>
-                      {plan.name}
-                    </CardTitle>
-                    <p className={`${
-                      plan.popular === "true" ? "text-gray-100" : "text-gray-600"
-                    }`}>
-                      {plan.description}
-                    </p>
-                    <div className="mt-4">
-                      <span className={`text-4xl font-bold ${
-                        plan.popular === "true" ? "text-white" : "text-primary"
-                      }`}>
-                        {formatPrice(plan.price, plan.duration)}
-                      </span>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent>
-                    <ul className="space-y-3 mb-6">
-                      {plan.features?.map((feature, idx) => (
-                        <li key={idx} className={`flex items-center ${
-                          plan.popular === "true" ? "text-gray-100" : "text-gray-600"
-                        }`}>
-                          <CheckCircle className={`ml-3 flex-shrink-0 ${
-                            plan.popular === "true" ? "text-green-300" : "text-green-500"
-                          }`} size={16} />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <InteractiveButton
-                      className={`w-full ${
-                        plan.popular === "true"
-                          ? "bg-white text-primary hover:bg-gray-100"
-                          : "bg-primary text-white hover:bg-primary-dark"
-                      }`}
-                      icon={<CreditCard size={16} />}
-                      onClick={() => {
-                        setSelectedPlan(plan);
-                        setIsSubscriptionModalOpen(true);
-                      }}
-                    >
-                      اشترك الآن
-                    </InteractiveButton>
-
-                    <div className="flex items-center justify-center gap-4 mt-4">
-                      <button className={`flex items-center gap-2 text-sm ${
-                        plan.popular === "true" ? "text-gray-200 hover:text-white" : "text-gray-500 hover:text-gray-700"
-                      }`}>
-                        <Phone size={14} />
-                        استشارة هاتفية
-                      </button>
-                      <button className={`flex items-center gap-2 text-sm ${
-                        plan.popular === "true" ? "text-gray-200 hover:text-white" : "text-gray-500 hover:text-gray-700"
-                      }`}>
-                        <MessageCircle size={14} />
-                        دردشة مباشرة
-                      </button>
+                    
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold mb-3 text-secondary">
+                        {project.title}
+                      </h3>
+                      <p className="text-gray-600 mb-4 leading-relaxed">
+                        {project.description}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} variant="secondary" className="text-xs">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      
+                      <Link href="/portfolio">
+                        <InteractiveButton
+                          variant="outline"
+                          className="w-full"
+                          icon={<ArrowRight size={16} />}
+                        >
+                          عرض التفاصيل
+                        </InteractiveButton>
+                      </Link>
                     </div>
                   </CardContent>
                 </AnimatedCard>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">لا توجد باقات متاحة لهذه الخدمة حالياً</p>
-              <Link href="/contact">
-                <InteractiveButton className="mt-4">
-                  تواصل معنا للحصول على عرض مخصص
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center mt-12"
+            >
+              <Link href="/portfolio">
+                <InteractiveButton
+                  className="bg-primary text-white hover:bg-primary-dark"
+                  icon={<ArrowRight size={16} />}
+                >
+                  عرض جميع الأعمال
                 </InteractiveButton>
               </Link>
-            </div>
-          )}
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Pricing Plans - Show for non-mobile and non-web services */}
+      {!showProjectsInsteadOfPlans && (
+        <section className="py-16 lg:py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <AnimatedText className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
+                باقات الأسعار
+              </h2>
+              <p className="text-xl text-gray-600">
+                اختر الباقة المناسبة لاحتياجاتك
+              </p>
+            </AnimatedText>
+
+            {plansLoading ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3].map((i) => (
+                  <Skeleton key={i} className="h-96 rounded-xl" />
+                ))}
+              </div>
+            ) : plans && plans.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {plans.map((plan, index) => (
+                  <AnimatedCard
+                    key={plan.id}
+                    delay={index * 0.1}
+                    className={`relative overflow-hidden ${
+                      plan.popular === "true"
+                        ? "gradient-primary text-white scale-105 shadow-2xl"
+                        : "bg-white hover:shadow-xl border border-gray-200"
+                    }`}
+                  >
+                    {plan.popular === "true" && (
+                      <div className="absolute top-0 left-0 right-0 bg-yellow-400 text-center py-2">
+                        <span className="text-sm font-bold text-gray-900">الأكثر شعبية</span>
+                      </div>
+                    )}
+                    
+                    <CardHeader className={`text-center ${plan.popular === "true" ? "pt-12" : ""}`}>
+                      <CardTitle className={`text-2xl font-bold ${
+                        plan.popular === "true" ? "text-white" : "text-secondary"
+                      }`}>
+                        {plan.name}
+                      </CardTitle>
+                      <p className={`${
+                        plan.popular === "true" ? "text-gray-100" : "text-gray-600"
+                      }`}>
+                        {plan.description}
+                      </p>
+                      <div className="mt-4">
+                        <span className={`text-4xl font-bold ${
+                          plan.popular === "true" ? "text-white" : "text-primary"
+                        }`}>
+                          {formatPrice(plan.price, plan.duration)}
+                        </span>
+                      </div>
+                    </CardHeader>
+
+                    <CardContent>
+                      <ul className="space-y-3 mb-6">
+                        {plan.features?.map((feature, idx) => (
+                          <li key={idx} className={`flex items-center ${
+                            plan.popular === "true" ? "text-gray-100" : "text-gray-600"
+                          }`}>
+                            <CheckCircle className={`ml-3 flex-shrink-0 ${
+                              plan.popular === "true" ? "text-green-300" : "text-green-500"
+                            }`} size={16} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <InteractiveButton
+                        className={`w-full ${
+                          plan.popular === "true"
+                            ? "bg-white text-primary hover:bg-gray-100"
+                            : "bg-primary text-white hover:bg-primary-dark"
+                        }`}
+                        icon={<CreditCard size={16} />}
+                        onClick={() => {
+                          setSelectedPlan(plan);
+                          setIsSubscriptionModalOpen(true);
+                        }}
+                      >
+                        اشترك الآن
+                      </InteractiveButton>
+
+                      <div className="flex items-center justify-center gap-4 mt-4">
+                        <button className={`flex items-center gap-2 text-sm ${
+                          plan.popular === "true" ? "text-gray-200 hover:text-white" : "text-gray-500 hover:text-gray-700"
+                        }`}>
+                          <Phone size={14} />
+                          استشارة هاتفية
+                        </button>
+                        <button className={`flex items-center gap-2 text-sm ${
+                          plan.popular === "true" ? "text-gray-200 hover:text-white" : "text-gray-500 hover:text-gray-700"
+                        }`}>
+                          <MessageCircle size={14} />
+                          دردشة مباشرة
+                        </button>
+                      </div>
+                    </CardContent>
+                  </AnimatedCard>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">لا توجد باقات متاحة لهذه الخدمة حالياً</p>
+                <Link href="/contact">
+                  <InteractiveButton className="mt-4">
+                    تواصل معنا للحصول على عرض مخصص
+                  </InteractiveButton>
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Quote Calculator Section */}
       <section className="py-16 lg:py-24 bg-gray-50">
