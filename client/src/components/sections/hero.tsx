@@ -78,7 +78,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <Link href="/contact">
+              <Link href="/#services">
                 <InteractiveButton
                   className="btn-primary shadow-lg hover:shadow-xl"
                   icon={<Star className="w-4 h-4" />}
