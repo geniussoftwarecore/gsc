@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator, Database, Users, ShoppingCart, FileText, BarChart3, Settings2, Shield, Globe, Send, AlertCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, CreditCard, Star, Phone, MessageCircle, Calculator, Database, Users, ShoppingCart, FileText, BarChart3, Settings2, Shield, Globe, Send, AlertCircle, Plus } from "lucide-react";
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { Service, SubscriptionPlan } from "@shared/schema";
 import { Link } from "wouter";
