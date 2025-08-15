@@ -31,6 +31,20 @@ import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 
+// Helper function for Arabic distance formatting
+const formatDistanceToNow = (date: Date, options?: { addSuffix?: boolean }) => {
+  // Simple Arabic distance formatting
+  const diffMs = Date.now() - date.getTime();
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffDays > 0) return `منذ ${diffDays} ${diffDays === 1 ? 'يوم' : 'أيام'}`;
+  if (diffHours > 0) return `منذ ${diffHours} ${diffHours === 1 ? 'ساعة' : 'ساعات'}`;
+  if (diffMinutes > 0) return `منذ ${diffMinutes} ${diffMinutes === 1 ? 'دقيقة' : 'دقائق'}`;
+  return 'منذ لحظات';
+};
+
 interface TicketPanelProps {
   ticket: CRMClientRequest | null;
   onClose: () => void;
@@ -141,18 +155,7 @@ export const TicketPanel: React.FC<TicketPanelProps> = ({
   const macros = getMacros();
   const auditEntries = getAuditEntries({ targetId: ticket.id });
 
-  const formatDistanceToNow = (date: Date, options?: { addSuffix?: boolean }) => {
-    // Simple Arabic distance formatting
-    const diffMs = Date.now() - date.getTime();
-    const diffMinutes = Math.floor(diffMs / (1000 * 60));
-    const diffHours = Math.floor(diffMinutes / 60);
-    const diffDays = Math.floor(diffHours / 24);
 
-    if (diffDays > 0) return `منذ ${diffDays} ${diffDays === 1 ? 'يوم' : 'أيام'}`;
-    if (diffHours > 0) return `منذ ${diffHours} ${diffHours === 1 ? 'ساعة' : 'ساعات'}`;
-    if (diffMinutes > 0) return `منذ ${diffMinutes} ${diffMinutes === 1 ? 'دقيقة' : 'دقائق'}`;
-    return 'منذ لحظات';
-  };
 
   return (
     <div className="w-96 border-r bg-white dark:bg-gray-800 flex flex-col">

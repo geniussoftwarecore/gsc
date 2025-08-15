@@ -80,9 +80,9 @@ export const CRMHeader: React.FC<CRMHeaderProps> = ({
         {/* User Actions */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" data-testid="user-menu">
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3" data-testid="user-menu">
               <MoreVertical className="h-5 w-5" />
-            </Button>
+            </button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
             <div className="px-3 py-2 text-sm text-gray-600 dark:text-gray-300">
