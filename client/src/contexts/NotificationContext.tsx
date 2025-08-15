@@ -71,11 +71,12 @@ export const NotificationProvider = ({ children, userId }: NotificationProviderP
   }, [currentNotifications, userId]);
 
   const addNotification = (notification: Omit<InsertNotification, 'userId'>) => {
-    if (!userId) return;
+    // Use current user ID if available, otherwise use a default admin user
+    const targetUserId = userId || "admin-1";
     
     const newNotification: Notification = {
       id: `notif-${Date.now()}`,
-      userId,
+      userId: targetUserId,
       title: notification.title,
       message: notification.message,
       type: notification.type || "general",

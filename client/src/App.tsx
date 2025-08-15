@@ -22,6 +22,7 @@ import Login from "@/pages/login";
 import Register from "@/pages/register";
 import AdminPanel from "@/pages/admin";
 import AdminDashboard from "@/pages/admin/dashboard";
+import AdminCRM from "@/pages/admin/crm";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/admin" component={AdminPanel} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/crm" component={AdminCRM} />
       <Route component={NotFound} />
     </Switch>
   );

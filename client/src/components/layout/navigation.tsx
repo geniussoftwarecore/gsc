@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings } from "lucide-react";
+import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
@@ -16,7 +16,7 @@ import gscLogo from "@assets/gsc-logo.png";
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
-  const { user, isAuthenticated, loading, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, loading, logout } = useAuth();
 
   const navigationItems = [
     { href: "/", label: "الرئيسية" },
@@ -111,6 +111,22 @@ export default function Navigation() {
                         <span>الداشبورد</span>
                       </DropdownMenuItem>
                     </Link>
+                    {isAdmin && (
+                      <>
+                        <Link href="/admin/crm">
+                          <DropdownMenuItem onSelect={closeMobileMenu}>
+                            <Shield className="mr-2 h-4 w-4" />
+                            <span>نظام CRM</span>
+                          </DropdownMenuItem>
+                        </Link>
+                        <Link href="/admin/dashboard">
+                          <DropdownMenuItem onSelect={closeMobileMenu}>
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>لوحة الإدارة</span>
+                          </DropdownMenuItem>
+                        </Link>
+                      </>
+                    )}
                     <Link href="/settings">
                       <DropdownMenuItem onSelect={closeMobileMenu}>
                         <Settings className="mr-2 h-4 w-4" />

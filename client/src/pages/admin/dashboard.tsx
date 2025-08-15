@@ -36,7 +36,7 @@ import {
   ClientRequestWithService 
 } from "@/data/clientRequests";
 
-export default function AdminDashboard() {
+function AdminDashboardContent() {
   const [activeTab, setActiveTab] = useState("overview");
   const [, setLocation] = useLocation();
   const { user, isAdmin } = useAuth();
@@ -435,4 +435,8 @@ export default function AdminDashboard() {
       </div>
     </AdminRoute>
   );
+}
+
+export default function AdminDashboard() {
+  return <AdminDashboardContent />;
 }

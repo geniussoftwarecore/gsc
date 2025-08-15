@@ -31,18 +31,33 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     
+    // Import authentication function
+    const { authenticateUser } = await import("@/data/users");
+    
     // Simulate login API call
     setTimeout(() => {
       setIsLoading(false);
-      console.log("Login attempt:", formData);
       
-      // Mock user data - in real app this would come from API response
+      // Authenticate user with real data
+      const authenticatedUser = authenticateUser(formData.email, formData.password);
+      
+      if (!authenticatedUser) {
+        toast({
+          title: "خطأ في تسجيل الدخول",
+          description: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Convert to AuthContext format
       const userData = {
-        id: "user123",
-        name: formData.email.split('@')[0], // Extract name from email
-        email: formData.email,
-        phone: "+966 50 123 4567",
-        token: "mock-jwt-token-login" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من الخادم
+        id: authenticatedUser.id,
+        name: authenticatedUser.name,
+        email: authenticatedUser.email,
+        phone: authenticatedUser.phone,
+        role: authenticatedUser.role,
+        token: `jwt-token-${authenticatedUser.id}-${Date.now()}` // رمز وهمي مع معرف المستخدم
       };
       
       // Use AuthContext to log in user

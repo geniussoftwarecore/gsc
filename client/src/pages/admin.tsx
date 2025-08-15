@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AdminRoute } from "@/components/auth/AdminRoute";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +26,7 @@ import {
   FileText
 } from "lucide-react";
 
-export default function AdminPanel() {
+function AdminPanelContent() {
   const [activeTab, setActiveTab] = useState("overview");
 
   // Mock data for admin panel
@@ -335,5 +336,13 @@ export default function AdminPanel() {
         </Tabs>
       </div>
     </div>
+  );
+}
+
+export default function AdminPanel() {
+  return (
+    <AdminRoute>
+      <AdminPanelContent />
+    </AdminRoute>
   );
 }
