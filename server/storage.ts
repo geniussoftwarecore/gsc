@@ -14,38 +14,110 @@ import {
   type UserSubscription,
   type InsertUserSubscription,
   type ServiceRequest,
-  type InsertServiceRequest
+  type InsertServiceRequest,
+  type Lead,
+  type InsertLead,
+  type Contact,
+  type InsertContact,
+  type Account,
+  type InsertAccount,
+  type Opportunity,
+  type InsertOpportunity,
+  type Task,
+  type InsertTask,
+  type CrmActivity,
+  type InsertCrmActivity
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
+  // User Management
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUser(id: string, updates: Partial<User>): Promise<User>;
+  getAllUsers(): Promise<User[]>;
   
+  // Contact Submissions
   createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
   getAllContactSubmissions(): Promise<ContactSubmission[]>;
   
+  // Portfolio Management
   getAllPortfolioItems(): Promise<PortfolioItem[]>;
   getPortfolioItemsByCategory(category: string): Promise<PortfolioItem[]>;
   createPortfolioItem(item: InsertPortfolioItem): Promise<PortfolioItem>;
   
+  // Services Management
   getAllServices(): Promise<Service[]>;
   getServiceById(id: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
   
+  // Testimonials
   getAllTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
   
+  // Subscription Plans
   getAllSubscriptionPlans(): Promise<SubscriptionPlan[]>;
   getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]>;
   createSubscriptionPlan(plan: InsertSubscriptionPlan): Promise<SubscriptionPlan>;
   
+  // User Subscriptions
   getUserSubscriptions(userId: string): Promise<UserSubscription[]>;
   createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription>;
   
+  // Service Requests
   getServiceRequests(userId?: string): Promise<ServiceRequest[]>;
   createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest>;
+  
+  // CRM - Leads Management
+  getAllLeads(): Promise<Lead[]>;
+  getLeadById(id: string): Promise<Lead | undefined>;
+  createLead(lead: InsertLead): Promise<Lead>;
+  updateLead(id: string, updates: Partial<Lead>): Promise<Lead>;
+  deleteLead(id: string): Promise<boolean>;
+  getLeadsByAssignee(userId: string): Promise<Lead[]>;
+  convertLeadToContact(leadId: string, accountId?: string): Promise<Contact>;
+  
+  // CRM - Contacts Management
+  getAllContacts(): Promise<Contact[]>;
+  getContactById(id: string): Promise<Contact | undefined>;
+  createContact(contact: InsertContact): Promise<Contact>;
+  updateContact(id: string, updates: Partial<Contact>): Promise<Contact>;
+  deleteContact(id: string): Promise<boolean>;
+  getContactsByAccount(accountId: string): Promise<Contact[]>;
+  
+  // CRM - Accounts Management
+  getAllAccounts(): Promise<Account[]>;
+  getAccountById(id: string): Promise<Account | undefined>;
+  createAccount(account: InsertAccount): Promise<Account>;
+  updateAccount(id: string, updates: Partial<Account>): Promise<Account>;
+  deleteAccount(id: string): Promise<boolean>;
+  getAccountsByAssignee(userId: string): Promise<Account[]>;
+  
+  // CRM - Opportunities Management
+  getAllOpportunities(): Promise<Opportunity[]>;
+  getOpportunityById(id: string): Promise<Opportunity | undefined>;
+  createOpportunity(opportunity: InsertOpportunity): Promise<Opportunity>;
+  updateOpportunity(id: string, updates: Partial<Opportunity>): Promise<Opportunity>;
+  deleteOpportunity(id: string): Promise<boolean>;
+  getOpportunitiesByAccount(accountId: string): Promise<Opportunity[]>;
+  getOpportunitiesByAssignee(userId: string): Promise<Opportunity[]>;
+  
+  // CRM - Tasks Management
+  getAllTasks(): Promise<Task[]>;
+  getTaskById(id: string): Promise<Task | undefined>;
+  createTask(task: InsertTask): Promise<Task>;
+  updateTask(id: string, updates: Partial<Task>): Promise<Task>;
+  deleteTask(id: string): Promise<boolean>;
+  getTasksByAssignee(userId: string): Promise<Task[]>;
+  getTasksByRelatedEntity(relatedTo: string, relatedId: string): Promise<Task[]>;
+  
+  // CRM - Activities
+  getAllActivities(): Promise<CrmActivity[]>;
+  getActivityById(id: string): Promise<CrmActivity | undefined>;
+  createActivity(activity: InsertCrmActivity): Promise<CrmActivity>;
+  getActivitiesByRelatedEntity(relatedTo: string, relatedId: string): Promise<CrmActivity[]>;
+  getActivitiesByUser(userId: string): Promise<CrmActivity[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -57,6 +129,12 @@ export class MemStorage implements IStorage {
   private subscriptionPlans: Map<string, SubscriptionPlan>;
   private userSubscriptions: Map<string, UserSubscription>;
   private serviceRequests: Map<string, ServiceRequest>;
+  private leads: Map<string, Lead>;
+  private contacts: Map<string, Contact>;
+  private accounts: Map<string, Account>;
+  private opportunities: Map<string, Opportunity>;
+  private tasks: Map<string, Task>;
+  private activities: Map<string, CrmActivity>;
 
   constructor() {
     this.users = new Map();
@@ -67,6 +145,12 @@ export class MemStorage implements IStorage {
     this.subscriptionPlans = new Map();
     this.userSubscriptions = new Map();
     this.serviceRequests = new Map();
+    this.leads = new Map();
+    this.contacts = new Map();
+    this.accounts = new Map();
+    this.opportunities = new Map();
+    this.tasks = new Map();
+    this.activities = new Map();
     
     // Initialize with sample data
     this.initializeSampleData();
@@ -78,9 +162,57 @@ export class MemStorage implements IStorage {
       id: "admin-001",
       username: "admin@geniussoftwarecore.com",
       password: "123", // In production, this should be hashed
-      role: "admin"
+      role: "admin",
+      name: "مدير النظام",
+      email: "admin@geniussoftwarecore.com",
+      phone: null,
+      department: "الإدارة",
+      position: "مدير عام",
+      avatar: null,
+      isActive: "true",
+      lastLoginAt: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
     this.users.set(adminUser.id, adminUser);
+
+    // Create additional sample users for CRM demo
+    const salesUser: User = {
+      id: "sales-001",
+      username: "sales@geniussoftwarecore.com",
+      password: "123",
+      role: "sales",
+      name: "أحمد محمد",
+      email: "sales@geniussoftwarecore.com",
+      phone: "+966501234567",
+      department: "المبيعات",
+      position: "مدير مبيعات",
+      avatar: null,
+      isActive: "true",
+      lastLoginAt: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const supportUser: User = {
+      id: "support-001",
+      username: "support@geniussoftwarecore.com", 
+      password: "123",
+      role: "support",
+      name: "فاطمة علي",
+      email: "support@geniussoftwarecore.com",
+      phone: "+966507654321",
+      department: "الدعم الفني",
+      position: "أخصائي دعم فني",
+      avatar: null,
+      isActive: "true",
+      lastLoginAt: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.users.set(salesUser.id, salesUser);
+    this.users.set(supportUser.id, supportUser);
 
     // Sample services
     const sampleServices: Service[] = [
@@ -269,7 +401,17 @@ export class MemStorage implements IStorage {
     const user: User = { 
       ...insertUser, 
       id,
-      role: insertUser.role || "client"
+      role: insertUser.role || "client",
+      name: insertUser.name || null,
+      email: insertUser.email || null,
+      phone: insertUser.phone || null,
+      department: insertUser.department || null,
+      position: insertUser.position || null,
+      avatar: insertUser.avatar || null,
+      isActive: insertUser.isActive || "true",
+      lastLoginAt: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
     this.users.set(id, user);
     return user;
@@ -428,6 +570,357 @@ export class MemStorage implements IStorage {
     return newRequest;
   }
 
+  // User Management Methods
+  async updateUser(id: string, updates: Partial<User>): Promise<User> {
+    const user = this.users.get(id);
+    if (!user) throw new Error("User not found");
+    
+    const updatedUser = { ...user, ...updates, updatedAt: new Date() };
+    this.users.set(id, updatedUser);
+    return updatedUser;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return Array.from(this.users.values());
+  }
+
+  // CRM - Leads Management
+  async getAllLeads(): Promise<Lead[]> {
+    return Array.from(this.leads.values());
+  }
+
+  async getLeadById(id: string): Promise<Lead | undefined> {
+    return this.leads.get(id);
+  }
+
+  async createLead(lead: InsertLead): Promise<Lead> {
+    const id = randomUUID();
+    const newLead: Lead = {
+      ...lead,
+      id,
+      email: lead.email || null,
+      phone: lead.phone || null,
+      company: lead.company || null,
+      jobTitle: lead.jobTitle || null,
+      leadSource: lead.leadSource || "website",
+      status: lead.status || "new",
+      rating: lead.rating || "cold",
+      estimatedValue: lead.estimatedValue || null,
+      expectedCloseDate: lead.expectedCloseDate || null,
+      assignedTo: lead.assignedTo || null,
+      notes: lead.notes || null,
+      tags: lead.tags || null,
+      customFields: lead.customFields || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.leads.set(id, newLead);
+    return newLead;
+  }
+
+  async updateLead(id: string, updates: Partial<Lead>): Promise<Lead> {
+    const lead = this.leads.get(id);
+    if (!lead) throw new Error("Lead not found");
+    
+    const updatedLead = { ...lead, ...updates, updatedAt: new Date() };
+    this.leads.set(id, updatedLead);
+    return updatedLead;
+  }
+
+  async deleteLead(id: string): Promise<boolean> {
+    return this.leads.delete(id);
+  }
+
+  async getLeadsByAssignee(userId: string): Promise<Lead[]> {
+    return Array.from(this.leads.values()).filter(lead => lead.assignedTo === userId);
+  }
+
+  async convertLeadToContact(leadId: string, accountId?: string): Promise<Contact> {
+    const lead = this.leads.get(leadId);
+    if (!lead) throw new Error("Lead not found");
+
+    const contact: InsertContact = {
+      leadId: leadId,
+      accountId: accountId || null,
+      name: lead.name,
+      email: lead.email,
+      phone: lead.phone,
+      mobile: null,
+      jobTitle: lead.jobTitle,
+      department: null,
+      isPrimary: "false",
+      isActive: "true",
+      dateOfBirth: null,
+      socialProfiles: null,
+      preferences: null,
+      tags: lead.tags,
+      notes: lead.notes
+    };
+
+    return this.createContact(contact);
+  }
+
+  // CRM - Contacts Management
+  async getAllContacts(): Promise<Contact[]> {
+    return Array.from(this.contacts.values());
+  }
+
+  async getContactById(id: string): Promise<Contact | undefined> {
+    return this.contacts.get(id);
+  }
+
+  async createContact(contact: InsertContact): Promise<Contact> {
+    const id = randomUUID();
+    const newContact: Contact = {
+      ...contact,
+      id,
+      leadId: contact.leadId || null,
+      accountId: contact.accountId || null,
+      email: contact.email || null,
+      phone: contact.phone || null,
+      mobile: contact.mobile || null,
+      jobTitle: contact.jobTitle || null,
+      department: contact.department || null,
+      isPrimary: contact.isPrimary || "false",
+      isActive: contact.isActive || "true",
+      dateOfBirth: contact.dateOfBirth || null,
+      socialProfiles: contact.socialProfiles || null,
+      preferences: contact.preferences || null,
+      tags: contact.tags || null,
+      notes: contact.notes || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.contacts.set(id, newContact);
+    return newContact;
+  }
+
+  async updateContact(id: string, updates: Partial<Contact>): Promise<Contact> {
+    const contact = this.contacts.get(id);
+    if (!contact) throw new Error("Contact not found");
+    
+    const updatedContact = { ...contact, ...updates, updatedAt: new Date() };
+    this.contacts.set(id, updatedContact);
+    return updatedContact;
+  }
+
+  async deleteContact(id: string): Promise<boolean> {
+    return this.contacts.delete(id);
+  }
+
+  async getContactsByAccount(accountId: string): Promise<Contact[]> {
+    return Array.from(this.contacts.values()).filter(contact => contact.accountId === accountId);
+  }
+
+  // CRM - Accounts Management
+  async getAllAccounts(): Promise<Account[]> {
+    return Array.from(this.accounts.values());
+  }
+
+  async getAccountById(id: string): Promise<Account | undefined> {
+    return this.accounts.get(id);
+  }
+
+  async createAccount(account: InsertAccount): Promise<Account> {
+    const id = randomUUID();
+    const newAccount: Account = {
+      ...account,
+      id,
+      type: account.type || "prospect",
+      industry: account.industry || null,
+      website: account.website || null,
+      phone: account.phone || null,
+      email: account.email || null,
+      billingAddress: account.billingAddress || null,
+      shippingAddress: account.shippingAddress || null,
+      annualRevenue: account.annualRevenue || null,
+      numberOfEmployees: account.numberOfEmployees || null,
+      assignedTo: account.assignedTo || null,
+      parentAccountId: account.parentAccountId || null,
+      description: account.description || null,
+      tags: account.tags || null,
+      customFields: account.customFields || null,
+      isActive: account.isActive || "true",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.accounts.set(id, newAccount);
+    return newAccount;
+  }
+
+  async updateAccount(id: string, updates: Partial<Account>): Promise<Account> {
+    const account = this.accounts.get(id);
+    if (!account) throw new Error("Account not found");
+    
+    const updatedAccount = { ...account, ...updates, updatedAt: new Date() };
+    this.accounts.set(id, updatedAccount);
+    return updatedAccount;
+  }
+
+  async deleteAccount(id: string): Promise<boolean> {
+    return this.accounts.delete(id);
+  }
+
+  async getAccountsByAssignee(userId: string): Promise<Account[]> {
+    return Array.from(this.accounts.values()).filter(account => account.assignedTo === userId);
+  }
+
+  // CRM - Opportunities Management
+  async getAllOpportunities(): Promise<Opportunity[]> {
+    return Array.from(this.opportunities.values());
+  }
+
+  async getOpportunityById(id: string): Promise<Opportunity | undefined> {
+    return this.opportunities.get(id);
+  }
+
+  async createOpportunity(opportunity: InsertOpportunity): Promise<Opportunity> {
+    const id = randomUUID();
+    const newOpportunity: Opportunity = {
+      ...opportunity,
+      id,
+      accountId: opportunity.accountId || null,
+      contactId: opportunity.contactId || null,
+      stage: opportunity.stage || "prospecting",
+      amount: opportunity.amount || null,
+      probability: opportunity.probability || "0",
+      expectedCloseDate: opportunity.expectedCloseDate || null,
+      actualCloseDate: opportunity.actualCloseDate || null,
+      leadSource: opportunity.leadSource || null,
+      description: opportunity.description || null,
+      lossReason: opportunity.lossReason || null,
+      nextStep: opportunity.nextStep || null,
+      assignedTo: opportunity.assignedTo || null,
+      competitorId: opportunity.competitorId || null,
+      tags: opportunity.tags || null,
+      customFields: opportunity.customFields || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.opportunities.set(id, newOpportunity);
+    return newOpportunity;
+  }
+
+  async updateOpportunity(id: string, updates: Partial<Opportunity>): Promise<Opportunity> {
+    const opportunity = this.opportunities.get(id);
+    if (!opportunity) throw new Error("Opportunity not found");
+    
+    const updatedOpportunity = { ...opportunity, ...updates, updatedAt: new Date() };
+    this.opportunities.set(id, updatedOpportunity);
+    return updatedOpportunity;
+  }
+
+  async deleteOpportunity(id: string): Promise<boolean> {
+    return this.opportunities.delete(id);
+  }
+
+  async getOpportunitiesByAccount(accountId: string): Promise<Opportunity[]> {
+    return Array.from(this.opportunities.values()).filter(opp => opp.accountId === accountId);
+  }
+
+  async getOpportunitiesByAssignee(userId: string): Promise<Opportunity[]> {
+    return Array.from(this.opportunities.values()).filter(opp => opp.assignedTo === userId);
+  }
+
+  // CRM - Tasks Management
+  async getAllTasks(): Promise<Task[]> {
+    return Array.from(this.tasks.values());
+  }
+
+  async getTaskById(id: string): Promise<Task | undefined> {
+    return this.tasks.get(id);
+  }
+
+  async createTask(task: InsertTask): Promise<Task> {
+    const id = randomUUID();
+    const newTask: Task = {
+      ...task,
+      id,
+      description: task.description || null,
+      type: task.type || "call",
+      status: task.status || "pending",
+      priority: task.priority || "medium",
+      assignedTo: task.assignedTo || null,
+      createdBy: task.createdBy || null,
+      relatedTo: task.relatedTo || null,
+      relatedId: task.relatedId || null,
+      dueDate: task.dueDate || null,
+      completedDate: task.completedDate || null,
+      reminderDate: task.reminderDate || null,
+      estimatedDuration: task.estimatedDuration || null,
+      actualDuration: task.actualDuration || null,
+      tags: task.tags || null,
+      attachments: task.attachments || null,
+      customFields: task.customFields || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.tasks.set(id, newTask);
+    return newTask;
+  }
+
+  async updateTask(id: string, updates: Partial<Task>): Promise<Task> {
+    const task = this.tasks.get(id);
+    if (!task) throw new Error("Task not found");
+    
+    const updatedTask = { ...task, ...updates, updatedAt: new Date() };
+    this.tasks.set(id, updatedTask);
+    return updatedTask;
+  }
+
+  async deleteTask(id: string): Promise<boolean> {
+    return this.tasks.delete(id);
+  }
+
+  async getTasksByAssignee(userId: string): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => task.assignedTo === userId);
+  }
+
+  async getTasksByRelatedEntity(relatedTo: string, relatedId: string): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => 
+      task.relatedTo === relatedTo && task.relatedId === relatedId
+    );
+  }
+
+  // CRM - Activities
+  async getAllActivities(): Promise<CrmActivity[]> {
+    return Array.from(this.activities.values());
+  }
+
+  async getActivityById(id: string): Promise<CrmActivity | undefined> {
+    return this.activities.get(id);
+  }
+
+  async createActivity(activity: InsertCrmActivity): Promise<CrmActivity> {
+    const id = randomUUID();
+    const newActivity: CrmActivity = {
+      ...activity,
+      id,
+      description: activity.description || null,
+      userId: activity.userId || null,
+      relatedTo: activity.relatedTo || null,
+      relatedId: activity.relatedId || null,
+      metadata: activity.metadata || null,
+      duration: activity.duration || null,
+      outcome: activity.outcome || null,
+      scheduledAt: activity.scheduledAt || null,
+      completedAt: activity.completedAt || null,
+      createdAt: new Date()
+    };
+    this.activities.set(id, newActivity);
+    return newActivity;
+  }
+
+  async getActivitiesByRelatedEntity(relatedTo: string, relatedId: string): Promise<CrmActivity[]> {
+    return Array.from(this.activities.values()).filter(activity => 
+      activity.relatedTo === relatedTo && activity.relatedId === relatedId
+    );
+  }
+
+  async getActivitiesByUser(userId: string): Promise<CrmActivity[]> {
+    return Array.from(this.activities.values()).filter(activity => activity.userId === userId);
+  }
+
   private initializeSubscriptionPlans() {
     const servicesArray = Array.from(this.services.values());
     const mobileService = servicesArray.find(s => s.category === "mobile");
@@ -544,6 +1037,305 @@ export class MemStorage implements IStorage {
     ];
 
     samplePlans.forEach(plan => this.subscriptionPlans.set(plan.id, plan));
+
+    // Initialize CRM sample data
+    this.initializeCRMData();
+  }
+
+  private initializeCRMData() {
+    // Sample Accounts
+    const account1: Account = {
+      id: "account-001",
+      name: "شركة التقنية المتقدمة",
+      type: "prospect",
+      industry: "تكنولوجيا المعلومات",
+      website: "https://techadvanced.sa",
+      phone: "+966112345678",
+      email: "info@techadvanced.sa",
+      billingAddress: {
+        street: "شارع الملك فهد",
+        city: "الرياض",
+        state: "الرياض",
+        country: "المملكة العربية السعودية",
+        postalCode: "12345"
+      },
+      shippingAddress: null,
+      annualRevenue: "5000000",
+      numberOfEmployees: "50-100",
+      assignedTo: "sales-001",
+      parentAccountId: null,
+      description: "شركة متخصصة في حلول تكنولوجيا المعلومات",
+      tags: ["تقنية", "برمجيات", "مؤسسة"],
+      customFields: null,
+      isActive: "true",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const account2: Account = {
+      id: "account-002", 
+      name: "مجموعة الخليج التجارية",
+      type: "customer",
+      industry: "تجارة",
+      website: "https://gulfgroup.com",
+      phone: "+966133456789",
+      email: "contact@gulfgroup.com",
+      billingAddress: {
+        street: "طريق الأمير محمد بن فهد",
+        city: "الدمام",
+        state: "المنطقة الشرقية",
+        country: "المملكة العربية السعودية",
+        postalCode: "34567"
+      },
+      shippingAddress: null,
+      annualRevenue: "12000000",
+      numberOfEmployees: "100-500", 
+      assignedTo: "sales-001",
+      parentAccountId: null,
+      description: "مجموعة تجارية رائدة في المنطقة",
+      tags: ["تجارة", "عميل", "كبيرة"],
+      customFields: null,
+      isActive: "true",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.accounts.set(account1.id, account1);
+    this.accounts.set(account2.id, account2);
+
+    // Sample Leads
+    const lead1: Lead = {
+      id: "lead-001",
+      name: "محمد أحمد السالم",
+      email: "m.salem@startup.sa",
+      phone: "+966501112233",
+      company: "شركة الابتكار الناشئة",
+      jobTitle: "المدير التنفيذي",
+      leadSource: "website",
+      status: "new",
+      rating: "hot",
+      estimatedValue: "75000",
+      expectedCloseDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      assignedTo: "sales-001",
+      notes: "مهتم بتطوير تطبيق موبايل لشركته الناشئة",
+      tags: ["تطبيق", "ناشئة", "مهم"],
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const lead2: Lead = {
+      id: "lead-002",
+      name: "سارة محمد العتيبي",
+      email: "s.otaibi@design.co",
+      phone: "+966507654321",
+      company: "استوديو التصميم الإبداعي",
+      jobTitle: "مديرة التسويق",
+      leadSource: "social-media",
+      status: "contacted",
+      rating: "warm", 
+      estimatedValue: "25000",
+      expectedCloseDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000),
+      assignedTo: "sales-001",
+      notes: "تحتاج هوية بصرية جديدة وموقع إلكتروني",
+      tags: ["تصميم", "هوية", "موقع"],
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.leads.set(lead1.id, lead1);
+    this.leads.set(lead2.id, lead2);
+
+    // Sample Contacts
+    const contact1: Contact = {
+      id: "contact-001",
+      leadId: null,
+      accountId: "account-001",
+      name: "خالد عبدالله المنصور",
+      email: "k.mansour@techadvanced.sa",
+      phone: "+966112345678",
+      mobile: "+966501234567",
+      jobTitle: "مدير تقنية المعلومات",
+      department: "التقنية",
+      isPrimary: "true",
+      isActive: "true",
+      dateOfBirth: null,
+      socialProfiles: {
+        "linkedin": "khalid-mansour",
+        "twitter": "@kmansour"
+      },
+      preferences: null,
+      tags: ["صانع قرار", "تقني"],
+      notes: "الشخص الرئيسي لاتخاذ القرارات التقنية",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const contact2: Contact = {
+      id: "contact-002",
+      leadId: null,
+      accountId: "account-002",
+      name: "نورا سعد الغامدي",
+      email: "n.ghamdi@gulfgroup.com",
+      phone: "+966133456789",
+      mobile: "+966507891234",
+      jobTitle: "مديرة المشاريع",
+      department: "إدارة المشاريع",
+      isPrimary: "true",
+      isActive: "true",
+      dateOfBirth: null,
+      socialProfiles: null,
+      preferences: null,
+      tags: ["مشاريع", "إدارة"],
+      notes: "مسؤولة عن متابعة المشاريع التقنية",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.contacts.set(contact1.id, contact1);
+    this.contacts.set(contact2.id, contact2);
+
+    // Sample Opportunities
+    const opportunity1: Opportunity = {
+      id: "opportunity-001",
+      name: "تطبيق إدارة المخزون",
+      accountId: "account-001",
+      contactId: "contact-001",
+      stage: "proposal",
+      amount: "150000",
+      probability: "70",
+      expectedCloseDate: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
+      actualCloseDate: null,
+      leadSource: "website",
+      description: "تطوير تطبيق شامل لإدارة المخزون والمبيعات",
+      lossReason: null,
+      nextStep: "عرض نهائي للمشروع",
+      assignedTo: "sales-001",
+      competitorId: null,
+      tags: ["تطبيق", "مخزون", "كبير"],
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const opportunity2: Opportunity = {
+      id: "opportunity-002",
+      name: "موقع التجارة الإلكترونية",
+      accountId: "account-002",
+      contactId: "contact-002",
+      stage: "negotiation",
+      amount: "200000",
+      probability: "85",
+      expectedCloseDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+      actualCloseDate: null,
+      leadSource: "referral",
+      description: "منصة تجارة إلكترونية متكاملة مع نظام إدارة",
+      lossReason: null,
+      nextStep: "توقيع العقد",
+      assignedTo: "sales-001",
+      competitorId: null,
+      tags: ["متجر", "تجارة", "منصة"],
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.opportunities.set(opportunity1.id, opportunity1);
+    this.opportunities.set(opportunity2.id, opportunity2);
+
+    // Sample Tasks
+    const task1: Task = {
+      id: "task-001",
+      title: "متابعة عرض تطبيق المخزون",
+      description: "التواصل مع العميل لمتابعة العرض المقدم",
+      type: "call",
+      status: "pending",
+      priority: "high",
+      assignedTo: "sales-001",
+      createdBy: "admin-001",
+      relatedTo: "opportunity",
+      relatedId: "opportunity-001",
+      dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+      completedDate: null,
+      reminderDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+      estimatedDuration: "30",
+      actualDuration: null,
+      tags: ["مبيعات", "متابعة"],
+      attachments: null,
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const task2: Task = {
+      id: "task-002",
+      title: "إعداد عرض فني للتجارة الإلكترونية",
+      description: "تحضير العرض الفني التفصيلي للمشروع",
+      type: "other",
+      status: "in-progress",
+      priority: "high",
+      assignedTo: "admin-001",
+      createdBy: "sales-001",
+      relatedTo: "opportunity",
+      relatedId: "opportunity-002",
+      dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+      completedDate: null,
+      reminderDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      estimatedDuration: "120",
+      actualDuration: null,
+      tags: ["عرض", "فني"],
+      attachments: null,
+      customFields: null,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    this.tasks.set(task1.id, task1);
+    this.tasks.set(task2.id, task2);
+
+    // Sample Activities
+    const activity1: CrmActivity = {
+      id: "activity-001",
+      type: "call",
+      title: "مكالمة مع شركة التقنية المتقدمة",
+      description: "مناقشة متطلبات تطبيق إدارة المخزون",
+      userId: "sales-001",
+      relatedTo: "opportunity",
+      relatedId: "opportunity-001",
+      metadata: {
+        callDuration: "45 دقيقة",
+        outcome: "إيجابي",
+        nextSteps: "إرسال عرض مفصل"
+      },
+      duration: "45",
+      outcome: "تم الاتفاق على المتطلبات الأساسية",
+      scheduledAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+      completedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+      createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+    };
+
+    const activity2: CrmActivity = {
+      id: "activity-002",
+      type: "email",
+      title: "إرسال عرض التجارة الإلكترونية",
+      description: "إرسال العرض الأولي لمنصة التجارة الإلكترونية",
+      userId: "sales-001",
+      relatedTo: "opportunity",
+      relatedId: "opportunity-002",
+      metadata: {
+        emailSubject: "عرض منصة التجارة الإلكترونية",
+        attachments: ["عرض_التجارة_الإلكترونية.pdf"]
+      },
+      duration: null,
+      outcome: "تم الإرسال بنجاح",
+      scheduledAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+      completedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+      createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+    };
+
+    this.activities.set(activity1.id, activity1);
+    this.activities.set(activity2.id, activity2);
   }
 }
 

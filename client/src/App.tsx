@@ -24,6 +24,7 @@ import Settings from "@/pages/settings";
 import AdminPanel from "@/pages/admin";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminCRM from "@/pages/admin/crm";
+import CrmDashboard from "@/pages/CrmDashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -42,7 +43,7 @@ function Router() {
       <Route path="/settings" component={Settings} />
       <Route path="/admin" component={AdminPanel} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
-      <Route path="/admin/crm" component={AdminCRM} />
+      <Route path="/admin/crm" component={CrmDashboard} />
       <Route component={NotFound} />
     </Switch>
   );
