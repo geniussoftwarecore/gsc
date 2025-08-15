@@ -65,6 +65,35 @@ export default function Settings() {
 
   // Handle profile update
   const handleProfileUpdate = () => {
+    if (!profileData.name.trim()) {
+      toast({
+        title: "الاسم مطلوب",
+        description: "يرجى إدخال اسمك الكامل",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    if (!profileData.email.trim()) {
+      toast({
+        title: "البريد الإلكتروني مطلوب",
+        description: "يرجى إدخال بريدك الإلكتروني",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(profileData.email)) {
+      toast({
+        title: "بريد إلكتروني غير صحيح",
+        description: "يرجى إدخال بريد إلكتروني صحيح",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     try {
       // In a real app, this would call an API to update user profile
       // For now, just show success message
@@ -84,6 +113,24 @@ export default function Settings() {
 
   // Handle password change
   const handlePasswordChange = () => {
+    if (!passwordData.currentPassword) {
+      toast({
+        title: "كلمة المرور الحالية مطلوبة",
+        description: "يرجى إدخال كلمة المرور الحالية",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    if (!passwordData.newPassword) {
+      toast({
+        title: "كلمة المرور الجديدة مطلوبة",
+        description: "يرجى إدخال كلمة المرور الجديدة",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     if (passwordData.newPassword !== passwordData.confirmPassword) {
       toast({
         title: "خطأ في كلمة المرور",
@@ -213,7 +260,11 @@ export default function Settings() {
                   />
                 </div>
                 
-                <Button onClick={handleProfileUpdate} className="flex items-center gap-2" data-testid="button-save-profile">
+                <Button 
+                  onClick={handleProfileUpdate} 
+                  className="flex items-center gap-2 bg-primary hover:bg-primary/90 transition-colors" 
+                  data-testid="button-save-profile"
+                >
                   <Save className="w-4 h-4" />
                   حفظ التغييرات
                 </Button>
@@ -311,7 +362,16 @@ export default function Settings() {
                   </div>
                 </div>
                 
-                <Button className="flex items-center gap-2" data-testid="button-save-notifications">
+                <Button 
+                  onClick={() => {
+                    toast({
+                      title: "تم حفظ إعدادات الإشعارات",
+                      description: "تم تحديث تفضيلات الإشعارات بنجاح"
+                    });
+                  }}
+                  className="flex items-center gap-2 bg-primary hover:bg-primary/90 transition-colors" 
+                  data-testid="button-save-notifications"
+                >
                   <Save className="w-4 h-4" />
                   حفظ إعدادات الإشعارات
                 </Button>
@@ -399,7 +459,11 @@ export default function Settings() {
                     </div>
                   </div>
                   
-                  <Button onClick={handlePasswordChange} className="flex items-center gap-2" data-testid="button-change-password">
+                  <Button 
+                    onClick={handlePasswordChange} 
+                    className="flex items-center gap-2 bg-primary hover:bg-primary/90 transition-colors" 
+                    data-testid="button-change-password"
+                  >
                     <Key className="w-4 h-4" />
                     تغيير كلمة المرور
                   </Button>
@@ -444,7 +508,16 @@ export default function Settings() {
                     />
                   </div>
                   
-                  <Button className="flex items-center gap-2" data-testid="button-save-security">
+                  <Button 
+                    onClick={() => {
+                      toast({
+                        title: "تم حفظ إعدادات الأمان",
+                        description: "تم تحديث إعدادات الأمان بنجاح"
+                      });
+                    }}
+                    className="flex items-center gap-2 bg-primary hover:bg-primary/90 transition-colors" 
+                    data-testid="button-save-security"
+                  >
                     <Save className="w-4 h-4" />
                     حفظ إعدادات الأمان
                   </Button>
@@ -491,7 +564,16 @@ export default function Settings() {
                   </div>
                 </div>
                 
-                <Button className="flex items-center gap-2" data-testid="button-save-preferences">
+                <Button 
+                  onClick={() => {
+                    toast({
+                      title: "تم حفظ التفضيلات",
+                      description: "تم تحديث التفضيلات العامة بنجاح"
+                    });
+                  }}
+                  className="flex items-center gap-2 bg-primary hover:bg-primary/90 transition-colors" 
+                  data-testid="button-save-preferences"
+                >
                   <Save className="w-4 h-4" />
                   حفظ التفضيلات
                 </Button>
