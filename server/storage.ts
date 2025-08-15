@@ -73,6 +73,15 @@ export class MemStorage implements IStorage {
   }
 
   private initializeSampleData() {
+    // Create admin user
+    const adminUser: User = {
+      id: "admin-001",
+      username: "admin@geniussoftwarecore.com",
+      password: "123", // In production, this should be hashed
+      role: "admin"
+    };
+    this.users.set(adminUser.id, adminUser);
+
     // Sample services
     const sampleServices: Service[] = [
       {
@@ -257,7 +266,11 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
+    const user: User = { 
+      ...insertUser, 
+      id,
+      role: insertUser.role || "client"
+    };
     this.users.set(id, user);
     return user;
   }

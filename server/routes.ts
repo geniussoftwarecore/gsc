@@ -117,6 +117,53 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Login route
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      
+      if (!email || !password) {
+        return res.status(400).json({
+          success: false,
+          message: "Email and password are required"
+        });
+      }
+
+      const user = await storage.getUserByUsername(email);
+      
+      if (!user || user.password !== password) {
+        return res.status(401).json({
+          success: false,
+          message: "Invalid credentials"
+        });
+      }
+
+      // Create user response without password
+      const userResponse = {
+        id: user.id,
+        name: user.username.split('@')[0], // Use username part as name
+        email: user.username,
+        role: user.role,
+        token: `jwt-token-${user.id}` // Mock JWT token
+      };
+
+      res.json({
+        success: true,
+        user: userResponse
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Login failed"
+      });
+    }
+  });
+
+  // Logout route
+  app.post("/api/auth/logout", async (req, res) => {
+    res.json({ success: true });
+  });
+
   // Create service request
   app.post("/api/service-requests", async (req, res) => {
     try {

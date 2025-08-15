@@ -23,7 +23,8 @@ export default function Login() {
   // إعادة توجيه تلقائية للداشبورد عند نجاح المصادقة
   useEffect(() => {
     if (isAuthenticated) {
-      setLocation("/dashboard");
+      // Navigation will be handled in the login function
+      return;
     }
   }, [isAuthenticated, setLocation]);
 
@@ -31,45 +32,53 @@ export default function Login() {
     e.preventDefault();
     setIsLoading(true);
     
-    // Import authentication function
-    const { authenticateUser } = await import("@/data/users");
-    
-    // Simulate login API call
-    setTimeout(() => {
-      setIsLoading(false);
-      
-      // Authenticate user with real data
-      const authenticatedUser = authenticateUser(formData.email, formData.password);
-      
-      if (!authenticatedUser) {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
         toast({
           title: "خطأ في تسجيل الدخول",
-          description: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+          description: result.message || "البريد الإلكتروني أو كلمة المرور غير صحيحة",
           variant: "destructive",
         });
         return;
       }
-      
-      // Convert to AuthContext format
-      const userData = {
-        id: authenticatedUser.id,
-        name: authenticatedUser.name,
-        email: authenticatedUser.email,
-        phone: authenticatedUser.phone,
-        role: authenticatedUser.role,
-        token: `jwt-token-${authenticatedUser.id}-${Date.now()}` // رمز وهمي مع معرف المستخدم
-      };
-      
+
       // Use AuthContext to log in user
-      login(userData);
+      login(result.user);
       
       toast({
         title: "تم تسجيل الدخول بنجاح",
-        description: `أهلاً وسهلاً ${userData.name}`,
+        description: `أهلاً وسهلاً ${result.user.name}`,
       });
+
+      // إعادة توجيه بناءً على دور المستخدم
+      if (result.user.role === 'admin') {
+        setLocation("/admin/dashboard");
+      } else {
+        setLocation("/dashboard");
+      }
       
-      // لا حاجة لاستدعاء setLocation هنا - سيتم التوجيه تلقائياً عبر useEffect
-    }, 1500);
+    } catch (error) {
+      toast({
+        title: "خطأ في الاتصال",
+        description: "حدث خطأ في الاتصال بالخادم",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleLogin = () => {
