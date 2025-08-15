@@ -11,7 +11,7 @@ export const users: AuthUser[] = [
   {
     id: "admin-1",
     name: "مدير النظام",
-    email: "admin@geniussoftwarecore.com",
+    email: "admin@example.com",
     role: "admin",
     password: "123",
     phone: "+967 1 234567"
