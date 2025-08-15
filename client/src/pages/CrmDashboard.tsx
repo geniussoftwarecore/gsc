@@ -188,19 +188,19 @@ export default function CrmDashboard() {
   const filteredLeads = leads.filter(lead => {
     const matchesSearch = !searchTerm || lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          (lead.company && lead.company.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesStatus = !statusFilter || lead.status === statusFilter;
+    const matchesStatus = !statusFilter || statusFilter === "all" || lead.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const filteredOpportunities = opportunities.filter(opp => {
     const matchesSearch = !searchTerm || opp.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = !statusFilter || opp.stage === statusFilter;
+    const matchesStatus = !statusFilter || statusFilter === "all" || opp.stage === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = !searchTerm || task.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = !statusFilter || task.status === statusFilter;
+    const matchesStatus = !statusFilter || statusFilter === "all" || task.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
@@ -389,7 +389,7 @@ export default function CrmDashboard() {
                       <SelectValue placeholder="تصفية حسب الحالة" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">جميع الحالات</SelectItem>
+                      <SelectItem value="all">جميع الحالات</SelectItem>
                       <SelectItem value="new">جديد</SelectItem>
                       <SelectItem value="contacted">تم التواصل</SelectItem>
                       <SelectItem value="qualified">مؤهل</SelectItem>
@@ -501,7 +501,7 @@ export default function CrmDashboard() {
                       <SelectValue placeholder="تصفية حسب المرحلة" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">جميع المراحل</SelectItem>
+                      <SelectItem value="all">جميع المراحل</SelectItem>
                       <SelectItem value="prospecting">استطلاع</SelectItem>
                       <SelectItem value="qualification">تأهيل</SelectItem>
                       <SelectItem value="proposal">عرض</SelectItem>
@@ -687,7 +687,7 @@ export default function CrmDashboard() {
                       <SelectValue placeholder="تصفية حسب الحالة" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">جميع الحالات</SelectItem>
+                      <SelectItem value="all">جميع الحالات</SelectItem>
                       <SelectItem value="pending">معلقة</SelectItem>
                       <SelectItem value="in-progress">قيد التنفيذ</SelectItem>
                       <SelectItem value="completed">مكتملة</SelectItem>
