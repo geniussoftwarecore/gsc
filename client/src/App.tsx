@@ -20,6 +20,7 @@ import Contact from "@/pages/contact";
 import Dashboard from "@/pages/dashboard";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
+import Settings from "@/pages/settings";
 import AdminPanel from "@/pages/admin";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminCRM from "@/pages/admin/crm";
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/settings" component={Settings} />
       <Route path="/admin" component={AdminPanel} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/crm" component={AdminCRM} />
