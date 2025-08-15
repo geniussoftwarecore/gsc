@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import crmRoutes from "../crm_api/routes";
 import { 
   insertContactSubmissionSchema, 
   insertServiceRequestSchema,
@@ -657,6 +658,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Mount CRM routes
+  app.use("/api/crm", crmRoutes);
+  
   const httpServer = createServer(app);
   return httpServer;
 }

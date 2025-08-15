@@ -1,111 +1,165 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../client/src/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../client/src/components/ui/tabs";
+import { Button } from "../../client/src/components/ui/button";
+import { Badge } from "../../client/src/components/ui/badge";
+import { Input } from "../../client/src/components/ui/input";
 import { 
-  Users, Building2, UserCheck, Target, Ticket,
+  Users, Building2, UserCheck, Target, Activity, Ticket,
   Phone, Mail, Calendar, DollarSign, TrendingUp, Filter
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+
+interface CrmStats {
+  totalLeads: number;
+  totalAccounts: number;
+  totalContacts: number;
+  totalOpportunities: number;
+  openTickets: number;
+  totalRevenue: string;
+}
+
+interface Lead {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  company: string;
+  lead_status: string;
+  lead_rating: string;
+  lead_score: number;
+  estimated_value: string;
+  created_at: string;
+}
+
+interface Account {
+  id: string;
+  legal_name: string;
+  industry: string;
+  size_tier: string;
+  website: string;
+  phone: string;
+  email: string;
+  created_at: string;
+}
+
+interface Contact {
+  id: string;
+  first_name: string;
+  last_name: string;
+  primary_email: string;
+  job_title: string;
+  account_id: string;
+  phones: string[];
+  created_at: string;
+}
+
+interface Opportunity {
+  id: string;
+  name: string;
+  stage: string;
+  expected_value: string;
+  close_date: string;
+  win_probability: number;
+  account_id: string;
+  created_at: string;
+}
+
+interface Ticket {
+  id: string;
+  ticket_number: string;
+  subject: string;
+  priority: string;
+  status: string;
+  contact_id: string;
+  created_at: string;
+}
 
 export default function CrmDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchTerm, setSearchTerm] = useState("");
   
   // Fetch CRM data
-  const { data: leadsData, isLoading: leadsLoading } = useQuery({
+  const { data: leadsData } = useQuery({
     queryKey: ['/api/crm/leads'],
     enabled: true
   });
 
-  const { data: accountsData, isLoading: accountsLoading } = useQuery({
-    queryKey: ['/api/crm/accounts'], 
+  const { data: accountsData } = useQuery({
+    queryKey: ['/api/crm/accounts'],
     enabled: true
   });
 
-  const { data: contactsData, isLoading: contactsLoading } = useQuery({
+  const { data: contactsData } = useQuery({
     queryKey: ['/api/crm/contacts'],
     enabled: true
   });
 
-  const { data: opportunitiesData, isLoading: opportunitiesLoading } = useQuery({
+  const { data: opportunitiesData } = useQuery({
     queryKey: ['/api/crm/opportunities'],
     enabled: true
   });
 
-  const { data: ticketsData, isLoading: ticketsLoading } = useQuery({
+  const { data: ticketsData } = useQuery({
     queryKey: ['/api/crm/tickets'],
     enabled: true
   });
 
-  const leads = (leadsData as any)?.leads || [];
-  const accounts = (accountsData as any)?.accounts || [];
-  const contacts = (contactsData as any)?.contacts || [];
-  const opportunities = (opportunitiesData as any)?.opportunities || [];
-  const tickets = (ticketsData as any)?.tickets || [];
+  const leads: Lead[] = leadsData?.leads || [];
+  const accounts: Account[] = accountsData?.accounts || [];
+  const contacts: Contact[] = contactsData?.contacts || [];
+  const opportunities: Opportunity[] = opportunitiesData?.opportunities || [];
+  const tickets: Ticket[] = ticketsData?.tickets || [];
 
   // Calculate stats
-  const stats = {
+  const stats: CrmStats = {
     totalLeads: leads.length,
     totalAccounts: accounts.length,
     totalContacts: contacts.length,
     totalOpportunities: opportunities.length,
-    openTickets: tickets.filter((t: any) => t.status === 'open').length,
+    openTickets: tickets.filter(t => t.status === 'open').length,
     totalRevenue: opportunities
-      .filter((o: any) => o.stage === 'closed-won')
-      .reduce((sum: number, o: any) => sum + parseFloat(o.expected_value || '0'), 0)
+      .filter(o => o.stage === 'closed-won')
+      .reduce((sum, o) => sum + parseFloat(o.expected_value || '0'), 0)
       .toLocaleString()
   };
 
   const getRatingColor = (rating: string) => {
     switch (rating) {
-      case 'hot': return 'bg-red-500 text-white';
-      case 'warm': return 'bg-orange-500 text-white';
-      case 'cold': return 'bg-blue-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'hot': return 'bg-red-500';
+      case 'warm': return 'bg-orange-500';
+      case 'cold': return 'bg-blue-500';
+      default: return 'bg-gray-500';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'new': return 'bg-blue-500 text-white';
-      case 'qualified': return 'bg-green-500 text-white';
-      case 'converted': return 'bg-purple-500 text-white';
-      case 'open': return 'bg-yellow-500 text-white';
-      case 'in_progress': return 'bg-blue-500 text-white';
-      case 'resolved': return 'bg-green-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'new': return 'bg-blue-500';
+      case 'qualified': return 'bg-green-500';
+      case 'converted': return 'bg-purple-500';
+      case 'closed-won': return 'bg-green-600';
+      case 'closed-lost': return 'bg-red-500';
+      case 'open': return 'bg-yellow-500';
+      case 'in_progress': return 'bg-blue-500';
+      case 'resolved': return 'bg-green-500';
+      default: return 'bg-gray-500';
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'urgent': return 'bg-red-600 text-white';
-      case 'high': return 'bg-red-500 text-white';
-      case 'medium': return 'bg-orange-500 text-white';
-      case 'low': return 'bg-green-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      case 'urgent': return 'bg-red-600';
+      case 'high': return 'bg-red-500';
+      case 'medium': return 'bg-orange-500';
+      case 'low': return 'bg-green-500';
+      default: return 'bg-gray-500';
     }
   };
 
-  if (leadsLoading || accountsLoading || contactsLoading || opportunitiesLoading || ticketsLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto px-6 py-8">
-          <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">Loading CRM Dashboard...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-6 py-8" dir="ltr">
+      <div className="container mx-auto px-6 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             CRM Dashboard
@@ -117,68 +171,68 @@ export default function CrmDashboard() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
-          <Card data-testid="stat-leads">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Leads</CardTitle>
               <UserCheck className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="leads-count">{stats.totalLeads}</div>
+              <div className="text-2xl font-bold">{stats.totalLeads}</div>
               <p className="text-xs text-muted-foreground">Active prospects</p>
             </CardContent>
           </Card>
 
-          <Card data-testid="stat-accounts">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Accounts</CardTitle>
               <Building2 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="accounts-count">{stats.totalAccounts}</div>
+              <div className="text-2xl font-bold">{stats.totalAccounts}</div>
               <p className="text-xs text-muted-foreground">Companies</p>
             </CardContent>
           </Card>
 
-          <Card data-testid="stat-contacts">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Contacts</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="contacts-count">{stats.totalContacts}</div>
+              <div className="text-2xl font-bold">{stats.totalContacts}</div>
               <p className="text-xs text-muted-foreground">People</p>
             </CardContent>
           </Card>
 
-          <Card data-testid="stat-deals">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Deals</CardTitle>
               <Target className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="deals-count">{stats.totalOpportunities}</div>
+              <div className="text-2xl font-bold">{stats.totalOpportunities}</div>
               <p className="text-xs text-muted-foreground">Opportunities</p>
             </CardContent>
           </Card>
 
-          <Card data-testid="stat-tickets">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Tickets</CardTitle>
               <Ticket className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="tickets-count">{stats.openTickets}</div>
+              <div className="text-2xl font-bold">{stats.openTickets}</div>
               <p className="text-xs text-muted-foreground">Open issues</p>
             </CardContent>
           </Card>
 
-          <Card data-testid="stat-revenue">
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Revenue</CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold" data-testid="revenue-amount">${stats.totalRevenue}</div>
+              <div className="text-2xl font-bold">${stats.totalRevenue}</div>
               <p className="text-xs text-muted-foreground">Closed deals</p>
             </CardContent>
           </Card>
@@ -187,82 +241,60 @@ export default function CrmDashboard() {
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid grid-cols-6 w-full mb-6">
-            <TabsTrigger value="overview" data-testid="tab-overview">Overview</TabsTrigger>
-            <TabsTrigger value="leads" data-testid="tab-leads">Leads</TabsTrigger>
-            <TabsTrigger value="accounts" data-testid="tab-accounts">Accounts</TabsTrigger>
-            <TabsTrigger value="contacts" data-testid="tab-contacts">Contacts</TabsTrigger>
-            <TabsTrigger value="deals" data-testid="tab-deals">Deals</TabsTrigger>
-            <TabsTrigger value="tickets" data-testid="tab-tickets">Support</TabsTrigger>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="leads">Leads</TabsTrigger>
+            <TabsTrigger value="accounts">Accounts</TabsTrigger>
+            <TabsTrigger value="contacts">Contacts</TabsTrigger>
+            <TabsTrigger value="deals">Deals</TabsTrigger>
+            <TabsTrigger value="tickets">Support</TabsTrigger>
           </TabsList>
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card data-testid="recent-leads-card">
+              <Card>
                 <CardHeader>
                   <CardTitle>Recent Leads</CardTitle>
                   <CardDescription>Latest prospects in your pipeline</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {leads.slice(0, 5).map((lead: any) => (
-                    <div key={lead.id} className="flex items-center justify-between p-3 border rounded-lg" data-testid={`lead-${lead.id}`}>
+                  {leads.slice(0, 5).map((lead) => (
+                    <div key={lead.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
-                        <div className="font-semibold" data-testid={`lead-name-${lead.id}`}>
-                          {lead.first_name} {lead.last_name}
-                        </div>
-                        <div className="text-sm text-gray-600" data-testid={`lead-company-${lead.id}`}>
-                          {lead.company}
-                        </div>
-                        <div className="text-xs text-gray-500" data-testid={`lead-value-${lead.id}`}>
-                          ${lead.estimated_value}
-                        </div>
+                        <div className="font-semibold">{lead.first_name} {lead.last_name}</div>
+                        <div className="text-sm text-gray-600">{lead.company}</div>
+                        <div className="text-xs text-gray-500">${lead.estimated_value}</div>
                       </div>
                       <div className="text-right">
-                        <Badge className={getRatingColor(lead.lead_rating)} data-testid={`lead-rating-${lead.id}`}>
+                        <Badge className={`${getRatingColor(lead.lead_rating)} text-white`}>
                           {lead.lead_rating}
                         </Badge>
-                        <div className="text-xs text-gray-500 mt-1" data-testid={`lead-score-${lead.id}`}>
-                          Score: {lead.lead_score}
-                        </div>
+                        <div className="text-xs text-gray-500 mt-1">Score: {lead.lead_score}</div>
                       </div>
                     </div>
                   ))}
-                  {leads.length === 0 && (
-                    <div className="text-center py-8 text-gray-500" data-testid="no-leads">
-                      No leads found
-                    </div>
-                  )}
                 </CardContent>
               </Card>
 
-              <Card data-testid="open-tickets-card">
+              <Card>
                 <CardHeader>
                   <CardTitle>Open Tickets</CardTitle>
                   <CardDescription>Support tickets requiring attention</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {tickets.filter((t: any) => t.status === 'open').slice(0, 5).map((ticket: any) => (
-                    <div key={ticket.id} className="flex items-center justify-between p-3 border rounded-lg" data-testid={`ticket-${ticket.id}`}>
+                  {tickets.filter(t => t.status === 'open').slice(0, 5).map((ticket) => (
+                    <div key={ticket.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
-                        <div className="font-semibold" data-testid={`ticket-number-${ticket.id}`}>
-                          {ticket.ticket_number}
-                        </div>
-                        <div className="text-sm text-gray-600" data-testid={`ticket-subject-${ticket.id}`}>
-                          {ticket.subject}
-                        </div>
+                        <div className="font-semibold">{ticket.ticket_number}</div>
+                        <div className="text-sm text-gray-600">{ticket.subject}</div>
                       </div>
                       <div className="text-right">
-                        <Badge className={getPriorityColor(ticket.priority)} data-testid={`ticket-priority-${ticket.id}`}>
+                        <Badge className={`${getPriorityColor(ticket.priority)} text-white`}>
                           {ticket.priority}
                         </Badge>
                       </div>
                     </div>
                   ))}
-                  {tickets.filter((t: any) => t.status === 'open').length === 0 && (
-                    <div className="text-center py-8 text-gray-500" data-testid="no-open-tickets">
-                      No open tickets
-                    </div>
-                  )}
                 </CardContent>
               </Card>
             </div>
@@ -270,7 +302,7 @@ export default function CrmDashboard() {
 
           {/* Leads Tab */}
           <TabsContent value="leads" className="space-y-6">
-            <Card data-testid="leads-management-card">
+            <Card>
               <CardHeader>
                 <CardTitle>Leads Management</CardTitle>
                 <CardDescription>Track and manage your sales prospects</CardDescription>
@@ -282,9 +314,8 @@ export default function CrmDashboard() {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="max-w-sm"
-                    data-testid="input-search-leads"
                   />
-                  <Button variant="outline" data-testid="button-filter-leads">
+                  <Button variant="outline">
                     <Filter className="mr-2 h-4 w-4" />
                     Filter
                   </Button>
@@ -292,58 +323,50 @@ export default function CrmDashboard() {
                 
                 <div className="space-y-4">
                   {leads
-                    .filter((lead: any) => 
+                    .filter(lead => 
                       `${lead.first_name} ${lead.last_name} ${lead.company}`.toLowerCase()
                         .includes(searchTerm.toLowerCase())
                     )
-                    .map((lead: any) => (
-                    <div key={lead.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800" data-testid={`lead-item-${lead.id}`}>
+                    .map((lead) => (
+                    <div key={lead.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-lg" data-testid={`lead-full-name-${lead.id}`}>
+                          <h3 className="font-semibold text-lg">
                             {lead.first_name} {lead.last_name}
                           </h3>
-                          <Badge className={getRatingColor(lead.lead_rating)} data-testid={`lead-rating-badge-${lead.id}`}>
+                          <Badge className={`${getRatingColor(lead.lead_rating)} text-white`}>
                             {lead.lead_rating}
                           </Badge>
-                          <Badge className={getStatusColor(lead.lead_status)} data-testid={`lead-status-badge-${lead.id}`}>
+                          <Badge className={`${getStatusColor(lead.lead_status)} text-white`}>
                             {lead.lead_status}
                           </Badge>
                         </div>
-                        <div className="text-gray-600 mb-1" data-testid={`lead-company-name-${lead.id}`}>
-                          {lead.company}
-                        </div>
+                        <div className="text-gray-600 mb-1">{lead.company}</div>
                         <div className="flex items-center gap-4 text-sm text-gray-500">
-                          <span className="flex items-center gap-1" data-testid={`lead-email-${lead.id}`}>
+                          <span className="flex items-center gap-1">
                             <Mail className="h-4 w-4" />
                             {lead.email}
                           </span>
-                          <span className="flex items-center gap-1" data-testid={`lead-estimated-value-${lead.id}`}>
+                          <span className="flex items-center gap-1">
                             <DollarSign className="h-4 w-4" />
                             ${lead.estimated_value}
                           </span>
-                          <span data-testid={`lead-score-display-${lead.id}`}>Score: {lead.lead_score}</span>
+                          <span>Score: {lead.lead_score}</span>
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm" data-testid={`button-call-${lead.id}`}>
+                        <Button variant="outline" size="sm">
                           <Phone className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="sm" data-testid={`button-email-${lead.id}`}>
+                        <Button variant="outline" size="sm">
                           <Mail className="h-4 w-4" />
                         </Button>
-                        <Button variant="outline" size="sm" data-testid={`button-schedule-${lead.id}`}>
+                        <Button variant="outline" size="sm">
                           <Calendar className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
                   ))}
-                  
-                  {leads.length === 0 && (
-                    <div className="text-center py-8 text-gray-500" data-testid="no-leads-message">
-                      No leads found
-                    </div>
-                  )}
                 </div>
               </CardContent>
             </Card>
@@ -351,42 +374,36 @@ export default function CrmDashboard() {
 
           {/* Accounts Tab */}
           <TabsContent value="accounts" className="space-y-6">
-            <Card data-testid="accounts-management-card">
+            <Card>
               <CardHeader>
                 <CardTitle>Accounts Management</CardTitle>
                 <CardDescription>Manage your customer accounts and companies</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {accounts.map((account: any) => (
-                    <div key={account.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800" data-testid={`account-item-${account.id}`}>
+                  {accounts.map((account) => (
+                    <div key={account.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="font-semibold text-lg" data-testid={`account-name-${account.id}`}>
-                            {account.legal_name}
-                          </h3>
-                          <Badge variant="outline" data-testid={`account-size-${account.id}`}>
-                            {account.size_tier}
-                          </Badge>
-                          <Badge variant="outline" data-testid={`account-industry-${account.id}`}>
-                            {account.industry}
-                          </Badge>
+                          <h3 className="font-semibold text-lg">{account.legal_name}</h3>
+                          <Badge variant="outline">{account.size_tier}</Badge>
+                          <Badge variant="outline">{account.industry}</Badge>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-gray-500">
                           {account.website && (
-                            <span className="flex items-center gap-1" data-testid={`account-website-${account.id}`}>
+                            <span className="flex items-center gap-1">
                               <TrendingUp className="h-4 w-4" />
                               {account.website}
                             </span>
                           )}
                           {account.phone && (
-                            <span className="flex items-center gap-1" data-testid={`account-phone-${account.id}`}>
+                            <span className="flex items-center gap-1">
                               <Phone className="h-4 w-4" />
                               {account.phone}
                             </span>
                           )}
                           {account.email && (
-                            <span className="flex items-center gap-1" data-testid={`account-email-${account.id}`}>
+                            <span className="flex items-center gap-1">
                               <Mail className="h-4 w-4" />
                               {account.email}
                             </span>
@@ -394,31 +411,25 @@ export default function CrmDashboard() {
                         </div>
                       </div>
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm" data-testid={`button-view-${account.id}`}>View</Button>
-                        <Button variant="outline" size="sm" data-testid={`button-edit-${account.id}`}>Edit</Button>
+                        <Button variant="outline" size="sm">View</Button>
+                        <Button variant="outline" size="sm">Edit</Button>
                       </div>
                     </div>
                   ))}
-                  
-                  {accounts.length === 0 && (
-                    <div className="text-center py-8 text-gray-500" data-testid="no-accounts-message">
-                      No accounts found
-                    </div>
-                  )}
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
-          {/* Other tabs placeholder */}
+          {/* Other tabs would be similar... */}
           <TabsContent value="contacts">
-            <Card data-testid="contacts-placeholder-card">
+            <Card>
               <CardHeader>
                 <CardTitle>Contacts</CardTitle>
                 <CardDescription>Manage individual contacts and their information</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-500" data-testid="contacts-coming-soon">
+                <div className="text-center py-8 text-gray-500">
                   Contacts management interface coming soon...
                 </div>
               </CardContent>
@@ -426,13 +437,13 @@ export default function CrmDashboard() {
           </TabsContent>
 
           <TabsContent value="deals">
-            <Card data-testid="deals-placeholder-card">
+            <Card>
               <CardHeader>
                 <CardTitle>Deals Pipeline</CardTitle>
                 <CardDescription>Track opportunities through your sales process</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-500" data-testid="deals-coming-soon">
+                <div className="text-center py-8 text-gray-500">
                   Deals pipeline interface coming soon...
                 </div>
               </CardContent>
@@ -440,13 +451,13 @@ export default function CrmDashboard() {
           </TabsContent>
 
           <TabsContent value="tickets">
-            <Card data-testid="tickets-placeholder-card">
+            <Card>
               <CardHeader>
                 <CardTitle>Support Tickets</CardTitle>
                 <CardDescription>Manage customer support requests and issues</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-8 text-gray-500" data-testid="tickets-coming-soon">
+                <div className="text-center py-8 text-gray-500">
                   Support tickets interface coming soon...
                 </div>
               </CardContent>
