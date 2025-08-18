@@ -112,33 +112,68 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
   return (
     <motion.section 
       ref={sectionRef}
-      className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+      className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50/30 relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: isInView ? 1 : 0 }}
       transition={{ duration: 0.8 }}
     >
-      {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Enhanced Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute -top-24 -right-24 w-96 h-96 bg-primary/5 rounded-full"
+          className="absolute -top-32 -right-32 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-primary/8 to-primary/4 rounded-full blur-3xl"
           animate={{ 
             rotate: 360,
-            scale: [1, 1.1, 1]
+            scale: [1, 1.2, 1],
+            x: [0, 20, 0],
+            y: [0, -20, 0]
           }}
           transition={{ 
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+            scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 10, repeat: Infinity, ease: "easeInOut" }
           }}
         />
         <motion.div 
-          className="absolute -bottom-32 -left-32 w-80 h-80 bg-secondary/5 rounded-full"
+          className="absolute -bottom-24 -left-24 w-48 h-48 sm:w-80 sm:h-80 bg-gradient-to-tl from-secondary/6 to-secondary/3 rounded-full blur-2xl"
           animate={{ 
             rotate: -360,
-            scale: [1, 1.2, 1]
+            scale: [1, 0.9, 1.1, 1],
+            x: [0, -15, 0],
+            y: [0, 15, 0]
           }}
           transition={{ 
-            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-            scale: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+            rotate: { duration: 35, repeat: Infinity, ease: "linear" },
+            scale: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 16, repeat: Infinity, ease: "easeInOut" }
+          }}
+        />
+        {/* Additional floating particles */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-2 h-2 sm:w-3 sm:h-3 bg-primary/20 rounded-full"
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.3, 1, 0.3]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-3/4 right-1/3 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-secondary/30 rounded-full"
+          animate={{
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+            opacity: [0.4, 1, 0.4]
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
           }}
         />
       </div>
@@ -167,9 +202,9 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             مجموعة مختارة من مشاريعنا المميزة والناجحة التي حققت نتائج استثنائية لعملائنا
           </motion.p>
 
-          {/* Statistics */}
+          {/* Enhanced Statistics with better mobile layout */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-2xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.8 }}
@@ -182,13 +217,31 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-100"
-                whileHover={{ scale: 1.05, y: -2 }}
-                transition={{ duration: 0.2 }}
+                className="group p-3 sm:p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100/50 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -4,
+                  rotate: [0, 1, -1, 0]
+                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                custom={index}
               >
-                <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-secondary">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <motion.div
+                  whileHover={{ rotate: 12, scale: 1.1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary mx-auto mb-2 group-hover:text-primary/80 transition-colors" />
+                </motion.div>
+                <motion.div 
+                  className="text-xl sm:text-2xl font-bold text-secondary group-hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  {stat.value}
+                </motion.div>
+                <div className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -200,8 +253,8 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
               animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 1.0 }}
             >
-              {/* Filter Buttons */}
-              <div className="flex flex-wrap justify-center gap-3 mb-8">
+              {/* Enhanced Filter Buttons with better mobile responsive */}
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-4">
                 {PORTFOLIO_CATEGORIES.map((category, index) => (
                   <motion.div
                     key={category.id}
@@ -209,19 +262,22 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 + 1.2 }}
                   >
-                    <Button
-                      onClick={() => handleFilterChange(category.id)}
-                      className={`
-                        relative overflow-hidden transition-all duration-300 
-                        ${activeFilter === category.id
-                          ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg scale-105"
-                          : "bg-white hover:bg-gray-50 text-gray-700 shadow-sm hover:shadow-md border border-gray-200"
-                        }
-                        px-6 py-3 rounded-full font-medium
-                      `}
+                    <motion.div
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
+                      <Button
+                        onClick={() => handleFilterChange(category.id)}
+                        className={`
+                          relative overflow-hidden transition-all duration-300 
+                          ${activeFilter === category.id
+                            ? "bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg ring-2 ring-primary/20"
+                            : "bg-white hover:bg-gray-50 text-gray-700 shadow-sm hover:shadow-md border border-gray-200 hover:border-primary/30"
+                          }
+                          px-3 py-2 sm:px-6 sm:py-3 rounded-full font-medium text-sm sm:text-base
+                          focus:outline-none focus:ring-2 focus:ring-primary/20
+                        `}
+                      >
                       <motion.span
                         className="relative z-10"
                         animate={activeFilter === category.id ? { scale: [1, 1.1, 1] } : {}}
@@ -236,7 +292,8 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                         />
                       )}
-                    </Button>
+                      </Button>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -306,8 +363,8 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             <motion.div 
               key={activeFilter + viewMode}
               className={viewMode === 'grid' 
-                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" 
-                : "space-y-6"
+                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" 
+                : "space-y-4 sm:space-y-6"
               }
               variants={containerVariants}
               initial="hidden"
@@ -322,29 +379,47 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                   className={`group ${viewMode === 'list' ? 'flex gap-6' : ''}`}
                 >
                   <Card className={`
-                    overflow-hidden cursor-pointer shadow-sm border-0 bg-white/90 backdrop-blur-sm
-                    hover:shadow-xl transition-all duration-300 hover:-translate-y-2
-                    ${item.featured === "true" ? "ring-2 ring-primary/20" : ""}
+                    overflow-hidden cursor-pointer shadow-sm border-0 bg-white/95 backdrop-blur-sm
+                    hover:shadow-xl transition-all duration-500 hover:-translate-y-3 hover:rotate-1
+                    ${item.featured === "true" ? "ring-2 ring-primary/20 shadow-lg" : ""}
                     ${viewMode === 'list' ? 'flex-1' : ''}
+                    group-hover:shadow-2xl group-hover:border-primary/10
                   `}>
-                    {/* Project Image/Icon */}
+                    {/* Enhanced Project Image/Icon with better mobile sizing */}
                     <div className={`
                       relative overflow-hidden
-                      ${viewMode === 'list' ? 'w-48 h-32 flex-shrink-0' : 'h-64'}
+                      ${viewMode === 'list' ? 'w-32 h-24 sm:w-48 sm:h-32 flex-shrink-0' : 'h-48 sm:h-56 md:h-64'}
                     `}>
                       <motion.div 
-                        className="w-full h-full bg-gradient-to-br from-primary/10 via-primary/20 to-primary/30 flex items-center justify-center relative"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
+                        className="w-full h-full bg-gradient-to-br from-primary/10 via-primary/20 to-primary/30 flex items-center justify-center relative overflow-hidden"
+                        whileHover={{ scale: 1.1, rotate: 2 }}
+                        transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
                       >
+                        {/* Animated background pattern */}
                         <motion.div
-                          whileHover={{ rotate: 5, scale: 1.1 }}
-                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 opacity-10"
+                          style={{
+                            backgroundImage: 'radial-gradient(circle at 25% 25%, currentColor 2px, transparent 2px)',
+                            backgroundSize: '24px 24px'
+                          }}
+                          animate={{
+                            backgroundPosition: ['0px 0px', '24px 24px'],
+                          }}
+                          transition={{
+                            duration: 10,
+                            repeat: Infinity,
+                            ease: 'linear',
+                          }}
+                        />
+                        <motion.div
+                          whileHover={{ rotate: 360, scale: 1.2 }}
+                          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+                          className="relative z-10"
                         >
                           <DynamicIcon 
                             name={item.imageUrl as IconName} 
-                            className="text-primary/80" 
-                            size={viewMode === 'list' ? 40 : 80} 
+                            className="text-primary/80 drop-shadow-lg" 
+                            size={viewMode === 'list' ? 32 : 64} 
                           />
                         </motion.div>
 
@@ -409,25 +484,27 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                       </motion.div>
                     </div>
 
-                    {/* Project Content */}
+                    {/* Enhanced Project Content with better mobile padding */}
                     <CardContent className={`
-                      p-6 ${viewMode === 'list' ? 'flex-1' : ''}
+                      p-4 sm:p-6 ${viewMode === 'list' ? 'flex-1' : ''}
                     `}>
                       <div className="flex items-start justify-between mb-3">
                         <motion.h3 
-                          className="text-xl font-bold text-secondary group-hover:text-primary transition-colors duration-300"
-                          whileHover={{ scale: 1.02 }}
+                          className="text-lg sm:text-xl font-bold text-secondary group-hover:text-primary transition-colors duration-300 flex-1 pr-2"
+                          whileHover={{ scale: 1.02, x: 5 }}
+                          transition={{ duration: 0.2 }}
                         >
                           {item.title}
                         </motion.h3>
                         <motion.button
-                          className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+                          className="p-1.5 sm:p-2 rounded-full hover:bg-gray-100 transition-colors flex-shrink-0"
                           onClick={(e) => { e.stopPropagation(); toggleLike(item.id); }}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
+                          whileHover={{ scale: 1.2, rotate: 12 }}
+                          whileTap={{ scale: 0.8 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <Heart 
-                            className={`w-5 h-5 ${likedItems.has(item.id) 
+                            className={`w-4 h-4 sm:w-5 sm:h-5 ${likedItems.has(item.id) 
                               ? 'text-red-500 fill-current' 
                               : 'text-gray-400 hover:text-red-400'
                             }`}
@@ -435,13 +512,18 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                         </motion.button>
                       </div>
                       
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                      <motion.p 
+                        className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4 line-clamp-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                      >
                         {item.description}
-                      </p>
+                      </motion.p>
 
                       {/* Technologies */}
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {item.technologies.slice(0, viewMode === 'list' ? 2 : 3).map((tech, techIndex) => (
+                        {item.technologies?.slice(0, viewMode === 'list' ? 2 : 3).map((tech, techIndex) => (
                           <motion.div
                             key={tech}
                             initial={{ opacity: 0, scale: 0.8 }}
@@ -453,38 +535,46 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                             </Badge>
                           </motion.div>
                         ))}
-                        {item.technologies.length > (viewMode === 'list' ? 2 : 3) && (
+                        {item.technologies && item.technologies.length > (viewMode === 'list' ? 2 : 3) && (
                           <Badge variant="outline" className="text-xs text-gray-500">
                             +{item.technologies.length - (viewMode === 'list' ? 2 : 3)}
                           </Badge>
                         )}
                       </div>
 
-                      {/* Action Area */}
+                      {/* Enhanced Action Area with better mobile layout */}
                       <motion.div 
-                        className="flex items-center justify-between pt-3 border-t border-gray-100"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        className="flex items-center justify-between pt-3 border-t border-gray-100/70"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8 }}
                       >
-                        <div className="flex items-center text-xs text-gray-500 gap-4">
-                          <span className="flex items-center gap-1">
-                            <Eye className="w-3 h-3" />
+                        <div className="flex items-center text-xs sm:text-sm text-gray-500 gap-3 sm:gap-4">
+                          <motion.span 
+                            className="flex items-center gap-1"
+                            whileHover={{ scale: 1.1, color: '#6366f1' }}
+                          >
+                            <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
                             {Math.floor(Math.random() * 500) + 100}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Heart className="w-3 h-3" />
+                          </motion.span>
+                          <motion.span 
+                            className="flex items-center gap-1"
+                            whileHover={{ scale: 1.1, color: '#ef4444' }}
+                          >
+                            <Heart className="w-3 h-3 sm:w-4 sm:h-4" />
                             {Math.floor(Math.random() * 50) + 10}
-                          </span>
+                          </motion.span>
                         </div>
                         
                         <motion.button
-                          className="text-primary hover:text-primary/80 text-sm font-medium flex items-center gap-1 group/btn"
-                          whileHover={{ x: 5 }}
+                          className="text-primary hover:text-primary/80 text-sm sm:text-base font-medium flex items-center gap-1 group/btn px-2 py-1 rounded-md hover:bg-primary/5 transition-colors"
+                          whileHover={{ x: 3, scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           transition={{ duration: 0.2 }}
                         >
-                          عرض التفاصيل
-                          <ExternalLink className="w-3 h-3 group-hover/btn:rotate-12 transition-transform" />
+                          <span className="hidden sm:inline">عرض التفاصيل</span>
+                          <span className="sm:hidden">عرض</span>
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:rotate-12 transition-transform" />
                         </motion.button>
                       </motion.div>
                     </CardContent>
@@ -497,23 +587,34 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
 
         {!showFilter && (
           <motion.div 
-            className="text-center mt-16"
+            className="text-center mt-12 sm:mt-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
           >
             <Link href="/portfolio">
               <motion.button
-                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-white px-8 py-4 rounded-full font-medium text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 mx-auto"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-gradient-to-r from-primary via-primary/90 to-primary/80 hover:from-primary/95 hover:to-primary/75 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-base sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 sm:gap-3 mx-auto relative overflow-hidden group"
+                whileHover={{ scale: 1.08, y: -3 }}
+                whileTap={{ scale: 0.95 }}
               >
-                استعرض جميع المشاريع
+                {/* Animated background shine effect */}
                 <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 w-full h-full"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ 
+                    x: "100%",
+                    transition: { duration: 0.6, ease: "easeInOut" }
+                  }}
+                />
+                <span className="relative z-10">استعرض جميع المشاريع</span>
+                <motion.div
+                  className="relative z-10"
                   animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  whileHover={{ rotate: 12 }}
                 >
-                  <ExternalLink className="w-5 h-5" />
+                  <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" />
                 </motion.div>
               </motion.button>
             </Link>
