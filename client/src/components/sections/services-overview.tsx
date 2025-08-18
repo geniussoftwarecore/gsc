@@ -120,31 +120,9 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
                       {service.description}
                     </p>
 
-                    <div className={`space-y-3 mb-6 ${
+                    <div className={`mb-6 ${
                       service.featured === "true" ? "text-gray-100" : "text-gray-700"
                     }`}>
-                      {service.startingPrice && (
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm">يبدأ من:</span>
-                          <span className={`font-bold ${
-                            service.featured === "true" ? "text-white" : "text-primary"
-                          }`}>
-                            {service.startingPrice}
-                          </span>
-                        </div>
-                      )}
-                      
-                      {service.deliveryTime && (
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm">مدة التسليم:</span>
-                          <span className={`font-semibold ${
-                            service.featured === "true" ? "text-white" : "text-secondary"
-                          }`}>
-                            {service.deliveryTime}
-                          </span>
-                        </div>
-                      )}
-
                       {service.technologies && (
                         <div className="flex flex-wrap gap-2 mt-4">
                           {service.technologies.slice(0, 3).map((tech) => (
