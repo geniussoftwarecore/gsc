@@ -17,6 +17,13 @@ export default function Services() {
 
   const serviceCategories = [
     {
+      id: "business",
+      title: "حلول الأعمال",
+      description: "أنظمة إدارة الأعمال والتحليلات الذكية",
+      icon: TrendingUp,
+      services: services?.filter(s => s.category === "erp" || s.category === "consulting") || [],
+    },
+    {
       id: "development",
       title: "التطوير والبرمجة",
       description: "حلول برمجية شاملة من التطبيقات المحمولة إلى الأنظمة المعقدة",
@@ -38,13 +45,6 @@ export default function Services() {
       description: "استراتيجيات تسويقية متطورة لنمو أعمالك الرقمية",
       icon: Megaphone,
       services: services?.filter(s => s.category === "marketing") || [],
-    },
-    {
-      id: "business",
-      title: "حلول الأعمال",
-      description: "أنظمة إدارة الأعمال والتحليلات الذكية",
-      icon: TrendingUp,
-      services: services?.filter(s => s.category === "erp" || s.category === "consulting") || [],
     },
   ];
 

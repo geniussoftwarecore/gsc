@@ -16,6 +16,7 @@ Preferred communication style: Simple, everyday language.
 - ✅ All dependencies properly installed and configured
 - ✅ Project structure validated and working in Replit environment
 - ✅ Removed delivery time and starting price from services overview per user request
+- ✅ Moved Business Systems section and ERPNext systems to top of services page
 - Ready for development and feature expansion
 
 # System Architecture
