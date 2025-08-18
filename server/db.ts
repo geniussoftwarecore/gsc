@@ -6,11 +6,12 @@ import * as crmSchema from "@shared/crm-schema";
 
 neonConfig.webSocketConstructor = ws;
 
+// Use in-memory storage if DATABASE_URL is not provided
+const databaseUrl = process.env.DATABASE_URL || "";
+
 if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
+  console.log("No DATABASE_URL found. Using in-memory storage for development.");
 }
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle({ client: pool, schema: { ...schema, ...crmSchema } });
+export const pool = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL }) : null;
+export const db = pool ? drizzle({ client: pool, schema: { ...schema, ...crmSchema } }) : null;
