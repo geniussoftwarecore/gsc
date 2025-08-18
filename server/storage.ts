@@ -272,6 +272,17 @@ export class MemStorage implements IStorage {
         startingPrice: "25,000 ريال"
       },
       {
+        id: "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
+        title: "تطبيقات سطح المكتب",
+        description: "تطوير تطبيقات سطح المكتب الاحترافية والقوية لأنظمة Windows و macOS و Linux باستخدام أحدث التقنيات والأدوات المتطورة مع واجهات مستخدم سهلة الاستخدام وأداء عالي",
+        icon: "monitor",
+        category: "desktop",
+        featured: "false",
+        technologies: ["Electron", ".NET", "Qt", "JavaFX", "Python Tkinter", "C++"],
+        deliveryTime: "6-10 أسابيع",
+        startingPrice: "12,000 ريال"
+      },
+      {
         id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
         title: "أنظمة إدارة الموارد ERPNext",
         description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم جميع جوانب أعمالك من المحاسبة إلى إدارة المخزون والموارد البشرية",
@@ -317,6 +328,16 @@ export class MemStorage implements IStorage {
         projectUrl: "",
         technologies: ["Adobe Illustrator", "Photoshop", "Figma"],
         featured: "false"
+      },
+      {
+        id: randomUUID(),
+        title: "نظام إدارة المخزون",
+        description: "تطبيق سطح مكتب شامل لإدارة المخزون والمبيعات",
+        category: "desktop",
+        imageUrl: "monitor",
+        projectUrl: "",
+        technologies: ["Electron", "React", "SQLite", "Node.js"],
+        featured: "true"
       },
       {
         id: randomUUID(),
