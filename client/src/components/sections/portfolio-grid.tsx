@@ -149,31 +149,80 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             y: { duration: 16, repeat: Infinity, ease: "easeInOut" }
           }}
         />
-        {/* Additional floating particles */}
+        {/* Enhanced Dynamic Floating Particles System */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className={`absolute rounded-full ${
+              i % 3 === 0 ? 'bg-primary/15' : 
+              i % 3 === 1 ? 'bg-secondary/20' : 
+              'bg-gradient-to-r from-primary/10 to-secondary/15'
+            }`}
+            style={{
+              width: `${Math.random() * 6 + 3}px`,
+              height: `${Math.random() * 6 + 3}px`,
+              left: `${10 + Math.random() * 80}%`,
+              top: `${10 + Math.random() * 80}%`,
+            }}
+            animate={{
+              y: [0, -25 - Math.random() * 15, 0],
+              x: [0, (Math.random() - 0.5) * 20, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.3 + Math.random() * 0.5, 1]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5
+            }}
+          />
+        ))}
+        
+        {/* Geometric floating shapes for visual interest */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-2 h-2 sm:w-3 sm:h-3 bg-primary/20 rounded-full"
+          className="absolute top-1/6 left-1/5 w-3 h-3 sm:w-4 sm:h-4 border border-primary/40 rotate-45"
           animate={{
+            rotate: [45, 405],
             y: [0, -20, 0],
-            opacity: [0.3, 1, 0.3]
+            opacity: [0.3, 0.7, 0.3],
+            scale: [1, 1.2, 1]
           }}
           transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
+            rotate: { duration: 8, repeat: Infinity, ease: "linear" },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
           }}
         />
         <motion.div
-          className="absolute top-3/4 right-1/3 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-secondary/30 rounded-full"
+          className="absolute top-2/3 right-1/4 w-2 h-2 sm:w-3 sm:h-3 bg-secondary/30 rounded-full shadow-lg"
           animate={{
-            y: [0, -15, 0],
-            x: [0, 10, 0],
+            y: [0, -18, 0],
+            x: [0, 12, 0],
+            scale: [1, 1.4, 1],
             opacity: [0.4, 1, 0.4]
           }}
           transition={{
-            duration: 4,
+            duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1.5
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-4/5 w-1 h-6 sm:w-2 sm:h-8 bg-gradient-to-b from-primary/25 to-transparent rounded-full"
+          animate={{
+            rotate: [0, 180, 360],
+            y: [0, -25, 0],
+            opacity: [0.3, 0.8, 0.3],
+            scaleY: [1, 1.3, 1]
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
           }}
         />
       </div>
@@ -186,18 +235,35 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h2 
-            className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-secondary via-primary to-secondary bg-clip-text text-transparent mb-6 relative"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ scale: 1.02 }}
           >
-            معرض أعمالنا المميزة
+            <motion.span
+              animate={{
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{
+                duration: 8,
+                ease: 'linear',
+                repeat: Infinity,
+              }}
+              style={{
+                backgroundSize: '200% 200%',
+              }}
+              className="bg-gradient-to-r from-secondary via-primary to-secondary bg-clip-text text-transparent"
+            >
+              معرض أعمالنا المميزة
+            </motion.span>
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
+            className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 15 }}
             transition={{ duration: 0.6, delay: 0.6 }}
+            whileHover={{ scale: 1.01, color: '#4f46e5' }}
           >
             مجموعة مختارة من مشاريعنا المميزة والناجحة التي حققت نتائج استثنائية لعملائنا
           </motion.p>
@@ -428,11 +494,12 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                   className={`group ${viewMode === 'list' ? 'flex gap-3 sm:gap-6' : ''}`}
                 >
                   <Card className={`
-                    overflow-hidden cursor-pointer shadow-sm border-0 bg-white/95 backdrop-blur-sm
-                    hover:shadow-xl transition-all duration-500 hover:-translate-y-3 hover:rotate-1
-                    ${item.featured === "true" ? "ring-2 ring-primary/20 shadow-lg" : ""}
+                    overflow-hidden cursor-pointer shadow-sm border-0 bg-white/96 backdrop-blur-sm
+                    hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 hover:rotate-2
+                    ${item.featured === "true" ? "ring-2 ring-primary/25 shadow-lg" : ""}
                     ${viewMode === 'list' ? 'flex-1' : ''}
-                    group-hover:shadow-2xl group-hover:border-primary/10
+                    group-hover:shadow-2xl group-hover:border-primary/15 relative
+                    before:absolute before:inset-0 before:bg-gradient-to-tr before:from-primary/5 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500
                   `}>
                     {/* Enhanced Project Image/Icon with better mobile sizing */}
                     <div className={`
@@ -440,22 +507,37 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                       ${viewMode === 'list' ? 'w-32 h-24 sm:w-48 sm:h-32 flex-shrink-0' : 'h-48 sm:h-56 md:h-64'}
                     `}>
                       <motion.div 
-                        className="w-full h-full bg-gradient-to-br from-primary/10 via-primary/20 to-primary/30 flex items-center justify-center relative overflow-hidden"
-                        whileHover={{ scale: 1.1, rotate: 2 }}
-                        transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+                        className="w-full h-full bg-gradient-to-br from-primary/12 via-primary/20 to-primary/30 flex items-center justify-center relative overflow-hidden"
+                        whileHover={{ scale: 1.08, rotate: 3 }}
+                        transition={{ duration: 0.6, type: "spring", stiffness: 150 }}
                       >
-                        {/* Animated background pattern */}
+                        {/* Enhanced Animated background patterns */}
                         <motion.div
-                          className="absolute inset-0 opacity-10"
+                          className="absolute inset-0 opacity-15"
                           style={{
                             backgroundImage: 'radial-gradient(circle at 25% 25%, currentColor 2px, transparent 2px)',
-                            backgroundSize: '24px 24px'
+                            backgroundSize: '20px 20px'
                           }}
                           animate={{
-                            backgroundPosition: ['0px 0px', '24px 24px'],
+                            backgroundPosition: ['0px 0px', '20px 20px'],
                           }}
                           transition={{
-                            duration: 10,
+                            duration: 8,
+                            repeat: Infinity,
+                            ease: 'linear',
+                          }}
+                        />
+                        <motion.div
+                          className="absolute inset-0 opacity-8"
+                          style={{
+                            backgroundImage: 'linear-gradient(45deg, currentColor 1px, transparent 1px)',
+                            backgroundSize: '16px 16px'
+                          }}
+                          animate={{
+                            backgroundPosition: ['0px 0px', '16px 16px'],
+                          }}
+                          transition={{
+                            duration: 12,
                             repeat: Infinity,
                             ease: 'linear',
                           }}
