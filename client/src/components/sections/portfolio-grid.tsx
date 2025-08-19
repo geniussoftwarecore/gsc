@@ -298,9 +298,9 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                 ))}
               </div>
 
-              {/* View Mode Toggle */}
+              {/* Enhanced View Mode Toggle with better mobile design */}
               <motion.div 
-                className="flex justify-center gap-2 p-1 bg-gray-100 rounded-lg w-fit mx-auto"
+                className="flex justify-center gap-1 p-1 bg-gray-100/80 backdrop-blur-sm rounded-xl w-fit mx-auto shadow-sm"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.4 }}
@@ -309,20 +309,38 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                   { mode: 'grid' as const, label: 'شبكة', icon: '⊞' },
                   { mode: 'list' as const, label: 'قائمة', icon: '☰' }
                 ].map((option) => (
-                  <button
+                  <motion.button
                     key={option.mode}
                     onClick={() => setViewMode(option.mode)}
                     className={`
-                      px-4 py-2 rounded-md font-medium text-sm transition-all duration-200
+                      px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-medium text-sm transition-all duration-300 relative overflow-hidden
                       ${viewMode === option.mode 
-                        ? 'bg-white text-primary shadow-sm' 
-                        : 'text-gray-600 hover:text-gray-900'
+                        ? 'bg-white text-primary shadow-md ring-2 ring-primary/10' 
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
                       }
                     `}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    <span className="mr-2">{option.icon}</span>
-                    {option.label}
-                  </button>
+                    {viewMode === option.mode && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/10"
+                        layoutId="activeViewMode"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
+                      <motion.span
+                        animate={viewMode === option.mode ? { rotate: [0, 10, -10, 0] } : {}}
+                        transition={{ duration: 0.5 }}
+                        className="text-base sm:text-lg"
+                      >
+                        {option.icon}
+                      </motion.span>
+                      <span className="hidden sm:inline">{option.label}</span>
+                    </span>
+                  </motion.button>
                 ))}
               </motion.div>
             </motion.div>
@@ -332,8 +350,8 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
         {isLoading ? (
           <motion.div 
             className={viewMode === 'grid' 
-              ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" 
-              : "space-y-6"
+              ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" 
+              : "space-y-4 sm:space-y-6"
             }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -342,17 +360,48 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             {[...Array(limit || 6)].map((_, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={viewMode === 'list' ? "flex gap-4" : ""}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  delay: index * 0.1,
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 100 
+                }}
+                className={viewMode === 'list' ? "flex gap-3 sm:gap-4" : ""}
               >
-                <Card className="overflow-hidden shadow-sm border-0 bg-white/80 backdrop-blur-sm">
-                  <Skeleton className={viewMode === 'list' ? "h-32 w-48 flex-shrink-0" : "h-64 w-full"} />
-                  <CardContent className="p-6">
-                    <Skeleton className="h-6 w-3/4 mb-3" />
-                    <Skeleton className="h-4 w-full mb-2" />
-                    <Skeleton className="h-4 w-2/3" />
+                <Card className="overflow-hidden shadow-sm border-0 bg-white/90 backdrop-blur-sm hover:shadow-md transition-all duration-300">
+                  <motion.div
+                    animate={{ 
+                      opacity: [0.5, 0.8, 0.5],
+                      scale: [1, 1.02, 1]
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Skeleton className={
+                      viewMode === 'list' 
+                        ? "h-24 w-32 sm:h-32 sm:w-48 flex-shrink-0 rounded-lg" 
+                        : "h-48 sm:h-56 md:h-64 w-full rounded-lg"
+                    } />
+                  </motion.div>
+                  <CardContent className="p-4 sm:p-6">
+                    <motion.div
+                      animate={{ opacity: [0.4, 0.7, 0.4] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                    >
+                      <Skeleton className="h-5 sm:h-6 w-3/4 mb-3 rounded" />
+                    </motion.div>
+                    <motion.div
+                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ duration: 1.8, repeat: Infinity, delay: 0.4 }}
+                    >
+                      <Skeleton className="h-4 w-full mb-2 rounded" />
+                      <Skeleton className="h-4 w-2/3 rounded" />
+                    </motion.div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -376,7 +425,7 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                   key={item.id}
                   variants={itemVariants}
                   layout
-                  className={`group ${viewMode === 'list' ? 'flex gap-6' : ''}`}
+                  className={`group ${viewMode === 'list' ? 'flex gap-3 sm:gap-6' : ''}`}
                 >
                   <Card className={`
                     overflow-hidden cursor-pointer shadow-sm border-0 bg-white/95 backdrop-blur-sm
@@ -438,45 +487,51 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                           </motion.div>
                         )}
 
-                        {/* Interactive Overlay */}
+                        {/* Enhanced Interactive Overlay with better mobile touch targets */}
                         <motion.div 
-                          className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                           initial={{ opacity: 0 }}
                           whileHover={{ opacity: 1 }}
                         >
-                          <div className="absolute bottom-4 left-4 right-4">
+                          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
                             <motion.div
                               initial={{ y: 20, opacity: 0 }}
                               whileHover={{ y: 0, opacity: 1 }}
-                              transition={{ duration: 0.3 }}
-                              className="flex gap-2"
+                              transition={{ duration: 0.3, staggerChildren: 0.1 }}
+                              className="flex gap-1.5 sm:gap-2 justify-center"
                             >
                               <motion.button
-                                className="p-2 bg-white/90 rounded-full shadow-lg hover:bg-white transition-colors"
+                                className="p-1.5 sm:p-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 touch-manipulation"
                                 onClick={(e) => { e.stopPropagation(); toggleLike(item.id); }}
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                whileHover={{ scale: 1.15, rotate: 12 }}
+                                whileTap={{ scale: 0.85 }}
+                                transition={{ type: "spring", stiffness: 400 }}
+                                variants={{
+                                  hover: { y: -2, shadow: "0 8px 25px rgba(0,0,0,0.15)" }
+                                }}
                               >
                                 <Heart 
-                                  className={`w-4 h-4 ${likedItems.has(item.id) 
+                                  className={`w-3 h-3 sm:w-4 sm:h-4 ${likedItems.has(item.id) 
                                     ? 'text-red-500 fill-current' 
-                                    : 'text-gray-600'
+                                    : 'text-gray-700'
                                   }`}
                                 />
                               </motion.button>
                               <motion.button
-                                className="p-2 bg-white/90 rounded-full shadow-lg hover:bg-white transition-colors"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                className="p-1.5 sm:p-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 touch-manipulation"
+                                whileHover={{ scale: 1.15, rotate: -12 }}
+                                whileTap={{ scale: 0.85 }}
+                                transition={{ type: "spring", stiffness: 400 }}
                               >
-                                <Eye className="w-4 h-4 text-gray-600" />
+                                <Eye className="w-3 h-3 sm:w-4 sm:h-4 text-gray-700" />
                               </motion.button>
                               <motion.button
-                                className="p-2 bg-white/90 rounded-full shadow-lg hover:bg-white transition-colors"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                className="p-1.5 sm:p-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300 touch-manipulation"
+                                whileHover={{ scale: 1.15, x: 3 }}
+                                whileTap={{ scale: 0.85 }}
+                                transition={{ type: "spring", stiffness: 400 }}
                               >
-                                <ExternalLink className="w-4 h-4 text-gray-600" />
+                                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 text-gray-700" />
                               </motion.button>
                             </motion.div>
                           </div>
@@ -526,13 +581,26 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                         {item.technologies?.slice(0, viewMode === 'list' ? 2 : 3).map((tech, techIndex) => (
                           <motion.div
                             key={tech}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: techIndex * 0.1 + 0.5 }}
+                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ 
+                              delay: techIndex * 0.1 + 0.5,
+                              type: "spring",
+                              stiffness: 200
+                            }}
                           >
-                            <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                              {tech}
-                            </Badge>
+                            <motion.div
+                              whileHover={{ scale: 1.1, y: -2 }}
+                              whileTap={{ scale: 0.95 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Badge 
+                                variant="secondary" 
+                                className="text-xs bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border border-gray-200 hover:border-primary/20"
+                              >
+                                {tech}
+                              </Badge>
+                            </motion.div>
                           </motion.div>
                         ))}
                         {item.technologies && item.technologies.length > (viewMode === 'list' ? 2 : 3) && (
