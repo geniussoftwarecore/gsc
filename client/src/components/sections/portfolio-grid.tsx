@@ -268,47 +268,128 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             مجموعة مختارة من مشاريعنا المميزة والناجحة التي حققت نتائج استثنائية لعملائنا
           </motion.p>
 
-          {/* Enhanced Statistics with better mobile layout */}
+          {/* Circular Statistics with Orbital Animation */}
           <motion.div 
-            className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
+            className="relative w-80 h-80 sm:w-96 sm:h-96 mx-auto mb-16"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.8 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {[
-              { icon: Award, value: "50+", label: "مشروع مكتمل" },
-              { icon: Star, value: "98%", label: "رضا العملاء" },
-              { icon: TrendingUp, value: "200%", label: "نمو الأداء" },
-              { icon: Zap, value: "24/7", label: "دعم مستمر" }
-            ].map((stat, index) => (
+            {/* Central Hub */}
+            <motion.div 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-xl"
+              animate={{ 
+                rotate: 360,
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ 
+                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+              }}
+            >
               <motion.div
-                key={index}
-                className="group p-3 sm:p-4 bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-gray-100/50 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -4,
-                  rotate: [0, 1, -1, 0]
-                }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                custom={index}
+                className="text-white text-center"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <motion.div
-                  whileHover={{ rotate: 12, scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary mx-auto mb-2 group-hover:text-primary/80 transition-colors" />
-                </motion.div>
-                <motion.div 
-                  className="text-xl sm:text-2xl font-bold text-secondary group-hover:text-primary transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-xs sm:text-sm text-gray-600 group-hover:text-gray-700 transition-colors">{stat.label}</div>
+                <div className="text-lg sm:text-xl font-bold">Portfolio</div>
+                <div className="text-xs sm:text-sm opacity-90">Core</div>
               </motion.div>
+            </motion.div>
+
+            {/* Orbital Statistics */}
+            {[
+              { icon: Award, value: "50+", label: "مشروع مكتمل", angle: 0 },
+              { icon: Star, value: "98%", label: "رضا العملاء", angle: 90 },
+              { icon: TrendingUp, value: "200%", label: "نمو الأداء", angle: 180 },
+              { icon: Zap, value: "24/7", label: "دعم مستمر", angle: 270 }
+            ].map((stat, index) => {
+              const radius = 120; // Distance from center
+              const orbitRadius = 140; // Orbit animation radius
+              
+              return (
+                <motion.div
+                  key={index}
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                  }}
+                  animate={{
+                    x: Math.cos((stat.angle + (index * 5)) * Math.PI / 180) * radius - 50,
+                    y: Math.sin((stat.angle + (index * 5)) * Math.PI / 180) * radius - 50,
+                    rotate: stat.angle + (index * 5)
+                  }}
+                  transition={{
+                    x: { duration: 15 + index, repeat: Infinity, ease: "linear" },
+                    y: { duration: 15 + index, repeat: Infinity, ease: "linear" },
+                    rotate: { duration: 15 + index, repeat: Infinity, ease: "linear" }
+                  }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ 
+                    scale: 1.3,
+                    zIndex: 10,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  <motion.div
+                    className="group p-3 sm:p-4 bg-white/95 backdrop-blur-sm rounded-full shadow-lg border border-gray-100/50 hover:shadow-xl hover:border-primary/30 transition-all duration-300 w-20 h-20 sm:w-24 sm:h-24 flex flex-col items-center justify-center relative"
+                    animate={{ rotate: -stat.angle - (index * 5) }}
+                    transition={{ duration: 15 + index, repeat: Infinity, ease: "linear" }}
+                    whileHover={{ 
+                      rotate: 0,
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    {/* Orbit Trail Effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-primary/20"
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.3, 0, 0.3]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeOut",
+                        delay: index * 0.5
+                      }}
+                    />
+                    
+                    <motion.div
+                      whileHover={{ rotate: 360, scale: 1.2 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary mb-1" />
+                    </motion.div>
+                    <div className="text-xs sm:text-sm font-bold text-secondary">{stat.value}</div>
+                    <div className="text-xs text-gray-600 text-center leading-tight hidden sm:block">{stat.label}</div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+
+            {/* Orbital Rings */}
+            {[1, 2, 3].map((ring, index) => (
+              <motion.div
+                key={ring}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-primary/10 rounded-full"
+                style={{
+                  width: `${160 + (ring * 40)}px`,
+                  height: `${160 + (ring * 40)}px`,
+                }}
+                animate={{
+                  rotate: ring % 2 === 0 ? 360 : -360,
+                  scale: [1, 1.02, 1]
+                }}
+                transition={{
+                  rotate: { duration: 25 + (ring * 5), repeat: Infinity, ease: "linear" },
+                  scale: { duration: 3 + ring, repeat: Infinity, ease: "easeInOut" }
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isInView ? 0.3 : 0 }}
+              />
             ))}
           </motion.div>
 
@@ -475,17 +556,191 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
           </motion.div>
         ) : (
           <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeFilter + viewMode}
-              className={viewMode === 'grid' 
-                ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" 
-                : "space-y-4 sm:space-y-6"
-              }
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-            >
+            {viewMode === 'grid' ? (
+              /* Circular Grid Layout for Technical Expression */
+              <motion.div 
+                key={activeFilter + viewMode}
+                className="relative w-full max-w-6xl mx-auto h-[600px] sm:h-[700px] flex items-center justify-center"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                {/* Central Featured Project */}
+                {displayItems && displayItems.length > 0 && displayItems[0].featured === "true" && (
+                  <motion.div
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  >
+                    <motion.div
+                      animate={{ 
+                        rotate: 360,
+                        scale: [1, 1.05, 1]
+                      }}
+                      transition={{ 
+                        rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+                        scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                      }}
+                      className="w-48 h-48 sm:w-64 sm:h-64"
+                    >
+                      {/* Featured project card component */}
+                      <Card className="w-full h-full overflow-hidden cursor-pointer shadow-xl border-2 border-primary/30 bg-white/98 backdrop-blur-sm hover:shadow-2xl transition-all duration-700 relative group">
+                        <div className="relative w-full h-2/3 overflow-hidden">
+                          <motion.div 
+                            className="w-full h-full bg-gradient-to-br from-primary/15 via-primary/25 to-primary/35 flex items-center justify-center relative overflow-hidden"
+                            animate={{ rotate: -360 }}
+                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                          >
+                            <DynamicIcon 
+                              name={displayItems[0].imageUrl as IconName} 
+                              className="text-primary/90 drop-shadow-lg" 
+                              size={48} 
+                            />
+                          </motion.div>
+                        </div>
+                        <CardContent className="p-3 h-1/3 flex flex-col justify-center">
+                          <h3 className="text-sm font-bold text-secondary text-center mb-1 line-clamp-1">
+                            {displayItems[0].title}
+                          </h3>
+                          <p className="text-xs text-gray-600 text-center line-clamp-2">
+                            {displayItems[0].description}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
+                )}
+
+                {/* Circular Arrangement of Remaining Projects */}
+                {displayItems?.slice(1).map((item, index) => {
+                  const totalItems = displayItems.length - 1;
+                  const angle = (360 / totalItems) * index;
+                  const radius = window.innerWidth < 640 ? 200 : 280;
+                  
+                  return (
+                    <motion.div
+                      key={item.id}
+                      className="absolute"
+                      style={{
+                        left: '50%',
+                        top: '50%',
+                      }}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        x: Math.cos(angle * Math.PI / 180) * radius - 75,
+                        y: Math.sin(angle * Math.PI / 180) * radius - 75,
+                      }}
+                      transition={{
+                        delay: 0.8 + (index * 0.1),
+                        duration: 0.8,
+                        type: "spring",
+                        stiffness: 100
+                      }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        zIndex: 20,
+                        rotateZ: 5
+                      }}
+                    >
+                      <motion.div
+                        animate={{
+                          rotate: angle,
+                          x: Math.cos((angle + index * 2) * Math.PI / 180) * 10,
+                          y: Math.sin((angle + index * 2) * Math.PI / 180) * 10,
+                        }}
+                        transition={{
+                          rotate: { duration: 20 + index, repeat: Infinity, ease: "linear" },
+                          x: { duration: 8 + index, repeat: Infinity, ease: "easeInOut" },
+                          y: { duration: 8 + index, repeat: Infinity, ease: "easeInOut" }
+                        }}
+                        className="group w-32 h-32 sm:w-40 sm:h-40"
+                      >
+                        <Card className="w-full h-full overflow-hidden cursor-pointer shadow-lg border-0 bg-white/95 backdrop-blur-sm hover:shadow-xl transition-all duration-500 relative">
+                          <div className="relative w-full h-2/3 overflow-hidden">
+                            <motion.div 
+                              className="w-full h-full bg-gradient-to-br from-primary/10 via-primary/20 to-primary/30 flex items-center justify-center relative overflow-hidden"
+                              animate={{ rotate: -angle }}
+                              transition={{ duration: 20 + index, repeat: Infinity, ease: "linear" }}
+                            >
+                              <motion.div
+                                whileHover={{ rotate: 360, scale: 1.3 }}
+                                transition={{ duration: 0.6 }}
+                              >
+                                <DynamicIcon 
+                                  name={item.imageUrl as IconName} 
+                                  className="text-primary/80 drop-shadow-lg" 
+                                  size={24} 
+                                />
+                              </motion.div>
+                            </motion.div>
+                          </div>
+                          <CardContent className="p-2 h-1/3 flex flex-col justify-center">
+                            <h3 className="text-xs font-bold text-secondary text-center line-clamp-1 mb-1">
+                              {item.title}
+                            </h3>
+                            <div className="flex justify-center gap-1">
+                              {item.technologies?.slice(0, 2).map((tech, techIndex) => (
+                                <Badge key={techIndex} variant="secondary" className="text-xs px-1 py-0">
+                                  {tech}
+                                </Badge>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
+
+                {/* Connecting Lines for Technical Feel */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+                  {displayItems?.slice(1).map((_, index) => {
+                    const totalItems = displayItems.length - 1;
+                    const angle = (360 / totalItems) * index;
+                    const radius = window.innerWidth < 640 ? 200 : 280;
+                    const centerX = '50%';
+                    const centerY = '50%';
+                    const endX = `calc(50% + ${Math.cos(angle * Math.PI / 180) * radius}px)`;
+                    const endY = `calc(50% + ${Math.sin(angle * Math.PI / 180) * radius}px)`;
+                    
+                    return (
+                      <motion.line
+                        key={index}
+                        x1={centerX}
+                        y1={centerY}
+                        x2={endX}
+                        y2={endY}
+                        stroke="url(#gradient)"
+                        strokeWidth="1"
+                        opacity="0.3"
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ delay: 1 + (index * 0.1), duration: 1 }}
+                      />
+                    );
+                  })}
+                  <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgb(99, 102, 241)" stopOpacity="0.8" />
+                      <stop offset="100%" stopColor="rgb(99, 102, 241)" stopOpacity="0.2" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </motion.div>
+            ) : (
+              /* Traditional List View */
+              <motion.div 
+                key={activeFilter + viewMode}
+                className="space-y-4 sm:space-y-6"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
               {displayItems?.map((item, index) => (
                 <motion.div
                   key={item.id}
@@ -732,6 +987,7 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
                 </motion.div>
               ))}
             </motion.div>
+            )}
           </AnimatePresence>
         )}
 
