@@ -110,7 +110,7 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
   };
 
   return (
-    <div className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50/30 relative overflow-hidden">
+    <div className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50/30 relative overflow-hidden" style={{ position: 'relative' }}>
       {/* Enhanced Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -558,7 +558,7 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
             ))}
           </motion.div>
         ) : (
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {viewMode === 'grid' ? (
               /* Horizontal Moving Bar Layout */
               <motion.div 

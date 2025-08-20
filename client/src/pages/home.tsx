@@ -1,7 +1,7 @@
 import Hero from "@/components/sections/hero";
 import ServicesOverview from "@/components/sections/services-overview";
 import AboutStats from "@/components/sections/about-stats";
-import PortfolioGrid from "@/components/sections/portfolio-grid";
+import HomePortfolio from "@/components/sections/home-portfolio";
 import Testimonials from "@/components/sections/testimonials";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ParallaxSection, RevealOnScroll, StaggerContainer } from "@/components/ui/enhanced-scroll-effects";
@@ -50,7 +50,7 @@ export default function Home() {
 
         <RevealOnScroll direction="left" delay={0.4} distance={100}>
           <ParallaxSection offset={-20}>
-            <PortfolioGrid showFilter={false} limit={6} />
+            <HomePortfolio maxItems={6} />
           </ParallaxSection>
         </RevealOnScroll>
 
