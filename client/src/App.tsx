@@ -14,7 +14,8 @@ import Home from "@/pages/home";
 import About from "@/pages/about";
 import Services from "@/pages/services";
 import ServiceDetail from "@/pages/service-detail";
-import Portfolio from "@/pages/portfolio";
+import PortfolioIndex from "@/pages/portfolio/index";
+import ProjectDetail from "@/pages/portfolio/[slug]";
 import Frameworks from "@/pages/frameworks";
 import Contact from "@/pages/contact";
 import Dashboard from "@/pages/dashboard";
@@ -35,7 +36,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
       <Route path="/services/:id" component={ServiceDetail} />
-      <Route path="/portfolio" component={Portfolio} />
+      <Route path="/portfolio" component={PortfolioIndex} />
+      <Route path="/portfolio/:slug" component={ProjectDetail} />
       <Route path="/frameworks" component={Frameworks} />
       <Route path="/contact" component={Contact} />
       <Route path="/dashboard" component={Dashboard} />
