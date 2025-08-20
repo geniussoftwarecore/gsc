@@ -273,30 +273,7 @@ export default function Testimonials() {
               </div>
             </div>
 
-            {/* Grid of Additional Testimonials */}
-            <motion.div 
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 40 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-            >
-              {testimonials.slice(0, 6).map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.id}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                >
-                  <EnhancedTestimonialCard
-                    testimonial={testimonial}
-                    isLiked={likedTestimonials.has(testimonial.id)}
-                    onToggleLike={() => toggleLike(testimonial.id)}
-                    featured={false}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
+
           </>
         ) : (
           <EmptyState />
@@ -510,40 +487,7 @@ function LoadingSkeleton() {
         </Card>
       </div>
       
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {[...Array(6)].map((_, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <Card className="p-6">
-              <CardContent className="p-0">
-                <motion.div
-                  animate={{ opacity: [0.4, 0.7, 0.4] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: index * 0.2 }}
-                  className="space-y-4"
-                >
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Skeleton key={i} className="w-5 h-5 rounded" />
-                    ))}
-                  </div>
-                  <Skeleton className="h-16 w-full rounded" />
-                  <div className="flex items-center gap-3">
-                    <Skeleton className="w-12 h-12 rounded-full" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-24 rounded" />
-                      <Skeleton className="h-3 w-32 rounded" />
-                    </div>
-                  </div>
-                </motion.div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+
     </div>
   );
 }
