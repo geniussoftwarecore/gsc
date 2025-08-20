@@ -1,4 +1,4 @@
-import Hero from "@/components/sections/hero";
+import { HomeHero } from "@/components/home/home-hero";
 import ServicesOverview from "@/components/sections/services-overview";
 import AboutStats from "@/components/sections/about-stats";
 import HomePortfolio from "@/components/sections/home-portfolio";
@@ -37,7 +37,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <Hero />
+          <HomeHero language="ar" />
         </motion.div>
 
         <RevealOnScroll direction="up" delay={0.2} distance={80}>
