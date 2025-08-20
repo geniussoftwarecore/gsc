@@ -14,8 +14,20 @@ export default {
         foreground: "var(--foreground)",
         'primary': 'var(--primary)',
         'primary-dark': 'var(--primary-dark)',
-        'secondary': 'var(--secondary)',
         'light-gray': 'var(--light-gray)',
+        // New Brand Colors (White + Sky Blue)
+        brand: {
+          bg: "var(--brand-bg)",
+          sky: {
+            light: "var(--brand-sky-light)",
+            base: "var(--brand-sky-base)",
+            accent: "var(--brand-sky-accent)",
+          },
+          text: {
+            primary: "var(--brand-text-primary)",
+            muted: "var(--brand-text-muted)",
+          },
+        },
         card: {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
@@ -24,7 +36,7 @@ export default {
           DEFAULT: "var(--popover)",
           foreground: "var(--popover-foreground)",
         },
-        primary: {
+        primaryColor: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
         },

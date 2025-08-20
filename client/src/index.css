@@ -30,6 +30,14 @@
   --light-gray: hsl(210, 16.6667%, 97.6471%);
   --font-cairo: 'Cairo', sans-serif;
   --radius: 1.3rem;
+  
+  /* Brand Colors (White + Sky Blue) */
+  --brand-bg: hsl(0, 0%, 100%);
+  --brand-sky-light: hsl(206, 100%, 95%);
+  --brand-sky-base: hsl(204, 100%, 90%);
+  --brand-sky-accent: hsl(200, 100%, 73%);
+  --brand-text-primary: hsl(220, 35%, 9%);
+  --brand-text-muted: hsl(220, 14%, 37%);
 }
 
 .dark {
@@ -177,7 +185,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-primary-foreground px-8 py-4 rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl;
+    @apply bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg transition-all duration-300 font-medium shadow-lg hover:shadow-xl;
   }
 
   .btn-secondary {

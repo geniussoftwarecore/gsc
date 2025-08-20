@@ -1,26 +1,38 @@
 import { motion } from "framer-motion";
-import PortfolioHero from "@/components/portfolio/portfolio-hero";
-import PortfolioGrid from "@/components/portfolio/portfolio-grid";
+import EnhancedPortfolioHero from "@/components/portfolio/enhanced-portfolio-hero";
+import EnhancedPortfolioGrid from "@/components/portfolio/enhanced-portfolio-grid";
+import { portfolioProjects } from "@/data/portfolio";
 
 export default function PortfolioIndex() {
+  const stats = {
+    totalProjects: portfolioProjects.length,
+    totalIndustries: [...new Set(portfolioProjects.map(p => p.sector))].length,
+    yearsExperience: 5,
+    satisfaction: 98,
+    totalClients: 150,
+    totalTechnologies: [...new Set(portfolioProjects.flatMap(p => p.tech))].length
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="min-h-screen bg-white"
+      className="min-h-screen bg-brand-bg"
     >
-      {/* Portfolio Hero */}
-      <PortfolioHero
-        totalProjects={50}
-        totalIndustries={8}
-        yearsExperience={5}
-        satisfaction={98}
+      {/* Enhanced Portfolio Hero */}
+      <EnhancedPortfolioHero
+        totalProjects={stats.totalProjects}
+        totalIndustries={stats.totalIndustries}
+        yearsExperience={stats.yearsExperience}
+        satisfaction={stats.satisfaction}
+        totalClients={stats.totalClients}
+        totalTechnologies={stats.totalTechnologies}
       />
       
-      {/* Portfolio Grid with Filters */}
-      <PortfolioGrid
+      {/* Enhanced Portfolio Grid with Filters */}
+      <EnhancedPortfolioGrid
         showFilters={true}
         showViewToggle={true}
         showLoadMore={true}
