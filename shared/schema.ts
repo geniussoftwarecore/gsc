@@ -32,13 +32,36 @@ export const contactSubmissions = pgTable("contact_submissions", {
 
 export const portfolioItems = pgTable("portfolio_items", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  slug: text("slug").notNull().unique(),
   title: text("title").notNull(),
   description: text("description").notNull(),
+  fullDescription: text("full_description"),
   category: text("category").notNull(),
+  industry: text("industry").notNull(),
+  services: jsonb("services").$type<string[]>(),
   imageUrl: text("image_url").notNull(),
+  coverImage: text("cover_image"),
+  gallery: jsonb("gallery").$type<Array<{id: string, url: string, alt: string, type: 'image' | 'video'}>>(),
   projectUrl: text("project_url"),
+  liveUrl: text("live_url"),
   technologies: jsonb("technologies").$type<string[]>(),
   featured: text("featured").default("false"),
+  year: text("year").notNull(),
+  duration: text("duration"),
+  teamSize: text("team_size"),
+  budget: text("budget"),
+  client: jsonb("client").$type<{name: string, company: string, position: string, logo?: string}>(),
+  kpis: jsonb("kpis").$type<Array<{label: string, value: string, description: string, icon?: string}>>(),
+  testimonial: jsonb("testimonial").$type<{content: string, author: string, position: string, rating: number}>(),
+  tags: jsonb("tags").$type<string[]>(),
+  views: text("views").default("0"),
+  likes: text("likes").default("0"),
+  status: text("status").default("published"), // draft, published, archived
+  seoTitle: text("seo_title"),
+  seoDescription: text("seo_description"),
+  socialImage: text("social_image"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const services = pgTable("services", {
@@ -349,6 +372,8 @@ export const insertContactSubmissionSchema = createInsertSchema(contactSubmissio
 
 export const insertPortfolioItemSchema = createInsertSchema(portfolioItems).omit({
   id: true,
+  createdAt: true,
+  updatedAt: true,
 });
 
 export const insertServiceSchema = createInsertSchema(services).omit({

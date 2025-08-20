@@ -297,77 +297,424 @@ export class MemStorage implements IStorage {
 
     sampleServices.forEach(service => this.services.set(service.id, service));
 
-    // Sample portfolio items
+    // Sample portfolio items with comprehensive details
     const samplePortfolio: PortfolioItem[] = [
       {
         id: randomUUID(),
-        title: "تطبيق التجارة الإلكترونية",
-        description: "تطبيق شامل للتسوق الإلكتروني بواجهة حديثة",
+        slug: "ecommerce-mobile-app",
+        title: "تطبيق سوق الذهب - منصة التجارة الإلكترونية",
+        description: "تطبيق شامل للتسوق الإلكتروني مع واجهة حديثة ونظام دفع متقدم",
+        fullDescription: "منصة تجارة إلكترونية متكاملة تخدم أكثر من 50,000 مستخدم يومياً. تتضمن نظام إدارة المنتجات، عربة التسوق الذكية، نظام دفع آمن، وتتبع الطلبات في الوقت الفعلي. تم تطويرها بأحدث تقنيات React Native مع واجهة مستخدم سلسة ومتجاوبة.",
         category: "mobile",
+        industry: "E-commerce",
+        services: ["تطوير التطبيقات", "تصميم UX/UI", "نظم الدفع"],
         imageUrl: "shopping-cart",
-        projectUrl: "",
-        technologies: ["React Native", "Node.js", "MongoDB"],
-        featured: "true"
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "الشاشة الرئيسية", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "صفحة المنتج", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "عربة التسوق", type: "image" },
+          { id: "4", url: "/api/placeholder/400/300", alt: "نظام الدفع", type: "image" }
+        ],
+        projectUrl: "https://github.com/geniussoftware/gold-market",
+        liveUrl: "https://goldmarket.sa",
+        technologies: ["React Native", "Node.js", "MongoDB", "Stripe API", "Firebase"],
+        featured: "true",
+        year: "2024",
+        duration: "6 أشهر",
+        teamSize: "8 مطورين",
+        budget: "150,000 ريال",
+        client: {
+          name: "أحمد المالكي",
+          company: "مجوهرات الذهب السعودي",
+          position: "المدير التنفيذي",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "زيادة المبيعات", value: "+250%", description: "نمو المبيعات خلال 6 أشهر", icon: "trending-up" },
+          { label: "المستخدمين النشطين", value: "50k+", description: "مستخدم يومي", icon: "users" },
+          { label: "معدل التحويل", value: "18%", description: "من الزيارة للشراء", icon: "target" },
+          { label: "تقييم المستخدمين", value: "4.8/5", description: "في متاجر التطبيقات", icon: "star" }
+        ],
+        testimonial: {
+          content: "تطبيق رائع غير مجرى أعمالنا تماماً. زادت مبيعاتنا بنسبة 250% وحصلنا على عملاء من جميع أنحاء المملكة.",
+          author: "أحمد المالكي",
+          position: "المدير التنفيذي - مجوهرات الذهب السعودي",
+          rating: 5
+        },
+        tags: ["تجارة إلكترونية", "تطبيق محمول", "نظام دفع", "React Native"],
+        views: "1250",
+        likes: "85",
+        status: "published",
+        seoTitle: "تطبيق سوق الذهب - دراسة حالة تطوير تطبيق التجارة الإلكترونية",
+        seoDescription: "تعرف على كيفية تطوير تطبيق تجارة إلكترونية ناجح حقق نمو 250% في المبيعات",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2024-01-15'),
+        updatedAt: new Date('2024-03-20')
       },
       {
         id: randomUUID(),
-        title: "موقع شركة مؤسسية",
-        description: "موقع إلكتروني احترافي لشركة عقارية كبرى",
+        slug: "government-portal",
+        title: "البوابة الحكومية الموحدة",
+        description: "منصة رقمية شاملة لتقديم الخدمات الحكومية للمواطنين",
+        fullDescription: "بوابة إلكترونية موحدة تجمع أكثر من 200 خدمة حكومية في منصة واحدة. تتضمن نظام هوية رقمية، دفع إلكتروني، وتتبع معاملات. خدمت أكثر من مليون مواطن وقللت وقت إنجاز المعاملات بنسبة 80%.",
         category: "web",
+        industry: "Government",
+        services: ["تطوير المواقع", "الأمن السيبراني", "تكامل الأنظمة"],
         imageUrl: "building",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "الصفحة الرئيسية", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "لوحة المواطن", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "الخدمات الحكومية", type: "image" }
+        ],
         projectUrl: "",
-        technologies: ["React", "TypeScript", "Tailwind CSS"],
-        featured: "false"
+        liveUrl: "https://gov.portal.sa",
+        technologies: ["React", "TypeScript", "PostgreSQL", "Redis", "Docker"],
+        featured: "true",
+        year: "2023",
+        duration: "12 شهر",
+        teamSize: "15 مطور",
+        budget: "2,500,000 ريال",
+        client: {
+          name: "د. محمد العتيبي",
+          company: "وزارة التحول الرقمي",
+          position: "وكيل الوزارة",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "المستخدمين المسجلين", value: "1M+", description: "مواطن مسجل", icon: "users" },
+          { label: "المعاملات المنجزة", value: "5M+", description: "معاملة شهرياً", icon: "file-check" },
+          { label: "توفير الوقت", value: "80%", description: "تقليل وقت المعاملات", icon: "clock" },
+          { label: "رضا المستخدمين", value: "92%", description: "معدل الرضا", icon: "heart" }
+        ],
+        testimonial: {
+          content: "مشروع استثنائي حقق التحول الرقمي الحقيقي. وفرنا ملايين الساعات من أوقات المواطنين وحققنا هدف الرؤية 2030.",
+          author: "د. محمد العتيبي",
+          position: "وكيل وزارة التحول الرقمي",
+          rating: 5
+        },
+        tags: ["حكومي", "تحول رقمي", "خدمات إلكترونية", "React"],
+        views: "2800",
+        likes: "156",
+        status: "published",
+        seoTitle: "البوابة الحكومية الموحدة - مشروع التحول الرقمي الحكومي",
+        seoDescription: "دراسة حالة تطوير البوابة الحكومية التي خدمت مليون مواطن ووفرت 80% من الوقت",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2023-06-10'),
+        updatedAt: new Date('2024-01-15')
       },
       {
         id: randomUUID(),
-        title: "هوية بصرية متكاملة",
-        description: "تصميم هوية بصرية شاملة لمطعم فاخر",
-        category: "design",
-        imageUrl: "palette",
-        projectUrl: "",
-        technologies: ["Adobe Illustrator", "Photoshop", "Figma"],
-        featured: "false"
-      },
-      {
-        id: randomUUID(),
-        title: "نظام إدارة المخزون",
-        description: "تطبيق سطح مكتب شامل لإدارة المخزون والمبيعات",
-        category: "desktop",
-        imageUrl: "monitor",
-        projectUrl: "",
-        technologies: ["Electron", "React", "SQLite", "Node.js"],
-        featured: "true"
-      },
-      {
-        id: randomUUID(),
-        title: "نظام ERP متقدم",
-        description: "نظام إدارة موارد مؤسسية لشركة صناعية",
-        category: "erp",
-        imageUrl: "database",
-        projectUrl: "",
-        technologies: ["ERPNext", "Python", "PostgreSQL"],
-        featured: "true"
-      },
-      {
-        id: randomUUID(),
-        title: "تطبيق الرعاية الصحية",
-        description: "تطبيق طبي لحجز المواعيد والاستشارات",
-        category: "mobile",
-        imageUrl: "heart-pulse",
-        projectUrl: "",
-        technologies: ["Flutter", "Firebase", "Node.js"],
-        featured: "false"
-      },
-      {
-        id: randomUUID(),
-        title: "منصة التعلم الإلكتروني",
-        description: "منصة شاملة للكورسات والتدريب أونلاين",
+        slug: "healthcare-management-system",
+        title: "نظام إدارة المستشفيات الذكي",
+        description: "نظام شامل لإدارة المرضى والمواعيد والملفات الطبية",
+        fullDescription: "نظام إدارة مستشفيات متكامل يخدم أكثر من 10 مستشفيات بـ 500 سرير. يشمل إدارة المرضى، الملفات الطبية الإلكترونية، نظام المواعيد، إدارة الصيدلية، والتقارير الطبية. حقق تحسن 60% في كفاءة العمليات الطبية.",
         category: "web",
-        imageUrl: "graduation-cap",
+        industry: "Healthcare",
+        services: ["تطوير الأنظمة", "قواعد البيانات", "الأمن الطبي"],
+        imageUrl: "heart-pulse",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "لوحة الطبيب", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "سجل المريض", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "نظام المواعيد", type: "image" }
+        ],
         projectUrl: "",
-        technologies: ["Vue.js", "Laravel", "MySQL"],
-        featured: "false"
+        liveUrl: "https://hospital.health.sa",
+        technologies: ["Vue.js", "Laravel", "MySQL", "Redis", "WebRTC"],
+        featured: "true",
+        year: "2023",
+        duration: "10 أشهر",
+        teamSize: "12 مطور",
+        budget: "800,000 ريال",
+        client: {
+          name: "د. سارة الأحمدي",
+          company: "مجمع الملك فهد الطبي",
+          position: "مديرة تقنية المعلومات",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "تحسين الكفاءة", value: "+60%", description: "في العمليات الطبية", icon: "trending-up" },
+          { label: "المرضى المخدومين", value: "100k+", description: "مريض سنوياً", icon: "users" },
+          { label: "توفير الأوراق", value: "90%", description: "تقليل الاستهلاك", icon: "leaf" },
+          { label: "دقة التشخيص", value: "+40%", description: "تحسين دقة البيانات", icon: "target" }
+        ],
+        testimonial: {
+          content: "النظام أحدث نقلة نوعية في عملنا. وفرنا الكثير من الوقت وحسنا جودة الخدمة الطبية للمرضى بشكل كبير.",
+          author: "د. سارة الأحمدي",
+          position: "مديرة تقنية المعلومات - مجمع الملك فهد الطبي",
+          rating: 5
+        },
+        tags: ["صحي", "إدارة مستشفيات", "نظام طبي", "Vue.js"],
+        views: "1890",
+        likes: "127",
+        status: "published",
+        seoTitle: "نظام إدارة المستشفيات الذكي - حلول الرعاية الصحية الرقمية",
+        seoDescription: "تعرف على نظام إدارة المستشفيات الذي حسن كفاءة العمليات الطبية بنسبة 60%",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2023-08-20'),
+        updatedAt: new Date('2024-02-10')
+      },
+      {
+        id: randomUUID(),
+        slug: "education-platform",
+        title: "منصة التعليم الإلكتروني المتقدمة",
+        description: "منصة شاملة للتعلم عن بُعد مع فصول افتراضية وذكاء اصطناعي",
+        fullDescription: "منصة تعليمية متطورة تخدم أكثر من 50,000 طالب و 2,000 معلم. تتضمن فصول افتراضية تفاعلية، نظام إدارة التعلم، اختبارات ذكية، وتحليلات أداء مدعومة بالذكاء الاصطناعي. استخدمت خلال جائحة كوفيد-19 لضمان استمرارية التعليم.",
+        category: "web",
+        industry: "Education",
+        services: ["تطوير المنصات", "الذكاء الاصطناعي", "البث المباشر"],
+        imageUrl: "graduation-cap",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "الفصل الافتراضي", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "لوحة الطالب", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "نظام الاختبارات", type: "image" }
+        ],
+        projectUrl: "",
+        liveUrl: "https://edu.platform.sa",
+        technologies: ["React", "Node.js", "WebRTC", "Socket.io", "AI/ML"],
+        featured: "true",
+        year: "2022",
+        duration: "8 أشهر",
+        teamSize: "10 مطورين",
+        budget: "600,000 ريال",
+        client: {
+          name: "د. عبدالله الرشيد",
+          company: "وزارة التعليم",
+          position: "مدير التحول الرقمي",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "الطلاب المسجلين", value: "50k+", description: "طالب نشط", icon: "users" },
+          { label: "ساعات التعلم", value: "2M+", description: "ساعة تعليمية", icon: "clock" },
+          { label: "معدل الإنجاز", value: "85%", description: "إكمال الكورسات", icon: "check-circle" },
+          { label: "رضا المعلمين", value: "94%", description: "تقييم المنصة", icon: "heart" }
+        ],
+        testimonial: {
+          content: "منصة استثنائية ساعدتنا في الحفاظ على جودة التعليم خلال الجائحة. الطلاب أحبوا التفاعل والمعلمون تكيفوا بسرعة.",
+          author: "د. عبدالله الرشيد",
+          position: "مدير التحول الرقمي - وزارة التعليم",
+          rating: 5
+        },
+        tags: ["تعليم", "منصة تعليمية", "فصول افتراضية", "ذكاء اصطناعي"],
+        views: "2200",
+        likes: "198",
+        status: "published",
+        seoTitle: "منصة التعليم الإلكتروني - حلول التعليم عن بُعد المتقدمة",
+        seoDescription: "دراسة حالة منصة تعليمية تخدم 50 ألف طالب مع فصول افتراضية وذكاء اصطناعي",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2022-09-15'),
+        updatedAt: new Date('2023-12-05')
+      },
+      {
+        id: randomUUID(),
+        slug: "logistics-management-system",
+        title: "نظام إدارة اللوجستيات والشحن",
+        description: "منصة شاملة لإدارة الشحنات وتتبع المركبات في الوقت الفعلي",
+        fullDescription: "نظام لوجستيات متطور يدير أكثر من 1000 مركبة و 50,000 شحنة شهرياً. يتضمن تتبع GPS في الوقت الفعلي، تحسين المسارات بالذكاء الاصطناعي، إدارة السائقين، ونظام فوترة متكامل. قلل تكاليف الوقود بنسبة 30% وحسن كفاءة التسليم.",
+        category: "web",
+        industry: "Logistics",
+        services: ["تطوير الأنظمة", "تتبع GPS", "ذكاء اصطناعي"],
+        imageUrl: "zap",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "خريطة التتبع", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "لوحة السائق", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "تقارير الأداء", type: "image" }
+        ],
+        projectUrl: "",
+        liveUrl: "https://logistics.fast.sa",
+        technologies: ["Angular", "Spring Boot", "PostgreSQL", "Redis", "GPS API"],
+        featured: "false",
+        year: "2023",
+        duration: "7 أشهر",
+        teamSize: "9 مطورين",
+        budget: "450,000 ريال",
+        client: {
+          name: "خالد العنزي",
+          company: "شركة الشحن السريع",
+          position: "المدير العام",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "تقليل التكاليف", value: "-30%", description: "في استهلاك الوقود", icon: "trending-down" },
+          { label: "الشحنات الشهرية", value: "50k+", description: "شحنة مُدارة", icon: "package" },
+          { label: "دقة التسليم", value: "95%", description: "في الوقت المحدد", icon: "clock" },
+          { label: "رضا العملاء", value: "88%", description: "تقييم الخدمة", icon: "heart" }
+        ],
+        testimonial: {
+          content: "النظام أحدث ثورة في عملياتنا. وفرنا آلاف الريالات شهرياً وأصبح عملاؤنا أكثر رضا عن خدمة التوصيل.",
+          author: "خالد العنزي",
+          position: "المدير العام - شركة الشحن السريع",
+          rating: 4
+        },
+        tags: ["لوجستيات", "تتبع", "شحن", "GPS"],
+        views: "980",
+        likes: "67",
+        status: "published",
+        seoTitle: "نظام إدارة اللوجستيات والشحن - حلول الشحن الذكية",
+        seoDescription: "تعرف على نظام اللوجستيات الذي قلل تكاليف الوقود 30% وحسن دقة التسليم إلى 95%",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2023-04-12'),
+        updatedAt: new Date('2023-11-28')
+      },
+      {
+        id: randomUUID(),
+        slug: "fintech-banking-app",
+        title: "تطبيق البنك الرقمي الشامل",
+        description: "تطبيق مصرفي متكامل مع محفظة رقمية وخدمات مالية متقدمة",
+        fullDescription: "تطبيق مصرفي رقمي متطور يخدم أكثر من 200,000 عميل. يتضمن إدارة الحسابات، التحويلات الفورية، محفظة رقمية، خدمات الاستثمار، وقروض فورية. مبني بأعلى معايير الأمان السيبراني والامتثال المصرفي.",
+        category: "mobile",
+        industry: "Finance",
+        services: ["تطوير التطبيقات", "الأمن السيبراني", "خدمات مالية"],
+        imageUrl: "smartphone",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "الصفحة الرئيسية", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "التحويلات", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "الاستثمار", type: "image" }
+        ],
+        projectUrl: "",
+        liveUrl: "https://app.digitalbank.sa",
+        technologies: ["Flutter", "Dart", "Firebase", "Blockchain", "AI/ML"],
+        featured: "true",
+        year: "2024",
+        duration: "9 أشهر",
+        teamSize: "14 مطور",
+        budget: "1,200,000 ريال",
+        client: {
+          name: "د. منى الحربي",
+          company: "البنك الرقمي السعودي",
+          position: "رئيسة التقنية",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "العملاء النشطين", value: "200k+", description: "عميل مسجل", icon: "users" },
+          { label: "المعاملات اليومية", value: "1M+", description: "معاملة مالية", icon: "credit-card" },
+          { label: "معدل الأمان", value: "99.9%", description: "حماية البيانات", icon: "shield" },
+          { label: "تقييم المتاجر", value: "4.7/5", description: "في متاجر التطبيقات", icon: "star" }
+        ],
+        testimonial: {
+          content: "تطبيق ثوري في عالم الخدمات المصرفية الرقمية. سهولة الاستخدام والأمان العالي جعل عملاءنا يثقون بنا أكثر.",
+          author: "د. منى الحربي",
+          position: "رئيسة التقنية - البنك الرقمي السعودي",
+          rating: 5
+        },
+        tags: ["مالي", "بنك رقمي", "محفظة", "أمان"],
+        views: "3200",
+        likes: "245",
+        status: "published",
+        seoTitle: "تطبيق البنك الرقمي - حلول الخدمات المصرفية المتطورة",
+        seoDescription: "دراسة حالة تطبيق مصرفي رقمي يخدم 200 ألف عميل بمليون معاملة يومية",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2024-02-20'),
+        updatedAt: new Date('2024-04-15')
+      },
+      {
+        id: randomUUID(),
+        slug: "industrial-iot-system",
+        title: "نظام إنترنت الأشياء الصناعي",
+        description: "منصة مراقبة وتحكم ذكية للمصانع والمنشآت الصناعية",
+        fullDescription: "نظام IoT صناعي متطور يراقب أكثر من 5,000 جهاز في 15 مصنع. يتضمن مراقبة الآلات في الوقت الفعلي، صيانة تنبؤية، تحليل البيانات الضخمة، وأتمتة العمليات الصناعية. قلل أوقات التوقف بنسبة 45% وزاد الإنتاجية 35%.",
+        category: "web",
+        industry: "Industrial",
+        services: ["إنترنت الأشياء", "تحليل البيانات", "أتمتة صناعية"],
+        imageUrl: "settings",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "لوحة المراقبة", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "مؤشرات الآلات", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "تقارير الإنتاج", type: "image" }
+        ],
+        projectUrl: "",
+        liveUrl: "https://iot.industry.sa",
+        technologies: ["React", "Python", "InfluxDB", "MQTT", "TensorFlow"],
+        featured: "false",
+        year: "2023",
+        duration: "11 شهر",
+        teamSize: "16 مطور",
+        budget: "950,000 ريال",
+        client: {
+          name: "م. سعد الدوسري",
+          company: "مصانع المستقبل الصناعية",
+          position: "مدير التقنية",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "تقليل التوقف", value: "-45%", description: "أوقات الصيانة", icon: "trending-down" },
+          { label: "زيادة الإنتاج", value: "+35%", description: "كفاءة الإنتاج", icon: "trending-up" },
+          { label: "الأجهزة المراقبة", value: "5k+", description: "جهاز IoT", icon: "cpu" },
+          { label: "توفير التكاليف", value: "2M ريال", description: "سنوياً", icon: "dollar-sign" }
+        ],
+        testimonial: {
+          content: "النظام غير مفهومنا للصناعة الذكية. الآن نتوقع الأعطال قبل حدوثها ونحسن الإنتاج باستمرار.",
+          author: "م. سعد الدوسري",
+          position: "مدير التقنية - مصانع المستقبل الصناعية",
+          rating: 5
+        },
+        tags: ["صناعي", "إنترنت الأشياء", "ذكاء اصطناعي", "أتمتة"],
+        views: "1450",
+        likes: "89",
+        status: "published",
+        seoTitle: "نظام إنترنت الأشياء الصناعي - حلول الصناعة الذكية",
+        seoDescription: "تعرف على نظام IoT الصناعي الذي قلل أوقات التوقف 45% وزاد الإنتاجية 35%",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2023-02-08'),
+        updatedAt: new Date('2024-01-22')
+      },
+      {
+        id: randomUUID(),
+        slug: "media-streaming-platform",
+        title: "منصة البث المرئي والصوتي",
+        description: "منصة بث محتوى متطورة مع ذكاء اصطناعي لتخصيص المحتوى",
+        fullDescription: "منصة بث محتوى متقدمة تخدم أكثر من 500,000 مشترك. تتضمن بث فيديو عالي الجودة، توصيات ذكية بالذكاء الاصطناعي، نظام اشتراكات متدرج، وتحليلات مشاهدة متطورة. تدعم البث المباشر والمحتوى المسجل مع جودة 4K.",
+        category: "web",
+        industry: "Media",
+        services: ["تطوير المنصات", "بث الفيديو", "ذكاء اصطناعي"],
+        imageUrl: "monitor",
+        coverImage: "/api/placeholder/800/600",
+        gallery: [
+          { id: "1", url: "/api/placeholder/400/300", alt: "واجهة المشاهدة", type: "image" },
+          { id: "2", url: "/api/placeholder/400/300", alt: "التوصيات الذكية", type: "image" },
+          { id: "3", url: "/api/placeholder/400/300", alt: "لوحة المحتوى", type: "image" }
+        ],
+        projectUrl: "",
+        liveUrl: "https://stream.media.sa",
+        technologies: ["Vue.js", "Node.js", "FFmpeg", "CDN", "AI/ML"],
+        featured: "false",
+        year: "2023",
+        duration: "8 أشهر",
+        teamSize: "11 مطور",
+        budget: "700,000 ريال",
+        client: {
+          name: "أحمد الشهري",
+          company: "شبكة الإعلام الرقمي",
+          position: "المدير التقني",
+          logo: "/api/placeholder/100/100"
+        },
+        kpis: [
+          { label: "المشتركين النشطين", value: "500k+", description: "مشترك فعال", icon: "users" },
+          { label: "ساعات المشاهدة", value: "10M+", description: "ساعة شهرياً", icon: "play" },
+          { label: "معدل الاستبقاء", value: "78%", description: "بقاء المشتركين", icon: "heart" },
+          { label: "جودة البث", value: "99.5%", description: "وقت التشغيل", icon: "signal" }
+        ],
+        testimonial: {
+          content: "منصة رائعة منافسة للعالمية. جودة البث ممتازة والتوصيات الذكية زادت مشاهدات المحتوى بشكل كبير.",
+          author: "أحمد الشهري",
+          position: "المدير التقني - شبكة الإعلام الرقمي",
+          rating: 4
+        },
+        tags: ["إعلام", "بث فيديو", "ذكاء اصطناعي", "منصة"],
+        views: "1680",
+        likes: "134",
+        status: "published",
+        seoTitle: "منصة البث المرئي والصوتي - حلول الإعلام الرقمي المتطورة",
+        seoDescription: "دراسة حالة منصة بث رقمية تخدم 500 ألف مشترك مع 10 مليون ساعة مشاهدة شهرياً",
+        socialImage: "/api/placeholder/1200/630",
+        createdAt: new Date('2023-05-18'),
+        updatedAt: new Date('2024-03-10')
       }
     ];
 

@@ -72,6 +72,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get portfolio item by slug
+  app.get("/api/portfolio/:slug", async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const portfolioItems = await storage.getAllPortfolioItems();
+      const item = portfolioItems.find(p => p.slug === slug);
+      
+      if (!item) {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Portfolio item not found" 
+        });
+      }
+      
+      res.json(item);
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch portfolio item" 
+      });
+    }
+  });
+
   // Get all testimonials
   app.get("/api/testimonials", async (req, res) => {
     try {
