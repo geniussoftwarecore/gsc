@@ -2,7 +2,9 @@ import Hero from "@/components/sections/hero";
 import ServicesOverview from "@/components/sections/services-overview";
 import AboutStats from "@/components/sections/about-stats";
 import HomePortfolio from "@/components/sections/home-portfolio";
+import { HomeMetrics } from "@/components/sections/home-metrics";
 import Testimonials from "@/components/sections/testimonials";
+import { HOME_METRICS } from "@/data/home-metrics";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ParallaxSection, RevealOnScroll, StaggerContainer } from "@/components/ui/enhanced-scroll-effects";
 import { useRef } from "react";
@@ -51,6 +53,12 @@ export default function Home() {
         <RevealOnScroll direction="left" delay={0.4} distance={100}>
           <ParallaxSection offset={-20}>
             <HomePortfolio maxItems={6} />
+          </ParallaxSection>
+        </RevealOnScroll>
+
+        <RevealOnScroll direction="up" delay={0.45} distance={80}>
+          <ParallaxSection offset={10}>
+            <HomeMetrics metrics={HOME_METRICS} language="ar" />
           </ParallaxSection>
         </RevealOnScroll>
 

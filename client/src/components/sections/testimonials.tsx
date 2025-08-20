@@ -35,7 +35,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-light-gray">
+    <section className="py-16 lg:py-24 bg-light-gray" style={{ position: 'relative' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedText className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
