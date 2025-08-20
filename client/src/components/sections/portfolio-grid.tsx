@@ -110,13 +110,7 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
   };
 
   return (
-    <motion.section 
-      ref={sectionRef}
-      className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50/30 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: isInView ? 1 : 0 }}
-      transition={{ duration: 0.8 }}
-    >
+    <div className="py-12 sm:py-16 lg:py-24 bg-gradient-to-br from-gray-50 via-white to-gray-50/30 relative overflow-hidden">
       {/* Enhanced Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -1079,6 +1073,6 @@ export default function PortfolioGrid({ showFilter = true, limit }: PortfolioGri
           </motion.div>
         )}
       </div>
-    </motion.section>
+    </div>
   );
 }
