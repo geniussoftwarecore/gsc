@@ -227,48 +227,67 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                aria-label={language === 'ar' ? 'ابدأ مشروعك الآن' : 'Start Your Project'}
+            <Link href="/services">
+              <motion.div
+                whileHover={{ y: -2 }}
+                whileTap={{ y: 0 }}
+                transition={{ duration: 0.2 }}
               >
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ x: language === 'ar' ? -3 : 3 }}
-                  transition={{ duration: 0.2 }}
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-sky-300 text-sky-600 hover:bg-sky-600 hover:text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  aria-label={language === 'ar' ? 'ابدأ التجربة المجانية' : 'Start Free Trial'}
+                  data-testid="button-start-trial"
                 >
-                  {language === 'ar' ? (
-                    <>
-                      <ArrowRight className="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" />
-                      ابدأ مشروعك الآن
-                    </>
-                  ) : (
-                    <>
-                      Start Your Project
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </motion.div>
-              </Button>
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ x: language === 'ar' ? -3 : 3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {language === 'ar' ? (
+                      <>
+                        <ArrowRight className="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" />
+                        ابدأ التجربة المجانية
+                      </>
+                    ) : (
+                      <>
+                        Start Free Trial
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </motion.div>
+                </Button>
+              </motion.div>
             </Link>
 
-            <Link href="/portfolio">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-sky-300 text-sky-600 hover:bg-sky-50 px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 group"
-                aria-label={language === 'ar' ? 'استعرض أعمالنا' : 'View Our Work'}
+            <Link href="/services">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
-                <motion.div 
-                  className="flex items-center gap-2"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="text-sky-600 hover:text-sky-700 px-6 py-3 text-lg font-medium transition-all duration-300 group"
+                  aria-label={language === 'ar' ? 'اشترك الآن' : 'Subscribe Now'}
+                  data-testid="button-subscribe"
                 >
-                  <Eye className="w-5 h-5" />
-                  {language === 'ar' ? 'استعرض أعمالنا' : 'View Our Work'}
-                </motion.div>
-              </Button>
+                  <div className="flex items-center gap-2">
+                    {language === 'ar' ? (
+                      <>
+                        <ArrowRight className="w-4 h-4 rotate-180 group-hover:translate-x-1 transition-transform" />
+                        اشترك الآن
+                      </>
+                    ) : (
+                      <>
+                        Subscribe Now
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </div>
+                </Button>
+              </motion.div>
             </Link>
           </motion.div>
 
