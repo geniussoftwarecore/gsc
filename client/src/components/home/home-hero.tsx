@@ -233,8 +233,8 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
           {/* CTA Buttons - RTL/LTR responsive ordering */}
           <motion.div 
             variants={itemVariants}
-            className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 ${
-              language === 'ar' ? 'sm:flex-row-reverse' : ''
+            className={`flex flex-col lg:flex-row gap-4 justify-center items-center mb-16 ${
+              language === 'ar' ? 'lg:flex-row-reverse' : ''
             }`}
           >
             {/* Subscribe Now Button */}
@@ -263,6 +263,40 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                       </>
                     )}
                   </div>
+                </Button>
+              </motion.div>
+            </Link>
+
+            {/* Start Free Trial Button */}
+            <Link href="/login">
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  aria-label={language === 'ar' ? 'اشترك مجاناً - ابدأ بتجربة' : 'Subscribe Free - Start Trial'}
+                  data-testid="button-free-trial"
+                >
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ x: language === 'ar' ? -3 : 3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {language === 'ar' ? (
+                      <>
+                        <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        اشترك مجاناً - ابدأ بتجربة
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        Subscribe Free - Start Trial
+                      </>
+                    )}
+                  </motion.div>
                 </Button>
               </motion.div>
             </Link>
