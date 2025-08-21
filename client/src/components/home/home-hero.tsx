@@ -180,18 +180,30 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
           animate={isInView ? "visible" : "hidden"}
           className="text-center"
         >
-          {/* Brand Logo */}
-          <motion.div variants={itemVariants} className="mx-auto mb-4 md:mb-6 flex items-center justify-center">
+          {/* Brand Logo with Company Name */}
+          <motion.div variants={itemVariants} className="mx-auto mb-4 md:mb-6 flex items-center justify-center gap-4">
             <motion.img
-              src="/brand/logo-gsc.svg"
+              src="/brand/logo-gsc-hero.png"
               onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc.png")}
               alt="GSC"
-              className="h-10 w-auto md:h-16"
-              width={256}
-              height={72}
+              className="h-12 w-auto md:h-20"
+              width={80}
+              height={80}
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             />
+            <motion.div 
+              className="flex flex-col items-start"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-2xl md:text-4xl font-bold text-slate-900 leading-tight">
+                Genius Software Core
+              </h2>
+              <p className="text-sm md:text-lg text-sky-600 font-medium mt-1">
+                {language === 'ar' ? 'الأساس البرمجي العبقري' : 'Innovative Software Solutions'}
+              </p>
+            </motion.div>
           </motion.div>
 
           {/* Top Badge */}
