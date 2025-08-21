@@ -52,13 +52,33 @@
   },
   "contact": {
     "title": "Contact Us",
-    "subtitle": "Let's discuss your next project",
+    "subtitle": "You have an opportunity, we're here to help you",
     "getInTouch": "Get In Touch",
-    "sendMessage": "Send Message"
+    "sendMessage": "Send Message",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company (Optional)",
+      "service": "Service Type",
+      "message": "Message",
+      "budget": "Budget (Optional)",
+      "timeline": "Timeline (Optional)",
+      "send": "Send",
+      "sending": "Sending...",
+      "successTitle": "Message sent successfully!",
+      "successDesc": "We will contact you as soon as possible.",
+      "errorTitle": "Error sending message",
+      "errorDesc": "Please try again or contact us directly."
+    }
   },
   "about": {
     "title": "About Us",
-    "subtitle": "Leading software development company"
+    "subtitle": "A team of creators and specialists in technology, striving to provide innovative solutions that help businesses grow and thrive",
+    "storyTitle": "Our Story",
+    "storyParagraph1": "{companyName} was founded with a clear vision: empowering businesses through advanced technology. We started as a small team of passionate developers and evolved to become a trusted technology partner for many companies.",
+    "storyParagraph2": "We don't just build software, we strive to deeply understand our clients' needs and provide solutions that align with their strategic goals. Every project we work on is an opportunity to make a real positive impact.",
+    "partnership": "Start Your Partnership with Us"
   },
   "forms": {
     "name": "Name",
@@ -68,6 +88,23 @@
     "submit": "Submit",
     "required": "This field is required",
     "invalidEmail": "Invalid email address"
+  },
+  "servicesPage": {
+    "title": "Our Services",
+    "subtitle": "We provide comprehensive and specialized solutions for all your technical needs",
+    "search": "Search for service...",
+    "categories": {
+      "all": "All Services",
+      "allDesc": "Browse all our specialized services",
+      "business": "Business Solutions",
+      "businessDesc": "Business management systems and smart analytics",
+      "development": "Development & Programming",
+      "developmentDesc": "Comprehensive software solutions from mobile apps to complex systems",
+      "design": "Design & User Experience",
+      "designDesc": "Attractive user interface design and distinctive interactive experiences",
+      "marketing": "Digital Marketing",
+      "marketingDesc": "Advanced marketing strategies for your digital business growth"
+    }
   },
   "common": {
     "loading": "Loading...",

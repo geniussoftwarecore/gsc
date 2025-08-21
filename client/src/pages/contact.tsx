@@ -17,6 +17,8 @@ import { Upload, File, X, AlertCircle } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNotifications } from "@/contexts/NotificationContext";
 import { addClientRequest } from "@/data/clientRequests";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 const contactSchema = z.object({
   name: z.string().min(2, "الاسم يجب أن يكون أكثر من حرفين"),
@@ -33,6 +35,8 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguageContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -66,16 +70,16 @@ export default function Contact() {
     },
     onSuccess: () => {
       toast({
-        title: "تم إرسال الرسالة بنجاح!",
-        description: "سنتواصل معك في أقرب وقت ممكن.",
+        title: t('contact.form.successTitle'),
+        description: t('contact.form.successDesc'),
       });
       reset();
       setIsSubmitting(false);
     },
     onError: () => {
       toast({
-        title: "خطأ في إرسال الرسالة",
-        description: "يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.",
+        title: t('contact.form.errorTitle'),
+        description: t('contact.form.errorDesc'),
         variant: "destructive",
       });
       setIsSubmitting(false);

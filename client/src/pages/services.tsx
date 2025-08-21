@@ -143,9 +143,9 @@ export default function Services() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-500 text-xl mb-4">حدث خطأ في تحميل الخدمات</p>
+          <p className="text-red-500 text-xl mb-4">{t('services.loadError')}</p>
           <InteractiveButton onClick={() => window.location.reload()}>
-            إعادة المحاولة
+            {t('common.cancel')}
           </InteractiveButton>
         </div>
       </div>
@@ -158,11 +158,11 @@ export default function Services() {
       <section className="gradient-light py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedText delay={0.2}>
-            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6">
-              خدماتنا المتخصصة
+            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('servicesPage.title')}
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              نقدم مجموعة شاملة من الخدمات التقنية والإبداعية لتلبية جميع احتياجات أعمالك الرقمية
+            <p className={`text-xl text-gray-600 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('servicesPage.subtitle')}
             </p>
           </AnimatedText>
         </div>
@@ -184,7 +184,7 @@ export default function Services() {
                 <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                 <Input
                   type="text"
-                  placeholder="ابحث في خدماتنا..."
+                  placeholder={t('servicesPage.search')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pr-12 py-3 text-lg rounded-full border-2 border-gray-200 focus:border-primary transition-all duration-300"

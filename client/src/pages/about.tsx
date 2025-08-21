@@ -6,8 +6,13 @@ import { Link } from "wouter";
 import { COMPANY_INFO, STATS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { Users, User, Palette, Smartphone, TrendingUp, MessageCircle, Eye, Heart, Target, Lightbulb, Shield, Zap } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function About() {
+  const { t } = useTranslation();
+  const { language, isRTL } = useLanguageContext();
+  
   const teamMembers = [
     {
       name: "أحمد محمد",
@@ -91,11 +96,11 @@ export default function About() {
       <section className="gradient-light py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedText delay={0.2}>
-            <h1 className="text-4xl lg:text-6xl font-bold text-secondary mb-6">
-              من نحن
+            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('about.title')}
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              فريق من المبدعين والمتخصصين في مجال التكنولوجيا، نسعى لتقديم حلول مبتكرة تساعد الأعمال على النمو والازدهار
+            <p className={`text-xl text-gray-600 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+              {t('about.subtitle')}
             </p>
           </AnimatedText>
         </div>
@@ -106,21 +111,21 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection delay={0.3}>
-              <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-                قصتنا
+              <h2 className={`text-4xl lg:text-5xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('about.storyTitle')}
               </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                تأسست {COMPANY_INFO.name} من رؤية واضحة: تمكين الأعمال من خلال التكنولوجيا المتطورة. بدأنا كفريق صغير من المطورين المتحمسين وتطورنا لنصبح شريكاً تقنياً موثوقاً للعديد من الشركات.
+              <p className={`text-lg text-gray-600 mb-6 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('about.storyParagraph1').replace('{companyName}', COMPANY_INFO.name)}
               </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                نحن لا نكتفي ببناء البرمجيات فحسب، بل نسعى لفهم احتياجات عملائنا بعمق وتقديم حلول تتماشى مع أهدافهم الاستراتيجية. كل مشروع نعمل عليه هو فرصة لإحداث تأثير إيجابي حقيقي.
+              <p className={`text-lg text-gray-600 mb-8 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+                {t('about.storyParagraph2')}
               </p>
               <Link href="/contact">
                 <InteractiveButton
                   className="btn-primary shadow-lg hover:shadow-xl"
                   icon={<i className="fas fa-handshake"></i>}
                 >
-                  ابدأ شراكتك معنا
+                  {t('about.partnership')}
                 </InteractiveButton>
               </Link>
             </AnimatedSection>
