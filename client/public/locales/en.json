@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "subscribe": "Subscribe Now",
+    "startProject": "Start Your Project"
+  },
+  "home": {
+    "hero": {
+      "cta": {
+        "startProject": "Start Your Project",
+        "subscribe": "Subscribe Now"
+      },
+      "brand": {
+        "alt": "GSC"
+      }
+    }
+  }
+}

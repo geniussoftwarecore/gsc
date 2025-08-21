@@ -1,0 +1,47 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular base -->
+  <circle cx="100" cy="100" r="80" fill="#0EA5E9" opacity="0.9"/>
+  
+  <!-- Digital squares pattern -->
+  <!-- Large squares -->
+  <rect x="40" y="40" width="16" height="16" fill="#0EA5E9"/>
+  <rect x="60" y="55" width="20" height="20" fill="#0EA5E9"/>
+  <rect x="85" y="35" width="14" height="14" fill="#0EA5E9"/>
+  <rect x="105" y="50" width="18" height="18" fill="#0EA5E9"/>
+  <rect x="130" y="40" width="16" height="16" fill="#0EA5E9"/>
+  <rect x="145" y="60" width="12" height="12" fill="#0EA5E9"/>
+  
+  <!-- Medium squares -->
+  <rect x="45" y="80" width="22" height="22" fill="#0EA5E9"/>
+  <rect x="75" y="70" width="14" height="14" fill="#0EA5E9"/>
+  <rect x="95" y="85" width="16" height="16" fill="#0EA5E9"/>
+  <rect x="115" y="75" width="20" height="20" fill="#0EA5E9"/>
+  <rect x="140" y="85" width="15" height="15" fill="#0EA5E9"/>
+  
+  <!-- Bottom squares -->
+  <rect x="35" y="110" width="18" height="18" fill="#0EA5E9"/>
+  <rect x="60" y="115" width="16" height="16" fill="#0EA5E9"/>
+  <rect x="80" y="125" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="110" y="120" width="20" height="20" fill="#0EA5E9"/>
+  <rect x="135" y="115" width="18" height="18" fill="#0EA5E9"/>
+  
+  <!-- Lower area squares -->
+  <rect x="50" y="140" width="22" height="22" fill="#0EA5E9"/>
+  <rect x="85" y="150" width="16" height="16" fill="#0EA5E9"/>
+  <rect x="110" y="145" width="18" height="18" fill="#0EA5E9"/>
+  
+  <!-- Small accent squares -->
+  <rect x="65" y="100" width="10" height="10" fill="white"/>
+  <rect x="125" y="105" width="12" height="12" fill="white"/>
+  <rect x="90" y="110" width="8" height="8" fill="white"/>
+  
+  <!-- Digital edge effect -->
+  <path d="M140 20 L160 20 L160 30 L150 30 L150 40 L140 40 Z" fill="#0EA5E9"/>
+  <path d="M140 45 L155 45 L155 50 L150 50 L150 55 L140 55 Z" fill="#0EA5E9"/>
+  <path d="M140 60 L160 60 L160 70 L145 70 L145 75 L140 75 Z" fill="#0EA5E9"/>
+  <path d="M140 80 L158 80 L158 90 L148 90 L148 95 L140 95 Z" fill="#0EA5E9"/>
+  <path d="M140 100 L160 100 L160 110 L150 110 L150 115 L140 115 Z" fill="#0EA5E9"/>
+  <path d="M140 120 L155 120 L155 130 L145 130 L145 135 L140 135 Z" fill="#0EA5E9"/>
+  <path d="M140 140 L160 140 L160 150 L150 150 L150 155 L140 155 Z" fill="#0EA5E9"/>
+  <path d="M140 160 L158 160 L158 170 L148 170 L148 175 L140 175 Z" fill="#0EA5E9"/>
+</svg>

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings, Shield } from "lucide-react";
+import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings, Shield, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import { motion } from 'framer-motion';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,12 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import gscLogo from "@assets/gsc-logo.png";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
-  const { user, isAuthenticated, isAdmin, loading, logout } = useAuth();
+  const { user, isAuthenticated, isLoading, logout } = useAuth();
 
   const navigationItems = [
     { href: "/", label: "الرئيسية" },
@@ -40,45 +40,30 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <div className="flex items-center gap-2">
-              {/* SVG Logo Icon */}
-              <div className="w-10 h-10 bg-sky-600 rounded-full flex items-center justify-center">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-white"
-                >
-                  <path
-                    d="M12 2L2 7L12 12L22 7L12 2Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M2 17L12 22L22 17"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M2 12L12 17L22 12"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-              {/* Company Name */}
-              <div className="hidden sm:block">
-                <span className="text-lg font-semibold text-slate-900">
-                  Genius Software Core
-                </span>
-              </div>
-            </div>
+          <Link href="/">
+            <motion.div 
+              className="flex items-center gap-2 h-10"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* GSC Logo */}
+              <motion.img 
+                src="/brand/logo-gsc.svg" 
+                alt="GSC" 
+                className="h-7 w-auto md:h-8"
+                whileHover={{ rotate: 5 }}
+                transition={{ duration: 0.3 }}
+              />
+              {/* Company Name - Desktop Only */}
+              <motion.span 
+                className="hidden md:inline-block font-semibold tracking-wide text-slate-900 text-lg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                Genius Software Core
+              </motion.span>
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -97,8 +82,36 @@ export default function Navigation() {
                 </Link>
               ))}
               
+              {/* CTA Buttons */}
+              <div className="flex items-center gap-3">
+                <Link href="/services">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button variant="ghost" className="text-slate-600 hover:text-sky-600 transition-colors">
+                      اشترك الآن
+                    </Button>
+                  </motion.div>
+                </Link>
+                <Link href="/services">
+                  <motion.div
+                    whileHover={{ scale: 1.05, x: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button 
+                      variant="outline" 
+                      className="border-sky-600 text-sky-600 hover:bg-sky-600 hover:text-white transition-all duration-300 group"
+                    >
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:-translate-x-1 transition-transform" />
+                      ابدأ مشروعك
+                    </Button>
+                  </motion.div>
+                </Link>
+              </div>
+              
               {/* Authentication UI - Show loading or auth content based on state */}
-              {loading ? (
+              {isLoading ? (
                 <span className="text-gray-500 text-sm">جارٍ التحميل...</span>
               ) : !isAuthenticated ? (
                 <>
@@ -139,7 +152,7 @@ export default function Navigation() {
                         <span>الداشبورد</span>
                       </DropdownMenuItem>
                     </Link>
-                    {isAdmin && (
+                    {user?.role === 'admin' && (
                       <>
                         <Link href="/admin/crm">
                           <DropdownMenuItem onSelect={closeMobileMenu}>
@@ -214,7 +227,7 @@ export default function Navigation() {
               ))}
               
               {/* Mobile Authentication UI */}
-              {loading ? (
+              {isLoading ? (
                 <div className="px-3 py-2 text-gray-500 text-sm">جارٍ التحميل...</div>
               ) : !isAuthenticated ? (
                 <>

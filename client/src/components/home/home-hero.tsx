@@ -15,6 +15,9 @@ import {
   Clock
 } from 'lucide-react';
 import { Link } from 'wouter';
+import { BrandGlow } from '@/components/brand/BrandGlow';
+import { BrandParticles } from '@/components/brand/BrandParticles';
+import { DigitalGrid } from '@/components/brand/DigitalGrid';
 
 interface ServiceHighlight {
   id: string;
@@ -105,6 +108,9 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
       style={{ position: 'relative' }}
       dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
+      {/* Digital Grid Background */}
+      <DigitalGrid />
+      
       {/* Background decorations with White + Sky Blue theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -185,6 +191,22 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             </Badge>
           </motion.div>
 
+          {/* GSC Logo with Brand Effects */}
+          <motion.div 
+            variants={itemVariants} 
+            className="relative mx-auto mb-4 md:mb-6 flex items-center justify-center"
+          >
+            <BrandGlow size="md" />
+            <BrandParticles />
+            <motion.img 
+              src="/brand/logo-gsc.svg" 
+              alt="GSC" 
+              className="h-14 w-auto md:h-16 relative z-10"
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+
           {/* Main Heading */}
           <motion.h1 
             variants={itemVariants}
@@ -222,45 +244,14 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             }
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - RTL/LTR responsive ordering */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+            className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 ${
+              language === 'ar' ? 'sm:flex-row-reverse' : ''
+            }`}
           >
-            <Link href="/services">
-              <motion.div
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-sky-300 text-sky-600 hover:bg-sky-600 hover:text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                  aria-label={language === 'ar' ? 'ابدأ التجربة المجانية' : 'Start Free Trial'}
-                  data-testid="button-start-trial"
-                >
-                  <motion.div 
-                    className="flex items-center gap-2"
-                    whileHover={{ x: language === 'ar' ? -3 : 3 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {language === 'ar' ? (
-                      <>
-                        <ArrowRight className="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" />
-                        ابدأ التجربة المجانية
-                      </>
-                    ) : (
-                      <>
-                        Start Free Trial
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                      </>
-                    )}
-                  </motion.div>
-                </Button>
-              </motion.div>
-            </Link>
-
+            {/* Subscribe Now Button */}
             <Link href="/services">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -286,6 +277,41 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                       </>
                     )}
                   </div>
+                </Button>
+              </motion.div>
+            </Link>
+
+            {/* Start Your Project Button */}
+            <Link href="/services">
+              <motion.div
+                whileHover={{ y: -2, x: language === 'ar' ? 2 : -2 }}
+                whileTap={{ y: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-sky-600 text-sky-600 hover:bg-sky-600 hover:text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+                  aria-label={language === 'ar' ? 'ابدأ مشروعك' : 'Start Your Project'}
+                  data-testid="button-start-project"
+                >
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    whileHover={{ x: language === 'ar' ? -3 : 3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {language === 'ar' ? (
+                      <>
+                        <ArrowRight className="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" />
+                        ابدأ مشروعك
+                      </>
+                    ) : (
+                      <>
+                        Start Your Project
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </motion.div>
                 </Button>
               </motion.div>
             </Link>
