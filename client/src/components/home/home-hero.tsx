@@ -277,7 +277,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
-                  aria-label={language === 'ar' ? 'اشترك مجاناً - ابدأ بتجربة' : 'Subscribe Free - Start Trial'}
+                  aria-label={language === 'ar' ? 'ابدأ تجربتك المجانية' : 'Start Your Free Trial'}
                   data-testid="button-free-trial"
                 >
                   <motion.div 
@@ -288,12 +288,12 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                     {language === 'ar' ? (
                       <>
                         <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        اشترك مجاناً - ابدأ بتجربة
+                        ابدأ تجربتك المجانية
                       </>
                     ) : (
                       <>
                         <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        Subscribe Free - Start Trial
+                        Start Your Free Trial
                       </>
                     )}
                   </motion.div>
