@@ -191,21 +191,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             </Badge>
           </motion.div>
 
-          {/* GSC Logo with Brand Effects */}
-          <motion.div 
-            variants={itemVariants} 
-            className="relative mx-auto mb-4 md:mb-6 flex items-center justify-center"
-          >
-            <BrandGlow size="md" />
-            <BrandParticles />
-            <motion.img 
-              src="/brand/logo-gsc-full.png" 
-              alt="Genius Software Core" 
-              className="h-16 w-auto md:h-20 relative z-10"
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              transition={{ duration: 0.3 }}
-            />
-          </motion.div>
+          
 
           {/* Main Heading */}
           <motion.h1 
