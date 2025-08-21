@@ -59,7 +59,7 @@ export default function Navigation() {
             >
               {/* GSC Logo */}
               <motion.img 
-                src="/brand/logo-gsc-icon.svg" 
+                src="/brand/logo-gsc-new.png" 
                 onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc-icon.png")}
                 alt="GSC" 
                 className="h-7 w-auto md:h-8"
