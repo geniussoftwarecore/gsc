@@ -180,39 +180,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
           animate={isInView ? "visible" : "hidden"}
           className="text-center"
         >
-          {/* Brand Logo - Interactive and Attractive */}
-          <motion.div 
-            variants={itemVariants} 
-            className="mx-auto mb-8 md:mb-12 flex justify-center relative"
-          >
-            {/* Background glow effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-sky-400/20 via-sky-500/30 to-sky-600/20 rounded-full blur-2xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            
-            {/* Main logo with advanced interactions */}
-            <img
-              src="/brand/logo-gsc-hero.png"
-              onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc.png")}
-              alt="GSC"
-              className="h-24 w-auto md:h-32 lg:h-40 xl:h-48 relative z-10 cursor-pointer drop-shadow-2xl"
-              width={192}
-              height={192}
-              style={{
-                filter: "drop-shadow(0 10px 30px rgba(14, 165, 233, 0.3))"
-              }}
-            />
 
-          </motion.div>
 
           {/* Company Name */}
           <motion.div 
