@@ -1,17 +1,74 @@
 {
-  "nav": {
-    "subscribe": "Subscribe Now",
-    "startProject": "Start Your Project"
+  "brand": {
+    "name": "genius software core",
+    "shortName": "GSC",
+    "alt": "GSC"
   },
-  "home": {
-    "hero": {
-      "cta": {
-        "startProject": "Start Your Project",
-        "subscribe": "Subscribe Now"
-      },
-      "brand": {
-        "alt": "GSC"
-      }
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "contact": "Contact",
+    "erp": "ERP",
+    "subscribe": "Subscribe Now",
+    "startProject": "Start Your Project",
+    "toggleMenu": "Toggle menu"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "createAccount": "Create Account",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "title": "Tech & ERP solutions to accelerate your growth",
+    "subtitle": "We provide comprehensive services in app development, design, digital marketing and enterprise resource planning",
+    "cta": {
+      "startProject": "Start Your Project",
+      "subscribe": "Subscribe Now",
+      "learnMore": "Learn More"
     }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We offer comprehensive technology solutions",
+    "viewAll": "View All Services",
+    "learnMore": "Learn More"
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Discover our successful projects",
+    "viewProject": "View Project",
+    "allProjects": "All Projects"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Let's discuss your next project",
+    "getInTouch": "Get In Touch",
+    "sendMessage": "Send Message"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Leading software development company"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close"
   }
 }

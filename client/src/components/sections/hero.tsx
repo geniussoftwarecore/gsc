@@ -4,8 +4,13 @@ import { COMPANY_INFO } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { Monitor, Code, Smartphone, Zap, Star } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function Hero() {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguageContext();
+  
   return (
     <section className="gradient-light py-16 lg:py-24 relative overflow-hidden">
       {/* Animated background elements */}
@@ -42,7 +47,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-right"
+            className={`text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -50,17 +55,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-4xl lg:text-6xl font-bold text-secondary mb-6 leading-tight"
             >
-              حول فكرتك إلى{" "}
-              <motion.span
-                initial={{ backgroundPosition: "0% 50%" }}
-                animate={{ backgroundPosition: "100% 50%" }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                className="bg-gradient-to-r from-primary via-primary-dark to-primary bg-300% bg-clip-text text-transparent"
-              >
-                منتج رقمي
-              </motion.span>
-              <br />
-              يصنع فرقًا
+              {t('hero.title')}
             </motion.h1>
             
             <motion.p
@@ -69,21 +64,21 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-xl text-gray-600 mb-8 leading-relaxed"
             >
-              نساعدك في تحويل أفكارك إلى حلول رقمية مبتكرة ومتطورة تواكب احتياجات عملك وتحقق أهدافك التجارية بأحدث التقنيات والمعايير العالمية
+              {t('hero.subtitle')}
             </motion.p>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}
             >
               <Link href="/services">
                 <InteractiveButton
                   className="btn-primary shadow-lg hover:shadow-xl"
                   icon={<Star className="w-4 h-4" />}
                 >
-                  اشتراك مميز
+                  {t('hero.cta.subscribe')}
                 </InteractiveButton>
               </Link>
               <Link href="/contact">
@@ -91,7 +86,7 @@ export default function Hero() {
                   className="btn-primary shadow-lg hover:shadow-xl"
                   icon={<i className="fas fa-rocket"></i>}
                 >
-                  ابدأ مشروعك الآن
+                  {t('hero.cta.startProject')}
                 </InteractiveButton>
               </Link>
               <Link href="/portfolio">
@@ -100,7 +95,7 @@ export default function Hero() {
                   className="btn-secondary"
                   icon={<i className="fas fa-eye"></i>}
                 >
-                  استعرض أعمالنا
+                  {t('portfolio.allProjects')}
                 </InteractiveButton>
               </Link>
             </motion.div>
@@ -110,7 +105,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:order-first order-last"
+            className={isRTL ? 'lg:order-first order-last' : 'lg:order-last order-last'}
           >
             <motion.div
               whileHover={{ scale: 1.02, rotateY: 5 }}

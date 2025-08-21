@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import Cookies from 'js-cookie';
 
 export type Language = 'ar' | 'en';
 
@@ -17,9 +18,16 @@ interface LanguageProviderProps {
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [language, setLanguageState] = useState<Language>(() => {
-    // Get language from localStorage or default to Arabic
-    const stored = localStorage.getItem('language');
-    return (stored as Language) || 'ar';
+    // Get language from cookie, then localStorage, or default to Arabic
+    if (typeof document !== 'undefined') {
+      const cookieLanguage = Cookies.get('NEXT_LOCALE');
+      if (cookieLanguage === 'ar' || cookieLanguage === 'en') {
+        return cookieLanguage;
+      }
+      const stored = localStorage.getItem('language');
+      return (stored as Language) || 'ar';
+    }
+    return 'ar';
   });
 
   const isRTL = language === 'ar';
@@ -29,8 +37,11 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
     
-    // Store language preference
-    localStorage.setItem('language', language);
+    // Store language preference in both cookie and localStorage
+    if (typeof document !== 'undefined') {
+      Cookies.set('NEXT_LOCALE', language, { expires: 365, sameSite: 'lax' });
+      localStorage.setItem('language', language);
+    }
     
     // Update body classes for font handling
     if (language === 'ar') {

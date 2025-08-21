@@ -8,34 +8,36 @@ import { Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { LanguageToggle } from "@/components/ui/language-toggle";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
   const { user, isAuthenticated } = useAuth();
-  const { language, isRTL } = useLanguageContext();
+  const { isRTL } = useLanguageContext();
+  const { t } = useTranslation();
 
-  // Navigation items with bilingual support
+  // Navigation items with translation support
   const navigationItems = [
     { 
       href: "/", 
-      label: language === 'ar' ? "الرئيسية" : "Home"
+      label: t('nav.home')
     },
     { 
       href: "/services", 
-      label: language === 'ar' ? "خدماتنا" : "Services"
+      label: t('nav.services')
     },
     { 
       href: "/portfolio", 
-      label: language === 'ar' ? "أعمالنا" : "Portfolio"
+      label: t('nav.portfolio')
     },
     { 
       href: "/about", 
-      label: language === 'ar' ? "من نحن" : "About"
+      label: t('nav.about')
     },
     { 
       href: "/contact", 
-      label: language === 'ar' ? "تواصل معنا" : "Contact"
+      label: t('nav.contact')
     },
   ];
 
@@ -89,7 +91,7 @@ export default function Navbar() {
                   isRTL ? "font-cairo" : "font-inter"
                 )}
               >
-                {language === 'ar' ? 'جينيوس سوفت وير كور' : 'genius software core'}
+                {t('brand.name')}
               </span>
             </motion.div>
           </Link>
@@ -141,7 +143,7 @@ export default function Navbar() {
                   className="h-9 px-3 text-sm font-medium border-slate-300 dark:border-slate-600 hover:border-sky-600 dark:hover:border-sky-400"
                   data-testid="button-dashboard"
                 >
-                  {language === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
+                  {t('auth.dashboard')}
                 </Button>
               </Link>
             ) : (
@@ -153,7 +155,7 @@ export default function Navbar() {
                     className="h-9 px-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                     data-testid="button-login"
                   >
-                    {language === 'ar' ? 'تسجيل الدخول' : 'Login'}
+                    {t('auth.login')}
                   </Button>
                 </Link>
                 
@@ -168,7 +170,7 @@ export default function Navbar() {
                       className="h-9 px-3 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
                       data-testid="button-create-account"
                     >
-                      {language === 'ar' ? 'إنشاء حساب' : 'Create Account'}
+                      {t('auth.createAccount')}
                     </Button>
                   </motion.div>
                 </Link>
@@ -182,7 +184,7 @@ export default function Navbar() {
                 "md:hidden p-2 rounded-md text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
               )}
-              aria-label={language === 'ar' ? 'تبديل القائمة' : 'Toggle menu'}
+              aria-label={t('nav.toggleMenu')}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
             >
@@ -252,7 +254,7 @@ export default function Navbar() {
                         className="w-full justify-center h-10 text-sm font-medium"
                         data-testid="mobile-button-login"
                       >
-                        {language === 'ar' ? 'تسجيل الدخول' : 'Login'}
+                        {t('auth.login')}
                       </Button>
                     </Link>
                     
@@ -261,7 +263,7 @@ export default function Navbar() {
                         className="w-full justify-center h-10 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600"
                         data-testid="mobile-button-create-account"
                       >
-                        {language === 'ar' ? 'إنشاء حساب' : 'Create Account'}
+                        {t('auth.createAccount')}
                       </Button>
                     </Link>
                   </motion.div>

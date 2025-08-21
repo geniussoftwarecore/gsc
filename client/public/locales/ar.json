@@ -1,17 +1,74 @@
 {
-  "nav": {
-    "subscribe": "اشترك الآن",
-    "startProject": "ابدأ مشروعك"
+  "brand": {
+    "name": "جينيوس سوفت وير كور",
+    "shortName": "GSC",
+    "alt": "GSC"
   },
-  "home": {
-    "hero": {
-      "cta": {
-        "startProject": "ابدأ مشروعك",
-        "subscribe": "اشترك الآن"
-      },
-      "brand": {
-        "alt": "GSC"
-      }
+  "nav": {
+    "home": "الرئيسية",
+    "services": "خدماتنا",
+    "portfolio": "أعمالنا",
+    "about": "من نحن",
+    "contact": "تواصل معنا",
+    "erp": "أنظمة ERP",
+    "subscribe": "اشترك الآن",
+    "startProject": "ابدأ مشروعك",
+    "toggleMenu": "تبديل القائمة"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "createAccount": "إنشاء حساب",
+    "dashboard": "لوحة التحكم"
+  },
+  "hero": {
+    "title": "حلول تقنية و ERP تُسرّع نمو أعمالك",
+    "subtitle": "نقدم خدمات شاملة في تطوير التطبيقات، التصميم، التسويق الرقمي وأنظمة إدارة الموارد",
+    "cta": {
+      "startProject": "ابدأ مشروعك",
+      "subscribe": "اشترك الآن",
+      "learnMore": "اعرف المزيد"
     }
+  },
+  "services": {
+    "title": "خدماتنا",
+    "subtitle": "نقدم مجموعة شاملة من الحلول التقنية",
+    "viewAll": "عرض جميع الخدمات",
+    "learnMore": "اعرف المزيد"
+  },
+  "portfolio": {
+    "title": "أعمالنا",
+    "subtitle": "اكتشف مشاريعنا الناجحة",
+    "viewProject": "عرض المشروع",
+    "allProjects": "جميع المشاريع"
+  },
+  "contact": {
+    "title": "تواصل معنا",
+    "subtitle": "دعنا نناقش مشروعك القادم",
+    "getInTouch": "تواصل معنا",
+    "sendMessage": "إرسال رسالة"
+  },
+  "about": {
+    "title": "من نحن",
+    "subtitle": "شركة رائدة في مجال تطوير البرمجيات"
+  },
+  "forms": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "رقم الهاتف",
+    "message": "الرسالة",
+    "submit": "إرسال",
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "البريد الإلكتروني غير صحيح"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "تم بنجاح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تحرير",
+    "delete": "حذف",
+    "close": "إغلاق"
   }
 }
