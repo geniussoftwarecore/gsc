@@ -2,6 +2,10 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import crmRoutes from "../crm_api/routes";
+import authRoutes from "./routes/auth";
+import billingRoutes from "./routes/billing";
+import stripeWebhookRoutes from "./routes/stripeWebhook";
+import healthRoutes, { trackMetrics } from "./routes/health";
 import { 
   insertContactSubmissionSchema, 
   insertServiceRequestSchema,
@@ -16,6 +20,14 @@ import {
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Add metrics tracking middleware
+  app.use(trackMetrics());
+
+  // Mount new authentication and billing routes
+  app.use("/api/auth", authRoutes);
+  app.use("/api/billing", billingRoutes);
+  app.use("/api/stripe", stripeWebhookRoutes);
+  app.use("/api/health", healthRoutes);
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {

@@ -1,117 +1,135 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-
-/**
- * سياق المصادقة (AuthContext) مع دعم JWT
- * يدير حالة المستخدم، تسجيل الدخول، تسجيل الخروج، والتحقق من صلاحية الرمز
- */
-
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  phone?: string;
-  role?: 'admin' | 'client';  // User role for access control
-  token?: string;  // JWT token للتحقق من المصادقة في الطلبات المستقبلية
-}
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { User, LoginResponse } from '../../../shared/types/auth';
 
 interface AuthContextType {
   user: User | null;
+  isLoading: boolean;
   isAuthenticated: boolean;
-  isAdmin: boolean;
-  login: (userData: User) => void;
-  logout: () => void;
-  loading: boolean;
+  login: (email: string, redirectUrl?: string) => Promise<void>;
+  verifyMagicLink: (token: string) => Promise<void>;
+  logout: () => Promise<void>;
+  trialDaysRemaining: number | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Load user from localStorage on mount
+  const isAuthenticated = !!user;
+
+  const trialDaysRemaining = user?.subscription?.status === 'trialing' && user.subscription.trialEndsAt
+    ? Math.max(0, Math.ceil((new Date(user.subscription.trialEndsAt).getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
+    : null;
+
   useEffect(() => {
-    const loadUserFromStorage = () => {
-      try {
-        const storedUser = localStorage.getItem("gsc_user");
-        if (storedUser) {
-          const userData = JSON.parse(storedUser);
-          setUser(userData);
-          
-          // TODO: في المستقبل، يجب التحقق من صلاحية الـ JWT 
-          // عن طريق إرسال طلب إلى الخادم للتأكد من أن الرمز لا يزال صالحاً
-          // const token = localStorage.getItem("gsc_token");
-          // if (token) {
-          //   validateToken(token).then(isValid => {
-          //     if (!isValid) {
-          //       logout();
-          //     }
-          //   });
-          // }
-        }
-      } catch (error) {
-        console.error("Error loading user from localStorage:", error);
-        // Clear invalid data
-        localStorage.removeItem("gsc_user");
-        localStorage.removeItem("gsc_token");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUserFromStorage();
+    checkAuthStatus();
   }, []);
 
-  const login = (userData: User) => {
-    setUser(userData);
+  const checkAuthStatus = async () => {
     try {
-      // حفظ بيانات المستخدم الكاملة
-      localStorage.setItem("gsc_user", JSON.stringify(userData));
-      
-      // حفظ الرمز منفصلاً للوصول السريع في الطلبات
-      if (userData.token) {
-        localStorage.setItem("gsc_token", userData.token);
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await fetch('/api/auth/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user);
+      } else {
+        localStorage.removeItem('auth_token');
       }
     } catch (error) {
-      console.error("Error saving user to localStorage:", error);
+      console.error('Auth check failed:', error);
+      localStorage.removeItem('auth_token');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const logout = () => {
-    setUser(null);
+  const login = async (email: string, redirectUrl?: string) => {
+    const response = await fetch('/api/auth/login-magic', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, redirectUrl }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to send magic link');
+    }
+  };
+
+  const verifyMagicLink = async (token: string) => {
+    const response = await fetch('/api/auth/login-magic/verify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to verify magic link');
+    }
+
+    const loginResponse: LoginResponse = await response.json();
+    
+    localStorage.setItem('auth_token', loginResponse.tokens.accessToken);
+    setUser(loginResponse.user);
+  };
+
+  const logout = async () => {
     try {
-      // إزالة كل من بيانات المستخدم والرمز
-      localStorage.removeItem("gsc_user");
-      localStorage.removeItem("gsc_token");
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        await fetch('/api/auth/logout', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
     } catch (error) {
-      console.error("Error removing user from localStorage:", error);
+      console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('auth_token');
+      setUser(null);
     }
   };
 
   const value: AuthContextType = {
     user,
-    isAuthenticated: !!user,
-    isAdmin: user?.role === 'admin',
+    isLoading,
+    isAuthenticated,
     login,
+    verifyMagicLink,
     logout,
-    loading,
+    trialDaysRemaining,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
