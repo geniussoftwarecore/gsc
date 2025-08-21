@@ -1,17 +1,28 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
-import { Menu, X, User, UserPlus, Star, LogOut, Home as HomeIcon, Settings, Shield, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
+import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/contexts/AuthContext";
-import { motion } from 'framer-motion';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+import { Button } from "@/components/ui/button";
+import { 
+  Menu, 
+  X, 
+  User, 
+  UserPlus, 
+  Star, 
+  Home as HomeIcon, 
+  Settings, 
+  Shield, 
+  LogOut 
+} from "lucide-react";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,106 +81,99 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8 space-x-reverse">
-              {navigationItems.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <span
-                    className={cn(
-                      "text-secondary hover:text-primary transition-colors duration-300 font-medium cursor-pointer",
-                      location === item.href && "text-primary"
-                    )}
-                  >
-                    {item.label}
-                  </span>
-                </Link>
-              ))}
-              
-              {/* CTA Buttons */}
-              <div className="flex items-center gap-3">
-                
-              </div>
-              
-              {/* Authentication UI - Show loading or auth content based on state */}
-              {isLoading ? (
-                <span className="text-gray-500 text-sm">جارٍ التحميل...</span>
-              ) : !isAuthenticated ? (
-                <>
-                  <Link href="/login">
-                    <Button variant="outline" className="ml-2">
-                      <User className="w-4 h-4 ml-2" />
-                      تسجيل الدخول
-                    </Button>
-                  </Link>
-                  <Link href="/register">
-                    <Button variant="outline" className="ml-2">
-                      <UserPlus className="w-4 h-4 ml-2" />
-                      إنشاء حساب
-                    </Button>
-                  </Link>
-                </>
-              ) : (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-2">
-                      <User className="w-4 h-4 ml-2" />
-                      {user?.name || "المستخدم"}
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <div className="flex items-center justify-start gap-2 p-2">
-                      <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user?.name}</p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                          {user?.email}
-                        </p>
-                      </div>
-                    </div>
-                    <DropdownMenuSeparator />
-                    <Link href="/dashboard">
-                      <DropdownMenuItem onSelect={closeMobileMenu}>
-                        <HomeIcon className="mr-2 h-4 w-4" />
-                        <span>الداشبورد</span>
-                      </DropdownMenuItem>
-                    </Link>
-                    {user?.role === 'admin' && (
-                      <>
-                        <Link href="/admin/crm">
-                          <DropdownMenuItem onSelect={closeMobileMenu}>
-                            <Shield className="mr-2 h-4 w-4" />
-                            <span>نظام CRM</span>
-                          </DropdownMenuItem>
-                        </Link>
-                        <Link href="/admin/dashboard">
-                          <DropdownMenuItem onSelect={closeMobileMenu}>
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>لوحة الإدارة</span>
-                          </DropdownMenuItem>
-                        </Link>
-                      </>
-                    )}
-                    <Link href="/settings">
-                      <DropdownMenuItem onSelect={closeMobileMenu}>
-                        <Settings className="mr-2 h-4 w-4" />
-                        <span>الإعدادات</span>
-                      </DropdownMenuItem>
-                    </Link>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      <span>تسجيل الخروج</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
-              
-              <Link href="/services">
-                <Button className="btn-primary ml-2">
-                  <Star className="w-4 h-4 ml-2" />
-                  اشتراك
-                </Button>
+          <div className="hidden md:flex items-center space-x-8 space-x-reverse">
+            {navigationItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <span
+                  className={cn(
+                    "text-secondary hover:text-primary transition-colors duration-300 font-medium cursor-pointer",
+                    location === item.href && "text-primary"
+                  )}
+                >
+                  {item.label}
+                </span>
               </Link>
-            </div>
+            ))}
+            
+            {/* Authentication UI - Show loading or auth content based on state */}
+            {isLoading ? (
+              <span className="text-gray-500 text-sm">جارٍ التحميل...</span>
+            ) : !isAuthenticated ? (
+              <>
+                <Link href="/login">
+                  <Button variant="outline" className="ml-2">
+                    <User className="w-4 h-4 ml-2" />
+                    تسجيل الدخول
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button variant="outline" className="ml-2">
+                    <UserPlus className="w-4 h-4 ml-2" />
+                    إنشاء حساب
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="ml-2">
+                    <User className="w-4 h-4 ml-2" />
+                    {user?.name || "المستخدم"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user?.name}</p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {user?.email}
+                      </p>
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <Link href="/dashboard">
+                    <DropdownMenuItem onSelect={closeMobileMenu}>
+                      <HomeIcon className="mr-2 h-4 w-4" />
+                      <span>الداشبورد</span>
+                    </DropdownMenuItem>
+                  </Link>
+                  {user?.role === 'admin' && (
+                    <>
+                      <Link href="/admin/crm">
+                        <DropdownMenuItem onSelect={closeMobileMenu}>
+                          <Shield className="mr-2 h-4 w-4" />
+                          <span>نظام CRM</span>
+                        </DropdownMenuItem>
+                      </Link>
+                      <Link href="/admin/dashboard">
+                        <DropdownMenuItem onSelect={closeMobileMenu}>
+                          <Settings className="mr-2 h-4 w-4" />
+                          <span>لوحة الإدارة</span>
+                        </DropdownMenuItem>
+                      </Link>
+                    </>
+                  )}
+                  <Link href="/settings">
+                    <DropdownMenuItem onSelect={closeMobileMenu}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      <span>الإعدادات</span>
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={logout}>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    <span>تسجيل الخروج</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            
+            <Link href="/services">
+              <Button className="btn-primary ml-2">
+                <Star className="w-4 h-4 ml-2" />
+                اشتراك
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
