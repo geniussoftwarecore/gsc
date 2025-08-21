@@ -8,9 +8,11 @@ import { HOME_METRICS } from "@/data/home-metrics";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ParallaxSection, RevealOnScroll, StaggerContainer } from "@/components/ui/enhanced-scroll-effects";
 import { useRef } from "react";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguageContext();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -37,7 +39,7 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <HomeHero language="ar" />
+          <HomeHero language={language} />
         </motion.div>
 
         <RevealOnScroll direction="up" delay={0.2} distance={80}>
@@ -58,7 +60,7 @@ export default function Home() {
 
         <RevealOnScroll direction="up" delay={0.45} distance={80}>
           <ParallaxSection offset={10}>
-            <HomeMetrics metrics={HOME_METRICS} language="ar" />
+            <HomeMetrics metrics={HOME_METRICS} language={language} />
           </ParallaxSection>
         </RevealOnScroll>
 

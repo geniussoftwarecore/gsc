@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { Globe } from 'lucide-react';
 import { useLanguageContext } from '@/contexts/LanguageContext';
+import { useTranslation } from '@/hooks/useTranslation';
 import { cn } from '@/lib/utils';
 
 export function LanguageToggle() {
   const { language, toggleLanguage, isRTL } = useLanguageContext();
+  const { t } = useTranslation();
 
   return (
     <motion.button
@@ -21,6 +23,7 @@ export function LanguageToggle() {
       transition={{ duration: 0.1 }}
       data-testid="button-language-toggle"
       aria-label={language === 'ar' ? 'تبديل اللغة إلى الإنجليزية' : 'Switch to Arabic'}
+      title={language === 'ar' ? 'Switch to English' : 'التبديل للعربية'}
     >
       <Globe className="h-4 w-4" />
       <span className={cn(isRTL ? "font-cairo" : "font-inter")}>

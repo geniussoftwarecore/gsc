@@ -18,6 +18,8 @@ import { Link } from 'wouter';
 import { BrandGlow } from '@/components/brand/BrandGlow';
 import { BrandParticles } from '@/components/brand/BrandParticles';
 import { DigitalGrid } from '@/components/brand/DigitalGrid';
+import { useTranslation } from '@/hooks/useTranslation';
+import { useLanguageContext } from '@/contexts/LanguageContext';
 
 interface ServiceHighlight {
   id: string;
@@ -68,6 +70,8 @@ interface HomeHeroProps {
 }
 
 export function HomeHero({ language = 'ar' }: HomeHeroProps) {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguageContext();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -191,7 +195,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
               variant="secondary"
             >
               <Sparkles className="w-4 h-4 ml-2" />
-              {language === 'ar' ? 'منصة رقمية متكاملة' : 'Complete Digital Platform'}
+              {t('hero.badge', language === 'ar' ? 'منصة رقمية متكاملة' : 'Complete Digital Platform')}
             </Badge>
           </motion.div>
 
@@ -203,7 +207,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
           >
             <span className="text-slate-900">
-              {language === 'ar' ? 'نُحوّل أفكارك إلى ' : 'We turn ideas into '}
+              {t('hero.titlePrefix', language === 'ar' ? 'نُحوّل أفكارك إلى ' : 'We turn ideas into ')}
             </span>
             <motion.span
               className="bg-gradient-to-r from-sky-600 via-sky-500 to-sky-600 bg-clip-text text-transparent relative"
@@ -219,7 +223,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                 backgroundSize: '200% 200%',
               }}
             >
-              {language === 'ar' ? 'منتجات رقمية فعّالة' : 'effective digital products'}
+              {t('hero.titleHighlight', language === 'ar' ? 'منتجات رقمية فعّالة' : 'effective digital products')}
             </motion.span>
           </motion.h1>
 
@@ -228,10 +232,11 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             variants={itemVariants}
             className="text-xl lg:text-2xl text-slate-600 max-w-4xl mx-auto mb-12 leading-relaxed"
           >
-            {language === 'ar' 
-              ? 'نقدم حلول تطوير الويب وتطبيقات الجوال وأنظمة ERP والذكاء الاصطناعي والأتمتة لتحويل رؤيتك إلى واقع رقمي متطور'
-              : 'We provide web development, mobile apps, ERP systems, AI and automation solutions to transform your vision into advanced digital reality'
-            }
+            {t('hero.description', 
+              language === 'ar' 
+                ? 'نقدم حلول تطوير الويب وتطبيقات الجوال وأنظمة ERP والذكاء الاصطناعي والأتمتة لتحويل رؤيتك إلى واقع رقمي متطور'
+                : 'We provide web development, mobile apps, ERP systems, AI and automation solutions to transform your vision into advanced digital reality'
+            )}
           </motion.p>
 
           {/* CTA Buttons - RTL/LTR responsive ordering */}
@@ -258,11 +263,11 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                     {language === 'ar' ? (
                       <>
                         <ArrowRight className="w-4 h-4 rotate-180 group-hover:translate-x-1 transition-transform" />
-                        اشترك الآن
+                        {t('hero.cta.subscribe')}
                       </>
                     ) : (
                       <>
-                        Subscribe Now
+                        {t('hero.cta.subscribe')}
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
@@ -292,12 +297,12 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                     {language === 'ar' ? (
                       <>
                         <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        ابدأ تجربتك المجانية
+                        {t('hero.cta.freeTrial', 'ابدأ تجربتك المجانية')}
                       </>
                     ) : (
                       <>
                         <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                        Start Your Free Trial
+                        {t('hero.cta.freeTrial', 'Start Your Free Trial')}
                       </>
                     )}
                   </motion.div>
@@ -327,11 +332,11 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                     {language === 'ar' ? (
                       <>
                         <ArrowRight className="w-5 h-5 rotate-180 group-hover:translate-x-1 transition-transform" />
-                        ابدأ مشروعك
+                        {t('hero.cta.startProject')}
                       </>
                     ) : (
                       <>
-                        Start Your Project
+                        {t('hero.cta.startProject')}
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
@@ -349,13 +354,13 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-5 h-5 text-sky-500" />
               <span className="text-sm font-medium">
-                {language === 'ar' ? 'موثوق من قبل الشركات الرائدة' : 'Trusted by leading companies'}
+                {t('hero.trustedBy', language === 'ar' ? 'موثوق من قبل الشركات الرائدة' : 'Trusted by leading companies')}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5 text-sky-500" />
               <span className="text-sm font-medium">
-                {language === 'ar' ? 'استجابة خلال 24 ساعة' : 'Response within 24 hours'}
+                {t('hero.response24h', language === 'ar' ? 'استجابة خلال 24 ساعة' : 'Response within 24 hours')}
               </span>
             </div>
           </motion.div>

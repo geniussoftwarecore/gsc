@@ -9,12 +9,17 @@ import { InteractiveButton } from "@/components/ui/interactive-button";
 import { motion } from "framer-motion";
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { ArrowLeft, AlertTriangle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 interface ServicesOverviewProps {
   limit?: number;
 }
 
 export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguageContext();
+  
   const {
     data: services,
     isLoading,
@@ -32,10 +37,10 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
               <AlertTriangle size={48} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              خطأ في تحميل الخدمات
+              {t('common.error')}
             </h2>
             <p className="text-gray-600">
-              حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة مرة أخرى.
+              {t('services.loadError', 'حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة مرة أخرى.')}
             </p>
           </div>
         </div>
@@ -47,11 +52,11 @@ export default function ServicesOverview({ limit = 6 }: ServicesOverviewProps) {
     <section className="py-16 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedText className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-            خدماتنا المتخصصة
+          <h2 className={`text-4xl lg:text-5xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('services.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            نقدم مجموعة شاملة من الحلول البرمجية والتقنية المتطورة
+          <p className={`text-xl text-gray-600 max-w-3xl mx-auto ${isRTL ? 'text-right' : 'text-left'}`}>
+            {t('services.subtitle')}
           </p>
         </AnimatedText>
 

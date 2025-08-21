@@ -24,17 +24,25 @@
   "hero": {
     "title": "Tech & ERP solutions to accelerate your growth",
     "subtitle": "We provide comprehensive services in app development, design, digital marketing and enterprise resource planning",
+    "badge": "Complete Digital Platform",
+    "titlePrefix": "We turn ideas into ",
+    "titleHighlight": "effective digital products",
+    "description": "We provide web development, mobile apps, ERP systems, AI and automation solutions to transform your vision into advanced digital reality",
+    "trustedBy": "Trusted by leading companies",
+    "response24h": "Response within 24 hours",
     "cta": {
       "startProject": "Start Your Project",
       "subscribe": "Subscribe Now",
-      "learnMore": "Learn More"
+      "learnMore": "Learn More",
+      "freeTrial": "Start Your Free Trial"
     }
   },
   "services": {
-    "title": "Our Services",
-    "subtitle": "We offer comprehensive technology solutions",
+    "title": "Our Specialized Services",
+    "subtitle": "We offer comprehensive software and advanced technology solutions",
     "viewAll": "View All Services",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "loadError": "An error occurred while loading services. Please try again."
   },
   "portfolio": {
     "title": "Our Work",
