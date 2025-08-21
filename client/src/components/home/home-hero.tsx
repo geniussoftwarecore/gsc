@@ -232,30 +232,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
                 filter: "drop-shadow(0 10px 30px rgba(14, 165, 233, 0.3))"
               }}
             />
-            
-            {/* Floating particles around logo */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-sky-400 rounded-full opacity-60"
-                style={{
-                  left: `${30 + Math.cos(i * 60 * Math.PI / 180) * 60}%`,
-                  top: `${30 + Math.sin(i * 60 * Math.PI / 180) * 60}%`,
-                }}
-                animate={{
-                  y: [0, -20, 0],
-                  x: [0, Math.cos(i * 60 * Math.PI / 180) * 10, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                  scale: [0.5, 1.2, 0.5],
-                }}
-                transition={{
-                  duration: 3 + i * 0.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.5
-                }}
-              />
-            ))}
+
           </motion.div>
 
           {/* Company Name */}
