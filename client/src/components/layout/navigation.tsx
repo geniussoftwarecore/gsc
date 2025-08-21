@@ -75,41 +75,86 @@ export default function Navigation() {
                   filter: "drop-shadow(0 6px 16px rgba(14, 165, 233, 0.35))"
                 }}
               />
-              {/* Company Name - Premium Typography with Effects */}
+              {/* Company Name - Harmonized with Logo */}
               <motion.div 
-                className="hidden md:flex flex-col justify-center"
+                className="hidden md:flex flex-col justify-center relative"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08 }}
               >
+                {/* Background glow effect matching logo */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-sky-400/20 via-blue-500/20 to-sky-600/20 rounded-lg blur-lg opacity-0"
+                  animate={{ opacity: [0, 0.3, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                />
+                
                 <motion.span 
-                  className="font-black tracking-wider text-slate-900 text-2xl lg:text-3xl xl:text-4xl leading-none whitespace-nowrap relative"
+                  className="font-black tracking-wider text-2xl lg:text-3xl xl:text-4xl leading-none whitespace-nowrap relative z-10"
                   style={{
                     fontFamily: "'Inter', 'Cairo', sans-serif",
-                    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)",
+                    background: "linear-gradient(135deg, #0ea5e9 0%, #3b82f6 40%, #1e40af 70%, #0f172a 100%)",
+                    backgroundSize: "200% 200%",
                     backgroundClip: "text",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
-                    textShadow: "0 0 30px rgba(14, 165, 233, 0.3)",
-                    letterSpacing: "0.1em"
+                    filter: "drop-shadow(0 2px 8px rgba(14, 165, 233, 0.3))",
+                    letterSpacing: "0.15em"
+                  }}
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear"
                   }}
                   whileHover={{
-                    background: "linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #1d4ed8 100%)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    scale: 1.1,
-                    textShadow: "0 0 40px rgba(14, 165, 233, 0.5)"
+                    scale: 1.12,
+                    filter: "drop-shadow(0 4px 16px rgba(14, 165, 233, 0.6))",
+                    textShadow: "0 0 20px rgba(14, 165, 233, 0.8)"
                   }}
-                  transition={{ duration: 0.3 }}
                 >
                   GSC
-                  {/* Animated accent */}
+                  
+                  {/* Animated particles around text */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-sky-400 rounded-full"
+                      style={{
+                        top: `${20 + i * 15}%`,
+                        right: `-${5 + i * 3}px`
+                      }}
+                      animate={{
+                        opacity: [0.3, 1, 0.3],
+                        scale: [0.5, 1.2, 0.5],
+                        y: [0, -10, 0]
+                      }}
+                      transition={{
+                        duration: 2 + i * 0.5,
+                        repeat: Infinity,
+                        delay: i * 0.3,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                  
+                  {/* Dynamic underline */}
                   <motion.div
-                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-blue-600 rounded-full"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-sky-400 via-blue-500 to-sky-600 rounded-full"
+                    initial={{ width: "0%", opacity: 0 }}
+                    animate={{ 
+                      width: "100%", 
+                      opacity: 1,
+                      boxShadow: ["0 0 5px rgba(14, 165, 233, 0.5)", "0 0 15px rgba(14, 165, 233, 0.8)", "0 0 5px rgba(14, 165, 233, 0.5)"]
+                    }}
+                    transition={{ 
+                      width: { delay: 0.5, duration: 0.8 },
+                      opacity: { delay: 0.5, duration: 0.3 },
+                      boxShadow: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                    }}
                   />
                 </motion.span>
               </motion.div>
