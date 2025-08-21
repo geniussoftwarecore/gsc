@@ -180,6 +180,20 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
           animate={isInView ? "visible" : "hidden"}
           className="text-center"
         >
+          {/* Brand Logo */}
+          <motion.div variants={itemVariants} className="mx-auto mb-4 md:mb-6 flex items-center justify-center">
+            <motion.img
+              src="/brand/logo-gsc.svg"
+              onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc.png")}
+              alt="GSC"
+              className="h-10 w-auto md:h-16"
+              width={256}
+              height={72}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+
           {/* Top Badge */}
           <motion.div variants={itemVariants} className="mb-8">
             <Badge 

@@ -1,0 +1,55 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient circle -->
+  <defs>
+    <radialGradient id="iconBgGradient" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#7CC7FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.3"/>
+    </radialGradient>
+    <filter id="iconGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main circle background -->
+  <circle cx="24" cy="24" r="20" fill="url(#iconBgGradient)" filter="url(#iconGlow)"/>
+  
+  <!-- Pixelated squares pattern -->
+  <g fill="#7CC7FF" opacity="0.9">
+    <!-- Main squares forming the G pattern -->
+    <rect x="12" y="12" width="3" height="3"/>
+    <rect x="17" y="10" width="3" height="3"/>
+    <rect x="22" y="11" width="3" height="3"/>
+    <rect x="27" y="13" width="3" height="3"/>
+    <rect x="32" y="12" width="3" height="3"/>
+    
+    <!-- Middle section -->
+    <rect x="10" y="17" width="3" height="3"/>
+    <rect x="15" y="16" width="3" height="3"/>
+    <rect x="20" y="18" width="3" height="3"/>
+    <rect x="25" y="17" width="3" height="3"/>
+    <rect x="30" y="19" width="3" height="3"/>
+    <rect x="35" y="18" width="3" height="3"/>
+    
+    <!-- Center large square -->
+    <rect x="18" y="21" width="4" height="4"/>
+    <rect x="25" y="22" width="3" height="3"/>
+    <rect x="30" y="23" width="3" height="3"/>
+    
+    <!-- Bottom pattern -->
+    <rect x="13" y="28" width="3" height="3"/>
+    <rect x="18" y="29" width="3" height="3"/>
+    <rect x="23" y="31" width="3" height="3"/>
+    <rect x="28" y="29" width="3" height="3"/>
+    <rect x="33" y="32" width="3" height="3"/>
+    
+    <!-- Scattered small squares -->
+    <rect x="9" y="21" width="2" height="2"/>
+    <rect x="36" y="22" width="2" height="2"/>
+    <rect x="11" y="32" width="2" height="2"/>
+    <rect x="34" y="35" width="2" height="2"/>
+  </g>
+</svg>

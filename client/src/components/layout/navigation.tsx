@@ -48,9 +48,12 @@ export default function Navigation() {
             >
               {/* GSC Logo */}
               <motion.img 
-                src="/brand/logo-gsc-full.png" 
-                alt="Genius Software Core" 
-                className="h-8 w-auto md:h-9"
+                src="/brand/logo-gsc-icon.svg" 
+                onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc-icon.png")}
+                alt="GSC" 
+                className="h-7 w-auto md:h-8"
+                width={28}
+                height={28}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               />
