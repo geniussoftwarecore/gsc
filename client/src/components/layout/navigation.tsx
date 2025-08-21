@@ -83,7 +83,7 @@ export default function Navigation() {
                 transition={{ delay: 0.1, duration: 0.3 }}
               >
                 <span className="font-bold tracking-wide text-slate-900 text-xl lg:text-2xl leading-tight whitespace-nowrap">
-                  Genius Software Core
+                  GSC
                 </span>
               </motion.div>
             </motion.div>
