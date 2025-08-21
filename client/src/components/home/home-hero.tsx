@@ -200,34 +200,13 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             />
             
             {/* Main logo with advanced interactions */}
-            <motion.img
+            <img
               src="/brand/logo-gsc-hero.png"
               onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc.png")}
               alt="GSC"
               className="h-24 w-auto md:h-32 lg:h-40 xl:h-48 relative z-10 cursor-pointer drop-shadow-2xl"
               width={192}
               height={192}
-              whileHover={{ 
-                scale: 1.1,
-                rotate: [0, -5, 5, 0],
-                filter: "brightness(1.2) saturate(1.3)",
-                y: -8
-              }}
-              whileTap={{ 
-                scale: 0.95,
-                rotate: 15,
-                transition: { duration: 0.1 }
-              }}
-              animate={{
-                y: [0, -8, 0],
-                rotate: [0, 2, -2, 0],
-              }}
-              transition={{
-                y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                rotate: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                hover: { duration: 0.3, ease: "easeOut" },
-                tap: { duration: 0.1 }
-              }}
               style={{
                 filter: "drop-shadow(0 10px 30px rgba(14, 165, 233, 0.3))"
               }}
