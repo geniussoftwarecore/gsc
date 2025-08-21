@@ -199,10 +199,10 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             <BrandGlow size="md" />
             <BrandParticles />
             <motion.img 
-              src="/brand/logo-gsc.svg" 
-              alt="GSC" 
-              className="h-14 w-auto md:h-16 relative z-10"
-              whileHover={{ scale: 1.05, rotate: 2 }}
+              src="/brand/logo-gsc-full.png" 
+              alt="Genius Software Core" 
+              className="h-16 w-auto md:h-20 relative z-10"
+              whileHover={{ scale: 1.05, rotate: 1 }}
               transition={{ duration: 0.3 }}
             />
           </motion.div>

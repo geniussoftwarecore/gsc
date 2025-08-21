@@ -48,10 +48,10 @@ export default function Navigation() {
             >
               {/* GSC Logo */}
               <motion.img 
-                src="/brand/logo-gsc.svg" 
-                alt="GSC" 
-                className="h-7 w-auto md:h-8"
-                whileHover={{ rotate: 5 }}
+                src="/brand/logo-gsc-full.png" 
+                alt="Genius Software Core" 
+                className="h-8 w-auto md:h-9"
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               />
               {/* Company Name - Desktop Only */}

@@ -1,47 +1,51 @@
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Circular base -->
-  <circle cx="100" cy="100" r="80" fill="#0EA5E9" opacity="0.9"/>
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main circular base -->
+  <circle cx="200" cy="160" r="120" fill="#0EA5E9"/>
   
-  <!-- Digital squares pattern -->
+  <!-- Digital squares pattern flowing into the circle -->
   <!-- Large squares -->
-  <rect x="40" y="40" width="16" height="16" fill="#0EA5E9"/>
-  <rect x="60" y="55" width="20" height="20" fill="#0EA5E9"/>
-  <rect x="85" y="35" width="14" height="14" fill="#0EA5E9"/>
-  <rect x="105" y="50" width="18" height="18" fill="#0EA5E9"/>
-  <rect x="130" y="40" width="16" height="16" fill="#0EA5E9"/>
-  <rect x="145" y="60" width="12" height="12" fill="#0EA5E9"/>
+  <rect x="60" y="70" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="90" y="85" width="28" height="28" fill="#0EA5E9"/>
+  <rect x="130" y="60" width="20" height="20" fill="#0EA5E9"/>
+  <rect x="160" y="80" width="26" height="26" fill="#0EA5E9"/>
+  <rect x="200" y="70" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="230" y="90" width="18" height="18" fill="#0EA5E9"/>
   
   <!-- Medium squares -->
-  <rect x="45" y="80" width="22" height="22" fill="#0EA5E9"/>
-  <rect x="75" y="70" width="14" height="14" fill="#0EA5E9"/>
-  <rect x="95" y="85" width="16" height="16" fill="#0EA5E9"/>
-  <rect x="115" y="75" width="20" height="20" fill="#0EA5E9"/>
-  <rect x="140" y="85" width="15" height="15" fill="#0EA5E9"/>
+  <rect x="70" y="120" width="32" height="32" fill="#0EA5E9"/>
+  <rect x="110" y="110" width="20" height="20" fill="#0EA5E9"/>
+  <rect x="140" y="130" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="170" y="115" width="28" height="28" fill="#0EA5E9"/>
+  <rect x="210" y="125" width="22" height="22" fill="#0EA5E9"/>
   
   <!-- Bottom squares -->
-  <rect x="35" y="110" width="18" height="18" fill="#0EA5E9"/>
-  <rect x="60" y="115" width="16" height="16" fill="#0EA5E9"/>
-  <rect x="80" y="125" width="24" height="24" fill="#0EA5E9"/>
-  <rect x="110" y="120" width="20" height="20" fill="#0EA5E9"/>
-  <rect x="135" y="115" width="18" height="18" fill="#0EA5E9"/>
+  <rect x="50" y="165" width="26" height="26" fill="#0EA5E9"/>
+  <rect x="90" y="175" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="120" y="185" width="36" height="36" fill="#0EA5E9"/>
+  <rect x="165" y="180" width="30" height="30" fill="#0EA5E9"/>
+  <rect x="205" y="170" width="26" height="26" fill="#0EA5E9"/>
   
   <!-- Lower area squares -->
-  <rect x="50" y="140" width="22" height="22" fill="#0EA5E9"/>
-  <rect x="85" y="150" width="16" height="16" fill="#0EA5E9"/>
-  <rect x="110" y="145" width="18" height="18" fill="#0EA5E9"/>
+  <rect x="75" y="210" width="32" height="32" fill="#0EA5E9"/>
+  <rect x="125" y="225" width="24" height="24" fill="#0EA5E9"/>
+  <rect x="165" y="220" width="26" height="26" fill="#0EA5E9"/>
   
-  <!-- Small accent squares -->
-  <rect x="65" y="100" width="10" height="10" fill="white"/>
-  <rect x="125" y="105" width="12" height="12" fill="white"/>
-  <rect x="90" y="110" width="8" height="8" fill="white"/>
+  <!-- Small accent squares (white) -->
+  <rect x="95" y="150" width="15" height="15" fill="white"/>
+  <rect x="185" y="155" width="18" height="18" fill="white"/>
+  <rect x="135" y="165" width="12" height="12" fill="white"/>
   
-  <!-- Digital edge effect -->
-  <path d="M140 20 L160 20 L160 30 L150 30 L150 40 L140 40 Z" fill="#0EA5E9"/>
-  <path d="M140 45 L155 45 L155 50 L150 50 L150 55 L140 55 Z" fill="#0EA5E9"/>
-  <path d="M140 60 L160 60 L160 70 L145 70 L145 75 L140 75 Z" fill="#0EA5E9"/>
-  <path d="M140 80 L158 80 L158 90 L148 90 L148 95 L140 95 Z" fill="#0EA5E9"/>
-  <path d="M140 100 L160 100 L160 110 L150 110 L150 115 L140 115 Z" fill="#0EA5E9"/>
-  <path d="M140 120 L155 120 L155 130 L145 130 L145 135 L140 135 Z" fill="#0EA5E9"/>
-  <path d="M140 140 L160 140 L160 150 L150 150 L150 155 L140 155 Z" fill="#0EA5E9"/>
-  <path d="M140 160 L158 160 L158 170 L148 170 L148 175 L140 175 Z" fill="#0EA5E9"/>
+  <!-- Digital edge effect on the right -->
+  <path d="M260 40 L290 40 L290 50 L280 50 L280 65 L260 65 Z" fill="#0EA5E9"/>
+  <path d="M260 75 L285 75 L285 85 L275 85 L275 95 L260 95 Z" fill="#0EA5E9"/>
+  <path d="M260 105 L290 105 L290 120 L270 120 L270 130 L260 130 Z" fill="#0EA5E9"/>
+  <path d="M260 140 L286 140 L286 155 L276 155 L276 165 L260 165 Z" fill="#0EA5E9"/>
+  <path d="M260 175 L290 175 L290 190 L280 190 L280 200 L260 200 Z" fill="#0EA5E9"/>
+  <path d="M260 210 L285 210 L285 225 L270 225 L270 235 L260 235 Z" fill="#0EA5E9"/>
+  <path d="M260 245 L290 245 L290 260 L280 260 L280 270 L260 270 Z" fill="#0EA5E9"/>
+  <path d="M260 280 L286 280 L286 295 L276 295 L276 305 L260 305 Z" fill="#0EA5E9"/>
+  
+  <!-- Company name text -->
+  <text x="200" y="340" text-anchor="middle" fill="#0EA5E9" font-family="Arial, sans-serif" font-size="48" font-weight="300">Genius</text>
+  <text x="200" y="380" text-anchor="middle" fill="#0EA5E9" font-family="Arial, sans-serif" font-size="38" font-weight="300">Software Core</text>
 </svg>
