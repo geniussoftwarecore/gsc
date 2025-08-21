@@ -269,7 +269,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
               Genius Software Core
             </h2>
             <p className="text-lg md:text-2xl lg:text-3xl text-sky-600 font-semibold">
-              {language === 'ar' ? 'الأساس البرمجي العبقري' : 'Innovative Software Solutions'}
+              Innovative Software Solutions
             </p>
           </motion.div>
 
