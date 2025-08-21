@@ -97,20 +97,7 @@ export default function Navigation() {
                     </Button>
                   </motion.div>
                 </Link>
-                <Link href="/services">
-                  <motion.div
-                    whileHover={{ scale: 1.05, x: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button 
-                      variant="outline" 
-                      className="border-sky-600 text-sky-600 hover:bg-sky-600 hover:text-white transition-all duration-300 group"
-                    >
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:-translate-x-1 transition-transform" />
-                      ابدأ مشروعك
-                    </Button>
-                  </motion.div>
-                </Link>
+                
               </div>
               
               {/* Authentication UI - Show loading or auth content based on state */}
