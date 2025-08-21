@@ -6,13 +6,14 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useLanguage } from "@/lib/useLanguage";
+import { useLanguageContext } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
   const { user, isAuthenticated } = useAuth();
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL } = useLanguageContext();
 
   // Navigation items with bilingual support
   const navigationItems = [
@@ -129,8 +130,9 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right section: Auth Buttons */}
+          {/* Right section: Language Toggle & Auth Buttons */}
           <div className="flex items-center gap-2">
+            <LanguageToggle />
             {isAuthenticated ? (
               <Link href="/dashboard">
                 <Button

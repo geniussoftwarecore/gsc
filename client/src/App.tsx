@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
@@ -58,24 +59,26 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <NotificationProviderWrapper>
-            <TooltipProvider>
-              <div className="min-h-screen font-cairo" dir="rtl">
-                <MetaTags />
-                <ScrollIndicator />
-                <Navbar />
-                <Breadcrumbs />
-                <main className="scroll-smooth">
-                  <Router />
-                </main>
-                <Footer />
-                <ScrollToTop />
-                <Toaster />
-              </div>
-            </TooltipProvider>
-          </NotificationProviderWrapper>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <NotificationProviderWrapper>
+              <TooltipProvider>
+                <div className="min-h-screen font-cairo">
+                  <MetaTags />
+                  <ScrollIndicator />
+                  <Navbar />
+                  <Breadcrumbs />
+                  <main className="scroll-smooth">
+                    <Router />
+                  </main>
+                  <Footer />
+                  <ScrollToTop />
+                  <Toaster />
+                </div>
+              </TooltipProvider>
+            </NotificationProviderWrapper>
+          </AuthProvider>
+        </LanguageProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );
