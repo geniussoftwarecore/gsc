@@ -87,16 +87,6 @@ export default function Navigation() {
               
               {/* CTA Buttons */}
               <div className="flex items-center gap-3">
-                <Link href="/services">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button variant="ghost" className="text-slate-600 hover:text-sky-600 transition-colors">
-                      اشترك الآن
-                    </Button>
-                  </motion.div>
-                </Link>
                 
               </div>
               
