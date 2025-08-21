@@ -49,34 +49,43 @@ export default function Navigation() {
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/">
             <motion.div 
-              className="flex items-center gap-2 h-10"
-              whileHover={{ scale: 1.05 }}
+              className="flex items-center gap-3 h-12"
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              {/* GSC Logo */}
+              {/* GSC Logo - Larger and More Prominent */}
               <motion.img 
                 src="/brand/logo-gsc-new.png" 
                 onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc-icon.png")}
                 alt="GSC" 
-                className="h-7 w-auto md:h-8"
-                width={28}
-                height={28}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
+                className="h-10 w-auto md:h-12 lg:h-14"
+                width={56}
+                height={56}
+                whileHover={{ 
+                  scale: 1.1,
+                  rotate: [0, 5, -5, 0],
+                  filter: "brightness(1.1) saturate(1.2)"
+                }}
+                transition={{ duration: 0.4 }}
+                style={{
+                  filter: "drop-shadow(0 4px 12px rgba(14, 165, 233, 0.25))"
+                }}
               />
-              {/* Company Name - Desktop Only */}
-              <motion.span 
-                className="hidden md:inline-block font-semibold tracking-wide text-slate-900 text-lg"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
+              {/* Company Name - Enhanced Typography */}
+              <motion.div 
+                className="hidden md:flex flex-col justify-center"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1, duration: 0.3 }}
               >
-                Genius Software Core
-              </motion.span>
+                <span className="font-bold tracking-wide text-slate-900 text-xl lg:text-2xl leading-tight whitespace-nowrap">
+                  Genius Software Core
+                </span>
+              </motion.div>
             </motion.div>
           </Link>
 
