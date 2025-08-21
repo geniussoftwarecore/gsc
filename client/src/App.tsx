@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
-import Navigation from "@/components/layout/navigation";
+import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { MetaTags } from "@/components/seo/meta-tags";
@@ -64,7 +64,7 @@ function App() {
               <div className="min-h-screen font-cairo" dir="rtl">
                 <MetaTags />
                 <ScrollIndicator />
-                <Navigation />
+                <Navbar />
                 <Breadcrumbs />
                 <main className="scroll-smooth">
                   <Router />
