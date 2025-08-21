@@ -182,18 +182,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
         >
 
 
-          {/* Company Name */}
-          <motion.div 
-            variants={itemVariants}
-            className="mx-auto mb-6 md:mb-8"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight mb-2">
-              Genius Software Core
-            </h2>
 
-          </motion.div>
 
           {/* Top Badge */}
           <motion.div variants={itemVariants} className="mb-8">
