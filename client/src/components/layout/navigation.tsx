@@ -57,34 +57,61 @@ export default function Navigation() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              {/* GSC Logo - Larger and More Prominent */}
+              {/* GSC Logo - Enhanced Size and Effects */}
               <motion.img 
                 src="/brand/logo-gsc-new.png" 
                 onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc-icon.png")}
                 alt="GSC" 
-                className="h-10 w-auto md:h-12 lg:h-14"
-                width={56}
-                height={56}
+                className="h-12 w-auto md:h-14 lg:h-16 xl:h-18"
+                width={72}
+                height={72}
                 whileHover={{ 
-                  scale: 1.1,
-                  rotate: [0, 5, -5, 0],
-                  filter: "brightness(1.1) saturate(1.2)"
+                  scale: 1.15,
+                  rotate: [0, 8, -8, 0],
+                  filter: "brightness(1.2) saturate(1.3) hue-rotate(5deg)"
                 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.5, type: "spring", stiffness: 300 }}
                 style={{
-                  filter: "drop-shadow(0 4px 12px rgba(14, 165, 233, 0.25))"
+                  filter: "drop-shadow(0 6px 16px rgba(14, 165, 233, 0.35))"
                 }}
               />
-              {/* Company Name - Enhanced Typography */}
+              {/* Company Name - Premium Typography with Effects */}
               <motion.div 
                 className="hidden md:flex flex-col justify-center"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
               >
-                <span className="font-bold tracking-wide text-slate-900 text-xl lg:text-2xl leading-tight whitespace-nowrap">
+                <motion.span 
+                  className="font-black tracking-wider text-slate-900 text-2xl lg:text-3xl xl:text-4xl leading-none whitespace-nowrap relative"
+                  style={{
+                    fontFamily: "'Inter', 'Cairo', sans-serif",
+                    background: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    textShadow: "0 0 30px rgba(14, 165, 233, 0.3)",
+                    letterSpacing: "0.1em"
+                  }}
+                  whileHover={{
+                    background: "linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #1d4ed8 100%)",
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    scale: 1.1,
+                    textShadow: "0 0 40px rgba(14, 165, 233, 0.5)"
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   GSC
-                </span>
+                  {/* Animated accent */}
+                  <motion.div
+                    className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-sky-400 to-blue-600 rounded-full"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  />
+                </motion.span>
               </motion.div>
             </motion.div>
           </Link>
