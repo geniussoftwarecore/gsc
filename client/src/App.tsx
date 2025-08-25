@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
-import { LanguageProvider } from "@/contexts/LanguageContext";
+import { LanguageProvider } from "@/i18n/lang";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";

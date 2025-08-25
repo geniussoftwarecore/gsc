@@ -18,7 +18,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNotifications } from "@/contexts/NotificationContext";
 import { addClientRequest } from "@/data/clientRequests";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguageContext } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/i18n/lang";
 
 const contactSchema = z.object({
   name: z.string().min(2, "الاسم يجب أن يكون أكثر من حرفين"),
@@ -36,7 +36,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function Contact() {
   const { t } = useTranslation();
-  const { isRTL } = useLanguageContext();
+  const { dir } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);

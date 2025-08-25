@@ -7,11 +7,12 @@ import { COMPANY_INFO, STATS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import { Users, User, Palette, Smartphone, TrendingUp, MessageCircle, Eye, Heart, Target, Lightbulb, Shield, Zap } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguageContext } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/i18n/lang";
 
 export default function About() {
   const { t } = useTranslation();
-  const { language, isRTL } = useLanguageContext();
+  const { lang, dir } = useLanguage();
+  const isRTL = dir === 'rtl';
   
   const teamMembers = [
     {
@@ -96,10 +97,10 @@ export default function About() {
       <section className="gradient-light py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedText delay={0.2}>
-            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${dir ? 'text-right' : 'text-left'}`}>
               {t('about.title')}
             </h1>
-            <p className={`text-xl text-gray-600 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+            <p className={`text-xl text-gray-600 leading-relaxed ${dir ? 'text-right' : 'text-left'}`}>
               {t('about.subtitle')}
             </p>
           </AnimatedText>
@@ -111,13 +112,13 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection delay={0.3}>
-              <h2 className={`text-4xl lg:text-5xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+              <h2 className={`text-4xl lg:text-5xl font-bold text-secondary mb-6 ${dir ? 'text-right' : 'text-left'}`}>
                 {t('about.storyTitle')}
               </h2>
-              <p className={`text-lg text-gray-600 mb-6 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+              <p className={`text-lg text-gray-600 mb-6 leading-relaxed ${dir ? 'text-right' : 'text-left'}`}>
                 {t('about.storyParagraph1').replace('{companyName}', COMPANY_INFO.name)}
               </p>
-              <p className={`text-lg text-gray-600 mb-8 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+              <p className={`text-lg text-gray-600 mb-8 leading-relaxed ${dir ? 'text-right' : 'text-left'}`}>
                 {t('about.storyParagraph2')}
               </p>
               <Link href="/contact">

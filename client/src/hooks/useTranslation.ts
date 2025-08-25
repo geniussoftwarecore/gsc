@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLanguageContext } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/i18n/lang';
 
 type TranslationKey = string;
 type Translations = Record<string, any>;
@@ -7,7 +7,7 @@ type Translations = Record<string, any>;
 let cachedTranslations: Record<string, Translations> = {};
 
 export function useTranslation() {
-  const { language } = useLanguageContext();
+  const { lang } = useLanguage();
   const [translations, setTranslations] = useState<Translations>({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,29 +15,29 @@ export function useTranslation() {
     const loadTranslations = async () => {
       try {
         // Check if translations are already cached
-        if (cachedTranslations[language]) {
-          setTranslations(cachedTranslations[language]);
+        if (cachedTranslations[lang]) {
+          setTranslations(cachedTranslations[lang]);
           setIsLoading(false);
           return;
         }
 
         // Load translations from public folder
-        const response = await fetch(`/locales/${language}.json`);
+        const response = await fetch(`/locales/${lang}.json`);
         const data = await response.json();
         
         // Cache the translations
-        cachedTranslations[language] = data;
+        cachedTranslations[lang] = data;
         setTranslations(data);
         setIsLoading(false);
       } catch (error) {
-        console.error(`Failed to load translations for ${language}:`, error);
+        console.error(`Failed to load translations for ${lang}:`, error);
         setIsLoading(false);
       }
     };
 
     setIsLoading(true);
     loadTranslations();
-  }, [language]);
+  }, [lang]);
 
   const t = (key: TranslationKey, fallback?: string): string => {
     if (isLoading) return fallback || key;
@@ -56,5 +56,5 @@ export function useTranslation() {
     return typeof value === 'string' ? value : fallback || key;
   };
 
-  return { t, isLoading, language };
+  return { t, isLoading, language: lang };
 }

@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 import { InteractiveButton } from "@/components/ui/interactive-button";
 import { Monitor, Code, Smartphone, Zap, Star } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguageContext } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/i18n/lang";
 
 export default function Hero() {
   const { t } = useTranslation();
-  const { isRTL } = useLanguageContext();
+  const { dir } = useLanguage();
   
   return (
     <section className="gradient-light py-16 lg:py-24 relative overflow-hidden">
@@ -47,7 +47,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}
+            className={`text-center ${dir ? 'lg:text-right' : 'lg:text-left'}`}
           >
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -71,7 +71,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}
+              className={`flex flex-col sm:flex-row gap-4 justify-center ${dir ? 'lg:justify-start' : 'lg:justify-start'}`}
             >
               <Link href="/services">
                 <InteractiveButton
@@ -105,7 +105,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className={isRTL ? 'lg:order-first order-last' : 'lg:order-last order-last'}
+            className={dir ? 'lg:order-first order-last' : 'lg:order-last order-last'}
           >
             <motion.div
               whileHover={{ scale: 1.02, rotateY: 5 }}

@@ -13,11 +13,11 @@ import { Code, Palette, Megaphone, TrendingUp, Search, Compass, Hammer, CheckCir
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { useState, useMemo } from "react";
 import { useTranslation } from "@/hooks/useTranslation";
-import { useLanguageContext } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/i18n/lang";
 
 export default function Services() {
   const { t } = useTranslation();
-  const { isRTL } = useLanguageContext();
+  const { dir } = useLanguage();
   const { data: services, isLoading, error } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
@@ -162,10 +162,10 @@ export default function Services() {
       <section className="gradient-light py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedText delay={0.2}>
-            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${dir ? 'text-right' : 'text-left'}`}>
               {t('servicesPage.title')}
             </h1>
-            <p className={`text-xl text-gray-600 leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
+            <p className={`text-xl text-gray-600 leading-relaxed ${dir ? 'text-right' : 'text-left'}`}>
               {t('servicesPage.subtitle')}
             </p>
           </AnimatedText>

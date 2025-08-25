@@ -4,8 +4,8 @@ import Cookies from 'js-cookie';
 export type Language = 'ar' | 'en';
 
 interface LanguageContextType {
-  language: Language;
-  isRTL: boolean;
+  lang: Language;
+  dir: boolean;
   toggleLanguage: () => void;
   setLanguage: (lang: Language) => void;
 }
@@ -30,11 +30,11 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     return 'ar';
   });
 
-  const isRTL = language === 'ar';
+  const dir = language === 'ar';
 
   // Update document direction and lang attribute when language changes
   useEffect(() => {
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.documentElement.dir = dir ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
     
     // Store language preference in both cookie and localStorage
@@ -51,7 +51,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       document.body.classList.add('font-inter');
       document.body.classList.remove('font-cairo');
     }
-  }, [language, isRTL]);
+  }, [lang, dir]);
 
   const toggleLanguage = () => {
     setLanguageState(current => current === 'ar' ? 'en' : 'ar');
@@ -64,7 +64,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   return (
     <LanguageContext.Provider value={{
       language,
-      isRTL,
+      dir,
       toggleLanguage,
       setLanguage
     }}>
@@ -73,7 +73,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   );
 }
 
-export function useLanguageContext() {
+export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
     throw new Error('useLanguageContext must be used within a LanguageProvider');

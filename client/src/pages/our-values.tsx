@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
-import { useLanguageContext } from '@/contexts/LanguageContext';
+import { useLanguage } from "@/i18n/lang";
 import { cn } from '@/lib/utils';
 import { MetaTags } from '@/components/seo/meta-tags';
 import { 
@@ -106,7 +106,7 @@ const mission = {
 };
 
 export default function OurValues() {
-  const { language, isRTL } = useLanguageContext();
+  const { lang, dir } = useLanguage();
 
   return (
     <div className={cn("min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800")}>
@@ -130,13 +130,13 @@ export default function OurValues() {
             <h1 className={cn(
               "text-4xl md:text-5xl lg:text-6xl font-bold mb-6",
               "bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'قيمنا ورؤيتنا' : 'Our Values & Vision'}
             </h1>
             <p className={cn(
               "text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'المبادئ والقيم التي توجه عملنا وتشكل هويتنا كشركة رائدة في التكنولوجيا'
@@ -153,7 +153,7 @@ export default function OurValues() {
           <div className="grid md:grid-cols-2 gap-8 mb-20">
             {/* Vision */}
             <motion.div
-              initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
+              initial={{ opacity: 0, x: dir ? 50 : -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
@@ -163,14 +163,14 @@ export default function OurValues() {
                     <Target className="h-8 w-8 mr-3" />
                     <h2 className={cn(
                       "text-2xl md:text-3xl font-bold",
-                      isRTL ? "font-cairo" : "font-inter"
+                      dir ? "font-cairo" : "font-inter"
                     )}>
                       {vision.title[language]}
                     </h2>
                   </div>
                   <p className={cn(
                     "text-lg leading-relaxed",
-                    isRTL ? "font-cairo" : "font-inter"
+                    dir ? "font-cairo" : "font-inter"
                   )}>
                     {vision.description[language]}
                   </p>
@@ -180,7 +180,7 @@ export default function OurValues() {
 
             {/* Mission */}
             <motion.div
-              initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
+              initial={{ opacity: 0, x: dir ? -50 : 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
@@ -190,14 +190,14 @@ export default function OurValues() {
                     <Lightbulb className="h-8 w-8 mr-3" />
                     <h2 className={cn(
                       "text-2xl md:text-3xl font-bold",
-                      isRTL ? "font-cairo" : "font-inter"
+                      dir ? "font-cairo" : "font-inter"
                     )}>
                       {mission.title[language]}
                     </h2>
                   </div>
                   <p className={cn(
                     "text-lg leading-relaxed",
-                    isRTL ? "font-cairo" : "font-inter"
+                    dir ? "font-cairo" : "font-inter"
                   )}>
                     {mission.description[language]}
                   </p>
@@ -219,13 +219,13 @@ export default function OurValues() {
           >
             <h2 className={cn(
               "text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'قيمنا الأساسية' : 'Our Core Values'}
             </h2>
             <p className={cn(
               "text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'القيم التي نؤمن بها وتوجه قراراتنا وتفاعلنا مع عملائنا وشركائنا'
@@ -256,13 +256,13 @@ export default function OurValues() {
                     <div className="p-6">
                       <h3 className={cn(
                         "text-lg font-semibold text-slate-900 dark:text-white mb-3 text-center",
-                        isRTL ? "font-cairo" : "font-inter"
+                        dir ? "font-cairo" : "font-inter"
                       )}>
                         {value.title[language]}
                       </h3>
                       <p className={cn(
                         "text-sm text-slate-600 dark:text-slate-300 text-center leading-relaxed",
-                        isRTL ? "font-cairo" : "font-inter"
+                        dir ? "font-cairo" : "font-inter"
                       )}>
                         {value.description[language]}
                       </p>
@@ -285,13 +285,13 @@ export default function OurValues() {
           >
             <h2 className={cn(
               "text-3xl md:text-4xl font-bold text-white mb-6",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'تشاركنا نفس القيم؟' : 'Share the Same Values?'}
             </h2>
             <p className={cn(
               "text-lg text-slate-300 mb-8 max-w-2xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'إذا كنت تشاركنا نفس الرؤية والقيم، فلنعمل معاً لتحقيق النجاح'

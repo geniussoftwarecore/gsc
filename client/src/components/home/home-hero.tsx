@@ -19,7 +19,7 @@ import { BrandGlow } from '@/components/brand/BrandGlow';
 import { BrandParticles } from '@/components/brand/BrandParticles';
 import { DigitalGrid } from '@/components/brand/DigitalGrid';
 import { useTranslation } from '@/hooks/useTranslation';
-import { useLanguageContext } from '@/contexts/LanguageContext';
+import { useLanguage } from "@/i18n/lang";
 
 interface ServiceHighlight {
   id: string;
@@ -71,7 +71,7 @@ interface HomeHeroProps {
 
 export function HomeHero({ language = 'ar' }: HomeHeroProps) {
   const { t } = useTranslation();
-  const { isRTL } = useLanguageContext();
+  const { dir } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 

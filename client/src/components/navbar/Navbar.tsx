@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import { useLanguageContext } from "@/contexts/LanguageContext";
+import { useLanguage } from "@/i18n/lang";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -14,7 +14,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location] = useLocation();
   const { user, isAuthenticated } = useAuth();
-  const { isRTL } = useLanguageContext();
+  const { dir } = useLanguage();
   const { t } = useTranslation();
 
   // Navigation items with translation support
@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <nav 
       className="sticky top-0 z-50 bg-white/60 dark:bg-neutral-900/50 backdrop-blur-md border-b border-neutral-200/60 dark:border-neutral-800/60"
-      dir={isRTL ? 'rtl' : 'ltr'}
+      dir={dir}
       aria-label="Main Navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,7 +88,7 @@ export default function Navbar() {
                 className={cn(
                   "font-medium tracking-tight text-slate-900 dark:text-white transition-colors",
                   "text-base md:text-lg",
-                  isRTL ? "font-cairo" : "font-inter"
+                  dir ? "font-cairo" : "font-inter"
                 )}
               >
                 {t('brand.name')}
@@ -220,7 +220,7 @@ export default function Navbar() {
                   {navigationItems.map((item, index) => (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
+                      initial={{ opacity: 0, x: dir ? 20 : -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                     >

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useLanguageContext } from '@/contexts/LanguageContext';
+import { useLanguage } from "@/i18n/lang";
 import { cn } from '@/lib/utils';
 import { MetaTags } from '@/components/seo/meta-tags';
 import { 
@@ -133,7 +133,7 @@ const stats = [
 ];
 
 export default function OurTeam() {
-  const { language, isRTL } = useLanguageContext();
+  const { lang, dir } = useLanguage();
 
   return (
     <div className={cn("min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800")}>
@@ -157,13 +157,13 @@ export default function OurTeam() {
             <h1 className={cn(
               "text-4xl md:text-5xl lg:text-6xl font-bold mb-6",
               "bg-gradient-to-r from-sky-600 to-blue-600 bg-clip-text text-transparent",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'فريقنا المتميز' : 'Our Amazing Team'}
             </h1>
             <p className={cn(
               "text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'مجموعة من الخبراء المتفانين في تقديم أفضل الحلول التقنية وتحقيق رؤية عملائنا'
@@ -193,7 +193,7 @@ export default function OurTeam() {
                     </div>
                     <div className={cn(
                       "text-sm text-slate-600 dark:text-slate-300",
-                      isRTL ? "font-cairo" : "font-inter"
+                      dir ? "font-cairo" : "font-inter"
                     )}>
                       {stat.label[language]}
                     </div>
@@ -216,13 +216,13 @@ export default function OurTeam() {
           >
             <h2 className={cn(
               "text-3xl md:text-4xl font-bold mb-4 text-slate-900 dark:text-white",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'أعضاء الفريق' : 'Team Members'}
             </h2>
             <p className={cn(
               "text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'تعرف على الخبراء الذين يقودون الابتكار في مجال التكنولوجيا'
@@ -252,7 +252,7 @@ export default function OurTeam() {
                     <div className="p-6">
                       <h3 className={cn(
                         "text-lg font-semibold text-slate-900 dark:text-white mb-1",
-                        isRTL ? "font-cairo" : "font-inter"
+                        dir ? "font-cairo" : "font-inter"
                       )}>
                         {member.name[language]}
                       </h3>
@@ -261,7 +261,7 @@ export default function OurTeam() {
                       </p>
                       <p className={cn(
                         "text-sm text-slate-600 dark:text-slate-300 mb-4",
-                        isRTL ? "font-cairo" : "font-inter"
+                        dir ? "font-cairo" : "font-inter"
                       )}>
                         {member.bio[language]}
                       </p>
@@ -336,13 +336,13 @@ export default function OurTeam() {
           >
             <h2 className={cn(
               "text-3xl md:text-4xl font-bold text-white mb-6",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' ? 'هل تريد الانضمام إلى فريقنا؟' : 'Want to Join Our Team?'}
             </h2>
             <p className={cn(
               "text-lg text-sky-100 mb-8 max-w-2xl mx-auto",
-              isRTL ? "font-cairo" : "font-inter"
+              dir ? "font-cairo" : "font-inter"
             )}>
               {language === 'ar' 
                 ? 'نحن دائماً نبحث عن المواهب المتميزة للانضمام إلى رحلتنا في الابتكار'

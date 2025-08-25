@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../client/src/compo
 import { Button } from "./base";
 import { Badge } from "./base";
 import { Input } from "./base";
+import { useLanguage } from "../../client/src/i18n/lang";
 import { 
   Users, Building2, UserCheck, Target, Activity, Ticket,
   Phone, Mail, Calendar, DollarSign, TrendingUp, Filter
