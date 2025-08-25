@@ -11,7 +11,7 @@ router.post('/login-magic', async (req, res) => {
   try {
     const { email, redirectUrl } = req.body as MagicLinkRequest;
     
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return res.status(400).json({ message: 'Valid email is required' });
     }
 
