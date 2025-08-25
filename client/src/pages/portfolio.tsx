@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -6,16 +6,27 @@ import { PortfolioItem } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
 import { InteractiveButton } from "@/components/ui/interactive-button";
+import { EnhancedSearchBar } from "@/components/portfolio/enhanced-search-bar";
+import { EnhancedProjectGallery } from "@/components/portfolio/enhanced-project-gallery";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Grid, Globe, Smartphone, Monitor, Settings, Megaphone, CheckCircle, Heart, Headphones, Award } from "lucide-react";
+import { Grid, Globe, Smartphone, Monitor, Settings, Megaphone, CheckCircle, Heart, Headphones, Award, ExternalLink } from "lucide-react";
 
 export default function Portfolio() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filters, setFilters] = useState({
+    technologies: [] as string[],
+    categories: [] as string[],
+    sortBy: 'newest' as 'newest' | 'oldest' | 'popular' | 'alphabetical'
+  });
   
   const { data: portfolio, isLoading, error } = useQuery<PortfolioItem[]>({
     queryKey: ["/api/portfolio"],
   });
+
+  // Mock data for search functionality
+  const recentSearches = ["React", "موبايل", "تطبيق"];
+  const popularSearches = ["تطبيق ويب", "React Native", "UI/UX", "تجارة إلكترونية"];
 
   const categories = [
     { id: "all", label: "جميع المشاريع", icon: Grid },
@@ -26,9 +37,70 @@ export default function Portfolio() {
     { id: "marketing", label: "التسويق الرقمي", icon: Megaphone },
   ];
 
-  const filteredPortfolio = portfolio?.filter(
-    item => selectedCategory === "all" || item.category === selectedCategory
-  );
+  // Enhanced filtering and search logic
+  const { filteredPortfolio, availableTechnologies } = useMemo(() => {
+    if (!portfolio) return { filteredPortfolio: [], availableTechnologies: [] };
+
+    // Get all unique technologies
+    const allTechnologies = Array.from(
+      new Set(portfolio.flatMap(project => project.technologies || []))
+    ).sort();
+
+    // Apply filters
+    let filtered = portfolio.filter(project => {
+      // Search query filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const matchesTitle = project.title.toLowerCase().includes(query);
+        const matchesDescription = project.description.toLowerCase().includes(query);
+        const matchesTechnologies = project.technologies?.some(tech => 
+          tech.toLowerCase().includes(query)
+        );
+        
+        if (!matchesTitle && !matchesDescription && !matchesTechnologies) {
+          return false;
+        }
+      }
+
+      // Category filter
+      if (filters.categories.length > 0 && !filters.categories.includes(project.category)) {
+        return false;
+      }
+
+      // Technology filter
+      if (filters.technologies.length > 0) {
+        const hasMatchingTech = filters.technologies.some(tech => 
+          project.technologies?.includes(tech)
+        );
+        if (!hasMatchingTech) return false;
+      }
+
+      return true;
+    });
+
+    // Apply sorting
+    switch (filters.sortBy) {
+      case 'oldest':
+        filtered = filtered.sort((a, b) => a.id.localeCompare(b.id));
+        break;
+      case 'alphabetical':
+        filtered = filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'popular':
+        // For demo, sort by category then title
+        filtered = filtered.sort((a, b) => {
+          if (a.category === b.category) return a.title.localeCompare(b.title);
+          return a.category.localeCompare(b.category);
+        });
+        break;
+      case 'newest':
+      default:
+        filtered = filtered.sort((a, b) => b.id.localeCompare(a.id));
+        break;
+    }
+
+    return { filteredPortfolio: filtered, availableTechnologies: allTechnologies };
+  }, [portfolio, searchQuery, filters]);
 
   const stats = [
     { value: "50+", label: "مشروع مكتمل", icon: CheckCircle },
@@ -97,31 +169,21 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="py-8 bg-light-gray">
+      {/* Enhanced Search Section */}
+      <section className="py-12 bg-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.3}>
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category, index) => (
-                <motion.button
-                  key={category.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2 ${
-                    selectedCategory === category.id
-                      ? "bg-primary text-white shadow-lg"
-                      : "bg-white text-gray-600 hover:bg-gray-50"
-                  }`}
-                >
-                  <category.icon size={20} />
-                  {category.label}
-                </motion.button>
-              ))}
-            </div>
+            <EnhancedSearchBar
+              searchQuery={searchQuery}
+              onSearchChange={setSearchQuery}
+              filters={filters}
+              onFiltersChange={setFilters}
+              availableTechnologies={availableTechnologies}
+              availableCategories={categories}
+              recentSearches={recentSearches}
+              popularSearches={popularSearches}
+              totalResults={filteredPortfolio.length}
+            />
           </AnimatedSection>
         </div>
       </section>
@@ -144,28 +206,30 @@ export default function Portfolio() {
                 <AnimatedCard
                   key={project.id}
                   delay={index * 0.1}
-                  className="group cursor-pointer overflow-hidden"
+                  className="group overflow-hidden"
                 >
                   <CardContent className="p-0">
-                    <div className="relative overflow-hidden">
-                      <motion.img
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-48 object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute bottom-4 left-4 right-4">
-                          <InteractiveButton
-                            className="btn-primary w-full"
-                            icon={<i className="fas fa-eye"></i>}
-                          >
-                            عرض المشروع
-                          </InteractiveButton>
-                        </div>
-                      </div>
-                    </div>
+                    {/* Enhanced Project Gallery */}
+                    <EnhancedProjectGallery
+                      project={{
+                        id: project.id,
+                        title: project.title,
+                        imageUrl: project.imageUrl,
+                        category: project.category,
+                        technologies: project.technologies,
+                        description: project.description,
+                        gallery: [
+                          // Mock additional gallery images for demo
+                          {
+                            id: `${project.id}-2`,
+                            url: project.imageUrl,
+                            alt: `${project.title} - صورة إضافية`,
+                            type: 'image' as const,
+                            caption: 'لقطة شاشة من المشروع'
+                          }
+                        ]
+                      }}
+                    />
                     
                     <div className="p-6">
                       <div className="flex items-center justify-between mb-3">
@@ -173,7 +237,7 @@ export default function Portfolio() {
                           {categories.find(c => c.id === project.category)?.label || project.category}
                         </Badge>
                         <div className="text-primary">
-                          <i className={categories.find(c => c.id === project.category)?.icon || "fas fa-folder"}></i>
+                          <i className="fas fa-folder"></i>
                         </div>
                       </div>
                       
@@ -181,32 +245,44 @@ export default function Portfolio() {
                         {project.title}
                       </h3>
                       
-                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
                         {project.description}
                       </p>
                       
                       {project.technologies && (
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {project.technologies.slice(0, 3).map((tech, idx) => (
+                          {project.technologies.slice(0, 4).map((tech, idx) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {tech}
                             </Badge>
                           ))}
-                          {project.technologies.length > 3 && (
+                          {project.technologies.length > 4 && (
                             <Badge variant="outline" className="text-xs">
-                              +{project.technologies.length - 3}
+                              +{project.technologies.length - 4}
                             </Badge>
                           )}
                         </div>
                       )}
                       
-                      <motion.div
-                        whileHover={{ x: 5 }}
-                        className="text-primary font-semibold cursor-pointer flex items-center"
-                      >
-                        تفاصيل المشروع
-                        <i className="fas fa-arrow-left mr-2"></i>
-                      </motion.div>
+                      <div className="flex items-center gap-2">
+                        <motion.button
+                          whileHover={{ x: 5 }}
+                          className="text-primary font-semibold cursor-pointer flex items-center flex-1"
+                        >
+                          تفاصيل المشروع
+                          <i className="fas fa-arrow-left mr-2"></i>
+                        </motion.button>
+                        
+                        {/* Quick actions */}
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="p-2 rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors"
+                          title="زيارة المشروع"
+                        >
+                          <ExternalLink size={16} />
+                        </motion.button>
+                      </div>
                     </div>
                   </CardContent>
                 </AnimatedCard>
@@ -219,13 +295,22 @@ export default function Portfolio() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                <i className="fas fa-folder-open text-6xl text-gray-300 mb-4"></i>
+                <i className="fas fa-search text-6xl text-gray-300 mb-4"></i>
                 <h3 className="text-xl font-semibold text-gray-500 mb-2">
-                  لا توجد مشاريع في هذه الفئة
+                  لم نجد مشاريع تطابق معايير البحث
                 </h3>
-                <p className="text-gray-400">
-                  جرب اختيار فئة أخرى أو عرض جميع المشاريع
+                <p className="text-gray-400 mb-4">
+                  جرب تعديل كلمات البحث أو إزالة بعض المرشحات
                 </p>
+                <InteractiveButton
+                  onClick={() => {
+                    setSearchQuery('');
+                    setFilters({ technologies: [], categories: [], sortBy: 'newest' });
+                  }}
+                  className="btn-primary"
+                >
+                  مسح جميع المرشحات
+                </InteractiveButton>
               </motion.div>
             </div>
           )}
