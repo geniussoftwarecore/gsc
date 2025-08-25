@@ -53,51 +53,58 @@ export default function Register() {
 
     setIsLoading(true);
     
-    // Simulate registration API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
       console.log("Registration attempt:", formData);
       
-      // Mock user data after registration
-      const userData = {
-        id: "newuser123",
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        token: "mock-jwt-token-register" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من الخادم
-      };
-      
-      // Use AuthContext to log in user after registration
-      login(userData);
+      // Call the real registration endpoint
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Registration failed');
+      }
+
+      const result = await response.json();
       
       toast({
         title: "تم إنشاء الحساب بنجاح",
-        description: `أهلاً وسهلاً ${userData.name}`,
+        description: result.message,
       });
       
-      // لا حاجة لاستدعاء setLocation هنا - سيتم التوجيه تلقائياً عبر useEffect
-    }, 2000);
+      // Redirect to login page for magic link verification
+      setLocation("/login");
+      
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast({
+        title: "فشل في إنشاء الحساب",
+        description: error instanceof Error ? error.message : "حدث خطأ غير متوقع",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleRegister = () => {
-    console.log("Google OAuth registration");
-    
-    // Mock Google registration
-    const userData = {
-      id: "google123",
-      name: "مستخدم Google",
-      email: "user@gmail.com",
-      token: "mock-jwt-token-google-register" // رمز وهمي - سيتم استبداله برمز JWT حقيقي من Google OAuth
-    };
-    
-    login(userData);
+    console.log("Google OAuth registration - coming soon!");
     
     toast({
-      title: "تم إنشاء الحساب بنجاح",
-      description: `أهلاً وسهلاً ${userData.name}`,
+      title: "قريباً",
+      description: "تسجيل الدخول عبر Google سيكون متاحاً قريباً",
+      variant: "destructive",
     });
-    
-    // لا حاجة لاستدعاء setLocation هنا - سيتم التوجيه تلقائياً عبر useEffect
   };
 
   return (

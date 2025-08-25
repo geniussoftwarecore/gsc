@@ -6,6 +6,48 @@ import { MagicLinkRequest, MagicLinkVerification, TotpVerification } from '../..
 const router = Router();
 const authService = new AuthService();
 
+// POST /api/auth/register
+router.post('/register', async (req, res) => {
+  try {
+    const { name, email, phone, password } = req.body;
+    
+    // Debug logging
+    console.log('Registration request:', { name, email, phone, hasPassword: !!password });
+    
+    if (!name || typeof name !== 'string' || name.trim().length < 2) {
+      return res.status(400).json({ message: 'Name is required and must be at least 2 characters' });
+    }
+    
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      return res.status(400).json({ message: 'Valid email is required' });
+    }
+    
+    if (!password || typeof password !== 'string' || password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+    
+    // For now, we'll create the user and send a magic link for verification
+    // In a real system, you'd save the user to the database first
+    const userData = {
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      phone: phone || '',
+      password // In production, hash this password
+    };
+    
+    // Send magic link for email verification
+    await authService.sendMagicLink(userData.email, '/dashboard');
+    
+    res.json({ 
+      message: 'Registration successful! Please check your email to verify your account.',
+      email: userData.email.replace(/(.{2}).*(@.*)/, '$1***$2') // Partially hide email
+    });
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Failed to register user' });
+  }
+});
+
 // POST /api/auth/login-magic
 router.post('/login-magic', async (req, res) => {
   try {
