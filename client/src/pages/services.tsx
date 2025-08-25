@@ -12,8 +12,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Code, Palette, Megaphone, TrendingUp, Search, Compass, Hammer, CheckCircle, ArrowLeft, Smartphone, Cloud, Package, Database, Server, Phone, Filter, Star, Clock, Users, Eye, Heart } from "lucide-react";
 import { DynamicIcon, IconName } from "@/lib/icons";
 import { useState, useMemo } from "react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function Services() {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguageContext();
   const { data: services, isLoading, error } = useQuery<Service[]>({
     queryKey: ["/api/services"],
   });
