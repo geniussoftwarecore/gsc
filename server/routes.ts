@@ -143,6 +143,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api/stripe", stripeWebhookRoutes);
   app.use("/api/health", healthRoutes);
   
+  // Mount new CRM routes
+  app.use("/api/crm", crmRoutes);
+  
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {

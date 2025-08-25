@@ -142,7 +142,7 @@ export type OpportunityFormData = z.infer<typeof opportunityFormSchema>
 export type TaskFormData = z.infer<typeof taskFormSchema>
 
 // Form validation helpers
-export const validateFormData = <T>(schema: z.ZodSchema<T>, data: unknown): { 
+export const validateFormData = <T,>(schema: z.ZodSchema<T>, data: unknown): { 
   success: boolean
   data?: T
   errors?: z.ZodError
