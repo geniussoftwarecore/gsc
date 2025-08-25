@@ -118,6 +118,29 @@ export const crmContacts = crmCore.table("crm_contacts", {
   deletedAt: timestamp("deleted_at"),
 });
 
+// Audit Logs Table - Tracks all CRM actions
+export const crmAuditLogs = crmCore.table("crm_audit_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  actorId: varchar("actor_id").notNull().references(() => crmUsers.id),
+  action: text("action").notNull(), // create, update, delete, export, view, assign, etc.
+  entityType: text("entity_type").notNull(), // accounts, contacts, deals, tickets, users
+  entityId: varchar("entity_id").notNull(),
+  entityName: text("entity_name"), // Human readable name of the entity
+  diff: jsonb("diff").$type<{
+    before?: Record<string, any>;
+    after?: Record<string, any>;
+    changed?: string[];
+  }>(),
+  metadata: jsonb("metadata").$type<{
+    userAgent?: string;
+    ipAddress?: string;
+    source?: string; // web, api, mobile, etc.
+    requestId?: string;
+    sessionId?: string;
+  }>(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const crmLeads = crmCore.table("crm_leads", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   firstName: text("first_name").notNull(),

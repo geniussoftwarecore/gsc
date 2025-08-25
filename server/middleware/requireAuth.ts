@@ -1,9 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '../utils/jwt';
 import { User } from '../../shared/types/auth';
+import { type Role } from '../../shared/security/roles';
+
+// Extended user interface for CRM context
+interface CRMUser extends User {
+  username?: string;
+  teamId?: string;
+}
 
 export interface AuthenticatedRequest extends Request {
-  user?: User;
+  user?: CRMUser;
 }
 
 export function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction) {
@@ -18,10 +25,12 @@ export function requireAuth(req: AuthenticatedRequest, res: Response, next: Next
     
     // In a real app, you'd fetch the full user from the database
     // For now, we'll create a minimal user object from the JWT payload
-    const user: User = {
+    const user: CRMUser = {
       id: payload.userId,
       email: payload.email,
       role: payload.role as any,
+      username: payload.username,
+      teamId: payload.teamId,
     };
     
     req.user = user;
@@ -38,10 +47,12 @@ export function optionalAuth(req: AuthenticatedRequest, res: Response, next: Nex
       const token = authHeader.substring(7);
       const payload = verifyToken(token);
       
-      const user: User = {
+      const user: CRMUser = {
         id: payload.userId,
         email: payload.email,
         role: payload.role as any,
+        username: payload.username,
+        teamId: payload.teamId,
       };
       
       req.user = user;
