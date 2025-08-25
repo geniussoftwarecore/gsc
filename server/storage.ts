@@ -29,6 +29,8 @@ import {
   type InsertCrmActivity
 } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { DatabaseStorage } from "./database-storage";
+import { db } from "./db";
 
 export interface IStorage {
   // User Management
@@ -119,6 +121,22 @@ export interface IStorage {
   getActivitiesByRelatedEntity(relatedTo: string, relatedId: string): Promise<CrmActivity[]>;
   getActivitiesByUser(userId: string): Promise<CrmActivity[]>;
 }
+
+// Initialize storage based on database availability
+function createStorage(): IStorage {
+  if (db) {
+    console.log("Using PostgreSQL database storage");
+    return new DatabaseStorage();
+  } else {
+    console.log("Database not available, using in-memory storage");
+    return new MemStorage();
+  }
+}
+
+export const storage = createStorage();
+
+// Export a singleton instance for backwards compatibility
+let memStorageInstance: MemStorage | null = null;
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
@@ -1706,5 +1724,3 @@ export class MemStorage implements IStorage {
     this.activities.set(activity2.id, activity2);
   }
 }
-
-export const storage = new MemStorage();

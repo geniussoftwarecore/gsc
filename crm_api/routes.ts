@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { crmStorage } from "../crm_services/crm-storage";
+import { requireAuth, requireRole } from "../server/middleware/requireAuth";
 
 const router = Router();
 

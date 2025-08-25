@@ -1,4 +1,7 @@
-// بيانات المشاريع الوهمية - سيتم استبدالها ببيانات حقيقية من قاعدة البيانات لاحقاً
+// DEPRECATED: This file contains dummy project data that has been replaced by real database data
+// Portfolio data is now fetched from the database via /api/portfolio endpoints
+// Real portfolio data is seeded in server/seed-database.ts and served through the API
+// Frontend components now use React Query to fetch data from /api/portfolio endpoints
 export const dummyProjects = {
   mobile: [
     {

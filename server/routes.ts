@@ -1,6 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { AuthenticatedRequest, requireAuth, requireRole, loginUser } from "./auth";
+import { DatabaseStorage } from "./database-storage";
 import crmRoutes from "../crm_api/routes";
 import authRoutes from "./routes/auth";
 import billingRoutes from "./routes/billing";
@@ -23,11 +25,85 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Add metrics tracking middleware
   app.use(trackMetrics());
 
+  // Authentication endpoints
+  app.post("/api/login", async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      
+      if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
+      }
+
+      const result = await loginUser(username, password, storage as DatabaseStorage);
+      
+      if (!result) {
+        return res.status(401).json({ message: "Invalid credentials" });
+      }
+
+      res.json(result);
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  app.post("/api/register", async (req, res) => {
+    try {
+      const validatedData = insertUserSchema.extend({
+        password: z.string().min(6, "Password must be at least 6 characters")
+      }).parse(req.body);
+      
+      const existingUser = await storage.getUserByUsername(validatedData.username);
+      if (existingUser) {
+        return res.status(400).json({ message: "Username already exists" });
+      }
+
+      const user = await storage.createUser(validatedData);
+      const { password: _, ...userWithoutPassword } = user;
+      
+      res.status(201).json({ 
+        success: true, 
+        data: userWithoutPassword,
+        message: "User created successfully" 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      } else {
+        console.error("Registration error:", error);
+        res.status(500).json({ 
+          success: false, 
+          message: "Internal server error" 
+        });
+      }
+    }
+  });
+
+  app.get("/api/me", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const user = await storage.getUser(req.user!.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const { password: _, ...userWithoutPassword } = user;
+      res.json(userWithoutPassword);
+    } catch (error) {
+      console.error("Get user error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
   // Mount new authentication and billing routes
   app.use("/api/auth", authRoutes);
   app.use("/api/billing", billingRoutes);
   app.use("/api/stripe", stripeWebhookRoutes);
   app.use("/api/health", healthRoutes);
+  
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
