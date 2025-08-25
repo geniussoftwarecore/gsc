@@ -1,10 +1,20 @@
 import type { Config } from "tailwindcss";
+import { tokens } from "./shared/ui/tokens";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}", "./crm_ui/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      // Design System Tokens
+      spacing: tokens.spacing,
+      fontSize: tokens.fontSizes,
+      fontWeight: tokens.fontWeights,
+      zIndex: tokens.zIndex,
+      maxWidth: tokens.containers,
+      transitionDuration: tokens.durations,
+      transitionTimingFunction: tokens.easing,
+      boxShadow: tokens.shadows,
       fontFamily: {
         'cairo': ['Cairo', 'sans-serif'],
         sans: ['Cairo', 'sans-serif'],

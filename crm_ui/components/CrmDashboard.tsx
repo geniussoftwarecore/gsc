@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../client/src/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./base";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../client/src/components/ui/tabs";
-import { Button } from "../../client/src/components/ui/button";
-import { Badge } from "../../client/src/components/ui/badge";
-import { Input } from "../../client/src/components/ui/input";
+import { Button } from "./base";
+import { Badge } from "./base";
+import { Input } from "./base";
 import { 
   Users, Building2, UserCheck, Target, Activity, Ticket,
   Phone, Mail, Calendar, DollarSign, TrendingUp, Filter
