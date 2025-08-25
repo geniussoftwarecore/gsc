@@ -559,35 +559,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedText className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
-              موقعنا
-            </h2>
-            <p className="text-xl text-gray-600">
-              يمكنك زيارتنا في مكتبنا أو التواصل معنا رقمياً
-            </p>
-          </AnimatedText>
-
-          <AnimatedSection delay={0.4}>
-            <Card className="overflow-hidden shadow-2xl">
-              <CardContent className="p-0">
-                <div className="bg-light-gray h-80 flex items-center justify-center">
-                  <div className="text-center">
-                    <i className="fas fa-map-marker-alt text-6xl text-primary mb-4"></i>
-                    <h3 className="text-2xl font-bold text-secondary mb-2">صنعاء، اليمن</h3>
-                    <p className="text-gray-600">
-                      سنقوم بإضافة خريطة تفاعلية قريباً
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedSection>
-        </div>
-      </section>
     </div>
   );
 }
