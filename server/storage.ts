@@ -26,7 +26,11 @@ import {
   type Task,
   type InsertTask,
   type CrmActivity,
-  type InsertCrmActivity
+  type InsertCrmActivity,
+  type SavedFilter,
+  type InsertSavedFilter,
+  type SupportTicket,
+  supportTickets
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { DatabaseStorage } from "./database-storage";
@@ -120,6 +124,15 @@ export interface IStorage {
   createActivity(activity: InsertCrmActivity): Promise<CrmActivity>;
   getActivitiesByRelatedEntity(relatedTo: string, relatedId: string): Promise<CrmActivity[]>;
   getActivitiesByUser(userId: string): Promise<CrmActivity[]>;
+  
+  // Saved Filters
+  getSavedFilters(userId: string): Promise<SavedFilter[]>;
+  createSavedFilter(filter: InsertSavedFilter): Promise<SavedFilter>;
+  updateSavedFilter(id: string, updates: Partial<SavedFilter>): Promise<SavedFilter>;
+  deleteSavedFilter(id: string): Promise<boolean>;
+  
+  // Search
+  searchEntities(query: string, entities: string[]): Promise<any[]>;
 }
 
 // Initialize storage based on database availability
@@ -153,6 +166,8 @@ export class MemStorage implements IStorage {
   private opportunities: Map<string, Opportunity>;
   private tasks: Map<string, Task>;
   private activities: Map<string, CrmActivity>;
+  private savedFilters: Map<string, SavedFilter>;
+  private supportTickets: Map<string, SupportTicket>;
 
   constructor() {
     this.users = new Map();
@@ -169,6 +184,8 @@ export class MemStorage implements IStorage {
     this.opportunities = new Map();
     this.tasks = new Map();
     this.activities = new Map();
+    this.savedFilters = new Map();
+    this.supportTickets = new Map();
     
     // Initialize with sample data
     this.initializeSampleData();
@@ -1305,6 +1322,93 @@ export class MemStorage implements IStorage {
 
   async getActivitiesByUser(userId: string): Promise<CrmActivity[]> {
     return Array.from(this.activities.values()).filter(activity => activity.userId === userId);
+  }
+
+  // Saved Filters Implementation
+  async getSavedFilters(userId: string): Promise<SavedFilter[]> {
+    return Array.from(this.savedFilters.values()).filter(filter => filter.userId === userId);
+  }
+
+  async createSavedFilter(filter: InsertSavedFilter): Promise<SavedFilter> {
+    const savedFilter: SavedFilter = {
+      id: randomUUID(),
+      ...filter,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.savedFilters.set(savedFilter.id, savedFilter);
+    return savedFilter;
+  }
+
+  async updateSavedFilter(id: string, updates: Partial<SavedFilter>): Promise<SavedFilter> {
+    const filter = this.savedFilters.get(id);
+    if (!filter) throw new Error("Saved filter not found");
+    const updatedFilter = { ...filter, ...updates, updatedAt: new Date() };
+    this.savedFilters.set(id, updatedFilter);
+    return updatedFilter;
+  }
+
+  async deleteSavedFilter(id: string): Promise<boolean> {
+    return this.savedFilters.delete(id);
+  }
+
+  // Search Implementation
+  async searchEntities(query: string, entities: string[]): Promise<any[]> {
+    const searchTerm = query.toLowerCase();
+    const results: any[] = [];
+
+    if (entities.includes('contacts')) {
+      const contactResults = Array.from(this.contacts.values()).filter(contact =>
+        contact.name?.toLowerCase().includes(searchTerm) ||
+        contact.email?.toLowerCase().includes(searchTerm) ||
+        contact.phone?.toLowerCase().includes(searchTerm) ||
+        contact.jobTitle?.toLowerCase().includes(searchTerm)
+      ).map(contact => ({ ...contact, entity: 'contacts' }));
+      results.push(...contactResults);
+    }
+
+    if (entities.includes('accounts') || entities.includes('companies')) {
+      const accountResults = Array.from(this.accounts.values()).filter(account =>
+        account.name?.toLowerCase().includes(searchTerm) ||
+        account.email?.toLowerCase().includes(searchTerm) ||
+        account.phone?.toLowerCase().includes(searchTerm) ||
+        account.industry?.toLowerCase().includes(searchTerm) ||
+        account.type?.toLowerCase().includes(searchTerm)
+      ).map(account => ({ ...account, entity: 'accounts' }));
+      results.push(...accountResults);
+    }
+
+    if (entities.includes('opportunities') || entities.includes('deals')) {
+      const opportunityResults = Array.from(this.opportunities.values()).filter(opportunity =>
+        opportunity.name?.toLowerCase().includes(searchTerm) ||
+        opportunity.description?.toLowerCase().includes(searchTerm) ||
+        opportunity.stage?.toLowerCase().includes(searchTerm)
+      ).map(opportunity => ({ ...opportunity, entity: 'opportunities' }));
+      results.push(...opportunityResults);
+    }
+
+    if (entities.includes('tickets')) {
+      const ticketResults = Array.from(this.supportTickets.values()).filter(ticket =>
+        ticket.subject?.toLowerCase().includes(searchTerm) ||
+        ticket.description?.toLowerCase().includes(searchTerm) ||
+        ticket.category?.toLowerCase().includes(searchTerm) ||
+        ticket.status?.toLowerCase().includes(searchTerm)
+      ).map(ticket => ({ ...ticket, entity: 'tickets' }));
+      results.push(...ticketResults);
+    }
+
+    if (entities.includes('leads')) {
+      const leadResults = Array.from(this.leads.values()).filter(lead =>
+        lead.name?.toLowerCase().includes(searchTerm) ||
+        lead.email?.toLowerCase().includes(searchTerm) ||
+        lead.phone?.toLowerCase().includes(searchTerm) ||
+        lead.company?.toLowerCase().includes(searchTerm) ||
+        lead.jobTitle?.toLowerCase().includes(searchTerm)
+      ).map(lead => ({ ...lead, entity: 'leads' }));
+      results.push(...leadResults);
+    }
+
+    return results;
   }
 
   private initializeSubscriptionPlans() {

@@ -17,7 +17,8 @@ import {
   insertOpportunitySchema,
   insertTaskSchema,
   insertCrmActivitySchema,
-  insertUserSchema
+  insertUserSchema,
+  insertSavedFilterSchema
 } from "@shared/schema";
 import { z } from "zod";
 import { generateToken } from "./auth";
@@ -808,6 +809,80 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ success: false, message: "Failed to create activity" });
       }
+    }
+  });
+
+  // Search endpoint
+  app.get("/api/search", async (req, res) => {
+    try {
+      const query = req.query.q as string;
+      const entitiesParam = req.query.entities as string;
+      
+      if (!query || query.trim().length < 2) {
+        return res.json([]);
+      }
+
+      const entities = entitiesParam ? entitiesParam.split(',') : ['contacts', 'accounts', 'deals', 'tickets'];
+      
+      const results = await storage.searchEntities(query.trim(), entities);
+      res.json(results);
+    } catch (error) {
+      console.error("Search error:", error);
+      res.status(500).json({ success: false, message: "Search failed" });
+    }
+  });
+
+  // Saved Filters endpoints
+  app.get("/api/saved-filters", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const filters = await storage.getSavedFilters(req.user!.id);
+      res.json(filters);
+    } catch (error) {
+      console.error("Get saved filters error:", error);
+      res.status(500).json({ success: false, message: "Failed to fetch saved filters" });
+    }
+  });
+
+  app.post("/api/saved-filters", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const validatedData = insertSavedFilterSchema.parse({
+        ...req.body,
+        userId: req.user!.id
+      });
+      const filter = await storage.createSavedFilter(validatedData);
+      res.json({ success: true, data: filter });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ success: false, message: "Validation error", errors: error.errors });
+      } else {
+        console.error("Create saved filter error:", error);
+        res.status(500).json({ success: false, message: "Failed to save filter" });
+      }
+    }
+  });
+
+  app.put("/api/saved-filters/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const updates = req.body;
+      const filter = await storage.updateSavedFilter(req.params.id, updates);
+      res.json({ success: true, data: filter });
+    } catch (error) {
+      console.error("Update saved filter error:", error);
+      res.status(500).json({ success: false, message: "Failed to update filter" });
+    }
+  });
+
+  app.delete("/api/saved-filters/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const success = await storage.deleteSavedFilter(req.params.id);
+      if (success) {
+        res.json({ success: true, message: "Filter deleted successfully" });
+      } else {
+        res.status(404).json({ success: false, message: "Filter not found" });
+      }
+    } catch (error) {
+      console.error("Delete saved filter error:", error);
+      res.status(500).json({ success: false, message: "Failed to delete filter" });
     }
   });
 

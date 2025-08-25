@@ -27,6 +27,9 @@ import {
   type InsertTask,
   type CrmActivity,
   type InsertCrmActivity,
+  type SavedFilter,
+  type InsertSavedFilter,
+  type SupportTicket,
   users,
   contactSubmissions,
   portfolioItems,
@@ -40,10 +43,12 @@ import {
   accounts,
   opportunities,
   tasks,
-  crmActivities
+  crmActivities,
+  savedFilters,
+  supportTickets
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, desc, sql } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import { IStorage } from "./storage";
 
@@ -453,5 +458,106 @@ export class DatabaseStorage implements IStorage {
     return await db.select().from(crmActivities)
       .where(eq(crmActivities.userId, userId))
       .orderBy(desc(crmActivities.createdAt));
+  }
+
+  // Saved Filters Implementation
+  async getSavedFilters(userId: string): Promise<SavedFilter[]> {
+    if (!db) throw new Error("Database not available");
+    return await db.select().from(savedFilters)
+      .where(eq(savedFilters.userId, userId))
+      .orderBy(desc(savedFilters.createdAt));
+  }
+
+  async createSavedFilter(filter: InsertSavedFilter): Promise<SavedFilter> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.insert(savedFilters).values(filter).returning();
+    return result[0];
+  }
+
+  async updateSavedFilter(id: string, updates: Partial<SavedFilter>): Promise<SavedFilter> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.update(savedFilters).set(updates).where(eq(savedFilters.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteSavedFilter(id: string): Promise<boolean> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.delete(savedFilters).where(eq(savedFilters.id, id));
+    return (result.rowCount || 0) > 0;
+  }
+
+  // Search Implementation
+  async searchEntities(query: string, entities: string[]): Promise<any[]> {
+    if (!db) throw new Error("Database not available");
+    const searchTerm = `%${query.toLowerCase()}%`;
+    const results: any[] = [];
+
+    try {
+      if (entities.includes('contacts')) {
+        const contactResults = await db.select().from(contacts)
+          .where(
+            sql`lower(${contacts.name}) LIKE ${searchTerm} OR 
+                lower(${contacts.email}) LIKE ${searchTerm} OR 
+                lower(${contacts.phone}) LIKE ${searchTerm} OR 
+                lower(${contacts.jobTitle}) LIKE ${searchTerm}`
+          )
+          .limit(50);
+        results.push(...contactResults.map(contact => ({ ...contact, entity: 'contacts' })));
+      }
+
+      if (entities.includes('accounts') || entities.includes('companies')) {
+        const accountResults = await db.select().from(accounts)
+          .where(
+            sql`lower(${accounts.name}) LIKE ${searchTerm} OR 
+                lower(${accounts.email}) LIKE ${searchTerm} OR 
+                lower(${accounts.phone}) LIKE ${searchTerm} OR 
+                lower(${accounts.industry}) LIKE ${searchTerm} OR 
+                lower(${accounts.type}) LIKE ${searchTerm}`
+          )
+          .limit(50);
+        results.push(...accountResults.map(account => ({ ...account, entity: 'accounts' })));
+      }
+
+      if (entities.includes('opportunities') || entities.includes('deals')) {
+        const opportunityResults = await db.select().from(opportunities)
+          .where(
+            sql`lower(${opportunities.name}) LIKE ${searchTerm} OR 
+                lower(${opportunities.description}) LIKE ${searchTerm} OR 
+                lower(${opportunities.stage}) LIKE ${searchTerm}`
+          )
+          .limit(50);
+        results.push(...opportunityResults.map(opportunity => ({ ...opportunity, entity: 'opportunities' })));
+      }
+
+      if (entities.includes('tickets')) {
+        const ticketResults = await db.select().from(supportTickets)
+          .where(
+            sql`lower(${supportTickets.subject}) LIKE ${searchTerm} OR 
+                lower(${supportTickets.description}) LIKE ${searchTerm} OR 
+                lower(${supportTickets.category}) LIKE ${searchTerm} OR 
+                lower(${supportTickets.status}) LIKE ${searchTerm}`
+          )
+          .limit(50);
+        results.push(...ticketResults.map(ticket => ({ ...ticket, entity: 'tickets' })));
+      }
+
+      if (entities.includes('leads')) {
+        const leadResults = await db.select().from(leads)
+          .where(
+            sql`lower(${leads.name}) LIKE ${searchTerm} OR 
+                lower(${leads.email}) LIKE ${searchTerm} OR 
+                lower(${leads.phone}) LIKE ${searchTerm} OR 
+                lower(${leads.company}) LIKE ${searchTerm} OR 
+                lower(${leads.jobTitle}) LIKE ${searchTerm}`
+          )
+          .limit(50);
+        results.push(...leadResults.map(lead => ({ ...lead, entity: 'leads' })));
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+      throw error;
+    }
+
+    return results;
   }
 }

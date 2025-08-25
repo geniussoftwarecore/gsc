@@ -358,6 +358,18 @@ export const clientRequests = pgTable("client_requests", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Saved Filters for search functionality
+export const savedFilters = pgTable("saved_filters", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id),
+  name: text("name").notNull(),
+  entities: jsonb("entities").$type<string[]>(), // ['contacts', 'accounts', 'deals', 'tickets']
+  filters: jsonb("filters").$type<Record<string, any>>(), // filter criteria
+  isDefault: text("is_default").default("false"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -467,6 +479,12 @@ export const insertCrmActivitySchema = createInsertSchema(crmActivities).omit({
   createdAt: true,
 });
 
+export const insertSavedFilterSchema = createInsertSchema(savedFilters).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const insertClientRequestSchema = createInsertSchema(clientRequests).omit({
   id: true,
   createdAt: true,
@@ -532,6 +550,9 @@ export type Task = typeof tasks.$inferSelect;
 
 export type InsertCrmActivity = z.infer<typeof insertCrmActivitySchema>;
 export type CrmActivity = typeof crmActivities.$inferSelect;
+
+export type InsertSavedFilter = z.infer<typeof insertSavedFilterSchema>;
+export type SavedFilter = typeof savedFilters.$inferSelect;
 
 export type InsertClientRequest = z.infer<typeof insertClientRequestSchema>;
 export type ClientRequest = typeof clientRequests.$inferSelect;

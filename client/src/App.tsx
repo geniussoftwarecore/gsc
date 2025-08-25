@@ -30,6 +30,7 @@ import AdminCRM from "@/pages/admin/crm";
 import CrmPage from "@/pages/CrmPage";
 import CrmDashboard from "@/pages/CrmDashboard";
 import UIPreview from "@/dev/ui-preview";
+import SearchDemo from "@/pages/SearchDemo";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -51,6 +52,7 @@ function Router() {
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/crm" component={CrmDashboard} />
       <Route path="/crm" component={CrmDashboard} />
+      <Route path="/search-demo" component={SearchDemo} />
       <Route path="/dev/ui-preview" component={UIPreview} />
       <Route component={NotFound} />
     </Switch>
