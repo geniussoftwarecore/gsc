@@ -6,38 +6,51 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { 
   Users, Building2, UserCheck, Target, Ticket,
-  Phone, Mail, Calendar, DollarSign, TrendingUp, Filter
+  Phone, Mail, Calendar, DollarSign, TrendingUp, Filter, BarChart3
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { KPICards } from "@/components/dashboard/KPICards";
+import { PeriodSelector } from "@/components/dashboard/PeriodSelector";
+import { DashboardCharts } from "@/components/dashboard/DashboardCharts";
+
+type Period = 'week' | 'month' | 'quarter' | 'year' | 'custom';
 
 export default function CrmDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPeriod, setSelectedPeriod] = useState<Period>('month');
   
-  // Fetch CRM data
+  // Fetch batched dashboard analytics
+  const { data: analyticsData, isLoading: analyticsLoading } = useQuery({
+    queryKey: ['/api/dashboard/analytics', selectedPeriod],
+    queryFn: () => fetch(`/api/dashboard/analytics?period=${selectedPeriod}`).then(res => res.json()),
+    enabled: true
+  });
+
+  // Fetch individual CRM data for detailed views
   const { data: leadsData, isLoading: leadsLoading } = useQuery({
     queryKey: ['/api/crm/leads'],
-    enabled: true
+    enabled: activeTab !== 'overview'
   });
 
   const { data: accountsData, isLoading: accountsLoading } = useQuery({
     queryKey: ['/api/crm/accounts'], 
-    enabled: true
+    enabled: activeTab !== 'overview'
   });
 
   const { data: contactsData, isLoading: contactsLoading } = useQuery({
     queryKey: ['/api/crm/contacts'],
-    enabled: true
+    enabled: activeTab !== 'overview'
   });
 
   const { data: opportunitiesData, isLoading: opportunitiesLoading } = useQuery({
     queryKey: ['/api/crm/opportunities'],
-    enabled: true
+    enabled: activeTab !== 'overview'
   });
 
   const { data: ticketsData, isLoading: ticketsLoading } = useQuery({
     queryKey: ['/api/crm/tickets'],
-    enabled: true
+    enabled: activeTab !== 'overview'
   });
 
   const leads = (leadsData as any)?.leads || [];
@@ -46,7 +59,29 @@ export default function CrmDashboard() {
   const opportunities = (opportunitiesData as any)?.opportunities || [];
   const tickets = (ticketsData as any)?.tickets || [];
 
-  // Calculate stats
+  // Analytics data from batched endpoint
+  const kpiData = analyticsData?.kpis || {
+    totalDeals: 0,
+    pipelineValue: 0,
+    conversionRate: 0,
+    avgResolutionTime: 0
+  };
+  
+  const chartData = analyticsData?.chartData || {
+    dealsByStage: {},
+    monthlyTrend: [],
+    ticketStatus: {}
+  };
+  
+  const summary = analyticsData?.summary || {
+    totalContacts: 0,
+    totalAccounts: 0,
+    totalOpportunities: 0,
+    totalTickets: 0,
+    totalTasks: 0
+  };
+
+  // Calculate stats for other tabs (when not using analytics endpoint)
   const stats = {
     totalLeads: leads.length,
     totalAccounts: accounts.length,
@@ -57,6 +92,11 @@ export default function CrmDashboard() {
       .filter((o: any) => o.stage === 'closed-won')
       .reduce((sum: number, o: any) => sum + parseFloat(o.expected_value || '0'), 0)
       .toLocaleString()
+  };
+
+  const handlePeriodChange = (period: Period, customRange?: { from: Date; to: Date }) => {
+    setSelectedPeriod(period);
+    // customRange handling would go here if needed
   };
 
   const getRatingColor = (rating: string) => {
@@ -90,7 +130,10 @@ export default function CrmDashboard() {
     }
   };
 
-  if (leadsLoading || accountsLoading || contactsLoading || opportunitiesLoading || ticketsLoading) {
+  const isLoading = activeTab === 'overview' ? analyticsLoading : 
+    (leadsLoading || accountsLoading || contactsLoading || opportunitiesLoading || ticketsLoading);
+
+  if (isLoading && activeTab !== 'overview') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto px-6 py-8">
@@ -106,82 +149,24 @@ export default function CrmDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-6 py-8" dir="ltr">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            CRM Dashboard
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300">
-            Manage your customer relationships and sales pipeline
-          </p>
+        <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+              CRM Dashboard
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300">
+              Manage your customer relationships and sales pipeline
+            </p>
+          </div>
+          <PeriodSelector 
+            selectedPeriod={selectedPeriod}
+            onPeriodChange={handlePeriodChange}
+          />
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
-          <Card data-testid="stat-leads">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Leads</CardTitle>
-              <UserCheck className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="leads-count">{stats.totalLeads}</div>
-              <p className="text-xs text-muted-foreground">Active prospects</p>
-            </CardContent>
-          </Card>
-
-          <Card data-testid="stat-accounts">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Accounts</CardTitle>
-              <Building2 className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="accounts-count">{stats.totalAccounts}</div>
-              <p className="text-xs text-muted-foreground">Companies</p>
-            </CardContent>
-          </Card>
-
-          <Card data-testid="stat-contacts">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Contacts</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="contacts-count">{stats.totalContacts}</div>
-              <p className="text-xs text-muted-foreground">People</p>
-            </CardContent>
-          </Card>
-
-          <Card data-testid="stat-deals">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Deals</CardTitle>
-              <Target className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="deals-count">{stats.totalOpportunities}</div>
-              <p className="text-xs text-muted-foreground">Opportunities</p>
-            </CardContent>
-          </Card>
-
-          <Card data-testid="stat-tickets">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tickets</CardTitle>
-              <Ticket className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="tickets-count">{stats.openTickets}</div>
-              <p className="text-xs text-muted-foreground">Open issues</p>
-            </CardContent>
-          </Card>
-
-          <Card data-testid="stat-revenue">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold" data-testid="revenue-amount">${stats.totalRevenue}</div>
-              <p className="text-xs text-muted-foreground">Closed deals</p>
-            </CardContent>
-          </Card>
+        {/* KPI Cards */}
+        <div className="mb-8">
+          <KPICards data={kpiData} isLoading={analyticsLoading} />
         </div>
 
         {/* Main Tabs */}
@@ -197,6 +182,9 @@ export default function CrmDashboard() {
 
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
+            {/* Charts */}
+            <DashboardCharts data={chartData} isLoading={analyticsLoading} />
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card data-testid="recent-leads-card">
                 <CardHeader>
