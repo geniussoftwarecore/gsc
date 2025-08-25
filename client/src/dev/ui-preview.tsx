@@ -1,33 +1,38 @@
 import React from 'react'
 import { 
-  Button, 
+  Button
+} from '../components/ui/button'
+import { 
   Card, 
   CardHeader, 
   CardTitle, 
   CardDescription, 
-  CardContent,
-  Input,
+  CardContent
+} from '../components/ui/card'
+import {
+  Input
+} from '../components/ui/input'
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-  Badge,
+  SelectValue
+} from '../components/ui/select'
+import {
+  Badge
+} from '../components/ui/badge'
+import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormDescription,
-  FormMessage,
+  TableRow
+} from '../components/ui/table'
+import {
   Label
-} from '../../../crm_ui/components/base'
+} from '../components/ui/label'
 
 /**
  * UI Preview Page - Design System Component Showcase
@@ -53,8 +58,6 @@ export default function UIPreview() {
         <CardContent className="space-y-4">
           <div className="flex flex-wrap gap-3">
             <Button variant="default">Default</Button>
-            <Button variant="primary">Primary</Button>
-            <Button variant="gsc">GSC Brand</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
@@ -88,7 +91,7 @@ export default function UIPreview() {
             <CardDescription>Card with custom shadow</CardDescription>
           </CardHeader>
           <CardContent>
-            <Badge variant="gsc">GSC Badge</Badge>
+            <Badge variant="default">GSC Badge</Badge>
           </CardContent>
         </Card>
 
@@ -99,9 +102,9 @@ export default function UIPreview() {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <Badge variant="success">Success</Badge>
-              <Badge variant="warning">Warning</Badge>
-              <Badge variant="info">Info</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="destructive">Error</Badge>
             </div>
           </CardContent>
         </Card>
@@ -154,12 +157,8 @@ export default function UIPreview() {
           <div className="flex flex-wrap gap-2">
             <Badge variant="default">Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
-            <Badge variant="success">Success</Badge>
-            <Badge variant="warning">Warning</Badge>
-            <Badge variant="info">Info</Badge>
             <Badge variant="destructive">Error</Badge>
             <Badge variant="outline">Outline</Badge>
-            <Badge variant="gsc">GSC Brand</Badge>
           </div>
         </CardContent>
       </Card>
@@ -183,7 +182,7 @@ export default function UIPreview() {
             <TableBody>
               <TableRow>
                 <TableCell className="font-medium">أحمد محمد</TableCell>
-                <TableCell><Badge variant="success">Active</Badge></TableCell>
+                <TableCell><Badge variant="default">Active</Badge></TableCell>
                 <TableCell>مطور</TableCell>
                 <TableCell className="text-right">
                   <Button size="sm" variant="outline">Edit</Button>
@@ -191,7 +190,7 @@ export default function UIPreview() {
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">سارة أحمد</TableCell>
-                <TableCell><Badge variant="warning">Pending</Badge></TableCell>
+                <TableCell><Badge variant="secondary">Pending</Badge></TableCell>
                 <TableCell>مصممة</TableCell>
                 <TableCell className="text-right">
                   <Button size="sm" variant="outline">Edit</Button>
@@ -199,7 +198,7 @@ export default function UIPreview() {
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium">محمد علي</TableCell>
-                <TableCell><Badge variant="info">Review</Badge></TableCell>
+                <TableCell><Badge variant="outline">Review</Badge></TableCell>
                 <TableCell>مدير مشروع</TableCell>
                 <TableCell className="text-right">
                   <Button size="sm" variant="outline">Edit</Button>
@@ -227,7 +226,7 @@ export default function UIPreview() {
               <p className="text-sm text-muted-foreground">مطور رئيسي</p>
             </div>
             <div className="flex gap-2">
-              <Badge variant="gsc">فريق التطوير</Badge>
+              <Badge variant="default">فريق التطوير</Badge>
               <Button size="sm">عرض الملف</Button>
             </div>
           </div>
@@ -239,8 +238,8 @@ export default function UIPreview() {
               <p className="text-sm text-muted-foreground">يحتاج إلى مراجعة التصميم والكود</p>
             </div>
             <div className="flex items-center gap-2">
-              <Badge variant="warning">عاجل</Badge>
-              <Button size="sm" variant="primary">
+              <Badge variant="destructive">عاجل</Badge>
+              <Button size="sm" variant="default">
                 بدء المراجعة
               </Button>
             </div>
