@@ -5,7 +5,8 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (email: string, redirectUrl?: string) => Promise<void>;
+  login: (email: string, password?: string, redirectUrl?: string) => Promise<void>;
+  loginWithGoogle: () => void;
   verifyMagicLink: (token: string) => Promise<void>;
   logout: () => Promise<void>;
   trialDaysRemaining: number | null;
@@ -39,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         return;
       }
 
-      const response = await fetch('/api/auth/me', {
+      const response = await fetch('/api/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -47,7 +48,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       if (response.ok) {
         const data = await response.json();
-        setUser(data.user);
+        setUser(data);
       } else {
         localStorage.removeItem('auth_token');
       }
@@ -59,19 +60,44 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
-  const login = async (email: string, redirectUrl?: string) => {
-    const response = await fetch('/api/auth/login-magic', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, redirectUrl }),
-    });
+  const login = async (email: string, password?: string, redirectUrl?: string) => {
+    if (password) {
+      // Password login flow
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: email, password }),
+      });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'Failed to send magic link');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to login');
+      }
+
+      const loginResponse = await response.json();
+      localStorage.setItem('auth_token', loginResponse.token);
+      await checkAuthStatus();
+    } else {
+      // Magic link flow (fallback)
+      const response = await fetch('/api/auth/login-magic', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, redirectUrl }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to send magic link');
+      }
     }
+  };
+
+  const loginWithGoogle = () => {
+    window.location.href = '/api/auth/google';
   };
 
   const verifyMagicLink = async (token: string) => {
@@ -118,6 +144,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     isLoading,
     isAuthenticated,
     login,
+    loginWithGoogle,
     verifyMagicLink,
     logout,
     trialDaysRemaining,

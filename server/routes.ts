@@ -20,6 +20,7 @@ import {
   insertUserSchema
 } from "@shared/schema";
 import { z } from "zod";
+import { generateToken } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Add metrics tracking middleware
@@ -95,6 +96,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get user error:", error);
       res.status(500).json({ message: "Internal server error" });
+    }
+  });
+
+  // Google OAuth routes
+  app.get("/api/auth/google", (req, res) => {
+    // Redirect to Google OAuth
+    const googleClientId = process.env.GOOGLE_CLIENT_ID || 'demo-client-id';
+    const redirectUri = `${req.protocol}://${req.get('host')}/api/auth/google/callback`;
+    const scope = 'email profile';
+    const googleAuthUrl = `https://accounts.google.com/oauth/authorize?client_id=${googleClientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}&response_type=code&access_type=offline`;
+    
+    res.redirect(googleAuthUrl);
+  });
+
+  app.get("/api/auth/google/callback", async (req, res) => {
+    try {
+      const { code } = req.query;
+      
+      if (!code) {
+        return res.redirect('/login?error=oauth_cancelled');
+      }
+
+      // For demo purposes, we'll simulate successful OAuth
+      // In production, you would exchange the code for tokens and get user info
+      const demoUser = {
+        id: 'google-user-123',
+        email: 'user@gmail.com',
+        name: 'Google User',
+        role: 'client' as const
+      };
+
+      const token = generateToken(demoUser);
+      
+      // Redirect to frontend with token
+      res.redirect(`/dashboard?token=${token}`);
+    } catch (error) {
+      console.error('Google OAuth callback error:', error);
+      res.redirect('/login?error=oauth_failed');
     }
   });
 
