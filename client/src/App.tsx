@@ -12,48 +12,120 @@ import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { MetaTags } from "@/components/seo/meta-tags";
 import { ScrollIndicator, ScrollToTop } from "@/components/ui/scroll-indicator";
+import { Suspense, lazy } from "react";
+import { PageSkeleton } from "@/components/ui/page-skeleton";
+
+// Critical routes - loaded immediately
 import Home from "@/pages/home";
-import About from "@/pages/about";
-import Services from "@/pages/services";
-import ServiceDetail from "@/pages/service-detail";
-import PortfolioIndex from "@/pages/portfolio/index";
-import ProjectDetail from "@/pages/portfolio/[slug]";
-import Frameworks from "@/pages/frameworks";
-import Contact from "@/pages/contact";
-import Dashboard from "@/pages/dashboard";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
-import Settings from "@/pages/settings";
-import AdminPanel from "@/pages/admin";
-import AdminDashboard from "@/pages/admin/dashboard";
-import AdminCRM from "@/pages/admin/crm";
-import CrmPage from "@/pages/CrmPage";
-import CrmDashboard from "@/pages/CrmDashboard";
-import UIPreview from "@/dev/ui-preview";
-import SearchDemo from "@/pages/SearchDemo";
 import NotFound from "@/pages/not-found";
+
+// Non-critical routes - lazy loaded
+const About = lazy(() => import("@/pages/about"));
+const Services = lazy(() => import("@/pages/services"));
+const ServiceDetail = lazy(() => import("@/pages/service-detail"));
+const PortfolioIndex = lazy(() => import("@/pages/portfolio/index"));
+const ProjectDetail = lazy(() => import("@/pages/portfolio/[slug]"));
+const Frameworks = lazy(() => import("@/pages/frameworks"));
+const Contact = lazy(() => import("@/pages/contact"));
+const Dashboard = lazy(() => import("@/pages/dashboard"));
+const Login = lazy(() => import("@/pages/login"));
+const Register = lazy(() => import("@/pages/register"));
+const Settings = lazy(() => import("@/pages/settings"));
+const AdminPanel = lazy(() => import("@/pages/admin"));
+const AdminDashboard = lazy(() => import("@/pages/admin/dashboard"));
+const CrmDashboard = lazy(() => import("@/pages/CrmDashboard"));
+const UIPreview = lazy(() => import("@/dev/ui-preview"));
+const SearchDemo = lazy(() => import("@/pages/SearchDemo"));
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/services" component={Services} />
-      <Route path="/services/:id" component={ServiceDetail} />
-      <Route path="/portfolio" component={PortfolioIndex} />
-      <Route path="/portfolio/:slug" component={ProjectDetail} />
-      <Route path="/frameworks" component={Frameworks} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/admin" component={AdminPanel} />
-      <Route path="/admin/dashboard" component={AdminDashboard} />
-      <Route path="/admin/crm" component={CrmDashboard} />
-      <Route path="/crm" component={CrmDashboard} />
-      <Route path="/search-demo" component={SearchDemo} />
-      <Route path="/dev/ui-preview" component={UIPreview} />
+      <Route path="/about">
+        <Suspense fallback={<PageSkeleton />}>
+          <About />
+        </Suspense>
+      </Route>
+      <Route path="/services">
+        <Suspense fallback={<PageSkeleton />}>
+          <Services />
+        </Suspense>
+      </Route>
+      <Route path="/services/:id">
+        <Suspense fallback={<PageSkeleton />}>
+          <ServiceDetail />
+        </Suspense>
+      </Route>
+      <Route path="/portfolio">
+        <Suspense fallback={<PageSkeleton />}>
+          <PortfolioIndex />
+        </Suspense>
+      </Route>
+      <Route path="/portfolio/:slug">
+        <Suspense fallback={<PageSkeleton />}>
+          <ProjectDetail />
+        </Suspense>
+      </Route>
+      <Route path="/frameworks">
+        <Suspense fallback={<PageSkeleton />}>
+          <Frameworks />
+        </Suspense>
+      </Route>
+      <Route path="/contact">
+        <Suspense fallback={<PageSkeleton />}>
+          <Contact />
+        </Suspense>
+      </Route>
+      <Route path="/dashboard">
+        <Suspense fallback={<PageSkeleton />}>
+          <Dashboard />
+        </Suspense>
+      </Route>
+      <Route path="/login">
+        <Suspense fallback={<PageSkeleton />}>
+          <Login />
+        </Suspense>
+      </Route>
+      <Route path="/register">
+        <Suspense fallback={<PageSkeleton />}>
+          <Register />
+        </Suspense>
+      </Route>
+      <Route path="/settings">
+        <Suspense fallback={<PageSkeleton />}>
+          <Settings />
+        </Suspense>
+      </Route>
+      <Route path="/admin">
+        <Suspense fallback={<PageSkeleton />}>
+          <AdminPanel />
+        </Suspense>
+      </Route>
+      <Route path="/admin/dashboard">
+        <Suspense fallback={<PageSkeleton />}>
+          <AdminDashboard />
+        </Suspense>
+      </Route>
+      <Route path="/admin/crm">
+        <Suspense fallback={<PageSkeleton />}>
+          <CrmDashboard />
+        </Suspense>
+      </Route>
+      <Route path="/crm">
+        <Suspense fallback={<PageSkeleton />}>
+          <CrmDashboard />
+        </Suspense>
+      </Route>
+      <Route path="/search-demo">
+        <Suspense fallback={<PageSkeleton />}>
+          <SearchDemo />
+        </Suspense>
+      </Route>
+      <Route path="/dev/ui-preview">
+        <Suspense fallback={<PageSkeleton />}>
+          <UIPreview />
+        </Suspense>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
