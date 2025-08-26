@@ -35,6 +35,8 @@ const AdminPanel = lazy(() => import("@/pages/admin"));
 const AdminDashboard = lazy(() => import("@/pages/admin/dashboard"));
 const CrmDashboard = lazy(() => import("@/pages/CrmDashboard"));
 const UIPreview = lazy(() => import("@/dev/ui-preview"));
+const ComponentsPreview = lazy(() => import("@/dev/components-preview"));
+const CRMComponentsPreview = lazy(() => import("@/dev/crm-components-preview"));
 const SearchDemo = lazy(() => import("@/pages/SearchDemo"));
 
 function Router() {
@@ -124,6 +126,16 @@ function Router() {
       <Route path="/dev/ui-preview">
         <Suspense fallback={<PageSkeleton />}>
           <UIPreview />
+        </Suspense>
+      </Route>
+      <Route path="/dev/components">
+        <Suspense fallback={<PageSkeleton />}>
+          <ComponentsPreview />
+        </Suspense>
+      </Route>
+      <Route path="/dev/crm">
+        <Suspense fallback={<PageSkeleton />}>
+          <CRMComponentsPreview />
         </Suspense>
       </Route>
       <Route component={NotFound} />
