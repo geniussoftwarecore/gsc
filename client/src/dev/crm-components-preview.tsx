@@ -56,23 +56,53 @@ const mockKanbanStages = [
 export default function CRMComponentsPreview() {
   const [draggedDeal, setDraggedDeal] = useState<any>(null);
   const [kanbanStages, setKanbanStages] = useState(mockKanbanStages);
+  const [apiCalls, setApiCalls] = useState<string[]>([]);
+  const [userRole, setUserRole] = useState<'admin' | 'manager' | 'agent' | 'viewer'>('agent');
 
   const handleDragStart = (deal: any) => {
     setDraggedDeal(deal);
   };
 
   const handleDrop = (targetStageId: string) => {
-    if (!draggedDeal) return;
+    if (!draggedDeal || draggedDeal.stage === targetStageId) {
+      setDraggedDeal(null);
+      return;
+    }
+
+    // Simulate API call logging
+    const apiCall = `PUT /api/crm/deals/${draggedDeal.id}/stage - ${new Date().toLocaleTimeString()}`;
+    setApiCalls(prev => [apiCall, ...prev.slice(0, 9)]); // Keep last 10 calls
 
     setKanbanStages(prev => 
       prev.map(stage => ({
         ...stage,
         deals: stage.id === targetStageId 
-          ? [...stage.deals, draggedDeal]
+          ? [...stage.deals, { ...draggedDeal, stage: targetStageId }]
           : stage.deals.filter(deal => deal.id !== draggedDeal.id)
       }))
     );
     setDraggedDeal(null);
+  };
+
+  // RBAC field filtering simulation
+  const filterEntityFields = (entity: any, role: string) => {
+    const roleFields = {
+      admin: ['*'], // All fields
+      manager: ['id', 'name', 'email', 'phone', 'company', 'revenue', 'status'],
+      agent: ['id', 'name', 'email', 'phone', 'company', 'status'], // No revenue
+      viewer: ['id', 'name', 'company', 'status'] // Limited fields
+    };
+    
+    const allowedFields = roleFields[role as keyof typeof roleFields] || [];
+    if (allowedFields.includes('*')) return entity;
+    
+    const filtered: any = {};
+    allowedFields.forEach(field => {
+      if (entity[field] !== undefined) {
+        filtered[field] = entity[field];
+      }
+    });
+    return filtered;
   };
 
   const formatCurrency = (value: number) => {
@@ -318,7 +348,9 @@ export default function CRMComponentsPreview() {
                   <DollarSign className="h-5 w-5" />
                   لوحة كانبان للصفقات
                 </CardTitle>
-                <CardDescription>إدارة الصفقات بالسحب والإفلات</CardDescription>
+                <CardDescription>
+                  إدارة الصفقات بالسحب والإفلات - API Calls: {apiCalls.length}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-5 gap-4" data-testid="kanban-board">

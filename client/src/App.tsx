@@ -42,6 +42,7 @@ const UIPreview = lazy(() => import("@/dev/ui-preview"));
 const ComponentsPreview = lazy(() => import("@/dev/components-preview"));
 const CRMComponentsPreview = lazy(() => import("@/dev/crm-components-preview"));
 const SearchDemo = lazy(() => import("@/pages/SearchDemo"));
+const TestRunner = lazy(() => import("@/dev/test-runner"));
 
 // Import specialized skeletons
 import { 
@@ -149,6 +150,11 @@ function Router() {
       <Route path="/dev/crm">
         <Suspense fallback={<PageSkeleton />}>
           <CRMComponentsPreview />
+        </Suspense>
+      </Route>
+      <Route path="/dev/test-runner">
+        <Suspense fallback={<PageSkeleton />}>
+          <TestRunner />
         </Suspense>
       </Route>
       <Route component={NotFound} />
