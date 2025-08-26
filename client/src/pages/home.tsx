@@ -4,6 +4,7 @@ import AboutStats from "@/components/sections/about-stats";
 import HomePortfolio from "@/components/sections/home-portfolio";
 import { HomeMetrics } from "@/components/sections/home-metrics";
 import Testimonials from "@/components/sections/testimonials";
+import PricingOverview from "@/components/sections/pricing-overview";
 import { HOME_METRICS } from "@/data/home-metrics";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ParallaxSection, RevealOnScroll, StaggerContainer } from "@/components/ui/enhanced-scroll-effects";
@@ -65,6 +66,12 @@ export default function Home() {
         </RevealOnScroll>
 
         <RevealOnScroll direction="up" delay={0.5} distance={60}>
+          <ParallaxSection offset={15}>
+            <PricingOverview />
+          </ParallaxSection>
+        </RevealOnScroll>
+
+        <RevealOnScroll direction="up" delay={0.55} distance={60}>
           <Testimonials />
         </RevealOnScroll>
       </StaggerContainer>

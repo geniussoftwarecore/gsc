@@ -89,6 +89,16 @@
     "required": "This field is required",
     "invalidEmail": "Invalid email address"
   },
+  "pricing": {
+    "title": "Pricing Plans",
+    "subtitle": "Choose the plan that fits your needs and budget",
+    "mostPopular": "Most Popular",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "customSolution": "Need a custom solution? Contact us for a personalized quote",
+    "monthly": "monthly",
+    "currency": "SAR"
+  },
   "servicesPage": {
     "title": "Our Services",
     "subtitle": "We provide comprehensive and specialized solutions for all your technical needs",

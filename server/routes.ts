@@ -147,11 +147,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Mount new CRM routes
   app.use("/api/crm", crmRoutes);
   
-  // Contact form submission
+  // Contact form submission - Creates CRM Lead
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
+      
+      // Create the contact submission for record keeping
       const submission = await storage.createContactSubmission(validatedData);
+      
+      // Also create a CRM Lead from the contact form
+      try {
+        const leadData = {
+          source: 'website_contact_form',
+          status: 'new',
+          priority: 'medium',
+          firstName: validatedData.name.split(' ')[0] || validatedData.name,
+          lastName: validatedData.name.split(' ').slice(1).join(' ') || '',
+          email: validatedData.email,
+          phone: validatedData.phone || '',
+          company: '', // Optional, can be added to contact form later
+          title: '',  // Optional
+          website: '',
+          description: validatedData.message,
+          estimatedValue: 0,
+          notes: `Contact form submission - Service: ${validatedData.service || 'Not specified'}`
+        };
+
+        if (storage.createLead) {
+          await storage.createLead(leadData);
+        }
+      } catch (leadError) {
+        // Don't fail the entire request if lead creation fails
+        console.error('Failed to create CRM lead from contact form:', leadError);
+      }
+      
       res.json({ success: true, data: submission });
     } catch (error) {
       if (error instanceof z.ZodError) {
