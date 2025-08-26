@@ -490,6 +490,503 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // =============================================================================
+  // TABLE CONTROLLER ENDPOINTS
+  // =============================================================================
+
+  // Enhanced contacts endpoint with table features
+  app.get("/api/table/contacts", async (req, res) => {
+    try {
+      const {
+        page = 1,
+        pageSize = 25,
+        search = '',
+        sorts = '[]',
+        filters = '[]',
+        columns = '[]'
+      } = req.query;
+
+      const pageNum = parseInt(page as string);
+      const pageSizeNum = parseInt(pageSize as string);
+      const sortData = JSON.parse(sorts as string);
+      const filterData = JSON.parse(filters as string);
+      
+      let contacts = await storage.getAllContacts();
+      
+      // Apply search
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        contacts = contacts.filter(contact =>
+          contact.first_name.toLowerCase().includes(searchTerm) ||
+          contact.last_name.toLowerCase().includes(searchTerm) ||
+          contact.primary_email?.toLowerCase().includes(searchTerm) ||
+          contact.job_title?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Apply sorting
+      if (sortData.length > 0) {
+        contacts.sort((a: any, b: any) => {
+          for (const sort of sortData) {
+            const aVal = a[sort.field] || '';
+            const bVal = b[sort.field] || '';
+            const comparison = aVal.toString().localeCompare(bVal.toString());
+            if (comparison !== 0) {
+              return sort.direction === 'asc' ? comparison : -comparison;
+            }
+          }
+          return 0;
+        });
+      }
+
+      const total = contacts.length;
+      const totalPages = Math.ceil(total / pageSizeNum);
+      const start = (pageNum - 1) * pageSizeNum;
+      const paginatedContacts = contacts.slice(start, start + pageSizeNum);
+
+      res.json({
+        data: paginatedContacts,
+        pagination: {
+          page: pageNum,
+          pageSize: pageSizeNum,
+          total,
+          totalPages
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to fetch contacts" });
+    }
+  });
+
+  // Enhanced companies endpoint with table features
+  app.get("/api/table/accounts", async (req, res) => {
+    try {
+      const {
+        page = 1,
+        pageSize = 25,
+        search = '',
+        sorts = '[]',
+        filters = '[]',
+        columns = '[]'
+      } = req.query;
+
+      const pageNum = parseInt(page as string);
+      const pageSizeNum = parseInt(pageSize as string);
+      const sortData = JSON.parse(sorts as string);
+      
+      let accounts = await storage.getAllAccounts();
+      
+      // Apply search
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        accounts = accounts.filter(account =>
+          account.legal_name.toLowerCase().includes(searchTerm) ||
+          account.industry?.toLowerCase().includes(searchTerm) ||
+          account.website?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Apply sorting
+      if (sortData.length > 0) {
+        accounts.sort((a: any, b: any) => {
+          for (const sort of sortData) {
+            const aVal = a[sort.field] || '';
+            const bVal = b[sort.field] || '';
+            const comparison = aVal.toString().localeCompare(bVal.toString());
+            if (comparison !== 0) {
+              return sort.direction === 'asc' ? comparison : -comparison;
+            }
+          }
+          return 0;
+        });
+      }
+
+      const total = accounts.length;
+      const totalPages = Math.ceil(total / pageSizeNum);
+      const start = (pageNum - 1) * pageSizeNum;
+      const paginatedAccounts = accounts.slice(start, start + pageSizeNum);
+
+      res.json({
+        data: paginatedAccounts,
+        pagination: {
+          page: pageNum,
+          pageSize: pageSizeNum,
+          total,
+          totalPages
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to fetch accounts" });
+    }
+  });
+
+  // Enhanced opportunities endpoint with table features
+  app.get("/api/table/opportunities", async (req, res) => {
+    try {
+      const {
+        page = 1,
+        pageSize = 25,
+        search = '',
+        sorts = '[]',
+        filters = '[]',
+        columns = '[]'
+      } = req.query;
+
+      const pageNum = parseInt(page as string);
+      const pageSizeNum = parseInt(pageSize as string);
+      const sortData = JSON.parse(sorts as string);
+      
+      let opportunities = await storage.getAllOpportunities();
+      
+      // Apply search
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        opportunities = opportunities.filter(opp =>
+          opp.name.toLowerCase().includes(searchTerm) ||
+          opp.stage?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Apply sorting
+      if (sortData.length > 0) {
+        opportunities.sort((a: any, b: any) => {
+          for (const sort of sortData) {
+            const aVal = a[sort.field] || '';
+            const bVal = b[sort.field] || '';
+            if (sort.field === 'expected_value') {
+              return sort.direction === 'asc' 
+                ? parseFloat(aVal) - parseFloat(bVal)
+                : parseFloat(bVal) - parseFloat(aVal);
+            }
+            const comparison = aVal.toString().localeCompare(bVal.toString());
+            if (comparison !== 0) {
+              return sort.direction === 'asc' ? comparison : -comparison;
+            }
+          }
+          return 0;
+        });
+      }
+
+      const total = opportunities.length;
+      const totalPages = Math.ceil(total / pageSizeNum);
+      const start = (pageNum - 1) * pageSizeNum;
+      const paginatedOpportunities = opportunities.slice(start, start + pageSizeNum);
+
+      res.json({
+        data: paginatedOpportunities,
+        pagination: {
+          page: pageNum,
+          pageSize: pageSizeNum,
+          total,
+          totalPages
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to fetch opportunities" });
+    }
+  });
+
+  // Enhanced tickets endpoint with table features
+  app.get("/api/table/tickets", async (req, res) => {
+    try {
+      const {
+        page = 1,
+        pageSize = 25,
+        search = '',
+        sorts = '[]',
+        filters = '[]',
+        columns = '[]'
+      } = req.query;
+
+      const pageNum = parseInt(page as string);
+      const pageSizeNum = parseInt(pageSize as string);
+      const sortData = JSON.parse(sorts as string);
+      
+      let tickets = await storage.getAllTickets();
+      
+      // Apply search
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        tickets = tickets.filter(ticket =>
+          ticket.ticket_number.toLowerCase().includes(searchTerm) ||
+          ticket.subject.toLowerCase().includes(searchTerm) ||
+          ticket.priority?.toLowerCase().includes(searchTerm) ||
+          ticket.status?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      // Apply sorting
+      if (sortData.length > 0) {
+        tickets.sort((a: any, b: any) => {
+          for (const sort of sortData) {
+            const aVal = a[sort.field] || '';
+            const bVal = b[sort.field] || '';
+            const comparison = aVal.toString().localeCompare(bVal.toString());
+            if (comparison !== 0) {
+              return sort.direction === 'asc' ? comparison : -comparison;
+            }
+          }
+          return 0;
+        });
+      }
+
+      const total = tickets.length;
+      const totalPages = Math.ceil(total / pageSizeNum);
+      const start = (pageNum - 1) * pageSizeNum;
+      const paginatedTickets = tickets.slice(start, start + pageSizeNum);
+
+      res.json({
+        data: paginatedTickets,
+        pagination: {
+          page: pageNum,
+          pageSize: pageSizeNum,
+          total,
+          totalPages
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to fetch tickets" });
+    }
+  });
+
+  // Export endpoints
+  app.get("/api/table/contacts/export", async (req, res) => {
+    try {
+      const { format, search = '', sorts = '[]', filters = '[]', columns = '[]' } = req.query;
+      
+      let contacts = await storage.getAllContacts();
+      
+      // Apply search and filters (same as above)
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        contacts = contacts.filter(contact =>
+          contact.first_name.toLowerCase().includes(searchTerm) ||
+          contact.last_name.toLowerCase().includes(searchTerm) ||
+          contact.primary_email?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      if (format === 'csv') {
+        const csv = convertToCSV(contacts, [
+          { key: 'first_name', label: 'الاسم الأول' },
+          { key: 'last_name', label: 'الاسم الأخير' },
+          { key: 'primary_email', label: 'البريد الإلكتروني' },
+          { key: 'job_title', label: 'المنصب' },
+          { key: 'created_at', label: 'تاريخ الإنشاء' }
+        ]);
+        
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=contacts.csv');
+        res.send(csv);
+      } else if (format === 'pdf') {
+        // Simple PDF generation (in production, use proper PDF library)
+        const html = generateHTMLTable(contacts, [
+          { key: 'first_name', label: 'الاسم الأول' },
+          { key: 'last_name', label: 'الاسم الأخير' },
+          { key: 'primary_email', label: 'البريد الإلكتروني' },
+          { key: 'job_title', label: 'المنصب' }
+        ]);
+        
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=contacts.html');
+        res.send(html);
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Export failed" });
+    }
+  });
+
+  // Export endpoints for other entities
+  app.get("/api/table/accounts/export", async (req, res) => {
+    try {
+      const { format, search = '', sorts = '[]', filters = '[]', columns = '[]' } = req.query;
+      let accounts = await storage.getAllAccounts();
+      
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        accounts = accounts.filter(account =>
+          account.legal_name.toLowerCase().includes(searchTerm) ||
+          account.industry?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      const columnsConfig = [
+        { key: 'legal_name', label: 'اسم الشركة' },
+        { key: 'industry', label: 'القطاع' },
+        { key: 'size_tier', label: 'الحجم' },
+        { key: 'website', label: 'الموقع' },
+        { key: 'primary_email', label: 'البريد الإلكتروني' }
+      ];
+
+      if (format === 'csv') {
+        const csv = convertToCSV(accounts, columnsConfig);
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=accounts.csv');
+        res.send(csv);
+      } else if (format === 'pdf') {
+        const html = generateHTMLTable(accounts, columnsConfig);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=accounts.html');
+        res.send(html);
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Export failed" });
+    }
+  });
+
+  app.get("/api/table/opportunities/export", async (req, res) => {
+    try {
+      const { format, search = '', sorts = '[]', filters = '[]', columns = '[]' } = req.query;
+      let opportunities = await storage.getAllOpportunities();
+      
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        opportunities = opportunities.filter(opp =>
+          opp.name.toLowerCase().includes(searchTerm) ||
+          opp.stage?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      const columnsConfig = [
+        { key: 'name', label: 'اسم الفرصة' },
+        { key: 'stage', label: 'المرحلة' },
+        { key: 'expected_value', label: 'القيمة المتوقعة' },
+        { key: 'probability', label: 'الاحتمالية' },
+        { key: 'close_date', label: 'تاريخ الإغلاق' }
+      ];
+
+      if (format === 'csv') {
+        const csv = convertToCSV(opportunities, columnsConfig);
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=opportunities.csv');
+        res.send(csv);
+      } else if (format === 'pdf') {
+        const html = generateHTMLTable(opportunities, columnsConfig);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=opportunities.html');
+        res.send(html);
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Export failed" });
+    }
+  });
+
+  app.get("/api/table/tickets/export", async (req, res) => {
+    try {
+      const { format, search = '', sorts = '[]', filters = '[]', columns = '[]' } = req.query;
+      let tickets = await storage.getAllTickets();
+      
+      if (search) {
+        const searchTerm = (search as string).toLowerCase();
+        tickets = tickets.filter(ticket =>
+          ticket.ticket_number.toLowerCase().includes(searchTerm) ||
+          ticket.subject.toLowerCase().includes(searchTerm) ||
+          ticket.priority?.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      const columnsConfig = [
+        { key: 'ticket_number', label: 'رقم التذكرة' },
+        { key: 'subject', label: 'الموضوع' },
+        { key: 'category', label: 'الفئة' },
+        { key: 'priority', label: 'الأولوية' },
+        { key: 'status', label: 'الحالة' },
+        { key: 'created_at', label: 'تاريخ الإنشاء' }
+      ];
+
+      if (format === 'csv') {
+        const csv = convertToCSV(tickets, columnsConfig);
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=tickets.csv');
+        res.send(csv);
+      } else if (format === 'pdf') {
+        const html = generateHTMLTable(tickets, columnsConfig);
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('Content-Disposition', 'attachment; filename=tickets.html');
+        res.send(html);
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Export failed" });
+    }
+  });
+
+  // Saved views endpoints
+  app.get("/api/saved-views", async (req, res) => {
+    try {
+      const { endpoint } = req.query;
+      // In a real app, fetch from database
+      const savedViews = [
+        {
+          id: '1',
+          name: 'جهات الاتصال النشطة',
+          columns: ['first_name', 'last_name', 'primary_email', 'job_title'],
+          sorts: [{ field: 'created_at', direction: 'desc' }],
+          filters: [],
+          pageSize: 25
+        }
+      ];
+      res.json(savedViews);
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to fetch saved views" });
+    }
+  });
+
+  app.post("/api/saved-views", async (req, res) => {
+    try {
+      const { name, columns, sorts, filters, pageSize, endpoint } = req.body;
+      // In a real app, save to database
+      const savedView = {
+        id: Date.now().toString(),
+        name,
+        columns,
+        sorts,
+        filters,
+        pageSize
+      };
+      res.json(savedView);
+    } catch (error) {
+      res.status(500).json({ success: false, message: "Failed to save view" });
+    }
+  });
+
+  // Helper functions for export
+  function convertToCSV(data: any[], columns: any[]) {
+    const headers = columns.map(col => col.label).join(',');
+    const rows = data.map(row => 
+      columns.map(col => {
+        const value = row[col.key] || '';
+        return `"${value.toString().replace(/"/g, '""')}"`;
+      }).join(',')
+    );
+    return '\uFEFF' + headers + '\\n' + rows.join('\\n');
+  }
+
+  function generateHTMLTable(data: any[], columns: any[]) {
+    const headers = columns.map(col => `<th>${col.label}</th>`).join('');
+    const rows = data.map(row => 
+      '<tr>' + columns.map(col => `<td>${row[col.key] || ''}</td>`).join('') + '</tr>'
+    ).join('');
+    
+    return `
+      <html dir="rtl">
+        <head>
+          <meta charset="utf-8">
+          <style>
+            table { border-collapse: collapse; width: 100%; font-family: Arial; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: right; }
+            th { background-color: #f2f2f2; font-weight: bold; }
+          </style>
+        </head>
+        <body>
+          <table>
+            <thead><tr>${headers}</tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </body>
+      </html>
+    `;
+  }
+
+  // =============================================================================
   // CRM API ENDPOINTS
   // =============================================================================
 
