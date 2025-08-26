@@ -107,6 +107,7 @@ export default function Navbar() {
                       ? "text-sky-600 dark:text-sky-400"
                       : "text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400"
                   )}
+                  data-preload={`nav-${item.href.replace('/', '') || 'home'}`}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >

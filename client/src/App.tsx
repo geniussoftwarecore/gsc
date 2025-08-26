@@ -19,7 +19,7 @@ import { PageSkeleton } from "@/components/ui/page-skeleton";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
 
-// Non-critical routes - lazy loaded
+// Non-critical routes - lazy loaded with specialized skeletons
 const About = lazy(() => import("@/pages/about"));
 const Services = lazy(() => import("@/pages/services"));
 const ServiceDetail = lazy(() => import("@/pages/service-detail"));
@@ -31,13 +31,26 @@ const Dashboard = lazy(() => import("@/pages/dashboard"));
 const Login = lazy(() => import("@/pages/login"));
 const Register = lazy(() => import("@/pages/register"));
 const Settings = lazy(() => import("@/pages/settings"));
+
+// Heavy admin/CRM components with separate chunk loading
 const AdminPanel = lazy(() => import("@/pages/admin"));
 const AdminDashboard = lazy(() => import("@/pages/admin/dashboard"));
 const CrmDashboard = lazy(() => import("@/pages/CrmDashboard"));
+
+// Dev components (only loaded in dev mode)
 const UIPreview = lazy(() => import("@/dev/ui-preview"));
 const ComponentsPreview = lazy(() => import("@/dev/components-preview"));
 const CRMComponentsPreview = lazy(() => import("@/dev/crm-components-preview"));
 const SearchDemo = lazy(() => import("@/pages/SearchDemo"));
+
+// Import specialized skeletons
+import { 
+  PortfolioSkeleton, 
+  ServicesSkeleton, 
+  DashboardSkeleton, 
+  CrmSkeleton, 
+  ContactSkeleton 
+} from "@/components/ui/specialized-skeletons";
 
 function Router() {
   return (
@@ -49,7 +62,7 @@ function Router() {
         </Suspense>
       </Route>
       <Route path="/services">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<ServicesSkeleton />}>
           <Services />
         </Suspense>
       </Route>
@@ -59,12 +72,12 @@ function Router() {
         </Suspense>
       </Route>
       <Route path="/portfolio">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<PortfolioSkeleton />}>
           <PortfolioIndex />
         </Suspense>
       </Route>
       <Route path="/portfolio/:slug">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<PortfolioSkeleton />}>
           <ProjectDetail />
         </Suspense>
       </Route>
@@ -74,12 +87,12 @@ function Router() {
         </Suspense>
       </Route>
       <Route path="/contact">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<ContactSkeleton />}>
           <Contact />
         </Suspense>
       </Route>
       <Route path="/dashboard">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<DashboardSkeleton />}>
           <Dashboard />
         </Suspense>
       </Route>
@@ -109,12 +122,12 @@ function Router() {
         </Suspense>
       </Route>
       <Route path="/admin/crm">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<CrmSkeleton />}>
           <CrmDashboard />
         </Suspense>
       </Route>
       <Route path="/crm">
-        <Suspense fallback={<PageSkeleton />}>
+        <Suspense fallback={<CrmSkeleton />}>
           <CrmDashboard />
         </Suspense>
       </Route>
