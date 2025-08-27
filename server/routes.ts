@@ -1603,6 +1603,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Cross-entity search endpoint
+  app.get("/api/search", async (req, res) => {
+    try {
+      const { q = '', entities = 'contacts,companies,deals,tickets' } = req.query;
+      const searchTerm = (q as string).toLowerCase().trim();
+      const entityTypes = (entities as string).split(',').map(e => e.trim());
+      
+      if (!searchTerm) {
+        return res.json({ results: [], totalResults: 0 });
+      }
+
+      const results: any[] = [];
+      const startTime = Date.now();
+
+      // For now, return mock results until storage methods are properly available
+      if (entityTypes.includes('contacts')) {
+        results.push({
+          id: 'contact-1',
+          type: 'contact',
+          title: 'John Doe',
+          subtitle: 'Software Engineer',
+          description: 'john@example.com',
+          metadata: {
+            email: 'john@example.com',
+            jobTitle: 'Software Engineer'
+          }
+        });
+      }
+
+      if (entityTypes.includes('companies')) {
+        results.push({
+          id: 'company-1',
+          type: 'company',
+          title: 'Tech Solutions Inc',
+          subtitle: 'Technology',
+          description: 'techsolutions.com',
+          metadata: {
+            industry: 'Technology',
+            website: 'techsolutions.com'
+          }
+        });
+      }
+
+      if (entityTypes.includes('deals')) {
+        results.push({
+          id: 'deal-1',
+          type: 'deal',
+          title: 'Software Development Project',
+          subtitle: 'negotiation - $50,000',
+          description: 'Custom software development for client',
+          metadata: {
+            stage: 'negotiation',
+            value: '50000',
+            probability: '75'
+          }
+        });
+      }
+
+      if (entityTypes.includes('tickets')) {
+        results.push({
+          id: 'ticket-1',
+          type: 'ticket',
+          title: 'Login Issues',
+          subtitle: 'open - high',
+          description: 'User cannot login to system',
+          metadata: {
+            status: 'open',
+            priority: 'high'
+          }
+        });
+      }
+
+      const searchTime = Date.now() - startTime;
+      
+      res.json({
+        results: results.filter(r => 
+          r.title.toLowerCase().includes(searchTerm) ||
+          r.subtitle.toLowerCase().includes(searchTerm) ||
+          r.description.toLowerCase().includes(searchTerm)
+        ).slice(0, 50),
+        totalResults: results.length,
+        searchTime: `${searchTime}ms`,
+        query: searchTerm,
+        entities: entityTypes
+      });
+
+    } catch (error) {
+      console.error('Search error:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Search failed" 
+      });
+    }
+  });
+
   // Mount CRM routes
   app.use("/api/crm", crmRoutes);
   
