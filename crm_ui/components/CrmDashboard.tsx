@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./base";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Badge, Input } from "./base";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../client/src/components/ui/tabs";
-import { Button } from "./base";
-import { Badge } from "./base";
-import { Input } from "./base";
 import { useLanguage } from "../../client/src/i18n/lang";
 import { 
   Users, Building2, UserCheck, Target, Activity, Ticket,

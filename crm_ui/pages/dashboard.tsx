@@ -1,8 +1,6 @@
 import React, { useState, Suspense, lazy } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "../../client/src/components/ui/card";
-import { Button } from "../components/base";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../client/src/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle, Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/base";
 import { Skeleton } from "../../client/src/components/ui/skeleton";
 import { 
   DollarSign, 
