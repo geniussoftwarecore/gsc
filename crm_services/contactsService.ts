@@ -1,11 +1,14 @@
 import { db } from "../server/db";
-import { eq, and, like, desc, asc, inArray, isNull } from "drizzle-orm";
+import { eq, and, like, desc, asc, or, gte, lte, isNotNull, count } from "drizzle-orm";
+import { contacts, accounts, users, type Contact } from "../shared/schema";
+import { AuditService } from "./auditService";
+import { filterEntityFields, type Role } from "../shared/security/roles";
 
 // DTOs for API responses
 export interface ContactDTO {
   id: string;
-  companyId?: string;
-  companyName?: string;
+  accountId?: string;
+  accountName?: string;
   firstName: string;
   lastName: string;
   fullName: string;
@@ -14,17 +17,12 @@ export interface ContactDTO {
   mobile?: string;
   jobTitle?: string;
   department?: string;
-  linkedinUrl?: string;
-  avatarUrl?: string;
   isPrimary: boolean;
-  isDecisionMaker: boolean;
-  leadSource?: string;
-  leadScore: number;
+  isActive: boolean;
+  socialProfiles?: Record<string, string>;
+  preferences?: Record<string, any>;
   tags: string[];
   notes?: string;
-  lastContactedAt?: Date;
-  ownerId?: string;
-  ownerName?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -39,43 +37,40 @@ export interface ContactListResponse {
 
 export interface ContactFilters {
   search?: string;
-  companyId?: string;
-  ownerId?: string;
-  leadSource?: string;
-  isDecisionMaker?: boolean;
-  leadScoreMin?: number;
-  leadScoreMax?: number;
+  accountId?: string;
+  jobTitle?: string;
+  department?: string;
+  isPrimary?: boolean;
+  isActive?: boolean;
   tags?: string[];
   hasEmail?: boolean;
   hasPhone?: boolean;
 }
 
 export interface ContactCreateInput {
-  companyId?: string;
-  firstName: string;
-  lastName: string;
+  accountId?: string;
+  name: string;
   email?: string;
   phone?: string;
   mobile?: string;
   jobTitle?: string;
   department?: string;
-  linkedinUrl?: string;
-  avatarUrl?: string;
   isPrimary?: boolean;
-  isDecisionMaker?: boolean;
-  leadSource?: string;
-  leadScore?: number;
+  isActive?: boolean;
+  socialProfiles?: Record<string, string>;
+  preferences?: Record<string, any>;
   tags?: string[];
   notes?: string;
-  ownerId?: string;
 }
 
-export interface ContactUpdateInput extends Partial<ContactCreateInput> {
-  lastContactedAt?: Date;
-}
+export interface ContactUpdateInput extends Partial<ContactCreateInput> {}
 
 class ContactsService {
+  /**
+   * Get contacts with role-based field filtering
+   */
   async getContacts(
+    userRole: Role,
     filters: ContactFilters = {},
     page: number = 1,
     limit: number = 20,
@@ -90,225 +85,307 @@ class ContactsService {
     if (filters.search) {
       const searchTerm = `%${filters.search}%`;
       conditions.push(
-        db.$with('search').as(
-          db.select().from('crm_contacts').where(
-            db.or(
-              like('first_name', searchTerm),
-              like('last_name', searchTerm),
-              like('email', searchTerm),
-              like('job_title', searchTerm)
-            )
-          )
+        or(
+          like(contacts.name, searchTerm),
+          like(contacts.email, searchTerm),
+          like(contacts.jobTitle, searchTerm)
         )
       );
     }
     
-    if (filters.companyId) {
-      conditions.push(eq('company_id', filters.companyId));
+    if (filters.accountId) {
+      conditions.push(eq(contacts.accountId, filters.accountId));
     }
     
-    if (filters.ownerId) {
-      conditions.push(eq('owner_id', filters.ownerId));
+    if (filters.jobTitle) {
+      conditions.push(like(contacts.jobTitle, `%${filters.jobTitle}%`));
     }
     
-    if (filters.leadSource) {
-      conditions.push(eq('lead_source', filters.leadSource));
+    if (filters.department) {
+      conditions.push(like(contacts.department, `%${filters.department}%`));
     }
     
-    if (filters.isDecisionMaker !== undefined) {
-      conditions.push(eq('is_decision_maker', filters.isDecisionMaker));
+    if (filters.isPrimary !== undefined) {
+      conditions.push(eq(contacts.isPrimary, filters.isPrimary ? "true" : "false"));
     }
     
-    if (filters.leadScoreMin !== undefined) {
-      conditions.push(gte('lead_score', filters.leadScoreMin));
-    }
-    
-    if (filters.leadScoreMax !== undefined) {
-      conditions.push(lte('lead_score', filters.leadScoreMax));
+    if (filters.isActive !== undefined) {
+      conditions.push(eq(contacts.isActive, filters.isActive ? "true" : "false"));
     }
     
     if (filters.hasEmail) {
-      conditions.push(isNull('email').not());
+      conditions.push(isNotNull(contacts.email));
     }
     
     if (filters.hasPhone) {
       conditions.push(
-        db.or(
-          isNull('phone').not(),
-          isNull('mobile').not()
+        or(
+          isNotNull(contacts.phone),
+          isNotNull(contacts.mobile)
         )
       );
     }
 
-    // Execute query with joins
-    const query = db
-      .select({
-        contact: 'crm_contacts.*',
-        companyName: 'crm_companies.name',
-        ownerName: 'users.name'
-      })
-      .from('crm_contacts')
-      .leftJoin('crm_companies', eq('crm_contacts.company_id', 'crm_companies.id'))
-      .leftJoin('users', eq('crm_contacts.owner_id', 'users.id'))
-      .where(conditions.length > 0 ? and(...conditions) : undefined)
-      .orderBy(sortOrder === 'desc' ? desc(sortBy) : asc(sortBy))
-      .limit(limit)
-      .offset(offset);
+    const whereClause = conditions.length > 0 
+      ? (conditions.length > 1 ? and(...conditions) : conditions[0])
+      : undefined;
 
-    const [contacts, [{ count }]] = await Promise.all([
-      query,
-      db.select({ count: db.count() }).from('crm_contacts').where(conditions.length > 0 ? and(...conditions) : undefined)
+    // Execute query with joins
+    const sortColumn = sortBy === 'name' ? contacts.name : 
+                      sortBy === 'email' ? contacts.email :
+                      sortBy === 'created_at' ? contacts.createdAt :
+                      contacts.updatedAt;
+    
+    const [contactRows, [{ count: totalCount }]] = await Promise.all([
+      db
+        .select({
+          contact: contacts,
+          accountName: accounts.name
+        })
+        .from(contacts)
+        .leftJoin(accounts, eq(contacts.accountId, accounts.id))
+        .where(whereClause)
+        .orderBy(sortOrder === 'desc' ? desc(sortColumn) : asc(sortColumn))
+        .limit(limit)
+        .offset(offset),
+      
+      db
+        .select({ count: count() })
+        .from(contacts)
+        .where(whereClause)
     ]);
 
-    // Transform to DTOs
-    const contactDTOs: ContactDTO[] = contacts.map(row => ({
-      id: row.contact.id,
-      companyId: row.contact.company_id,
-      companyName: row.companyName,
-      firstName: row.contact.first_name,
-      lastName: row.contact.last_name,
-      fullName: `${row.contact.first_name} ${row.contact.last_name}`,
-      email: row.contact.email,
-      phone: row.contact.phone,
-      mobile: row.contact.mobile,
-      jobTitle: row.contact.job_title,
-      department: row.contact.department,
-      linkedinUrl: row.contact.linkedin_url,
-      avatarUrl: row.contact.avatar_url,
-      isPrimary: row.contact.is_primary,
-      isDecisionMaker: row.contact.is_decision_maker,
-      leadSource: row.contact.lead_source,
-      leadScore: row.contact.lead_score,
-      tags: row.contact.tags || [],
-      notes: row.contact.notes,
-      lastContactedAt: row.contact.last_contacted_at,
-      ownerId: row.contact.owner_id,
-      ownerName: row.ownerName,
-      createdAt: row.contact.created_at,
-      updatedAt: row.contact.updated_at
-    }));
+    // Transform to DTOs with role-based field filtering
+    const contactDTOs: ContactDTO[] = contactRows.map(row => {
+      const [firstName, ...lastNameParts] = (row.contact.name || '').split(' ');
+      const lastName = lastNameParts.join(' ');
+      
+      const contactData = {
+        id: row.contact.id,
+        accountId: row.contact.accountId,
+        accountName: row.accountName,
+        firstName,
+        lastName,
+        fullName: row.contact.name || '',
+        email: row.contact.email,
+        phone: row.contact.phone,
+        mobile: row.contact.mobile,
+        jobTitle: row.contact.jobTitle,
+        department: row.contact.department,
+        isPrimary: row.contact.isPrimary === "true",
+        isActive: row.contact.isActive === "true",
+        socialProfiles: row.contact.socialProfiles || {},
+        preferences: row.contact.preferences || {},
+        tags: row.contact.tags || [],
+        notes: row.contact.notes,
+        createdAt: row.contact.createdAt,
+        updatedAt: row.contact.updatedAt
+      };
+
+      // Filter fields based on user role
+      return filterEntityFields(contactData, userRole, 'contacts') as ContactDTO;
+    });
 
     return {
       contacts: contactDTOs,
-      total: count,
+      total: totalCount,
       page,
       limit,
-      totalPages: Math.ceil(count / limit)
+      totalPages: Math.ceil(totalCount / limit)
     };
   }
 
-  async getContactById(id: string): Promise<ContactDTO | null> {
+  async getContactById(id: string, userRole: Role): Promise<ContactDTO | null> {
     const result = await db
       .select({
-        contact: 'crm_contacts.*',
-        companyName: 'crm_companies.name',
-        ownerName: 'users.name'
+        contact: contacts,
+        accountName: accounts.name
       })
-      .from('crm_contacts')
-      .leftJoin('crm_companies', eq('crm_contacts.company_id', 'crm_companies.id'))
-      .leftJoin('users', eq('crm_contacts.owner_id', 'users.id'))
-      .where(eq('crm_contacts.id', id))
+      .from(contacts)
+      .leftJoin(accounts, eq(contacts.accountId, accounts.id))
+      .where(eq(contacts.id, id))
       .limit(1);
 
     if (!result.length) return null;
 
     const row = result[0];
-    return {
+    const [firstName, ...lastNameParts] = (row.contact.name || '').split(' ');
+    const lastName = lastNameParts.join(' ');
+    
+    const contactData = {
       id: row.contact.id,
-      companyId: row.contact.company_id,
-      companyName: row.companyName,
-      firstName: row.contact.first_name,
-      lastName: row.contact.last_name,
-      fullName: `${row.contact.first_name} ${row.contact.last_name}`,
+      accountId: row.contact.accountId,
+      accountName: row.accountName,
+      firstName,
+      lastName,
+      fullName: row.contact.name || '',
       email: row.contact.email,
       phone: row.contact.phone,
       mobile: row.contact.mobile,
-      jobTitle: row.contact.job_title,
+      jobTitle: row.contact.jobTitle,
       department: row.contact.department,
-      linkedinUrl: row.contact.linkedin_url,
-      avatarUrl: row.contact.avatar_url,
-      isPrimary: row.contact.is_primary,
-      isDecisionMaker: row.contact.is_decision_maker,
-      leadSource: row.contact.lead_source,
-      leadScore: row.contact.lead_score,
+      isPrimary: row.contact.isPrimary === "true",
+      isActive: row.contact.isActive === "true",
+      socialProfiles: row.contact.socialProfiles || {},
+      preferences: row.contact.preferences || {},
       tags: row.contact.tags || [],
       notes: row.contact.notes,
-      lastContactedAt: row.contact.last_contacted_at,
-      ownerId: row.contact.owner_id,
-      ownerName: row.ownerName,
-      createdAt: row.contact.created_at,
-      updatedAt: row.contact.updated_at
+      createdAt: row.contact.createdAt,
+      updatedAt: row.contact.updatedAt
     };
+
+    // Filter fields based on user role
+    return filterEntityFields(contactData, userRole, 'contacts') as ContactDTO;
   }
 
-  async createContact(input: ContactCreateInput): Promise<ContactDTO> {
-    const [created] = await db.insert('crm_contacts').values({
-      company_id: input.companyId,
-      first_name: input.firstName,
-      last_name: input.lastName,
+  async createContact(
+    input: ContactCreateInput, 
+    actorId: string, 
+    userRole: Role,
+    req?: any
+  ): Promise<ContactDTO> {
+    const [created] = await db.insert(contacts).values({
+      accountId: input.accountId,
+      name: input.name,
       email: input.email,
       phone: input.phone,
       mobile: input.mobile,
-      job_title: input.jobTitle,
+      jobTitle: input.jobTitle,
       department: input.department,
-      linkedin_url: input.linkedinUrl,
-      avatar_url: input.avatarUrl,
-      is_primary: input.isPrimary || false,
-      is_decision_maker: input.isDecisionMaker || false,
-      lead_source: input.leadSource,
-      lead_score: input.leadScore || 0,
+      isPrimary: input.isPrimary ? "true" : "false",
+      isActive: input.isActive !== false ? "true" : "false",
+      socialProfiles: input.socialProfiles || {},
+      preferences: input.preferences || {},
       tags: input.tags || [],
       notes: input.notes,
-      owner_id: input.ownerId,
-      updated_at: new Date()
+      updatedAt: new Date()
     }).returning();
 
-    return this.getContactById(created.id)!;
+    // Log audit trail
+    await AuditService.logFromRequest(
+      req || { user: { id: actorId } },
+      'create',
+      'contacts',
+      created.id,
+      {
+        entityName: created.name,
+        after: created
+      }
+    );
+
+    const result = await this.getContactById(created.id, userRole);
+    if (!result) {
+      throw new Error('Failed to retrieve created contact');
+    }
+    return result;
   }
 
-  async updateContact(id: string, input: ContactUpdateInput): Promise<ContactDTO | null> {
-    const [updated] = await db.update('crm_contacts')
+  async updateContact(
+    id: string, 
+    input: ContactUpdateInput, 
+    actorId: string, 
+    userRole: Role,
+    req?: any
+  ): Promise<ContactDTO | null> {
+    // Get current data for audit log
+    const currentContact = await db
+      .select()
+      .from(contacts)
+      .where(eq(contacts.id, id))
+      .limit(1);
+
+    if (!currentContact.length) return null;
+
+    const beforeData = currentContact[0];
+
+    const [updated] = await db.update(contacts)
       .set({
-        company_id: input.companyId,
-        first_name: input.firstName,
-        last_name: input.lastName,
+        accountId: input.accountId,
+        name: input.name,
         email: input.email,
         phone: input.phone,
         mobile: input.mobile,
-        job_title: input.jobTitle,
+        jobTitle: input.jobTitle,
         department: input.department,
-        linkedin_url: input.linkedinUrl,
-        avatar_url: input.avatarUrl,
-        is_primary: input.isPrimary,
-        is_decision_maker: input.isDecisionMaker,
-        lead_source: input.leadSource,
-        lead_score: input.leadScore,
+        isPrimary: input.isPrimary !== undefined ? (input.isPrimary ? "true" : "false") : undefined,
+        isActive: input.isActive !== undefined ? (input.isActive ? "true" : "false") : undefined,
+        socialProfiles: input.socialProfiles,
+        preferences: input.preferences,
         tags: input.tags,
         notes: input.notes,
-        last_contacted_at: input.lastContactedAt,
-        owner_id: input.ownerId,
-        updated_at: new Date()
+        updatedAt: new Date()
       })
-      .where(eq('id', id))
+      .where(eq(contacts.id, id))
       .returning();
 
     if (!updated) return null;
-    return this.getContactById(id);
+
+    // Log audit trail
+    await AuditService.logFromRequest(
+      req || { user: { id: actorId } },
+      'update',
+      'contacts',
+      id,
+      {
+        entityName: updated.name,
+        before: beforeData,
+        after: updated
+      }
+    );
+
+    return this.getContactById(id, userRole);
   }
 
-  async deleteContact(id: string): Promise<boolean> {
-    const result = await db.delete('crm_contacts').where(eq('id', id));
-    return result.rowCount > 0;
+  async deleteContact(
+    id: string, 
+    actorId: string, 
+    userRole: Role,
+    req?: any
+  ): Promise<boolean> {
+    // Get current data for audit log
+    const currentContact = await db
+      .select()
+      .from(contacts)
+      .where(eq(contacts.id, id))
+      .limit(1);
+
+    if (!currentContact.length) return false;
+
+    const result = await db.delete(contacts).where(eq(contacts.id, id));
+    
+    if (result.rowCount && result.rowCount > 0) {
+      // Log audit trail
+      await AuditService.logFromRequest(
+        req || { user: { id: actorId } },
+        'delete',
+        'contacts',
+        id,
+        {
+          entityName: currentContact[0].name,
+          before: currentContact[0]
+        }
+      );
+      return true;
+    }
+    
+    return false;
   }
 
-  async getContactsByCompany(companyId: string): Promise<ContactDTO[]> {
-    const result = await this.getContacts({ companyId }, 1, 100);
+  async getContactsByAccount(accountId: string, userRole: Role): Promise<ContactDTO[]> {
+    const result = await this.getContacts(userRole, { accountId }, 1, 100);
     return result.contacts;
   }
 
-  async searchContacts(query: string, limit: number = 10): Promise<ContactDTO[]> {
-    const result = await this.getContacts({ search: query }, 1, limit);
+  async searchContacts(query: string, userRole: Role, limit: number = 10): Promise<ContactDTO[]> {
+    const result = await this.getContacts(userRole, { search: query }, 1, limit);
     return result.contacts;
+  }
+
+  /**
+   * Get audit history for a contact
+   */
+  async getContactHistory(contactId: string, page: number = 1, limit: number = 20) {
+    return AuditService.getEntityHistory('contacts', contactId, page, limit);
   }
 }
 

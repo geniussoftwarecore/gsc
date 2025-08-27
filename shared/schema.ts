@@ -528,6 +528,29 @@ export const insertTicketStatusSchema = createInsertSchema(ticketStatus).omit({
   updatedAt: true,
 });
 
+// Audit Logs Table for tracking all CRM actions
+export const auditLogs = pgTable("audit_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  actorId: varchar("actor_id").references(() => users.id).notNull(),
+  action: text("action").notNull(), // create, update, delete, export, assign, approve, escalate
+  entityType: text("entity_type").notNull(), // contacts, companies, deals, tickets, users
+  entityId: varchar("entity_id").notNull(),
+  diff: jsonb("diff").$type<{
+    before?: Record<string, any>;
+    after?: Record<string, any>;
+    changes?: Array<{field: string, oldValue: any, newValue: any}>;
+  }>(),
+  ip: text("ip"),
+  userAgent: text("user_agent"),
+  metadata: jsonb("metadata").$type<Record<string, any>>(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const insertAuditLogSchema = createInsertSchema(auditLogs).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
@@ -599,3 +622,6 @@ export type DealStage = typeof dealStages.$inferSelect;
 
 export type InsertTicketStatus = z.infer<typeof insertTicketStatusSchema>;
 export type TicketStatus = typeof ticketStatus.$inferSelect;
+
+export type InsertAuditLog = z.infer<typeof insertAuditLogSchema>;
+export type AuditLog = typeof auditLogs.$inferSelect;

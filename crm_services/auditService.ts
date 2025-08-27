@@ -1,6 +1,6 @@
 import { db } from "../server/db";
-import { crmAuditLogs } from "@shared/crm-schema";
-import { eq, and, desc, asc } from "drizzle-orm";
+import { auditLogs, users } from "../shared/schema";
+import { eq, and, desc, asc, sql, count } from "drizzle-orm";
 import { Request } from "express";
 
 export interface AuditLogEntry {
@@ -78,14 +78,28 @@ export class AuditService {
         changed
       } : undefined;
 
-      await db.insert(crmAuditLogs).values({
+      await db.insert(auditLogs).values({
         actorId,
         action,
         entityType,
         entityId,
-        entityName,
-        diff,
-        metadata
+        diff: {
+          before,
+          after,
+          changes: changed?.map(field => ({
+            field,
+            oldValue: before?.[field],
+            newValue: after?.[field]
+          }))
+        },
+        ip: metadata?.ipAddress,
+        userAgent: metadata?.userAgent,
+        metadata: {
+          entityName,
+          source: metadata?.source,
+          requestId: metadata?.requestId,
+          sessionId: metadata?.sessionId
+        }
       });
 
     } catch (error) {
@@ -145,10 +159,10 @@ export class AuditService {
     // Build where conditions
     const conditions = [];
     
-    if (actorId) conditions.push(eq(crmAuditLogs.actorId, actorId));
-    if (entityType) conditions.push(eq(crmAuditLogs.entityType, entityType));
-    if (entityId) conditions.push(eq(crmAuditLogs.entityId, entityId));
-    if (action) conditions.push(eq(crmAuditLogs.action, action));
+    if (actorId) conditions.push(eq(auditLogs.actorId, actorId));
+    if (entityType) conditions.push(eq(auditLogs.entityType, entityType));
+    if (entityId) conditions.push(eq(auditLogs.entityId, entityId));
+    if (action) conditions.push(eq(auditLogs.action, action));
     
     // Date range filtering would need additional SQL operators
     // For now, keeping it simple
@@ -156,27 +170,49 @@ export class AuditService {
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
     // Get total count
-    const [{ count }] = await db
-      .select({ count: sql<number>`count(*)`.as("count") })
-      .from(crmAuditLogs)
+    const [{ count: totalCount }] = await db
+      .select({ count: count() })
+      .from(auditLogs)
       .where(whereClause);
 
     // Get paginated results
     const offset = (page - 1) * limit;
-    const logs = await db
-      .select()
-      .from(crmAuditLogs)
+    const logRows = await db
+      .select({
+        log: auditLogs,
+        actorName: users.name
+      })
+      .from(auditLogs)
+      .leftJoin(users, eq(auditLogs.actorId, users.id))
       .where(whereClause)
-      .orderBy(desc(crmAuditLogs.createdAt))
+      .orderBy(desc(auditLogs.createdAt))
       .limit(limit)
       .offset(offset);
 
+    const logs: AuditLogEntry[] = logRows.map(row => ({
+      id: row.log.id,
+      actorId: row.log.actorId,
+      action: row.log.action,
+      entityType: row.log.entityType,
+      entityId: row.log.entityId,
+      entityName: row.actorName || row.log.metadata?.entityName,
+      diff: row.log.diff,
+      metadata: {
+        userAgent: row.log.userAgent,
+        ipAddress: row.log.ip,
+        source: row.log.metadata?.source,
+        requestId: row.log.metadata?.requestId,
+        sessionId: row.log.metadata?.sessionId
+      },
+      createdAt: row.log.createdAt
+    }));
+
     return {
-      logs: logs as AuditLogEntry[],
-      total: count,
+      logs,
+      total: totalCount,
       page,
       limit,
-      totalPages: Math.ceil(count / limit)
+      totalPages: Math.ceil(totalCount / limit)
     };
   }
 
@@ -224,17 +260,17 @@ export class AuditService {
     // For now, returning basic structure
     
     const conditions = [];
-    if (entityType) conditions.push(eq(crmAuditLogs.entityType, entityType));
+    if (entityType) conditions.push(eq(auditLogs.entityType, entityType));
     
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
     
-    const [{ count }] = await db
-      .select({ count: sql<number>`count(*)`.as("count") })
-      .from(crmAuditLogs)
+    const [{ count: totalCount }] = await db
+      .select({ count: count() })
+      .from(auditLogs)
       .where(whereClause);
 
     return {
-      totalEvents: count,
+      totalEvents: totalCount,
       actionBreakdown: {}, // Would need GROUP BY queries
       topActors: [] // Would need GROUP BY and ORDER BY queries
     };
@@ -290,6 +326,4 @@ export function auditMiddleware(
   };
 }
 
-// Import sql for count queries
-import { sql } from "drizzle-orm";
 import { Response, NextFunction } from "express";
