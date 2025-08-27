@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, jsonb, index, unique } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -7,18 +7,22 @@ export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
-  role: text("role").default("client"), // client, admin, sales, support
+  role: text("role").notNull().default("client"), // client, admin, manager, agent, viewer
   name: text("name"),
   email: text("email"),
   phone: text("phone"),
   department: text("department"),
   position: text("position"),
   avatar: text("avatar"),
-  isActive: text("is_active").default("true"),
+  isActive: text("is_active").notNull().default("true"),
   lastLoginAt: timestamp("last_login_at"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  roleIdx: index("users_role_idx").on(table.role),
+  activeIdx: index("users_active_idx").on(table.isActive),
+  emailIdx: index("users_email_idx").on(table.email),
+}));
 
 export const contactSubmissions = pgTable("contact_submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -152,14 +156,19 @@ export const supportTickets = pgTable("support_tickets", {
   statusId: varchar("status_id").references(() => ticketStatus.id),
   subject: text("subject").notNull(),
   description: text("description").notNull(),
-  status: text("status").default("open"), // open, in-progress, resolved, closed
-  priority: text("priority").default("medium"), // low, medium, high, urgent
-  category: text("category").default("general"), // general, technical, billing, feature-request
-  assignedTo: varchar("assigned_to"),
-  attachments: jsonb("attachments").$type<Array<{id: string, name: string, url: string}>>(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  status: text("status").notNull().default("open"), // open, in-progress, resolved, closed
+  priority: text("priority").notNull().default("medium"), // low, medium, high, urgent
+  category: text("category").notNull().default("general"), // general, technical, billing, feature-request
+  assignedTo: varchar("assigned_to").references(() => users.id),
+  attachments: jsonb("attachments").$type<Array<{id: string, name: string, url: string}>>().default([]),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  statusAssigneeIdx: index("tickets_status_assignee_idx").on(table.status, table.assignedTo),
+  priorityIdx: index("tickets_priority_idx").on(table.priority),
+  categoryIdx: index("tickets_category_idx").on(table.category),
+  userIdx: index("tickets_user_idx").on(table.userId),
+}));
 
 export const ticketMessages = pgTable("ticket_messages", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -221,24 +230,30 @@ export const dealStages = pgTable("deal_stages", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   position: text("position").notNull(),
-  probability: text("probability").default("0"), // 0-100
-  color: text("color").default("#3b82f6"),
-  isClosed: text("is_closed").default("false"),
-  isWon: text("is_won").default("false"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  probability: text("probability").notNull().default("0"), // 0-100
+  color: text("color").notNull().default("#3b82f6"),
+  isClosed: text("is_closed").notNull().default("false"),
+  isWon: text("is_won").notNull().default("false"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  positionIdx: index("deal_stages_position_idx").on(table.position),
+  nameUnique: unique("deal_stages_name_unique").on(table.name),
+}));
 
 // Ticket Status Table
 export const ticketStatus = pgTable("ticket_status", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   position: text("position").notNull(),
-  color: text("color").default("#3b82f6"),
-  isClosed: text("is_closed").default("false"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  color: text("color").notNull().default("#3b82f6"),
+  isClosed: text("is_closed").notNull().default("false"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  positionIdx: index("ticket_status_position_idx").on(table.position),
+  nameUnique: unique("ticket_status_name_unique").on(table.name),
+}));
 
 export const leads = pgTable("leads", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -263,7 +278,7 @@ export const leads = pgTable("leads", {
 export const accounts = pgTable("accounts", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
-  type: text("type").default("prospect"), // prospect, customer, partner, vendor
+  type: text("type").notNull().default("prospect"), // prospect, customer, partner, vendor
   industry: text("industry"),
   website: text("website"),
   phone: text("phone"),
@@ -275,12 +290,17 @@ export const accounts = pgTable("accounts", {
   assignedTo: varchar("assigned_to").references(() => users.id),
   parentAccountId: varchar("parent_account_id"),
   description: text("description"),
-  tags: jsonb("tags").$type<string[]>(),
-  customFields: jsonb("custom_fields").$type<Record<string, any>>(),
-  isActive: text("is_active").default("true"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  tags: jsonb("tags").$type<string[]>().default([]),
+  customFields: jsonb("custom_fields").$type<Record<string, any>>().default({}),
+  isActive: text("is_active").notNull().default("true"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  typeAssignedIdx: index("accounts_type_assigned_idx").on(table.type, table.assignedTo),
+  activeIdx: index("accounts_active_idx").on(table.isActive),
+  industryIdx: index("accounts_industry_idx").on(table.industry),
+  nameIdx: index("accounts_name_idx").on(table.name),
+}));
 
 export const contacts = pgTable("contacts", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -292,16 +312,21 @@ export const contacts = pgTable("contacts", {
   mobile: text("mobile"),
   jobTitle: text("job_title"),
   department: text("department"),
-  isPrimary: text("is_primary").default("false"),
-  isActive: text("is_active").default("true"),
+  isPrimary: text("is_primary").notNull().default("false"),
+  isActive: text("is_active").notNull().default("true"),
   dateOfBirth: timestamp("date_of_birth"),
-  socialProfiles: jsonb("social_profiles").$type<Record<string, string>>(),
-  preferences: jsonb("preferences").$type<Record<string, any>>(),
-  tags: jsonb("tags").$type<string[]>(),
+  socialProfiles: jsonb("social_profiles").$type<Record<string, string>>().default({}),
+  preferences: jsonb("preferences").$type<Record<string, any>>().default({}),
+  tags: jsonb("tags").$type<string[]>().default([]),
   notes: text("notes"),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  accountIdx: index("contacts_account_idx").on(table.accountId),
+  activeIdx: index("contacts_active_idx").on(table.isActive),
+  emailIdx: index("contacts_email_idx").on(table.email),
+  primaryAccountIdx: index("contacts_primary_account_idx").on(table.isPrimary, table.accountId),
+}));
 
 export const opportunities = pgTable("opportunities", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -309,9 +334,9 @@ export const opportunities = pgTable("opportunities", {
   accountId: varchar("account_id").references(() => accounts.id),
   contactId: varchar("contact_id").references(() => contacts.id),
   stageId: varchar("stage_id").references(() => dealStages.id),
-  stage: text("stage").default("prospecting"), // prospecting, qualification, proposal, negotiation, closed-won, closed-lost
+  stage: text("stage").notNull().default("prospecting"), // prospecting, qualification, proposal, negotiation, closed-won, closed-lost
   amount: text("amount"),
-  probability: text("probability").default("0"), // 0-100 percentage
+  probability: text("probability").notNull().default("0"), // 0-100 percentage
   expectedCloseDate: timestamp("expected_close_date"),
   actualCloseDate: timestamp("actual_close_date"),
   leadSource: text("lead_source"),
@@ -320,11 +345,16 @@ export const opportunities = pgTable("opportunities", {
   nextStep: text("next_step"),
   assignedTo: varchar("assigned_to").references(() => users.id),
   competitorId: varchar("competitor_id"),
-  tags: jsonb("tags").$type<string[]>(),
-  customFields: jsonb("custom_fields").$type<Record<string, any>>(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
-});
+  tags: jsonb("tags").$type<string[]>().default([]),
+  customFields: jsonb("custom_fields").$type<Record<string, any>>().default({}),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+}, (table) => ({
+  stageOwnerIdx: index("opportunities_stage_owner_idx").on(table.stage, table.assignedTo),
+  accountIdx: index("opportunities_account_idx").on(table.accountId),
+  closeDataIdx: index("opportunities_close_date_idx").on(table.expectedCloseDate),
+  stageIdx: index("opportunities_stage_idx").on(table.stage),
+}));
 
 export const tasks = pgTable("tasks", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
