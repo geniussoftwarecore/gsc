@@ -13,17 +13,23 @@ import bcrypt from "bcrypt";
 
 export async function seedDatabase() {
   if (!db) {
-    console.log("Database not available, skipping seeding");
+    console.log("Database not available, skipping seeding - using in-memory storage");
     return;
   }
 
   try {
     console.log("Starting database seeding...");
 
-    // Check if data already exists
-    const existingUsers = await db.select().from(users).limit(1);
-    if (existingUsers.length > 0) {
-      console.log("Database already seeded, skipping...");
+    // Test database connection first
+    try {
+      const existingUsers = await db.select().from(users).limit(1);
+      if (existingUsers.length > 0) {
+        console.log("Database already seeded, skipping...");
+        return;
+      }
+    } catch (testError: any) {
+      console.log("Database tables not ready or connection failed:", testError.message);
+      console.log("Falling back to in-memory storage");
       return;
     }
 
