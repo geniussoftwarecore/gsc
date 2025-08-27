@@ -34,6 +34,29 @@ import {
   Label
 } from '../components/ui/label'
 
+// Import CRM base components for comparison
+import { 
+  Button as CrmButton,
+  Card as CrmCard,
+  CardHeader as CrmCardHeader,
+  CardTitle as CrmCardTitle,
+  CardDescription as CrmCardDescription,
+  CardContent as CrmCardContent,
+  Input as CrmInput,
+  Badge as CrmBadge,
+  Table as CrmTable,
+  TableBody as CrmTableBody,
+  TableCell as CrmTableCell,
+  TableHead as CrmTableHead,
+  TableHeader as CrmTableHeader,
+  TableRow as CrmTableRow,
+  Select as CrmSelect,
+  SelectContent as CrmSelectContent,
+  SelectItem as CrmSelectItem,
+  SelectTrigger as CrmSelectTrigger,
+  SelectValue as CrmSelectValue,
+} from '../../../crm_ui/components/base'
+
 /**
  * UI Preview Page - Design System Component Showcase
  * 
@@ -281,6 +304,105 @@ export default function UIPreview() {
           {dir === 'ltr' && <hr className="my-8" />}
         </div>
       ))}
+
+      {/* Side-by-Side Comparison */}
+      <div className="py-8 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-2">Design System Consistency Test</h2>
+            <p className="text-muted-foreground">
+              Client UI vs CRM UI components should be visually identical
+            </p>
+            <div className="h-1 w-16 bg-primary rounded mt-2"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Client UI Column */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Client UI Components</CardTitle>
+                <CardDescription>Original shadcn/ui components</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="default">Default</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="outline">Outline</Button>
+                </div>
+                <div className="space-y-2">
+                  <Input placeholder="Sample input field" />
+                  <div className="flex gap-2">
+                    <Badge>Default</Badge>
+                    <Badge variant="secondary">Secondary</Badge>
+                    <Badge variant="outline">Outline</Badge>
+                  </div>
+                </div>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>John Doe</TableCell>
+                      <TableCell><Badge>Active</Badge></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
+            {/* CRM UI Column */}
+            <CrmCard>
+              <CrmCardHeader>
+                <CrmCardTitle>CRM UI Components</CrmCardTitle>
+                <CrmCardDescription>Centralized base components</CrmCardDescription>
+              </CrmCardHeader>
+              <CrmCardContent className="space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  <CrmButton variant="default">Default</CrmButton>
+                  <CrmButton variant="secondary">Secondary</CrmButton>
+                  <CrmButton variant="outline">Outline</CrmButton>
+                </div>
+                <div className="space-y-2">
+                  <CrmInput placeholder="Sample input field" />
+                  <div className="flex gap-2">
+                    <CrmBadge>Default</CrmBadge>
+                    <CrmBadge variant="secondary">Secondary</CrmBadge>
+                    <CrmBadge variant="outline">Outline</CrmBadge>
+                  </div>
+                </div>
+                <CrmTable>
+                  <CrmTableHeader>
+                    <CrmTableRow>
+                      <CrmTableHead>Name</CrmTableHead>
+                      <CrmTableHead>Status</CrmTableHead>
+                    </CrmTableRow>
+                  </CrmTableHeader>
+                  <CrmTableBody>
+                    <CrmTableRow>
+                      <CrmTableCell>John Doe</CrmTableCell>
+                      <CrmTableCell><CrmBadge>Active</CrmBadge></CrmTableCell>
+                    </CrmTableRow>
+                  </CrmTableBody>
+                </CrmTable>
+              </CrmCardContent>
+            </CrmCard>
+          </div>
+
+          <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <h3 className="text-green-800 font-semibold mb-2">✅ Design System Validation</h3>
+            <ul className="text-green-700 text-sm space-y-1">
+              <li>• Both columns should look identical in styling</li>
+              <li>• Colors, spacing, borders, and typography should match exactly</li>
+              <li>• Components use centralized tokens from shared/ui/tokens.ts</li>
+              <li>• RTL layouts should properly reverse text direction</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
       <footer className="border-t bg-muted/30 py-8">
