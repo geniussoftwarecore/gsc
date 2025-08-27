@@ -149,6 +149,7 @@ export const supportTickets = pgTable("support_tickets", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").references(() => users.id),
   projectId: varchar("project_id").references(() => projects.id),
+  statusId: varchar("status_id").references(() => ticketStatus.id),
   subject: text("subject").notNull(),
   description: text("description").notNull(),
   status: text("status").default("open"), // open, in-progress, resolved, closed
@@ -215,7 +216,30 @@ export const invoices = pgTable("invoices", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-// CRM Core Tables
+// CRM Core Tables - Deal Stages
+export const dealStages = pgTable("deal_stages", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  position: text("position").notNull(),
+  probability: text("probability").default("0"), // 0-100
+  color: text("color").default("#3b82f6"),
+  isClosed: text("is_closed").default("false"),
+  isWon: text("is_won").default("false"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+// Ticket Status Table
+export const ticketStatus = pgTable("ticket_status", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  position: text("position").notNull(),
+  color: text("color").default("#3b82f6"),
+  isClosed: text("is_closed").default("false"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const leads = pgTable("leads", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
@@ -284,6 +308,7 @@ export const opportunities = pgTable("opportunities", {
   name: text("name").notNull(),
   accountId: varchar("account_id").references(() => accounts.id),
   contactId: varchar("contact_id").references(() => contacts.id),
+  stageId: varchar("stage_id").references(() => dealStages.id),
   stage: text("stage").default("prospecting"), // prospecting, qualification, proposal, negotiation, closed-won, closed-lost
   amount: text("amount"),
   probability: text("probability").default("0"), // 0-100 percentage
@@ -491,6 +516,18 @@ export const insertClientRequestSchema = createInsertSchema(clientRequests).omit
   updatedAt: true,
 });
 
+export const insertDealStageSchema = createInsertSchema(dealStages).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertTicketStatusSchema = createInsertSchema(ticketStatus).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
@@ -556,3 +593,9 @@ export type SavedFilter = typeof savedFilters.$inferSelect;
 
 export type InsertClientRequest = z.infer<typeof insertClientRequestSchema>;
 export type ClientRequest = typeof clientRequests.$inferSelect;
+
+export type InsertDealStage = z.infer<typeof insertDealStageSchema>;
+export type DealStage = typeof dealStages.$inferSelect;
+
+export type InsertTicketStatus = z.infer<typeof insertTicketStatusSchema>;
+export type TicketStatus = typeof ticketStatus.$inferSelect;

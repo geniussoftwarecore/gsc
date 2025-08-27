@@ -2,6 +2,9 @@ import { Router } from "express";
 import { simpleContactsService } from "../crm_services/simpleContactsService";
 import { simpleCompaniesService } from "../crm_services/simpleCompaniesService";
 import { simpleDealsService } from "../crm_services/simpleDealsService";
+import { dealsService } from "../crm_services/dealsService";
+import { ticketsService } from "../crm_services/ticketsService";
+import { activitiesService } from "../crm_services/activitiesService";
 
 const router = Router();
 
@@ -145,10 +148,10 @@ router.delete("/companies/:id", async (req, res) => {
   }
 });
 
-// Deals endpoints
+// Deals endpoints - Enhanced with new service
 router.get("/deals/kanban", async (req, res) => {
   try {
-    const kanbanData = await simpleDealsService.getKanbanData();
+    const kanbanData = await dealsService.getKanbanData();
     res.json(kanbanData);
   } catch (error) {
     console.error("Error fetching kanban data:", error);
@@ -158,7 +161,7 @@ router.get("/deals/kanban", async (req, res) => {
 
 router.get("/deals/stages", async (req, res) => {
   try {
-    const stages = await simpleDealsService.getDealStages();
+    const stages = await dealsService.getDealStages();
     res.json(stages);
   } catch (error) {
     console.error("Error fetching deal stages:", error);
@@ -168,17 +171,46 @@ router.get("/deals/stages", async (req, res) => {
 
 router.get("/deals", async (req, res) => {
   try {
-    const deals = await simpleDealsService.getAllDeals();
-    res.json(deals);
+    const { search, stageId, accountId, ownerId, page = 1, limit = 20, sortBy = 'updated_at', sortOrder = 'desc' } = req.query;
+    
+    const filters = {
+      search: search as string,
+      stageId: stageId as string,
+      accountId: accountId as string,
+      ownerId: ownerId as string
+    };
+
+    const result = await dealsService.getDeals(
+      filters, 
+      parseInt(page as string), 
+      parseInt(limit as string),
+      sortBy as string,
+      sortOrder as 'asc' | 'desc'
+    );
+    
+    res.json(result);
   } catch (error) {
     console.error("Error fetching deals:", error);
     res.status(500).json({ error: "Failed to fetch deals" });
   }
 });
 
+router.get("/deals/:id", async (req, res) => {
+  try {
+    const deal = await dealsService.getDealById(req.params.id);
+    if (!deal) {
+      return res.status(404).json({ error: "Deal not found" });
+    }
+    res.json(deal);
+  } catch (error) {
+    console.error("Error fetching deal:", error);
+    res.status(500).json({ error: "Failed to fetch deal" });
+  }
+});
+
 router.post("/deals", async (req, res) => {
   try {
-    const deal = await simpleDealsService.createDeal(req.body);
+    const deal = await dealsService.createDeal(req.body);
     if (!deal) {
       return res.status(400).json({ error: "Failed to create deal" });
     }
@@ -189,10 +221,23 @@ router.post("/deals", async (req, res) => {
   }
 });
 
+router.put("/deals/:id", async (req, res) => {
+  try {
+    const deal = await dealsService.updateDeal(req.params.id, req.body);
+    if (!deal) {
+      return res.status(404).json({ error: "Deal not found" });
+    }
+    res.json(deal);
+  } catch (error) {
+    console.error("Error updating deal:", error);
+    res.status(500).json({ error: "Failed to update deal" });
+  }
+});
+
 router.put("/deals/:id/stage", async (req, res) => {
   try {
     const { stageId } = req.body;
-    const deal = await simpleDealsService.updateDealStage(req.params.id, stageId);
+    const deal = await dealsService.updateDealStage(req.params.id, stageId);
     if (!deal) {
       return res.status(404).json({ error: "Deal not found" });
     }
@@ -205,7 +250,7 @@ router.put("/deals/:id/stage", async (req, res) => {
 
 router.delete("/deals/:id", async (req, res) => {
   try {
-    const success = await simpleDealsService.deleteDeal(req.params.id);
+    const success = await dealsService.deleteDeal(req.params.id);
     if (!success) {
       return res.status(404).json({ error: "Deal not found" });
     }
@@ -216,25 +261,151 @@ router.delete("/deals/:id", async (req, res) => {
   }
 });
 
-// Tickets endpoints (basic structure)
+// Tickets endpoints - Enhanced
 router.get("/tickets", async (req, res) => {
   try {
-    // TODO: Implement ticket service
-    res.json([]);
+    const { search, status, priority, assignedTo, page = 1, limit = 20, sortBy = 'updated_at', sortOrder = 'desc' } = req.query;
+    
+    const filters = {
+      search: search as string,
+      status: status as string,
+      priority: priority as string,
+      assignedTo: assignedTo as string
+    };
+
+    const result = await ticketsService.getTickets(
+      filters,
+      parseInt(page as string),
+      parseInt(limit as string),
+      sortBy as string,
+      sortOrder as 'asc' | 'desc'
+    );
+    
+    res.json(result);
   } catch (error) {
     console.error("Error fetching tickets:", error);
     res.status(500).json({ error: "Failed to fetch tickets" });
   }
 });
 
-// Activities/Timeline endpoints (basic structure)
+router.get("/tickets/statuses", async (req, res) => {
+  try {
+    const statuses = await ticketsService.getTicketStatuses();
+    res.json(statuses);
+  } catch (error) {
+    console.error("Error fetching ticket statuses:", error);
+    res.status(500).json({ error: "Failed to fetch ticket statuses" });
+  }
+});
+
+router.get("/tickets/:id", async (req, res) => {
+  try {
+    const ticket = await ticketsService.getTicketById(req.params.id);
+    if (!ticket) {
+      return res.status(404).json({ error: "Ticket not found" });
+    }
+    res.json(ticket);
+  } catch (error) {
+    console.error("Error fetching ticket:", error);
+    res.status(500).json({ error: "Failed to fetch ticket" });
+  }
+});
+
+router.post("/tickets", async (req, res) => {
+  try {
+    const ticket = await ticketsService.createTicket(req.body);
+    if (!ticket) {
+      return res.status(400).json({ error: "Failed to create ticket" });
+    }
+    res.status(201).json(ticket);
+  } catch (error) {
+    console.error("Error creating ticket:", error);
+    res.status(500).json({ error: "Failed to create ticket" });
+  }
+});
+
+router.put("/tickets/:id", async (req, res) => {
+  try {
+    const ticket = await ticketsService.updateTicket(req.params.id, req.body);
+    if (!ticket) {
+      return res.status(404).json({ error: "Ticket not found" });
+    }
+    res.json(ticket);
+  } catch (error) {
+    console.error("Error updating ticket:", error);
+    res.status(500).json({ error: "Failed to update ticket" });
+  }
+});
+
+router.put("/tickets/:id/status", async (req, res) => {
+  try {
+    const { statusId } = req.body;
+    const ticket = await ticketsService.updateTicketStatus(req.params.id, statusId);
+    if (!ticket) {
+      return res.status(404).json({ error: "Ticket not found" });
+    }
+    res.json(ticket);
+  } catch (error) {
+    console.error("Error updating ticket status:", error);
+    res.status(500).json({ error: "Failed to update ticket status" });
+  }
+});
+
+router.delete("/tickets/:id", async (req, res) => {
+  try {
+    const success = await ticketsService.deleteTicket(req.params.id);
+    if (!success) {
+      return res.status(404).json({ error: "Ticket not found" });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error deleting ticket:", error);
+    res.status(500).json({ error: "Failed to delete ticket" });
+  }
+});
+
+// Activities/Timeline endpoints - Enhanced
 router.get("/activities/:entityType/:entityId", async (req, res) => {
   try {
-    // TODO: Implement activities service
-    res.json([]);
+    const { entityType, entityId } = req.params;
+    const { page = 1, limit = 50 } = req.query;
+    
+    const result = await activitiesService.getActivities(
+      { entityType, entityId },
+      parseInt(page as string),
+      parseInt(limit as string)
+    );
+    
+    res.json(result);
   } catch (error) {
     console.error("Error fetching activities:", error);
     res.status(500).json({ error: "Failed to fetch activities" });
+  }
+});
+
+router.post("/activities", async (req, res) => {
+  try {
+    const activity = await activitiesService.createActivity(req.body);
+    if (!activity) {
+      return res.status(400).json({ error: "Failed to create activity" });
+    }
+    res.status(201).json(activity);
+  } catch (error) {
+    console.error("Error creating activity:", error);
+    res.status(500).json({ error: "Failed to create activity" });
+  }
+});
+
+router.put("/activities/:id/complete", async (req, res) => {
+  try {
+    const activity = await activitiesService.completeActivity(req.params.id);
+    if (!activity) {
+      return res.status(404).json({ error: "Activity not found" });
+    }
+    res.json(activity);
+  } catch (error) {
+    console.error("Error completing activity:", error);
+    res.status(500).json({ error: "Failed to complete activity" });
   }
 });
 

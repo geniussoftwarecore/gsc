@@ -30,7 +30,13 @@ import {
   type SavedFilter,
   type InsertSavedFilter,
   type SupportTicket,
-  supportTickets
+  type DealStage,
+  type InsertDealStage,
+  type TicketStatus,
+  type InsertTicketStatus,
+  supportTickets,
+  dealStages,
+  ticketStatus
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { DatabaseStorage } from "./database-storage";
@@ -131,6 +137,18 @@ export interface IStorage {
   updateSavedFilter(id: string, updates: Partial<SavedFilter>): Promise<SavedFilter>;
   deleteSavedFilter(id: string): Promise<boolean>;
   
+  // Deal Stages Management
+  getAllDealStages(): Promise<DealStage[]>;
+  createDealStage(stage: InsertDealStage): Promise<DealStage>;
+  updateDealStage(id: string, updates: Partial<DealStage>): Promise<DealStage>;
+  deleteDealStage(id: string): Promise<boolean>;
+  
+  // Ticket Status Management
+  getAllTicketStatus(): Promise<TicketStatus[]>;
+  createTicketStatus(status: InsertTicketStatus): Promise<TicketStatus>;
+  updateTicketStatus(id: string, updates: Partial<TicketStatus>): Promise<TicketStatus>;
+  deleteTicketStatus(id: string): Promise<boolean>;
+  
   // Search
   searchEntities(query: string, entities: string[]): Promise<any[]>;
 }
@@ -184,6 +202,8 @@ export class MemStorage implements IStorage {
   private activities: Map<string, CrmActivity>;
   private savedFilters: Map<string, SavedFilter>;
   private supportTickets: Map<string, SupportTicket>;
+  private dealStages: Map<string, DealStage>;
+  private ticketStatuses: Map<string, TicketStatus>;
 
   constructor() {
     this.users = new Map();
@@ -202,6 +222,8 @@ export class MemStorage implements IStorage {
     this.activities = new Map();
     this.savedFilters = new Map();
     this.supportTickets = new Map();
+    this.dealStages = new Map();
+    this.ticketStatuses = new Map();
     
     // Initialize with sample data
     this.initializeSampleData();
@@ -264,6 +286,118 @@ export class MemStorage implements IStorage {
 
     this.users.set(salesUser.id, salesUser);
     this.users.set(supportUser.id, supportUser);
+
+    // Initialize Deal Stages
+    const defaultDealStages: DealStage[] = [
+      {
+        id: "stage-1",
+        name: "التأهيل",
+        position: "1",
+        probability: "10",
+        color: "#3b82f6",
+        isClosed: "false",
+        isWon: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "stage-2", 
+        name: "الاقتراح",
+        position: "2",
+        probability: "25",
+        color: "#f59e0b",
+        isClosed: "false",
+        isWon: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "stage-3",
+        name: "التفاوض",
+        position: "3", 
+        probability: "60",
+        color: "#10b981",
+        isClosed: "false",
+        isWon: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "stage-4",
+        name: "مربحة",
+        position: "4",
+        probability: "100",
+        color: "#059669",
+        isClosed: "true",
+        isWon: "true",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "stage-5",
+        name: "خاسرة",
+        position: "5",
+        probability: "0",
+        color: "#dc2626",
+        isClosed: "true",
+        isWon: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ];
+
+    defaultDealStages.forEach(stage => this.dealStages.set(stage.id, stage));
+
+    // Initialize Ticket Statuses
+    const defaultTicketStatuses: TicketStatus[] = [
+      {
+        id: "status-1",
+        name: "جديد",
+        position: "1",
+        color: "#3b82f6",
+        isClosed: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "status-2",
+        name: "قيد المعالجة",
+        position: "2",
+        color: "#f59e0b",
+        isClosed: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "status-3",
+        name: "في الانتظار",
+        position: "3",
+        color: "#8b5cf6",
+        isClosed: "false",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "status-4",
+        name: "محلول",
+        position: "4",
+        color: "#10b981",
+        isClosed: "true",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        id: "status-5",
+        name: "مغلق",
+        position: "5",
+        color: "#6b7280",
+        isClosed: "true",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ];
+
+    defaultTicketStatuses.forEach(status => this.ticketStatuses.set(status.id, status));
 
     // Sample services
     const sampleServices: Service[] = [
@@ -1368,6 +1502,66 @@ export class MemStorage implements IStorage {
     return this.savedFilters.delete(id);
   }
 
+  // Deal Stages Management
+  async getAllDealStages(): Promise<DealStage[]> {
+    return Array.from(this.dealStages.values());
+  }
+
+  async createDealStage(stage: InsertDealStage): Promise<DealStage> {
+    const newStage: DealStage = {
+      id: randomUUID(),
+      ...stage,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.dealStages.set(newStage.id, newStage);
+    return newStage;
+  }
+
+  async updateDealStage(id: string, updates: Partial<DealStage>): Promise<DealStage> {
+    const existing = this.dealStages.get(id);
+    if (!existing) {
+      throw new Error(`Deal stage with id ${id} not found`);
+    }
+    const updated = { ...existing, ...updates, updatedAt: new Date() };
+    this.dealStages.set(id, updated);
+    return updated;
+  }
+
+  async deleteDealStage(id: string): Promise<boolean> {
+    return this.dealStages.delete(id);
+  }
+
+  // Ticket Status Management
+  async getAllTicketStatus(): Promise<TicketStatus[]> {
+    return Array.from(this.ticketStatuses.values());
+  }
+
+  async createTicketStatus(status: InsertTicketStatus): Promise<TicketStatus> {
+    const newStatus: TicketStatus = {
+      id: randomUUID(),
+      ...status,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.ticketStatuses.set(newStatus.id, newStatus);
+    return newStatus;
+  }
+
+  async updateTicketStatus(id: string, updates: Partial<TicketStatus>): Promise<TicketStatus> {
+    const existing = this.ticketStatuses.get(id);
+    if (!existing) {
+      throw new Error(`Ticket status with id ${id} not found`);
+    }
+    const updated = { ...existing, ...updates, updatedAt: new Date() };
+    this.ticketStatuses.set(id, updated);
+    return updated;
+  }
+
+  async deleteTicketStatus(id: string): Promise<boolean> {
+    return this.ticketStatuses.delete(id);
+  }
+
   // Search Implementation
   async searchEntities(query: string, entities: string[]): Promise<any[]> {
     const searchTerm = query.toLowerCase();
@@ -1708,6 +1902,7 @@ export class MemStorage implements IStorage {
       name: "تطبيق إدارة المخزون",
       accountId: "account-001",
       contactId: "contact-001",
+      stageId: "stage-2",
       stage: "proposal",
       amount: "150000",
       probability: "70",
@@ -1730,6 +1925,7 @@ export class MemStorage implements IStorage {
       name: "موقع التجارة الإلكترونية",
       accountId: "account-002",
       contactId: "contact-002",
+      stageId: "stage-3",
       stage: "negotiation",
       amount: "200000",
       probability: "85",

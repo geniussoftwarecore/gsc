@@ -47,7 +47,7 @@ export const CrmTimeline: React.FC<CrmTimelineProps> = ({
   const fetchActivities = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/crm/timeline/${entityType}/${entityId}`);
+      const response = await fetch(`/api/crm/activities/${entityType}/${entityId}`);
       if (response.ok) {
         const data = await response.json();
         setActivities(data);
