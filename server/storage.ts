@@ -138,15 +138,31 @@ export interface IStorage {
 // Initialize storage based on database availability
 function createStorage(): IStorage {
   if (db) {
-    console.log("Using PostgreSQL database storage");
+    console.log("Creating PostgreSQL database storage");
     return new DatabaseStorage();
   } else {
-    console.log("Database not available, using in-memory storage");
+    console.log("Creating in-memory storage");
     return new MemStorage();
   }
 }
 
-export const storage = createStorage();
+let storageInstance: IStorage | null = null;
+
+export function initializeStorage(): IStorage {
+  if (!storageInstance) {
+    storageInstance = createStorage();
+  }
+  return storageInstance;
+}
+
+export const storage = {
+  get instance(): IStorage {
+    if (!storageInstance) {
+      throw new Error("Storage not initialized. Call initializeStorage() first.");
+    }
+    return storageInstance;
+  }
+};
 
 // Export a singleton instance for backwards compatibility
 let memStorageInstance: MemStorage | null = null;

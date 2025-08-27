@@ -2,6 +2,8 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedDatabase } from "./seed-database";
+import { initializeDatabase } from "./db";
+import { initializeStorage } from "./storage";
 
 const app = express();
 app.use(express.json());
@@ -38,6 +40,12 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize database connection
+  await initializeDatabase();
+  
+  // Initialize storage (will use database or fall back to in-memory)
+  initializeStorage();
+  
   // Seed database with initial data
   await seedDatabase();
   

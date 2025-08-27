@@ -36,7 +36,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Username and password are required" });
       }
 
-      const result = await loginUser(username, password, storage as DatabaseStorage);
+      const result = await loginUser(username, password, storage.instance as DatabaseStorage);
       
       if (!result) {
         return res.status(401).json({ message: "Invalid credentials" });
@@ -55,12 +55,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         password: z.string().min(6, "Password must be at least 6 characters")
       }).parse(req.body);
       
-      const existingUser = await storage.getUserByUsername(validatedData.username);
+      const existingUser = await storage.instance.getUserByUsername(validatedData.username);
       if (existingUser) {
         return res.status(400).json({ message: "Username already exists" });
       }
 
-      const user = await storage.createUser(validatedData);
+      const user = await storage.instance.createUser(validatedData);
       const { password: _, ...userWithoutPassword } = user;
       
       res.status(201).json({ 
@@ -87,7 +87,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/me", requireAuth, async (req: AuthenticatedRequest, res) => {
     try {
-      const user = await storage.getUser(req.user!.id);
+      const user = await storage.instance.getUser(req.user!.id);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -153,7 +153,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertContactSubmissionSchema.parse(req.body);
       
       // Create the contact submission for record keeping
-      const submission = await storage.createContactSubmission(validatedData);
+      const submission = await storage.instance.createContactSubmission(validatedData);
       
       // Also create a CRM Lead from the contact form
       try {
@@ -173,8 +173,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           notes: `Contact form submission - Service: ${validatedData.service || 'Not specified'}`
         };
 
-        if (storage.createLead) {
-          await storage.createLead(leadData);
+        if (storage.instance.createLead) {
+          await storage.instance.createLead(leadData);
         }
       } catch (leadError) {
         // Don't fail the entire request if lead creation fails
@@ -201,7 +201,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get all services
   app.get("/api/services", async (req, res) => {
     try {
-      const services = await storage.getAllServices();
+      const services = await storage.instance.getAllServices();
       res.json(services);
     } catch (error) {
       res.status(500).json({ 
@@ -258,7 +258,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get all testimonials
   app.get("/api/testimonials", async (req, res) => {
     try {
-      const testimonials = await storage.getAllTestimonials();
+      const testimonials = await storage.instance.getAllTestimonials();
       res.json(testimonials);
     } catch (error) {
       res.status(500).json({ 
