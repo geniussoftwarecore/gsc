@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, Button, Badge, Input } from "./base";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../client/src/components/ui/tabs";
 import { useLanguage } from "../../client/src/i18n/lang";
@@ -103,11 +103,11 @@ export default function CrmDashboard() {
     enabled: true
   });
 
-  const leads: Lead[] = leadsData?.leads || [];
-  const accounts: Account[] = accountsData?.accounts || [];
-  const contacts: Contact[] = contactsData?.contacts || [];
-  const opportunities: Opportunity[] = opportunitiesData?.opportunities || [];
-  const tickets: Ticket[] = ticketsData?.tickets || [];
+  const leads: Lead[] = Array.isArray(leadsData?.leads) ? leadsData.leads : [];
+  const accounts: Account[] = Array.isArray(accountsData?.accounts) ? accountsData.accounts : [];
+  const contacts: Contact[] = Array.isArray(contactsData?.contacts) ? contactsData.contacts : [];
+  const opportunities: Opportunity[] = Array.isArray(opportunitiesData?.opportunities) ? opportunitiesData.opportunities : [];
+  const tickets: Ticket[] = Array.isArray(ticketsData?.tickets) ? ticketsData.tickets : [];
 
   // Calculate stats
   const stats: CrmStats = {
