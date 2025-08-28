@@ -67,11 +67,10 @@ Key security-related environment variables:
 
 ```bash
 # Admin Provisioning
-ADMIN_USERNAME=admin@yourcompany.com
-ADMIN_PASSWORD=your_secure_password
-ADMIN_FIRST_NAME=Administrator
-ADMIN_LAST_NAME=GSC
-ADMIN_ROLE=admin
+ADMIN_EMAIL=admin@yourdomain.com
+ADMIN_PASSWORD=Change!This!Strong!Password123
+ADMIN_NAME=System Administrator
+ADMIN_FORCE_CHANGE=true
 
 # Password Security (argon2)
 ARGON2_MEMORY_COST=65536
@@ -112,6 +111,79 @@ Run preflight checks to validate system health:
 ```bash
 ./scripts/run.sh preflight
 ```
+
+## User Provisioning
+
+### Setup Requirements
+
+1. **Copy environment configuration:**
+   ```bash
+   cp .env.example .env
+   ```
+   
+2. **Fill in database and admin variables in `.env`:**
+   ```bash
+   DATABASE_URL=postgresql://username:password@localhost:5432/database_name
+   ADMIN_EMAIL=admin@yourdomain.com
+   ADMIN_PASSWORD=Change!This!Strong!Password123
+   ADMIN_NAME=System Administrator
+   ADMIN_FORCE_CHANGE=true
+   ```
+
+3. **Run database migrations:**
+   ```bash
+   npm run db:push
+   ```
+
+### Create Admin User
+
+Create admin user using two methods:
+
+#### Method 1: Environment-driven (Recommended)
+```bash
+# Set variables in .env file, then run:
+tsx scripts/admin-create.ts
+```
+
+#### Method 2: CLI-driven
+```bash
+tsx scripts/admin-create.ts --email admin@yourdomain.com --password "S7rong!Pass" --forceChange
+```
+
+### Reset Admin Password
+
+Reset admin password when needed:
+
+```bash
+tsx scripts/admin-reset.ts --email admin@yourdomain.com --password "N3w!StrongPass" --forceChange
+```
+
+### Demo Data (Optional)
+
+Add sample data for development (does NOT touch admin users):
+
+```bash
+tsx scripts/seed-demo.ts
+```
+
+### Password Policy
+
+Passwords must meet these requirements:
+- At least 8 characters long
+- Contains uppercase letters (A-Z)
+- Contains lowercase letters (a-z)
+- Contains numbers (0-9)
+- Contains special characters (!@#$%^&*()_+-=[]{}|;':",./<>?)
+- Does not contain common patterns (password, admin, 123456, etc.)
+
+**Example strong passwords:**
+- `MyS3cur3P@ssw0rd!`
+- `Tr0ub4dor&3`
+- `C0mplex!Pa$$w0rd2024`
+
+### Authentication Integration
+
+The login system uses `verifyPassword()` from `server/security/password.ts` and enforces the `force_password_change` flag. When this flag is set to true, users must change their password on first login.
 
 ---
 

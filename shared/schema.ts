@@ -6,7 +6,9 @@ import { z } from "zod";
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  password: text("password").notNull(), // Deprecated - use password_hash
+  password_hash: text("password_hash"), // Argon2 hashed password
+  force_password_change: text("force_password_change").notNull().default("false"),
   role: text("role").notNull().default("client"), // client, admin, manager, agent, viewer
   name: text("name"),
   email: text("email"),
