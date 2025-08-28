@@ -60,23 +60,40 @@ export default function Contact() {
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      // Enhanced data for CRM integration
+      const enhancedData = {
+        ...data,
+        leadSource: 'website_contact_form',
+        utm: {
+          source: new URLSearchParams(window.location.search).get('utm_source') || 'direct',
+          medium: new URLSearchParams(window.location.search).get('utm_medium') || 'website',
+          campaign: new URLSearchParams(window.location.search).get('utm_campaign'),
+        }
+      };
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(enhancedData),
       });
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast({
         title: t('contact.form.successTitle'),
         description: t('contact.form.successDesc'),
       });
+      
+      // Track successful lead creation
+      console.log('Lead created successfully:', response);
+      
       reset();
+      setUploadedFiles([]);
       setIsSubmitting(false);
     },
-    onError: () => {
+    onError: (error) => {
+      console.error('Contact form submission error:', error);
       toast({
         title: t('contact.form.errorTitle'),
         description: t('contact.form.errorDesc'),
@@ -301,10 +318,10 @@ export default function Contact() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">الاسم الكامل *</Label>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="col-span-1 md:col-span-2">
+                        <Label htmlFor="name" className="text-sm font-medium text-gray-700">{t('contact.form.name')} *</Label>
                         <Input
                           id="name"
                           {...register("name")}
@@ -316,7 +333,7 @@ export default function Contact() {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="email">البريد الإلكتروني *</Label>
+                        <Label htmlFor="email" className="text-sm font-medium text-gray-700">{t('contact.form.email')} *</Label>
                         <Input
                           id="email"
                           type="email"
@@ -332,7 +349,7 @@ export default function Contact() {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="phone">رقم الهاتف *</Label>
+                        <Label htmlFor="phone" className="text-sm font-medium text-gray-700">{t('contact.form.phone')} *</Label>
                         <Input
                           id="phone"
                           {...register("phone")}
@@ -344,21 +361,21 @@ export default function Contact() {
                         )}
                       </div>
                       <div>
-                        <Label htmlFor="company">اسم الشركة</Label>
+                        <Label htmlFor="company" className="text-sm font-medium text-gray-700">{t('contact.form.company')}</Label>
                         <Input
                           id="company"
                           {...register("company")}
-                          placeholder="شركتك (اختياري)"
+                          placeholder={t('contact.form.company')}
                           className="mt-2"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="service">نوع الخدمة المطلوبة *</Label>
+                      <Label htmlFor="service" className="text-sm font-medium text-gray-700">{t('contact.form.service')} *</Label>
                       <Select onValueChange={(value) => setValue("service", value)}>
                         <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="اختر الخدمة" />
+                          <SelectValue placeholder={t('contact.form.service')} />
                         </SelectTrigger>
                         <SelectContent>
                           {services.map((service) => (
@@ -375,10 +392,10 @@ export default function Contact() {
                     
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="budget">الميزانية المتوقعة</Label>
+                        <Label htmlFor="budget" className="text-sm font-medium text-gray-700">{t('contact.form.budget')}</Label>
                         <Select onValueChange={(value) => setValue("budget", value)}>
                           <SelectTrigger className="mt-2">
-                            <SelectValue placeholder="اختر نطاق الميزانية" />
+                            <SelectValue placeholder={t('contact.form.budget')} />
                           </SelectTrigger>
                           <SelectContent>
                             {budgetRanges.map((range) => (
@@ -390,10 +407,10 @@ export default function Contact() {
                         </Select>
                       </div>
                       <div>
-                        <Label htmlFor="timeline">مدة التنفيذ المتوقعة</Label>
+                        <Label htmlFor="timeline" className="text-sm font-medium text-gray-700">{t('contact.form.timeline')}</Label>
                         <Select onValueChange={(value) => setValue("timeline", value)}>
                           <SelectTrigger className="mt-2">
-                            <SelectValue placeholder="اختر المدة" />
+                            <SelectValue placeholder={t('contact.form.timeline')} />
                           </SelectTrigger>
                           <SelectContent>
                             {timelineOptions.map((timeline) => (
@@ -407,11 +424,11 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <Label htmlFor="message">تفاصيل المشروع *</Label>
+                      <Label htmlFor="message" className="text-sm font-medium text-gray-700">{t('contact.form.message')} *</Label>
                       <Textarea
                         id="message"
                         {...register("message")}
-                        placeholder="اكتب تفاصيل مشروعك ومتطلباتك..."
+                        placeholder={t('contact.form.message')}
                         rows={5}
                         className="mt-2"
                       />

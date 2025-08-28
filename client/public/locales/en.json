@@ -67,7 +67,7 @@
       "send": "Send",
       "sending": "Sending...",
       "successTitle": "Message sent successfully!",
-      "successDesc": "We will contact you as soon as possible.",
+      "successDesc": "We will contact you as soon as possible and a lead will be created in our CRM system.",
       "errorTitle": "Error sending message",
       "errorDesc": "Please try again or contact us directly."
     }

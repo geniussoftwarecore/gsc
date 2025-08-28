@@ -159,26 +159,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create the contact submission for record keeping
       const submission = await storage.instance.createContactSubmission(validatedData);
       
-      // Also create a CRM Lead from the contact form
+      // Create a CRM Lead from the contact form with enhanced data
       try {
         const leadData = {
-          source: 'website_contact_form',
-          status: 'new',
-          priority: 'medium',
           firstName: validatedData.name.split(' ')[0] || validatedData.name,
           lastName: validatedData.name.split(' ').slice(1).join(' ') || '',
-          email: validatedData.email,
-          phone: validatedData.phone || '',
-          company: '', // Optional, can be added to contact form later
-          title: '',  // Optional
-          website: '',
+          primaryEmail: validatedData.email,
+          phones: validatedData.phone ? [validatedData.phone] : [],
+          company: validatedData.company || '',
+          jobTitle: '',
+          leadSource: validatedData.leadSource || 'website_contact_form',
+          leadStatus: 'new',
+          leadRating: 'warm',
+          leadScore: 50, // Default score for website leads
+          estimatedValue: validatedData.budget ? parseFloat(validatedData.budget.replace(/[^\d.]/g, '')) : 0,
           description: validatedData.message,
-          estimatedValue: 0,
-          notes: `Contact form submission - Service: ${validatedData.service || 'Not specified'}`
+          utm: validatedData.utm || {
+            source: 'direct',
+            medium: 'website'
+          }
         };
 
         if (storage.instance.createLead) {
-          await storage.instance.createLead(leadData);
+          const lead = await storage.instance.createLead(leadData);
+          console.log('CRM Lead created successfully:', lead.id);
         }
       } catch (leadError) {
         // Don't fail the entire request if lead creation fails
