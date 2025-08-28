@@ -9,6 +9,8 @@ import billingRoutes from "./routes/billing";
 import stripeWebhookRoutes from "./routes/stripeWebhook";
 import healthRoutes, { trackMetrics } from "./routes/health";
 import enhancedCrmRoutes from "../crm_api/crmRoutes";
+import exportsRoutes from "./routes/exports";
+import savedViewsRoutes from "./routes/savedViews";
 import enterpriseTableRoutes from "./routes/enterpriseTableRoutes";
 import { 
   insertContactSubmissionSchema, 
@@ -150,6 +152,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Mount new CRM routes
   app.use("/api/crm", crmRoutes);
   app.use("/api/crm", enhancedCrmRoutes);
+  
+  // Mount export and saved views routes
+  app.use("/api", exportsRoutes);
+  app.use("/api", savedViewsRoutes);
   
   // Contact form submission - Creates CRM Lead
   app.post("/api/contact", async (req, res) => {
