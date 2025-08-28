@@ -151,6 +151,22 @@ export interface IStorage {
   
   // Search
   searchEntities(query: string, entities: string[]): Promise<any[]>;
+  
+  // Enhanced Table Operations
+  getTableData(tableName: string, options: {
+    offset?: number;
+    limit?: number;
+    search?: string;
+    sorts?: Array<{ field: string; direction: 'asc' | 'desc' }>;
+    filters?: Array<{ field: string; operator: string; value: any }>;
+    columns?: string[];
+    export?: boolean;
+  }): Promise<{ data: any[]; total: number }>;
+  
+  // Saved Views
+  getSavedViews(userId: string, endpoint: string): Promise<any[]>;
+  createSavedView(view: any): Promise<any>;
+  deleteSavedView(id: string, userId: string): Promise<boolean>;
 }
 
 // Initialize storage based on database availability
@@ -1619,6 +1635,120 @@ export class MemStorage implements IStorage {
     }
 
     return results;
+  }
+
+  // Enhanced Table Operations
+  async getTableData(tableName: string, options: {
+    offset?: number;
+    limit?: number;
+    search?: string;
+    sorts?: Array<{ field: string; direction: 'asc' | 'desc' }>;
+    filters?: Array<{ field: string; operator: string; value: any }>;
+    columns?: string[];
+    export?: boolean;
+  }): Promise<{ data: any[]; total: number }> {
+    const { offset = 0, limit = 25, search = '', sorts = [], filters = [], export: isExport = false } = options;
+
+    // Map table names to data stores
+    const dataMap: any = {
+      'contacts': this.contacts,
+      'accounts': this.accounts,
+      'opportunities': this.opportunities,
+      'supportTickets': this.supportTickets
+    };
+
+    const dataStore = dataMap[tableName];
+    if (!dataStore) throw new Error(`Unknown table: ${tableName}`);
+
+    let data = Array.from(dataStore.values());
+
+    // Apply search filter
+    if (search) {
+      const searchTerm = search.toLowerCase();
+      data = data.filter((item: any) => {
+        const searchableFields = this.getSearchableFields(tableName);
+        return searchableFields.some(field => 
+          item[field]?.toString().toLowerCase().includes(searchTerm)
+        );
+      });
+    }
+
+    // Apply filters
+    filters.forEach(filter => {
+      const { field, operator, value } = filter;
+      data = data.filter((item: any) => {
+        switch (operator) {
+          case 'eq':
+            return item[field] === value;
+          case 'contains':
+            return item[field]?.toString().toLowerCase().includes(value.toLowerCase());
+          case 'gt':
+            return parseFloat(item[field]) > parseFloat(value);
+          case 'lt':
+            return parseFloat(item[field]) < parseFloat(value);
+          default:
+            return true;
+        }
+      });
+    });
+
+    const total = data.length;
+
+    // Apply sorting
+    if (sorts.length > 0) {
+      data.sort((a: any, b: any) => {
+        for (const sort of sorts) {
+          const aVal = a[sort.field];
+          const bVal = b[sort.field];
+          const comparison = aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
+          if (comparison !== 0) {
+            return sort.direction === 'desc' ? -comparison : comparison;
+          }
+        }
+        return 0;
+      });
+    }
+
+    // Apply pagination (skip for exports)
+    if (!isExport) {
+      data = data.slice(offset, offset + limit);
+    }
+
+    return { data, total };
+  }
+
+  private getSearchableFields(tableName: string): string[] {
+    const fieldMap: any = {
+      'contacts': ['name', 'email', 'phone', 'jobTitle'],
+      'accounts': ['name', 'industry', 'description', 'email'],
+      'opportunities': ['name', 'description', 'stage'],
+      'supportTickets': ['subject', 'description', 'category', 'status']
+    };
+    return fieldMap[tableName] || [];
+  }
+
+  // Saved Views Management
+  private savedViews: Map<string, any> = new Map();
+
+  async getSavedViews(userId: string, endpoint: string): Promise<any[]> {
+    const views = Array.from(this.savedViews.values()).filter(
+      view => view.userId === userId && view.endpoint === endpoint
+    );
+    return views;
+  }
+
+  async createSavedView(view: any): Promise<any> {
+    this.savedViews.set(view.id, view);
+    return view;
+  }
+
+  async deleteSavedView(id: string, userId: string): Promise<boolean> {
+    const view = this.savedViews.get(id);
+    if (view && view.userId === userId) {
+      this.savedViews.delete(id);
+      return true;
+    }
+    return false;
   }
 
   private initializeSubscriptionPlans() {

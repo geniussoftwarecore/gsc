@@ -22,6 +22,7 @@ import {
   insertSavedFilterSchema
 } from "@shared/schema";
 import { z } from "zod";
+import { createObjectCsvWriter } from 'csv-writer';
 import { generateToken } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -1603,8 +1604,198 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Enhanced table endpoints with pagination, sorting, and filtering
+  const createTableEndpoint = (entity: string, tableName: string) => {
+    app.get(`/api/${entity}`, requireAuth, async (req: AuthenticatedRequest, res) => {
+      try {
+        const page = parseInt(req.query.page as string) || 1;
+        const pageSize = parseInt(req.query.pageSize as string) || 25;
+        const search = req.query.search as string || '';
+        const sorts = req.query.sorts ? JSON.parse(req.query.sorts as string) : [];
+        const filters = req.query.filters ? JSON.parse(req.query.filters as string) : [];
+        const columns = req.query.columns ? JSON.parse(req.query.columns as string) : null;
+
+        const offset = (page - 1) * pageSize;
+        
+        // Get data from storage with pagination and filtering
+        const result = await storage.instance.getTableData(tableName, {
+          offset,
+          limit: pageSize,
+          search,
+          sorts,
+          filters,
+          columns
+        });
+
+        res.json({
+          success: true,
+          data: result.data,
+          pagination: {
+            page,
+            pageSize,
+            total: result.total,
+            totalPages: Math.ceil(result.total / pageSize)
+          }
+        });
+      } catch (error) {
+        console.error(`${entity} table error:`, error);
+        res.status(500).json({ success: false, message: `Failed to load ${entity}` });
+      }
+    });
+
+    // Export endpoint for CSV and PDF
+    app.get(`/api/${entity}/export`, requireAuth, async (req: AuthenticatedRequest, res) => {
+      try {
+        const format = req.query.format as string;
+        const search = req.query.search as string || '';
+        const sorts = req.query.sorts ? JSON.parse(req.query.sorts as string) : [];
+        const filters = req.query.filters ? JSON.parse(req.query.filters as string) : [];
+        const columns = req.query.columns ? JSON.parse(req.query.columns as string) : null;
+
+        // Get all data for export (no pagination)
+        const result = await storage.instance.getTableData(tableName, {
+          search,
+          sorts,
+          filters,
+          columns,
+          export: true
+        });
+
+        if (format === 'csv') {
+          const csvWriter = createObjectCsvWriter({
+            path: `/tmp/${entity}-export-${Date.now()}.csv`,
+            header: Object.keys(result.data[0] || {}).map(key => ({ id: key, title: key }))
+          });
+          
+          await csvWriter.writeRecords(result.data);
+          
+          res.setHeader('Content-Type', 'text/csv');
+          res.setHeader('Content-Disposition', `attachment; filename="${entity}-export.csv"`);
+          
+          const fs = require('fs');
+          const csvContent = fs.readFileSync(csvWriter.path);
+          res.send(csvContent);
+          
+          // Cleanup temp file
+          fs.unlinkSync(csvWriter.path);
+        } else if (format === 'pdf') {
+          // Generate PDF export
+          const puppeteer = require('puppeteer');
+          const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+          const page = await browser.newPage();
+          
+          // Create HTML table
+          const html = generateTableHTML(result.data, entity);
+          await page.setContent(html);
+          
+          const pdf = await page.pdf({
+            format: 'A4',
+            landscape: true,
+            margin: { top: '1cm', right: '1cm', bottom: '1cm', left: '1cm' }
+          });
+          
+          await browser.close();
+          
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', `attachment; filename="${entity}-export.pdf"`);
+          res.send(pdf);
+        } else {
+          res.status(400).json({ success: false, message: 'Invalid export format' });
+        }
+      } catch (error) {
+        console.error(`${entity} export error:`, error);
+        res.status(500).json({ success: false, message: `Export failed for ${entity}` });
+      }
+    });
+  };
+
+  // Helper function to generate HTML for PDF export
+  const generateTableHTML = (data: any[], entityName: string) => {
+    if (!data.length) return '<html><body><h1>No data to export</h1></body></html>';
+    
+    const headers = Object.keys(data[0]);
+    const rows = data.map(row => 
+      headers.map(header => row[header] || '').join('</td><td>')
+    ).join('</tr><tr><td>');
+    
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${entityName} Export</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #333; text-align: center; margin-bottom: 30px; }
+          table { width: 100%; border-collapse: collapse; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f5f5f5; font-weight: bold; }
+          tr:nth-child(even) { background-color: #f9f9f9; }
+        </style>
+      </head>
+      <body>
+        <h1>${entityName.charAt(0).toUpperCase() + entityName.slice(1)} Export</h1>
+        <table>
+          <thead>
+            <tr><th>${headers.join('</th><th>')}</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>${rows}</td></tr>
+          </tbody>
+        </table>
+      </body>
+      </html>
+    `;
+  };
+
+  // Create table endpoints for all entities
+  createTableEndpoint('contacts', 'contacts');
+  createTableEndpoint('companies', 'accounts');
+  createTableEndpoint('deals', 'opportunities');
+  createTableEndpoint('tickets', 'supportTickets');
+
+  // Saved Views endpoints
+  app.get("/api/saved-views", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const endpoint = req.query.endpoint as string;
+      const views = await storage.instance.getSavedViews(req.user!.id, endpoint);
+      res.json(views);
+    } catch (error) {
+      console.error("Get saved views error:", error);
+      res.status(500).json({ success: false, message: "Failed to fetch saved views" });
+    }
+  });
+
+  app.post("/api/saved-views", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const viewData = {
+        ...req.body,
+        userId: req.user!.id,
+        id: `view-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      };
+      const view = await storage.instance.createSavedView(viewData);
+      res.json({ success: true, data: view });
+    } catch (error) {
+      console.error("Create saved view error:", error);
+      res.status(500).json({ success: false, message: "Failed to save view" });
+    }
+  });
+
+  app.delete("/api/saved-views/:id", requireAuth, async (req: AuthenticatedRequest, res) => {
+    try {
+      const success = await storage.instance.deleteSavedView(req.params.id, req.user!.id);
+      if (success) {
+        res.json({ success: true, message: "View deleted successfully" });
+      } else {
+        res.status(404).json({ success: false, message: "View not found" });
+      }
+    } catch (error) {
+      console.error("Delete saved view error:", error);
+      res.status(500).json({ success: false, message: "Failed to delete view" });
+    }
+  });
+
   // Cross-entity search endpoint
-  app.get("/api/search", async (req, res) => {
+  app.get("/api/global-search", async (req, res) => {
     try {
       const { q = '', entities = 'contacts,companies,deals,tickets' } = req.query;
       const searchTerm = (q as string).toLowerCase().trim();

@@ -30,6 +30,10 @@ import {
   type SavedFilter,
   type InsertSavedFilter,
   type SupportTicket,
+  type DealStage,
+  type InsertDealStage,
+  type TicketStatus,
+  type InsertTicketStatus,
   users,
   contactSubmissions,
   portfolioItems,
@@ -45,7 +49,9 @@ import {
   tasks,
   crmActivities,
   savedFilters,
-  supportTickets
+  supportTickets,
+  dealStages,
+  ticketStatus
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, and, desc, sql } from "drizzle-orm";
@@ -502,7 +508,7 @@ export class DatabaseStorage implements IStorage {
                 lower(${contacts.jobTitle}) LIKE ${searchTerm}`
           )
           .limit(50);
-        results.push(...contactResults.map(contact => ({ ...contact, entity: 'contacts' })));
+        results.push(...contactResults.map((contact: any) => ({ ...contact, entity: 'contacts' })));
       }
 
       if (entities.includes('accounts') || entities.includes('companies')) {
@@ -515,7 +521,7 @@ export class DatabaseStorage implements IStorage {
                 lower(${accounts.type}) LIKE ${searchTerm}`
           )
           .limit(50);
-        results.push(...accountResults.map(account => ({ ...account, entity: 'accounts' })));
+        results.push(...accountResults.map((account: any) => ({ ...account, entity: 'accounts' })));
       }
 
       if (entities.includes('opportunities') || entities.includes('deals')) {
@@ -526,7 +532,7 @@ export class DatabaseStorage implements IStorage {
                 lower(${opportunities.stage}) LIKE ${searchTerm}`
           )
           .limit(50);
-        results.push(...opportunityResults.map(opportunity => ({ ...opportunity, entity: 'opportunities' })));
+        results.push(...opportunityResults.map((opportunity: any) => ({ ...opportunity, entity: 'opportunities' })));
       }
 
       if (entities.includes('tickets')) {
@@ -538,7 +544,7 @@ export class DatabaseStorage implements IStorage {
                 lower(${supportTickets.status}) LIKE ${searchTerm}`
           )
           .limit(50);
-        results.push(...ticketResults.map(ticket => ({ ...ticket, entity: 'tickets' })));
+        results.push(...ticketResults.map((ticket: any) => ({ ...ticket, entity: 'tickets' })));
       }
 
       if (entities.includes('leads')) {
@@ -551,7 +557,7 @@ export class DatabaseStorage implements IStorage {
                 lower(${leads.jobTitle}) LIKE ${searchTerm}`
           )
           .limit(50);
-        results.push(...leadResults.map(lead => ({ ...lead, entity: 'leads' })));
+        results.push(...leadResults.map((lead: any) => ({ ...lead, entity: 'leads' })));
       }
     } catch (error) {
       console.error('Search error:', error);
@@ -559,5 +565,195 @@ export class DatabaseStorage implements IStorage {
     }
 
     return results;
+  }
+
+  // Enhanced Table Operations
+  async getTableData(tableName: string, options: {
+    offset?: number;
+    limit?: number;
+    search?: string;
+    sorts?: Array<{ field: string; direction: 'asc' | 'desc' }>;
+    filters?: Array<{ field: string; operator: string; value: any }>;
+    columns?: string[];
+    export?: boolean;
+  }): Promise<{ data: any[]; total: number }> {
+    if (!db) throw new Error("Database not available");
+
+    const { offset = 0, limit = 25, search = '', sorts = [], filters = [], columns, export: isExport = false } = options;
+
+    // Map table names to actual tables
+    const tableMap: any = {
+      'contacts': contacts,
+      'accounts': accounts,
+      'opportunities': opportunities,
+      'supportTickets': supportTickets
+    };
+
+    const table = tableMap[tableName];
+    if (!table) throw new Error(`Unknown table: ${tableName}`);
+
+    try {
+      let query = db.select().from(table);
+      let countQuery = db.select({ count: sql`count(*)` }).from(table);
+
+      // Apply search if provided
+      if (search) {
+        const searchTerm = `%${search.toLowerCase()}%`;
+        let searchConditions: any[] = [];
+
+        // Define searchable fields per table
+        const searchFields: any = {
+          'contacts': [table.name, table.email, table.phone, table.jobTitle],
+          'accounts': [table.name, table.industry, table.description],
+          'opportunities': [table.name, table.description, table.stage],
+          'supportTickets': [table.subject, table.description, table.category]
+        };
+
+        const fields = searchFields[tableName] || [];
+        fields.forEach((field: any) => {
+          searchConditions.push(sql`lower(${field}) LIKE ${searchTerm}`);
+        });
+
+        if (searchConditions.length > 0) {
+          const searchWhere = searchConditions.reduce((acc, condition) => 
+            acc ? sql`${acc} OR ${condition}` : condition
+          );
+          query = query.where(searchWhere);
+          countQuery = countQuery.where(searchWhere);
+        }
+      }
+
+      // Apply filters
+      filters.forEach(filter => {
+        const { field, operator, value } = filter;
+        const column = (table as any)[field];
+        if (!column) return;
+
+        switch (operator) {
+          case 'eq':
+            query = query.where(eq(column, value));
+            countQuery = countQuery.where(eq(column, value));
+            break;
+          case 'contains':
+            query = query.where(sql`lower(${column}) LIKE ${`%${value.toLowerCase()}%`}`);
+            countQuery = countQuery.where(sql`lower(${column}) LIKE ${`%${value.toLowerCase()}%`}`);
+            break;
+          case 'gt':
+            query = query.where(sql`${column} > ${value}`);
+            countQuery = countQuery.where(sql`${column} > ${value}`);
+            break;
+          case 'lt':
+            query = query.where(sql`${column} < ${value}`);
+            countQuery = countQuery.where(sql`${column} < ${value}`);
+            break;
+        }
+      });
+
+      // Apply sorts
+      if (sorts.length > 0) {
+        const orderClauses = sorts.map(sort => {
+          const column = (table as any)[sort.field];
+          return sort.direction === 'desc' ? desc(column) : column;
+        });
+        query = query.orderBy(...orderClauses);
+      } else {
+        // Default sort by created date
+        const createdColumn = (table as any).createdAt;
+        if (createdColumn) {
+          query = query.orderBy(desc(createdColumn));
+        }
+      }
+
+      // Get total count
+      const countResult = await countQuery;
+      const total = parseInt(countResult[0]?.count || '0');
+
+      // Apply pagination (skip for exports)
+      if (!isExport) {
+        query = query.offset(offset).limit(limit);
+      }
+
+      // Execute query
+      const data = await query;
+
+      return { data, total };
+    } catch (error) {
+      console.error(`Table query error for ${tableName}:`, error);
+      throw error;
+    }
+  }
+
+  // Saved Views Management
+  private savedViews: Map<string, any> = new Map();
+
+  async getSavedViews(userId: string, endpoint: string): Promise<any[]> {
+    // For now, use in-memory storage for saved views
+    const views = Array.from(this.savedViews.values()).filter(
+      view => view.userId === userId && view.endpoint === endpoint
+    );
+    return views;
+  }
+
+  async createSavedView(view: any): Promise<any> {
+    // For now, use in-memory storage for saved views
+    this.savedViews.set(view.id, view);
+    return view;
+  }
+
+  async deleteSavedView(id: string, userId: string): Promise<boolean> {
+    const view = this.savedViews.get(id);
+    if (view && view.userId === userId) {
+      this.savedViews.delete(id);
+      return true;
+    }
+    return false;
+  }
+
+  // Deal Stages Management
+  async getAllDealStages(): Promise<DealStage[]> {
+    if (!db) throw new Error("Database not available");
+    return await db.select().from(dealStages).orderBy(dealStages.position);
+  }
+
+  async createDealStage(stage: InsertDealStage): Promise<DealStage> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.insert(dealStages).values(stage).returning();
+    return result[0];
+  }
+
+  async updateDealStage(id: string, updates: Partial<DealStage>): Promise<DealStage> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.update(dealStages).set(updates).where(eq(dealStages.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteDealStage(id: string): Promise<boolean> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.delete(dealStages).where(eq(dealStages.id, id));
+    return result.rowCount > 0;
+  }
+
+  // Ticket Status Management
+  async getAllTicketStatus(): Promise<TicketStatus[]> {
+    if (!db) throw new Error("Database not available");
+    return await db.select().from(ticketStatus);
+  }
+
+  async createTicketStatus(status: InsertTicketStatus): Promise<TicketStatus> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.insert(ticketStatus).values(status).returning();
+    return result[0];
+  }
+
+  async updateTicketStatus(id: string, updates: Partial<TicketStatus>): Promise<TicketStatus> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.update(ticketStatus).set(updates).where(eq(ticketStatus.id, id)).returning();
+    return result[0];
+  }
+
+  async deleteTicketStatus(id: string): Promise<boolean> {
+    if (!db) throw new Error("Database not available");
+    const result = await db.delete(ticketStatus).where(eq(ticketStatus.id, id));
+    return result.rowCount > 0;
   }
 }
