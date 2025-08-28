@@ -17,27 +17,32 @@ export default function Navbar() {
   const { dir } = useLanguage();
   const { t } = useTranslation();
 
-  // Navigation items with translation support
+  // Navigation items with translation support and preload keys
   const navigationItems = [
     { 
       href: "/", 
-      label: t('nav.home')
+      label: t('nav.home'),
+      preload: null
     },
     { 
       href: "/services", 
-      label: t('nav.services')
+      label: t('nav.services'),
+      preload: "nav-services"
     },
     { 
       href: "/portfolio", 
-      label: t('nav.portfolio')
+      label: t('nav.portfolio'),
+      preload: "nav-portfolio"
     },
     { 
       href: "/about", 
-      label: t('nav.about')
+      label: t('nav.about'),
+      preload: "nav-about"
     },
     { 
       href: "/contact", 
-      label: t('nav.contact')
+      label: t('nav.contact'),
+      preload: "nav-contact"
     },
   ];
 
@@ -107,7 +112,7 @@ export default function Navbar() {
                       ? "text-sky-600 dark:text-sky-400"
                       : "text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400"
                   )}
-                  data-preload={`nav-${item.href.replace('/', '') || 'home'}`}
+                  data-preload={item.preload}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 >

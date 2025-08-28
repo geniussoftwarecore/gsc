@@ -64,7 +64,7 @@ export function preloadCriticalResources() {
 export function setupPreloadOnInteraction() {
   if (typeof window === 'undefined') return;
 
-  const preloadMap = new Map([
+  const preloadMap = new Map<string, () => Promise<any>>([
     // Route preloads
     ['/about', () => import('@/pages/about')],
     ['/services', () => import('@/pages/services')],

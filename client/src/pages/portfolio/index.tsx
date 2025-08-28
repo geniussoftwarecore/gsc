@@ -6,11 +6,11 @@ import { portfolioProjects } from "@/data/portfolio";
 export default function PortfolioIndex() {
   const stats = {
     totalProjects: portfolioProjects.length,
-    totalIndustries: [...new Set(portfolioProjects.map(p => p.sector))].length,
+    totalIndustries: Array.from(new Set(portfolioProjects.map(p => p.sector))).length,
     yearsExperience: 5,
     satisfaction: 98,
     totalClients: 150,
-    totalTechnologies: [...new Set(portfolioProjects.flatMap(p => p.tech))].length
+    totalTechnologies: Array.from(new Set(portfolioProjects.flatMap(p => p.tech))).length
   };
 
   return (
