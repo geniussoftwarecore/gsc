@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, jsonb, index, unique } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, jsonb, index, unique, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -8,7 +8,7 @@ export const users = pgTable("users", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(), // Deprecated - use password_hash
   password_hash: text("password_hash"), // Argon2 hashed password
-  force_password_change: text("force_password_change").notNull().default("false"),
+  force_password_change: boolean("force_password_change").notNull().default(false),
   role: text("role").notNull().default("client"), // client, admin, manager, agent, viewer
   name: text("name"),
   email: text("email"),
@@ -16,7 +16,7 @@ export const users = pgTable("users", {
   department: text("department"),
   position: text("position"),
   avatar: text("avatar"),
-  isActive: text("is_active").notNull().default("true"),
+  isActive: boolean("is_active").notNull().default(true),
   lastLoginAt: timestamp("last_login_at"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),

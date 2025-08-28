@@ -5,9 +5,11 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  forcePasswordChange: boolean;
   login: (email: string, password?: string, redirectUrl?: string) => Promise<void>;
   loginWithGoogle: () => void;
   verifyMagicLink: (token: string) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   logout: () => Promise<void>;
   trialDaysRemaining: number | null;
 }
@@ -21,6 +23,7 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [forcePasswordChange, setForcePasswordChange] = useState(false);
 
   const isAuthenticated = !!user;
 
@@ -78,7 +81,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       const loginResponse = await response.json();
       localStorage.setItem('auth_token', loginResponse.token);
-      await checkAuthStatus();
+      
+      // Check if password change is required
+      if (loginResponse.forcePasswordChange) {
+        setForcePasswordChange(true);
+        // Store user data even with force password change
+        setUser(loginResponse.user);
+      } else {
+        setForcePasswordChange(false);
+        await checkAuthStatus();
+      }
     } else {
       // Magic link flow (fallback)
       const response = await fetch('/api/auth/login-magic', {
@@ -120,6 +132,31 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(loginResponse.user);
   };
 
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    const token = localStorage.getItem('auth_token');
+    if (!token) {
+      throw new Error('Not authenticated');
+    }
+
+    const response = await fetch('/api/auth/change-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ currentPassword, newPassword }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to change password');
+    }
+
+    // Password changed successfully, clear force password change flag
+    setForcePasswordChange(false);
+    await checkAuthStatus();
+  };
+
   const logout = async () => {
     try {
       const token = localStorage.getItem('auth_token');
@@ -143,9 +180,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
     user,
     isLoading,
     isAuthenticated,
+    forcePasswordChange,
     login,
     loginWithGoogle,
     verifyMagicLink,
+    changePassword,
     logout,
     trialDaysRemaining,
   };

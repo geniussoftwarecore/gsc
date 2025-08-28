@@ -2,9 +2,20 @@ import { Router } from 'express';
 import { AuthService } from '../services/authService';
 import { requireAuth, AuthenticatedRequest } from '../middleware/requireAuth';
 import { MagicLinkRequest, MagicLinkVerification, TotpVerification } from '../../shared/types/auth';
+import { PasswordAuthService } from '../services/passwordAuthService';
+import { Pool } from 'pg';
 
 const router = Router();
 const authService = new AuthService();
+
+// Initialize password auth service with database connection
+const getPasswordAuthService = () => {
+  // Using environment variable for database connection
+  const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+  });
+  return new PasswordAuthService(pool);
+};
 
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
@@ -157,6 +168,37 @@ router.post('/totp/verify', requireAuth, async (req: AuthenticatedRequest, res) 
   } catch (error) {
     console.error('TOTP verification error:', error);
     res.status(500).json({ message: 'Failed to verify TOTP' });
+  }
+});
+
+// POST /api/auth/change-password
+router.post('/change-password', requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Not authenticated' });
+    }
+
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: 'Current password and new password are required' });
+    }
+
+    if (currentPassword === newPassword) {
+      return res.status(400).json({ message: 'New password must be different from current password' });
+    }
+
+    const passwordAuthService = getPasswordAuthService();
+    const result = await passwordAuthService.changePassword(req.user.id, currentPassword, newPassword);
+
+    if (result.success) {
+      res.json({ message: 'Password changed successfully' });
+    } else {
+      res.status(400).json({ message: result.error || 'Failed to change password' });
+    }
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ message: 'Failed to change password' });
   }
 });
 

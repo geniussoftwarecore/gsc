@@ -12,7 +12,8 @@ import Footer from "@/components/layout/footer";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { MetaTags } from "@/components/seo/meta-tags";
 import { ScrollIndicator, ScrollToTop } from "@/components/ui/scroll-indicator";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
+import { useLocation } from "wouter";
 import { PageSkeleton } from "@/components/ui/page-skeleton";
 
 // Critical routes - loaded immediately
@@ -30,6 +31,7 @@ const Contact = lazy(() => import("@/pages/contact"));
 const Dashboard = lazy(() => import("@/pages/dashboard"));
 const Login = lazy(() => import("@/pages/login"));
 const Register = lazy(() => import("@/pages/register"));
+const ChangePassword = lazy(() => import("@/pages/change-password"));
 const Settings = lazy(() => import("@/pages/settings"));
 
 // Heavy admin/CRM components with separate chunk loading
@@ -52,6 +54,24 @@ import {
   CrmSkeleton, 
   ContactSkeleton 
 } from "@/components/ui/specialized-skeletons";
+
+// Protected route wrapper that enforces password change
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { forcePasswordChange, isAuthenticated } = useAuth();
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    if (isAuthenticated && forcePasswordChange && window.location.pathname !== '/change-password') {
+      setLocation('/change-password');
+    }
+  }, [isAuthenticated, forcePasswordChange, setLocation]);
+
+  if (isAuthenticated && forcePasswordChange && window.location.pathname !== '/change-password') {
+    return null; // Will redirect via useEffect
+  }
+
+  return <>{children}</>;
+}
 
 function Router() {
   return (
@@ -93,9 +113,11 @@ function Router() {
         </Suspense>
       </Route>
       <Route path="/dashboard">
-        <Suspense fallback={<DashboardSkeleton />}>
-          <Dashboard />
-        </Suspense>
+        <ProtectedRoute>
+          <Suspense fallback={<DashboardSkeleton />}>
+            <Dashboard />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/login">
         <Suspense fallback={<PageSkeleton />}>
@@ -107,30 +129,45 @@ function Router() {
           <Register />
         </Suspense>
       </Route>
-      <Route path="/settings">
+      <Route path="/change-password">
         <Suspense fallback={<PageSkeleton />}>
-          <Settings />
+          <ChangePassword />
         </Suspense>
+      </Route>
+      <Route path="/settings">
+        <ProtectedRoute>
+          <Suspense fallback={<PageSkeleton />}>
+            <Settings />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/admin">
-        <Suspense fallback={<PageSkeleton />}>
-          <AdminPanel />
-        </Suspense>
+        <ProtectedRoute>
+          <Suspense fallback={<PageSkeleton />}>
+            <AdminPanel />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/admin/dashboard">
-        <Suspense fallback={<PageSkeleton />}>
-          <AdminDashboard />
-        </Suspense>
+        <ProtectedRoute>
+          <Suspense fallback={<PageSkeleton />}>
+            <AdminDashboard />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/admin/crm">
-        <Suspense fallback={<CrmSkeleton />}>
-          <CrmDashboard />
-        </Suspense>
+        <ProtectedRoute>
+          <Suspense fallback={<CrmSkeleton />}>
+            <CrmDashboard />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/crm">
-        <Suspense fallback={<CrmSkeleton />}>
-          <CrmDashboard />
-        </Suspense>
+        <ProtectedRoute>
+          <Suspense fallback={<CrmSkeleton />}>
+            <CrmDashboard />
+          </Suspense>
+        </ProtectedRoute>
       </Route>
       <Route path="/search-demo">
         <Suspense fallback={<PageSkeleton />}>

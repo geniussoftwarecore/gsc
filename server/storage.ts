@@ -251,6 +251,8 @@ export class MemStorage implements IStorage {
       id: "admin-001",
       username: "admin@geniussoftwarecore.com",
       password: "123", // In production, this should be hashed
+      password_hash: null,
+      force_password_change: false,
       role: "admin",
       name: "مدير النظام",
       email: "admin@geniussoftwarecore.com",
@@ -258,7 +260,7 @@ export class MemStorage implements IStorage {
       department: "الإدارة",
       position: "مدير عام",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -270,6 +272,8 @@ export class MemStorage implements IStorage {
       id: "sales-001",
       username: "sales@geniussoftwarecore.com",
       password: "123",
+      password_hash: null,
+      force_password_change: false,
       role: "sales",
       name: "أحمد محمد",
       email: "sales@geniussoftwarecore.com",
@@ -277,7 +281,7 @@ export class MemStorage implements IStorage {
       department: "المبيعات",
       position: "مدير مبيعات",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -287,6 +291,8 @@ export class MemStorage implements IStorage {
       id: "support-001",
       username: "support@geniussoftwarecore.com", 
       password: "123",
+      password_hash: null,
+      force_password_change: false,
       role: "support",
       name: "فاطمة علي",
       email: "support@geniussoftwarecore.com",
@@ -294,7 +300,7 @@ export class MemStorage implements IStorage {
       department: "الدعم الفني",
       position: "أخصائي دعم فني",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -977,7 +983,9 @@ export class MemStorage implements IStorage {
       department: insertUser.department || null,
       position: insertUser.position || null,
       avatar: insertUser.avatar || null,
-      isActive: insertUser.isActive || "true",
+      password_hash: insertUser.password_hash || null,
+      force_password_change: insertUser.force_password_change ?? false,
+      isActive: insertUser.isActive ?? true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1218,7 +1226,7 @@ export class MemStorage implements IStorage {
       jobTitle: lead.jobTitle,
       department: null,
       isPrimary: "false",
-      isActive: "true",
+      isActive: true,
       dateOfBirth: null,
       socialProfiles: null,
       preferences: null,
@@ -1897,7 +1905,7 @@ export class MemStorage implements IStorage {
       description: "شركة متخصصة في حلول تكنولوجيا المعلومات",
       tags: ["تقنية", "برمجيات", "مؤسسة"],
       customFields: null,
-      isActive: "true",
+      isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1925,7 +1933,7 @@ export class MemStorage implements IStorage {
       description: "مجموعة تجارية رائدة في المنطقة",
       tags: ["تجارة", "عميل", "كبيرة"],
       customFields: null,
-      isActive: "true",
+      isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1989,7 +1997,7 @@ export class MemStorage implements IStorage {
       jobTitle: "مدير تقنية المعلومات",
       department: "التقنية",
       isPrimary: "true",
-      isActive: "true",
+      isActive: true,
       dateOfBirth: null,
       socialProfiles: {
         "linkedin": "khalid-mansour",
@@ -2013,7 +2021,7 @@ export class MemStorage implements IStorage {
       jobTitle: "مديرة المشاريع",
       department: "إدارة المشاريع",
       isPrimary: "true",
-      isActive: "true",
+      isActive: true,
       dateOfBirth: null,
       socialProfiles: null,
       preferences: null,

@@ -51,7 +51,7 @@ export class PasswordAuthService {
         const userResult = await client.query(`
           SELECT id, email, name, role, password_hash, force_password_change, is_active
           FROM users 
-          WHERE email = $1 AND is_active = 'true'
+          WHERE email = $1 AND is_active = true
         `, [email]);
 
         if (userResult.rows.length === 0) {
@@ -88,15 +88,15 @@ export class PasswordAuthService {
           WHERE id = $1
         `, [user.id]);
 
-        // Generate JWT token
+        const forcePasswordChange = user.force_password_change === true;
+
+        // Generate JWT token with limited scope if password change required
         const token = generateToken({
           id: user.id,
           email: user.email,
           role: user.role,
           name: user.name
-        });
-
-        const forcePasswordChange = user.force_password_change === 'true';
+        }, forcePasswordChange);
 
         return {
           success: true,
@@ -148,7 +148,7 @@ export class PasswordAuthService {
         const userResult = await client.query(`
           SELECT id, password_hash
           FROM users 
-          WHERE id = $1 AND is_active = 'true'
+          WHERE id = $1 AND is_active = true
         `, [userId]);
 
         if (userResult.rows.length === 0) {
@@ -177,7 +177,7 @@ export class PasswordAuthService {
         // Update password and clear force_password_change flag
         await client.query(`
           UPDATE users 
-          SET password_hash = $1, force_password_change = 'false', updated_at = NOW()
+          SET password_hash = $1, force_password_change = false, updated_at = NOW()
           WHERE id = $2
         `, [newPasswordHash, userId]);
 
@@ -240,7 +240,7 @@ export class PasswordAuthService {
           UPDATE users 
           SET password_hash = $1, force_password_change = $2, updated_at = NOW()
           WHERE email = $3
-        `, [newPasswordHash, forceChange ? 'true' : 'false', email]);
+        `, [newPasswordHash, forceChange, email]);
 
         return {
           success: true
@@ -269,7 +269,7 @@ export class PasswordAuthService {
         const userResult = await client.query(`
           SELECT id, email, name, role, force_password_change, is_active
           FROM users 
-          WHERE id = $1 AND is_active = 'true'
+          WHERE id = $1 AND is_active = true
         `, [userId]);
 
         if (userResult.rows.length === 0) {
@@ -282,7 +282,7 @@ export class PasswordAuthService {
           email: user.email,
           name: user.name || '',
           role: user.role,
-          force_password_change: user.force_password_change === 'true'
+          force_password_change: user.force_password_change === true
         };
 
       } finally {
