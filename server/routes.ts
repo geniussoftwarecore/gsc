@@ -9,6 +9,7 @@ import billingRoutes from "./routes/billing";
 import stripeWebhookRoutes from "./routes/stripeWebhook";
 import healthRoutes, { trackMetrics } from "./routes/health";
 import enhancedCrmRoutes from "../crm_api/crmRoutes";
+import enterpriseTableRoutes from "./routes/enterpriseTableRoutes";
 import { 
   insertContactSubmissionSchema, 
   insertServiceRequestSchema,
@@ -521,6 +522,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // =============================================================================
+  // Enterprise Table API Routes
+  app.use("/api/tables", enterpriseTableRoutes);
+  app.use("/api", enterpriseTableRoutes);  // For saved-views endpoints
+  
   // =============================================================================
   // TABLE CONTROLLER ENDPOINTS
   // =============================================================================

@@ -323,6 +323,29 @@ export const crmTickets = crmCore.table("crm_tickets", {
   ticketNumberIdx: uniqueIndex("crm_tickets_number_idx").on(table.ticketNumber),
 }));
 
+// Saved Views - User-specific table configurations
+export const crmSavedViews = crmCore.table("crm_saved_views", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => crmUsers.id),
+  tableName: text("table_name").notNull(), // contacts, accounts, opportunities, tickets
+  name: text("name").notNull(),
+  isDefault: boolean("is_default").notNull().default(false),
+  isPublic: boolean("is_public").notNull().default(false),
+  config: jsonb("config").notNull().$type<{
+    columns: string[];
+    sorts: Array<{ field: string; direction: 'asc' | 'desc' }>;
+    filters: Array<{ field: string; operator: string; value: any }>;
+    pageSize: number;
+    search?: string;
+  }>(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
+}, (table) => ({
+  userTableIdx: index("crm_saved_views_user_table_idx").on(table.userId, table.tableName),
+  userDefaultIdx: index("crm_saved_views_user_default_idx").on(table.userId, table.isDefault),
+  publicTableIdx: index("crm_saved_views_public_table_idx").on(table.isPublic, table.tableName),
+}));
+
 // Insert schemas for validation
 export const insertCrmUserSchema = createInsertSchema(crmUsers);
 export const insertCrmTeamSchema = createInsertSchema(crmTeams);
@@ -334,6 +357,7 @@ export const insertCrmProductSchema = createInsertSchema(crmProducts);
 export const insertCrmActivitySchema = createInsertSchema(crmActivities);
 export const insertCrmTicketSchema = createInsertSchema(crmTickets);
 export const insertCrmAuditLogSchema = createInsertSchema(crmAuditLogs);
+export const insertCrmSavedViewSchema = createInsertSchema(crmSavedViews);
 
 // Select types
 export type CrmUser = typeof crmUsers.$inferSelect;
@@ -346,3 +370,4 @@ export type CrmProduct = typeof crmProducts.$inferSelect;
 export type CrmActivity = typeof crmActivities.$inferSelect;
 export type CrmTicket = typeof crmTickets.$inferSelect;
 export type CrmAuditLog = typeof crmAuditLogs.$inferSelect;
+export type CrmSavedView = typeof crmSavedViews.$inferSelect;
