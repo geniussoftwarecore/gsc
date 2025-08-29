@@ -73,30 +73,81 @@ export default function Navbar() {
           {/* Left section: Logo + Brand Text */}
           <Link href="/">
             <motion.div 
-              className="flex items-center gap-2 md:gap-3"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.2 }}
+              className="flex items-center gap-2 md:gap-3 relative"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
-              {/* Navbar Logo - Larger size for better visibility */}
-              <img 
-                src="/brand/logo-gsc-48.png" 
-                alt="GSC" 
-                className="h-10 w-auto md:h-12"
-                width={48}
-                height={48}
-                style={{ height: '40px' }}
-              />
+              {/* Interactive Logo Container */}
+              <motion.div
+                className="relative"
+                whileHover={{ 
+                  rotate: [0, -5, 5, 0],
+                  transition: { duration: 0.6, ease: "easeInOut" }
+                }}
+              >
+                {/* Animated Background Glow */}
+                <motion.div
+                  className="absolute inset-0 bg-sky-400/20 rounded-full blur-md -z-10"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ 
+                    scale: 1.5, 
+                    opacity: 1,
+                    transition: { duration: 0.3 }
+                  }}
+                />
+                
+                {/* Logo with Bounce Effect */}
+                <motion.img 
+                  src="/brand/logo-gsc-48.png" 
+                  alt="GSC" 
+                  className="h-10 w-auto md:h-12"
+                  width={48}
+                  height={48}
+                  style={{ height: '40px' }}
+                  whileHover={{ 
+                    y: [-2, -4, -2],
+                    transition: { duration: 0.5, ease: "easeInOut" }
+                  }}
+                />
+                
+                {/* Sparkle Effects */}
+                <motion.div
+                  className="absolute -top-1 -right-1 w-2 h-2 bg-sky-400 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ 
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                    transition: { duration: 0.8, delay: 0.2 }
+                  }}
+                />
+                <motion.div
+                  className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-sky-300 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileHover={{ 
+                    scale: [0, 1, 0],
+                    opacity: [0, 1, 0],
+                    transition: { duration: 0.6, delay: 0.4 }
+                  }}
+                />
+              </motion.div>
               
-              {/* Brand Text */}
-              <span 
+              {/* Brand Text with Color Animation */}
+              <motion.span 
                 className={cn(
-                  "font-medium tracking-tight text-slate-900 dark:text-white transition-colors",
+                  "font-medium tracking-tight transition-all duration-300",
                   "text-base md:text-lg",
                   dir ? "font-cairo" : "font-inter"
                 )}
+                whileHover={{
+                  color: "#0ea5e9", // sky-500
+                  textShadow: "0 0 8px rgba(14, 165, 233, 0.3)"
+                }}
+                initial={{ color: "rgb(15 23 42)" }} // slate-900
+                style={{ color: "var(--foreground)" }}
               >
                 {t('brand.name')}
-              </span>
+              </motion.span>
             </motion.div>
           </Link>
 
