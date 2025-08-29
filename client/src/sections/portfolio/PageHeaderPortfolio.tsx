@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
-import { cn } from "@/lib/utils";
 
 export function PageHeaderPortfolio() {
   const { dir } = useLanguage();
@@ -38,30 +37,6 @@ export function PageHeaderPortfolio() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Breadcrumb */}
-        <motion.nav
-          className="flex mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <ol className="flex items-center space-x-2 rtl:space-x-reverse text-sm text-brand-text-muted">
-            <li>
-              <a href="/" className="hover:text-primary transition-colors">
-                {t('nav.home')}
-              </a>
-            </li>
-            <li className="flex items-center">
-              <svg className="w-4 h-4 mx-2 rtl:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-              </svg>
-              <span className="text-brand-text-primary font-medium">
-                {dir === 'rtl' ? 'أعمالنا' : 'Our Work'}
-              </span>
-            </li>
-          </ol>
-        </motion.nav>
-
         {/* Page Header */}
         <div className="text-center max-w-4xl mx-auto">
           <motion.h1

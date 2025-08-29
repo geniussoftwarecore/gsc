@@ -1,9 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
-import { cn } from "@/lib/utils";
-import { Home, ChevronRight } from "lucide-react";
-import { Link } from "wouter";
 
 export function PageHeaderServices() {
   const { dir } = useLanguage();
@@ -40,27 +37,6 @@ export function PageHeaderServices() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Breadcrumb */}
-        <motion.nav
-          className="flex items-center gap-2 mb-8 text-brand-text-muted"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          dir={dir}
-        >
-          <Link href="/" className="flex items-center gap-2 hover:text-primary transition-colors duration-300">
-            <Home className="w-4 h-4" />
-            <span>{t('nav.home')}</span>
-          </Link>
-          <ChevronRight 
-            className={cn(
-              "w-4 h-4",
-              dir === 'rtl' && "rotate-180"
-            )} 
-          />
-          <span className="text-brand-text-primary font-medium">{t('nav.services')}</span>
-        </motion.nav>
-
         {/* Page Header */}
         <motion.div
           className="text-center max-w-4xl mx-auto"
