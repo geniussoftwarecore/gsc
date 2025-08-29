@@ -1,6 +1,12 @@
+import { Layout } from "@/components/layout/Layout";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { AnimatedCard } from "@/components/ui/AnimatedCard";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Card, CardContent } from "@/components/ui/card";
-import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
-import { InteractiveButton } from "@/components/ui/interactive-button";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { COMPANY_INFO, STATS } from "@/lib/constants";
@@ -92,24 +98,19 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="gradient-light py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <AnimatedText delay={0.2}>
-            <h1 className={`text-4xl lg:text-6xl font-bold text-secondary mb-6 ${dir ? 'text-right' : 'text-left'}`}>
-              {t('about.title')}
-            </h1>
-            <p className={`text-xl text-gray-600 leading-relaxed ${dir ? 'text-right' : 'text-left'}`}>
-              {t('about.subtitle')}
-            </p>
-          </AnimatedText>
-        </div>
-      </section>
+    <Layout>
+      <PageHeader 
+        title={dir === 'rtl' ? 'معلومات عنا' : 'About Us'}
+        subtitle={dir === 'rtl' 
+          ? 'نحن شركة رائدة في مجال تطوير البرمجيات، نقدم حلولاً تقنية مبتكرة تساعد الشركات على النمو والازدهار في العصر الرقمي'
+          : 'We are a leading software development company providing innovative technical solutions to help businesses grow and thrive in the digital age'
+        }
+        breadcrumbs={[{ href: '/about', label: dir === 'rtl' ? 'معلومات عنا' : 'About Us' }]}
+        background="light"
+      />
 
-      {/* Company Story */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section size="xl" background="white">
+        <Container size="lg">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection delay={0.3}>
               <h2 className={`text-4xl lg:text-5xl font-bold text-secondary mb-6 ${dir ? 'text-right' : 'text-left'}`}>
@@ -122,12 +123,13 @@ export default function About() {
                 {t('about.storyParagraph2')}
               </p>
               <Link href="/contact">
-                <InteractiveButton
-                  className="btn-primary shadow-lg hover:shadow-xl"
-                  icon={<i className="fas fa-handshake"></i>}
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-primary-dark hover:from-primary-dark hover:to-primary text-white px-8 py-4 rounded-xl shadow-lg hover:shadow-xl text-base font-semibold"
                 >
+                  <i className="fas fa-handshake mr-2"></i>
                   {t('about.partnership')}
-                </InteractiveButton>
+                </Button>
               </Link>
             </AnimatedSection>
             <AnimatedSection delay={0.5}>
@@ -149,12 +151,11 @@ export default function About() {
               </motion.div>
             </AnimatedSection>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Timeline */}
-      <section className="py-16 lg:py-24 bg-light-gray">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section size="xl" background="light">
+        <Container size="md">
           <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
               رحلتنا عبر الزمن
@@ -166,7 +167,7 @@ export default function About() {
 
           <div className="space-y-8">
             {timeline.map((item, index) => (
-              <AnimatedCard key={index} delay={index * 0.1} className="p-6">
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6" hover={true}>
                 <CardContent className="p-0">
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
@@ -187,12 +188,11 @@ export default function About() {
               </AnimatedCard>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Stats */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section size="xl" background="white">
+        <Container size="lg">
           <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
               إنجازاتنا بالأرقام
@@ -201,7 +201,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {STATS.map((stat, index) => (
-              <AnimatedCard key={index} delay={index * 0.1} className="text-center p-8">
+              <AnimatedCard key={index} delay={index * 0.1} className="text-center p-8" hover={true}>
                 <CardContent className="p-0">
                   <motion.div
                     initial={{ scale: 0 }}
@@ -219,12 +219,11 @@ export default function About() {
               </AnimatedCard>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Team */}
-      <section className="py-16 lg:py-24 bg-light-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section size="xl" background="light">
+        <Container size="lg">
           <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
               فريقنا المميز
@@ -236,7 +235,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
-              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center" hover={true}>
                 <CardContent className="p-0">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -267,12 +266,11 @@ export default function About() {
               </AnimatedCard>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* Values */}
-      <section className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Section size="xl" background="white">
+        <Container size="lg">
           <AnimatedText className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-secondary mb-6">
               قيمنا الأساسية
@@ -284,7 +282,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center">
+              <AnimatedCard key={index} delay={index * 0.1} className="p-6 text-center" hover={true}>
                 <CardContent className="p-0">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -303,12 +301,11 @@ export default function About() {
               </AnimatedCard>
             ))}
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
-      {/* CTA */}
-      <section className="py-16 lg:py-24 gradient-primary text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Section size="xl" background="gradient">
+        <Container size="md" className="text-center">
           <AnimatedSection delay={0.3}>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               جاهزون للعمل معك
@@ -318,26 +315,28 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
-                <InteractiveButton
-                  className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl"
-                  icon={<MessageCircle size={20} />}
+                <Button
+                  size="lg"
+                  className="bg-white text-primary hover:bg-gray-100 shadow-lg hover:shadow-xl px-8 py-4 rounded-xl text-base font-semibold"
                 >
+                  <MessageCircle size={20} className="mr-2" />
                   ابدأ محادثة
-                </InteractiveButton>
+                </Button>
               </Link>
               <Link href="/portfolio">
-                <InteractiveButton
+                <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-primary"
-                  icon={<Eye size={20} />}
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-primary px-8 py-4 rounded-xl text-base font-semibold"
                 >
+                  <Eye size={20} className="mr-2" />
                   اطلع على أعمالنا
-                </InteractiveButton>
+                </Button>
               </Link>
             </div>
           </AnimatedSection>
-        </div>
-      </section>
-    </div>
+        </Container>
+      </Section>
+    </Layout>
   );
 }

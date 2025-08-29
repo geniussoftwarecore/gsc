@@ -1,18 +1,26 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Layout } from "@/components/layout/Layout";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Section } from "@/components/ui/Section";
+import { Container } from "@/components/ui/Container";
+import { AnimatedCard } from "@/components/ui/AnimatedCard";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { PortfolioItem } from "@shared/schema";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AnimatedCard, AnimatedSection, AnimatedText } from "@/components/ui/animated-card";
-import { InteractiveButton } from "@/components/ui/interactive-button";
 import { EnhancedSearchBar } from "@/components/portfolio/enhanced-search-bar";
 import { EnhancedProjectGallery } from "@/components/portfolio/enhanced-project-gallery";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Grid, Globe, Smartphone, Monitor, Settings, Megaphone, CheckCircle, Heart, Headphones, Award, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/i18n/lang";
 
 export default function Portfolio() {
+  const { dir } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     technologies: [] as string[],
@@ -114,16 +122,16 @@ export default function Portfolio() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-500 text-xl mb-4">حدث خطأ في تحميل المشاريع</p>
-          <InteractiveButton onClick={() => window.location.reload()}>
+          <Button onClick={() => window.location.reload()}>
             إعادة المحاولة
-          </InteractiveButton>
+          </Button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen">
+    <Layout>
       {/* Hero Section */}
       <section className="gradient-light py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

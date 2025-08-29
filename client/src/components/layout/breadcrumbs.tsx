@@ -1,71 +1,104 @@
-import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { AnimatedSection } from "@/components/ui/animated-card";
+import { useLanguage } from "@/i18n/lang";
+import { useTranslation } from "@/hooks/useTranslation";
+import { cn } from "@/lib/utils";
+import { Home, ChevronRight } from "lucide-react";
+import { Link, useLocation } from "wouter";
 
-interface BreadcrumbItem {
-  label: string;
-  href: string;
-}
-
-const routeMap: Record<string, string> = {
-  "/": "الرئيسية",
-  "/about": "من نحن", 
-  "/services": "الخدمات",
-  "/portfolio": "أعمالنا",
-  "/frameworks": "أطرنا التقنية",
-  "/contact": "تواصل معنا",
-};
-
+/**
+ * Auto-generating breadcrumbs component following Services/Home design
+ */
 export function Breadcrumbs() {
+  const { dir } = useLanguage();
+  const { t } = useTranslation();
   const [location] = useLocation();
-  
-  if (location === "/") {
-    return null;
-  }
 
-  const pathSegments = location.split("/").filter(Boolean);
-  const breadcrumbs: BreadcrumbItem[] = [
-    { label: "الرئيسية", href: "/" }
-  ];
+  // Generate breadcrumb items from current path
+  const generateBreadcrumbs = () => {
+    const pathSegments = location.split('/').filter(Boolean);
+    const breadcrumbs = [];
 
-  let currentPath = "";
-  pathSegments.forEach(segment => {
-    currentPath += `/${segment}`;
-    const label = routeMap[currentPath] || segment;
-    breadcrumbs.push({
-      label,
-      href: currentPath
-    });
-  });
+    // Always start with home
+    breadcrumbs.push({ href: '/', label: 'الرئيسية' });
+
+    // Add path segments
+    let currentPath = '';
+    for (const segment of pathSegments) {
+      currentPath += `/${segment}`;
+      
+      // Map common paths to Arabic labels
+      const labelMap: Record<string, string> = {
+        services: 'الخدمات',
+        about: 'معلومات عنا',
+        portfolio: 'أعمالنا',
+        contact: 'اتصل بنا',
+        pricing: 'الأسعار',
+        blog: 'المدونة',
+        login: 'تسجيل الدخول',
+        register: 'إنشاء حساب',
+        dashboard: 'لوحة التحكم',
+        admin: 'الإدارة',
+        settings: 'الإعدادات',
+        crm: 'إدارة العملاء',
+        'change-password': 'تغيير كلمة المرور',
+        frameworks: 'أطر العمل',
+        'our-team': 'فريقنا',
+        'our-values': 'قيمنا'
+      };
+
+      breadcrumbs.push({
+        href: currentPath,
+        label: labelMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1)
+      });
+    }
+
+    return breadcrumbs;
+  };
+
+  const breadcrumbs = generateBreadcrumbs();
+
+  // Don't show breadcrumbs on home page
+  if (location === '/') return null;
 
   return (
-    <AnimatedSection delay={0.1} className="bg-light-gray py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center space-x-1 text-sm" aria-label="Breadcrumb">
+    <motion.nav
+      className="bg-white border-b border-brand-sky-base py-4"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      dir={dir}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-2 text-sm text-brand-text-muted">
           {breadcrumbs.map((crumb, index) => (
-            <motion.div
-              key={crumb.href}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="flex items-center"
-            >
-              {index > 0 && (
-                <i className="fas fa-chevron-left mx-2 text-gray-400"></i>
-              )}
+            <div key={index} className="flex items-center gap-2">
+              {index === 0 && <Home className="w-4 h-4" />}
+              
               {index === breadcrumbs.length - 1 ? (
-                <span className="text-gray-500 font-medium">{crumb.label}</span>
+                <span className="text-brand-text-primary font-medium">
+                  {crumb.label}
+                </span>
               ) : (
-                <Link href={crumb.href}>
-                  <span className="text-primary hover:text-primary-dark transition-colors cursor-pointer">
-                    {crumb.label}
-                  </span>
+                <Link 
+                  href={crumb.href} 
+                  className="hover:text-primary transition-colors duration-300"
+                >
+                  {crumb.label}
                 </Link>
               )}
-            </motion.div>
+              
+              {index < breadcrumbs.length - 1 && (
+                <ChevronRight 
+                  className={cn(
+                    "w-4 h-4",
+                    dir === 'rtl' && "rotate-180"
+                  )} 
+                />
+              )}
+            </div>
           ))}
-        </nav>
+        </div>
       </div>
-    </AnimatedSection>
+    </motion.nav>
   );
 }
