@@ -60,7 +60,7 @@ export function Hero() {
               <img
                 src="/brand/logo-gsc-hero.png"
                 alt={t('brand.name')}
-                className="h-16 md:h-20 lg:h-24 w-auto"
+                className="h-20 md:h-24 lg:h-28 w-auto"
                 width={192}
                 height={96}
                 loading="eager"
