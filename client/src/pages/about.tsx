@@ -1,4 +1,3 @@
-import { Layout } from "@/components/layout/Layout";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -98,14 +97,13 @@ export default function About() {
   ];
 
   return (
-    <Layout>
+    <>
       <PageHeader 
         title={dir === 'rtl' ? 'معلومات عنا' : 'About Us'}
         subtitle={dir === 'rtl' 
           ? 'نحن شركة رائدة في مجال تطوير البرمجيات، نقدم حلولاً تقنية مبتكرة تساعد الشركات على النمو والازدهار في العصر الرقمي'
           : 'We are a leading software development company providing innovative technical solutions to help businesses grow and thrive in the digital age'
         }
-        breadcrumbs={[{ href: '/about', label: dir === 'rtl' ? 'معلومات عنا' : 'About Us' }]}
         background="light"
       />
 
@@ -337,6 +335,6 @@ export default function About() {
           </AnimatedSection>
         </Container>
       </Section>
-    </Layout>
+    </>
   );
 }
