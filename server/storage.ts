@@ -502,7 +502,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
-        title: "أنظمة إدارة الموارد ERPNext",
+        title: "أنظمة إدارة موارد المؤسسات",
         description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم جميع جوانب أعمالك من المحاسبة إلى إدارة المخزون والموارد البشرية",
         icon: "settings",
         category: "erp",
