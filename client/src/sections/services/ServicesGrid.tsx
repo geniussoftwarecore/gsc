@@ -80,6 +80,14 @@ export function ServicesGrid({
       bgColor: "bg-green-50",
     },
     {
+      id: "smart",
+      title: "الحلول الذكية",
+      description: "تقنيات الذكاء الاصطناعي والواقع المعزز والحلول المبتكرة",
+      icon: Code,
+      color: "text-cyan-500",
+      bgColor: "bg-cyan-50",
+    },
+    {
       id: "design",
       title: "التصميم وتجربة المستخدم",
       description: "تصميم واجهات مستخدم جذابة وتجارب تفاعلية مميزة",
@@ -107,6 +115,7 @@ export function ServicesGrid({
       const categoryMap = {
         "business": ["erp", "consulting"],
         "development": ["web", "mobile", "desktop"],
+        "smart": ["smart", "smart-mobile", "ar-vr"],
         "design": ["design"],
         "marketing": ["marketing"],
       };
@@ -200,6 +209,7 @@ export function ServicesGrid({
                     {filteredServices.filter(s => {
                       if (category.id === "business") return ["erp", "consulting"].includes(s.category);
                       if (category.id === "development") return ["web", "mobile", "desktop"].includes(s.category);
+                      if (category.id === "smart") return ["smart", "smart-mobile", "ar-vr"].includes(s.category);
                       if (category.id === "design") return s.category === "design";
                       if (category.id === "marketing") return s.category === "marketing";
                       return false;

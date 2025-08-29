@@ -260,7 +260,7 @@ export class MemStorage implements IStorage {
       department: "الإدارة",
       position: "مدير عام",
       avatar: null,
-      isActive: true,
+      isActive: "true",
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -281,7 +281,7 @@ export class MemStorage implements IStorage {
       department: "المبيعات",
       position: "مدير مبيعات",
       avatar: null,
-      isActive: true,
+      isActive: "true",
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -300,7 +300,7 @@ export class MemStorage implements IStorage {
       department: "الدعم الفني",
       position: "أخصائي دعم فني",
       avatar: null,
-      isActive: true,
+      isActive: "true",
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -446,6 +446,39 @@ export class MemStorage implements IStorage {
         startingPrice: "8,000 ريال"
       },
       {
+        id: "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
+        title: "برمجة وتطوير تطبيقات سطح المكتب",
+        description: "تطوير تطبيقات سطح المكتب الاحترافية والقوية لأنظمة Windows و macOS و Linux باستخدام أحدث التقنيات والأدوات المتطورة. نقدم حلولاً شاملة من البرمجيات البسيطة إلى الأنظمة المؤسسية المعقدة مع واجهات مستخدم عصرية وأداء استثنائي وتكامل مثالي مع أنظمة التشغيل",
+        icon: "monitor",
+        category: "desktop",
+        featured: "true",
+        technologies: ["Electron", ".NET Core", "Qt Framework", "JavaFX", "C# WPF", "Python PyQt", "C++ MFC", "Cross-Platform"],
+        deliveryTime: "6-12 أسبوع",
+        startingPrice: "18,000 ريال"
+      },
+      {
+        id: "m9n8b7v6-c5x4-z3a2-s1d0-f9g8h7j6k5l4",
+        title: "الحلول الذكية والبرمجية للهواتف الذكية",
+        description: "تطوير حلول برمجية ذكية ومبتكرة للهواتف الذكية مع تقنيات الذكاء الاصطناعي والتعلم الآلي. نقدم تطبيقات ذكية تتعلم من سلوك المستخدمين وتقدم تجارب مخصصة، بما في ذلك معالجة الصور والنصوص، التعرف على الأنماط، الدردشة الذكية، والتحليلات المتقدمة. حلول متطورة تدمج قوة الذكاء الاصطناعي في راحة يدك",
+        icon: "brain-circuit",
+        category: "smart-mobile",
+        featured: "true",
+        technologies: ["AI/ML Integration", "TensorFlow Mobile", "Core ML", "OpenAI API", "Computer Vision", "NLP", "React Native AI", "Smart Analytics", "Predictive Models"],
+        deliveryTime: "8-16 أسبوع",
+        startingPrice: "35,000 ريال"
+      },
+      {
+        id: "q1w2e3r4-t5y6-u7i8-o9p0-a1s2d3f4g5h6",
+        title: "حلول الواقع المعزز والافتراضي للهواتف",
+        description: "تطوير تطبيقات الواقع المعزز (AR) والواقع الافتراضي (VR) التفاعلية للهواتف الذكية. نقدم تجارب غامرة ومبتكرة تشمل التسوق الافتراضي، التعليم التفاعلي، الألعاب ثلاثية الأبعاد، والعروض التقديمية المرئية. حلول تقنية متطورة تمزج الواقع الرقمي بالعالم الحقيقي لتقديم تجارب لا تُنسى",
+        icon: "glasses",
+        category: "ar-vr",
+        featured: "false",
+        technologies: ["ARKit", "ARCore", "Unity 3D", "Unreal Engine", "WebXR", "8th Wall", "Vuforia", "3D Modeling", "Spatial Computing"],
+        deliveryTime: "10-20 أسبوع",
+        startingPrice: "45,000 ريال"
+      },
+      {
         id: "9a6c839d-2a5c-4418-832a-2a5bd14dcf7e",
         title: "تصميم الجرافيكس والهوية البصرية",
         description: "تصميم الشعارات والهوية البصرية والمواد التسويقية الإبداعية التي تعكس قيم علامتك التجارية وتجذب العملاء",
@@ -473,21 +506,10 @@ export class MemStorage implements IStorage {
         description: "تطوير حلول برمجية ذكية ومتقدمة باستخدام تقنيات الذكاء الاصطناعي والتعلم الآلي لأتمتة العمليات وتحسين الكفاءة",
         icon: "brain",
         category: "smart",
-        featured: "true",
+        featured: "false",
         technologies: ["Python", "TensorFlow", "OpenAI API", "Machine Learning", "Computer Vision"],
         deliveryTime: "6-12 أسبوع",
         startingPrice: "25,000 ريال"
-      },
-      {
-        id: "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
-        title: "تطبيقات سطح المكتب",
-        description: "تطوير تطبيقات سطح المكتب الاحترافية والقوية لأنظمة Windows و macOS و Linux باستخدام أحدث التقنيات والأدوات المتطورة مع واجهات مستخدم سهلة الاستخدام وأداء عالي",
-        icon: "monitor",
-        category: "desktop",
-        featured: "false",
-        technologies: ["Electron", ".NET", "Qt", "JavaFX", "Python Tkinter", "C++"],
-        deliveryTime: "6-10 أسابيع",
-        startingPrice: "12,000 ريال"
       },
       {
         id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
@@ -1226,7 +1248,7 @@ export class MemStorage implements IStorage {
       jobTitle: lead.jobTitle,
       department: null,
       isPrimary: "false",
-      isActive: true,
+      isActive: "true",
       dateOfBirth: null,
       socialProfiles: null,
       preferences: null,
@@ -1905,7 +1927,7 @@ export class MemStorage implements IStorage {
       description: "شركة متخصصة في حلول تكنولوجيا المعلومات",
       tags: ["تقنية", "برمجيات", "مؤسسة"],
       customFields: null,
-      isActive: true,
+      isActive: "true",
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1933,7 +1955,7 @@ export class MemStorage implements IStorage {
       description: "مجموعة تجارية رائدة في المنطقة",
       tags: ["تجارة", "عميل", "كبيرة"],
       customFields: null,
-      isActive: true,
+      isActive: "true",
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1997,7 +2019,7 @@ export class MemStorage implements IStorage {
       jobTitle: "مدير تقنية المعلومات",
       department: "التقنية",
       isPrimary: "true",
-      isActive: true,
+      isActive: "true",
       dateOfBirth: null,
       socialProfiles: {
         "linkedin": "khalid-mansour",
@@ -2021,7 +2043,7 @@ export class MemStorage implements IStorage {
       jobTitle: "مديرة المشاريع",
       department: "إدارة المشاريع",
       isPrimary: "true",
-      isActive: true,
+      isActive: "true",
       dateOfBirth: null,
       socialProfiles: null,
       preferences: null,
