@@ -154,14 +154,19 @@ export default function Navbar() {
             ) : (
               <>
                 <Link href="/login">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-9 px-3 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-                    data-testid="button-login"
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.1 }}
                   >
-                    {t('auth.login')}
-                  </Button>
+                    <Button
+                      size="sm"
+                      className="h-9 px-3 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
+                      data-testid="button-login"
+                    >
+                      {t('auth.login')}
+                    </Button>
+                  </motion.div>
                 </Link>
                 
                 <Link href="/register">
@@ -255,8 +260,7 @@ export default function Navbar() {
                   >
                     <Link href="/login" onClick={closeMobileMenu}>
                       <Button
-                        variant="ghost"
-                        className="w-full justify-center h-10 text-sm font-medium"
+                        className="w-full justify-center h-10 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600"
                         data-testid="mobile-button-login"
                       >
                         {t('auth.login')}
