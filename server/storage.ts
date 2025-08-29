@@ -447,7 +447,7 @@ export class MemStorage implements IStorage {
       },
       {
         id: "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
-        title: "برمجة وتطوير تطبيقات سطح المكتب",
+        title: "تطوير تطبيقات سطح المكتب",
         description: "تطوير تطبيقات سطح المكتب الاحترافية والقوية لأنظمة Windows و macOS و Linux باستخدام أحدث التقنيات والأدوات المتطورة. نقدم حلولاً شاملة من البرمجيات البسيطة إلى الأنظمة المؤسسية المعقدة مع واجهات مستخدم عصرية وأداء استثنائي وتكامل مثالي مع أنظمة التشغيل",
         icon: "monitor",
         category: "desktop",
@@ -521,6 +521,28 @@ export class MemStorage implements IStorage {
         technologies: ["ERPNext", "Python", "Frappe Framework", "MariaDB", "Redis"],
         deliveryTime: "8-16 أسبوع",
         startingPrice: "20,000 ريال"
+      },
+      {
+        id: "new-desktop-apps-2025",
+        title: "برمجة وتطوير برامج سطح المكتب",
+        description: "برمجيات مكتبية قوية لأنظمة ويندوز (وممكن عبر الأنظمة عند الحاجة).",
+        icon: "monitor",
+        category: "desktop",
+        featured: "false",
+        technologies: [".NET (WPF/WinUI)", "Electron", "مزامنة قاعدة بيانات محلية", "تكامل عميق مع النظام", "تحديثات تلقائية"],
+        deliveryTime: "6-12 أسبوع",
+        startingPrice: "22,000 ريال"
+      },
+      {
+        id: "new-smart-mobile-solutions-2025", 
+        title: "الحلول الذكية والبرمجية للهواتف الذكية المتقدمة",
+        description: "حلول متكاملة للهواتف الذكية: تكاملات وSDKات وميزات على مستوى الجهاز.",
+        icon: "smartphone",
+        category: "smart-mobile",
+        featured: "false",
+        technologies: ["مدفوعات وخرائط وكاميرا", "بصمات/بيومتريكس", "دمج SDKات ووحدات أصلية", "توزيع مؤسسي وسياسات MDM", "تحسين الأداء وتتبع الأعطال"],
+        deliveryTime: "8-14 أسبوع",
+        startingPrice: "28,000 ريال"
       }
     ];
 
