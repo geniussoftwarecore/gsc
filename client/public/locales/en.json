@@ -157,6 +157,12 @@
       "successDesc": "We will contact you as soon as possible and a lead will be created in our CRM system.",
       "errorTitle": "Error sending message",
       "errorDesc": "Please try again or contact us directly."
+    },
+    "channels": {
+      "email": "Email",
+      "phone": "Phone", 
+      "address": "Address",
+      "hours": "Working Hours"
     }
   },
   "about": {
