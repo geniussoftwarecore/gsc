@@ -311,7 +311,7 @@ export function HomeHero({ language = 'ar' }: HomeHeroProps) {
             </Link>
 
             {/* Start Your Project Button */}
-            <Link href="/services">
+            <Link href="/contact">
               <motion.div
                 whileHover={{ y: -2, x: language === 'ar' ? 2 : -2 }}
                 whileTap={{ y: 0 }}
