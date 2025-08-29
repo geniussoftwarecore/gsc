@@ -511,17 +511,6 @@ export class MemStorage implements IStorage {
         deliveryTime: "8-16 أسبوع",
         startingPrice: "20,000 ريال"
       },
-      {
-        id: "new-smart-mobile-solutions-2025", 
-        title: "الحلول الذكية والبرمجية للهواتف الذكية المتقدمة",
-        description: "حلول متكاملة للهواتف الذكية: تكاملات وSDKات وميزات على مستوى الجهاز.",
-        icon: "smartphone",
-        category: "smart-mobile",
-        featured: "false",
-        technologies: ["مدفوعات وخرائط وكاميرا", "بصمات/بيومتريكس", "دمج SDKات ووحدات أصلية", "توزيع مؤسسي وسياسات MDM", "تحسين الأداء وتتبع الأعطال"],
-        deliveryTime: "8-14 أسبوع",
-        startingPrice: "28,000 ريال"
-      }
     ];
 
     sampleServices.forEach(service => this.services.set(service.id, service));
