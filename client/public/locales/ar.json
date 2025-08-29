@@ -17,8 +17,8 @@
   },
   "auth": {
     "login": "تسجيل الدخول",
-    "signup": "إنشاء حساب",
-    "createAccount": "إنشاء حساب",
+    "signup": "التسجيل",
+    "createAccount": "التسجيل",
     "dashboard": "لوحة التحكم"
   },
   "hero": {
