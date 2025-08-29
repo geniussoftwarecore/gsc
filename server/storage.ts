@@ -425,7 +425,7 @@ export class MemStorage implements IStorage {
     const sampleServices: Service[] = [
       {
         id: "66b131cc-ccec-49a7-b832-972f4ba29a7b",
-        title: "تطبيقات الهواتف الذكية",
+        title: "تطوير تطبيقات الهواتف الذكية",
         description: "نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة",
         icon: "smartphone",
         category: "mobile",
