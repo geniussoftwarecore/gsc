@@ -57,14 +57,42 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <img
-                src="/brand/logo-gsc-hero.png"
-                alt={t('brand.name')}
-                className="h-20 md:h-24 lg:h-28 w-auto"
-                width={192}
-                height={96}
-                loading="eager"
-              />
+              <motion.div
+                className="relative group cursor-pointer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                {/* Glow effect background */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary/20 to-brand-sky-accent/20 rounded-2xl blur-xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                />
+                
+                {/* Logo with enhanced styling */}
+                <motion.img
+                  src="/brand/logo-gsc-hero.png"
+                  alt={t('brand.name')}
+                  className="relative h-24 md:h-32 lg:h-40 w-auto drop-shadow-lg group-hover:drop-shadow-2xl transition-all duration-300"
+                  width={192}
+                  height={96}
+                  loading="eager"
+                  whileHover={{ 
+                    filter: "brightness(1.1) contrast(1.05)",
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                
+                {/* Interactive shine effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '200%' }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                />
+              </motion.div>
             </motion.div>
 
             {/* Main Headline */}
