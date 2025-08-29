@@ -512,17 +512,6 @@ export class MemStorage implements IStorage {
         startingPrice: "20,000 ريال"
       },
       {
-        id: "new-desktop-apps-2025",
-        title: "برمجة وتطوير برامج سطح المكتب",
-        description: "برمجيات مكتبية قوية لأنظمة ويندوز (وممكن عبر الأنظمة عند الحاجة).",
-        icon: "monitor",
-        category: "desktop",
-        featured: "false",
-        technologies: [".NET (WPF/WinUI)", "Electron", "مزامنة قاعدة بيانات محلية", "تكامل عميق مع النظام", "تحديثات تلقائية"],
-        deliveryTime: "6-12 أسبوع",
-        startingPrice: "22,000 ريال"
-      },
-      {
         id: "new-smart-mobile-solutions-2025", 
         title: "الحلول الذكية والبرمجية للهواتف الذكية المتقدمة",
         description: "حلول متكاملة للهواتف الذكية: تكاملات وSDKات وميزات على مستوى الجهاز.",
