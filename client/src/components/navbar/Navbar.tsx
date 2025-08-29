@@ -204,34 +204,84 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
+                {/* Login Button - Outline Style */}
                 <Link href="/login">
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.1 }}
+                    whileHover={{ 
+                      scale: 1.05,
+                      y: -2
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="relative"
                   >
+                    {/* Animated Background */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-sky-500/10 to-sky-600/10 rounded-lg opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
                     <Button
+                      variant="outline"
                       size="sm"
-                      className="h-9 px-3 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
+                      className="relative h-9 px-4 text-sm font-medium border-2 border-sky-500/20 text-sky-600 hover:border-sky-500 hover:text-sky-700 hover:bg-sky-50 dark:text-sky-400 dark:border-sky-400/30 dark:hover:border-sky-400 dark:hover:bg-sky-900/20 rounded-lg transition-all duration-300 group overflow-hidden"
                       data-testid="button-login"
                     >
-                      {t('auth.login')}
+                      {/* Shimmer Effect */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 opacity-0 group-hover:opacity-100"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 0.6 }}
+                      />
+                      <span className="relative z-10">{t('auth.login')}</span>
                     </Button>
                   </motion.div>
                 </Link>
                 
+                {/* Register Button - Gradient Style */}
                 <Link href="/register">
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.1 }}
+                    whileHover={{ 
+                      scale: 1.05,
+                      y: -2
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="relative"
                   >
+                    {/* Glowing Background */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-sky-400 to-sky-600 rounded-lg blur-sm opacity-0"
+                      whileHover={{ opacity: 0.3 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    
                     <Button
                       size="sm"
-                      className="h-9 px-3 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white shadow-sm hover:shadow-md transition-all duration-200"
+                      className="relative h-9 px-4 text-sm font-semibold bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden border-0"
                       data-testid="button-create-account"
                     >
-                      {t('auth.createAccount')}
+                      {/* Animated Gradient Overlay */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-sky-400 to-sky-500 opacity-0 group-hover:opacity-100"
+                        initial={{ scale: 0.8 }}
+                        whileHover={{ scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      
+                      {/* Sparkle Effect */}
+                      <motion.div
+                        className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100"
+                        initial={{ scale: 0 }}
+                        whileHover={{ 
+                          scale: [0, 1, 0],
+                          transition: { duration: 0.8, delay: 0.2 }
+                        }}
+                      />
+                      
+                      <span className="relative z-10">{t('auth.createAccount')}</span>
                     </Button>
                   </motion.div>
                 </Link>
@@ -310,21 +360,34 @@ export default function Navbar() {
                     transition={{ duration: 0.3, delay: 0.3 }}
                   >
                     <Link href="/login" onClick={closeMobileMenu}>
-                      <Button
-                        className="w-full justify-center h-10 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600"
-                        data-testid="mobile-button-login"
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        {t('auth.login')}
-                      </Button>
+                        <Button
+                          variant="outline"
+                          className="w-full justify-center h-11 text-sm font-medium border-2 border-sky-500/30 text-sky-600 hover:border-sky-500 hover:bg-sky-50 dark:text-sky-400 dark:border-sky-400/30 dark:hover:bg-sky-900/20 rounded-xl transition-all duration-300"
+                          data-testid="mobile-button-login"
+                        >
+                          {t('auth.login')}
+                        </Button>
+                      </motion.div>
                     </Link>
                     
                     <Link href="/register" onClick={closeMobileMenu}>
-                      <Button
-                        className="w-full justify-center h-10 text-sm font-medium bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600"
-                        data-testid="mobile-button-create-account"
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        {t('auth.createAccount')}
-                      </Button>
+                        <Button
+                          className="w-full justify-center h-11 text-sm font-semibold bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                          data-testid="mobile-button-create-account"
+                        >
+                          {t('auth.createAccount')}
+                        </Button>
+                      </motion.div>
                     </Link>
                   </motion.div>
                 )}
