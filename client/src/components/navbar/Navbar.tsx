@@ -77,14 +77,14 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              {/* Navbar Logo - Optimized 28px */}
+              {/* Navbar Logo - Larger size for better visibility */}
               <img 
-                src="/brand/logo-gsc-navbar.png" 
+                src="/brand/logo-gsc-48.png" 
                 alt="GSC" 
-                className="h-7 w-auto"
-                width={28}
-                height={28}
-                style={{ height: '28px' }}
+                className="h-10 w-auto md:h-12"
+                width={48}
+                height={48}
+                style={{ height: '40px' }}
               />
               
               {/* Brand Text */}
