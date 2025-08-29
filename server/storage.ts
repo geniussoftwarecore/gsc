@@ -468,17 +468,6 @@ export class MemStorage implements IStorage {
         startingPrice: "35,000 ريال"
       },
       {
-        id: "q1w2e3r4-t5y6-u7i8-o9p0-a1s2d3f4g5h6",
-        title: "حلول الواقع المعزز والافتراضي للهواتف",
-        description: "تطوير تطبيقات الواقع المعزز (AR) والواقع الافتراضي (VR) التفاعلية للهواتف الذكية. نقدم تجارب غامرة ومبتكرة تشمل التسوق الافتراضي، التعليم التفاعلي، الألعاب ثلاثية الأبعاد، والعروض التقديمية المرئية. حلول تقنية متطورة تمزج الواقع الرقمي بالعالم الحقيقي لتقديم تجارب لا تُنسى",
-        icon: "glasses",
-        category: "ar-vr",
-        featured: "false",
-        technologies: ["ARKit", "ARCore", "Unity 3D", "Unreal Engine", "WebXR", "8th Wall", "Vuforia", "3D Modeling", "Spatial Computing"],
-        deliveryTime: "10-20 أسبوع",
-        startingPrice: "45,000 ريال"
-      },
-      {
         id: "9a6c839d-2a5c-4418-832a-2a5bd14dcf7e",
         title: "تصميم الجرافيكس والهوية البصرية",
         description: "تصميم الشعارات والهوية البصرية والمواد التسويقية الإبداعية التي تعكس قيم علامتك التجارية وتجذب العملاء",
