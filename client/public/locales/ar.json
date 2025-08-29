@@ -204,13 +204,34 @@
     }
   },
   "footer": {
-    "columns": {
-      "company": "الشركة",
-      "services": "الخدمات",
-      "resources": "المصادر",
-      "policies": "السياسات",
-      "contact": "التواصل"
-    }
+    "aboutTitle": "عن GSC",
+    "aboutText": "نبني منصات أعمال حديثة ثنائية اللغة—ويب وموبايل و CRM/ERP متكاملة—مصممة خصيصاً لنموك.",
+    "cta": "احصل على عرض تجريبي",
+    "servicesTitle": "خدماتنا",
+    "services": {
+      "webApps": "تطبيقات الويب",
+      "mobileApps": "تطبيقات الجوال",
+      "crmErp": "أنظمة CRM و ERP",
+      "integrations": "التكاملات",
+      "brandingUi": "العلامة التجارية والواجهات",
+      "devops": "DevOps والبنية التحتية"
+    },
+    "resourcesTitle": "المصادر",
+    "resources": {
+      "docs": "الوثائق",
+      "blog": "المدونة",
+      "terms": "شروط الخدمة",
+      "privacy": "سياسة الخصوصية",
+      "cookies": "سياسة ملفات تعريف الارتباط"
+    },
+    "contactTitle": "التواصل",
+    "contact": {
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف"
+    },
+    "socialTitle": "تابعنا",
+    "copyright": "جميع الحقوق محفوظة.",
+    "language": "اللغة"
   },
   "common": {
     "loading": "جاري التحميل...",

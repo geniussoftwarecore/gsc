@@ -204,13 +204,34 @@
     }
   },
   "footer": {
-    "columns": {
-      "company": "Company",
-      "services": "Services",
-      "resources": "Resources",
-      "policies": "Policies",
-      "contact": "Contact"
-    }
+    "aboutTitle": "About GSC",
+    "aboutText": "We build modern, bilingual business platforms—web, mobile, and integrated CRM/ERP—tailored for your growth.",
+    "cta": "Get a Demo",
+    "servicesTitle": "Services",
+    "services": {
+      "webApps": "Web Applications",
+      "mobileApps": "Mobile Applications",
+      "crmErp": "CRM & ERP",
+      "integrations": "Integrations",
+      "brandingUi": "Branding & UI",
+      "devops": "DevOps & CI/CD"
+    },
+    "resourcesTitle": "Resources",
+    "resources": {
+      "docs": "Documentation",
+      "blog": "Blog",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "contactTitle": "Contact",
+    "contact": {
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "socialTitle": "Follow us",
+    "copyright": "All rights reserved.",
+    "language": "Language"
   },
   "common": {
     "loading": "Loading...",
