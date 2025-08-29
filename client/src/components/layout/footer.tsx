@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { COMPANY_INFO, SERVICES } from "@/lib/constants";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import gscLogo from "@assets/gsc-logo.png";
+// Using direct path to optimized logo
 
 export default function Footer() {
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-4 mb-6">
               <img 
-                src={gscLogo} 
+                src="/brand/logo-gsc-64.png" 
                 alt="GSC Digital Services" 
                 className="w-16 h-16 object-contain"
               />

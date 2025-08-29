@@ -77,12 +77,11 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              {/* Navbar Logo - Compact */}
+              {/* Navbar Logo - Optimized 28px */}
               <img 
-                src="/brand/logo-gsc-icon.svg" 
-                onError={(e: any) => (e.currentTarget.src = "/brand/logo-gsc-icon.png")}
+                src="/brand/logo-gsc-navbar.png" 
                 alt="GSC" 
-                className="h-6 w-auto md:h-7"
+                className="h-7 w-auto"
                 width={28}
                 height={28}
                 style={{ height: '28px' }}
