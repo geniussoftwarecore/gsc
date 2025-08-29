@@ -15,6 +15,18 @@
     "startProject": "Start Your Project",
     "toggleMenu": "Toggle menu"
   },
+  "header": {
+    "links": {
+      "home": "Home",
+      "services": "Services",
+      "crm": "CRM",
+      "portfolio": "Portfolio",
+      "pricing": "Pricing",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "cta": "Get a Demo"
+  },
   "auth": {
     "login": "Login",
     "signup": "Sign Up",
@@ -30,6 +42,8 @@
     "description": "We provide web development, mobile apps, ERP systems, AI and automation solutions to transform your vision into advanced digital reality",
     "trustedBy": "Trusted by leading companies",
     "response24h": "Response within 24 hours",
+    "primaryCta": "Try the Demo",
+    "secondaryCta": "Contact Us",
     "cta": {
       "startProject": "Start Your Project",
       "subscribe": "Subscribe Now",
@@ -37,18 +51,91 @@
       "freeTrial": "Start Your Free Trial"
     }
   },
+  "problem": {
+    "title": "Challenges You Face",
+    "points": [
+      "Fragmented and disconnected tools",
+      "Poor customer follow-up",
+      "Data chaos and disorganization",
+      "Difficulty tracking performance"
+    ]
+  },
+  "solution": {
+    "title": "How We Solve These Problems",
+    "points": [
+      "Unified and integrated CRM system",
+      "Automated follow-up alerts",
+      "Consolidated analytics and insights",
+      "Clear and easy dashboard"
+    ],
+    "cta": "See how we solve it in 3 minutes"
+  },
   "services": {
     "title": "Our Specialized Services",
     "subtitle": "We offer comprehensive software and advanced technology solutions",
     "viewAll": "View All Services",
     "learnMore": "Learn More",
-    "loadError": "An error occurred while loading services. Please try again."
+    "loadError": "An error occurred while loading services. Please try again.",
+    "items": [
+      {
+        "title": "Web Apps",
+        "desc": "Advanced and responsive web solutions"
+      },
+      {
+        "title": "Mobile Apps",
+        "desc": "Smart applications for Android & iOS"
+      },
+      {
+        "title": "ERP/CRM Systems",
+        "desc": "Comprehensive business and customer management"
+      },
+      {
+        "title": "Integrations",
+        "desc": "System connectivity and data exchange"
+      },
+      {
+        "title": "Design & UX",
+        "desc": "Attractive interfaces and distinctive experiences"
+      },
+      {
+        "title": "DevOps",
+        "desc": "Reliable and scalable infrastructure"
+      }
+    ]
+  },
+  "crm": {
+    "title": "Customer Management System",
+    "cards": [
+      {
+        "title": "Core Entities"
+      },
+      {
+        "title": "Sales Pipeline"
+      },
+      {
+        "title": "Tickets & Support"
+      }
+    ],
+    "openDemo": "Open CRM Demo"
   },
   "portfolio": {
     "title": "Our Work",
     "subtitle": "Discover our successful projects",
     "viewProject": "View Project",
-    "allProjects": "All Projects"
+    "allProjects": "All Projects",
+    "viewAll": "View All Projects"
+  },
+  "proof": {
+    "title": "Trusted by Leading Companies",
+    "testimonial": {
+      "quote": "Genius Software Core transformed our vision into an advanced digital reality that helped us significantly improve our business efficiency",
+      "author": "Ahmed Mohammed, Technical Manager"
+    }
+  },
+  "cta": {
+    "title": "Ready to Grow Your Business?",
+    "primary": "Book a Consultation",
+    "secondary": "WhatsApp / Email"
   },
   "contact": {
     "title": "Contact Us",
@@ -114,6 +201,15 @@
       "designDesc": "Attractive user interface design and distinctive interactive experiences",
       "marketing": "Digital Marketing",
       "marketingDesc": "Advanced marketing strategies for your digital business growth"
+    }
+  },
+  "footer": {
+    "columns": {
+      "company": "Company",
+      "services": "Services",
+      "resources": "Resources",
+      "policies": "Policies",
+      "contact": "Contact"
     }
   },
   "common": {

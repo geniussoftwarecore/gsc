@@ -1,107 +1,57 @@
-import { HomeHero } from "@/components/home/home-hero";
-import ServicesOverview from "@/components/sections/services-overview";
-import AboutStats from "@/components/sections/about-stats";
-import HomePortfolio from "@/components/sections/home-portfolio";
-import { HomeMetrics } from "@/components/sections/home-metrics";
-import Testimonials from "@/components/sections/testimonials";
-import PricingOverview from "@/components/sections/pricing-overview";
-import { HOME_METRICS } from "@/data/home-metrics";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ParallaxSection, RevealOnScroll, StaggerContainer } from "@/components/ui/enhanced-scroll-effects";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/lang";
+import { useTranslation } from "@/hooks/useTranslation";
+import { SEOHead } from "@/components/SEOHead";
+import {
+  Hero,
+  ProblemSolution,
+  ServicesGrid,
+  CRMShowcase,
+  PortfolioPreview,
+  SocialProof,
+  CTAStrip
+} from "@/sections/home";
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { lang } = useLanguage();
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Background parallax effect
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const { dir } = useLanguage();
+  const { t } = useTranslation();
 
   return (
-    <div ref={containerRef} className="min-h-screen relative overflow-hidden">
-      {/* Animated background elements */}
-      <motion.div 
-        style={{ y: backgroundY }}
-        className="fixed inset-0 opacity-5 pointer-events-none"
-      >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary-dark rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </motion.div>
-
-      {/* Page sections with enhanced scroll effects */}
-      <StaggerContainer staggerDelay={0.2}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <HomeHero language={lang} />
-        </motion.div>
-
-        <RevealOnScroll direction="up" delay={0.2} distance={80}>
-          <ParallaxSection offset={30}>
-            <ServicesOverview />
-          </ParallaxSection>
-        </RevealOnScroll>
-
-        <RevealOnScroll direction="scale" delay={0.3}>
-          <AboutStats />
-        </RevealOnScroll>
-
-        <RevealOnScroll direction="left" delay={0.4} distance={100}>
-          <ParallaxSection offset={-20}>
-            <HomePortfolio maxItems={6} />
-          </ParallaxSection>
-        </RevealOnScroll>
-
-        <RevealOnScroll direction="up" delay={0.45} distance={80}>
-          <ParallaxSection offset={10}>
-            <HomeMetrics metrics={HOME_METRICS} language={lang} />
-          </ParallaxSection>
-        </RevealOnScroll>
-
-        <RevealOnScroll direction="up" delay={0.5} distance={60}>
-          <ParallaxSection offset={15}>
-            <PricingOverview />
-          </ParallaxSection>
-        </RevealOnScroll>
-
-        <RevealOnScroll direction="up" delay={0.55} distance={60}>
-          <Testimonials />
-        </RevealOnScroll>
-      </StaggerContainer>
-
-      {/* Floating decoration elements */}
-      <motion.div
-        className="fixed top-20 right-10 w-4 h-4 bg-primary rounded-full opacity-30 pointer-events-none"
-        animate={{
-          y: [0, -30, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+    <>
+      <SEOHead 
+        title={t('hero.title')}
+        description={t('hero.subtitle')}
+        type="website"
       />
       
-      <motion.div
-        className="fixed bottom-32 left-16 w-6 h-6 bg-primary-dark rounded-full opacity-20 pointer-events-none"
-        animate={{
-          x: [0, 20, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-    </div>
+      <motion.div 
+        className="min-h-screen"
+        dir={dir}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Hero Section */}
+        <Hero />
+        
+        {/* Problem Solution Section */}
+        <ProblemSolution />
+        
+        {/* Services Grid */}
+        <ServicesGrid />
+        
+        {/* CRM Showcase */}
+        <CRMShowcase />
+        
+        {/* Portfolio Preview */}
+        <PortfolioPreview />
+        
+        {/* Social Proof */}
+        <SocialProof />
+        
+        {/* CTA Strip */}
+        <CTAStrip />
+      </motion.div>
+    </>
   );
 }
