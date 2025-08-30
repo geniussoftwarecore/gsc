@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useMemo } from "react";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useServiceTranslations } from "@/hooks/useServiceTranslations";
 import { cn } from "@/lib/utils";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -10,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { services, Service } from "@/content/services";
 import { 
   Code, 
   Palette, 
@@ -71,7 +71,7 @@ const getIconForService = (iconName?: string) => {
 
 // Service Card Component with Collapsible Sections
 interface ServiceCardProps {
-  service: Service;
+  service: any; // Service from translation data
   index: number;
   viewMode: "grid" | "list";
   dir: string;
@@ -79,6 +79,7 @@ interface ServiceCardProps {
   setHoveredService: (id: string | null) => void;
   likedServices: Set<string>;
   toggleLike: (id: string) => void;
+  servicesData: any;
 }
 
 function ServiceCard({
@@ -89,7 +90,8 @@ function ServiceCard({
   hoveredService,
   setHoveredService,
   likedServices,
-  toggleLike
+  toggleLike,
+  servicesData
 }: ServiceCardProps) {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   
@@ -190,7 +192,7 @@ function ServiceCard({
               className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
               onClick={() => toggleSection('features')}
             >
-              <span className="font-medium text-brand-text-primary">What you get</span>
+              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.whatYouGet || 'What you get'}</span>
               <ChevronDown 
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -213,7 +215,7 @@ function ServiceCard({
               className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
               onClick={() => toggleSection('deliverables')}
             >
-              <span className="font-medium text-brand-text-primary">Deliverables</span>
+              <span className="font-medium text-brand-text-primary">{dir === 'rtl' ? 'التسليمات' : 'Deliverables'}</span>
               <ChevronDown 
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -236,7 +238,7 @@ function ServiceCard({
               className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
               onClick={() => toggleSection('inputs')}
             >
-              <span className="font-medium text-brand-text-primary">What we need from you</span>
+              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.whatWeNeed || 'What we need from you'}</span>
               <ChevronDown 
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -259,7 +261,7 @@ function ServiceCard({
               className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
               onClick={() => toggleSection('interactive')}
             >
-              <span className="font-medium text-brand-text-primary">Interactive ideas</span>
+              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.interactiveIdeas || 'Interactive ideas'}</span>
               <ChevronDown 
                 className={cn(
                   "h-4 w-4 transition-transform duration-200",
@@ -279,19 +281,17 @@ function ServiceCard({
         </div>
 
         {/* CTA Button */}
-        {service.cta && (
-          <Link href={service.cta.href} className="block">
-            <Button className="w-full rounded-xl bg-primary hover:bg-primary-dark transition-colors duration-300">
-              {service.cta.label}
-              <ArrowRight 
-                className={cn(
-                  "ml-2 w-4 h-4",
-                  dir === 'rtl' && "rotate-180 mr-2 ml-0"
-                )} 
-              />
-            </Button>
-          </Link>
-        )}
+        <Link href={`/services/${service.id}`} className="block">
+          <Button className="w-full rounded-xl bg-primary hover:bg-primary-dark transition-colors duration-300">
+            {servicesData?.ui?.viewDetails || 'View Details'}
+            <ArrowRight 
+              className={cn(
+                "ml-2 w-4 h-4",
+                dir === 'rtl' && "rotate-180 mr-2 ml-0"
+              )} 
+            />
+          </Button>
+        </Link>
       </div>
 
       {/* Decorative Elements */}
@@ -319,6 +319,7 @@ export function ServicesGrid({
 }: ServicesGridProps) {
   const { dir } = useLanguage();
   const { t } = useTranslation();
+  const { servicesData, loading, error } = useServiceTranslations();
 
   const serviceCategories = [
     {
@@ -372,7 +373,9 @@ export function ServicesGrid({
   ];
 
   const filteredServices = useMemo(() => {
-    let filtered = services;
+    if (!servicesData) return [];
+    
+    let filtered = servicesData.services;
     
     // Apply category filter
     if (activeFilter !== "all") {
@@ -391,7 +394,34 @@ export function ServicesGrid({
     }
     
     return filtered;
-  }, [activeFilter, searchQuery]);
+  }, [servicesData, activeFilter, searchQuery]);
+
+  if (loading) {
+    return (
+      <section className="py-20 bg-gradient-to-br from-brand-sky-light to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Skeleton key={i} className="h-96 rounded-xl" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 bg-gradient-to-br from-brand-sky-light to-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-red-500 text-xl mb-4">{error}</p>
+          <Button onClick={() => window.location.reload()}>
+            {dir === 'rtl' ? 'إعادة المحاولة' : 'Try Again'}
+          </Button>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20 bg-gradient-to-br from-brand-sky-light to-white">
@@ -458,9 +488,9 @@ export function ServicesGrid({
               >
                 <category.icon size={20} />
                 <span className="font-medium">{category.title}</span>
-                {category.id !== "all" && (
+                {category.id !== "all" && servicesData && (
                   <Badge variant="secondary" className="text-xs bg-white/50">
-                    {services.filter(s => s.category === category.id).length}
+                    {servicesData.services.filter(s => s.category === category.id).length}
                   </Badge>
                 )}
               </motion.button>
@@ -520,6 +550,7 @@ export function ServicesGrid({
                     setHoveredService={setHoveredService}
                     likedServices={likedServices}
                     toggleLike={toggleLike}
+                    servicesData={servicesData}
                   />
                 ))
               ) : (
