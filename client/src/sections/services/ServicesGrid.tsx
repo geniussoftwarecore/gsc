@@ -11,7 +11,6 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { 
   Code, 
   Palette, 
@@ -22,7 +21,6 @@ import {
   Eye, 
   Heart,
   ArrowRight,
-  ChevronDown,
   Globe,
   Smartphone,
   Boxes,
@@ -32,7 +30,6 @@ import {
   BarChartBig,
   ShoppingCart,
   LifeBuoy,
-  CheckCircle,
   Settings,
   Users
 } from "lucide-react";
@@ -94,19 +91,6 @@ function ServiceCard({
   toggleLike,
   servicesData
 }: ServiceCardProps) {
-  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
-  
-  const toggleSection = (section: string) => {
-    setExpandedSections(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(section)) {
-        newSet.delete(section);
-      } else {
-        newSet.add(section);
-      }
-      return newSet;
-    });
-  };
 
   const IconComponent = getIconForService(service.icon);
 
@@ -175,110 +159,11 @@ function ServiceCard({
           </p>
         </div>
 
-        {/* Quick Features */}
+        {/* Professional Details */}
         <div className="mb-6">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {service.features.slice(0, 3).map((feature, i) => (
-              <span key={i} className="text-xs px-3 py-1 rounded-full bg-brand-sky-base text-primary font-medium">
-                {feature}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Collapsible Sections */}
-        <div className="space-y-3 mb-6">
-          <Collapsible>
-            <CollapsibleTrigger 
-              className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
-              onClick={() => toggleSection('features')}
-            >
-              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.whatYouGet || 'What you get'}</span>
-              <ChevronDown 
-                className={cn(
-                  "h-4 w-4 transition-transform duration-200",
-                  expandedSections.has('features') && "transform rotate-180"
-                )}
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="p-3 space-y-2">
-              {service.features.map((feature, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-brand-text-muted">
-                  <CheckCircle size={16} className="text-green-500 flex-shrink-0" />
-                  {feature}
-                </div>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-
-          <Collapsible>
-            <CollapsibleTrigger 
-              className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
-              onClick={() => toggleSection('deliverables')}
-            >
-              <span className="font-medium text-brand-text-primary">{dir === 'rtl' ? 'التسليمات' : 'Deliverables'}</span>
-              <ChevronDown 
-                className={cn(
-                  "h-4 w-4 transition-transform duration-200",
-                  expandedSections.has('deliverables') && "transform rotate-180"
-                )}
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="p-3 space-y-2">
-              {service.deliverables.map((deliverable, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-brand-text-muted">
-                  <Settings size={16} className="text-blue-500 flex-shrink-0" />
-                  {deliverable}
-                </div>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-
-          <Collapsible>
-            <CollapsibleTrigger 
-              className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
-              onClick={() => toggleSection('inputs')}
-            >
-              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.whatWeNeed || 'What we need from you'}</span>
-              <ChevronDown 
-                className={cn(
-                  "h-4 w-4 transition-transform duration-200",
-                  expandedSections.has('inputs') && "transform rotate-180"
-                )}
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="p-3 space-y-2">
-              {service.inputsNeeded.map((input, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-brand-text-muted">
-                  <Users size={16} className="text-orange-500 flex-shrink-0" />
-                  {input}
-                </div>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-
-          <Collapsible>
-            <CollapsibleTrigger 
-              className="flex items-center justify-between w-full p-3 text-left bg-brand-sky-base rounded-lg hover:bg-brand-sky-accent transition-colors duration-200"
-              onClick={() => toggleSection('interactive')}
-            >
-              <span className="font-medium text-brand-text-primary">{servicesData?.ui?.interactiveIdeas || 'Interactive ideas'}</span>
-              <ChevronDown 
-                className={cn(
-                  "h-4 w-4 transition-transform duration-200",
-                  expandedSections.has('interactive') && "transform rotate-180"
-                )}
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="p-3 space-y-2">
-              {service.interactiveIdeas.map((idea, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-brand-text-muted">
-                  <Star size={16} className="text-yellow-500 flex-shrink-0" />
-                  {idea}
-                </div>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
+          <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground">
+            {servicesData?.services?.find(s => s.id === service.id)?.details || service.details}
+          </p>
         </div>
 
         {/* CTA Button */}
