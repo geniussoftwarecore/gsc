@@ -95,99 +95,105 @@ function ServiceCard({
   const IconComponent = getIconForService(service.icon);
 
   return (
-    <motion.div
-      className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-sky-base hover:border-primary overflow-hidden"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      onHoverStart={() => setHoveredService(service.id)}
-      onHoverEnd={() => setHoveredService(null)}
-      data-testid={`service-card-${service.id}`}
-    >
-      {/* Background Animation */}
+    <Link href={`/services/${service.slug || service.id}`} className="block">
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        initial={false}
-      />
-
-      {/* Like Button */}
-      <motion.button
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          toggleLike(service.id);
+        className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-sky-base hover:border-primary overflow-hidden cursor-pointer"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -8 }}
+        onHoverStart={() => setHoveredService(service.id)}
+        onHoverEnd={() => setHoveredService(null)}
+        data-testid={`service-card-${service.id}`}
+        role="link"
+        aria-label={`View details for ${service.name}`}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            window.location.href = `/services/${service.slug || service.id}`;
+          }
         }}
-        className={`absolute top-4 rtl:left-4 ltr:right-4 z-10 p-2 rounded-full transition-all duration-300 ${
-          likedServices.has(service.id)
-            ? "bg-red-500 text-white"
-            : "bg-white/80 backdrop-blur-sm text-brand-text-muted hover:text-red-500 hover:bg-white"
-        }`}
-        data-testid={`like-${service.id}`}
       >
-        <Heart size={18} fill={likedServices.has(service.id) ? "currentColor" : "none"} />
-      </motion.button>
-
-      <div className="relative z-10">
-        {/* Service Icon and Header */}
+        {/* Background Animation */}
         <motion.div
-          className="mb-6 text-center"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          initial={false}
+        />
+
+        {/* Like Button */}
+        <motion.button
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleLike(service.id);
+          }}
+          className={`absolute top-4 rtl:left-4 ltr:right-4 z-10 p-2 rounded-full transition-all duration-300 ${
+            likedServices.has(service.id)
+              ? "bg-red-500 text-white"
+              : "bg-white/80 backdrop-blur-sm text-brand-text-muted hover:text-red-500 hover:bg-white"
+          }`}
+          data-testid={`like-${service.id}`}
         >
-          <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:shadow-lg transition-shadow duration-300">
-            <IconComponent size={32} className="text-white" />
+          <Heart size={18} fill={likedServices.has(service.id) ? "currentColor" : "none"} />
+        </motion.button>
+
+        <div className="relative z-10">
+          {/* Service Icon and Header */}
+          <motion.div
+            className="mb-4 text-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:shadow-lg transition-shadow duration-300">
+              <IconComponent size={24} className="text-white" />
+            </div>
+          </motion.div>
+
+          {/* Service Content */}
+          <div className="text-center mb-4">
+            <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-primary transition-colors duration-300">
+              {service.name}
+            </h3>
+            <p className="text-sm text-primary font-medium mb-3">
+              {service.tagline}
+            </p>
+            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+              {servicesData?.services?.find((s: any) => s.id === service.id)?.details || service.details}
+            </p>
           </div>
-          <Badge className="mb-4 bg-brand-sky-base text-primary">
-            {service.category}
-          </Badge>
-        </motion.div>
 
-        {/* Service Content */}
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-brand-text-primary mb-2 group-hover:text-primary transition-colors duration-300">
-            {service.name}
-          </h3>
-          <p className="text-sm text-primary font-medium mb-3">
-            {service.tagline}
-          </p>
-          <p className="text-brand-text-muted leading-relaxed">
-            {service.description}
-          </p>
-        </div>
-
-        {/* Professional Details */}
-        <div className="mb-6">
-          <p className="mt-3 text-sm md:text-base leading-relaxed text-muted-foreground">
-            {servicesData?.services?.find(s => s.id === service.id)?.details || service.details}
-          </p>
-        </div>
-
-        {/* CTA Button */}
-        <Link href={`/services/${service.id}`} className="block">
-          <Button className="w-full rounded-xl bg-primary hover:bg-primary-dark transition-colors duration-300">
-            {servicesData?.ui?.viewDetails || 'View Details'}
+          {/* Hover indicator */}
+          <motion.div
+            className="flex items-center justify-center mt-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            initial={{ y: 10 }}
+            whileInView={{ y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-sm font-medium mr-2">
+              {servicesData?.ui?.viewDetails || 'View Details'}
+            </span>
             <ArrowRight 
               className={cn(
-                "ml-2 w-4 h-4",
-                dir === 'rtl' && "rotate-180 mr-2 ml-0"
+                "w-4 h-4",
+                dir === 'rtl' && "rotate-180"
               )} 
             />
-          </Button>
-        </Link>
-      </div>
+          </motion.div>
+        </div>
 
-      {/* Decorative Elements */}
-      <motion.div
-        className="absolute top-4 rtl:right-4 ltr:left-4 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.5 }}
-      />
-    </motion.div>
+        {/* Decorative Elements */}
+        <motion.div
+          className="absolute top-4 rtl:right-4 ltr:left-4 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100"
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.5 }}
+        />
+      </motion.div>
+    </Link>
   );
 }
 

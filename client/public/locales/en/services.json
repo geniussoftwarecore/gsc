@@ -20,7 +20,7 @@
     {
       "id": "mobileApps",
       "name": "Mobile App Development",
-      "tagline": "Smart applications for Android & iOS",
+      "tagline": "Beautiful, fast, and ready for the stores.",
       "description": "We develop high-quality, user-friendly mobile applications for both Android and iOS platforms using the latest technologies and development frameworks.",
       "details": "We design and build high-quality Android and iOS apps—from discovery and UX to secure APIs, offline-first experiences, and store releases. Delivery includes analytics, crash monitoring, CI/CD, and post-launch support so your app stays fast, reliable, and ready to scale.",
       "features": [
@@ -53,12 +53,17 @@
       "category": "development",
       "ctaLabel": "Start Mobile Project",
       "icon": "Smartphone",
-      "slug": "mobile-apps"
+      "slug": "mobile-apps",
+      "detailPage": {
+        "achieve": "Launch an app users love: fast onboarding, smooth flows, and robust telemetry so you can iterate with confidence.",
+        "delivery": "We follow a milestone-based plan with regular demos, CI/CD pipelines, and automated QA to keep releases predictable.",
+        "timeline": "We define a clear scope, MVP-first plan, and handover with docs, training, and post-launch support."
+      }
     },
     {
       "id": "webApps",
       "name": "Web Application Development",
-      "tagline": "Advanced and responsive web solutions",
+      "tagline": "Scalable, secure, and SEO-friendly web.",
       "description": "We create modern, scalable web applications using cutting-edge technologies that provide exceptional user experiences across all devices.",
       "details": "We ship production-grade web applications with clean architecture, responsive UI, and strong security. Expect SEO-aware routing, role-based access, audit trails, performance budgets, automated testing, and CI/CD pipelines that keep releases predictable.",
       "features": [
@@ -91,12 +96,17 @@
       "category": "development",
       "ctaLabel": "Start Web Project",
       "icon": "Globe",
-      "slug": "web-apps"
+      "slug": "web-apps",
+      "detailPage": {
+        "achieve": "Ship web applications that scale: clean architecture, responsive design, and enterprise-grade security built for growth.",
+        "delivery": "We use modern frameworks with automated testing, performance monitoring, and continuous deployment for reliable releases.",
+        "timeline": "Clear project phases with regular milestones, comprehensive documentation, and ongoing maintenance support."
+      }
     },
     {
       "id": "desktopApps",
       "name": "Desktop Software Development",
-      "tagline": "Powerful desktop applications for enhanced productivity",
+      "tagline": "Reliable desktop tools with native power.",
       "description": "We develop robust desktop applications that integrate seamlessly with your business processes and provide powerful functionality for your teams.",
       "details": "We develop robust desktop software for Windows (and cross-platform when required) with native OS integrations such as printing, device access, and secure local storage. Updates are streamlined via managed release channels and enterprise-ready installers.",
       "features": [
@@ -129,12 +139,17 @@
       "category": "development",
       "ctaLabel": "Start Desktop Project",
       "icon": "Boxes",
-      "slug": "desktop-apps"
+      "slug": "desktop-apps",
+      "detailPage": {
+        "achieve": "Build powerful desktop tools that integrate seamlessly with your workflow and leverage native system capabilities.",
+        "delivery": "Cross-platform development with native OS integration, automated updates, and enterprise-ready installation packages.",
+        "timeline": "Requirements analysis, iterative development, comprehensive testing, and deployment with user training materials."
+      }
     },
     {
       "id": "designGraphics",
       "name": "UI/UX & Brand Design",
-      "tagline": "Attractive interfaces and distinctive experiences",
+      "tagline": "Cohesive identity, delightful interfaces.",
       "description": "We create compelling visual identities and user-centered designs that enhance your brand presence and improve user engagement.",
       "details": "We craft a consistent visual identity across UI/UX and marketing—logos, brand guidelines, design systems, social kits, and motion graphics—so every touchpoint looks professional, on brand, and conversion-ready.",
       "features": [
@@ -167,12 +182,17 @@
       "category": "design",
       "ctaLabel": "Start Design Project",
       "icon": "Palette",
-      "slug": "design-brand"
+      "slug": "design-brand",
+      "detailPage": {
+        "achieve": "Create a cohesive brand identity that resonates with your audience and drives engagement across all touchpoints.",
+        "delivery": "Complete design systems with brand guidelines, UI components, and marketing assets ready for immediate use.",
+        "timeline": "Discovery and research, concept development, design iteration, and final delivery with brand usage guidelines."
+      }
     },
     {
       "id": "paidAdsMarketing",
       "name": "Performance Marketing & Paid Media",
-      "tagline": "Advanced marketing strategies for digital growth",
+      "tagline": "Growth-focused campaigns with clear ROI.",
       "description": "We develop and execute data-driven marketing campaigns that maximize ROI through strategic paid advertising and performance optimization.",
       "details": "We run performance marketing across Meta, Google, and TikTok with transparent reporting. We handle creative variants, tracking (Pixels/GA4), landing pages, and A/B tests—optimizing budgets for measurable growth and positive ROI.",
       "features": [
@@ -205,12 +225,17 @@
       "category": "marketing",
       "ctaLabel": "Start Marketing Campaign",
       "icon": "BarChartBig",
-      "slug": "performance-marketing"
+      "slug": "performance-marketing",
+      "detailPage": {
+        "achieve": "Drive measurable growth with data-driven campaigns that optimize for conversions and maximize your advertising ROI.",
+        "delivery": "Full campaign management with creative development, audience targeting, performance tracking, and continuous optimization.",
+        "timeline": "Strategy development, campaign setup, launch and optimization, with transparent reporting and regular performance reviews."
+      }
     },
     {
       "id": "erpnextV15",
       "name": "ERPNext v15 Implementation & Customization",
-      "tagline": "Comprehensive business and customer management",
+      "tagline": "Streamlined operations on ERPNext v15.",
       "description": "We implement and customize ERPNext v15 to streamline your business operations with integrated modules for accounting, inventory, CRM, and more.",
       "details": "We implement and customize ERPNext v15—configuring doctypes, workflows, reports, and permissions. We handle integrations, data migration, hosting, training, and ongoing support so teams adopt ERP quickly, securely, and with confidence.",
       "features": [
@@ -243,12 +268,17 @@
       "category": "business",
       "ctaLabel": "Start ERP Project",
       "icon": "Settings",
-      "slug": "erpnext-v15"
+      "slug": "erpnext-v15",
+      "detailPage": {
+        "achieve": "Streamline your business operations with a fully configured ERPNext system that grows with your organization.",
+        "delivery": "Complete ERPNext implementation with custom modules, data migration, workflow automation, and comprehensive training.",
+        "timeline": "Requirements gathering, system configuration, data migration, testing, training, and ongoing support with maintenance plans."
+      }
     },
     {
       "id": "mobileSolutions",
       "name": "Smart Mobile Solutions & Device Integrations",
-      "tagline": "Innovative mobile technology and IoT integrations",
+      "tagline": "Device integrations that just work.",
       "description": "We develop intelligent mobile solutions and device integrations that connect your business with modern IoT technologies and smart systems.",
       "details": "We deliver smart mobile capabilities—payments, maps, camera, biometrics, SDK integrations, and MDM policies—with a focus on performance, profiling, and stability so device-level features work flawlessly at scale.",
       "features": [
@@ -281,7 +311,12 @@
       "category": "development",
       "ctaLabel": "Start Smart Solutions Project",
       "icon": "Bot",
-      "slug": "mobile-solutions"
+      "slug": "mobile-solutions",
+      "detailPage": {
+        "achieve": "Connect your business with smart mobile capabilities and IoT integrations that enhance productivity and user experience.",
+        "delivery": "End-to-end mobile solutions with device management, real-time monitoring, and seamless integration with existing systems.",
+        "timeline": "Technical assessment, architecture design, development and testing, deployment, and ongoing monitoring and support."
+      }
     }
   ]
 }

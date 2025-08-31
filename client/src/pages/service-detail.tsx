@@ -44,7 +44,7 @@ export default function ServiceDetail() {
         const data = await response.json();
         setServicesData(data);
         
-        const foundService = data.services.find((s: any) => s.id === slug);
+        const foundService = data.services.find((s: any) => s.id === slug || s.slug === slug);
         setService(foundService);
         
         // Load ERPNext content if this is the erpnext service
