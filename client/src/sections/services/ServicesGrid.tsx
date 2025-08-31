@@ -10,16 +10,13 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { 
   Code, 
   Palette, 
   Megaphone, 
   TrendingUp, 
   Search, 
-  Star, 
-  Eye, 
-  Heart,
   ArrowRight,
   Globe,
   Smartphone,
@@ -67,28 +64,18 @@ const getIconForService = (iconName?: string) => {
   return iconMap[iconName || "Settings"] || Settings;
 };
 
-// Service Card Component with Collapsible Sections
+// Compact Service Card Component
 interface ServiceCardProps {
   service: any; // Service from translation data
   index: number;
-  viewMode: "grid" | "list";
   dir: string;
-  hoveredService: string | null;
-  setHoveredService: (id: string | null) => void;
-  likedServices: Set<string>;
-  toggleLike: (id: string) => void;
   servicesData: any;
 }
 
 function ServiceCard({
   service,
   index,
-  viewMode,
   dir,
-  hoveredService,
-  setHoveredService,
-  likedServices,
-  toggleLike,
   servicesData
 }: ServiceCardProps) {
 
@@ -96,107 +83,104 @@ function ServiceCard({
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
 
+  const handleViewDetails = () => {
+    const slug = service.slug || service.id;
+    setLocation(`/services/${slug}`);
+  };
+
+  const handleCardClick = () => {
+    handleViewDetails();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleViewDetails();
+    }
+  };
+
   return (
     <motion.div
-      className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-sky-base hover:border-primary overflow-hidden"
-      initial={{ opacity: 0, y: 50 }}
+      className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary overflow-hidden cursor-pointer"
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
       viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      onHoverStart={() => setHoveredService(service.id)}
-      onHoverEnd={() => setHoveredService(null)}
+      whileHover={{ y: -4, scale: 1.02 }}
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
       data-testid={`service-card-${service.id}`}
     >
-        {/* Background Animation */}
+      {/* Background Animation */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        initial={false}
+      />
+
+      <div className="relative z-10">
+        {/* Service Icon */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          initial={false}
-        />
-
-        {/* Like Button */}
-        <motion.button
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleLike(service.id);
-          }}
-          className={`absolute top-4 rtl:left-4 ltr:right-4 z-10 p-2 rounded-full transition-all duration-300 ${
-            likedServices.has(service.id)
-              ? "bg-red-500 text-white"
-              : "bg-white/80 backdrop-blur-sm text-brand-text-muted hover:text-red-500 hover:bg-white"
-          }`}
-          data-testid={`like-${service.id}`}
+          className="mb-4 flex justify-center"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
         >
-          <Heart size={18} fill={likedServices.has(service.id) ? "currentColor" : "none"} />
-        </motion.button>
-
-        <div className="relative z-10">
-          {/* Service Icon and Header */}
-          <motion.div
-            className="mb-4 text-center"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:shadow-lg transition-shadow duration-300">
-              <IconComponent size={24} className="text-white" />
-            </div>
-          </motion.div>
-
-          {/* Service Content */}
-          <div className="text-center mb-4">
-            <h3 className="text-lg font-bold text-brand-text-primary mb-1 group-hover:text-primary transition-colors duration-300">
-              {service.name}
-            </h3>
-            <p className="text-sm text-primary font-medium mb-3">
-              {service.tagline}
-            </p>
-            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-              {servicesData?.services?.find((s: any) => s.id === service.id)?.details || service.details}
-            </p>
+          <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary-dark rounded-2xl flex items-center justify-center group-hover:shadow-lg transition-shadow duration-300">
+            <IconComponent size={28} className="text-white" />
           </div>
+        </motion.div>
 
-          {/* View Details Button */}
-          <motion.div
-            className="mt-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 0.2 }}
-          >
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setLocation(`/services/${service.slug || service.id}`);
-              }}
-              className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
-              aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
-              data-testid={`view-details-${service.id}`}
-            >
-              <span className="font-medium">
-                {t('buttons.viewDetails')}
-              </span>
-              <ArrowRight 
-                className={cn(
-                  "w-4 h-4 ml-2",
-                  dir === 'rtl' && "rotate-180 ml-0 mr-2"
-                )} 
-              />
-            </Button>
-          </motion.div>
+        {/* Service Content */}
+        <div className="text-center space-y-3">
+          {/* Title */}
+          <h3 className="text-xl font-bold text-brand-text-primary group-hover:text-primary transition-colors duration-300 leading-tight">
+            {service.name}
+          </h3>
+          
+          {/* Tagline */}
+          <p className="text-sm text-primary font-medium leading-relaxed">
+            {service.tagline}
+          </p>
+          
+          {/* Description - Clamped to 3 lines */}
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 min-h-[3.75rem]">
+            {service.description}
+          </p>
         </div>
 
-        {/* Decorative Elements */}
+        {/* View Details Button */}
         <motion.div
-          className="absolute top-4 rtl:right-4 ltr:left-4 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100"
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.5 }}
-        />
-      </motion.div>
-    );
+          className="mt-6"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.15 }}
+        >
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleViewDetails();
+            }}
+            className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+            size="sm"
+            aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
+            data-testid={`view-details-${service.id}`}
+          >
+            <span className="font-medium">
+              {t('buttons.viewDetails')}
+            </span>
+            <ArrowRight 
+              className={cn(
+                "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200",
+                dir === 'rtl' && "rotate-180 ml-0 mr-2 group-hover:-translate-x-1"
+              )} 
+            />
+          </Button>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
 }
 
 export function ServicesGrid({
@@ -215,46 +199,43 @@ export function ServicesGrid({
   const { t } = useTranslation();
   const { servicesData, loading, error } = useServiceTranslations();
 
+  // Simple category filters aligned with the compact design
   const serviceCategories = [
     {
       id: "all",
       title: dir === 'rtl' ? "جميع الخدمات" : "All Services",
-      description: dir === 'rtl' ? "استعرض جميع خدماتنا المتخصصة" : "Browse all our specialized services",
       icon: TrendingUp,
-      color: "text-purple-500",
-      bgColor: "bg-purple-50",
-    },
-    {
-      id: "development",
-      title: dir === 'rtl' ? "التطوير والبرمجة" : "Development & Programming",
-      description: dir === 'rtl' ? "حلول برمجية شاملة من التطبيقات المحمولة إلى الأنظمة المعقدة" : "Comprehensive software solutions from mobile apps to complex systems",
-      icon: Code,
       color: "text-blue-500",
-      bgColor: "bg-blue-50",
     },
     {
-      id: "design",
-      title: dir === 'rtl' ? "التصميم وتجربة المستخدم" : "Design & User Experience",
-      description: dir === 'rtl' ? "تصميم واجهات مستخدم جذابة وتجارب تفاعلية مميزة" : "Attractive user interface design and distinctive interactive experiences",
-      icon: Palette,
+      id: "Web",
+      title: dir === 'rtl' ? "تطوير الويب" : "Web Development",
+      icon: Globe,
+      color: "text-green-500",
+    },
+    {
+      id: "Mobile",
+      title: dir === 'rtl' ? "تطبيقات الجوال" : "Mobile Apps",
+      icon: Smartphone,
+      color: "text-blue-500",
+    },
+    {
+      id: "ERP",
+      title: dir === 'rtl' ? "أنظمة ERP" : "ERP Systems",
+      icon: Boxes,
+      color: "text-purple-500",
+    },
+    {
+      id: "AI",
+      title: dir === 'rtl' ? "الذكاء الاصطناعي" : "AI & Automation",
+      icon: Bot,
       color: "text-orange-500",
-      bgColor: "bg-orange-50",
     },
     {
-      id: "marketing",
-      title: dir === 'rtl' ? "التسويق الرقمي" : "Digital Marketing",
-      description: dir === 'rtl' ? "استراتيجيات تسويقية متطورة لنمو أعمالك الرقمية" : "Advanced marketing strategies for your digital business growth",
-      icon: Megaphone,
+      id: "Design",
+      title: dir === 'rtl' ? "التصميم" : "Design & UX",
+      icon: Palette,
       color: "text-pink-500",
-      bgColor: "bg-pink-50",
-    },
-    {
-      id: "business",
-      title: dir === 'rtl' ? "حلول الأعمال" : "Business Solutions",
-      description: dir === 'rtl' ? "أنظمة إدارة الأعمال والتحليلات الذكية" : "Business management systems and smart analytics",
-      icon: Settings,
-      color: "text-cyan-500",
-      bgColor: "bg-cyan-50",
     },
   ];
 
@@ -274,8 +255,7 @@ export function ServicesGrid({
       filtered = filtered.filter(service =>
         service.name.toLowerCase().includes(query) ||
         service.description.toLowerCase().includes(query) ||
-        service.tagline.toLowerCase().includes(query) ||
-        service.features.some(feature => feature.toLowerCase().includes(query))
+        service.tagline.toLowerCase().includes(query)
       );
     }
     
@@ -312,25 +292,25 @@ export function ServicesGrid({
   return (
     <section className="py-20 bg-gradient-to-br from-brand-sky-light to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Filters and Search */}
+        {/* Search and Filters */}
         <motion.div
-          className="text-center max-w-4xl mx-auto mb-16"
+          className="text-center max-w-5xl mx-auto mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           {/* Search Bar */}
           <motion.div
-            className="relative max-w-2xl mx-auto mb-8"
-            initial={{ opacity: 0, scale: 0.9 }}
+            className="relative max-w-lg mx-auto mb-8"
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
             <div className="relative">
               <Search className={cn(
-                "absolute top-1/2 transform -translate-y-1/2 w-6 h-6 text-brand-text-muted",
+                "absolute top-1/2 transform -translate-y-1/2 w-5 h-5 text-brand-text-muted",
                 dir === 'rtl' ? "right-4" : "left-4"
               )} />
               <Input
@@ -339,8 +319,8 @@ export function ServicesGrid({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={cn(
-                  "py-4 text-lg rounded-2xl border-2 border-brand-sky-base focus:border-primary transition-all duration-300 shadow-lg hover:shadow-xl bg-white",
-                  dir === 'rtl' ? "pr-14" : "pl-14"
+                  "py-3 text-base rounded-xl border-2 border-gray-200 focus:border-primary transition-all duration-300 shadow-sm hover:shadow-md bg-white",
+                  dir === 'rtl' ? "pr-12" : "pl-12"
                 )}
                 data-testid="search-services"
               />
@@ -349,10 +329,10 @@ export function ServicesGrid({
 
           {/* Category Filters */}
           <motion.div
-            className="flex flex-wrap justify-center gap-4 mb-8"
+            className="flex flex-wrap justify-center gap-3 mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
             {serviceCategories.map((category, index) => (
@@ -360,109 +340,80 @@ export function ServicesGrid({
                 key={category.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={() => setActiveFilter(category.id)}
-                className={`flex items-center gap-3 px-6 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-2xl ${
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 text-sm font-medium",
                   activeFilter === category.id
-                    ? `${category.bgColor} ${category.color} ring-2 ring-current ring-opacity-20 transform scale-105`
-                    : "bg-white hover:bg-gray-50 text-brand-text-muted hover:text-brand-text-primary"
-                }`}
+                    ? `bg-primary text-white shadow-lg ${category.color.replace('text-', 'shadow-')}/20`
+                    : "bg-white text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-50 border border-gray-200 hover:border-gray-300"
+                )}
                 data-testid={`filter-${category.id}`}
               >
-                <category.icon size={20} />
-                <span className="font-medium">{category.title}</span>
+                <category.icon size={16} />
+                <span>{category.title}</span>
                 {category.id !== "all" && servicesData && (
-                  <Badge variant="secondary" className="text-xs bg-white/50">
+                  <Badge variant="secondary" className="text-xs ml-1 bg-gray-100 text-gray-600">
                     {servicesData.services.filter(s => s.category === category.id).length}
                   </Badge>
                 )}
               </motion.button>
             ))}
           </motion.div>
-
-          {/* View Mode Toggle */}
-          <motion.div
-            className="flex justify-center gap-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <Button
-              variant={viewMode === "grid" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setViewMode("grid")}
-              className="rounded-xl transition-all duration-300"
-              data-testid="view-grid"
-            >
-              <i className="fas fa-th mr-2"></i>
-              شبكة
-            </Button>
-            <Button
-              variant={viewMode === "list" ? "default" : "outline"}
-              size="sm"
-              onClick={() => setViewMode("list")}
-              className="rounded-xl transition-all duration-300"
-              data-testid="view-list"
-            >
-              <i className="fas fa-list mr-2"></i>
-              قائمة
-            </Button>
-          </motion.div>
         </motion.div>
 
-        {/* Services Grid/List */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${activeFilter}-${viewMode}-${searchQuery}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className={`grid gap-8 ${viewMode === "grid" ? "md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 max-w-4xl mx-auto"}`}
-            >
-              {filteredServices.length > 0 ? (
-                filteredServices.map((service, index) => (
-                  <ServiceCard
-                    key={service.id}
-                    service={service}
-                    index={index}
-                    viewMode={viewMode}
-                    dir={dir}
-                    hoveredService={hoveredService}
-                    setHoveredService={setHoveredService}
-                    likedServices={likedServices}
-                    toggleLike={toggleLike}
-                    servicesData={servicesData}
-                  />
-                ))
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="col-span-full text-center py-16"
+        {/* Services Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${activeFilter}-${searchQuery}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            data-testid="services-container"
+          >
+            {filteredServices.length > 0 ? (
+              filteredServices.map((service, index) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  dir={dir}
+                  servicesData={servicesData}
+                />
+              ))
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-16"
+              >
+                <div className="text-brand-text-muted mb-4">
+                  <Search size={64} className="mx-auto mb-4" />
+                </div>
+                <h3 className="text-2xl font-bold text-brand-text-primary mb-2">
+                  {dir === 'rtl' ? 'لا توجد نتائج' : 'No results found'}
+                </h3>
+                <p className="text-brand-text-muted mb-6">
+                  {dir === 'rtl' ? 'جرب تغيير مرشحات البحث أو الكلمات المفتاحية' : 'Try changing search filters or keywords'}
+                </p>
+                <Button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setActiveFilter("all");
+                  }}
+                  className="rounded-xl"
                 >
-                  <div className="text-brand-text-muted mb-4">
-                    <Search size={64} className="mx-auto mb-4" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-brand-text-primary mb-2">لا توجد نتائج</h3>
-                  <p className="text-brand-text-muted mb-6">جرب تغيير مرشحات البحث أو الكلمات المفتاحية</p>
-                  <Button
-                    onClick={() => {
-                      setSearchQuery("");
-                      setActiveFilter("all");
-                    }}
-                    className="rounded-xl"
-                  >
-                    إعادة تعيين البحث
-                  </Button>
-                </motion.div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+                  {dir === 'rtl' ? 'إعادة تعيين البحث' : 'Reset Search'}
+                </Button>
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
