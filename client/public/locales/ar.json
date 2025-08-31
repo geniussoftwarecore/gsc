@@ -289,5 +289,8 @@
     "edit": "تحرير",
     "delete": "حذف",
     "close": "إغلاق"
+  },
+  "buttons": {
+    "viewDetails": "عرض التفاصيل"
   }
 }

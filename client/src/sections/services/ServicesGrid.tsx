@@ -5,7 +5,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useServiceTranslations } from "@/hooks/useServiceTranslations";
 import { toCanonicalKey, getCanonicalServiceKeys } from "@/lib/services-normalize";
 import { cn } from "@/lib/utils";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -93,29 +93,21 @@ function ServiceCard({
 }: ServiceCardProps) {
 
   const IconComponent = getIconForService(service.icon);
+  const { t } = useTranslation();
+  const [, setLocation] = useLocation();
 
   return (
-    <Link href={`/services/${service.slug || service.id}`} className="block">
-      <motion.div
-        className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-sky-base hover:border-primary overflow-hidden cursor-pointer"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        viewport={{ once: true }}
-        whileHover={{ y: -8 }}
-        onHoverStart={() => setHoveredService(service.id)}
-        onHoverEnd={() => setHoveredService(null)}
-        data-testid={`service-card-${service.id}`}
-        role="link"
-        aria-label={`View details for ${service.name}`}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            window.location.href = `/services/${service.slug || service.id}`;
-          }
-        }}
-      >
+    <motion.div
+      className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 border border-brand-sky-base hover:border-primary overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -8 }}
+      onHoverStart={() => setHoveredService(service.id)}
+      onHoverEnd={() => setHoveredService(null)}
+      data-testid={`service-card-${service.id}`}
+    >
         {/* Background Animation */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -166,22 +158,33 @@ function ServiceCard({
             </p>
           </div>
 
-          {/* Hover indicator */}
+          {/* View Details Button */}
           <motion.div
-            className="flex items-center justify-center mt-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            initial={{ y: 10 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.3 }}
+            className="mt-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <span className="text-sm font-medium mr-2">
-              {servicesData?.ui?.viewDetails || 'View Details'}
-            </span>
-            <ArrowRight 
-              className={cn(
-                "w-4 h-4",
-                dir === 'rtl' && "rotate-180"
-              )} 
-            />
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setLocation(`/services/${service.slug || service.id}`);
+              }}
+              className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+              aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
+              data-testid={`view-details-${service.id}`}
+            >
+              <span className="font-medium">
+                {t('buttons.viewDetails')}
+              </span>
+              <ArrowRight 
+                className={cn(
+                  "w-4 h-4 ml-2",
+                  dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                )} 
+              />
+            </Button>
           </motion.div>
         </div>
 
@@ -193,8 +196,7 @@ function ServiceCard({
           transition={{ duration: 0.3, delay: 0.5 }}
         />
       </motion.div>
-    </Link>
-  );
+    );
 }
 
 export function ServicesGrid({
