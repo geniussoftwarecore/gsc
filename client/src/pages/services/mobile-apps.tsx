@@ -387,10 +387,10 @@ export default function MobileAppsDetail() {
                 viewport={{ once: true }}
               >
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Ready to build your mobile app?
+                  {dir === 'rtl' ? 'مستعد لبناء تطبيق الموبايل؟' : 'Ready to build your mobile app?'}
                 </h3>
                 <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                  Let's discuss your project and create something amazing together.
+                  {dir === 'rtl' ? 'دعنا نناقش مشروعك ونصنع شيئًا رائعًا معًا.' : "Let's discuss your project and create something amazing together."}
                 </p>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
