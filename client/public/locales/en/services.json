@@ -1,0 +1,280 @@
+{
+  "ui": {
+    "services": "Services",
+    "viewDetails": "View Details",
+    "whatYouGet": "What You Get",
+    "whatWeNeed": "What We Need",
+    "interactiveIdeas": "Interactive Ideas",
+    "startRequest": "Start Request",
+    "chooseLocation": "Choose Location",
+    "country": "Country",
+    "city": "City",
+    "mode": "Mode",
+    "onsite": "On-site",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "sendRequest": "Send Request",
+    "backToServices": "Back to Services"
+  },
+  "services": [
+    {
+      "id": "mobileApps",
+      "name": "Mobile App Development",
+      "tagline": "Smart applications for Android & iOS",
+      "description": "We develop high-quality, user-friendly mobile applications for both Android and iOS platforms using the latest technologies and development frameworks.",
+      "features": [
+        "Native Android development",
+        "Native iOS development",
+        "Cross-platform solutions",
+        "UI/UX design",
+        "Performance optimization",
+        "App store submission"
+      ],
+      "deliverables": [
+        "Source code",
+        "App store ready applications",
+        "Technical documentation",
+        "User guide",
+        "Post-launch support"
+      ],
+      "inputsNeeded": [
+        "App requirements and specifications",
+        "Design preferences",
+        "Target platforms",
+        "Timeline and budget"
+      ],
+      "interactiveIdeas": [
+        "Interactive prototypes",
+        "Real-time collaboration features",
+        "Push notifications",
+        "In-app purchases"
+      ],
+      "category": "development",
+      "ctaLabel": "Start Mobile Project",
+      "icon": "Smartphone",
+      "slug": "mobile-apps"
+    },
+    {
+      "id": "webApps",
+      "name": "Web Application Development",
+      "tagline": "Advanced and responsive web solutions",
+      "description": "We create modern, scalable web applications using cutting-edge technologies that provide exceptional user experiences across all devices.",
+      "features": [
+        "Responsive design",
+        "Modern frameworks",
+        "Database integration",
+        "API development",
+        "Security implementation",
+        "Performance optimization"
+      ],
+      "deliverables": [
+        "Complete web application",
+        "Admin dashboard",
+        "API documentation",
+        "Deployment guide",
+        "Maintenance plan"
+      ],
+      "inputsNeeded": [
+        "Project requirements",
+        "Preferred technologies",
+        "Integration needs",
+        "Hosting preferences"
+      ],
+      "interactiveIdeas": [
+        "Real-time features",
+        "Interactive dashboards",
+        "Data visualization",
+        "User collaboration tools"
+      ],
+      "category": "development",
+      "ctaLabel": "Start Web Project",
+      "icon": "Globe",
+      "slug": "web-apps"
+    },
+    {
+      "id": "desktopApps",
+      "name": "Desktop Software Development",
+      "tagline": "Powerful desktop applications for enhanced productivity",
+      "description": "We develop robust desktop applications that integrate seamlessly with your business processes and provide powerful functionality for your teams.",
+      "features": [
+        "Cross-platform compatibility",
+        "Native performance",
+        "System integration",
+        "Database connectivity",
+        "Security features",
+        "Auto-update mechanisms"
+      ],
+      "deliverables": [
+        "Executable applications",
+        "Installation packages",
+        "User documentation",
+        "System requirements guide",
+        "Support documentation"
+      ],
+      "inputsNeeded": [
+        "Functional requirements",
+        "Target operating systems",
+        "Integration requirements",
+        "Security specifications"
+      ],
+      "interactiveIdeas": [
+        "Drag-and-drop interfaces",
+        "Real-time synchronization",
+        "Advanced reporting",
+        "Workflow automation"
+      ],
+      "category": "development",
+      "ctaLabel": "Start Desktop Project",
+      "icon": "Boxes",
+      "slug": "desktop-apps"
+    },
+    {
+      "id": "designGraphics",
+      "name": "UI/UX & Brand Design",
+      "tagline": "Attractive interfaces and distinctive experiences",
+      "description": "We create compelling visual identities and user-centered designs that enhance your brand presence and improve user engagement.",
+      "features": [
+        "Brand identity design",
+        "UI/UX design",
+        "Responsive layouts",
+        "Design systems",
+        "User research",
+        "Accessibility compliance"
+      ],
+      "deliverables": [
+        "Brand guidelines",
+        "Design mockups",
+        "Interactive prototypes",
+        "Asset libraries",
+        "Style guides"
+      ],
+      "inputsNeeded": [
+        "Brand requirements",
+        "Target audience analysis",
+        "Design preferences",
+        "Content structure"
+      ],
+      "interactiveIdeas": [
+        "Interactive prototypes",
+        "Animation concepts",
+        "User journey mapping",
+        "A/B testing designs"
+      ],
+      "category": "design",
+      "ctaLabel": "Start Design Project",
+      "icon": "Palette",
+      "slug": "design-brand"
+    },
+    {
+      "id": "paidAdsMarketing",
+      "name": "Performance Marketing & Paid Media",
+      "tagline": "Advanced marketing strategies for digital growth",
+      "description": "We develop and execute data-driven marketing campaigns that maximize ROI through strategic paid advertising and performance optimization.",
+      "features": [
+        "Paid advertising campaigns",
+        "Performance analytics",
+        "Conversion optimization",
+        "Target audience research",
+        "A/B testing",
+        "ROI tracking"
+      ],
+      "deliverables": [
+        "Campaign strategies",
+        "Ad creatives",
+        "Performance reports",
+        "Analytics dashboards",
+        "Optimization recommendations"
+      ],
+      "inputsNeeded": [
+        "Marketing goals",
+        "Target audience",
+        "Budget allocation",
+        "Brand guidelines"
+      ],
+      "interactiveIdeas": [
+        "Interactive campaigns",
+        "Dynamic ad content",
+        "Real-time optimization",
+        "Audience engagement features"
+      ],
+      "category": "marketing",
+      "ctaLabel": "Start Marketing Campaign",
+      "icon": "BarChartBig",
+      "slug": "performance-marketing"
+    },
+    {
+      "id": "erpnextV15",
+      "name": "ERPNext v15 Implementation & Customization",
+      "tagline": "Comprehensive business and customer management",
+      "description": "We implement and customize ERPNext v15 to streamline your business operations with integrated modules for accounting, inventory, CRM, and more.",
+      "features": [
+        "ERPNext v15 setup",
+        "Custom module development",
+        "Business process automation",
+        "Integration capabilities",
+        "Data migration",
+        "Training and support"
+      ],
+      "deliverables": [
+        "Configured ERPNext system",
+        "Custom modules",
+        "Migration scripts",
+        "User training materials",
+        "Support documentation"
+      ],
+      "inputsNeeded": [
+        "Current business processes",
+        "Integration requirements",
+        "Data structures",
+        "User roles and permissions"
+      ],
+      "interactiveIdeas": [
+        "Workflow automation",
+        "Custom dashboards",
+        "Real-time notifications",
+        "Mobile app integration"
+      ],
+      "category": "business",
+      "ctaLabel": "Start ERP Project",
+      "icon": "Settings",
+      "slug": "erpnext-v15"
+    },
+    {
+      "id": "mobileSolutions",
+      "name": "Smart Mobile Solutions & Device Integrations",
+      "tagline": "Innovative mobile technology and IoT integrations",
+      "description": "We develop intelligent mobile solutions and device integrations that connect your business with modern IoT technologies and smart systems.",
+      "features": [
+        "IoT device integration",
+        "Mobile device management",
+        "Smart connectivity solutions",
+        "Real-time monitoring",
+        "Cloud integration",
+        "Security protocols"
+      ],
+      "deliverables": [
+        "Integration solutions",
+        "Mobile applications",
+        "Monitoring dashboards",
+        "Technical documentation",
+        "Support systems"
+      ],
+      "inputsNeeded": [
+        "Device specifications",
+        "Integration requirements",
+        "Security protocols",
+        "Scalability needs"
+      ],
+      "interactiveIdeas": [
+        "Device control interfaces",
+        "Real-time monitoring",
+        "Automated responses",
+        "Data visualization"
+      ],
+      "category": "development",
+      "ctaLabel": "Start Smart Solutions Project",
+      "icon": "Bot",
+      "slug": "mobile-solutions"
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useServiceTranslations } from "@/hooks/useServiceTranslations";
+import { toCanonicalKey, getCanonicalServiceKeys } from "@/lib/services-normalize";
 import { cn } from "@/lib/utils";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -331,44 +332,36 @@ export function ServicesGrid({
       bgColor: "bg-purple-50",
     },
     {
-      id: "Web",
-      title: dir === 'rtl' ? "تطوير الويب" : "Web Development",
-      description: dir === 'rtl' ? "مواقع ومنصات ويب متطورة" : "Modern websites and web applications",
-      icon: Globe,
+      id: "development",
+      title: dir === 'rtl' ? "التطوير والبرمجة" : "Development & Programming",
+      description: dir === 'rtl' ? "حلول برمجية شاملة من التطبيقات المحمولة إلى الأنظمة المعقدة" : "Comprehensive software solutions from mobile apps to complex systems",
+      icon: Code,
       color: "text-blue-500",
       bgColor: "bg-blue-50",
     },
     {
-      id: "Mobile",
-      title: dir === 'rtl' ? "تطبيقات المحمول" : "Mobile Apps",
-      description: dir === 'rtl' ? "تطبيقات أندرويد و iOS" : "Android and iOS applications",
-      icon: Smartphone,
-      color: "text-green-500",
-      bgColor: "bg-green-50",
+      id: "design",
+      title: dir === 'rtl' ? "التصميم وتجربة المستخدم" : "Design & User Experience",
+      description: dir === 'rtl' ? "تصميم واجهات مستخدم جذابة وتجارب تفاعلية مميزة" : "Attractive user interface design and distinctive interactive experiences",
+      icon: Palette,
+      color: "text-orange-500",
+      bgColor: "bg-orange-50",
     },
     {
-      id: "ERP",
-      title: dir === 'rtl' ? "أنظمة ERP" : "ERP Systems",
-      description: dir === 'rtl' ? "أنظمة إدارة موارد المؤسسة" : "Enterprise resource planning",
-      icon: Boxes,
-      color: "text-cyan-500",
-      bgColor: "bg-cyan-50",
-    },
-    {
-      id: "AI",
-      title: dir === 'rtl' ? "الذكاء الاصطناعي" : "AI & Automation",
-      description: dir === 'rtl' ? "تقنيات الذكاء الاصطناعي والأتمتة" : "AI and automation solutions",
-      icon: Bot,
+      id: "marketing",
+      title: dir === 'rtl' ? "التسويق الرقمي" : "Digital Marketing",
+      description: dir === 'rtl' ? "استراتيجيات تسويقية متطورة لنمو أعمالك الرقمية" : "Advanced marketing strategies for your digital business growth",
+      icon: Megaphone,
       color: "text-pink-500",
       bgColor: "bg-pink-50",
     },
     {
-      id: "Design",
-      title: dir === 'rtl' ? "التصميم والهوية" : "Design & Branding",
-      description: dir === 'rtl' ? "تصميم واجهات المستخدم والهوية البصرية" : "UI/UX design and branding",
-      icon: Palette,
-      color: "text-orange-500",
-      bgColor: "bg-orange-50",
+      id: "business",
+      title: dir === 'rtl' ? "حلول الأعمال" : "Business Solutions",
+      description: dir === 'rtl' ? "أنظمة إدارة الأعمال والتحليلات الذكية" : "Business management systems and smart analytics",
+      icon: Settings,
+      color: "text-cyan-500",
+      bgColor: "bg-cyan-50",
     },
   ];
 

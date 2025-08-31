@@ -76,30 +76,71 @@
     "viewAll": "عرض جميع الخدمات",
     "learnMore": "اعرف المزيد",
     "loadError": "حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة مرة أخرى.",
+    "mobileApps": {
+      "title": "تطوير تطبيقات الموبايل",
+      "short": "تطبيقات ذكية لأندرويد و iOS",
+      "slug": "mobile-apps"
+    },
+    "webApps": {
+      "title": "تطوير تطبيقات الويب",
+      "short": "حلول ويب متطورة وسريعة الاستجابة",
+      "slug": "web-apps"
+    },
+    "desktopApps": {
+      "title": "تطوير برمجيات سطح المكتب",
+      "short": "تطبيقات سطح مكتب قوية لزيادة الإنتاجية",
+      "slug": "desktop-apps"
+    },
+    "designGraphics": {
+      "title": "تصميم UI/UX وهوية العلامة",
+      "short": "واجهات جذابة وتجارب مميزة",
+      "slug": "design-brand"
+    },
+    "paidAdsMarketing": {
+      "title": "التسويق الأدائي والإعلانات الممولة",
+      "short": "استراتيجيات تسويقية متطورة للنمو الرقمي",
+      "slug": "performance-marketing"
+    },
+    "erpnextV15": {
+      "title": "تنفيذ وتخصيص ERPNext v15",
+      "short": "حلول شاملة لإدارة الأعمال والعملاء",
+      "slug": "erpnext-v15"
+    },
+    "mobileSolutions": {
+      "title": "الحلول الذكية وتكاملات الهواتف",
+      "short": "تقنيات جوال مبتكرة وتكاملات إنترنت الأشياء",
+      "slug": "mobile-solutions"
+    },
     "items": [
       {
         "title": "تطبيقات الويب",
-        "desc": "حلول ويب متطورة وسريعة الاستجابة"
+        "desc": "حلول ويب متطورة وسريعة الاستجابة",
+        "canonicalKey": "webApps"
       },
       {
         "title": "تطبيقات الجوال",
-        "desc": "تطبيقات ذكية لأندرويد و iOS"
+        "desc": "تطبيقات ذكية لأندرويد و iOS",
+        "canonicalKey": "mobileApps"
       },
       {
         "title": "أنظمة ERP/CRM",
-        "desc": "حلول شاملة لإدارة الأعمال والعملاء"
+        "desc": "حلول شاملة لإدارة الأعمال والعملاء",
+        "canonicalKey": "erpnextV15"
       },
       {
         "title": "التكاملات",
-        "desc": "ربط الأنظمة وتبادل البيانات"
+        "desc": "ربط الأنظمة وتبادل البيانات",
+        "canonicalKey": "mobileSolutions"
       },
       {
         "title": "التصميم وتجربة المستخدم",
-        "desc": "واجهات جذابة وتجارب مميزة"
+        "desc": "واجهات جذابة وتجارب مميزة",
+        "canonicalKey": "designGraphics"
       },
       {
         "title": "DevOps والبنية التحتية",
-        "desc": "حلول موثوقة وقابلة للتوسع"
+        "desc": "حلول موثوقة وقابلة للتوسع",
+        "canonicalKey": "mobileSolutions"
       }
     ]
   },

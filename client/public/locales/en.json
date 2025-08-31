@@ -76,30 +76,71 @@
     "viewAll": "View All Services",
     "learnMore": "Learn More",
     "loadError": "An error occurred while loading services. Please try again.",
+    "mobileApps": {
+      "title": "Mobile App Development",
+      "short": "Smart applications for Android & iOS",
+      "slug": "mobile-apps"
+    },
+    "webApps": {
+      "title": "Web Application Development",
+      "short": "Advanced and responsive web solutions",
+      "slug": "web-apps"
+    },
+    "desktopApps": {
+      "title": "Desktop Software Development",
+      "short": "Powerful desktop applications for enhanced productivity",
+      "slug": "desktop-apps"
+    },
+    "designGraphics": {
+      "title": "UI/UX & Brand Design",
+      "short": "Attractive interfaces and distinctive experiences",
+      "slug": "design-brand"
+    },
+    "paidAdsMarketing": {
+      "title": "Performance Marketing & Paid Media",
+      "short": "Advanced marketing strategies for digital growth",
+      "slug": "performance-marketing"
+    },
+    "erpnextV15": {
+      "title": "ERPNext v15 Implementation & Customization",
+      "short": "Comprehensive business and customer management",
+      "slug": "erpnext-v15"
+    },
+    "mobileSolutions": {
+      "title": "Smart Mobile Solutions & Device Integrations",
+      "short": "Innovative mobile technology and IoT integrations",
+      "slug": "mobile-solutions"
+    },
     "items": [
       {
         "title": "Web Apps",
-        "desc": "Advanced and responsive web solutions"
+        "desc": "Advanced and responsive web solutions",
+        "canonicalKey": "webApps"
       },
       {
         "title": "Mobile Apps",
-        "desc": "Smart applications for Android & iOS"
+        "desc": "Smart applications for Android & iOS",
+        "canonicalKey": "mobileApps"
       },
       {
         "title": "ERP/CRM Systems",
-        "desc": "Comprehensive business and customer management"
+        "desc": "Comprehensive business and customer management",
+        "canonicalKey": "erpnextV15"
       },
       {
         "title": "Integrations",
-        "desc": "System connectivity and data exchange"
+        "desc": "System connectivity and data exchange",
+        "canonicalKey": "mobileSolutions"
       },
       {
         "title": "Design & UX",
-        "desc": "Attractive interfaces and distinctive experiences"
+        "desc": "Attractive interfaces and distinctive experiences",
+        "canonicalKey": "designGraphics"
       },
       {
         "title": "DevOps",
-        "desc": "Reliable and scalable infrastructure"
+        "desc": "Reliable and scalable infrastructure",
+        "canonicalKey": "mobileSolutions"
       }
     ]
   },
