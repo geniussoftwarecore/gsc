@@ -291,6 +291,7 @@
     "close": "إغلاق"
   },
   "buttons": {
-    "viewDetails": "عرض التفاصيل"
+    "viewDetails": "عرض التفاصيل",
+    "getStarted": "ابدأ الآن"
   }
 }

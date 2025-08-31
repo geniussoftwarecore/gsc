@@ -291,6 +291,7 @@
     "close": "Close"
   },
   "buttons": {
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "getStarted": "Get Started"
   }
 }

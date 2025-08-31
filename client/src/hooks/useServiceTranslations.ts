@@ -21,6 +21,7 @@ export interface ServiceData {
   };
   services: Array<{
     id: string;
+    slug?: string;
     name: string;
     tagline: string;
     description: string;
@@ -30,6 +31,16 @@ export interface ServiceData {
     interactiveIdeas: string[];
     category: string;
     ctaLabel: string;
+    detailPage?: {
+      heroCta: string;
+      slides: {
+        slide1: { overline: string; title: string; body: string; };
+        slide2: { overline: string; title: string; body: string; };
+        slide3: { overline: string; title: string; body: string; };
+        slide4: { overline: string; title: string; body: string; };
+        slide5: { overline: string; title: string; body: string; };
+      };
+    };
   }>;
 }
 
