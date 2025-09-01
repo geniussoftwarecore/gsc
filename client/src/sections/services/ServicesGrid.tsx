@@ -295,6 +295,131 @@ export function ServicesGrid({
   }
 
   return (
-    
+    <section className="py-20 bg-gradient-to-br from-brand-sky-light to-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Search and Filter Controls */}
+        <motion.div
+          className="max-w-4xl mx-auto mb-12 space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          {/* Search Input */}
+          <motion.div
+            className="relative max-w-md mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative">
+              <Search className={cn(
+                "absolute top-1/2 transform -translate-y-1/2 w-5 h-5 text-brand-text-muted",
+                dir === 'rtl' ? "right-4" : "left-4"
+              )} />
+              <Input
+                type="text"
+                placeholder={dir === 'rtl' ? 'ابحث عن الخدمات...' : 'Search services...'}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={cn(
+                  "py-3 text-base rounded-xl border-2 border-gray-200 focus:border-primary transition-all duration-300 shadow-sm hover:shadow-md bg-white",
+                  dir === 'rtl' ? "pr-12" : "pl-12"
+                )}
+                data-testid="search-services"
+              />
+            </div>
+          </motion.div>
+
+          {/* Category Filters */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-3 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {serviceCategories.map((category, index) => (
+              <motion.button
+                key={category.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setActiveFilter(category.id)}
+                className={cn(
+                  "flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 text-sm font-medium",
+                  activeFilter === category.id
+                    ? `bg-primary text-white shadow-lg ${category.color.replace('text-', 'shadow-')}/20`
+                    : "bg-white text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-50 border border-gray-200 hover:border-gray-300"
+                )}
+                data-testid={`filter-${category.id}`}
+              >
+                <category.icon size={16} />
+                <span>{category.title}</span>
+                {category.id !== "all" && servicesData && (
+                  <Badge variant="secondary" className="text-xs ml-1 bg-gray-100 text-gray-600">
+                    {servicesData.services.filter(s => s.category === category.id).length}
+                  </Badge>
+                )}
+              </motion.button>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* Services Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`${activeFilter}-${searchQuery}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            data-testid="services-container"
+          >
+            {filteredServices.length > 0 ? (
+              filteredServices.map((service, index) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  index={index}
+                  dir={dir}
+                  servicesData={servicesData}
+                />
+              ))
+            ) : (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="col-span-full text-center py-16"
+              >
+                <div className="text-brand-text-muted mb-4">
+                  <Search size={64} className="mx-auto mb-4" />
+                </div>
+                <h3 className="text-2xl font-bold text-brand-text-primary mb-2">
+                  {dir === 'rtl' ? 'لا توجد نتائج' : 'No results found'}
+                </h3>
+                <p className="text-brand-text-muted mb-6">
+                  {dir === 'rtl' ? 'جرب تغيير مرشحات البحث أو الكلمات المفتاحية' : 'Try changing search filters or keywords'}
+                </p>
+                <Button
+                  onClick={() => {
+                    setSearchQuery("");
+                    setActiveFilter("all");
+                  }}
+                  className="rounded-xl"
+                >
+                  {dir === 'rtl' ? 'إعادة تعيين البحث' : 'Reset Search'}
+                </Button>
+              </motion.div>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
   );
 }
