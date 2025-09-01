@@ -1,0 +1,297 @@
+{
+  "brand": {
+    "name": "genius software core",
+    "shortName": "GSC",
+    "alt": "GSC"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "contact": "Contact",
+    "erp": "ERP",
+    "subscribe": "Subscribe Now",
+    "startProject": "Start Your Project",
+    "toggleMenu": "Toggle menu"
+  },
+  "header": {
+    "links": {
+      "home": "Home",
+      "services": "Services",
+      "crm": "CRM",
+      "portfolio": "Portfolio",
+      "pricing": "Pricing",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "cta": "Get a Demo"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "createAccount": "Create Account",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "title": "Integrated Software Solutions & ERP/CRM that accelerate your growth.",
+    "subtitle": "We build web & mobile apps, implement integrations, and deliver bilingual support with professional reporting.",
+    "badge": "Complete Digital Platform",
+    "titlePrefix": "We turn ideas into ",
+    "titleHighlight": "effective digital products",
+    "description": "We provide web development, mobile apps, ERP systems, AI and automation solutions to transform your vision into advanced digital reality",
+    "trustedBy": "Trusted by leading companies",
+    "response24h": "Response within 24 hours",
+    "primaryCta": "Start Free Trial",
+    "secondaryCta": "Contact Us",
+    "cta": {
+      "startProject": "Start Your Project",
+      "subscribe": "Subscribe Now",
+      "learnMore": "Learn More",
+      "freeTrial": "Start Your Free Trial"
+    }
+  },
+  "problem": {
+    "title": "Challenges You Face",
+    "points": [
+      "Fragmented and disconnected tools",
+      "Poor customer follow-up",
+      "Data chaos and disorganization",
+      "Difficulty tracking performance"
+    ]
+  },
+  "solution": {
+    "title": "How We Solve These Problems",
+    "points": [
+      "Unified and integrated CRM system",
+      "Automated follow-up alerts",
+      "Consolidated analytics and insights",
+      "Clear and easy dashboard"
+    ],
+    "cta": "See how we solve it in 3 minutes"
+  },
+  "services": {
+    "title": "Our Specialized Services",
+    "subtitle": "We offer comprehensive software and advanced technology solutions",
+    "viewAll": "View All Services",
+    "learnMore": "Learn More",
+    "loadError": "An error occurred while loading services. Please try again.",
+    "mobileApps": {
+      "title": "Mobile App Development",
+      "short": "Smart applications for Android & iOS",
+      "slug": "mobile-apps"
+    },
+    "webApps": {
+      "title": "Web Application Development",
+      "short": "Advanced and responsive web solutions",
+      "slug": "web-apps"
+    },
+    "desktopApps": {
+      "title": "Desktop Software Development",
+      "short": "Powerful desktop applications for enhanced productivity",
+      "slug": "desktop-apps"
+    },
+    "designGraphics": {
+      "title": "UI/UX & Brand Design",
+      "short": "Attractive interfaces and distinctive experiences",
+      "slug": "design-brand"
+    },
+    "paidAdsMarketing": {
+      "title": "Performance Marketing & Paid Media",
+      "short": "Advanced marketing strategies for digital growth",
+      "slug": "performance-marketing"
+    },
+    "erpnextV15": {
+      "title": "ERPNext v15 Implementation & Customization",
+      "short": "Comprehensive business and customer management",
+      "slug": "erpnext-v15"
+    },
+    "mobileSolutions": {
+      "title": "Smart Mobile Solutions & Device Integrations",
+      "short": "Innovative mobile technology and IoT integrations",
+      "slug": "mobile-solutions"
+    },
+    "items": [
+      {
+        "title": "Web Apps",
+        "desc": "Advanced and responsive web solutions",
+        "canonicalKey": "webApps"
+      },
+      {
+        "title": "Mobile Apps",
+        "desc": "Smart applications for Android & iOS",
+        "canonicalKey": "mobileApps"
+      },
+      {
+        "title": "ERP/CRM Systems",
+        "desc": "Comprehensive business and customer management",
+        "canonicalKey": "erpnextV15"
+      },
+      {
+        "title": "Integrations",
+        "desc": "System connectivity and data exchange",
+        "canonicalKey": "mobileSolutions"
+      },
+      {
+        "title": "Design & UX",
+        "desc": "Attractive interfaces and distinctive experiences",
+        "canonicalKey": "designGraphics"
+      },
+      {
+        "title": "DevOps",
+        "desc": "Reliable and scalable infrastructure",
+        "canonicalKey": "mobileSolutions"
+      }
+    ]
+  },
+  "crm": {
+    "title": "Customer Management System",
+    "cards": [
+      {
+        "title": "Core Entities"
+      },
+      {
+        "title": "Sales Pipeline"
+      },
+      {
+        "title": "Tickets & Support"
+      }
+    ],
+    "openDemo": "Open CRM Demo"
+  },
+  "portfolio": {
+    "title": "Our Work",
+    "subtitle": "Discover our successful projects",
+    "viewProject": "View Project",
+    "allProjects": "All Projects",
+    "viewAll": "View All Projects"
+  },
+  "proof": {
+    "title": "Trusted by Leading Companies",
+    "testimonial": {
+      "quote": "Genius Software Core transformed our vision into an advanced digital reality that helped us significantly improve our business efficiency",
+      "author": "Ahmed Mohammed, Technical Manager"
+    }
+  },
+  "cta": {
+    "title": "Ready to Grow Your Business?",
+    "primary": "Book a Consultation",
+    "secondary": "WhatsApp / Email"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "You have an opportunity, we're here to help you",
+    "getInTouch": "Get In Touch",
+    "sendMessage": "Send Message",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company (Optional)",
+      "service": "Service Type",
+      "message": "Message",
+      "budget": "Budget (Optional)",
+      "timeline": "Timeline (Optional)",
+      "send": "Send",
+      "sending": "Sending...",
+      "successTitle": "Message sent successfully!",
+      "successDesc": "We will contact you as soon as possible and a lead will be created in our CRM system.",
+      "errorTitle": "Error sending message",
+      "errorDesc": "Please try again or contact us directly."
+    },
+    "channels": {
+      "email": "Email",
+      "phone": "Phone", 
+      "address": "Address",
+      "hours": "Working Hours"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "A team of creators and specialists in technology, striving to provide innovative solutions that help businesses grow and thrive",
+    "storyTitle": "Our Story",
+    "storyParagraph1": "{companyName} was founded with a clear vision: empowering businesses through advanced technology. We started as a small team of passionate developers and evolved to become a trusted technology partner for many companies.",
+    "storyParagraph2": "We don't just build software, we strive to deeply understand our clients' needs and provide solutions that align with their strategic goals. Every project we work on is an opportunity to make a real positive impact.",
+    "partnership": "Start Your Partnership with Us"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit",
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address"
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "subtitle": "Choose the plan that fits your needs and budget",
+    "mostPopular": "Most Popular",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "customSolution": "Need a custom solution? Contact us for a personalized quote",
+    "monthly": "monthly",
+    "currency": "SAR"
+  },
+  "servicesPage": {
+    "title": "Our Services",
+    "subtitle": "We provide comprehensive and specialized solutions for all your technical needs",
+    "search": "Search for service...",
+    "categories": {
+      "all": "All Services",
+      "allDesc": "Browse all our specialized services",
+      "business": "Business Solutions",
+      "businessDesc": "Business management systems and smart analytics",
+      "development": "Development & Programming",
+      "developmentDesc": "Comprehensive software solutions from mobile apps to complex systems",
+      "design": "Design & User Experience",
+      "designDesc": "Attractive user interface design and distinctive interactive experiences",
+      "marketing": "Digital Marketing",
+      "marketingDesc": "Advanced marketing strategies for your digital business growth"
+    }
+  },
+  "footer": {
+    "aboutTitle": "About GSC",
+    "aboutText": "We build modern, bilingual business platforms—web, mobile, and integrated CRM/ERP—tailored for your growth.",
+    "cta": "Get a Demo",
+    "servicesTitle": "Services",
+    "services": {
+      "webApps": "Web Applications",
+      "mobileApps": "Mobile Applications",
+      "crmErp": "CRM & ERP",
+      "integrations": "Integrations",
+      "brandingUi": "Branding & UI",
+      "devops": "DevOps & CI/CD"
+    },
+    "resourcesTitle": "Resources",
+    "resources": {
+      "docs": "Documentation",
+      "blog": "Blog",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy"
+    },
+    "contactTitle": "Contact",
+    "contact": {
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "socialTitle": "Follow us",
+    "copyright": "All rights reserved.",
+    "language": "Language"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close"
+  },
+  "buttons": {
+    "viewDetails": "View Details",
+    "getStarted": "Get Started"
+  }
+}
