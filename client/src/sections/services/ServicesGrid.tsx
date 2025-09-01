@@ -147,10 +147,6 @@ function ServiceCard({
             {service.title}
           </h3>
           
-          {/* Price */}
-          <p className="text-sm text-primary font-medium leading-relaxed">
-            {service.startingPrice}
-          </p>
           
           {/* Description - Clamped to 3 lines */}
           <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 min-h-[3.75rem]">
