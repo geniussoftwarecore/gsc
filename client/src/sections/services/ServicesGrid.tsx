@@ -28,7 +28,9 @@ import {
   ShoppingCart,
   LifeBuoy,
   Settings,
-  Users
+  Users,
+  Monitor,
+  Brain
 } from "lucide-react";
 
 interface ServicesGridProps {
@@ -204,7 +206,7 @@ export function ServicesGrid({
   const { t } = useTranslation();
   const { servicesData, loading, error } = useServiceTranslations();
 
-  // Simple category filters aligned with the compact design
+  // Category filters matching actual service data
   const serviceCategories = [
     {
       id: "all",
@@ -213,34 +215,52 @@ export function ServicesGrid({
       color: "text-blue-500",
     },
     {
-      id: "Web",
+      id: "web",
       title: dir === 'rtl' ? "تطوير الويب" : "Web Development",
       icon: Globe,
       color: "text-green-500",
     },
     {
-      id: "Mobile",
+      id: "mobile",
       title: dir === 'rtl' ? "تطبيقات الجوال" : "Mobile Apps",
       icon: Smartphone,
       color: "text-blue-500",
     },
     {
-      id: "ERP",
+      id: "desktop",
+      title: dir === 'rtl' ? "تطبيقات سطح المكتب" : "Desktop Apps",
+      icon: Monitor,
+      color: "text-indigo-500",
+    },
+    {
+      id: "smart-mobile",
+      title: dir === 'rtl' ? "الحلول الذكية للجوال" : "Smart Mobile Solutions",
+      icon: Bot,
+      color: "text-orange-500",
+    },
+    {
+      id: "design",
+      title: dir === 'rtl' ? "التصميم والجرافيكس" : "Design & Graphics",
+      icon: Palette,
+      color: "text-pink-500",
+    },
+    {
+      id: "marketing",
+      title: dir === 'rtl' ? "التسويق الرقمي" : "Digital Marketing",
+      icon: Megaphone,
+      color: "text-red-500",
+    },
+    {
+      id: "erp",
       title: dir === 'rtl' ? "أنظمة ERP" : "ERP Systems",
       icon: Boxes,
       color: "text-purple-500",
     },
     {
-      id: "AI",
-      title: dir === 'rtl' ? "الذكاء الاصطناعي" : "AI & Automation",
-      icon: Bot,
-      color: "text-orange-500",
-    },
-    {
-      id: "Design",
-      title: dir === 'rtl' ? "التصميم" : "Design & UX",
-      icon: Palette,
-      color: "text-pink-500",
+      id: "smart",
+      title: dir === 'rtl' ? "الذكاء الاصطناعي" : "AI & Smart Solutions",
+      icon: Brain,
+      color: "text-cyan-500",
     },
   ];
 
