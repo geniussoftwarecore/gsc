@@ -108,6 +108,7 @@ export default function Services() {
         
         {/* Services Grid with Filters */}
         <ServicesGrid 
+          services={services}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           activeFilter={activeFilter}
@@ -118,6 +119,8 @@ export default function Services() {
           setHoveredService={setHoveredService}
           likedServices={likedServices}
           toggleLike={toggleLike}
+          loading={isLoading}
+          error={error?.toString()}
         />
 
         {/* Statistics Section */}

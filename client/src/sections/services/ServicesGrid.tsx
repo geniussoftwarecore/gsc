@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 
 interface ServicesGridProps {
+  services?: any[]; // Services data from API
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeFilter: string;
@@ -44,6 +45,8 @@ interface ServicesGridProps {
   setHoveredService: (id: string | null) => void;
   likedServices: Set<string>;
   toggleLike: (id: string) => void;
+  loading?: boolean;
+  error?: string | null;
 }
 
 // Icon mapping for service categories
@@ -68,17 +71,15 @@ const getIconForService = (iconName?: string) => {
 
 // Compact Service Card Component
 interface ServiceCardProps {
-  service: any; // Service from translation data
+  service: any; // Service from API data
   index: number;
   dir: string;
-  servicesData: any;
 }
 
 function ServiceCard({
   service,
   index,
-  dir,
-  servicesData
+  dir
 }: ServiceCardProps) {
 
   const IconComponent = getIconForService(service.icon);
@@ -118,7 +119,7 @@ function ServiceCard({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
+      aria-label={`${t('buttons.viewDetails')} - ${service.title}`}
       data-testid={`service-card-${service.id}`}
     >
       {/* Background Animation */}
@@ -143,12 +144,12 @@ function ServiceCard({
         <div className="text-center space-y-3">
           {/* Title */}
           <h3 className="text-xl font-bold text-brand-text-primary group-hover:text-primary transition-colors duration-300 leading-tight">
-            {service.name}
+            {service.title}
           </h3>
           
-          {/* Tagline */}
+          {/* Price */}
           <p className="text-sm text-primary font-medium leading-relaxed">
-            {service.tagline}
+            {service.startingPrice}
           </p>
           
           {/* Description - Clamped to 3 lines */}
@@ -171,7 +172,7 @@ function ServiceCard({
             }}
             className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
             size="sm"
-            aria-label={`${t('buttons.viewDetails')} - ${service.name}`}
+            aria-label={`${t('buttons.viewDetails')} - ${service.title}`}
             data-testid={`view-details-${service.id}`}
           >
             <span className="font-medium">
@@ -191,6 +192,7 @@ function ServiceCard({
 }
 
 export function ServicesGrid({
+  services,
   searchQuery,
   setSearchQuery,
   activeFilter,
@@ -200,11 +202,12 @@ export function ServicesGrid({
   hoveredService,
   setHoveredService,
   likedServices,
-  toggleLike
+  toggleLike,
+  loading,
+  error
 }: ServicesGridProps) {
   const { dir } = useLanguage();
   const { t } = useTranslation();
-  const { servicesData, loading, error } = useServiceTranslations();
 
   // Category filters matching actual service data
   const serviceCategories = [
@@ -265,9 +268,9 @@ export function ServicesGrid({
   ];
 
   const filteredServices = useMemo(() => {
-    if (!servicesData) return [];
+    if (!services) return [];
     
-    let filtered = servicesData.services;
+    let filtered = services;
     
     // Apply category filter
     if (activeFilter !== "all") {
@@ -278,14 +281,13 @@ export function ServicesGrid({
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(service =>
-        service.name.toLowerCase().includes(query) ||
-        service.description.toLowerCase().includes(query) ||
-        service.tagline.toLowerCase().includes(query)
+        service.title?.toLowerCase().includes(query) ||
+        service.description?.toLowerCase().includes(query)
       );
     }
     
     return filtered;
-  }, [servicesData, activeFilter, searchQuery]);
+  }, [services, activeFilter, searchQuery]);
 
   if (loading) {
     return (
@@ -380,9 +382,9 @@ export function ServicesGrid({
               >
                 <category.icon size={16} />
                 <span>{category.title}</span>
-                {category.id !== "all" && servicesData && (
+                {category.id !== "all" && services && (
                   <Badge variant="secondary" className="text-xs ml-1 bg-gray-100 text-gray-600">
-                    {servicesData.services.filter(s => s.category === category.id).length}
+                    {services.filter(s => s.category === category.id).length}
                   </Badge>
                 )}
               </motion.button>
@@ -408,7 +410,6 @@ export function ServicesGrid({
                   service={service}
                   index={index}
                   dir={dir}
-                  servicesData={servicesData}
                 />
               ))
             ) : (
