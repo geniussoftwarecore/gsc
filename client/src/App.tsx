@@ -24,7 +24,7 @@ import NotFound from "@/pages/not-found";
 const About = lazy(() => import("@/pages/about"));
 const Services = lazy(() => import("@/pages/services"));
 const ServiceDetail = lazy(() => import("@/pages/service-detail"));
-const MobileAppsDetail = lazy(() => import("@/pages/services/mobile-apps"));
+const MobileDetail = lazy(() => import("@/pages/services/mobile"));
 const PortfolioIndex = lazy(() => import("@/pages/portfolio/index"));
 const ProjectDetail = lazy(() => import("@/pages/portfolio/[slug]"));
 const Frameworks = lazy(() => import("@/pages/frameworks"));
@@ -88,9 +88,9 @@ function Router() {
           <Services />
         </Suspense>
       </Route>
-      <Route path="/services/mobile-apps">
+      <Route path="/services/mobile">
         <Suspense fallback={<PageSkeleton />}>
-          <MobileAppsDetail />
+          <MobileDetail />
         </Suspense>
       </Route>
       <Route path="/services/:id">

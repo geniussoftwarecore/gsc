@@ -85,7 +85,12 @@ function ServiceCard({
 
   const handleViewDetails = () => {
     const slug = service.slug || service.id;
-    setLocation(`/services/${slug}`);
+    // Special handling for mobile apps service
+    if (service.id === 'mobile-apps') {
+      setLocation('/services/mobile');
+    } else {
+      setLocation(`/services/${slug}`);
+    }
   };
 
   const handleCardClick = () => {
