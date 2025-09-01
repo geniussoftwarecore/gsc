@@ -87,13 +87,8 @@ function ServiceCard({
   const [, setLocation] = useLocation();
 
   const handleViewDetails = () => {
-    const slug = service.slug || service.id;
-    // Special handling for mobile apps service
-    if (service.id === 'mobile-apps') {
-      setLocation('/services/mobile');
-    } else {
-      setLocation(`/services/${slug}`);
-    }
+    // Navigate to the service detail page using the service ID
+    setLocation(`/services/${service.id}`);
   };
 
   const handleCardClick = () => {
