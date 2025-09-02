@@ -239,6 +239,26 @@ export function ContactForm() {
       dir === 'rtl' ? "نظام ERP للمستشفيات" : "Healthcare ERP",
       dir === 'rtl' ? "نظام ERP للتعليم" : "Education ERP",
       dir === 'rtl' ? "نظام ERP مخصص" : "Custom ERP"
+    ],
+    "تصميم الجرافيكس والهوية البصرية": [
+      dir === 'rtl' ? "تصميم هوية بصرية شاملة" : "Complete Brand Identity Design",
+      dir === 'rtl' ? "تصميم شعار احترافي" : "Professional Logo Design",
+      dir === 'rtl' ? "تصميم بروشورات وفلايرز" : "Brochure & Flyer Design",
+      dir === 'rtl' ? "تصميم مواد تسويقية" : "Marketing Materials Design",
+      dir === 'rtl' ? "تصميم لافتات ومعارض" : "Banners & Exhibition Design",
+      dir === 'rtl' ? "تصميم مواقع التواصل الاجتماعي" : "Social Media Graphics",
+      dir === 'rtl' ? "تصميم عبوات ومنتجات" : "Packaging Design",
+      dir === 'rtl' ? "تصميم تطبيقات UI/UX" : "App UI/UX Design"
+    ],
+    "التسويق الرقمي والإعلانات": [
+      dir === 'rtl' ? "حملات إعلانية على جوجل" : "Google Ads Campaigns",
+      dir === 'rtl' ? "حملات إعلانية على فيسبوك وإنستغرام" : "Facebook & Instagram Ads",
+      dir === 'rtl' ? "تحسين محركات البحث SEO" : "Search Engine Optimization (SEO)",
+      dir === 'rtl' ? "إدارة حسابات التواصل الاجتماعي" : "Social Media Management",
+      dir === 'rtl' ? "التسويق عبر البريد الإلكتروني" : "Email Marketing",
+      dir === 'rtl' ? "التسويق بالمحتوى" : "Content Marketing",
+      dir === 'rtl' ? "تحليل البيانات والتقارير" : "Analytics & Reporting",
+      dir === 'rtl' ? "استراتيجية تسويقية شاملة" : "Complete Marketing Strategy"
     ]
   };
 
