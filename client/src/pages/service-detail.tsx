@@ -480,21 +480,45 @@ export default function ServiceDetail() {
                             <p className="text-brand-text-muted mb-4 leading-relaxed">
                               {app.description}
                             </p>
-                            <div className="space-y-2">
-                              <h4 className="font-semibold text-brand-text-primary text-sm">
-                                {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {app.features.map((feature, featureIndex) => (
-                                  <Badge 
-                                    key={featureIndex} 
-                                    variant="secondary" 
-                                    className="text-xs"
-                                  >
-                                    {feature}
-                                  </Badge>
-                                ))}
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                  {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {app.features.map((feature, featureIndex) => (
+                                    <Badge 
+                                      key={featureIndex} 
+                                      variant="secondary" 
+                                      className="text-xs"
+                                    >
+                                      {feature}
+                                    </Badge>
+                                  ))}
+                                </div>
                               </div>
+                              
+                              {/* Apply Now Button */}
+                              <Button
+                                onClick={() => {
+                                  // Navigate to contact page with app name pre-selected
+                                  setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
+                                }}
+                                className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                size="sm"
+                                aria-label={`Apply for ${app.name}`}
+                                data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
+                              >
+                                <span className="font-medium">
+                                  {dir === 'rtl' ? 'اطلب هذا التطبيق' : 'Apply for This App'}
+                                </span>
+                                <ArrowRight 
+                                  className={cn(
+                                    "w-4 h-4 ml-2 transition-transform duration-200",
+                                    dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                  )} 
+                                />
+                              </Button>
                             </div>
                           </CardContent>
                         </Card>
