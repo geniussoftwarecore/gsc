@@ -109,14 +109,16 @@ export function ContactForm() {
     mutation.mutate(data);
   };
 
+  // Use actual service titles that match what's in the API/database
   const services = [
-    dir === 'rtl' ? "تطوير تطبيقات الويب" : "Web Application Development",
-    dir === 'rtl' ? "تطوير التطبيقات المحمولة" : "Mobile App Development", 
-    dir === 'rtl' ? "تطبيقات سطح المكتب" : "Desktop Applications",
-    dir === 'rtl' ? "أنظمة ERPNext" : "ERPNext Systems",
-    dir === 'rtl' ? "التصميم والجرافيك" : "Design & Graphics",
-    dir === 'rtl' ? "التسويق الرقمي" : "Digital Marketing",
-    dir === 'rtl' ? "إدارة وسائل التواصل" : "Social Media Management",
+    "تطوير تطبيقات الهواتف الذكية",
+    "تطوير المواقع والمنصات", 
+    "تطوير تطبيقات سطح المكتب",
+    "الحلول الذكية والبرمجية للهواتف الذكية",
+    "تصميم الجرافيكس والهوية البصرية",
+    "التسويق الرقمي والإعلانات",
+    "الحلول الذكية والذكاء الاصطناعي",
+    "أنظمة ERPNext",
     dir === 'rtl' ? "استشارات تقنية" : "Technical Consulting",
     dir === 'rtl' ? "أخرى" : "Other",
   ];
