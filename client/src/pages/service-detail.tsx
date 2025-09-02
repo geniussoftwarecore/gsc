@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
@@ -35,12 +36,96 @@ const getIconForService = (iconName?: string) => {
   return iconMap[iconName || "Globe"] || Globe;
 };
 
+// Detailed app information for mobile apps
+const getDetailedAppInfo = (appName: string) => {
+  const appDetails: Record<string, any> = {
+    // E-commerce Apps
+    "تطبيق تجاري للمتاجر الإلكترونية": {
+      name: "تطبيق تجاري للمتاجر الإلكترونية",
+      description: "تطبيق متكامل للتجارة الإلكترونية يوفر تجربة تسوق سلسة ومميزة للعملاء مع إدارة شاملة للمتجر",
+      fullDescription: "تطبيق تجاري احترافي مصمم خصيصاً للمتاجر الإلكترونية الحديثة. يوفر منصة تسوق متطورة تدعم جميع عمليات البيع والشراء الإلكتروني مع واجهة مستخدم جذابة وسهلة الاستخدام. يتضمن نظام إدارة مخزون متقدم، معالجة للمدفوعات المتعددة، وأنظمة توصيل مرنة.",
+      keyFeatures: ["كتالوج منتجات تفاعلي", "عربة تسوق ذكية", "بوابات دفع متعددة", "تتبع الطلبات", "نظام تقييم المنتجات", "إشعارات فورية", "برنامج نقاط الولاء", "تحليلات المبيعات"],
+      technicalFeatures: ["تصميم متجاوب", "أمان SSL", "تحسين SEO", "تكامل مع وسائل التواصل", "دعم اللغات المتعددة", "نسخ احتياطية تلقائية"],
+      benefits: ["زيادة المبيعات بنسبة 40%", "تحسين تجربة العملاء", "إدارة فعالة للمخزون", "تقارير مفصلة للأداء", "وصول أوسع للعملاء", "تكاليف تشغيل أقل"],
+      targetAudience: ["أصحاب المتاجر التقليدية", "رواد الأعمال", "الشركات الصغيرة والمتوسطة", "تجار التجزئة", "الموردين"],
+      pricing: "يبدأ من $2,500",
+      timeline: "4-6 أسابيع",
+      technologies: ["React Native", "Node.js", "PostgreSQL", "Stripe", "Firebase", "AWS"],
+      category: "business"
+    },
+    
+    // Inventory Management
+    "تطبيق إدارة المخزون والمستودعات": {
+      name: "تطبيق إدارة المخزون والمستودعات",
+      description: "نظام متطور لإدارة المخزون يوفر تتبعاً دقيقاً للبضائع مع تحليلات ذكية ونظام إنذار متقدم",
+      fullDescription: "تطبيق احترافي مخصص لإدارة المخزون والمستودعات بكفاءة عالية. يوفر تتبعاً في الوقت الفعلي لجميع المنتجات مع نظام تصنيف ذكي ومراقبة مستويات المخزون. يتضمن ميزات متقدمة مثل التنبؤ بالطلب وأتمتة عمليات الطلب والتزويد.",
+      keyFeatures: ["مسح الباركود", "تتبع المخزون الفوري", "إنذارات نفاد المخزون", "تقارير تفصيلية", "إدارة الموردين", "تتبع انتهاء الصلاحية", "جرد تلقائي", "تحليل اتجاهات المبيعات"],
+      technicalFeatures: ["قاعدة بيانات مركزية", "مزامنة متعددة الأجهزة", "واجهة مستخدم بديهية", "تصدير التقارير", "نسخ احتياطية يومية", "أمان متقدم"],
+      benefits: ["تقليل الفاقد بنسبة 30%", "تحسين دقة المخزون", "توفير الوقت والجهد", "تحسين خدمة العملاء", "تقليل التكاليف التشغيلية", "اتخاذ قرارات مبنية على البيانات"],
+      targetAudience: ["المتاجر الكبيرة", "المستودعات", "المصانع", "شركات التوزيع", "المطاعم والمقاهي"],
+      pricing: "يبدأ من $1,800",
+      timeline: "3-5 أسابيع",
+      technologies: ["React Native", "Express.js", "MongoDB", "QR Scanner", "Chart.js", "Redis"],
+      category: "business"
+    },
+
+    // Delivery App
+    "تطبيق خدمات التوصيل والشحن": {
+      name: "تطبيق خدمات التوصيل والشحن",
+      description: "منصة شاملة لخدمات التوصيل مع تتبع GPS وإدارة متقدمة للطلبات والسائقين",
+      fullDescription: "تطبيق متكامل لإدارة خدمات التوصيل والشحن يربط بين العملاء والسائقين ومقدمي الخدمة. يوفر نظام تتبع دقيق في الوقت الفعلي مع تحسين المسارات وإدارة ذكية للطلبات. مناسب لجميع أنواع خدمات التوصيل من الطعام إلى البضائع العامة.",
+      keyFeatures: ["تتبع GPS المباشر", "حساب المسافات والتكلفة", "إدارة السائقين", "إشعارات فورية", "تقييم الخدمة", "طرق دفع متعددة", "تتبع الطلبات", "خريطة تفاعلية"],
+      technicalFeatures: ["خرائط Google المتقدمة", "تحسين المسارات", "إشعارات فورية", "لوحة تحكم إدارية", "تكامل المدفوعات", "تقارير الأداء"],
+      benefits: ["تسريع عملية التوصيل", "تحسين رضا العملاء", "تقليل التكاليف التشغيلية", "زيادة الإيرادات", "مراقبة الأداء", "تحسين إدارة الأسطول"],
+      targetAudience: ["شركات التوصيل", "المطاعم", "المتاجر الإلكترونية", "الصيدليات", "شركات الشحن"],
+      pricing: "يبدأ من $3,200",
+      timeline: "6-8 أسابيع",
+      technologies: ["React Native", "Google Maps API", "Socket.io", "Firebase", "Payment APIs", "GPS Tracking"],
+      category: "business"
+    },
+
+    // Healthcare App
+    "تطبيق طبي وصحي": {
+      name: "تطبيق طبي وصحي",
+      description: "منصة صحية متكاملة للمرضى والأطباء مع مواعيد إلكترونية وملفات طبية رقمية",
+      fullDescription: "تطبيق طبي شامل يهدف إلى تحسين الخدمات الصحية من خلال ربط المرضى بالأطباء والمؤسسات الطبية. يوفر إدارة الملفات الطبية الإلكترونية، حجز المواعيد، والاستشارات عن بُعد مع ضمان أعلى معايير الخصوصية والأمان الطبي.",
+      keyFeatures: ["حجز المواعيد الطبية", "ملف طبي إلكتروني", "استشارات عن بُعد", "تذكير بالأدوية", "متابعة العلامات الحيوية", "تقارير طبية", "اتصال مع الطوارئ", "دليل الأطباء"],
+      technicalFeatures: ["تشفير طبي متقدم", "امتثال HIPAA", "مكالمات فيديو آمنة", "قاعدة بيانات طبية", "تكامل مع الأجهزة الذكية", "نسخ احتياطية مشفرة"],
+      benefits: ["تحسين جودة الرعاية", "سهولة الوصول للأطباء", "توفير الوقت", "تقليل الأخطاء الطبية", "متابعة صحية مستمرة", "تكاليف أقل"],
+      targetAudience: ["المستشفيات", "العيادات الطبية", "الأطباء", "المرضى", "مراكز الرعاية الصحية"],
+      pricing: "يبدأ من $4,500",
+      timeline: "8-10 أسابيع",
+      technologies: ["React Native", "Node.js", "HIPAA Compliance", "Video Calling", "Encryption", "HL7 FHIR"],
+      category: "healthcare"
+    },
+
+    // Educational App  
+    "تطبيق تعليمي وتدريبي": {
+      name: "تطبيق تعليمي وتدريبي",
+      description: "منصة تعليمية تفاعلية تدعم التعلم الإلكتروني مع أدوات متقدمة للطلاب والمعلمين",
+      fullDescription: "تطبيق تعليمي متطور يوفر بيئة تعلم تفاعلية ومرنة للطلاب والمدرسين. يتضمن أدوات إنشاء المحتوى التعليمي، اختبارات تفاعلية، ومتابعة تقدم الطلاب. يدعم أساليب التعلم المختلفة مع محتوى مرئي وصوتي وتفاعلي.",
+      keyFeatures: ["فصول افتراضية", "مكتبة محتوى تعليمي", "اختبارات تفاعلية", "تتبع التقدم", "منتديات نقاش", "شهادات إنجاز", "تقارير الأداء", "تعلم تكيفي"],
+      technicalFeatures: ["محتوى متعدد الوسائط", "نظام إدارة التعلم", "تقييم تلقائي", "مزامنة الأجهزة", "وضع عدم الاتصال", "أمان البيانات"],
+      benefits: ["تحسين نتائج التعلم", "مرونة في التعلم", "توفير التكاليف", "وصول أوسع للتعليم", "تخصيص التعلم", "تفاعل أكثر"],
+      targetAudience: ["المدارس", "الجامعات", "مراكز التدريب", "المعلمين المستقلين", "الطلاب"],
+      pricing: "يبدأ من $3,800",
+      timeline: "6-8 أسابيع",  
+      technologies: ["React Native", "Video Streaming", "Learning Analytics", "Offline Storage", "Gamification", "AI Assessment"],
+      category: "education"
+    }
+  };
+
+  return appDetails[appName] || null;
+};
+
 export default function ServiceDetail() {
   const { id: serviceId } = useParams();
   const [, setLocation] = useLocation();
   const { dir } = useLanguage();
   const { t } = useTranslation();
   const [selectedAppCategory, setSelectedAppCategory] = useState("all");
+  const [selectedAppForDetails, setSelectedAppForDetails] = useState<any>(null);
+  const [showAppDetailsModal, setShowAppDetailsModal] = useState(false);
 
   // Fetch all services to find the specific one
   const { data: services, isLoading, error } = useQuery<any[]>({
@@ -498,27 +583,48 @@ export default function ServiceDetail() {
                                 </div>
                               </div>
                               
-                              {/* Apply Now Button */}
-                              <Button
-                                onClick={() => {
-                                  // Navigate to contact page with app name pre-selected
-                                  setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
-                                }}
-                                className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
-                                size="sm"
-                                aria-label={`Apply for ${app.name}`}
-                                data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
-                              >
-                                <span className="font-medium">
-                                  {dir === 'rtl' ? 'اطلب هذا التطبيق' : 'Apply for This App'}
-                                </span>
-                                <ArrowRight 
-                                  className={cn(
-                                    "w-4 h-4 ml-2 transition-transform duration-200",
-                                    dir === 'rtl' && "rotate-180 ml-0 mr-2"
-                                  )} 
-                                />
-                              </Button>
+                              {/* Action Buttons */}
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                {/* View Details Button */}
+                                <Button
+                                  onClick={() => {
+                                    setSelectedAppForDetails(app);
+                                    setShowAppDetailsModal(true);
+                                  }}
+                                  variant="outline"
+                                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`View details for ${app.name}`}
+                                  data-testid={`view-details-app-${app.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-2" />
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                  </span>
+                                </Button>
+                                
+                                {/* Apply Now Button */}
+                                <Button
+                                  onClick={() => {
+                                    // Navigate to contact page with app name pre-selected
+                                    setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
+                                  }}
+                                  className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`Apply for ${app.name}`}
+                                  data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'اطلب الآن' : 'Apply Now'}
+                                  </span>
+                                  <ArrowRight 
+                                    className={cn(
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                    )} 
+                                  />
+                                </Button>
+                              </div>
                             </div>
                           </CardContent>
                         </Card>
@@ -738,6 +844,159 @@ export default function ServiceDetail() {
             </motion.div>
           </div>
         </section>
+
+        {/* App Details Modal */}
+        {selectedAppForDetails && (
+          <Dialog open={showAppDetailsModal} onOpenChange={setShowAppDetailsModal}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold text-brand-text-primary flex items-center gap-3">
+                  <Smartphone className="w-6 h-6 text-primary" />
+                  {selectedAppForDetails.name}
+                </DialogTitle>
+              </DialogHeader>
+              
+              {(() => {
+                const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
+                if (!appDetails) return null;
+
+                return (
+                  <div className="space-y-6 py-4">
+                    {/* Overview Section */}
+                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-6">
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-3">
+                        {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                      </h3>
+                      <p className="text-brand-text-muted leading-relaxed">
+                        {appDetails.fullDescription}
+                      </p>
+                    </div>
+
+                    {/* Pricing & Timeline */}
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-blue-50 rounded-lg p-4">
+                        <h4 className="font-bold text-blue-800 mb-2">
+                          {dir === 'rtl' ? 'السعر' : 'Pricing'}
+                        </h4>
+                        <p className="text-blue-700 text-lg font-semibold">{appDetails.pricing}</p>
+                      </div>
+                      <div className="bg-green-50 rounded-lg p-4">
+                        <h4 className="font-bold text-green-800 mb-2">
+                          {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
+                        </h4>
+                        <p className="text-green-700 text-lg font-semibold">{appDetails.timeline}</p>
+                      </div>
+                    </div>
+
+                    {/* Key Features */}
+                    <div>
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Star className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {appDetails.keyFeatures.map((feature: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-brand-text-muted">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Technical Features */}
+                    <div>
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Globe className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'المميزات التقنية' : 'Technical Features'}
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {appDetails.technicalFeatures.map((feature: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-blue-800">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Benefits */}
+                    <div>
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Heart className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'الفوائد والمزايا' : 'Benefits & Advantages'}
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {appDetails.benefits.map((benefit: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-green-800">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Target Audience */}
+                    <div>
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Users className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'الفئة المستهدفة' : 'Target Audience'}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {appDetails.targetAudience.map((audience: string, index: number) => (
+                          <Badge key={index} variant="secondary" className="px-3 py-1">
+                            {audience}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Technologies */}
+                    <div>
+                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Brain className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'التقنيات المستخدمة' : 'Technologies Used'}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {appDetails.technologies.map((tech: string, index: number) => (
+                          <Badge key={index} variant="outline" className="px-3 py-1 border-primary text-primary">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+                      <Button
+                        onClick={() => {
+                          setShowAppDetailsModal(false);
+                          setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
+                        }}
+                        className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-3"
+                        size="lg"
+                      >
+                        <ArrowRight className={cn(
+                          "w-5 h-5 mr-2",
+                          dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                        )} />
+                        {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                      </Button>
+                      <Button
+                        onClick={() => setShowAppDetailsModal(false)}
+                        variant="outline"
+                        className="flex-1 rounded-xl py-3"
+                        size="lg"
+                      >
+                        {dir === 'rtl' ? 'إغلاق' : 'Close'}
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })()}
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </>
   );
