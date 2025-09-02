@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 // Icon mapping for services
 const getIconForService = (iconName?: string) => {
@@ -39,6 +40,7 @@ export default function ServiceDetail() {
   const [, setLocation] = useLocation();
   const { dir } = useLanguage();
   const { t } = useTranslation();
+  const [selectedAppCategory, setSelectedAppCategory] = useState("all");
 
   // Fetch all services to find the specific one
   const { data: services, isLoading, error } = useQuery<any[]>({
@@ -104,6 +106,171 @@ export default function ServiceDetail() {
     dir === 'rtl' ? 'الاختبارات والتقارير' : 'Testing and reports',
     dir === 'rtl' ? 'التدريب والدعم' : 'Training and support',
   ];
+
+  // App categories for mobile development
+  const appCategories = [
+    {
+      id: "all",
+      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      icon: Smartphone,
+      color: "bg-blue-500",
+    },
+    {
+      id: "business",
+      title: dir === 'rtl' ? "تطبيقات الأعمال" : "Business Apps",
+      icon: Briefcase,
+      color: "bg-green-500",
+    },
+    {
+      id: "ecommerce",
+      title: dir === 'rtl' ? "التجارة الإلكترونية" : "E-commerce",
+      icon: ShoppingCart,
+      color: "bg-purple-500",
+    },
+    {
+      id: "finance",
+      title: dir === 'rtl' ? "المالية والمحاسبة" : "Finance & Accounting",
+      icon: Calculator,
+      color: "bg-orange-500",
+    },
+    {
+      id: "marketing",
+      title: dir === 'rtl' ? "التسويق" : "Marketing",
+      icon: Megaphone,
+      color: "bg-red-500",
+    },
+    {
+      id: "healthcare",
+      title: dir === 'rtl' ? "الصحة" : "Healthcare",
+      icon: Heart,
+      color: "bg-pink-500",
+    },
+    {
+      id: "education",
+      title: dir === 'rtl' ? "التعليم" : "Education",
+      icon: BookOpen,
+      color: "bg-indigo-500",
+    },
+    {
+      id: "lifestyle",
+      title: dir === 'rtl' ? "نمط الحياة" : "Lifestyle",
+      icon: Home,
+      color: "bg-teal-500",
+    },
+    {
+      id: "entertainment",
+      title: dir === 'rtl' ? "الترفيه" : "Entertainment",
+      icon: GamepadIcon,
+      color: "bg-yellow-500",
+    },
+  ];
+
+  // Sample apps for each category
+  const sampleApps = {
+    business: [
+      {
+        name: dir === 'rtl' ? "إدارة المشاريع" : "Project Management",
+        description: dir === 'rtl' ? "تطبيق لإدارة المشاريع والمهام" : "App for managing projects and tasks",
+        features: dir === 'rtl' ? ["إدارة المهام", "التعاون", "التقارير"] : ["Task Management", "Collaboration", "Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "إدارة العملاء CRM" : "CRM Management",
+        description: dir === 'rtl' ? "نظام إدارة علاقات العملاء" : "Customer relationship management system",
+        features: dir === 'rtl' ? ["قاعدة عملاء", "المتابعة", "المبيعات"] : ["Customer Database", "Follow-up", "Sales"],
+      },
+    ],
+    ecommerce: [
+      {
+        name: dir === 'rtl' ? "متجر إلكتروني" : "Online Store",
+        description: dir === 'rtl' ? "تطبيق للتسوق الإلكتروني" : "E-commerce shopping app",
+        features: dir === 'rtl' ? ["كتالوج المنتجات", "عربة التسوق", "الدفع الآمن"] : ["Product Catalog", "Shopping Cart", "Secure Payment"],
+      },
+      {
+        name: dir === 'rtl' ? "تطبيق الطعام" : "Food Delivery",
+        description: dir === 'rtl' ? "تطبيق طلب الطعام والتوصيل" : "Food ordering and delivery app",
+        features: dir === 'rtl' ? ["قائمة المطاعم", "تتبع الطلب", "التوصيل"] : ["Restaurant Menu", "Order Tracking", "Delivery"],
+      },
+    ],
+    finance: [
+      {
+        name: dir === 'rtl' ? "المحاسبة الشخصية" : "Personal Finance",
+        description: dir === 'rtl' ? "تطبيق لإدارة الأموال الشخصية" : "Personal money management app",
+        features: dir === 'rtl' ? ["تتبع المصروفات", "الميزانية", "التقارير"] : ["Expense Tracking", "Budgeting", "Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "تطبيق البنك" : "Banking App",
+        description: dir === 'rtl' ? "تطبيق الخدمات المصرفية الرقمية" : "Digital banking services app",
+        features: dir === 'rtl' ? ["رصيد الحساب", "التحويلات", "دفع الفواتير"] : ["Account Balance", "Transfers", "Bill Payments"],
+      },
+    ],
+    marketing: [
+      {
+        name: dir === 'rtl' ? "إدارة وسائل التواصل" : "Social Media Manager",
+        description: dir === 'rtl' ? "تطبيق إدارة حسابات التواصل الاجتماعي" : "Social media accounts management app",
+        features: dir === 'rtl' ? ["جدولة المنشورات", "التحليلات", "الرد التلقائي"] : ["Post Scheduling", "Analytics", "Auto-Reply"],
+      },
+      {
+        name: dir === 'rtl' ? "حملات إعلانية" : "Ad Campaigns",
+        description: dir === 'rtl' ? "تطبيق إدارة الحملات الإعلانية" : "Advertising campaigns management app",
+        features: dir === 'rtl' ? ["إنشاء الحملات", "تتبع الأداء", "التحسين"] : ["Campaign Creation", "Performance Tracking", "Optimization"],
+      },
+    ],
+    healthcare: [
+      {
+        name: dir === 'rtl' ? "متابعة صحية" : "Health Tracking",
+        description: dir === 'rtl' ? "تطبيق لمتابعة الصحة اليومية" : "Daily health monitoring app",
+        features: dir === 'rtl' ? ["متابعة الأعراض", "تذكير الأدوية", "التقارير"] : ["Symptom Tracking", "Medicine Reminders", "Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "حجز المواعيد الطبية" : "Medical Appointments",
+        description: dir === 'rtl' ? "تطبيق حجز المواعيد مع الأطباء" : "Doctor appointment booking app",
+        features: dir === 'rtl' ? ["البحث عن أطباء", "حجز مواعيد", "التذكيرات"] : ["Doctor Search", "Appointment Booking", "Reminders"],
+      },
+    ],
+    education: [
+      {
+        name: dir === 'rtl' ? "منصة تعليمية" : "Learning Platform",
+        description: dir === 'rtl' ? "تطبيق للتعلم الإلكتروني" : "E-learning platform app",
+        features: dir === 'rtl' ? ["الدورات التفاعلية", "الاختبارات", "متابعة التقدم"] : ["Interactive Courses", "Quizzes", "Progress Tracking"],
+      },
+      {
+        name: dir === 'rtl' ? "إدارة الطلاب" : "Student Management",
+        description: dir === 'rtl' ? "تطبيق إدارة شؤون الطلاب" : "Student affairs management app",
+        features: dir === 'rtl' ? ["سجل الدرجات", "الحضور", "التواصل"] : ["Grade Records", "Attendance", "Communication"],
+      },
+    ],
+    lifestyle: [
+      {
+        name: dir === 'rtl' ? "اللياقة البدنية" : "Fitness Tracker",
+        description: dir === 'rtl' ? "تطبيق متابعة اللياقة البدنية" : "Fitness and workout tracking app",
+        features: dir === 'rtl' ? ["التمارين", "النظام الغذائي", "التحديات"] : ["Workouts", "Diet Plans", "Challenges"],
+      },
+      {
+        name: dir === 'rtl' ? "إدارة المنزل" : "Home Management",
+        description: dir === 'rtl' ? "تطبيق إدارة شؤون المنزل" : "Household management app",
+        features: dir === 'rtl' ? ["قائمة المهام", "التنظيف", "الصيانة"] : ["Task Lists", "Cleaning", "Maintenance"],
+      },
+    ],
+    entertainment: [
+      {
+        name: dir === 'rtl' ? "الألعاب التفاعلية" : "Interactive Games",
+        description: dir === 'rtl' ? "ألعاب ترفيهية تفاعلية" : "Interactive entertainment games",
+        features: dir === 'rtl' ? ["ألعاب متعددة", "تحديات", "مستويات"] : ["Multiple Games", "Challenges", "Levels"],
+      },
+      {
+        name: dir === 'rtl' ? "مشغل الوسائط" : "Media Player",
+        description: dir === 'rtl' ? "تطبيق تشغيل الموسيقى والفيديو" : "Music and video player app",
+        features: dir === 'rtl' ? ["تشغيل الموسيقى", "قوائم التشغيل", "التحكم"] : ["Music Playback", "Playlists", "Controls"],
+      },
+    ],
+  };
+
+  const getFilteredApps = () => {
+    if (selectedAppCategory === "all") {
+      return Object.values(sampleApps).flat();
+    }
+    return sampleApps[selectedAppCategory as keyof typeof sampleApps] || [];
+  };
 
   return (
     <>
@@ -229,6 +396,142 @@ export default function ServiceDetail() {
             </div>
           </div>
         </section>
+
+        {/* App Categories and Examples Section - Only show for mobile service */}
+        {service && service.category === 'mobile' && (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <motion.div
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'اختر نوع التطبيق الذي تريده' : 'Choose Your App Type'}
+                  </h2>
+                  <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نطور تطبيقات متخصصة لجميع المجالات - من التجارة الإلكترونية إلى الصحة والتعليم والترفيه' 
+                      : 'We develop specialized apps for all industries - from e-commerce to healthcare, education, and entertainment'
+                    }
+                  </p>
+                </motion.div>
+
+                {/* App Category Filters */}
+                <motion.div
+                  className="flex flex-wrap justify-center gap-3 mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {appCategories.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setSelectedAppCategory(category.id)}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium",
+                        selectedAppCategory === category.id
+                          ? `${category.color} text-white shadow-lg`
+                          : "bg-gray-100 text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-200 border border-gray-200 hover:border-gray-300"
+                      )}
+                    >
+                      <category.icon size={18} />
+                      <span>{category.title}</span>
+                    </motion.button>
+                  ))}
+                </motion.div>
+
+                {/* App Examples Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedAppCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {getFilteredApps().map((app, index) => (
+                      <motion.div
+                        key={`${selectedAppCategory}-${index}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                      >
+                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
+                          <CardHeader>
+                            <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                              <Smartphone className="w-5 h-5 text-primary" />
+                              {app.name}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-brand-text-muted mb-4 leading-relaxed">
+                              {app.description}
+                            </p>
+                            <div className="space-y-2">
+                              <h4 className="font-semibold text-brand-text-primary text-sm">
+                                {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {app.features.map((feature, featureIndex) => (
+                                  <Badge 
+                                    key={featureIndex} 
+                                    variant="secondary" 
+                                    className="text-xs"
+                                  >
+                                    {feature}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Call to Action for Custom App */}
+                <motion.div
+                  className="mt-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                      {dir === 'rtl' ? 'لديك فكرة تطبيق مختلفة؟' : 'Have a Different App Idea?'}
+                    </h3>
+                    <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                      {dir === 'rtl' 
+                        ? 'نطور تطبيقات مخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى تطبيق احترافي' 
+                        : 'We develop custom apps based on your specific needs - tell us your idea and we\'ll turn it into a professional app'
+                      }
+                    </p>
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-xl px-8 py-3">
+                        {dir === 'rtl' ? 'ناقش فكرتك معنا' : 'Discuss Your Idea'}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Features & Deliverables Section */}
         <section className="py-20">
