@@ -39,78 +39,261 @@ const getIconForService = (iconName?: string) => {
 // Detailed app information for mobile apps
 const getDetailedAppInfo = (appName: string) => {
   const appDetails: Record<string, any> = {
-    // E-commerce Apps
-    "تطبيق تجاري للمتاجر الإلكترونية": {
-      name: "تطبيق تجاري للمتاجر الإلكترونية",
-      description: "تطبيق متكامل للتجارة الإلكترونية يوفر تجربة تسوق سلسة ومميزة للعملاء مع إدارة شاملة للمتجر",
-      fullDescription: "تطبيق تجاري احترافي مصمم خصيصاً للمتاجر الإلكترونية الحديثة. يوفر منصة تسوق متطورة تدعم جميع عمليات البيع والشراء الإلكتروني مع واجهة مستخدم جذابة وسهلة الاستخدام. يتضمن نظام إدارة مخزون متقدم، معالجة للمدفوعات المتعددة، وأنظمة توصيل مرنة.",
-      keyFeatures: ["كتالوج منتجات تفاعلي", "عربة تسوق ذكية", "بوابات دفع متعددة", "تتبع الطلبات", "نظام تقييم المنتجات", "إشعارات فورية", "برنامج نقاط الولاء", "تحليلات المبيعات"],
-      technicalFeatures: ["تصميم متجاوب", "أمان SSL", "تحسين SEO", "تكامل مع وسائل التواصل", "دعم اللغات المتعددة", "نسخ احتياطية تلقائية"],
-      benefits: ["زيادة المبيعات بنسبة 40%", "تحسين تجربة العملاء", "إدارة فعالة للمخزون", "تقارير مفصلة للأداء", "وصول أوسع للعملاء", "تكاليف تشغيل أقل"],
-      targetAudience: ["أصحاب المتاجر التقليدية", "رواد الأعمال", "الشركات الصغيرة والمتوسطة", "تجار التجزئة", "الموردين"],
-      pricing: "يبدأ من $2,500",
-      timeline: "4-6 أسابيع",
-      technologies: ["React Native", "Node.js", "PostgreSQL", "Stripe", "Firebase", "AWS"],
+    // Business Apps
+    "إدارة المشاريع": {
+      name: "إدارة المشاريع",
+      description: "تطبيق شامل لإدارة المشاريع والمهام بكفاءة عالية مع أدوات التعاون والمتابعة",
+      fullDescription: "تطبيق متقدم لإدارة المشاريع يوفر بيئة عمل متكاملة لفرق العمل. يتضمن أدوات تخطيط المشاريع، توزيع المهام، متابعة التقدم، وإدارة الموارد. يساعد على تحسين الإنتاجية وضمان تسليم المشاريع في الوقت المحدد.",
+      keyFeatures: ["تخطيط المشاريع التفاعلي", "توزيع المهام الذكي", "تتبع الوقت والتكلفة", "لوحة تحكم شاملة", "تعاون الفريق", "إشعارات ذكية", "تقارير مفصلة", "جدولة المواعيد"],
+      technicalFeatures: ["واجهة سهلة الاستخدام", "مزامنة الوقت الفعلي", "تكامل مع التقويم", "إدارة الملفات", "نسخ احتياطية تلقائية", "أمان متقدم"],
+      benefits: ["تحسين الإنتاجية بنسبة 35%", "تقليل وقت المشاريع", "تحسين التعاون بين الفرق", "شفافية كاملة في العمل", "تقليل الأخطاء", "اتخاذ قرارات سريعة"],
+      targetAudience: ["الشركات الناشئة", "فرق التطوير", "المكاتب الاستشارية", "الوكالات الإبداعية", "مديري المشاريع"],
+      pricing: "يبدأ من $1,200",
+      timeline: "3-4 أسابيع",
+      technologies: ["React Native", "Firebase", "Node.js", "MongoDB", "Socket.io", "Push Notifications"],
       category: "business"
     },
     
-    // Inventory Management
-    "تطبيق إدارة المخزون والمستودعات": {
-      name: "تطبيق إدارة المخزون والمستودعات",
-      description: "نظام متطور لإدارة المخزون يوفر تتبعاً دقيقاً للبضائع مع تحليلات ذكية ونظام إنذار متقدم",
-      fullDescription: "تطبيق احترافي مخصص لإدارة المخزون والمستودعات بكفاءة عالية. يوفر تتبعاً في الوقت الفعلي لجميع المنتجات مع نظام تصنيف ذكي ومراقبة مستويات المخزون. يتضمن ميزات متقدمة مثل التنبؤ بالطلب وأتمتة عمليات الطلب والتزويد.",
-      keyFeatures: ["مسح الباركود", "تتبع المخزون الفوري", "إنذارات نفاد المخزون", "تقارير تفصيلية", "إدارة الموردين", "تتبع انتهاء الصلاحية", "جرد تلقائي", "تحليل اتجاهات المبيعات"],
-      technicalFeatures: ["قاعدة بيانات مركزية", "مزامنة متعددة الأجهزة", "واجهة مستخدم بديهية", "تصدير التقارير", "نسخ احتياطية يومية", "أمان متقدم"],
-      benefits: ["تقليل الفاقد بنسبة 30%", "تحسين دقة المخزون", "توفير الوقت والجهد", "تحسين خدمة العملاء", "تقليل التكاليف التشغيلية", "اتخاذ قرارات مبنية على البيانات"],
-      targetAudience: ["المتاجر الكبيرة", "المستودعات", "المصانع", "شركات التوزيع", "المطاعم والمقاهي"],
-      pricing: "يبدأ من $1,800",
-      timeline: "3-5 أسابيع",
-      technologies: ["React Native", "Express.js", "MongoDB", "QR Scanner", "Chart.js", "Redis"],
+    "Project Management": {
+      name: "Project Management",
+      description: "Comprehensive project and task management application with high efficiency and collaboration tools",
+      fullDescription: "Advanced project management app that provides an integrated work environment for teams. Includes project planning tools, task distribution, progress tracking, and resource management. Helps improve productivity and ensures projects are delivered on time.",
+      keyFeatures: ["Interactive Project Planning", "Smart Task Assignment", "Time & Cost Tracking", "Comprehensive Dashboard", "Team Collaboration", "Smart Notifications", "Detailed Reports", "Schedule Management"],
+      technicalFeatures: ["User-friendly Interface", "Real-time Sync", "Calendar Integration", "File Management", "Automatic Backup", "Advanced Security"],
+      benefits: ["35% Productivity Improvement", "Reduced Project Time", "Better Team Collaboration", "Complete Work Transparency", "Error Reduction", "Quick Decision Making"],
+      targetAudience: ["Startups", "Development Teams", "Consulting Firms", "Creative Agencies", "Project Managers"],
+      pricing: "Starting from $1,200",
+      timeline: "3-4 weeks",
+      technologies: ["React Native", "Firebase", "Node.js", "MongoDB", "Socket.io", "Push Notifications"],
       category: "business"
     },
 
-    // Delivery App
-    "تطبيق خدمات التوصيل والشحن": {
-      name: "تطبيق خدمات التوصيل والشحن",
-      description: "منصة شاملة لخدمات التوصيل مع تتبع GPS وإدارة متقدمة للطلبات والسائقين",
-      fullDescription: "تطبيق متكامل لإدارة خدمات التوصيل والشحن يربط بين العملاء والسائقين ومقدمي الخدمة. يوفر نظام تتبع دقيق في الوقت الفعلي مع تحسين المسارات وإدارة ذكية للطلبات. مناسب لجميع أنواع خدمات التوصيل من الطعام إلى البضائع العامة.",
-      keyFeatures: ["تتبع GPS المباشر", "حساب المسافات والتكلفة", "إدارة السائقين", "إشعارات فورية", "تقييم الخدمة", "طرق دفع متعددة", "تتبع الطلبات", "خريطة تفاعلية"],
-      technicalFeatures: ["خرائط Google المتقدمة", "تحسين المسارات", "إشعارات فورية", "لوحة تحكم إدارية", "تكامل المدفوعات", "تقارير الأداء"],
-      benefits: ["تسريع عملية التوصيل", "تحسين رضا العملاء", "تقليل التكاليف التشغيلية", "زيادة الإيرادات", "مراقبة الأداء", "تحسين إدارة الأسطول"],
-      targetAudience: ["شركات التوصيل", "المطاعم", "المتاجر الإلكترونية", "الصيدليات", "شركات الشحن"],
+    "إدارة العملاء CRM": {
+      name: "إدارة العملاء CRM",
+      description: "نظام متطور لإدارة علاقات العملاء مع أدوات المتابعة والمبيعات المتقدمة",
+      fullDescription: "تطبيق CRM شامل يساعد الشركات على إدارة علاقاتها مع العملاء بكفاءة. يتضمن قاعدة بيانات عملاء متقدمة، نظام متابعة المبيعات، وأدوات التسويق الرقمي. يوفر رؤية شاملة لرحلة العميل ويساعد على زيادة المبيعات والاحتفاظ بالعملاء.",
+      keyFeatures: ["قاعدة بيانات عملاء شاملة", "تتبع المبيعات والفرص", "أتمتة التسويق", "تحليل سلوك العملاء", "إدارة المهام التجارية", "تقارير مفصلة", "تكامل مع البريد الإلكتروني", "لوحة تحكم تفاعلية"],
+      technicalFeatures: ["قاعدة بيانات مركزية", "تشفير البيانات", "تكامل API", "تقارير قابلة للتخصيص", "نسخ احتياطية آمنة", "واجهة متعددة المستخدمين"],
+      benefits: ["زيادة المبيعات بنسبة 25%", "تحسين رضا العملاء", "توفير وقت المتابعة", "تحليل دقيق للعملاء", "تحسين معدل الاحتفاظ", "تسريع دورة المبيعات"],
+      targetAudience: ["شركات المبيعات", "الوكالات التجارية", "المتاجر الكبيرة", "الشركات الخدمية", "فرق التسويق"],
+      pricing: "يبدأ من $2,800",
+      timeline: "5-6 أسابيع",
+      technologies: ["React Native", "Salesforce API", "PostgreSQL", "Analytics", "Email Integration", "Cloud Storage"],
+      category: "business"
+    },
+
+    "CRM Management": {
+      name: "CRM Management",
+      description: "Advanced customer relationship management system with sales tracking and follow-up tools",
+      fullDescription: "Comprehensive CRM app that helps companies efficiently manage customer relationships. Includes advanced customer database, sales tracking system, and digital marketing tools. Provides complete visibility into customer journey and helps increase sales and customer retention.",
+      keyFeatures: ["Comprehensive Customer Database", "Sales & Opportunity Tracking", "Marketing Automation", "Customer Behavior Analysis", "Business Task Management", "Detailed Reports", "Email Integration", "Interactive Dashboard"],
+      technicalFeatures: ["Centralized Database", "Data Encryption", "API Integration", "Customizable Reports", "Secure Backup", "Multi-user Interface"],
+      benefits: ["25% Sales Increase", "Improved Customer Satisfaction", "Time-saving Follow-up", "Accurate Customer Analysis", "Better Retention Rate", "Faster Sales Cycle"],
+      targetAudience: ["Sales Companies", "Commercial Agencies", "Large Retailers", "Service Companies", "Marketing Teams"],
+      pricing: "Starting from $2,800",
+      timeline: "5-6 weeks",
+      technologies: ["React Native", "Salesforce API", "PostgreSQL", "Analytics", "Email Integration", "Cloud Storage"],
+      category: "business"
+    },
+
+    // E-commerce Apps
+    "متجر إلكتروني": {
+      name: "متجر إلكتروني",
+      description: "منصة تسوق إلكتروني متكاملة مع جميع أدوات البيع والإدارة الحديثة",
+      fullDescription: "تطبيق متجر إلكتروني احترافي يوفر تجربة تسوق سلسة للعملاء مع نظام إدارة شامل للتجار. يتضمن كتالوج منتجات تفاعلي، نظام دفع آمن، وأدوات تسويق متقدمة. مصمم لزيادة المبيعات وتحسين تجربة العملاء.",
+      keyFeatures: ["كتالوج منتجات احترافي", "عربة تسوق ذكية", "نظام دفع آمن ومتعدد", "تتبع الطلبات المباشر", "نظام تقييمات ومراجعات", "كوبونات وعروض", "إدارة المخزون", "لوحة تحكم التاجر"],
+      technicalFeatures: ["تصميم متجاوب", "أمان SSL متقدم", "تحسين محركات البحث", "تكامل وسائل الدفع", "نسخ احتياطية يومية", "تحليلات المبيعات"],
+      benefits: ["زيادة المبيعات بنسبة 45%", "وصول أوسع للعملاء", "تقليل تكاليف التشغيل", "تحسين تجربة التسوق", "إدارة فعالة للطلبات", "نمو مستدام للأعمال"],
+      targetAudience: ["أصحاب المتاجر", "التجار الإلكترونيين", "الشركات التجارية", "رواد الأعمال", "المصنعين"],
+      pricing: "يبدأ من $3,500",
+      timeline: "6-8 أسابيع",
+      technologies: ["React Native", "WooCommerce", "Stripe", "PayPal", "Firebase", "Google Analytics"],
+      category: "ecommerce"
+    },
+
+    "Online Store": {
+      name: "Online Store",
+      description: "Integrated e-commerce shopping platform with all modern selling and management tools",
+      fullDescription: "Professional e-commerce store app that provides seamless shopping experience for customers with comprehensive management system for merchants. Includes interactive product catalog, secure payment system, and advanced marketing tools. Designed to increase sales and improve customer experience.",
+      keyFeatures: ["Professional Product Catalog", "Smart Shopping Cart", "Secure Multi-Payment System", "Live Order Tracking", "Reviews & Ratings System", "Coupons & Offers", "Inventory Management", "Merchant Dashboard"],
+      technicalFeatures: ["Responsive Design", "Advanced SSL Security", "SEO Optimization", "Payment Gateway Integration", "Daily Backups", "Sales Analytics"],
+      benefits: ["45% Sales Increase", "Wider Customer Reach", "Reduced Operating Costs", "Enhanced Shopping Experience", "Efficient Order Management", "Sustainable Business Growth"],
+      targetAudience: ["Store Owners", "E-commerce Merchants", "Trading Companies", "Entrepreneurs", "Manufacturers"],
+      pricing: "Starting from $3,500",
+      timeline: "6-8 weeks",
+      technologies: ["React Native", "WooCommerce", "Stripe", "PayPal", "Firebase", "Google Analytics"],
+      category: "ecommerce"
+    },
+
+    "تطبيق الطعام": {
+      name: "تطبيق الطعام",
+      description: "منصة طلب وتوصيل الطعام مع تتبع مباشر وتجربة مستخدم متميزة",
+      fullDescription: "تطبيق توصيل طعام متطور يربط بين العملاء والمطاعم والسائقين. يوفر تجربة طلب سلسة مع تتبع الطلب في الوقت الفعلي، خيارات دفع متنوعة، ونظام تقييم شامل. مصمم لتسهيل عملية طلب الطعام وتحسين خدمة التوصيل.",
+      keyFeatures: ["قوائم طعام تفاعلية", "تخصيص الطلبات", "تتبع GPS للتوصيل", "طرق دفع متعددة", "تقييم المطاعم والسائقين", "عروض وكوبونات", "تاريخ الطلبات", "إشعارات فورية"],
+      technicalFeatures: ["خرائط Google المتقدمة", "معالجة مدفوعات آمنة", "إدارة الطلبات الذكية", "واجهات متعددة", "تحسين المسارات", "قاعدة بيانات مركزية"],
+      benefits: ["سهولة طلب الطعام", "توصيل سريع ودقيق", "خيارات واسعة من المطاعم", "توفير الوقت والجهد", "أسعار تنافسية", "خدمة عملاء ممتازة"],
+      targetAudience: ["محبي الطعام", "العائلات", "المهنيين المشغولين", "الطلاب", "كبار السن"],
+      pricing: "يبدأ من $4,200",
+      timeline: "7-9 أسابيع",
+      technologies: ["React Native", "Google Maps", "Socket.io", "Payment Gateway", "Firebase", "GPS Tracking"],
+      category: "ecommerce"
+    },
+
+    "Food Delivery": {
+      name: "Food Delivery",
+      description: "Food ordering and delivery platform with live tracking and exceptional user experience",
+      fullDescription: "Advanced food delivery app that connects customers, restaurants, and drivers. Provides seamless ordering experience with real-time order tracking, diverse payment options, and comprehensive rating system. Designed to simplify food ordering process and improve delivery service.",
+      keyFeatures: ["Interactive Food Menus", "Order Customization", "GPS Delivery Tracking", "Multiple Payment Methods", "Restaurant & Driver Rating", "Offers & Coupons", "Order History", "Instant Notifications"],
+      technicalFeatures: ["Advanced Google Maps", "Secure Payment Processing", "Smart Order Management", "Multi-platform Interface", "Route Optimization", "Centralized Database"],
+      benefits: ["Easy Food Ordering", "Fast & Accurate Delivery", "Wide Restaurant Options", "Time & Effort Saving", "Competitive Prices", "Excellent Customer Service"],
+      targetAudience: ["Food Lovers", "Families", "Busy Professionals", "Students", "Seniors"],
+      pricing: "Starting from $4,200",
+      timeline: "7-9 weeks",
+      technologies: ["React Native", "Google Maps", "Socket.io", "Payment Gateway", "Firebase", "GPS Tracking"],
+      category: "ecommerce"
+    },
+
+    // Finance Apps
+    "المحاسبة الشخصية": {
+      name: "المحاسبة الشخصية",
+      description: "تطبيق ذكي لإدارة الأموال والمصروفات الشخصية مع تحليل مالي متقدم",
+      fullDescription: "تطبيق محاسبة شخصية متطور يساعد المستخدمين على إدارة أموالهم بذكاء. يتضمن تتبع المصروفات، وضع الميزانيات، وتحليل العادات المالية. يوفر رؤى مالية قيمة ويساعد على تحقيق الأهداف المالية الشخصية.",
+      keyFeatures: ["تتبع المصروفات التلقائي", "إنشاء ميزانيات ذكية", "تصنيف المعاملات", "تقارير مالية مفصلة", "تنبيهات الميزانية", "أهداف الادخار", "تحليل الاتجاهات المالية", "إدارة الديون"],
+      technicalFeatures: ["مزامنة البنوك", "تشفير البيانات المالية", "واجهة سهلة الاستخدام", "تحليلات ذكية", "نسخ احتياطية آمنة", "تصدير التقارير"],
+      benefits: ["تحسين الإدارة المالية", "توفير المال", "تحقيق الأهداف المالية", "فهم أفضل للعادات المالية", "تقليل الديون", "زيادة الادخار"],
+      targetAudience: ["الأفراد", "العائلات", "الطلاب", "المهنيين الشباب", "أي شخص يريد إدارة أمواله"],
+      pricing: "يبدأ من $1,500",
+      timeline: "4-5 أسابيع",
+      technologies: ["React Native", "Plaid API", "Chart.js", "SQLite", "Bank Integration", "Encryption"],
+      category: "finance"
+    },
+
+    "Personal Finance": {
+      name: "Personal Finance",
+      description: "Smart personal money and expense management app with advanced financial analytics",
+      fullDescription: "Advanced personal finance app that helps users manage their money intelligently. Includes expense tracking, budget creation, and financial habit analysis. Provides valuable financial insights and helps achieve personal financial goals.",
+      keyFeatures: ["Automatic Expense Tracking", "Smart Budget Creation", "Transaction Categorization", "Detailed Financial Reports", "Budget Alerts", "Savings Goals", "Financial Trend Analysis", "Debt Management"],
+      technicalFeatures: ["Bank Synchronization", "Financial Data Encryption", "User-friendly Interface", "Smart Analytics", "Secure Backups", "Report Export"],
+      benefits: ["Better Financial Management", "Money Saving", "Achieving Financial Goals", "Better Understanding of Financial Habits", "Debt Reduction", "Increased Savings"],
+      targetAudience: ["Individuals", "Families", "Students", "Young Professionals", "Anyone wanting to manage money"],
+      pricing: "Starting from $1,500",
+      timeline: "4-5 weeks",
+      technologies: ["React Native", "Plaid API", "Chart.js", "SQLite", "Bank Integration", "Encryption"],
+      category: "finance"
+    },
+
+    "تطبيق البنك": {
+      name: "تطبيق البنك",
+      description: "تطبيق خدمات مصرفية رقمية متكامل مع أعلى معايير الأمان والسهولة",
+      fullDescription: "تطبيق بنكي رقمي شامل يوفر جميع الخدمات المصرفية عبر الهاتف المحمول. يتضمن إدارة الحسابات، التحويلات، دفع الفواتير، وإدارة البطاقات. مصمم بأعلى معايير الأمان والامتثال للوائح المصرفية.",
+      keyFeatures: ["عرض رصيد الحساب", "التحويلات الفورية", "دفع الفواتير", "إدارة البطاقات", "تاريخ المعاملات", "خدمة العملاء المباشرة", "إعدادات الأمان", "الإشعارات المصرفية"],
+      technicalFeatures: ["تشفير المعاملات", "المصادقة الثنائية", "امتثال PCI DSS", "واجهة آمنة", "نسخ احتياطية مشفرة", "مراقبة أمنية 24/7"],
+      benefits: ["سهولة الوصول للخدمات", "أمان عالي للمعاملات", "توفير الوقت", "خدمات متاحة 24/7", "تكاليف أقل", "تجربة مصرفية محسنة"],
+      targetAudience: ["عملاء البنوك", "الشركات", "التجار", "المهنيين", "أي شخص يستخدم الخدمات المصرفية"],
+      pricing: "يبدأ من $8,500",
+      timeline: "12-16 أسبوع",
+      technologies: ["React Native", "Banking APIs", "Encryption", "Biometric Auth", "PCI Compliance", "Real-time Processing"],
+      category: "finance"
+    },
+
+    "Banking App": {
+      name: "Banking App",
+      description: "Comprehensive digital banking services app with highest security and usability standards",
+      fullDescription: "Comprehensive digital banking app that provides all banking services via mobile phone. Includes account management, transfers, bill payments, and card management. Designed with highest security standards and compliance with banking regulations.",
+      keyFeatures: ["Account Balance View", "Instant Transfers", "Bill Payments", "Card Management", "Transaction History", "Live Customer Service", "Security Settings", "Banking Notifications"],
+      technicalFeatures: ["Transaction Encryption", "Two-Factor Authentication", "PCI DSS Compliance", "Secure Interface", "Encrypted Backups", "24/7 Security Monitoring"],
+      benefits: ["Easy Service Access", "High Transaction Security", "Time Saving", "24/7 Available Services", "Lower Costs", "Enhanced Banking Experience"],
+      targetAudience: ["Bank Customers", "Companies", "Merchants", "Professionals", "Anyone using banking services"],
+      pricing: "Starting from $8,500",
+      timeline: "12-16 weeks",
+      technologies: ["React Native", "Banking APIs", "Encryption", "Biometric Auth", "PCI Compliance", "Real-time Processing"],
+      category: "finance"
+    },
+
+    // Marketing Apps
+    "إدارة وسائل التواصل": {
+      name: "إدارة وسائل التواصل",
+      description: "منصة شاملة لإدارة حسابات وسائل التواصل الاجتماعي مع أدوات تحليل متقدمة",
+      fullDescription: "تطبيق احترافي لإدارة وسائل التواصل الاجتماعي يوفر إدارة متعددة الحسابات مع جدولة المنشورات والتحليل المتقدم. يساعد الشركات والمؤثرين على إدارة وجودهم الرقمي بكفاءة وتحقيق أهدافهم التسويقية.",
+      keyFeatures: ["إدارة حسابات متعددة", "جدولة المنشورات", "تحليل الأداء", "إدارة التعليقات", "تقارير مفصلة", "أدوات التصميم", "مراقبة المنافسين", "التحليل التنبؤي"],
+      technicalFeatures: ["واجهات برمجة التطبيقات", "محرر محتوى متقدم", "تحليلات الوقت الفعلي", "إدارة الفرق", "نظام الموافقات", "أرشيف المحتوى"],
+      benefits: ["توفير الوقت في الإدارة", "تحسين التفاعل", "نمو المتابعين", "رؤى تسويقية قيمة", "إدارة فعالة للحملات", "عائد استثمار أفضل"],
+      targetAudience: ["وكالات التسويق", "الشركات", "المؤثرين", "المسوقين", "أصحاب الأعمال الصغيرة"],
+      pricing: "يبدأ من $2,200",
+      timeline: "5-7 أسابيع",
+      technologies: ["React Native", "Social Media APIs", "Analytics Tools", "Content Management", "Scheduling", "AI Analytics"],
+      category: "marketing"
+    },
+
+    "Social Media Manager": {
+      name: "Social Media Manager",
+      description: "Comprehensive platform for managing social media accounts with advanced analytics tools",
+      fullDescription: "Professional social media management app that provides multi-account management with post scheduling and advanced analytics. Helps companies and influencers manage their digital presence efficiently and achieve their marketing goals.",
+      keyFeatures: ["Multi-Account Management", "Post Scheduling", "Performance Analytics", "Comment Management", "Detailed Reports", "Design Tools", "Competitor Monitoring", "Predictive Analytics"],
+      technicalFeatures: ["API Integrations", "Advanced Content Editor", "Real-time Analytics", "Team Management", "Approval System", "Content Archive"],
+      benefits: ["Time-saving Management", "Improved Engagement", "Follower Growth", "Valuable Marketing Insights", "Effective Campaign Management", "Better ROI"],
+      targetAudience: ["Marketing Agencies", "Companies", "Influencers", "Marketers", "Small Business Owners"],
+      pricing: "Starting from $2,200",
+      timeline: "5-7 weeks",
+      technologies: ["React Native", "Social Media APIs", "Analytics Tools", "Content Management", "Scheduling", "AI Analytics"],
+      category: "marketing"
+    },
+
+    // Healthcare Apps
+    "متابعة صحية": {
+      name: "متابعة صحية",
+      description: "تطبيق ذكي لمراقبة الصحة اليومية وتتبع العادات الصحية",
+      fullDescription: "تطبيق صحي شامل يساعد المستخدمين على مراقبة صحتهم اليومية وتطوير عادات صحية إيجابية. يتضمن تتبع الأعراض، تذكير بالأدوية، ومراقبة العلامات الحيوية مع تقديم رؤى صحية شخصية.",
+      keyFeatures: ["تتبع الأعراض اليومية", "تذكير بالأدوية", "مراقبة العلامات الحيوية", "يوميات صحية", "تقارير طبية", "تنبيهات صحية", "تتبع اللياقة", "استشارات طبية"],
+      technicalFeatures: ["تكامل أجهزة اللياقة", "حماية البيانات الطبية", "واجهة سهلة الاستخدام", "تحليل البيانات الصحية", "تصدير التقارير الطبية", "مزامنة السحابة"],
+      benefits: ["تحسين الصحة العامة", "الكشف المبكر عن المشاكل", "الالتزام بالأدوية", "فهم أفضل للصحة", "تواصل أفضل مع الأطباء", "نمط حياة صحي"],
+      targetAudience: ["المرضى", "كبار السن", "الرياضيين", "الأشخاص المهتمين بالصحة", "مرضى الأمراض المزمنة"],
       pricing: "يبدأ من $3,200",
       timeline: "6-8 أسابيع",
-      technologies: ["React Native", "Google Maps API", "Socket.io", "Firebase", "Payment APIs", "GPS Tracking"],
-      category: "business"
-    },
-
-    // Healthcare App
-    "تطبيق طبي وصحي": {
-      name: "تطبيق طبي وصحي",
-      description: "منصة صحية متكاملة للمرضى والأطباء مع مواعيد إلكترونية وملفات طبية رقمية",
-      fullDescription: "تطبيق طبي شامل يهدف إلى تحسين الخدمات الصحية من خلال ربط المرضى بالأطباء والمؤسسات الطبية. يوفر إدارة الملفات الطبية الإلكترونية، حجز المواعيد، والاستشارات عن بُعد مع ضمان أعلى معايير الخصوصية والأمان الطبي.",
-      keyFeatures: ["حجز المواعيد الطبية", "ملف طبي إلكتروني", "استشارات عن بُعد", "تذكير بالأدوية", "متابعة العلامات الحيوية", "تقارير طبية", "اتصال مع الطوارئ", "دليل الأطباء"],
-      technicalFeatures: ["تشفير طبي متقدم", "امتثال HIPAA", "مكالمات فيديو آمنة", "قاعدة بيانات طبية", "تكامل مع الأجهزة الذكية", "نسخ احتياطية مشفرة"],
-      benefits: ["تحسين جودة الرعاية", "سهولة الوصول للأطباء", "توفير الوقت", "تقليل الأخطاء الطبية", "متابعة صحية مستمرة", "تكاليف أقل"],
-      targetAudience: ["المستشفيات", "العيادات الطبية", "الأطباء", "المرضى", "مراكز الرعاية الصحية"],
-      pricing: "يبدأ من $4,500",
-      timeline: "8-10 أسابيع",
-      technologies: ["React Native", "Node.js", "HIPAA Compliance", "Video Calling", "Encryption", "HL7 FHIR"],
+      technologies: ["React Native", "HealthKit", "Medical APIs", "Wearable Integration", "HIPAA Compliance", "Data Analytics"],
       category: "healthcare"
     },
 
-    // Educational App  
-    "تطبيق تعليمي وتدريبي": {
-      name: "تطبيق تعليمي وتدريبي",
-      description: "منصة تعليمية تفاعلية تدعم التعلم الإلكتروني مع أدوات متقدمة للطلاب والمعلمين",
-      fullDescription: "تطبيق تعليمي متطور يوفر بيئة تعلم تفاعلية ومرنة للطلاب والمدرسين. يتضمن أدوات إنشاء المحتوى التعليمي، اختبارات تفاعلية، ومتابعة تقدم الطلاب. يدعم أساليب التعلم المختلفة مع محتوى مرئي وصوتي وتفاعلي.",
-      keyFeatures: ["فصول افتراضية", "مكتبة محتوى تعليمي", "اختبارات تفاعلية", "تتبع التقدم", "منتديات نقاش", "شهادات إنجاز", "تقارير الأداء", "تعلم تكيفي"],
-      technicalFeatures: ["محتوى متعدد الوسائط", "نظام إدارة التعلم", "تقييم تلقائي", "مزامنة الأجهزة", "وضع عدم الاتصال", "أمان البيانات"],
-      benefits: ["تحسين نتائج التعلم", "مرونة في التعلم", "توفير التكاليف", "وصول أوسع للتعليم", "تخصيص التعلم", "تفاعل أكثر"],
-      targetAudience: ["المدارس", "الجامعات", "مراكز التدريب", "المعلمين المستقلين", "الطلاب"],
-      pricing: "يبدأ من $3,800",
-      timeline: "6-8 أسابيع",  
-      technologies: ["React Native", "Video Streaming", "Learning Analytics", "Offline Storage", "Gamification", "AI Assessment"],
+    "Health Tracking": {
+      name: "Health Tracking",
+      description: "Smart app for daily health monitoring and healthy habits tracking",
+      fullDescription: "Comprehensive health app that helps users monitor their daily health and develop positive healthy habits. Includes symptom tracking, medicine reminders, and vital signs monitoring with personalized health insights.",
+      keyFeatures: ["Daily Symptom Tracking", "Medicine Reminders", "Vital Signs Monitoring", "Health Diary", "Medical Reports", "Health Alerts", "Fitness Tracking", "Medical Consultations"],
+      technicalFeatures: ["Fitness Device Integration", "Medical Data Protection", "User-friendly Interface", "Health Data Analysis", "Medical Report Export", "Cloud Sync"],
+      benefits: ["Better Overall Health", "Early Problem Detection", "Medicine Compliance", "Better Health Understanding", "Better Doctor Communication", "Healthy Lifestyle"],
+      targetAudience: ["Patients", "Seniors", "Athletes", "Health-conscious People", "Chronic Disease Patients"],
+      pricing: "Starting from $3,200",
+      timeline: "6-8 weeks",
+      technologies: ["React Native", "HealthKit", "Medical APIs", "Wearable Integration", "HIPAA Compliance", "Data Analytics"],
+      category: "healthcare"
+    },
+
+    // Education Apps
+    "منصة تعليمية": {
+      name: "منصة تعليمية",
+      description: "منصة تعليم إلكتروني تفاعلية مع محتوى غني وأدوات تعلم متقدمة",
+      fullDescription: "منصة تعليمية متطورة توفر بيئة تعلم تفاعلية للطلاب والمعلمين. تتضمن دورات تفاعلية، اختبارات ذكية، ومتابعة التقدم مع إمكانيات التعلم الشخصي والتعاوني.",
+      keyFeatures: ["دورات تفاعلية متعددة الوسائط", "اختبارات ذكية ومتنوعة", "تتبع التقدم التعليمي", "منتديات نقاش تفاعلية", "شهادات إنجاز معتمدة", "مكتبة موارد تعليمية", "تعلم مخصص", "فصول افتراضية"],
+      technicalFeatures: ["محتوى تفاعلي متقدم", "نظام إدارة التعلم", "تحليلات التعلم", "دعم متعدد اللغات", "وضع غير متصل", "تكامل الفيديو"],
+      benefits: ["تحسين نتائج التعلم", "مرونة في التعلم", "وصول أوسع للتعليم", "تعلم شخصي", "توفير التكاليف", "تفاعل أكثر مع المحتوى"],
+      targetAudience: ["الطلاب", "المعلمين", "المؤسسات التعليمية", "المتدربين", "المهتمين بالتعلم الذاتي"],
+      pricing: "يبدأ من $4,800",
+      timeline: "8-10 أسابيع",
+      technologies: ["React Native", "Video Streaming", "Learning Management System", "Analytics", "Offline Storage", "Interactive Content"],
+      category: "education"
+    },
+
+    "Learning Platform": {
+      name: "Learning Platform",
+      description: "Interactive e-learning platform with rich content and advanced learning tools",
+      fullDescription: "Advanced educational platform that provides interactive learning environment for students and teachers. Includes interactive courses, smart quizzes, and progress tracking with personal and collaborative learning capabilities.",
+      keyFeatures: ["Interactive Multi-media Courses", "Smart Diverse Quizzes", "Educational Progress Tracking", "Interactive Discussion Forums", "Certified Achievement Certificates", "Educational Resource Library", "Personalized Learning", "Virtual Classrooms"],
+      technicalFeatures: ["Advanced Interactive Content", "Learning Management System", "Learning Analytics", "Multi-language Support", "Offline Mode", "Video Integration"],
+      benefits: ["Better Learning Outcomes", "Learning Flexibility", "Wider Access to Education", "Personal Learning", "Cost Savings", "More Content Interaction"],
+      targetAudience: ["Students", "Teachers", "Educational Institutions", "Trainees", "Self-learning Enthusiasts"],
+      pricing: "Starting from $4,800",
+      timeline: "8-10 weeks",
+      technologies: ["React Native", "Video Streaming", "Learning Management System", "Analytics", "Offline Storage", "Interactive Content"],
       category: "education"
     }
   };
