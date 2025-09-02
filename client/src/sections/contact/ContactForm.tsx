@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Loader2, Smartphone } from "lucide-react";
+import { Send, Loader2, Smartphone, Upload, X } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/i18n/lang";
 
@@ -39,6 +39,7 @@ export function ContactForm() {
   const [selectedService, setSelectedService] = useState<string>("");
   const [selectedServiceApplication, setSelectedServiceApplication] = useState<string>("");
   const [selectedApp, setSelectedApp] = useState<string>("");
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const { toast } = useToast();
 
   const {
@@ -92,6 +93,55 @@ export function ContactForm() {
       }
     }
   }, [setValue, toast, dir]);
+
+  // File upload handlers
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    const maxSize = 5 * 1024 * 1024; // 5MB
+
+    const validFiles = files.filter(file => {
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: dir === 'rtl' ? 'نوع ملف غير مدعوم' : 'Unsupported file type',
+          description: dir === 'rtl' ? `الملف ${file.name} غير مدعوم. يُسمح بـ PDF, JPG, PNG, DOC, DOCX فقط` : `File ${file.name} is not supported. Only PDF, JPG, PNG, DOC, DOCX are allowed`,
+          variant: 'destructive'
+        });
+        return false;
+      }
+      if (file.size > maxSize) {
+        toast({
+          title: dir === 'rtl' ? 'حجم الملف كبير جداً' : 'File too large',
+          description: dir === 'rtl' ? `الملف ${file.name} كبير جداً. الحد الأقصى 5MB` : `File ${file.name} is too large. Maximum size is 5MB`,
+          variant: 'destructive'
+        });
+        return false;
+      }
+      return true;
+    });
+
+    if (uploadedFiles.length + validFiles.length > 3) {
+      toast({
+        title: dir === 'rtl' ? 'عدد كبير من الملفات' : 'Too many files',
+        description: dir === 'rtl' ? 'يمكنك رفع 3 ملفات كحد أقصى' : 'You can upload maximum 3 files',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setUploadedFiles(prev => [...prev, ...validFiles]);
+    
+    if (validFiles.length > 0) {
+      toast({
+        title: dir === 'rtl' ? 'تم رفع الملفات' : 'Files uploaded',
+        description: dir === 'rtl' ? `تم رفع ${validFiles.length} ملف بنجاح` : `${validFiles.length} files uploaded successfully`
+      });
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index));
+  };
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
@@ -477,6 +527,89 @@ export function ContactForm() {
                   {errors.message && (
                     <p className="text-red-500 text-sm mt-2">{errors.message.message}</p>
                   )}
+                </div>
+
+                {/* File Upload Section */}
+                <div>
+                  <Label className="text-sm font-semibold text-gray-700 mb-2 block flex items-center gap-2">
+                    <Upload className="w-4 h-4 text-primary" />
+                    {dir === 'rtl' ? 'إرفاق ملفات (اختياري)' : 'Attach Files (Optional)'}
+                  </Label>
+                  
+                  <div className="space-y-3">
+                    {/* Upload Button */}
+                    <div className="relative">
+                      <input
+                        type="file"
+                        id="file-upload"
+                        multiple
+                        accept=".pdf,.jpg,.jpeg,.png,.gif,.doc,.docx"
+                        onChange={handleFileUpload}
+                        className="hidden"
+                        data-testid="input-file-upload"
+                      />
+                      <label
+                        htmlFor="file-upload"
+                        className="flex items-center justify-center w-full h-20 border-2 border-dashed border-gray-300 hover:border-primary rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-all duration-300"
+                        data-testid="button-file-upload"
+                      >
+                        <div className="text-center">
+                          <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                          <p className="text-sm text-gray-600 font-medium">
+                            {dir === 'rtl' ? 'اضغط لرفع الملفات أو اسحبها هنا' : 'Click to upload files or drag them here'}
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            {dir === 'rtl' ? 'PDF, JPG, PNG, DOC (حتى 5MB لكل ملف)' : 'PDF, JPG, PNG, DOC (up to 5MB each)'}
+                          </p>
+                        </div>
+                      </label>
+                    </div>
+
+                    {/* Uploaded Files List */}
+                    {uploadedFiles.length > 0 && (
+                      <div className="space-y-2">
+                        <p className="text-sm font-medium text-gray-700">
+                          {dir === 'rtl' ? `الملفات المرفقة (${uploadedFiles.length}/3):` : `Attached Files (${uploadedFiles.length}/3):`}
+                        </p>
+                        {uploadedFiles.map((file, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-lg"
+                            data-testid={`file-item-${index}`}
+                          >
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                              <Upload className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                              <div className="min-w-0 flex-1">
+                                <p className="text-sm font-medium text-blue-800 truncate">
+                                  {file.name}
+                                </p>
+                                <p className="text-xs text-blue-600">
+                                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                                </p>
+                              </div>
+                            </div>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => removeFile(index)}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50 flex-shrink-0"
+                              data-testid={`button-remove-file-${index}`}
+                            >
+                              <X className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 mt-2">
+                    {dir === 'rtl' 
+                      ? 'يمكنك رفع حتى 3 ملفات (PDF, JPG, PNG, DOC) بحجم أقصى 5MB لكل ملف'
+                      : 'You can upload up to 3 files (PDF, JPG, PNG, DOC) with maximum 5MB per file'
+                    }
+                  </p>
                 </div>
 
                 <Button
