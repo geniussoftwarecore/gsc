@@ -498,27 +498,53 @@ export default function ServiceDetail() {
                                 </div>
                               </div>
                               
-                              {/* Apply Now Button */}
-                              <Button
-                                onClick={() => {
-                                  // Navigate to contact page with app name pre-selected
-                                  setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
-                                }}
-                                className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
-                                size="sm"
-                                aria-label={`Apply for ${app.name}`}
-                                data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
-                              >
-                                <span className="font-medium">
-                                  {dir === 'rtl' ? 'اطلب هذا التطبيق' : 'Apply for This App'}
-                                </span>
-                                <ArrowRight 
-                                  className={cn(
-                                    "w-4 h-4 ml-2 transition-transform duration-200",
-                                    dir === 'rtl' && "rotate-180 ml-0 mr-2"
-                                  )} 
-                                />
-                              </Button>
+                              {/* Action Buttons */}
+                              <div className="space-y-2">
+                                {/* Apply Now Button */}
+                                <Button
+                                  onClick={() => {
+                                    // Navigate to contact page with app name pre-selected
+                                    setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
+                                  }}
+                                  className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`Apply for ${app.name}`}
+                                  data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'اطلب هذا التطبيق' : 'Apply for This App'}
+                                  </span>
+                                  <ArrowRight 
+                                    className={cn(
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                    )} 
+                                  />
+                                </Button>
+                                
+                                {/* Project Administration Button */}
+                                <Button
+                                  onClick={() => {
+                                    // Navigate to contact page with Project Administration pre-selected
+                                    setLocation(`/contact?service=${encodeURIComponent(dir === 'rtl' ? 'إدارة المشاريع' : 'Project Management')}`);
+                                  }}
+                                  variant="outline"
+                                  className="w-full border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 shadow-sm hover:shadow-md focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label="Project Administration"
+                                  data-testid={`project-admin-${app.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'إدارة المشاريع' : 'Project Administration'}
+                                  </span>
+                                  <ArrowRight 
+                                    className={cn(
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                    )} 
+                                  />
+                                </Button>
+                              </div>
                             </div>
                           </CardContent>
                         </Card>
