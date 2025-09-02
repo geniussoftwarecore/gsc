@@ -23,6 +23,7 @@ const contactSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number"),
   company: z.string().optional(),
   service: z.string().min(1, "Please select a service type"),
+  selectedApp: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
   budget: z.string().optional(),
   timeline: z.string().optional(),
@@ -35,6 +36,7 @@ export function ContactForm() {
   const { dir } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedService, setSelectedService] = useState<string>("");
+  const [selectedApp, setSelectedApp] = useState<string>("");
   const { toast } = useToast();
 
   const {
@@ -53,14 +55,39 @@ export function ContactForm() {
     const serviceParam = urlParams.get('service');
     if (serviceParam) {
       const decodedService = decodeURIComponent(serviceParam);
-      setSelectedService(decodedService);
-      setValue("service", decodedService);
       
-      // Show a notification that the service was pre-selected
-      toast({
-        title: dir === 'rtl' ? 'تم اختيار الخدمة' : 'Service Selected',
-        description: dir === 'rtl' ? `تم اختيار خدمة: ${decodedService}` : `Selected service: ${decodedService}`,
-      });
+      // Check if this is an app name or main service
+      const mainServices = [
+        "تطوير تطبيقات الهواتف الذكية",
+        "تطوير المواقع والمنصات", 
+        "تطوير تطبيقات سطح المكتب",
+        "الحلول الذكية والبرمجية للهواتف الذكية",
+        "تصميم الجرافيكس والهوية البصرية",
+        "التسويق الرقمي والإعلانات",
+        "الحلول الذكية والذكاء الاصطناعي",
+        "أنظمة ERPNext"
+      ];
+      
+      if (mainServices.includes(decodedService)) {
+        // It's a main service
+        setSelectedService(decodedService);
+        setValue("service", decodedService);
+        toast({
+          title: dir === 'rtl' ? 'تم اختيار الخدمة' : 'Service Selected',
+          description: dir === 'rtl' ? `تم اختيار خدمة: ${decodedService}` : `Selected service: ${decodedService}`,
+        });
+      } else {
+        // It's an app - set a default service and the specific app
+        const defaultService = "تطوير تطبيقات الهواتف الذكية";
+        setSelectedService(defaultService);
+        setValue("service", defaultService);
+        setSelectedApp(decodedService);
+        setValue("selectedApp", decodedService);
+        toast({
+          title: dir === 'rtl' ? 'تم اختيار التطبيق' : 'App Selected',
+          description: dir === 'rtl' ? `تم اختيار تطبيق: ${decodedService}` : `Selected app: ${decodedService}`,
+        });
+      }
     }
   }, [setValue, toast, dir]);
 
@@ -109,9 +136,8 @@ export function ContactForm() {
     mutation.mutate(data);
   };
 
-  // Use actual service titles that match what's in the API/database + app names
+  // Main services only (apps will appear in separate field)
   const services = [
-    // Main services
     "تطوير تطبيقات الهواتف الذكية",
     "تطوير المواقع والمنصات", 
     "تطوير تطبيقات سطح المكتب",
@@ -120,26 +146,6 @@ export function ContactForm() {
     "التسويق الرقمي والإعلانات",
     "الحلول الذكية والذكاء الاصطناعي",
     "أنظمة ERPNext",
-    
-    // App names from service detail page (Arabic)
-    dir === 'rtl' ? "إدارة المشاريع" : "Project Management",
-    dir === 'rtl' ? "إدارة العملاء CRM" : "CRM Management",
-    dir === 'rtl' ? "متجر إلكتروني" : "Online Store",
-    dir === 'rtl' ? "تطبيق الطعام" : "Food Delivery",
-    dir === 'rtl' ? "المحاسبة الشخصية" : "Personal Finance",
-    dir === 'rtl' ? "تطبيق البنك" : "Banking App",
-    dir === 'rtl' ? "إدارة وسائل التواصل" : "Social Media Manager",
-    dir === 'rtl' ? "حملات إعلانية" : "Ad Campaigns",
-    dir === 'rtl' ? "متابعة صحية" : "Health Tracking",
-    dir === 'rtl' ? "حجز المواعيد الطبية" : "Medical Appointments",
-    dir === 'rtl' ? "منصة تعليمية" : "Learning Platform",
-    dir === 'rtl' ? "إدارة الطلاب" : "Student Management",
-    dir === 'rtl' ? "اللياقة البدنية" : "Fitness Tracker",
-    dir === 'rtl' ? "إدارة المنزل" : "Home Management",
-    dir === 'rtl' ? "الألعاب التفاعلية" : "Interactive Games",
-    dir === 'rtl' ? "مشغل الوسائط" : "Media Player",
-    
-    // General options
     dir === 'rtl' ? "استشارات تقنية" : "Technical Consulting",
     dir === 'rtl' ? "أخرى" : "Other",
   ];
@@ -265,6 +271,24 @@ export function ContactForm() {
                     )}
                   </div>
                 </div>
+
+                {/* Selected App Field - appears when an app is selected */}
+                {selectedApp && (
+                  <div className="mb-6">
+                    <Label htmlFor="selectedApp" className="text-sm font-semibold text-gray-700 mb-2 block">
+                      {dir === 'rtl' ? 'التطبيق المختار' : 'Selected App'}
+                      <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                        {dir === 'rtl' ? 'محدد مسبقاً' : 'Pre-selected'}
+                      </span>
+                    </Label>
+                    <div className="h-12 text-base border-2 border-blue-200 bg-blue-50 rounded-xl px-4 flex items-center">
+                      <span className="text-blue-800 font-medium">{selectedApp}</span>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {dir === 'rtl' ? 'هذا هو التطبيق الذي اخترته من صفحة تفاصيل الخدمة' : 'This is the app you selected from the service details page'}
+                    </p>
+                  </div>
+                )}
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
