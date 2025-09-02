@@ -109,9 +109,8 @@ export function ContactForm() {
     mutation.mutate(data);
   };
 
-  // Use actual service titles that match what's in the API/database + app examples
+  // Use actual service titles that match what's in the API/database
   const services = [
-    // Main services
     "تطوير تطبيقات الهواتف الذكية",
     "تطوير المواقع والمنصات", 
     "تطوير تطبيقات سطح المكتب",
@@ -120,31 +119,6 @@ export function ContactForm() {
     "التسويق الرقمي والإعلانات",
     "الحلول الذكية والذكاء الاصطناعي",
     "أنظمة ERPNext",
-    
-    // App examples from service detail page
-    dir === 'rtl' ? "إدارة المشاريع" : "Project Management",
-    dir === 'rtl' ? "إدارة المهام" : "Task Management",
-    dir === 'rtl' ? "تخطيط المشاريع" : "Project Planning",
-    dir === 'rtl' ? "متابعة التقدم" : "Progress Tracking",
-    dir === 'rtl' ? "إدارة الفرق" : "Team Management",
-    dir === 'rtl' ? "تقارير المشاريع" : "Project Reports",
-    dir === 'rtl' ? "إدارة العملاء CRM" : "CRM Management",
-    dir === 'rtl' ? "متجر إلكتروني" : "Online Store",
-    dir === 'rtl' ? "تطبيق الطعام" : "Food Delivery",
-    dir === 'rtl' ? "المحاسبة الشخصية" : "Personal Finance",
-    dir === 'rtl' ? "تطبيق البنك" : "Banking App",
-    dir === 'rtl' ? "إدارة وسائل التواصل" : "Social Media Manager",
-    dir === 'rtl' ? "حملات إعلانية" : "Ad Campaigns",
-    dir === 'rtl' ? "متابعة صحية" : "Health Tracking",
-    dir === 'rtl' ? "حجز المواعيد الطبية" : "Medical Appointments",
-    dir === 'rtl' ? "منصة تعليمية" : "Learning Platform",
-    dir === 'rtl' ? "إدارة الطلاب" : "Student Management",
-    dir === 'rtl' ? "اللياقة البدنية" : "Fitness Tracker",
-    dir === 'rtl' ? "إدارة المنزل" : "Home Management",
-    dir === 'rtl' ? "الألعاب التفاعلية" : "Interactive Games",
-    dir === 'rtl' ? "مشغل الوسائط" : "Media Player",
-    
-    // Additional options
     dir === 'rtl' ? "استشارات تقنية" : "Technical Consulting",
     dir === 'rtl' ? "أخرى" : "Other",
   ];
@@ -222,40 +196,6 @@ export function ContactForm() {
                     {errors.phone && (
                       <p className="text-red-500 text-sm mt-2">{errors.phone.message}</p>
                     )}
-                  </div>
-                </div>
-
-                {/* Project Management Quick Selection */}
-                <div className="bg-gradient-to-r from-blue-50 to-sky-50 p-6 rounded-xl border border-blue-100">
-                  <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    <span className="w-6 h-6 bg-primary rounded-lg flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                      </svg>
-                    </span>
-                    {dir === 'rtl' ? 'خدمات إدارة المشاريع' : 'Project Management Services'}
-                  </h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {[
-                      { name: dir === 'rtl' ? 'إدارة المشاريع' : 'Project Management', value: dir === 'rtl' ? 'إدارة المشاريع' : 'Project Management' },
-                      { name: dir === 'rtl' ? 'إدارة المهام' : 'Task Management', value: dir === 'rtl' ? 'إدارة المهام' : 'Task Management' },
-                      { name: dir === 'rtl' ? 'تخطيط المشاريع' : 'Project Planning', value: dir === 'rtl' ? 'تخطيط المشاريع' : 'Project Planning' },
-                      { name: dir === 'rtl' ? 'متابعة التقدم' : 'Progress Tracking', value: dir === 'rtl' ? 'متابعة التقدم' : 'Progress Tracking' },
-                      { name: dir === 'rtl' ? 'إدارة الفرق' : 'Team Management', value: dir === 'rtl' ? 'إدارة الفرق' : 'Team Management' },
-                      { name: dir === 'rtl' ? 'تقارير المشاريع' : 'Project Reports', value: dir === 'rtl' ? 'تقارير المشاريع' : 'Project Reports' },
-                    ].map((item) => (
-                      <button
-                        key={item.value}
-                        type="button"
-                        onClick={() => {
-                          setValue("service", item.value);
-                          setSelectedService(item.value);
-                        }}
-                        className="text-left p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 text-sm font-medium text-gray-700 hover:text-blue-600"
-                      >
-                        {item.name}
-                      </button>
-                    ))}
                   </div>
                 </div>
 
