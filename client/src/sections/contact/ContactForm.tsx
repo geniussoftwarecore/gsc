@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -34,6 +34,7 @@ export function ContactForm() {
   const { t } = useTranslation();
   const { dir } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedService, setSelectedService] = useState<string>("");
   const { toast } = useToast();
 
   const {
@@ -45,6 +46,23 @@ export function ContactForm() {
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
+
+  // Check for pre-selected service in URL parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('service');
+    if (serviceParam) {
+      const decodedService = decodeURIComponent(serviceParam);
+      setSelectedService(decodedService);
+      setValue("service", decodedService);
+      
+      // Show a notification that the service was pre-selected
+      toast({
+        title: dir === 'rtl' ? 'تم اختيار الخدمة' : 'Service Selected',
+        description: dir === 'rtl' ? `تم اختيار خدمة: ${decodedService}` : `Selected service: ${decodedService}`,
+      });
+    }
+  }, [setValue, toast, dir]);
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
@@ -195,8 +213,19 @@ export function ContactForm() {
                   <div>
                     <Label htmlFor="service" className="text-sm font-semibold text-gray-700 mb-2 block">
                       {t('contact.form.service')} *
+                      {selectedService && (
+                        <span className="ml-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                          {dir === 'rtl' ? 'محدد مسبقاً' : 'Pre-selected'}
+                        </span>
+                      )}
                     </Label>
-                    <Select onValueChange={(value) => setValue("service", value)}>
+                    <Select 
+                      value={selectedService} 
+                      onValueChange={(value) => {
+                        setValue("service", value);
+                        setSelectedService(value);
+                      }}
+                    >
                       <SelectTrigger className="h-12 text-base border-2 focus:border-primary rounded-xl">
                         <SelectValue placeholder={t('contact.form.service')} />
                       </SelectTrigger>
