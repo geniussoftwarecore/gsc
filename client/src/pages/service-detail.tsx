@@ -172,6 +172,32 @@ const getDetailedAppInfo = (appName: string) => {
       category: "finance"
     },
 
+    "حملات إعلانية": {
+      name: "حملات إعلانية",
+      description: "تطبيق شامل لإدارة وتشغيل الحملات الإعلانية الرقمية بكفاءة عالية",
+      fullDescription: "تطبيق متطور لإدارة الحملات الإعلانية يمكن الشركات والمسوقين من إنشاء وتشغيل ومتابعة حملاتهم الإعلانية عبر منصات متعددة. يوفر أدوات تحليل متقدمة وتقارير مفصلة لتحسين الأداء وزيادة العائد على الاستثمار.",
+      keyFeatures: ["إنشاء حملات متعددة المنصات", "استهداف الجمهور الذكي", "تحليل الأداء المتقدم", "إدارة الميزانيات", "تقارير مفصلة في الوقت الفعلي", "اختبار A/B للإعلانات", "تحسين الكلمات المفتاحية", "تتبع التحويلات"],
+      technicalFeatures: ["تكامل مع منصات الإعلان", "لوحة تحكم متقدمة", "تحليلات ذكية", "تحديث فوري للبيانات", "إدارة مرنة للحملات", "أمان البيانات المتقدم"],
+      benefits: ["زيادة العائد بنسبة 40%", "توفير الوقت والجهد", "استهداف أكثر دقة", "تحسين الأداء المستمر", "تقليل التكاليف", "زيادة الوعي بالعلامة التجارية"],
+      targetAudience: ["الشركات والمؤسسات", "الوكالات الإعلانية", "المسوقين الرقميين", "أصحاب الأعمال", "خبراء التسويق"],
+      timeline: "4-5 أسابيع",
+      technologies: ["React Native", "Google Ads API", "Facebook Marketing API", "Analytics SDK", "Chart.js", "Firebase"],
+      category: "marketing"
+    },
+
+    "Ad Campaigns": {
+      name: "Ad Campaigns",
+      description: "Comprehensive advertising campaigns management app with high efficiency",
+      fullDescription: "Advanced advertising campaigns management app that enables companies and marketers to create, run, and monitor their advertising campaigns across multiple platforms. Provides advanced analytics tools and detailed reports to improve performance and increase ROI.",
+      keyFeatures: ["Multi-platform Campaign Creation", "Smart Audience Targeting", "Advanced Performance Analytics", "Budget Management", "Real-time Detailed Reports", "A/B Testing for Ads", "Keyword Optimization", "Conversion Tracking"],
+      technicalFeatures: ["Integration with Ad Platforms", "Advanced Dashboard", "Smart Analytics", "Real-time Data Updates", "Flexible Campaign Management", "Advanced Data Security"],
+      benefits: ["40% ROI Increase", "Time and Effort Savings", "More Precise Targeting", "Continuous Performance Improvement", "Cost Reduction", "Increased Brand Awareness"],
+      targetAudience: ["Companies and Organizations", "Advertising Agencies", "Digital Marketers", "Business Owners", "Marketing Experts"],
+      timeline: "4-5 weeks",
+      technologies: ["React Native", "Google Ads API", "Facebook Marketing API", "Analytics SDK", "Chart.js", "Firebase"],
+      category: "marketing"
+    },
+
     "تطبيق البنك": {
       name: "تطبيق البنك",
       description: "تطبيق خدمات مصرفية رقمية متكامل مع أعلى معايير الأمان والسهولة",
@@ -252,6 +278,32 @@ const getDetailedAppInfo = (appName: string) => {
       category: "healthcare"
     },
 
+    "حجز المواعيد الطبية": {
+      name: "حجز المواعيد الطبية",
+      description: "تطبيق ذكي لحجز المواعيد الطبية وإدارة الزيارات الصحية",
+      fullDescription: "تطبيق متطور لحجز المواعيد الطبية يربط المرضى بالأطباء والمراكز الطبية. يوفر نظام حجز سهل وسريع مع إمكانية البحث عن الأطباء حسب التخصص والموقع، وإدارة السجلات الطبية والتذكير بالمواعيد.",
+      keyFeatures: ["البحث عن الأطباء بالتخصص", "حجز المواعيد الفوري", "تذكيرات المواعيد الذكية", "السجل الطبي الرقمي", "تقييم الأطباء والمراكز", "الاستشارات الطبية عن بُعد", "إدارة الوصفات الطبية", "التاريخ الطبي الشامل"],
+      technicalFeatures: ["تكامل مع أنظمة المستشفيات", "حماية البيانات الطبية", "نظام حجز ذكي", "واجهة سهلة الاستخدام", "تشفير البيانات الحساسة", "مزامنة متعددة الأجهزة"],
+      benefits: ["سهولة الوصول للرعاية الصحية", "توفير الوقت في الحجز", "تقليل أوقات الانتظار", "متابعة صحية أفضل", "وصول أوسع للخدمات الطبية", "تحسين تجربة المريض"],
+      targetAudience: ["المرضى", "كبار السن", "العائلات", "المرضى المزمنين", "المهتمين بالصحة"],
+      timeline: "6-7 أسابيع",
+      technologies: ["React Native", "Hospital Management Systems", "Medical APIs", "Push Notifications", "HIPAA Compliance", "Calendar Integration"],
+      category: "healthcare"
+    },
+
+    "Medical Appointments": {
+      name: "Medical Appointments",
+      description: "Smart app for booking medical appointments and managing health visits",
+      fullDescription: "Advanced medical appointment booking app that connects patients with doctors and medical centers. Provides easy and quick booking system with ability to search for doctors by specialty and location, manage medical records and appointment reminders.",
+      keyFeatures: ["Search Doctors by Specialty", "Instant Appointment Booking", "Smart Appointment Reminders", "Digital Medical Records", "Doctor and Center Reviews", "Remote Medical Consultations", "Prescription Management", "Comprehensive Medical History"],
+      technicalFeatures: ["Hospital Systems Integration", "Medical Data Protection", "Smart Booking System", "User-friendly Interface", "Sensitive Data Encryption", "Multi-device Sync"],
+      benefits: ["Easy Access to Healthcare", "Time Savings in Booking", "Reduced Waiting Times", "Better Health Follow-up", "Wider Access to Medical Services", "Improved Patient Experience"],
+      targetAudience: ["Patients", "Seniors", "Families", "Chronic Patients", "Health-conscious People"],
+      timeline: "6-7 weeks",
+      technologies: ["React Native", "Hospital Management Systems", "Medical APIs", "Push Notifications", "HIPAA Compliance", "Calendar Integration"],
+      category: "healthcare"
+    },
+
     // Education Apps
     "منصة تعليمية": {
       name: "منصة تعليمية",
@@ -277,6 +329,138 @@ const getDetailedAppInfo = (appName: string) => {
       timeline: "8-10 weeks",
       technologies: ["React Native", "Video Streaming", "Learning Management System", "Analytics", "Offline Storage", "Interactive Content"],
       category: "education"
+    },
+
+    "إدارة الطلاب": {
+      name: "إدارة الطلاب",
+      description: "نظام شامل لإدارة شؤون الطلاب والعملية التعليمية",
+      fullDescription: "تطبيق متكامل لإدارة شؤون الطلاب في المؤسسات التعليمية. يوفر أدوات شاملة لتتبع الدرجات، إدارة الحضور، التواصل مع أولياء الأمور، وإدارة الأنشطة الأكاديمية والإدارية للطلاب.",
+      keyFeatures: ["سجل الدرجات الإلكتروني", "تتبع الحضور والغياب", "التواصل مع أولياء الأمور", "إدارة الجداول الدراسية", "تقارير الأداء الشاملة", "إدارة الأنشطة الطلابية", "نظام الإشعارات الذكية", "السجل الأكاديمي الرقمي"],
+      technicalFeatures: ["نظام إدارة شامل", "تكامل مع أنظمة التعليم", "تقارير تحليلية متقدمة", "واجهة متعددة المستخدمين", "نسخ احتياطية آمنة", "إعدادات مرنة للمؤسسة"],
+      benefits: ["تحسين الكفاءة الإدارية", "متابعة أفضل للطلاب", "تواصل محسن مع الأهالي", "توفير الوقت والجهد", "تقارير دقيقة وشاملة", "شفافية في العملية التعليمية"],
+      targetAudience: ["المدارس والجامعات", "المعلمين والإداريين", "أولياء الأمور", "الطلاب", "مديري التعليم"],
+      timeline: "6-8 أسابيع",
+      technologies: ["React Native", "Student Information Systems", "Database Management", "Reporting Tools", "Communication APIs", "Analytics"],
+      category: "education"
+    },
+
+    "Student Management": {
+      name: "Student Management",
+      description: "Comprehensive system for managing student affairs and educational processes",
+      fullDescription: "Integrated app for managing student affairs in educational institutions. Provides comprehensive tools for tracking grades, managing attendance, communicating with parents, and managing academic and administrative activities for students.",
+      keyFeatures: ["Electronic Grade Book", "Attendance and Absence Tracking", "Parent Communication", "Class Schedule Management", "Comprehensive Performance Reports", "Student Activity Management", "Smart Notification System", "Digital Academic Records"],
+      technicalFeatures: ["Comprehensive Management System", "Education Systems Integration", "Advanced Analytics Reports", "Multi-user Interface", "Secure Backups", "Flexible Institution Settings"],
+      benefits: ["Improved Administrative Efficiency", "Better Student Follow-up", "Enhanced Parent Communication", "Time and Effort Savings", "Accurate and Comprehensive Reports", "Transparency in Educational Process"],
+      targetAudience: ["Schools and Universities", "Teachers and Administrators", "Parents", "Students", "Education Managers"],
+      timeline: "6-8 weeks",
+      technologies: ["React Native", "Student Information Systems", "Database Management", "Reporting Tools", "Communication APIs", "Analytics"],
+      category: "education"
+    },
+
+    // Lifestyle Apps
+    "اللياقة البدنية": {
+      name: "اللياقة البدنية",
+      description: "تطبيق متكامل لتتبع اللياقة البدنية والأنشطة الرياضية",
+      fullDescription: "تطبيق شامل للياقة البدنية يساعد المستخدمين على تتبع أنشطتهم الرياضية وتحقيق أهدافهم الصحية. يتضمن برامج تمارين مخصصة، متابعة التقدم، وخطط غذائية صحية مع مجتمع رياضي تفاعلي.",
+      keyFeatures: ["برامج تمارين مخصصة", "تتبع السعرات الحرارية", "خطط غذائية صحية", "تحديات لياقة بدنية", "تتبع التقدم والإنجازات", "مجتمع رياضي تفاعلي", "تكامل مع أجهزة اللياقة", "إحصائيات شاملة للأداء"],
+      technicalFeatures: ["تكامل أجهزة اللياقة", "تتبع النشاط التلقائي", "تحليلات صحية ذكية", "خرائط المسارات", "مزامنة السحابة", "واجهة سهلة الاستخدام"],
+      benefits: ["تحسين اللياقة البدنية", "تحفيز مستمر للنشاط", "تحقيق الأهداف الصحية", "نمط حياة صحي", "تتبع التقدم بدقة", "مجتمع داعم ومحفز"],
+      targetAudience: ["الرياضيين", "المهتمين باللياقة", "المبتدئين في الرياضة", "مدربي اللياقة", "الباحثين عن نمط حياة صحي"],
+      timeline: "5-6 أسابيع",
+      technologies: ["React Native", "HealthKit", "Fitness APIs", "Wearables Integration", "GPS Tracking", "Social Features"],
+      category: "lifestyle"
+    },
+
+    "Fitness Tracker": {
+      name: "Fitness Tracker",
+      description: "Integrated app for tracking fitness and sports activities",
+      fullDescription: "Comprehensive fitness app that helps users track their sports activities and achieve their health goals. Includes personalized workout programs, progress tracking, and healthy diet plans with interactive sports community.",
+      keyFeatures: ["Personalized Workout Programs", "Calorie Tracking", "Healthy Diet Plans", "Fitness Challenges", "Progress and Achievement Tracking", "Interactive Sports Community", "Fitness Device Integration", "Comprehensive Performance Statistics"],
+      technicalFeatures: ["Fitness Device Integration", "Automatic Activity Tracking", "Smart Health Analytics", "Route Mapping", "Cloud Sync", "User-friendly Interface"],
+      benefits: ["Improved Physical Fitness", "Continuous Activity Motivation", "Health Goal Achievement", "Healthy Lifestyle", "Accurate Progress Tracking", "Supportive and Motivating Community"],
+      targetAudience: ["Athletes", "Fitness Enthusiasts", "Sports Beginners", "Fitness Trainers", "Health-conscious Lifestyle Seekers"],
+      timeline: "5-6 weeks",
+      technologies: ["React Native", "HealthKit", "Fitness APIs", "Wearables Integration", "GPS Tracking", "Social Features"],
+      category: "lifestyle"
+    },
+
+    "إدارة المنزل": {
+      name: "إدارة المنزل",
+      description: "تطبيق ذكي لإدارة وتنظيم شؤون المنزل اليومية",
+      fullDescription: "تطبيق شامل لإدارة المنزل يساعد العائلات على تنظيم وإدارة جميع جوانب الحياة المنزلية. يتضمن إدارة المهام المنزلية، جدولة الأعمال، تتبع المصروفات المنزلية، وتنظيم الأنشطة العائلية.",
+      keyFeatures: ["قوائم المهام المنزلية", "جدولة أعمال التنظيف", "تتبع مصروفات المنزل", "إدارة المخزون المنزلي", "تذكيرات الصيانة", "تنظيم الأنشطة العائلية", "مشاركة المهام", "إحصائيات الإنتاجية المنزلية"],
+      technicalFeatures: ["واجهة عائلية سهلة", "نظام تذكيرات ذكي", "تتبع الإنجازات", "مشاركة المهام متعددة المستخدمين", "نسخ احتياطية آمنة", "تقارير نشاط المنزل"],
+      benefits: ["منزل أكثر تنظيماً", "توزيع عادل للمهام", "توفير الوقت والجهد", "تحسين التواصل العائلي", "تتبع المصروفات بدقة", "نمط حياة منزلي محسن"],
+      targetAudience: ["العائلات", "ربات البيوت", "الأزواج", "الأشخاص المنظمين", "أصحاب المنازل"],
+      timeline: "4-5 أسابيع",
+      technologies: ["React Native", "Family Sharing", "Notification System", "Calendar Integration", "Budget Tracking", "Task Management"],
+      category: "lifestyle"
+    },
+
+    "Home Management": {
+      name: "Home Management",
+      description: "Smart app for managing and organizing daily household affairs",
+      fullDescription: "Comprehensive home management app that helps families organize and manage all aspects of household life. Includes household task management, work scheduling, household expense tracking, and family activity organization.",
+      keyFeatures: ["Household Task Lists", "Cleaning Work Scheduling", "Household Expense Tracking", "Home Inventory Management", "Maintenance Reminders", "Family Activity Organization", "Task Sharing", "Household Productivity Statistics"],
+      technicalFeatures: ["Easy Family Interface", "Smart Reminder System", "Achievement Tracking", "Multi-user Task Sharing", "Secure Backups", "Home Activity Reports"],
+      benefits: ["More Organized Home", "Fair Task Distribution", "Time and Effort Savings", "Improved Family Communication", "Accurate Expense Tracking", "Enhanced Household Lifestyle"],
+      targetAudience: ["Families", "Homemakers", "Couples", "Organized Individuals", "Homeowners"],
+      timeline: "4-5 weeks",
+      technologies: ["React Native", "Family Sharing", "Notification System", "Calendar Integration", "Budget Tracking", "Task Management"],
+      category: "lifestyle"
+    },
+
+    // Entertainment Apps
+    "الألعاب التفاعلية": {
+      name: "الألعاب التفاعلية",
+      description: "مجموعة ألعاب ترفيهية تفاعلية ومسلية لجميع الأعمار",
+      fullDescription: "تطبيق ألعاب تفاعلية يضم مجموعة متنوعة من الألعاب الترفيهية المناسبة لجميع الأعمار. يوفر تجربة لعب ممتعة مع تحديات مختلفة، مستويات متدرجة، ونظام مكافآت لتحفيز اللاعبين وضمان المتعة المستمرة.",
+      keyFeatures: ["ألعاب متنوعة ومسلية", "مستويات تحدي متدرجة", "نظام مكافآت وإنجازات", "ألعاب متعددة اللاعبين", "تحديات يومية وأسبوعية", "لوحة المتصدرين", "ألعاب تعليمية وترفيهية", "واجهة ملونة وجذابة"],
+      technicalFeatures: ["رسوميات عالية الجودة", "أداء سلس ومتجاوب", "نظام حفظ التقدم", "اللعب بدون اتصال", "تحديثات منتظمة للمحتوى", "أمان للأطفال"],
+      benefits: ["ترفيه آمن وممتع", "تنمية المهارات الذهنية", "قضاء وقت مفيد", "تحفيز التفكير الإبداعي", "تجربة لعب اجتماعية", "تسلية لجميع أفراد العائلة"],
+      targetAudience: ["الأطفال والمراهقين", "العائلات", "محبي الألعاب", "الباحثين عن التسلية", "المدارس والمراكز التعليمية"],
+      timeline: "6-8 أسابيع",
+      technologies: ["React Native", "Game Engines", "Graphics APIs", "Social Features", "Achievement Systems", "Offline Gaming"],
+      category: "entertainment"
+    },
+
+    "Interactive Games": {
+      name: "Interactive Games",
+      description: "Collection of interactive and entertaining games for all ages",
+      fullDescription: "Interactive games app featuring a diverse collection of entertaining games suitable for all ages. Provides enjoyable gaming experience with various challenges, progressive levels, and reward system to motivate players and ensure continuous fun.",
+      keyFeatures: ["Diverse and Entertaining Games", "Progressive Challenge Levels", "Rewards and Achievement System", "Multiplayer Games", "Daily and Weekly Challenges", "Leaderboards", "Educational and Entertainment Games", "Colorful and Attractive Interface"],
+      technicalFeatures: ["High-quality Graphics", "Smooth and Responsive Performance", "Progress Save System", "Offline Gaming", "Regular Content Updates", "Child Safety"],
+      benefits: ["Safe and Fun Entertainment", "Mental Skills Development", "Productive Time Spending", "Creative Thinking Stimulation", "Social Gaming Experience", "Entertainment for Whole Family"],
+      targetAudience: ["Children and Teenagers", "Families", "Game Lovers", "Entertainment Seekers", "Schools and Educational Centers"],
+      timeline: "6-8 weeks",
+      technologies: ["React Native", "Game Engines", "Graphics APIs", "Social Features", "Achievement Systems", "Offline Gaming"],
+      category: "entertainment"
+    },
+
+    "مشغل الوسائط": {
+      name: "مشغل الوسائط",
+      description: "مشغل متقدم للموسيقى والفيديو مع مميزات احترافية",
+      fullDescription: "مشغل وسائط متطور يوفر تجربة تشغيل عالية الجودة للموسيقى والفيديو. يدعم جميع صيغ الملفات الشائعة مع واجهة أنيقة وسهلة الاستخدام، ويتضمن مميزات متقدمة مثل المعادل الصوتي وقوائم التشغيل الذكية.",
+      keyFeatures: ["تشغيل جميع صيغ الوسائط", "قوائم تشغيل ذكية", "معادل صوتي متقدم", "واجهة أنيقة وسهلة", "البحث السريع في المكتبة", "تشغيل في الخلفية", "مشاركة الملفات", "إعدادات صوت مخصصة"],
+      technicalFeatures: ["دعم صيغ متعددة", "جودة صوت عالية", "استهلاك بطارية محسن", "فهرسة ذكية للملفات", "تكامل مع السحابة", "واجهة سريعة الاستجابة"],
+      benefits: ["تجربة صوتية متميزة", "إدارة سهلة للمكتبة", "تشغيل سلس وموثوق", "توفير مساحة التخزين", "وصول سريع للمحتوى", "تخصيص كامل للتجربة"],
+      targetAudience: ["محبي الموسيقى", "مشاهدي الفيديو", "المهتمين بجودة الصوت", "منشئي المحتوى", "عشاق الترفيه"],
+      timeline: "4-5 أسابيع",
+      technologies: ["React Native", "Audio/Video Codecs", "Media Libraries", "Cloud Storage", "UI/UX Frameworks", "Performance Optimization"],
+      category: "entertainment"
+    },
+
+    "Media Player": {
+      name: "Media Player",
+      description: "Advanced music and video player with professional features",
+      fullDescription: "Advanced media player that provides high-quality playback experience for music and video. Supports all common file formats with elegant and user-friendly interface, includes advanced features like audio equalizer and smart playlists.",
+      keyFeatures: ["All Media Format Playback", "Smart Playlists", "Advanced Audio Equalizer", "Elegant and Easy Interface", "Quick Library Search", "Background Playback", "File Sharing", "Custom Audio Settings"],
+      technicalFeatures: ["Multi-format Support", "High Audio Quality", "Optimized Battery Consumption", "Smart File Indexing", "Cloud Integration", "Fast Responsive Interface"],
+      benefits: ["Distinguished Audio Experience", "Easy Library Management", "Smooth and Reliable Playback", "Storage Space Savings", "Quick Content Access", "Complete Experience Customization"],
+      targetAudience: ["Music Lovers", "Video Viewers", "Audio Quality Enthusiasts", "Content Creators", "Entertainment Fans"],
+      timeline: "4-5 weeks",
+      technologies: ["React Native", "Audio/Video Codecs", "Media Libraries", "Cloud Storage", "UI/UX Frameworks", "Performance Optimization"],
+      category: "entertainment"
     }
   };
 
