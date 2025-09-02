@@ -23,6 +23,7 @@ const contactSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number"),
   company: z.string().optional(),
   service: z.string().min(1, "Please select a service type"),
+  serviceApplication: z.string().optional(),
   selectedApp: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
   budget: z.string().optional(),
@@ -36,6 +37,7 @@ export function ContactForm() {
   const { dir } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedService, setSelectedService] = useState<string>("");
+  const [selectedServiceApplication, setSelectedServiceApplication] = useState<string>("");
   const [selectedApp, setSelectedApp] = useState<string>("");
   const { toast } = useToast();
 
@@ -166,6 +168,64 @@ export function ContactForm() {
     dir === 'rtl' ? "أكثر من سنة" : "More than 1 year",
   ];
 
+  // Service applications mapping
+  const serviceApplications: Record<string, string[]> = {
+    "تطوير تطبيقات الهواتف الذكية": [
+      dir === 'rtl' ? "تطبيق تجاري للمتاجر" : "E-commerce App",
+      dir === 'rtl' ? "تطبيق إدارة المخزون" : "Inventory Management App",
+      dir === 'rtl' ? "تطبيق خدمات توصيل" : "Delivery Service App",
+      dir === 'rtl' ? "تطبيق حجز المواعيد" : "Appointment Booking App",
+      dir === 'rtl' ? "تطبيق تعليمي" : "Educational App",
+      dir === 'rtl' ? "تطبيق طبي" : "Healthcare App",
+      dir === 'rtl' ? "تطبيق مالي ومصرفي" : "Financial/Banking App",
+      dir === 'rtl' ? "تطبيق شبكات اجتماعية" : "Social Media App",
+      dir === 'rtl' ? "تطبيق ألعاب" : "Gaming App",
+      dir === 'rtl' ? "تطبيق مخصص" : "Custom App"
+    ],
+    "تطوير المواقع والمنصات": [
+      dir === 'rtl' ? "موقع تجاري" : "E-commerce Website",
+      dir === 'rtl' ? "موقع شخصي أو محفظة أعمال" : "Portfolio Website",
+      dir === 'rtl' ? "منصة إدارة محتوى" : "Content Management System",
+      dir === 'rtl' ? "منصة تعليمية" : "Educational Platform",
+      dir === 'rtl' ? "منصة حجوزات" : "Booking Platform",
+      dir === 'rtl' ? "منصة إعلانات مبوبة" : "Classified Ads Platform",
+      dir === 'rtl' ? "منصة شبكة اجتماعية" : "Social Media Platform",
+      dir === 'rtl' ? "منصة مخصصة" : "Custom Platform"
+    ],
+    "تطوير تطبيقات سطح المكتب": [
+      dir === 'rtl' ? "تطبيق إدارة المخزون" : "Inventory Management System",
+      dir === 'rtl' ? "تطبيق المحاسبة" : "Accounting Software",
+      dir === 'rtl' ? "تطبيق إدارة العملاء CRM" : "CRM System",
+      dir === 'rtl' ? "تطبيق إدارة المشاريع" : "Project Management Tool",
+      dir === 'rtl' ? "تطبيق إدارة المبيعات" : "Sales Management System",
+      dir === 'rtl' ? "تطبيق مخصص" : "Custom Desktop Application"
+    ],
+    "الحلول الذكية والبرمجية للهواتف الذكية": [
+      dir === 'rtl' ? "حل IoT للمنازل الذكية" : "Smart Home IoT Solution",
+      dir === 'rtl' ? "حل إدارة الطاقة" : "Energy Management Solution",
+      dir === 'rtl' ? "حل مراقبة وأمان" : "Security & Monitoring Solution",
+      dir === 'rtl' ? "حل ذكي للمصانع" : "Smart Factory Solution",
+      dir === 'rtl' ? "حل ذكي للزراعة" : "Smart Agriculture Solution",
+      dir === 'rtl' ? "حل مخصص" : "Custom Smart Solution"
+    ],
+    "الحلول الذكية والذكاء الاصطناعي": [
+      dir === 'rtl' ? "نظام ذكاء اصطناعي للتنبؤ" : "AI Prediction System",
+      dir === 'rtl' ? "نظام معالجة اللغات الطبيعية" : "NLP System",
+      dir === 'rtl' ? "نظام تحليل البيانات" : "Data Analytics System",
+      dir === 'rtl' ? "نظام التعرف على الصور" : "Image Recognition System",
+      dir === 'rtl' ? "نظام ذكي للمساعدة الآلية" : "AI Assistant System",
+      dir === 'rtl' ? "حل ذكاء اصطناعي مخصص" : "Custom AI Solution"
+    ],
+    "أنظمة ERPNext": [
+      dir === 'rtl' ? "نظام ERP للمصانع" : "Manufacturing ERP",
+      dir === 'rtl' ? "نظام ERP التجاري" : "Retail ERP",
+      dir === 'rtl' ? "نظام ERP للخدمات" : "Services ERP",
+      dir === 'rtl' ? "نظام ERP للمستشفيات" : "Healthcare ERP",
+      dir === 'rtl' ? "نظام ERP للتعليم" : "Education ERP",
+      dir === 'rtl' ? "نظام ERP مخصص" : "Custom ERP"
+    ]
+  };
+
   return (
     <Section size="xl" background="light">
       <Container size="lg">
@@ -253,6 +313,9 @@ export function ContactForm() {
                       onValueChange={(value) => {
                         setValue("service", value);
                         setSelectedService(value);
+                        // Clear service application when service changes
+                        setSelectedServiceApplication("");
+                        setValue("serviceApplication", "");
                       }}
                     >
                       <SelectTrigger className="h-12 text-base border-2 focus:border-primary rounded-xl">
@@ -271,6 +334,41 @@ export function ContactForm() {
                     )}
                   </div>
                 </div>
+
+                {/* Service Application Field - appears when a service with applications is selected */}
+                {selectedService && serviceApplications[selectedService] && (
+                  <div>
+                    <Label htmlFor="serviceApplication" className="text-sm font-semibold text-gray-700 mb-2 block">
+                      {dir === 'rtl' ? 'نوع التطبيق المطلوب' : 'Application Type'} 
+                      {selectedServiceApplication && (
+                        <span className="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
+                          {dir === 'rtl' ? 'مختار' : 'Selected'}
+                        </span>
+                      )}
+                    </Label>
+                    <Select 
+                      value={selectedServiceApplication} 
+                      onValueChange={(value) => {
+                        setValue("serviceApplication", value);
+                        setSelectedServiceApplication(value);
+                      }}
+                    >
+                      <SelectTrigger className="h-12 text-base border-2 focus:border-primary rounded-xl">
+                        <SelectValue placeholder={dir === 'rtl' ? 'اختر نوع التطبيق' : 'Select application type'} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {serviceApplications[selectedService].map((app) => (
+                          <SelectItem key={app} value={app}>
+                            {app}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {dir === 'rtl' ? 'اختر نوع التطبيق الذي تريد تطويره' : 'Choose the specific type of application you want to develop'}
+                    </p>
+                  </div>
+                )}
 
                 {/* Selected App Field - appears when an app is selected */}
                 {selectedApp && (

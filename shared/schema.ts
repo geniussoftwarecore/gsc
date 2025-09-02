@@ -32,6 +32,7 @@ export const contactSubmissions = pgTable("contact_submissions", {
   email: text("email").notNull(),
   phone: text("phone"),
   service: text("service"),
+  serviceApplication: text("service_application"),
   message: text("message").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
