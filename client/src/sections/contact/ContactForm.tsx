@@ -109,8 +109,9 @@ export function ContactForm() {
     mutation.mutate(data);
   };
 
-  // Use actual service titles that match what's in the API/database
+  // Use actual service titles that match what's in the API/database + app names
   const services = [
+    // Main services
     "تطوير تطبيقات الهواتف الذكية",
     "تطوير المواقع والمنصات", 
     "تطوير تطبيقات سطح المكتب",
@@ -119,6 +120,26 @@ export function ContactForm() {
     "التسويق الرقمي والإعلانات",
     "الحلول الذكية والذكاء الاصطناعي",
     "أنظمة ERPNext",
+    
+    // App names from service detail page (Arabic)
+    dir === 'rtl' ? "إدارة المشاريع" : "Project Management",
+    dir === 'rtl' ? "إدارة العملاء CRM" : "CRM Management",
+    dir === 'rtl' ? "متجر إلكتروني" : "Online Store",
+    dir === 'rtl' ? "تطبيق الطعام" : "Food Delivery",
+    dir === 'rtl' ? "المحاسبة الشخصية" : "Personal Finance",
+    dir === 'rtl' ? "تطبيق البنك" : "Banking App",
+    dir === 'rtl' ? "إدارة وسائل التواصل" : "Social Media Manager",
+    dir === 'rtl' ? "حملات إعلانية" : "Ad Campaigns",
+    dir === 'rtl' ? "متابعة صحية" : "Health Tracking",
+    dir === 'rtl' ? "حجز المواعيد الطبية" : "Medical Appointments",
+    dir === 'rtl' ? "منصة تعليمية" : "Learning Platform",
+    dir === 'rtl' ? "إدارة الطلاب" : "Student Management",
+    dir === 'rtl' ? "اللياقة البدنية" : "Fitness Tracker",
+    dir === 'rtl' ? "إدارة المنزل" : "Home Management",
+    dir === 'rtl' ? "الألعاب التفاعلية" : "Interactive Games",
+    dir === 'rtl' ? "مشغل الوسائط" : "Media Player",
+    
+    // General options
     dir === 'rtl' ? "استشارات تقنية" : "Technical Consulting",
     dir === 'rtl' ? "أخرى" : "Other",
   ];
