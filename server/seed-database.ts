@@ -64,14 +64,13 @@ export async function seedDatabase() {
     // Seed services
     await db.insert(services).values([
       {
-        title: "تطبيقات الهواتف الذكية",
+        title: "تطوير تطبيقات الهواتف الذكية",
         description: "نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة",
         icon: "smartphone",
         category: "mobile",
         featured: "false",
         technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
-        deliveryTime: "4-8 أسابيع",
-        startingPrice: "15,000 ريال"
+        deliveryTime: "4-8 أسابيع"
       },
       {
         title: "تطوير المواقع والمنصات",
@@ -80,8 +79,25 @@ export async function seedDatabase() {
         category: "web",
         featured: "true",
         technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL"],
-        deliveryTime: "3-6 أسابيع",
-        startingPrice: "8,000 ريال"
+        deliveryTime: "3-6 أسابيع"
+      },
+      {
+        title: "تطوير تطبيقات سطح المكتب",
+        description: "تطوير تطبيقات سطح المكتب الاحترافية والقوية لأنظمة Windows و macOS و Linux باستخدام أحدث التقنيات والأدوات المتطورة. نقدم حلولاً شاملة من البرمجيات البسيطة إلى الأنظمة المؤسسية المعقدة مع واجهات مستخدم عصرية وأداء استثنائي وتكامل مثالي مع أنظمة التشغيل",
+        icon: "monitor",
+        category: "desktop",
+        featured: "true",
+        technologies: ["Electron", ".NET Core", "Qt Framework", "JavaFX", "C# WPF", "Python PyQt", "C++ MFC", "Cross-Platform"],
+        deliveryTime: "6-12 أسبوع"
+      },
+      {
+        title: "الحلول الذكية والبرمجية للهواتف الذكية",
+        description: "تطوير حلول برمجية ذكية ومبتكرة للهواتف الذكية مع تقنيات الذكاء الاصطناعي والتعلم الآلي. نقدم تطبيقات ذكية تتعلم من سلوك المستخدمين وتقدم تجارب مخصصة، بما في ذلك معالجة الصور والنصوص، التعرف على الأنماط، الدردشة الذكية، والتحليلات المتقدمة. حلول متطورة تدمج قوة الذكاء الاصطناعي في راحة يدك",
+        icon: "brain-circuit",
+        category: "smart-mobile",
+        featured: "true",
+        technologies: ["AI/ML Integration", "TensorFlow Mobile", "Core ML", "OpenAI API", "Computer Vision", "NLP", "React Native AI", "Smart Analytics", "Predictive Models"],
+        deliveryTime: "8-16 أسبوع"
       },
       {
         title: "تصميم الجرافيكس والهوية البصرية",
@@ -90,18 +106,34 @@ export async function seedDatabase() {
         category: "design",
         featured: "false",
         technologies: ["Adobe Creative Suite", "Figma", "Sketch", "Illustrator", "Photoshop"],
-        deliveryTime: "1-3 أسابيع",
-        startingPrice: "2,500 ريال"
+        deliveryTime: "1-3 أسابيع"
       },
       {
-        title: "أنظمة إدارة الموارد ERPNext",
+        title: "التسويق الرقمي والإعلانات",
+        description: "استراتيجيات تسويق رقمية شاملة وحملات إعلانية مدروسة على منصات التواصل الاجتماعي ومحركات البحث لزيادة المبيعات والوصول",
+        icon: "megaphone",
+        category: "marketing",
+        featured: "false",
+        technologies: ["Google Ads", "Facebook Ads", "Instagram", "LinkedIn", "Analytics"],
+        deliveryTime: "مستمر"
+      },
+      {
+        title: "الحلول الذكية والذكاء الاصطناعي",
+        description: "تطوير حلول برمجية ذكية ومتقدمة باستخدام تقنيات الذكاء الاصطناعي والتعلم الآلي لأتمتة العمليات وتحسين الكفاءة",
+        icon: "brain",
+        category: "smart",
+        featured: "false",
+        technologies: ["Python", "TensorFlow", "OpenAI API", "Machine Learning", "Computer Vision"],
+        deliveryTime: "6-12 أسبوع"
+      },
+      {
+        title: "أنظمة إدارة موارد المؤسسات",
         description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم جميع جوانب أعمالك من المحاسبة إلى إدارة المخزون والموارد البشرية",
         icon: "settings",
         category: "erp",
         featured: "false",
         technologies: ["ERPNext", "Python", "Frappe Framework", "MariaDB", "Redis"],
-        deliveryTime: "8-16 أسبوع",
-        startingPrice: "20,000 ريال"
+        deliveryTime: "8-16 أسبوع"
       }
     ]);
 
