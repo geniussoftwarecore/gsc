@@ -163,7 +163,7 @@ function ServiceCard({
               // Navigate to contact page with service pre-selected
               setLocation(`/contact?service=${encodeURIComponent(service.title)}`);
             }}
-            className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-green-500/20 focus:ring-offset-2"
+            className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
             size="sm"
             aria-label={`Apply for ${service.title}`}
             data-testid={`apply-now-${service.id}`}
