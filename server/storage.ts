@@ -432,7 +432,7 @@ export class MemStorage implements IStorage {
         featured: "false",
         technologies: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
         deliveryTime: "4-8 أسابيع",
-        startingPrice: "15,000 ريال"
+        startingPrice: null
       },
       {
         id: "562fce34-abbd-4ba9-abc5-bc6b4afe61c7",
@@ -443,7 +443,7 @@ export class MemStorage implements IStorage {
         featured: "true",
         technologies: ["React", "Next.js", "Node.js", "TypeScript", "PostgreSQL"],
         deliveryTime: "3-6 أسابيع",
-        startingPrice: "8,000 ريال"
+        startingPrice: null
       },
       {
         id: "d7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2",
@@ -454,7 +454,7 @@ export class MemStorage implements IStorage {
         featured: "true",
         technologies: ["Electron", ".NET Core", "Qt Framework", "JavaFX", "C# WPF", "Python PyQt", "C++ MFC", "Cross-Platform"],
         deliveryTime: "6-12 أسبوع",
-        startingPrice: "18,000 ريال"
+        startingPrice: null
       },
       {
         id: "m9n8b7v6-c5x4-z3a2-s1d0-f9g8h7j6k5l4",
@@ -465,7 +465,7 @@ export class MemStorage implements IStorage {
         featured: "true",
         technologies: ["AI/ML Integration", "TensorFlow Mobile", "Core ML", "OpenAI API", "Computer Vision", "NLP", "React Native AI", "Smart Analytics", "Predictive Models"],
         deliveryTime: "8-16 أسبوع",
-        startingPrice: "35,000 ريال"
+        startingPrice: null
       },
       {
         id: "9a6c839d-2a5c-4418-832a-2a5bd14dcf7e",
@@ -476,7 +476,7 @@ export class MemStorage implements IStorage {
         featured: "false",
         technologies: ["Adobe Creative Suite", "Figma", "Sketch", "Illustrator", "Photoshop"],
         deliveryTime: "1-3 أسابيع",
-        startingPrice: "2,500 ريال"
+        startingPrice: null
       },
       {
         id: "e4f7b3d1-8c9a-4b5d-9e2f-1a3c5d7e9f1b",
@@ -487,7 +487,7 @@ export class MemStorage implements IStorage {
         featured: "false",
         technologies: ["Google Ads", "Facebook Ads", "Instagram", "LinkedIn", "Analytics"],
         deliveryTime: "مستمر",
-        startingPrice: "3,000 ريال/شهرياً"
+        startingPrice: null
       },
       {
         id: "f5a8c2b4-7d6e-4c9f-8a1b-3e5g7h9i2j4k",
@@ -498,7 +498,7 @@ export class MemStorage implements IStorage {
         featured: "false",
         technologies: ["Python", "TensorFlow", "OpenAI API", "Machine Learning", "Computer Vision"],
         deliveryTime: "6-12 أسبوع",
-        startingPrice: "25,000 ريال"
+        startingPrice: null
       },
       {
         id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
@@ -509,8 +509,8 @@ export class MemStorage implements IStorage {
         featured: "false",
         technologies: ["ERPNext", "Python", "Frappe Framework", "MariaDB", "Redis"],
         deliveryTime: "8-16 أسبوع",
-        startingPrice: "20,000 ريال"
-      },
+        startingPrice: null
+      }
     ];
 
     sampleServices.forEach(service => this.services.set(service.id, service));
