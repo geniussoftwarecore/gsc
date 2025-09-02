@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Smartphone } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useLanguage } from "@/i18n/lang";
 
@@ -354,7 +354,8 @@ export function ContactForm() {
                 {/* Service Application Field - appears when a service with applications is selected */}
                 {selectedService && serviceApplications[selectedService] && (
                   <div>
-                    <Label htmlFor="serviceApplication" className="text-sm font-semibold text-gray-700 mb-2 block">
+                    <Label htmlFor="serviceApplication" className="text-sm font-semibold text-gray-700 mb-2 block flex items-center gap-2">
+                      <Smartphone className="w-4 h-4 text-primary" />
                       {dir === 'rtl' ? 'نوع التطبيق المطلوب' : 'Application Type'} 
                       {selectedServiceApplication && (
                         <span className="ml-2 px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
