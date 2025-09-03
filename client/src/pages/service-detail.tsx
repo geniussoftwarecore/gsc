@@ -36,6 +36,135 @@ const getIconForService = (iconName?: string) => {
   return iconMap[iconName || "Globe"] || Globe;
 };
 
+// Detailed website information for web development
+const getDetailedWebsiteInfo = (websiteName: string) => {
+  const websiteDetails: Record<string, any> = {
+    // Corporate Websites
+    "موقع شركة تقنية": {
+      name: "موقع شركة تقنية",
+      description: "موقع شركة تقنية احترافي بتصميم عصري",
+      fullDescription: "موقع ويب احترافي للشركات التقنية يجمع بين التصميم العصري والوظائف المتقدمة. يعرض الخدمات والمنتجات بطريقة جذابة ويوفر تجربة مستخدم استثنائية. مصمم لإبراز هوية الشركة وزيادة معدلات التحويل والمبيعات.",
+      keyFeatures: ["صفحة رئيسية جذابة", "معرض خدمات تفاعلي", "صفحات فريق العمل", "نماذج أعمال ومشاريع", "نظام إدارة المحتوى", "تصميم متجاوب", "تحسين محركات البحث", "نماذج اتصال ذكية"],
+      technicalFeatures: ["تقنيات ويب حديثة", "سرعة تحميل فائقة", "أمان SSL متقدم", "تحسين الأداء", "دعم جميع المتصفحات", "واجهات API متقدمة"],
+      benefits: ["زيادة الثقة بالعلامة التجارية", "تحسين الوصول للعملاء المحتملين", "عرض احترافي للخدمات", "تحسين معدلات التحويل", "تعزيز الحضور الرقمي", "سهولة إدارة المحتوى"],
+      targetAudience: ["الشركات التقنية", "الاستشارات الهندسية", "شركات البرمجيات", "الوكالات الرقمية", "الشركات الناشئة"],
+      timeline: "4-6 أسابيع",
+      technologies: ["React.js", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
+      category: "corporate"
+    },
+
+    "Tech Company Website": {
+      name: "Tech Company Website",
+      description: "Professional tech company website with modern design",
+      fullDescription: "Professional corporate website for technology companies that combines modern design with advanced functionality. Showcases services and products attractively while providing exceptional user experience. Designed to highlight company identity and increase conversion rates and sales.",
+      keyFeatures: ["Attractive Homepage", "Interactive Services Gallery", "Team Member Pages", "Portfolio & Projects", "Content Management System", "Responsive Design", "SEO Optimization", "Smart Contact Forms"],
+      technicalFeatures: ["Modern Web Technologies", "Lightning-fast Loading", "Advanced SSL Security", "Performance Optimization", "Cross-browser Support", "Advanced API Integration"],
+      benefits: ["Increased Brand Trust", "Better Reach to Potential Clients", "Professional Service Display", "Improved Conversion Rates", "Enhanced Digital Presence", "Easy Content Management"],
+      targetAudience: ["Tech Companies", "Engineering Consultancies", "Software Companies", "Digital Agencies", "Startups"],
+      timeline: "4-6 weeks",
+      technologies: ["React.js", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "MongoDB"],
+      category: "corporate"
+    },
+
+    "موقع شركة استشارية": {
+      name: "موقع شركة استشارية",
+      description: "موقع لشركة استشارية مع نظام إدارة العملاء",
+      fullDescription: "موقع ويب متخصص للشركات الاستشارية يجمع بين العرض المهني للخدمات ونظام إدارة العملاء المتقدم. يتضمن عرض دراسات الحالة، حجز الاستشارات، وإدارة العلاقات مع العملاء لضمان تقديم خدمة استشارية متميزة.",
+      keyFeatures: ["معرض خدمات استشارية شامل", "دراسات حالة تفاعلية", "نظام حجز استشارات", "إدارة العملاء CRM", "مدونة متخصصة", "شهادات العملاء", "تقارير وبحوث", "نظام الدفع الآمن"],
+      technicalFeatures: ["نظام إدارة متقدم", "تكامل مع أدوات CRM", "حماية بيانات العملاء", "نظام تنبيهات ذكي", "لوحة تحكم إدارية", "تحليلات مفصلة"],
+      benefits: ["تحسين إدارة العملاء", "زيادة معدل حجز الاستشارات", "عرض احترافي للخبرات", "تسهيل التواصل مع العملاء", "تحسين سمعة الشركة", "زيادة الإيرادات"],
+      targetAudience: ["الشركات الاستشارية", "المكاتب القانونية", "الاستشاريين المستقلين", "شركات الإدارة", "المحاسبين القانونيين"],
+      timeline: "5-7 أسابيع",
+      technologies: ["React.js", "CRM Integration", "Calendar API", "Payment Gateway", "Analytics", "Database"],
+      category: "corporate"
+    },
+
+    "Consulting Firm Website": {
+      name: "Consulting Firm Website",
+      description: "Consulting firm website with client management system",
+      fullDescription: "Specialized website for consulting firms that combines professional service presentation with advanced client management system. Includes case study displays, consultation booking, and client relationship management to ensure exceptional consulting service delivery.",
+      keyFeatures: ["Comprehensive Consulting Services Gallery", "Interactive Case Studies", "Consultation Booking System", "CRM Client Management", "Specialized Blog", "Client Testimonials", "Reports & Research", "Secure Payment System"],
+      technicalFeatures: ["Advanced Management System", "CRM Tools Integration", "Client Data Protection", "Smart Notification System", "Administrative Dashboard", "Detailed Analytics"],
+      benefits: ["Improved Client Management", "Increased Consultation Booking Rate", "Professional Expertise Display", "Enhanced Client Communication", "Better Company Reputation", "Increased Revenue"],
+      targetAudience: ["Consulting Firms", "Law Offices", "Independent Consultants", "Management Companies", "Certified Accountants"],
+      timeline: "5-7 weeks",
+      technologies: ["React.js", "CRM Integration", "Calendar API", "Payment Gateway", "Analytics", "Database"],
+      category: "corporate"
+    },
+
+    // E-commerce Websites
+    "متجر إلكتروني متكامل": {
+      name: "متجر إلكتروني متكامل",
+      description: "متجر إلكتروني شامل مع نظام إدارة المخزون",
+      fullDescription: "منصة تجارة إلكترونية متكاملة تقدم تجربة تسوق استثنائية للعملاء مع نظام إدارة شامل للتجار. يتضمن كتالوج منتجات متقدم، نظام دفع آمن، إدارة المخزون، وأدوات تسويق قوية لضمان نجاح العمل التجاري الرقمي.",
+      keyFeatures: ["كتالوج منتجات احترافي", "سلة تسوق ذكية", "بوابات دفع متعددة", "نظام إدارة المخزون", "لوحة تحكم التاجر", "تتبع الطلبات", "نظام كوبونات وعروض", "تقييمات ومراجعات"],
+      technicalFeatures: ["تقنيات التجارة الإلكترونية المتقدمة", "أمان متعدد الطبقات", "معالجة مدفوعات آمنة", "تحسين محركات البحث", "تحليلات المبيعات", "واجهات API للدمج"],
+      benefits: ["زيادة المبيعات بنسبة 60%", "وصول لعملاء جدد", "تقليل تكاليف التشغيل", "إدارة فعالة للمخزون", "تحسين تجربة العملاء", "نمو مستدام للأعمال"],
+      targetAudience: ["التجار الإلكترونيين", "أصحاب المتاجر", "الشركات التجارية", "الموزعين", "رواد الأعمال"],
+      timeline: "6-10 أسابيع",
+      technologies: ["React.js", "WooCommerce", "Stripe", "PayPal", "Inventory API", "Analytics"],
+      category: "ecommerce"
+    },
+
+    "Full E-commerce Store": {
+      name: "Full E-commerce Store",
+      description: "Complete e-commerce store with inventory management",
+      fullDescription: "Integrated e-commerce platform that provides exceptional shopping experience for customers with comprehensive management system for merchants. Includes advanced product catalog, secure payment system, inventory management, and powerful marketing tools to ensure digital business success.",
+      keyFeatures: ["Professional Product Catalog", "Smart Shopping Cart", "Multiple Payment Gateways", "Inventory Management System", "Merchant Dashboard", "Order Tracking", "Coupons & Offers System", "Reviews & Ratings"],
+      technicalFeatures: ["Advanced E-commerce Technologies", "Multi-layer Security", "Secure Payment Processing", "SEO Optimization", "Sales Analytics", "Integration APIs"],
+      benefits: ["60% Sales Increase", "Reach New Customers", "Reduced Operating Costs", "Efficient Inventory Management", "Enhanced Customer Experience", "Sustainable Business Growth"],
+      targetAudience: ["E-commerce Merchants", "Store Owners", "Trading Companies", "Distributors", "Entrepreneurs"],
+      timeline: "6-10 weeks",
+      technologies: ["React.js", "WooCommerce", "Stripe", "PayPal", "Inventory API", "Analytics"],
+      category: "ecommerce"
+    },
+
+    // Government Websites
+    "بوابة حكومية إلكترونية": {
+      name: "بوابة حكومية إلكترونية",
+      description: "بوابة للخدمات الحكومية الإلكترونية",
+      fullDescription: "بوابة حكومية شاملة تقدم الخدمات الإلكترونية للمواطنين بطريقة مبسطة وآمنة. تتضمن جميع الخدمات الحكومية الرقمية، نظام مواعيد متقدم، ومعالجة المعاملات الإلكترونية مع ضمان أعلى مستويات الأمان والحماية.",
+      keyFeatures: ["دليل الخدمات الحكومية", "نظام المعاملات الإلكترونية", "حجز المواعيد الذكي", "بوابة الدفع الحكومية", "تتبع حالة المعاملات", "نظام الإشعارات", "خدمة العملاء الرقمية", "تطبيق الهاتف المحمول"],
+      technicalFeatures: ["أمان حكومي متقدم", "تشفير البيانات الحساسة", "تكامل مع الأنظمة الحكومية", "المصادقة الرقمية", "لوحة تحكم إدارية متقدمة", "نسخ احتياطية آمنة"],
+      benefits: ["تسهيل الخدمات على المواطنين", "تقليل الإجراءات الورقية", "توفير الوقت والجهد", "شفافية في المعاملات", "تحسين كفاءة الخدمات", "خدمة 24/7"],
+      targetAudience: ["المواطنين", "المقيمين", "الشركات", "المؤسسات الحكومية", "الموظفين الحكوميين"],
+      timeline: "8-12 أسبوع",
+      technologies: ["React.js", "Government APIs", "Digital Signature", "Secure Database", "Authentication", "Mobile App"],
+      category: "government"
+    },
+
+    // Education Websites
+    "منصة تعليمية تفاعلية": {
+      name: "منصة تعليمية تفاعلية",
+      description: "منصة تعليم إلكتروني شاملة",
+      fullDescription: "منصة تعليمية متطورة تقدم تجربة تعلم تفاعلية ومتطورة للطلاب والمعلمين. تتضمن دورات تفاعلية، نظام اختبارات متقدم، إدارة الدرجات، وأدوات التعاون التعليمي لضمان تحقيق أفضل النتائج التعليمية.",
+      keyFeatures: ["دورات تفاعلية متعددة الوسائط", "نظام اختبارات ذكي", "إدارة الدرجات والتقييم", "منتديات نقاش تعليمية", "مكتبة موارد تعليمية", "شهادات إنجاز معتمدة", "تقارير تقدم مفصلة", "فصول افتراضية"],
+      technicalFeatures: ["تقنيات التعلم الحديثة", "دعم الفيديو التفاعلي", "نظام إدارة التعلم LMS", "تحليلات التعلم المتقدمة", "تكامل مع أدوات التعليم", "حماية المحتوى التعليمي"],
+      benefits: ["تحسين جودة التعليم", "مرونة في التعلم", "تتبع تقدم الطلاب", "تفاعل أكبر مع المحتوى", "توفير تكاليف التعليم", "وصول لعدد أكبر من الطلاب"],
+      targetAudience: ["المؤسسات التعليمية", "المعلمين", "الطلاب", "مراكز التدريب", "شركات التطوير المهني"],
+      timeline: "8-12 أسبوع",
+      technologies: ["React.js", "LMS Integration", "Video Streaming", "Interactive Content", "Analytics", "Certification"],
+      category: "education"
+    },
+
+    // Healthcare Websites
+    "منصة صحية متكاملة": {
+      name: "منصة صحية متكاملة",
+      description: "منصة طبية شاملة لإدارة المرضى",
+      fullDescription: "منصة طبية متطورة تربط بين المرضى والأطباء والمؤسسات الصحية. تتضمن نظام حجز المواعيد، إدارة السجلات الطبية، الاستشارات عن بُعد، وأدوات متابعة صحية لتقديم رعاية طبية شاملة ومتطورة.",
+      keyFeatures: ["نظام حجز مواعيد ذكي", "سجلات طبية إلكترونية", "استشارات طبية عن بُعد", "وصفات طبية رقمية", "تذكير بالأدوية", "تقارير طبية مفصلة", "نظام دفع آمن", "تطبيق مرضى ومقدمي رعاية"],
+      technicalFeatures: ["معايير أمان طبية", "تشفير البيانات الصحية", "تكامل مع أنظمة المستشفيات", "الذكاء الاصطناعي الطبي", "تحليلات صحية متقدمة", "نسخ احتياطية آمنة"],
+      benefits: ["تحسين جودة الرعاية الصحية", "سهولة الوصول للخدمات", "تقليل أوقات الانتظار", "متابعة صحية أفضل", "تقليل التكاليف الطبية", "خدمات طبية متاحة 24/7"],
+      targetAudience: ["المستشفيات", "العيادات الطبية", "المرضى", "الأطباء", "مقدمي الرعاية الصحية"],
+      timeline: "10-16 أسبوع",
+      technologies: ["React.js", "HL7 FHIR", "Telemedicine", "Medical Database", "AI Integration", "HIPAA Compliance"],
+      category: "healthcare"
+    }
+  };
+
+  return websiteDetails[websiteName] || null;
+};
+
 // Detailed app information for mobile apps
 const getDetailedAppInfo = (appName: string) => {
   const appDetails: Record<string, any> = {
@@ -1564,13 +1693,15 @@ export default function ServiceDetail() {
             <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-bold text-brand-text-primary flex items-center gap-3">
-                  <Smartphone className="w-6 h-6 text-primary" />
+                  {getDetailedWebsiteInfo(selectedAppForDetails.name) ? <Globe className="w-6 h-6 text-primary" /> : <Smartphone className="w-6 h-6 text-primary" />}
                   {selectedAppForDetails.name}
                 </DialogTitle>
               </DialogHeader>
               
               {(() => {
-                const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
+                // Try to get detailed website info first, then app info as fallback
+                const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
+                const appDetails = websiteDetails || getDetailedAppInfo(selectedAppForDetails.name);
                 if (!appDetails) {
                   // Show fallback content when detailed app info is not available
                   return (
