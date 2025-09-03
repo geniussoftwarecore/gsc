@@ -1571,7 +1571,70 @@ export default function ServiceDetail() {
               
               {(() => {
                 const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
-                if (!appDetails) return null;
+                if (!appDetails) {
+                  // Show fallback content when detailed app info is not available
+                  return (
+                    <div className="space-y-6 py-4">
+                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-6">
+                        <h3 className="text-xl font-bold text-brand-text-primary mb-3">
+                          {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                        </h3>
+                        <p className="text-brand-text-muted leading-relaxed">
+                          {selectedAppForDetails.description}
+                        </p>
+                      </div>
+
+                      <div className="bg-green-50 rounded-lg p-4 max-w-md">
+                        <h4 className="font-bold text-green-800 mb-2">
+                          {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
+                        </h4>
+                        <p className="text-green-700 text-lg font-semibold">
+                          {dir === 'rtl' ? '4-6 أسابيع' : '4-6 weeks'}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                          <Star className="w-5 h-5 text-primary" />
+                          {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-3">
+                          {selectedAppForDetails.features?.map((feature: string, index: number) => (
+                            <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                              <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                              <span className="text-brand-text-muted">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+                        <Button
+                          onClick={() => {
+                            setShowAppDetailsModal(false);
+                            setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
+                          }}
+                          className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-3"
+                          size="lg"
+                        >
+                          <ArrowRight className={cn(
+                            "w-5 h-5 mr-2",
+                            dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                          )} />
+                          {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                        </Button>
+                        <Button
+                          onClick={() => setShowAppDetailsModal(false)}
+                          variant="outline"
+                          className="flex-1 rounded-xl py-3"
+                          size="lg"
+                        >
+                          {dir === 'rtl' ? 'إغلاق' : 'Close'}
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                }
 
                 return (
                   <div className="space-y-6 py-4">
