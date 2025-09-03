@@ -159,6 +159,326 @@ const getDetailedWebsiteInfo = (websiteName: string) => {
       timeline: "10-16 أسبوع",
       technologies: ["React.js", "HL7 FHIR", "Telemedicine", "Medical Database", "AI Integration", "HIPAA Compliance"],
       category: "healthcare"
+    },
+
+    "موقع مستشفى": {
+      name: "موقع مستشفى",
+      description: "موقع متكامل للمستشفيات والمراكز الطبية",
+      fullDescription: "موقع ويب شامل للمستشفيات يوفر منصة رقمية متطورة لتقديم الخدمات الطبية والصحية. يتضمن نظام حجز المواعيد، عرض الأطباء والتخصصات، الخدمات الطبية، ونظام إدارة شامل للمرضى والموظفين.",
+      keyFeatures: ["دليل الأطباء والتخصصات", "نظام حجز مواعيد متقدم", "معرض الخدمات الطبية", "إدارة المرضى", "نظام الطوارئ", "تقارير طبية رقمية", "بوابة المرضى", "نظام إدارة المواعيد"],
+      technicalFeatures: ["تكامل مع أنظمة المستشفى", "حماية البيانات الطبية", "نظام إنذار الطوارئ", "واجهات API طبية", "تحليلات صحية شاملة", "أمان البيانات HIPAA"],
+      benefits: ["تحسين خدمة المرضى", "تنظيم المواعيد والخدمات", "سهولة التواصل مع الأطباء", "تقليل أوقات الانتظار", "رقمنة الخدمات الطبية", "تحسين كفاءة العمل"],
+      targetAudience: ["المستشفيات العامة", "المراكز الطبية", "العيادات التخصصية", "المرضى", "الأطباء"],
+      timeline: "6-10 أسابيع",
+      technologies: ["React.js", "Medical APIs", "Database Integration", "Security Systems", "Booking System", "Patient Portal"],
+      category: "healthcare"
+    },
+
+    "Hospital Website": {
+      name: "Hospital Website",
+      description: "Comprehensive website for hospitals and medical centers",
+      fullDescription: "Comprehensive hospital website that provides an advanced digital platform for medical and healthcare services. Includes appointment booking system, doctor and specialty displays, medical services, and comprehensive management system for patients and staff.",
+      keyFeatures: ["Doctor Directory & Specialties", "Advanced Appointment Booking", "Medical Services Gallery", "Patient Management", "Emergency System", "Digital Medical Reports", "Patient Portal", "Appointment Management System"],
+      technicalFeatures: ["Hospital System Integration", "Medical Data Protection", "Emergency Alert System", "Medical API Integration", "Comprehensive Health Analytics", "HIPAA Data Security"],
+      benefits: ["Enhanced Patient Service", "Organized Appointments & Services", "Easy Doctor Communication", "Reduced Waiting Times", "Medical Service Digitization", "Improved Work Efficiency"],
+      targetAudience: ["General Hospitals", "Medical Centers", "Specialty Clinics", "Patients", "Doctors"],
+      timeline: "6-10 weeks",
+      technologies: ["React.js", "Medical APIs", "Database Integration", "Security Systems", "Booking System", "Patient Portal"],
+      category: "healthcare"
+    },
+
+    // E-commerce Additional Websites
+    "سوق إلكتروني": {
+      name: "سوق إلكتروني",
+      description: "منصة تجارية شاملة متعددة البائعين",
+      fullDescription: "منصة تجارة إلكترونية متطورة تجمع بين عدة بائعين وآلاف المنتجات في مكان واحد. توفر تجربة تسوق شاملة للعملاء مع نظام إدارة متقدم للبائعين، معالجة المدفوعات الآمنة، وأدوات تسويق قوية لضمان نجاح جميع الأطراف.",
+      keyFeatures: ["منصة متعددة البائعين", "كتالوج منتجات ضخم", "نظام تقييم البائعين", "إدارة المخزون المتقدمة", "معالجة مدفوعات آمنة", "لوحة تحكم البائعين", "نظام شحن متكامل", "تحليلات مبيعات شاملة"],
+      technicalFeatures: ["بنية نظام قابلة للتوسع", "أمان متعدد الطبقات", "واجهات API للبائعين", "نظام بحث متقدم", "تحسين الأداء", "تكامل مع منصات الدفع"],
+      benefits: ["وصول لآلاف المنتجات", "تنوع في الخيارات والأسعار", "ضمان الجودة والأمان", "خدمة عملاء متميزة", "سهولة المقارنة والاختيار", "عروض وخصومات مستمرة"],
+      targetAudience: ["التجار والبائعين", "المستهلكين", "الموزعين", "الشركات التجارية", "رواد الأعمال"],
+      timeline: "8-14 أسبوع",
+      technologies: ["React.js", "Multi-vendor System", "Payment Gateways", "Advanced Search", "Analytics", "Cloud Storage"],
+      category: "ecommerce"
+    },
+
+    "Online Marketplace": {
+      name: "Online Marketplace",
+      description: "Comprehensive multi-vendor trading platform",
+      fullDescription: "Advanced e-commerce platform that brings together multiple vendors and thousands of products in one place. Provides comprehensive shopping experience for customers with advanced management system for vendors, secure payment processing, and powerful marketing tools to ensure success for all parties.",
+      keyFeatures: ["Multi-vendor Platform", "Massive Product Catalog", "Vendor Rating System", "Advanced Inventory Management", "Secure Payment Processing", "Vendor Dashboard", "Integrated Shipping System", "Comprehensive Sales Analytics"],
+      technicalFeatures: ["Scalable System Architecture", "Multi-layer Security", "Vendor API Integration", "Advanced Search System", "Performance Optimization", "Payment Platform Integration"],
+      benefits: ["Access to Thousands of Products", "Variety in Options and Prices", "Quality and Security Guarantee", "Excellent Customer Service", "Easy Comparison and Selection", "Continuous Offers and Discounts"],
+      targetAudience: ["Merchants and Vendors", "Consumers", "Distributors", "Trading Companies", "Entrepreneurs"],
+      timeline: "8-14 weeks",
+      technologies: ["React.js", "Multi-vendor System", "Payment Gateways", "Advanced Search", "Analytics", "Cloud Storage"],
+      category: "ecommerce"
+    },
+
+    // Government Additional Websites
+    "موقع وزاري": {
+      name: "موقع وزاري",
+      description: "موقع رسمي للوزارات والمؤسسات الحكومية",
+      fullDescription: "موقع ويب رسمي للوزارات والهيئات الحكومية يوفر منصة شاملة للخدمات الإلكترونية والمعلومات الرسمية. يتضمن نظام نشر الأخبار والقرارات، تقديم الخدمات الحكومية، وتوفير المعلومات والإحصائيات الرسمية للمواطنين والمقيمين.",
+      keyFeatures: ["نشر الأخبار والقرارات الرسمية", "دليل الخدمات الحكومية", "نظام تقديم الطلبات", "مركز الإحصائيات", "بوابة الشفافية", "نظام الاستعلامات", "مكتبة الوثائق الرسمية", "خدمة العملاء الحكومية"],
+      technicalFeatures: ["أمان حكومي متقدم", "تكامل مع الأنظمة الرسمية", "نظام إدارة محتوى متخصص", "حماية البيانات الحساسة", "نسخ احتياطية آمنة", "واجهات API حكومية"],
+      benefits: ["سهولة الوصول للخدمات الحكومية", "شفافية في المعلومات", "تحسين التواصل مع المواطنين", "رقمنة الإجراءات الحكومية", "توفير الوقت والجهد", "خدمة متاحة 24/7"],
+      targetAudience: ["المواطنون والمقيمون", "الموظفون الحكوميون", "الشركات والمؤسسات", "الباحثون", "الإعلاميون"],
+      timeline: "6-10 أسابيع",
+      technologies: ["React.js", "Government APIs", "CMS System", "Security Framework", "Database Integration", "Official Documentation"],
+      category: "government"
+    },
+
+    "Ministry Website": {
+      name: "Ministry Website",
+      description: "Official website for ministries and government institutions",
+      fullDescription: "Official website for ministries and government entities that provides a comprehensive platform for electronic services and official information. Includes news and decision publishing system, government service delivery, and providing official information and statistics to citizens and residents.",
+      keyFeatures: ["Official News and Decisions Publishing", "Government Services Directory", "Application Submission System", "Statistics Center", "Transparency Portal", "Inquiry System", "Official Documents Library", "Government Customer Service"],
+      technicalFeatures: ["Advanced Government Security", "Official Systems Integration", "Specialized CMS", "Sensitive Data Protection", "Secure Backup", "Government API Integration"],
+      benefits: ["Easy Access to Government Services", "Information Transparency", "Better Citizen Communication", "Government Process Digitization", "Time and Effort Saving", "24/7 Available Service"],
+      targetAudience: ["Citizens and Residents", "Government Employees", "Companies and Institutions", "Researchers", "Media"],
+      timeline: "6-10 weeks",
+      technologies: ["React.js", "Government APIs", "CMS System", "Security Framework", "Database Integration", "Official Documentation"],
+      category: "government"
+    },
+
+    // Education Additional Websites
+    "موقع جامعة": {
+      name: "موقع جامعة",
+      description: "موقع شامل للجامعات والمؤسسات التعليمية العليا",
+      fullDescription: "موقع ويب متكامل للجامعات يوفر منصة شاملة للطلاب وأعضاء هيئة التدريس والإدارة. يتضمن نظام إدارة الطلاب، التسجيل الأكاديمي، المكتبة الرقمية، والبوابة الأكاديمية الشاملة لجميع الخدمات التعليمية والإدارية.",
+      keyFeatures: ["نظام إدارة الطلاب", "بوابة التسجيل الأكاديمي", "المكتبة الرقمية", "نظام الدرجات والتقييم", "دليل أعضاء هيئة التدريس", "نظام الجداول الدراسية", "بوابة البحث العلمي", "خدمات الطلاب الإلكترونية"],
+      technicalFeatures: ["نظام إدارة التعلم المتقدم", "تكامل مع أنظمة الجامعة", "حماية البيانات الأكاديمية", "نظام المصادقة الموحد", "تحليلات أكاديمية شاملة", "واجهات API تعليمية"],
+      benefits: ["تسهيل الإجراءات الأكاديمية", "وصول سهل للمعلومات", "تحسين التواصل الجامعي", "رقمنة الخدمات التعليمية", "تحسين تجربة الطلاب", "إدارة فعالة للموارد"],
+      targetAudience: ["الطلاب الجامعيون", "أعضاء هيئة التدريس", "الإدارة الأكاديمية", "الباحثون", "أولياء الأمور"],
+      timeline: "8-12 أسبوع",
+      technologies: ["React.js", "LMS Integration", "Academic APIs", "Database Systems", "Authentication", "Research Platforms"],
+      category: "education"
+    },
+
+    "University Website": {
+      name: "University Website",
+      description: "Comprehensive website for universities and higher education institutions",
+      fullDescription: "Integrated university website that provides a comprehensive platform for students, faculty, and administration. Includes student management system, academic registration, digital library, and comprehensive academic portal for all educational and administrative services.",
+      keyFeatures: ["Student Management System", "Academic Registration Portal", "Digital Library", "Grades and Assessment System", "Faculty Directory", "Class Schedules System", "Research Portal", "Electronic Student Services"],
+      technicalFeatures: ["Advanced Learning Management System", "University Systems Integration", "Academic Data Protection", "Single Sign-On Authentication", "Comprehensive Academic Analytics", "Educational API Integration"],
+      benefits: ["Simplified Academic Procedures", "Easy Information Access", "Enhanced University Communication", "Educational Service Digitization", "Improved Student Experience", "Efficient Resource Management"],
+      targetAudience: ["University Students", "Faculty Members", "Academic Administration", "Researchers", "Parents"],
+      timeline: "8-12 weeks",
+      technologies: ["React.js", "LMS Integration", "Academic APIs", "Database Systems", "Authentication", "Research Platforms"],
+      category: "education"
+    },
+
+    // News & Media Websites
+    "موقع إخباري تفاعلي": {
+      name: "موقع إخباري تفاعلي",
+      description: "منصة إخبارية رقمية شاملة ومتطورة",
+      fullDescription: "منصة إخبارية رقمية متطورة تقدم الأخبار والمقالات بطريقة تفاعلية وجذابة. تتضمن نظام نشر متقدم، تصنيف الأخبار، التعليقات التفاعلية، والبث المباشر للأحداث المهمة مع إمكانيات مشاركة واسعة عبر وسائل التواصل الاجتماعي.",
+      keyFeatures: ["نشر الأخبار الفورية", "تصنيف وتبويب متقدم", "نظام تعليقات تفاعلي", "البث المباشر للأحداث", "محرك البحث المتقدم", "مشاركة اجتماعية واسعة", "أرشيف الأخبار الشامل", "نظام اشتراكات النشرة الإخبارية"],
+      technicalFeatures: ["نظام إدارة محتوى متطور", "تحسين محركات البحث", "تحليلات القراءة المتقدمة", "نظام التعليقات الآمن", "تكامل وسائل التواصل", "استضافة محتوى الوسائط"],
+      benefits: ["وصول سريع للأخبار الحديثة", "تفاعل مباشر مع المحتوى", "مصداقية في نقل الأخبار", "تنوع في المحتوى الإخباري", "سهولة البحث والأرشفة", "تجربة قراءة محسنة"],
+      targetAudience: ["القراء والمتابعين", "الصحفيين والكتاب", "المؤسسات الإعلامية", "الباحثين", "عامة الجمهور"],
+      timeline: "5-8 أسابيع",
+      technologies: ["React.js", "CMS System", "SEO Tools", "Social Integration", "Analytics", "Media Hosting"],
+      category: "media"
+    },
+
+    "Interactive News Portal": {
+      name: "Interactive News Portal",
+      description: "Advanced and comprehensive digital news platform",
+      fullDescription: "Advanced digital news platform that presents news and articles in an interactive and engaging way. Includes advanced publishing system, news categorization, interactive comments, live streaming of important events with extensive sharing capabilities across social media platforms.",
+      keyFeatures: ["Real-time News Publishing", "Advanced Categorization", "Interactive Comments System", "Live Event Broadcasting", "Advanced Search Engine", "Extensive Social Sharing", "Comprehensive News Archive", "Newsletter Subscription System"],
+      technicalFeatures: ["Advanced Content Management System", "SEO Optimization", "Advanced Reading Analytics", "Secure Comments System", "Social Media Integration", "Media Content Hosting"],
+      benefits: ["Quick Access to Latest News", "Direct Content Interaction", "News Reporting Credibility", "Diverse News Content", "Easy Search and Archiving", "Enhanced Reading Experience"],
+      targetAudience: ["Readers and Followers", "Journalists and Writers", "Media Organizations", "Researchers", "General Public"],
+      timeline: "5-8 weeks",
+      technologies: ["React.js", "CMS System", "SEO Tools", "Social Integration", "Analytics", "Media Hosting"],
+      category: "media"
+    },
+
+    "مجلة إلكترونية": {
+      name: "مجلة إلكترونية",
+      description: "منصة نشر مجلات ومقالات رقمية متخصصة",
+      fullDescription: "منصة رقمية متطورة للمجلات الإلكترونية تقدم محتوى متخصص وعالي الجودة. تتضمن نظام نشر احترافي، تصميم مجلات تفاعلية، إدارة الاشتراكات، ونظام توزيع رقمي شامل مع إمكانيات قراءة محسنة على جميع الأجهزة.",
+      keyFeatures: ["تصميم مجلات تفاعلية", "نظام اشتراكات متقدم", "مكتبة أرشيف شاملة", "محرر مقالات احترافي", "نظام التوزيع الرقمي", "قراءة محسنة للأجهزة", "إدارة الكتاب والمحررين", "تحليلات القراءة المفصلة"],
+      technicalFeatures: ["تقنيات النشر الرقمي", "تصميم متجاوب متقدم", "نظام إدارة الاشتراكات", "حماية المحتوى المدفوع", "تحسين تجربة القراءة", "تكامل أنظمة الدفع"],
+      benefits: ["محتوى متخصص عالي الجودة", "تجربة قراءة مميزة", "وصول سهل للأعداد السابقة", "اشتراكات مرنة ومتنوعة", "تفاعل مع الكتاب", "توفر على جميع الأجهزة"],
+      targetAudience: ["القراء المتخصصين", "الباحثين والأكاديميين", "المهتمين بالمجالات المتخصصة", "الكتاب والمحررين", "المؤسسات التعليمية"],
+      timeline: "6-9 أسابيع",
+      technologies: ["React.js", "Digital Publishing", "Subscription Management", "Payment Systems", "Reading Analytics", "Content Protection"],
+      category: "media"
+    },
+
+    "Digital Magazine": {
+      name: "Digital Magazine",
+      description: "Specialized digital magazine and article publishing platform",
+      fullDescription: "Advanced digital platform for electronic magazines that provides specialized, high-quality content. Includes professional publishing system, interactive magazine design, subscription management, and comprehensive digital distribution system with enhanced reading capabilities across all devices.",
+      keyFeatures: ["Interactive Magazine Design", "Advanced Subscription System", "Comprehensive Archive Library", "Professional Article Editor", "Digital Distribution System", "Device-Optimized Reading", "Writers and Editors Management", "Detailed Reading Analytics"],
+      technicalFeatures: ["Digital Publishing Technologies", "Advanced Responsive Design", "Subscription Management System", "Paid Content Protection", "Reading Experience Optimization", "Payment Systems Integration"],
+      benefits: ["High-Quality Specialized Content", "Premium Reading Experience", "Easy Access to Past Issues", "Flexible and Diverse Subscriptions", "Writer Interaction", "Available on All Devices"],
+      targetAudience: ["Specialized Readers", "Researchers and Academics", "Field Specialists", "Writers and Editors", "Educational Institutions"],
+      timeline: "6-9 weeks",
+      technologies: ["React.js", "Digital Publishing", "Subscription Management", "Payment Systems", "Reading Analytics", "Content Protection"],
+      category: "media"
+    },
+
+    // Portfolio & Personal Websites
+    "معرض أعمال فنان": {
+      name: "معرض أعمال فنان",
+      description: "موقع شخصي لعرض الأعمال الفنية والإبداعية",
+      fullDescription: "موقع ويب شخصي راقي للفنانين والمبدعين لعرض أعمالهم الفنية والإبداعية بطريقة احترافية وجذابة. يتضمن معرض صور عالي الجودة، سيرة ذاتية فنية، إدارة المعارض والفعاليات، ونظام تواصل مع العملاء والمهتمين بالفن.",
+      keyFeatures: ["معرض أعمال فنية تفاعلي", "سيرة ذاتية فنية شاملة", "إدارة المعارض والفعاليات", "نظام تواصل مع العملاء", "مدونة فنية شخصية", "عرض الأعمال الحديثة", "تصنيف الأعمال الفنية", "نظام مبيعات الأعمال الفنية"],
+      technicalFeatures: ["معرض صور عالي الجودة", "تصميم فني متجاوب", "تحسين عرض الأعمال", "حماية حقوق الطبع", "تحليلات الزوار", "تكامل وسائل التواصل"],
+      benefits: ["عرض احترافي للأعمال الفنية", "وصول أوسع للجمهور المهتم", "زيادة فرص البيع والتعاون", "بناء هوية فنية قوية", "تفاعل مباشر مع المعجبين", "أرشفة شاملة للأعمال"],
+      targetAudience: ["الفنانين والمبدعين", "عشاق الفن", "جامعي الأعمال الفنية", "القيمين الفنيين", "وسائل الإعلام الفنية"],
+      timeline: "4-6 أسابيع",
+      technologies: ["React.js", "Image Gallery", "Portfolio Management", "Contact Systems", "Blog Platform", "Social Integration"],
+      category: "portfolio"
+    },
+
+    "Artist Portfolio": {
+      name: "Artist Portfolio",
+      description: "Personal website for showcasing artistic and creative works",
+      fullDescription: "Elegant personal website for artists and creators to showcase their artistic and creative works professionally and attractively. Includes high-quality image gallery, artistic biography, exhibition and event management, and communication system with clients and art enthusiasts.",
+      keyFeatures: ["Interactive Artistic Works Gallery", "Comprehensive Artistic Biography", "Exhibition and Event Management", "Client Communication System", "Personal Art Blog", "Latest Works Display", "Artistic Works Categorization", "Art Sales System"],
+      technicalFeatures: ["High-Quality Image Gallery", "Responsive Artistic Design", "Work Display Optimization", "Copyright Protection", "Visitor Analytics", "Social Media Integration"],
+      benefits: ["Professional Artistic Works Display", "Broader Reach to Interested Audience", "Increased Sales and Collaboration Opportunities", "Strong Artistic Identity Building", "Direct Fan Interaction", "Comprehensive Works Archive"],
+      targetAudience: ["Artists and Creators", "Art Lovers", "Art Collectors", "Art Curators", "Art Media"],
+      timeline: "4-6 weeks",
+      technologies: ["React.js", "Image Gallery", "Portfolio Management", "Contact Systems", "Blog Platform", "Social Integration"],
+      category: "portfolio"
+    },
+
+    "موقع شخصي احترافي": {
+      name: "موقع شخصي احترافي",
+      description: "موقع شخصي للمهنيين والخبراء في مجالاتهم",
+      fullDescription: "موقع ويب شخصي احترافي مصمم للخبراء والمهنيين لعرض سيرتهم الذاتية، خبراتهم، وإنجازاتهم بطريقة مهنية ومؤثرة. يتضمن عرض للمهارات والخبرات، أعمال ومشاريع سابقة، شهادات وتقديرات، ونظام تواصل للفرص المهنية والتعاون.",
+      keyFeatures: ["سيرة ذاتية تفاعلية شاملة", "عرض المهارات والخبرات", "معرض المشاريع والأعمال", "الشهادات والتقديرات", "مدونة مهنية متخصصة", "نظام تواصل مهني", "خدمات استشارية", "تحديثات الإنجازات المهنية"],
+      technicalFeatures: ["تصميم مهني أنيق", "تحسين محركات البحث", "تجربة مستخدم محسنة", "تكامل مع LinkedIn", "تحليلات الزوار", "نظام إدارة المحتوى"],
+      benefits: ["عرض مهني مميز للخبرات", "زيادة الفرص المهنية", "بناء سمعة مهنية قوية", "تواصل مع أصحاب العمل", "تطوير الشبكة المهنية", "عرض الخدمات الاستشارية"],
+      targetAudience: ["المهنيين والخبراء", "أصحاب العمل", "عملاء محتملين", "شركاء في المجال", "الباحثين عن خدمات استشارية"],
+      timeline: "3-5 أسابيع",
+      technologies: ["React.js", "Portfolio System", "Blog Platform", "Contact Management", "SEO Tools", "Analytics"],
+      category: "portfolio"
+    },
+
+    "Professional Personal Website": {
+      name: "Professional Personal Website",
+      description: "Personal website for professionals and experts in their fields",
+      fullDescription: "Professional personal website designed for experts and professionals to showcase their resume, experience, and achievements professionally and impressively. Includes skills and experience display, previous works and projects, certificates and recognitions, and communication system for professional opportunities and collaboration.",
+      keyFeatures: ["Comprehensive Interactive Resume", "Skills and Experience Display", "Projects and Works Gallery", "Certificates and Recognitions", "Specialized Professional Blog", "Professional Communication System", "Consulting Services", "Professional Achievement Updates"],
+      technicalFeatures: ["Elegant Professional Design", "SEO Optimization", "Enhanced User Experience", "LinkedIn Integration", "Visitor Analytics", "Content Management System"],
+      benefits: ["Distinguished Professional Experience Display", "Increased Professional Opportunities", "Strong Professional Reputation Building", "Employer Communication", "Professional Network Development", "Consulting Services Display"],
+      targetAudience: ["Professionals and Experts", "Employers", "Potential Clients", "Industry Partners", "Consulting Service Seekers"],
+      timeline: "3-5 weeks",
+      technologies: ["React.js", "Portfolio System", "Blog Platform", "Contact Management", "SEO Tools", "Analytics"],
+      category: "portfolio"
+    },
+
+    // Restaurant & Service Websites
+    "موقع مطعم متكامل": {
+      name: "موقع مطعم متكامل",
+      description: "موقع شامل للمطاعم مع نظام طلبات وحجوزات",
+      fullDescription: "موقع ويب متكامل للمطاعم والمقاهي يوفر تجربة رقمية شاملة للعملاء ونظام إدارة متقدم للمطعم. يتضمن عرض القائمة التفاعلية، نظام الطلبات أونلاين، حجز الطاولات، وإدارة شاملة للعمليات اليومية مع تكامل أنظمة الدفع والتوصيل.",
+      keyFeatures: ["قائمة طعام تفاعلية مصورة", "نظام طلبات أونلاين", "حجز الطاولات الذكي", "نظام إدارة الطلبات", "تتبع التوصيل", "برنامج نقاط الولاء", "تقييمات ومراجعات العملاء", "عروض وخصومات خاصة"],
+      technicalFeatures: ["تكامل مع أنظمة POS", "معالجة مدفوعات متعددة", "نظام إدارة المخزون", "تحليلات المبيعات", "إدارة طاقم العمل", "تطبيق توصيل متكامل"],
+      benefits: ["زيادة المبيعات والطلبات", "تحسين تجربة العملاء", "تنظيم العمليات التشغيلية", "تقليل تكاليف التشغيل", "وصول لعملاء جدد", "إدارة فعالة للموارد"],
+      targetAudience: ["أصحاب المطاعم", "عملاء المطاعم", "خدمات التوصيل", "السياح والزوار", "محبي الطعام"],
+      timeline: "6-8 أسابيع",
+      technologies: ["React.js", "POS Integration", "Payment Gateways", "Delivery Systems", "Inventory Management", "Customer Analytics"],
+      category: "restaurant"
+    },
+
+    "Complete Restaurant Website": {
+      name: "Complete Restaurant Website",
+      description: "Comprehensive restaurant website with ordering and reservation system",
+      fullDescription: "Integrated restaurant and cafe website that provides comprehensive digital experience for customers and advanced management system for the restaurant. Includes interactive menu display, online ordering system, table reservations, and comprehensive daily operations management with payment and delivery systems integration.",
+      keyFeatures: ["Interactive Photo Menu", "Online Ordering System", "Smart Table Reservations", "Order Management System", "Delivery Tracking", "Loyalty Points Program", "Customer Reviews and Ratings", "Special Offers and Discounts"],
+      technicalFeatures: ["POS Systems Integration", "Multiple Payment Processing", "Inventory Management System", "Sales Analytics", "Staff Management", "Integrated Delivery App"],
+      benefits: ["Increased Sales and Orders", "Enhanced Customer Experience", "Organized Operational Processes", "Reduced Operating Costs", "Reach New Customers", "Efficient Resource Management"],
+      targetAudience: ["Restaurant Owners", "Restaurant Customers", "Delivery Services", "Tourists and Visitors", "Food Lovers"],
+      timeline: "6-8 weeks",
+      technologies: ["React.js", "POS Integration", "Payment Gateways", "Delivery Systems", "Inventory Management", "Customer Analytics"],
+      category: "restaurant"
+    },
+
+    // Service Provider Platforms
+    "منصة خدمات": {
+      name: "منصة خدمات",
+      description: "منصة شاملة لمقدمي الخدمات المهنية",
+      fullDescription: "منصة رقمية متطورة تربط بين مقدمي الخدمات المهنية والعملاء الباحثين عن هذه الخدمات. تتضمن دليل شامل للخدمات، نظام حجز وإدارة المواعيد، تقييم مقدمي الخدمات، ونظام دفع آمن مع ضمانات الجودة وخدمة العملاء المتميزة.",
+      keyFeatures: ["دليل شامل لمقدمي الخدمات", "نظام حجز مواعيد ذكي", "تقييم ومراجعات الخدمات", "إدارة ملفات مقدمي الخدمات", "نظام دفع آمن ومرن", "تتبع حالة الطلبات", "خدمة عملاء متاحة 24/7", "برنامج ضمان الجودة"],
+      technicalFeatures: ["نظام بحث متقدم للخدمات", "تكامل مع التقويم", "معالجة مدفوعات متعددة", "نظام تنبيهات ذكي", "تحليلات الأداء", "واجهات API للتكامل"],
+      benefits: ["سهولة العثور على الخدمات المطلوبة", "ضمان جودة الخدمات المقدمة", "أسعار تنافسية ومتنوعة", "توفير الوقت والجهد", "دعم فني متخصص", "مرونة في الدفع والحجز"],
+      targetAudience: ["مقدمي الخدمات المهنية", "العملاء الباحثين عن خدمات", "أصحاب الأعمال", "الأفراد والعائلات", "الشركات الصغيرة والمتوسطة"],
+      timeline: "8-12 أسبوع",
+      technologies: ["React.js", "Service Management", "Booking Systems", "Payment Processing", "Rating Systems", "Calendar Integration"],
+      category: "services"
+    },
+
+    "Service Provider Platform": {
+      name: "Service Provider Platform",
+      description: "Comprehensive platform for professional service providers",
+      fullDescription: "Advanced digital platform that connects professional service providers with customers seeking these services. Includes comprehensive service directory, booking and appointment management system, service provider ratings, and secure payment system with quality guarantees and exceptional customer service.",
+      keyFeatures: ["Comprehensive Service Provider Directory", "Smart Appointment Booking System", "Service Reviews and Ratings", "Service Provider Profile Management", "Secure and Flexible Payment System", "Order Status Tracking", "24/7 Customer Service", "Quality Assurance Program"],
+      technicalFeatures: ["Advanced Service Search System", "Calendar Integration", "Multiple Payment Processing", "Smart Notification System", "Performance Analytics", "Integration APIs"],
+      benefits: ["Easy Finding of Required Services", "Guaranteed Quality of Provided Services", "Competitive and Varied Prices", "Time and Effort Saving", "Specialized Technical Support", "Payment and Booking Flexibility"],
+      targetAudience: ["Professional Service Providers", "Service-Seeking Customers", "Business Owners", "Individuals and Families", "Small and Medium Enterprises"],
+      timeline: "8-12 weeks",
+      technologies: ["React.js", "Service Management", "Booking Systems", "Payment Processing", "Rating Systems", "Calendar Integration"],
+      category: "services"
+    },
+
+    // Real Estate Platforms
+    "منصة عقارية شاملة": {
+      name: "منصة عقارية شاملة",
+      description: "منصة متكاملة للخدمات والاستثمار العقاري",
+      fullDescription: "منصة عقارية رقمية متطورة تجمع بين جميع خدمات السوق العقاري في مكان واحد. تشمل عرض العقارات، البحث المتقدم، التقييم العقاري، الاستشارات العقارية، وإدارة الاستثمارات العقارية مع أدوات تحليل السوق وتوقع الأسعار باستخدام الذكاء الاصطناعي.",
+      keyFeatures: ["دليل عقارات شامل ومصور", "بحث متقدم بالخرائط", "تقييم عقاري احترافي", "استشارات عقارية متخصصة", "إدارة الاستثمار العقاري", "تحليل السوق العقاري", "حاسبة القروض العقارية", "جولات افتراضية للعقارات"],
+      technicalFeatures: ["تكامل مع الخرائط الذكية", "الذكاء الاصطناعي للتقييم", "نظام CRM عقاري متقدم", "تحليلات السوق الفورية", "أمان البيانات المتقدم", "واجهات API عقارية"],
+      benefits: ["وصول شامل لجميع العقارات", "قرارات استثمارية مدروسة", "توفير الوقت في البحث", "تقييم دقيق للاستثمارات", "استشارات من خبراء معتمدين", "متابعة دورية لأداء الاستثمار"],
+      targetAudience: ["المستثمرين العقاريين", "الباحثين عن سكن", "وكلاء العقارات", "المطورين العقاريين", "المستشارين العقاريين"],
+      timeline: "10-16 أسبوع",
+      technologies: ["React.js", "Maps Integration", "AI Analytics", "CRM Systems", "Market Analysis", "Virtual Tours"],
+      category: "realestate"
+    },
+
+    "Comprehensive Real Estate Platform": {
+      name: "Comprehensive Real Estate Platform",
+      description: "Integrated platform for real estate services and investment",
+      fullDescription: "Advanced digital real estate platform that brings together all real estate market services in one place. Includes property listings, advanced search, property valuation, real estate consulting, and real estate investment management with market analysis tools and price forecasting using artificial intelligence.",
+      keyFeatures: ["Comprehensive Photo Property Directory", "Advanced Map Search", "Professional Property Valuation", "Specialized Real Estate Consulting", "Real Estate Investment Management", "Real Estate Market Analysis", "Mortgage Calculator", "Virtual Property Tours"],
+      technicalFeatures: ["Smart Maps Integration", "AI for Valuation", "Advanced Real Estate CRM", "Real-time Market Analytics", "Advanced Data Security", "Real Estate APIs"],
+      benefits: ["Comprehensive Access to All Properties", "Informed Investment Decisions", "Time-saving Search", "Accurate Investment Valuation", "Certified Expert Consulting", "Regular Investment Performance Monitoring"],
+      targetAudience: ["Real Estate Investors", "Home Seekers", "Real Estate Agents", "Real Estate Developers", "Real Estate Consultants"],
+      timeline: "10-16 weeks",
+      technologies: ["React.js", "Maps Integration", "AI Analytics", "CRM Systems", "Market Analysis", "Virtual Tours"],
+      category: "realestate"
+    },
+
+    "موقع شركة عقارية": {
+      name: "موقع شركة عقارية",
+      description: "موقع احترافي لشركات الوساطة العقارية",
+      fullDescription: "موقع ويب احترافي لشركات الوساطة والتطوير العقاري يعرض الخدمات والمشاريع العقارية بطريقة جذابة ومهنية. يتضمن معرض للمشاريع والعقارات، فريق العمل المختص، خدمات الشركة، ونظام تواصل متقدم للعملاء المهتمين والمستثمرين.",
+      keyFeatures: ["معرض مشاريع عقارية احترافي", "دليل العقارات المتاحة", "فريق الاستشاريين العقاريين", "خدمات الشركة المتنوعة", "نظام طلب استشارة عقارية", "مدونة عقارية متخصصة", "شهادات العملاء والمشاريع", "تواصل مباشر مع الفريق"],
+      technicalFeatures: ["عرض عقارات تفاعلي", "تكامل مع منصات العقارات", "نظام إدارة العملاء المحتملين", "تحليلات الزوار والاهتمامات", "تحسين محركات البحث", "تكامل وسائل التواصل"],
+      benefits: ["عرض مهني للخدمات العقارية", "زيادة الثقة بالعلامة التجارية", "جذب عملاء ومستثمرين جدد", "تحسين التواصل مع العملاء", "زيادة المبيعات والصفقات", "بناء سمعة عقارية قوية"],
+      targetAudience: ["العملاء المهتمين بالعقارات", "المستثمرين العقاريين", "الباحثين عن سكن", "شركاء الأعمال", "المطورين العقاريين"],
+      timeline: "5-8 أسابيع",
+      technologies: ["React.js", "Property Management", "CRM Integration", "SEO Tools", "Lead Generation", "Analytics"],
+      category: "realestate"
+    },
+
+    "Real Estate Agency Website": {
+      name: "Real Estate Agency Website",
+      description: "Professional website for real estate brokerage companies",
+      fullDescription: "Professional website for real estate brokerage and development companies that showcases real estate services and projects attractively and professionally. Includes project and property gallery, specialized team, company services, and advanced communication system for interested customers and investors.",
+      keyFeatures: ["Professional Real Estate Projects Gallery", "Available Properties Directory", "Real Estate Consultants Team", "Diverse Company Services", "Real Estate Consultation Request System", "Specialized Real Estate Blog", "Client and Project Testimonials", "Direct Team Communication"],
+      technicalFeatures: ["Interactive Property Display", "Real Estate Platforms Integration", "Potential Client Management System", "Visitor and Interest Analytics", "SEO Optimization", "Social Media Integration"],
+      benefits: ["Professional Real Estate Services Display", "Increased Brand Trust", "Attract New Clients and Investors", "Improved Customer Communication", "Increased Sales and Deals", "Strong Real Estate Reputation Building"],
+      targetAudience: ["Real Estate Interested Clients", "Real Estate Investors", "Home Seekers", "Business Partners", "Real Estate Developers"],
+      timeline: "5-8 weeks",
+      technologies: ["React.js", "Property Management", "CRM Integration", "SEO Tools", "Lead Generation", "Analytics"],
+      category: "realestate"
     }
   };
 
