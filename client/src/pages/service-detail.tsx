@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -599,6 +599,70 @@ export default function ServiceDetail() {
     },
   ];
 
+  // Website categories for web development
+  const websiteCategories = [
+    {
+      id: "all",
+      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      icon: Globe,
+      color: "bg-blue-500",
+    },
+    {
+      id: "corporate",
+      title: dir === 'rtl' ? "مواقع الشركات" : "Corporate Websites",
+      icon: Building,
+      color: "bg-green-500",
+    },
+    {
+      id: "ecommerce",
+      title: dir === 'rtl' ? "التجارة الإلكترونية" : "E-commerce",
+      icon: ShoppingCart,
+      color: "bg-purple-500",
+    },
+    {
+      id: "government",
+      title: dir === 'rtl' ? "المواقع الحكومية" : "Government Portals",
+      icon: Landmark,
+      color: "bg-orange-500",
+    },
+    {
+      id: "education",
+      title: dir === 'rtl' ? "التعليم والجامعات" : "Education & Universities",
+      icon: BookOpen,
+      color: "bg-indigo-500",
+    },
+    {
+      id: "healthcare",
+      title: dir === 'rtl' ? "المواقع الطبية" : "Healthcare Websites",
+      icon: Heart,
+      color: "bg-pink-500",
+    },
+    {
+      id: "news",
+      title: dir === 'rtl' ? "الأخبار والإعلام" : "News & Media",
+      icon: Newspaper,
+      color: "bg-red-500",
+    },
+    {
+      id: "portfolio",
+      title: dir === 'rtl' ? "المعارض الشخصية" : "Portfolio & Personal",
+      icon: User,
+      color: "bg-teal-500",
+    },
+    {
+      id: "restaurant",
+      title: dir === 'rtl' ? "المطاعم والخدمات" : "Restaurants & Services",
+      icon: Utensils,
+      color: "bg-yellow-500",
+    },
+    {
+      id: "realestate",
+      title: dir === 'rtl' ? "العقارات" : "Real Estate",
+      icon: MapPin,
+      color: "bg-slate-500",
+    },
+  ];
+
   // Sample apps for each category
   const sampleApps = {
     business: [
@@ -699,11 +763,130 @@ export default function ServiceDetail() {
     ],
   };
 
+  // Sample websites for each category  
+  const sampleWebsites = {
+    corporate: [
+      {
+        name: dir === 'rtl' ? "موقع شركة تقنية" : "Tech Company Website",
+        description: dir === 'rtl' ? "موقع شركة تقنية احترافي بتصميم عصري" : "Professional tech company website with modern design",
+        features: dir === 'rtl' ? ["معرض الخدمات", "فريق العمل", "نماذج الأعمال"] : ["Services Showcase", "Team Profiles", "Portfolio Gallery"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع شركة استشارية" : "Consulting Firm Website",
+        description: dir === 'rtl' ? "موقع لشركة استشارية مع نظام إدارة العملاء" : "Consulting firm website with client management system",
+        features: dir === 'rtl' ? ["خدمات استشارية", "دراسات الحالة", "حجز استشارات"] : ["Consulting Services", "Case Studies", "Consultation Booking"],
+      },
+    ],
+    ecommerce: [
+      {
+        name: dir === 'rtl' ? "متجر إلكتروني متكامل" : "Full E-commerce Store",
+        description: dir === 'rtl' ? "متجر إلكتروني شامل مع نظام إدارة المخزون" : "Complete e-commerce store with inventory management",
+        features: dir === 'rtl' ? ["كتالوج المنتجات", "سلة التسوق", "بوابات الدفع", "لوحة الإدارة"] : ["Product Catalog", "Shopping Cart", "Payment Gateways", "Admin Dashboard"],
+      },
+      {
+        name: dir === 'rtl' ? "سوق إلكتروني" : "Online Marketplace",
+        description: dir === 'rtl' ? "منصة تجمع عدة بائعين في مكان واحد" : "Platform connecting multiple vendors in one place",
+        features: dir === 'rtl' ? ["حسابات البائعين", "نظام العمولات", "إدارة الطلبات"] : ["Vendor Accounts", "Commission System", "Order Management"],
+      },
+    ],
+    government: [
+      {
+        name: dir === 'rtl' ? "بوابة حكومية إلكترونية" : "Government E-Services Portal",
+        description: dir === 'rtl' ? "بوابة للخدمات الحكومية الإلكترونية" : "Portal for digital government services",
+        features: dir === 'rtl' ? ["الخدمات الرقمية", "المعاملات الإلكترونية", "نظام المواعيد"] : ["Digital Services", "E-Transactions", "Appointment System"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع وزاري" : "Ministry Website",
+        description: dir === 'rtl' ? "موقع رسمي لوزارة حكومية" : "Official website for government ministry",
+        features: dir === 'rtl' ? ["الأخبار الرسمية", "البيانات", "التقارير", "التواصل"] : ["Official News", "Data & Reports", "Public Communication"],
+      },
+    ],
+    education: [
+      {
+        name: dir === 'rtl' ? "منصة تعليمية تفاعلية" : "Interactive Learning Platform",
+        description: dir === 'rtl' ? "منصة تعليم إلكتروني شاملة" : "Comprehensive e-learning platform",
+        features: dir === 'rtl' ? ["الدورات التفاعلية", "نظام الاختبارات", "شهادات إنجاز"] : ["Interactive Courses", "Testing System", "Certificates"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع جامعة" : "University Website",
+        description: dir === 'rtl' ? "موقع جامعة شامل مع نظام إدارة الطلاب" : "Complete university website with student management",
+        features: dir === 'rtl' ? ["القبول والتسجيل", "الأكاديميات", "البحث العلمي"] : ["Admissions", "Academics", "Research Portal"],
+      },
+    ],
+    healthcare: [
+      {
+        name: dir === 'rtl' ? "منصة صحية متكاملة" : "Integrated Healthcare Platform",
+        description: dir === 'rtl' ? "منصة طبية شاملة لإدارة المرضى" : "Comprehensive medical platform for patient management",
+        features: dir === 'rtl' ? ["حجز المواعيد", "السجلات الطبية", "الاستشارات عن بُعد"] : ["Appointment Booking", "Medical Records", "Telemedicine"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع مستشفى" : "Hospital Website",
+        description: dir === 'rtl' ? "موقع مستشفى مع أنظمة إدارة متقدمة" : "Hospital website with advanced management systems",
+        features: dir === 'rtl' ? ["أقسام المستشفى", "الأطباء", "الخدمات الطبية"] : ["Hospital Departments", "Medical Staff", "Healthcare Services"],
+      },
+    ],
+    news: [
+      {
+        name: dir === 'rtl' ? "موقع إخباري تفاعلي" : "Interactive News Portal",
+        description: dir === 'rtl' ? "منصة إخبارية شاملة مع نظام إدارة المحتوى" : "Comprehensive news platform with content management",
+        features: dir === 'rtl' ? ["الأخبار العاجلة", "التصنيفات", "التعليقات", "البث المباشر"] : ["Breaking News", "Categories", "Comments", "Live Streaming"],
+      },
+      {
+        name: dir === 'rtl' ? "مجلة إلكترونية" : "Digital Magazine",
+        description: dir === 'rtl' ? "مجلة رقمية تفاعلية مع محتوى متنوع" : "Interactive digital magazine with diverse content",
+        features: dir === 'rtl' ? ["المقالات التفاعلية", "الاشتراكات", "الأرشيف"] : ["Interactive Articles", "Subscriptions", "Archive"],
+      },
+    ],
+    portfolio: [
+      {
+        name: dir === 'rtl' ? "معرض أعمال فنان" : "Artist Portfolio",
+        description: dir === 'rtl' ? "معرض شخصي لعرض الأعمال الفنية" : "Personal gallery for showcasing artistic works",
+        features: dir === 'rtl' ? ["معرض الصور", "السيرة الذاتية", "التواصل"] : ["Image Gallery", "Biography", "Contact"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع شخصي احترافي" : "Professional Personal Website",
+        description: dir === 'rtl' ? "موقع شخصي للمهنيين والخبراء" : "Personal website for professionals and experts",
+        features: dir === 'rtl' ? ["الخبرات المهنية", "المشاريع", "المدونة الشخصية"] : ["Professional Experience", "Projects", "Personal Blog"],
+      },
+    ],
+    restaurant: [
+      {
+        name: dir === 'rtl' ? "موقع مطعم متكامل" : "Complete Restaurant Website",
+        description: dir === 'rtl' ? "موقع مطعم مع نظام طلبات أونلاين" : "Restaurant website with online ordering system",
+        features: dir === 'rtl' ? ["قائمة الطعام", "الحجوزات", "الطلب أونلاين", "التقييمات"] : ["Menu Display", "Reservations", "Online Orders", "Reviews"],
+      },
+      {
+        name: dir === 'rtl' ? "منصة خدمات" : "Service Provider Platform",
+        description: dir === 'rtl' ? "منصة لمقدمي الخدمات المختلفة" : "Platform for various service providers",
+        features: dir === 'rtl' ? ["دليل الخدمات", "الحجز أونلاين", "نظام التقييم"] : ["Service Directory", "Online Booking", "Rating System"],
+      },
+    ],
+    realestate: [
+      {
+        name: dir === 'rtl' ? "منصة عقارية شاملة" : "Comprehensive Real Estate Platform",
+        description: dir === 'rtl' ? "منصة عقارية متكاملة للبيع والإيجار" : "Complete real estate platform for sales and rentals",
+        features: dir === 'rtl' ? ["بحث العقارات", "عرض تفصيلي", "جولة افتراضية", "حاسبة التمويل"] : ["Property Search", "Detailed Listings", "Virtual Tours", "Mortgage Calculator"],
+      },
+      {
+        name: dir === 'rtl' ? "موقع شركة عقارية" : "Real Estate Agency Website",
+        description: dir === 'rtl' ? "موقع وكالة عقارية مع أدوات إدارة" : "Real estate agency website with management tools",
+        features: dir === 'rtl' ? ["محفظة العقارات", "فريق المبيعات", "استشارات عقارية"] : ["Property Portfolio", "Sales Team", "Real Estate Consulting"],
+      },
+    ],
+  };
+
   const getFilteredApps = () => {
-    if (selectedAppCategory === "all") {
-      return Object.values(sampleApps).flat();
+    if (service?.category === 'web') {
+      if (selectedAppCategory === "all") {
+        return Object.values(sampleWebsites).flat();
+      }
+      return sampleWebsites[selectedAppCategory as keyof typeof sampleWebsites] || [];
+    } else {
+      if (selectedAppCategory === "all") {
+        return Object.values(sampleApps).flat();
+      }
+      return sampleApps[selectedAppCategory as keyof typeof sampleApps] || [];
     }
-    return sampleApps[selectedAppCategory as keyof typeof sampleApps] || [];
   };
 
   return (
@@ -998,6 +1181,187 @@ export default function ServiceDetail() {
                       {dir === 'rtl' 
                         ? 'نطور تطبيقات مخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى تطبيق احترافي' 
                         : 'We develop custom apps based on your specific needs - tell us your idea and we\'ll turn it into a professional app'
+                      }
+                    </p>
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-xl px-8 py-3">
+                        {dir === 'rtl' ? 'ناقش فكرتك معنا' : 'Discuss Your Idea'}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Website Categories and Examples Section - Only show for web service */}
+        {service && service.category === 'web' && (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <motion.div
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'اختر نوع الموقع أو المنصة التي تريدها' : 'Choose Your Website or Platform Type'}
+                  </h2>
+                  <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نطور مواقع ومنصات متخصصة لجميع المجالات - من مواقع الشركات إلى المنصات الحكومية والتعليمية والطبية' 
+                      : 'We develop specialized websites and platforms for all industries - from corporate sites to government, educational, and healthcare platforms'
+                    }
+                  </p>
+                </motion.div>
+
+                {/* Website Category Filters */}
+                <motion.div
+                  className="flex flex-wrap justify-center gap-3 mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {websiteCategories.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setSelectedAppCategory(category.id)}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium",
+                        selectedAppCategory === category.id
+                          ? `${category.color} text-white shadow-lg`
+                          : "bg-gray-100 text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-200 border border-gray-200 hover:border-gray-300"
+                      )}
+                    >
+                      <category.icon size={18} />
+                      <span>{category.title}</span>
+                    </motion.button>
+                  ))}
+                </motion.div>
+
+                {/* Website Examples Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedAppCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {getFilteredApps().map((website, index) => (
+                      <motion.div
+                        key={`${selectedAppCategory}-${index}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                      >
+                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
+                          <CardHeader>
+                            <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                              <Globe className="w-5 h-5 text-primary" />
+                              {website.name}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-brand-text-muted mb-4 leading-relaxed">
+                              {website.description}
+                            </p>
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                  {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {website.features.map((feature, featureIndex) => (
+                                    <Badge 
+                                      key={featureIndex} 
+                                      variant="secondary" 
+                                      className="text-xs"
+                                    >
+                                      {feature}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              {/* Action Buttons */}
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                {/* View Details Button */}
+                                <Button
+                                  onClick={() => {
+                                    setSelectedAppForDetails(website);
+                                    setShowAppDetailsModal(true);
+                                  }}
+                                  variant="outline"
+                                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`View details for ${website.name}`}
+                                  data-testid={`view-details-website-${website.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-2" />
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                  </span>
+                                </Button>
+                                
+                                {/* Apply Now Button */}
+                                <Button
+                                  onClick={() => {
+                                    // Navigate to contact page with website name pre-selected
+                                    setLocation(`/contact?service=${encodeURIComponent(website.name)}`);
+                                  }}
+                                  className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`Apply for ${website.name}`}
+                                  data-testid={`apply-website-${website.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'اطلب الآن' : 'Apply Now'}
+                                  </span>
+                                  <ArrowRight 
+                                    className={cn(
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                    )} 
+                                  />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Call to Action for Custom Website */}
+                <motion.div
+                  className="mt-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                      {dir === 'rtl' ? 'لديك فكرة موقع أو منصة مختلفة؟' : 'Have a Different Website or Platform Idea?'}
+                    </h3>
+                    <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                      {dir === 'rtl' 
+                        ? 'نطور مواقع ومنصات مخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى موقع أو منصة احترافية' 
+                        : 'We develop custom websites and platforms based on your specific needs - tell us your idea and we\'ll turn it into a professional solution'
                       }
                     </p>
                     <Link href="/contact">
