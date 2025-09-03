@@ -903,13 +903,222 @@ const getDetailedAppInfo = (appName: string) => {
       name: "Media Player",
       description: "Advanced music and video player with professional features",
       fullDescription: "Advanced media player that provides high-quality playback experience for music and video. Supports all common file formats with elegant and user-friendly interface, includes advanced features like audio equalizer and smart playlists.",
-      keyFeatures: ["All Media Format Playback", "Smart Playlists", "Advanced Audio Equalizer", "Elegant and Easy Interface", "Quick Library Search", "Background Playback", "File Sharing", "Custom Audio Settings"],
+      keyFeatures: ["All Media Format Playbook", "Smart Playlists", "Advanced Audio Equalizer", "Elegant and Easy Interface", "Quick Library Search", "Background Playback", "File Sharing", "Custom Audio Settings"],
       technicalFeatures: ["Multi-format Support", "High Audio Quality", "Optimized Battery Consumption", "Smart File Indexing", "Cloud Integration", "Fast Responsive Interface"],
       benefits: ["Distinguished Audio Experience", "Easy Library Management", "Smooth and Reliable Playback", "Storage Space Savings", "Quick Content Access", "Complete Experience Customization"],
       targetAudience: ["Music Lovers", "Video Viewers", "Audio Quality Enthusiasts", "Content Creators", "Entertainment Fans"],
       timeline: "4-5 weeks",
       technologies: ["React Native", "Audio/Video Codecs", "Media Libraries", "Cloud Storage", "UI/UX Frameworks", "Performance Optimization"],
       category: "entertainment"
+    },
+
+    // Desktop Applications
+    "محرر نصوص متقدم": {
+      name: "محرر نصوص متقدم",
+      description: "محرر نصوص احترافي للمطورين والكتاب مع مميزات متطورة",
+      fullDescription: "محرر نصوص قوي ومتطور مصمم للمطورين والكتاب المحترفين. يوفر بيئة كتابة متكاملة مع دعم للعديد من لغات البرمجة، تمييز الكود، وأدوات التطوير المتقدمة. يتضمن إضافات وأدوات تخصيص شاملة لتحسين الإنتاجية.",
+      keyFeatures: ["دعم لغات برمجة متعددة", "تمييز الكود المتقدم", "إكمال تلقائي ذكي", "البحث والاستبدال المتقدم", "إدارة مشاريع متعددة", "نظام إضافات قوي", "واجهات متعددة قابلة للتخصيص", "تتبع الأخطاء والتصحيح"],
+      technicalFeatures: ["محرك تمييز كود متطور", "ذاكرة محسنة للملفات الكبيرة", "نظام إضافات مرن", "تكامل مع Git", "واجهة سريعة الاستجابة", "دعم الملفات المشفرة"],
+      benefits: ["زيادة سرعة البرمجة بـ 40%", "تقليل أخطاء الكود", "تحسين جودة الكتابة", "سهولة إدارة المشاريع", "مرونة في التخصيص", "توفير الوقت والجهد"],
+      targetAudience: ["المطورين", "مبرمجي الويب", "الكتاب التقنيين", "محللي البيانات", "طلاب البرمجة"],
+      timeline: "8-12 أسبوع",
+      technologies: ["Electron", "Node.js", "Monaco Editor", "Language Servers", "Git Integration", "Plugin System"],
+      category: "desktop"
+    },
+
+    "Advanced Text Editor": {
+      name: "Advanced Text Editor",
+      description: "Professional text editor for developers and writers with advanced features",
+      fullDescription: "Powerful and advanced text editor designed for professional developers and writers. Provides an integrated writing environment with support for multiple programming languages, code highlighting, and advanced development tools. Includes comprehensive plugins and customization tools to enhance productivity.",
+      keyFeatures: ["Multiple Programming Language Support", "Advanced Code Highlighting", "Smart Auto-completion", "Advanced Search & Replace", "Multi-project Management", "Powerful Plugin System", "Multiple Customizable Interfaces", "Error Tracking & Debugging"],
+      technicalFeatures: ["Advanced Code Highlighting Engine", "Optimized Memory for Large Files", "Flexible Plugin System", "Git Integration", "Fast Responsive Interface", "Encrypted File Support"],
+      benefits: ["40% Programming Speed Increase", "Code Error Reduction", "Writing Quality Improvement", "Easy Project Management", "Customization Flexibility", "Time and Effort Savings"],
+      targetAudience: ["Developers", "Web Programmers", "Technical Writers", "Data Analysts", "Programming Students"],
+      timeline: "8-12 weeks",
+      technologies: ["Electron", "Node.js", "Monaco Editor", "Language Servers", "Git Integration", "Plugin System"],
+      category: "desktop"
+    },
+
+    "برنامج محاسبة متكامل": {
+      name: "برنامج محاسبة متكامل",
+      description: "نظام محاسبي شامل للشركات الصغيرة والمتوسطة",
+      fullDescription: "برنامج محاسبة متكامل وسهل الاستخدام مصمم للشركات الصغيرة والمتوسطة. يغطي جميع جوانب المحاسبة والمالية من الفواتير والمصروفات إلى التقارير المالية والضرائب. يوفر أتمتة شاملة للعمليات المحاسبية وتحليلات مالية متقدمة.",
+      keyFeatures: ["إدارة الفواتير والمدفوعات", "تتبع المصروفات والإيرادات", "إدارة المخزون والأصول", "تقارير مالية شاملة", "حسابات العملاء والموردين", "نظام الرواتب المتقدم", "إدارة الضرائب", "لوحة تحكم مالية تفاعلية"],
+      technicalFeatures: ["نسخ احتياطية تلقائية", "تشفير البيانات المالية", "تكامل مع البنوك", "واجهات API للمحاسبة", "تحليلات مالية ذكية", "دعم العملات المتعددة"],
+      benefits: ["توفير 60% من وقت المحاسبة", "تقليل الأخطاء المحاسبية", "تحسين السيولة المالية", "اتخاذ قرارات مالية مدروسة", "الامتثال للمعايير المحاسبية", "تبسيط الإجراءات المالية"],
+      targetAudience: ["الشركات الصغيرة والمتوسطة", "المحاسبين", "أصحاب الأعمال", "المكاتب المحاسبية", "المؤسسات غير الربحية"],
+      timeline: "12-16 أسبوع",
+      technologies: ["Desktop Framework", "Database Systems", "Banking APIs", "Reporting Tools", "Accounting Standards", "Security Encryption"],
+      category: "desktop"
+    },
+
+    "Integrated Accounting System": {
+      name: "Integrated Accounting System",
+      description: "Comprehensive accounting system for small and medium enterprises",
+      fullDescription: "Comprehensive and user-friendly accounting software designed for small and medium enterprises. Covers all aspects of accounting and finance from invoices and expenses to financial reports and taxes. Provides comprehensive automation of accounting processes and advanced financial analytics.",
+      keyFeatures: ["Invoice and Payment Management", "Expense and Revenue Tracking", "Inventory and Asset Management", "Comprehensive Financial Reports", "Customer and Supplier Accounts", "Advanced Payroll System", "Tax Management", "Interactive Financial Dashboard"],
+      technicalFeatures: ["Automatic Backups", "Financial Data Encryption", "Bank Integration", "Accounting APIs", "Smart Financial Analytics", "Multi-currency Support"],
+      benefits: ["60% Accounting Time Savings", "Accounting Error Reduction", "Improved Financial Liquidity", "Informed Financial Decision Making", "Accounting Standards Compliance", "Simplified Financial Procedures"],
+      targetAudience: ["Small and Medium Enterprises", "Accountants", "Business Owners", "Accounting Firms", "Non-profit Organizations"],
+      timeline: "12-16 weeks",
+      technologies: ["Desktop Framework", "Database Systems", "Banking APIs", "Reporting Tools", "Accounting Standards", "Security Encryption"],
+      category: "desktop"
+    },
+
+    "برنامج إدارة مطاعم": {
+      name: "برنامج إدارة مطاعم",
+      description: "نظام شامل لإدارة المطاعم والمقاهي مع نقاط البيع",
+      fullDescription: "برنامج إدارة مطاعم متطور يوفر حلولاً شاملة لإدارة جميع جوانب المطعم أو المقهى. يتضمن نظام نقاط بيع متقدم، إدارة المخزون، تتبع المبيعات، وإدارة الموظفين. مصمم لتحسين الكفاءة التشغيلية وزيادة الأرباح.",
+      keyFeatures: ["نظام نقاط بيع POS متقدم", "إدارة القائمة والأسعار", "تتبع المخزون الذكي", "إدارة الطاولات والحجوزات", "نظام إدارة الموظفين", "تقارير مبيعات مفصلة", "إدارة العروض والخصومات", "تكامل مع خدمات التوصيل"],
+      technicalFeatures: ["واجهة تشغيل سريعة", "تكامل مع أجهزة POS", "نظام طباعة ذكي", "قاعدة بيانات محلية", "إدارة طلبات المطبخ", "نظام تنبيهات متقدم"],
+      benefits: ["زيادة سرعة الخدمة بـ 50%", "تحسين دقة الطلبات", "تقليل هدر المخزون", "زيادة رضا العملاء", "تحسين إدارة التكاليف", "زيادة الأرباح"],
+      targetAudience: ["أصحاب المطاعم", "مديري المقاهي", "سلاسل المطاعم", "مطاعم الوجبات السريعة", "المقاهي الشعبية"],
+      timeline: "10-14 أسبوع",
+      technologies: ["Desktop Application", "POS Integration", "Database Management", "Kitchen Display", "Inventory Systems", "Reporting Tools"],
+      category: "desktop"
+    },
+
+    "Restaurant Management System": {
+      name: "Restaurant Management System",
+      description: "Comprehensive restaurant and cafe management system with POS",
+      fullDescription: "Advanced restaurant management software that provides comprehensive solutions for managing all aspects of restaurant or cafe. Includes advanced point-of-sale system, inventory management, sales tracking, and staff management. Designed to improve operational efficiency and increase profits.",
+      keyFeatures: ["Advanced POS System", "Menu and Price Management", "Smart Inventory Tracking", "Table and Reservation Management", "Staff Management System", "Detailed Sales Reports", "Promotions and Discounts Management", "Delivery Services Integration"],
+      technicalFeatures: ["Fast Operating Interface", "POS Hardware Integration", "Smart Printing System", "Local Database", "Kitchen Order Management", "Advanced Alert System"],
+      benefits: ["50% Service Speed Increase", "Order Accuracy Improvement", "Inventory Waste Reduction", "Customer Satisfaction Increase", "Cost Management Improvement", "Profit Increase"],
+      targetAudience: ["Restaurant Owners", "Cafe Managers", "Restaurant Chains", "Fast Food Restaurants", "Popular Cafes"],
+      timeline: "10-14 weeks",
+      technologies: ["Desktop Application", "POS Integration", "Database Management", "Kitchen Display", "Inventory Systems", "Reporting Tools"],
+      category: "desktop"
+    },
+
+    "نظام إدارة المكتبات": {
+      name: "نظام إدارة المكتبات",
+      description: "نظام متكامل لإدارة المكتبات الأكاديمية والعامة",
+      fullDescription: "نظام إدارة مكتبات متطور يوفر حلولاً شاملة لإدارة جميع جوانب المكتبة الحديثة. يتضمن فهرسة الكتب، إدارة الأعضاء، نظام الاستعارة والإرجاع، والبحث المتقدم. مصمم لتحسين خدمات المكتبة وسهولة الوصول للمعلومات.",
+      keyFeatures: ["فهرسة الكتب والمواد", "إدارة أعضاء المكتبة", "نظام الاستعارة والإرجاع", "البحث المتقدم في الفهرس", "إدارة المجلات والدوريات", "نظام الحجوزات", "تقارير إحصائية شاملة", "إدارة الغرامات والرسوم"],
+      technicalFeatures: ["قاعدة بيانات متقدمة", "نظام باركود للكتب", "واجهة بحث ذكية", "تكامل مع RFID", "نسخ احتياطية آمنة", "واجهات متعددة المستخدمين"],
+      benefits: ["تحسين كفاءة المكتبة بـ 70%", "سهولة البحث والوصول", "تقليل فقدان الكتب", "تحسين خدمة الأعضاء", "إدارة فعالة للموارد", "توفير الوقت والجهد"],
+      targetAudience: ["المكتبات الأكاديمية", "المكتبات العامة", "مكتبات المدارس", "مكتبات الشركات", "مراكز المعلومات"],
+      timeline: "8-12 أسبوع",
+      technologies: ["Desktop Framework", "Database Systems", "Barcode Systems", "RFID Integration", "Search Engines", "Reporting Tools"],
+      category: "desktop"
+    },
+
+    "Library Management System": {
+      name: "Library Management System",
+      description: "Integrated system for managing academic and public libraries",
+      fullDescription: "Advanced library management system that provides comprehensive solutions for managing all aspects of modern libraries. Includes book cataloging, member management, borrowing and returning system, and advanced search. Designed to improve library services and ease access to information.",
+      keyFeatures: ["Book and Material Cataloging", "Library Member Management", "Borrowing and Return System", "Advanced Catalog Search", "Journal and Periodical Management", "Reservation System", "Comprehensive Statistical Reports", "Fines and Fees Management"],
+      technicalFeatures: ["Advanced Database", "Book Barcode System", "Smart Search Interface", "RFID Integration", "Secure Backups", "Multi-user Interfaces"],
+      benefits: ["70% Library Efficiency Improvement", "Easy Search and Access", "Book Loss Reduction", "Member Service Improvement", "Efficient Resource Management", "Time and Effort Savings"],
+      targetAudience: ["Academic Libraries", "Public Libraries", "School Libraries", "Corporate Libraries", "Information Centers"],
+      timeline: "8-12 weeks",
+      technologies: ["Desktop Framework", "Database Systems", "Barcode Systems", "RFID Integration", "Search Engines", "Reporting Tools"],
+      category: "desktop"
+    },
+
+    "برنامج تصميم جرافيكي": {
+      name: "برنامج تصميم جرافيكي",
+      description: "برنامج تصميم احترافي للفنانين والمصممين",
+      fullDescription: "برنامج تصميم جرافيكي قوي ومتطور يوفر أدوات احترافية للفنانين والمصممين. يتضمن مجموعة شاملة من الأدوات للرسم، التصميم، وتحرير الصور مع واجهة سهلة الاستخدام ومميزات متقدمة لإنتاج أعمال فنية عالية الجودة.",
+      keyFeatures: ["أدوات رسم وتصميم متقدمة", "طبقات وأقنعة احترافية", "مكتبة فرش وأشكال ضخمة", "تحرير صور متقدم", "دعم الرسم بالقلم الرقمي", "تصدير بصيغ متعددة", "قوالب تصميم جاهزة", "أدوات الطباعة المتقدمة"],
+      technicalFeatures: ["محرك رسم عالي الأداء", "دعم الدقة العالية", "معالجة متوازية للصور", "ذاكرة محسنة", "تسارع الرسوميات", "واجهة قابلة للتخصيص"],
+      benefits: ["تحسين جودة التصميم", "زيادة سرعة العمل", "مرونة في الإبداع", "نتائج احترافية", "توفير تكاليف التصميم", "سهولة التعلم والاستخدام"],
+      targetAudience: ["المصممين الجرافيكيين", "الفنانين الرقميين", "وكالات الإعلان", "استوديوهات التصميم", "المصورين"],
+      timeline: "14-18 أسبوع",
+      technologies: ["Graphics Engine", "Image Processing", "Vector Graphics", "Color Management", "Plugin System", "Hardware Acceleration"],
+      category: "desktop"
+    },
+
+    "Graphic Design Software": {
+      name: "Graphic Design Software",
+      description: "Professional design software for artists and designers",
+      fullDescription: "Powerful and advanced graphic design software that provides professional tools for artists and designers. Includes comprehensive set of tools for drawing, designing, and image editing with user-friendly interface and advanced features to produce high-quality artwork.",
+      keyFeatures: ["Advanced Drawing and Design Tools", "Professional Layers and Masks", "Huge Brush and Shape Library", "Advanced Image Editing", "Digital Pen Drawing Support", "Multi-format Export", "Ready Design Templates", "Advanced Printing Tools"],
+      technicalFeatures: ["High-performance Drawing Engine", "High Resolution Support", "Parallel Image Processing", "Optimized Memory", "Graphics Acceleration", "Customizable Interface"],
+      benefits: ["Design Quality Improvement", "Work Speed Increase", "Creative Flexibility", "Professional Results", "Design Cost Savings", "Easy Learning and Usage"],
+      targetAudience: ["Graphic Designers", "Digital Artists", "Advertising Agencies", "Design Studios", "Photographers"],
+      timeline: "14-18 weeks",
+      technologies: ["Graphics Engine", "Image Processing", "Vector Graphics", "Color Management", "Plugin System", "Hardware Acceleration"],
+      category: "desktop"
+    },
+
+    "نظام إدارة المستودعات": {
+      name: "نظام إدارة المستودعات",
+      description: "نظام متكامل لإدارة المخازن والمستودعات التجارية",
+      fullDescription: "نظام إدارة مستودعات متطور يوفر حلولاً شاملة لإدارة المخزون والعمليات اللوجستية. يتضمن تتبع المنتجات، إدارة الطلبات، تحسين المساحات، وتحليلات المخزون المتقدمة. مصمم لتحسين الكفاءة وتقليل التكاليف التشغيلية.",
+      keyFeatures: ["تتبع المخزون في الوقت الفعلي", "إدارة المواقع والرفوف", "نظام باركود و RFID", "إدارة الطلبات والشحن", "تحسين مسارات الالتقاط", "تقارير مخزون مفصلة", "إدارة التواريخ والانتهاء", "تكامل مع أنظمة المبيعات"],
+      technicalFeatures: ["قاعدة بيانات مركزية", "تكامل مع أجهزة المسح", "واجهات API متعددة", "نظام تنبيهات ذكي", "تحليلات متقدمة", "أمان البيانات"],
+      benefits: ["تحسين دقة المخزون بـ 95%", "تقليل تكاليف التشغيل", "تحسين سرعة التسليم", "تقليل الفاقد والتلف", "زيادة رضا العملاء", "اتخاذ قرارات مدروسة"],
+      targetAudience: ["شركات التوزيع", "المصانع", "متاجر التجزئة", "شركات اللوجستيات", "مراكز التوزيع"],
+      timeline: "12-16 أسبوع",
+      technologies: ["WMS Systems", "Barcode/RFID", "Database Management", "API Integration", "Analytics Tools", "Mobile Integration"],
+      category: "desktop"
+    },
+
+    "Warehouse Management System": {
+      name: "Warehouse Management System",
+      description: "Integrated system for managing commercial warehouses and storage",
+      fullDescription: "Advanced warehouse management system that provides comprehensive solutions for inventory and logistics operations management. Includes product tracking, order management, space optimization, and advanced inventory analytics. Designed to improve efficiency and reduce operational costs.",
+      keyFeatures: ["Real-time Inventory Tracking", "Location and Shelf Management", "Barcode and RFID System", "Order and Shipping Management", "Pick Path Optimization", "Detailed Inventory Reports", "Expiry Date Management", "Sales System Integration"],
+      technicalFeatures: ["Centralized Database", "Scanner Device Integration", "Multiple API Interfaces", "Smart Alert System", "Advanced Analytics", "Data Security"],
+      benefits: ["95% Inventory Accuracy Improvement", "Operating Cost Reduction", "Delivery Speed Improvement", "Loss and Damage Reduction", "Customer Satisfaction Increase", "Informed Decision Making"],
+      targetAudience: ["Distribution Companies", "Factories", "Retail Stores", "Logistics Companies", "Distribution Centers"],
+      timeline: "12-16 weeks",
+      technologies: ["WMS Systems", "Barcode/RFID", "Database Management", "API Integration", "Analytics Tools", "Mobile Integration"],
+      category: "desktop"
+    },
+
+    "برنامج إدارة العيادات": {
+      name: "برنامج إدارة العيادات",
+      description: "نظام شامل لإدارة العيادات الطبية والمراكز الصحية",
+      fullDescription: "نظام إدارة عيادات طبية متطور يوفر حلولاً شاملة لإدارة جميع جوانب العيادة الطبية. يتضمن حجز المواعيد، إدارة ملفات المرضى، الفواتير الطبية، وتتبع العلاجات. مصمم وفقاً للمعايير الطبية مع أعلى درجات الأمان والخصوصية.",
+      keyFeatures: ["حجز وإدارة المواعيد", "ملفات المرضى الإلكترونية", "إدارة الوصفات الطبية", "نظام الفواتير الطبية", "تقارير طبية مفصلة", "إدارة المخزون الطبي", "نظام التذكيرات", "تكامل مع المختبرات"],
+      technicalFeatures: ["تشفير البيانات الطبية", "نسخ احتياطية آمنة", "امتثال HIPAA", "واجهات طبية متخصصة", "تحليلات طبية", "تكامل مع الأجهزة الطبية"],
+      benefits: ["تحسين جودة الرعاية الطبية", "تنظيم أفضل للمواعيد", "تقليل الأخطاء الطبية", "توفير وقت الطبيب", "تحسين رضا المرضى", "إدارة مالية محسنة"],
+      targetAudience: ["الأطباء", "العيادات الخاصة", "المراكز الطبية", "عيادات الأسنان", "العيادات التخصصية"],
+      timeline: "10-14 أسبوع",
+      technologies: ["Medical Software", "EMR Systems", "HIPAA Compliance", "Medical APIs", "Database Security", "Device Integration"],
+      category: "desktop"
+    },
+
+    "Clinic Management System": {
+      name: "Clinic Management System",
+      description: "Comprehensive system for managing medical clinics and health centers",
+      fullDescription: "Advanced medical clinic management system that provides comprehensive solutions for managing all aspects of medical clinic. Includes appointment booking, patient file management, medical billing, and treatment tracking. Designed according to medical standards with highest levels of security and privacy.",
+      keyFeatures: ["Appointment Booking and Management", "Electronic Patient Records", "Medical Prescription Management", "Medical Billing System", "Detailed Medical Reports", "Medical Inventory Management", "Reminder System", "Laboratory Integration"],
+      technicalFeatures: ["Medical Data Encryption", "Secure Backups", "HIPAA Compliance", "Specialized Medical Interfaces", "Medical Analytics", "Medical Device Integration"],
+      benefits: ["Medical Care Quality Improvement", "Better Appointment Organization", "Medical Error Reduction", "Doctor Time Savings", "Patient Satisfaction Improvement", "Enhanced Financial Management"],
+      targetAudience: ["Doctors", "Private Clinics", "Medical Centers", "Dental Clinics", "Specialty Clinics"],
+      timeline: "10-14 weeks",
+      technologies: ["Medical Software", "EMR Systems", "HIPAA Compliance", "Medical APIs", "Database Security", "Device Integration"],
+      category: "desktop"
+    },
+
+    "برنامج مونتاج فيديو": {
+      name: "برنامج مونتاج فيديو",
+      description: "برنامج احترافي لتحرير ومونتاج الفيديوهات",
+      fullDescription: "برنامج مونتاج فيديو قوي ومتطور يوفر أدوات احترافية لتحرير وإنتاج الفيديوهات عالية الجودة. يتضمن مجموعة شاملة من الأدوات للقطع، التحرير، إضافة التأثيرات البصرية والصوتية، مع واجهة سهلة الاستخدام للمحترفين والمبتدئين.",
+      keyFeatures: ["تحرير متعدد المسارات", "تأثيرات بصرية متقدمة", "تحرير صوتي احترافي", "دعم جميع صيغ الفيديو", "قوالب وانتقالات جاهزة", "تصدير بدقة 4K", "أدوات تلوين متقدمة", "تسريع الأجهزة"],
+      technicalFeatures: ["معالجة متوازية للفيديو", "تسريع GPU", "واجهة محسنة للأداء", "إدارة ذاكرة ذكية", "دعم الملفات الكبيرة", "معاينة في الوقت الفعلي"],
+      benefits: ["جودة إنتاج احترافية", "توفير وقت التحرير", "سهولة الاستخدام", "نتائج إبداعية متميزة", "مرونة في التصدير", "أداء سريع ومستقر"],
+      targetAudience: ["صناع المحتوى", "استوديوهات الإنتاج", "المصورين", "الوكالات الإعلامية", "المؤثرين الرقميين"],
+      timeline: "16-20 أسبوع",
+      technologies: ["Video Processing", "GPU Acceleration", "Codec Support", "Audio Processing", "Color Grading", "Export Optimization"],
+      category: "desktop"
+    },
+
+    "Video Editing Software": {
+      name: "Video Editing Software",
+      description: "Professional software for video editing and production",
+      fullDescription: "Powerful and advanced video editing software that provides professional tools for editing and producing high-quality videos. Includes comprehensive set of tools for cutting, editing, adding visual and audio effects, with user-friendly interface for professionals and beginners.",
+      keyFeatures: ["Multi-track Editing", "Advanced Visual Effects", "Professional Audio Editing", "All Video Format Support", "Ready Templates and Transitions", "4K Export", "Advanced Color Grading Tools", "Hardware Acceleration"],
+      technicalFeatures: ["Parallel Video Processing", "GPU Acceleration", "Performance Optimized Interface", "Smart Memory Management", "Large File Support", "Real-time Preview"],
+      benefits: ["Professional Production Quality", "Editing Time Savings", "Easy to Use", "Outstanding Creative Results", "Export Flexibility", "Fast and Stable Performance"],
+      targetAudience: ["Content Creators", "Production Studios", "Photographers", "Media Agencies", "Digital Influencers"],
+      timeline: "16-20 weeks",
+      technologies: ["Video Processing", "GPU Acceleration", "Codec Support", "Audio Processing", "Color Grading", "Export Optimization"],
+      category: "desktop"
     }
   };
 
@@ -1320,6 +1529,48 @@ export default function ServiceDetail() {
         name: dir === 'rtl' ? "موقع شركة عقارية" : "Real Estate Agency Website",
         description: dir === 'rtl' ? "موقع وكالة عقارية مع أدوات إدارة" : "Real estate agency website with management tools",
         features: dir === 'rtl' ? ["محفظة العقارات", "فريق المبيعات", "استشارات عقارية"] : ["Property Portfolio", "Sales Team", "Real Estate Consulting"],
+      },
+    ],
+    desktop: [
+      {
+        name: dir === 'rtl' ? "محرر نصوص متقدم" : "Advanced Text Editor",
+        description: dir === 'rtl' ? "محرر احترافي للمطورين والكتاب" : "Professional editor for developers and writers",
+        features: dir === 'rtl' ? ["تمييز الكود", "إكمال تلقائي", "إدارة مشاريع", "نظام إضافات"] : ["Code Highlighting", "Auto-completion", "Project Management", "Plugin System"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج محاسبة متكامل" : "Integrated Accounting System",
+        description: dir === 'rtl' ? "نظام محاسبي شامل للشركات" : "Comprehensive accounting system for businesses",
+        features: dir === 'rtl' ? ["إدارة الفواتير", "تقارير مالية", "إدارة المخزون", "حسابات العملاء"] : ["Invoice Management", "Financial Reports", "Inventory Management", "Customer Accounts"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج إدارة مطاعم" : "Restaurant Management System",
+        description: dir === 'rtl' ? "نظام شامل لإدارة المطاعم مع POS" : "Comprehensive restaurant management system with POS",
+        features: dir === 'rtl' ? ["نقاط البيع", "إدارة المخزون", "إدارة الطاولات", "تقارير المبيعات"] : ["Point of Sale", "Inventory Management", "Table Management", "Sales Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة المكتبات" : "Library Management System",
+        description: dir === 'rtl' ? "نظام متكامل لإدارة المكتبات الأكاديمية" : "Integrated system for managing academic libraries",
+        features: dir === 'rtl' ? ["فهرسة الكتب", "إدارة الأعضاء", "الاستعارة والإرجاع", "تقارير إحصائية"] : ["Book Cataloging", "Member Management", "Borrowing & Returns", "Statistical Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج تصميم جرافيكي" : "Graphic Design Software",
+        description: dir === 'rtl' ? "برنامج تصميم احترافي للفنانين" : "Professional design software for artists",
+        features: dir === 'rtl' ? ["أدوات رسم متقدمة", "طبقات وأقنعة", "مكتبة فرش", "تصدير متعدد"] : ["Advanced Drawing Tools", "Layers & Masks", "Brush Library", "Multi-format Export"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة المستودعات" : "Warehouse Management System",
+        description: dir === 'rtl' ? "نظام متكامل لإدارة المخازن التجارية" : "Integrated system for managing commercial warehouses",
+        features: dir === 'rtl' ? ["تتبع المخزون", "إدارة المواقع", "نظام باركود", "تقارير مخزون"] : ["Inventory Tracking", "Location Management", "Barcode System", "Inventory Reports"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج إدارة العيادات" : "Clinic Management System",
+        description: dir === 'rtl' ? "نظام شامل لإدارة العيادات الطبية" : "Comprehensive system for managing medical clinics",
+        features: dir === 'rtl' ? ["حجز المواعيد", "ملفات المرضى", "الوصفات الطبية", "نظام الفواتير"] : ["Appointment Booking", "Patient Records", "Medical Prescriptions", "Billing System"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج مونتاج فيديو" : "Video Editing Software",
+        description: dir === 'rtl' ? "برنامج احترافي لتحرير ومونتاج الفيديو" : "Professional software for video editing and production",
+        features: dir === 'rtl' ? ["تحرير متعدد المسارات", "تأثيرات بصرية", "تحرير صوتي", "تصدير 4K"] : ["Multi-track Editing", "Visual Effects", "Audio Editing", "4K Export"],
       },
     ],
   };
