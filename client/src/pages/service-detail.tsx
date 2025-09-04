@@ -2819,6 +2819,67 @@ export default function ServiceDetail() {
       "Basic Print Materials - Silver Package": {
         name: "Basic Print Materials - Silver Package",
         description: "Basic print materials for small businesses",
+        fullDescription: "Essential print materials package perfect for small companies and startups needing high-quality printed marketing materials on a limited budget. Focuses on the most important and commonly used elements in daily marketing while ensuring professional quality.",
+        keyFeatures: ["3 diverse advertising posters", "Professional A4 flyer", "Elegant business cards", "Print-ready files", "Simple editable designs", "Basic printing guide", "Two free revisions", "Basic technical support"],
+        technicalFeatures: ["High 300 DPI resolution", "Print PDF files", "Optimized CMYK colors", "Basic cut marks", "Paper specifications", "Backup files"],
+        benefits: ["Attractive & impactful marketing materials", "35% brand awareness increase", "Reliable professional appearance", "High print quality", "Excellent value", "Easy to use"],
+        targetAudience: ["Small Companies", "Local Businesses", "Startup Projects", "Independent Professionals", "Small Stores"],
+        timeline: "2-3 weeks",
+        technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production"],
+        category: "print",
+        price: "6000",
+        package: "silver"
+      },
+
+      // Digital Design Packages - Gold & Silver
+      "تصاميم سوشيال ميديا - باقة ذهبية": {
+        name: "تصاميم سوشيال ميديا - باقة ذهبية",
+        description: "تصاميم احترافية للسوشيال ميديا",
+        fullDescription: "باقة تصاميم سوشيال ميديا متوازنة تجمع بين الكمية والجودة، مصممة للشركات والعلامات التجارية التي تريد حضوراً قوياً ومؤثراً على وسائل التواصل الاجتماعي. تشمل تصاميم متنوعة وجذابة مع التركيز على المحتوى الأكثر تفاعلاً وانتشاراً.",
+        keyFeatures: ["20 تصميم منشورات متنوعة", "3 إنفوجرافيك احترافي", "قوالب أساسية قابلة للتعديل", "تصاميم للأغلفة", "أحجام متعددة لكل منصة", "محتوى للمناسبات", "دليل استخدام مبسط", "دعم فني شامل"],
+        technicalFeatures: ["تصاميم محسنة لكل منصة", "ملفات عالية الدقة", "قوالب Photoshop أساسية", "أحجام مختلفة للمنصات", "ملفات ويب محسنة", "دليل الألوان والخطوط"],
+        benefits: ["زيادة التفاعل بنسبة 60%", "نمو طبيعي في المتابعين", "تحسين الحضور الرقمي", "محتوى جاهز لأسابيع", "توفير وقت التصميم", "مظهر احترافي متسق"],
+        targetAudience: ["الشركات المتوسطة", "العلامات التجارية النامية", "المتاجر الإلكترونية", "الخدمات المحلية", "وكالات التسويق الصغيرة"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva Pro", "Social Media Tools"],
+        category: "digital",
+        price: "10000",
+        package: "gold"
+      },
+
+      "Social Media Designs - Gold Package": {
+        name: "Social Media Designs - Gold Package",
+        description: "Professional social media designs",
+        fullDescription: "Balanced social media design package combining quantity and quality, designed for companies and brands wanting strong and impactful presence on social media platforms. Includes diverse and attractive designs focusing on the most engaging and viral content.",
+        keyFeatures: ["20 diverse post designs", "3 professional infographics", "Basic editable templates", "Cover designs", "Multiple sizes for each platform", "Content for occasions", "Simplified usage guide", "Comprehensive technical support"],
+        technicalFeatures: ["Platform-optimized designs", "High-resolution files", "Basic Photoshop templates", "Different platform sizes", "Optimized web files", "Color and font guide"],
+        benefits: ["60% engagement increase", "Natural follower growth", "Enhanced digital presence", "Ready content for weeks", "Design time savings", "Consistent professional appearance"],
+        targetAudience: ["Medium Companies", "Growing Brands", "E-commerce Stores", "Local Services", "Small Marketing Agencies"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe Photoshop", "Adobe Illustrator", "Figma", "Canva Pro", "Social Media Tools"],
+        category: "digital",
+        price: "10000",
+        package: "gold"
+      },
+
+      "تصاميم رقمية أساسية - باقة فضية": {
+        name: "تصاميم رقمية أساسية - باقة فضية",
+        description: "تصاميم رقمية أساسية للمشاريع الصغيرة",
+        fullDescription: "باقة تصاميم رقمية أساسية مثالية للمشاريع الصغيرة والناشئة التي تحتاج لحضور رقمي احترافي بميزانية محدودة. تركز على العناصر الأساسية الأكثر أهمية مع ضمان الجودة والتأثير البصري المطلوب لبداية قوية.",
+        keyFeatures: ["10 تصاميم منشورات متنوعة", "إنفوجرافيك واحد احترافي", "غلاف فيسبوك جذاب", "ملفات ويب جاهزة", "أحجام أساسية للمنصات", "قالب أساسي قابل للتعديل", "دليل استخدام بسيط", "دعم فني أساسي"],
+        technicalFeatures: ["ملفات عالية الدقة", "صيغ محسنة للويب", "أحجام أساسية للمنصات", "ملفات PNG/JPG جاهزة", "قالب Photoshop بسيط", "دليل الألوان الأساسي"],
+        benefits: ["تحسين الحضور الرقمي بنسبة 40%", "زيادة التفاعل الأولي", "مظهر احترافي موثوق", "محتوى جاهز للنشر", "نقطة انطلاق قوية", "استثمار ذكي للبداية"],
+        targetAudience: ["المشاريع الناشئة", "الأعمال الصغيرة", "رواد الأعمال", "المهنيين المستقلين", "المتاجر المحلية"],
+        timeline: "2-3 أسابيع",
+        technologies: ["Adobe Photoshop", "Adobe Illustrator", "Basic Design Tools"],
+        category: "digital",
+        price: "5000",
+        package: "silver"
+      },
+
+      "Basic Digital Designs - Silver Package": {
+        name: "Basic Digital Designs - Silver Package",
+        description: "Basic print materials for small businesses",
         fullDescription: "Essential print materials package perfect for small companies and startups needing high-quality printed marketing materials on a limited budget. Focuses on the most important and frequently used elements in daily marketing while ensuring professional quality.",
         keyFeatures: ["3 diverse advertising posters", "Professional A4 flyer", "Elegant business cards", "Ready print files", "Simple editable designs", "Basic printing guide", "Two free revisions", "Basic technical support"],
         technicalFeatures: ["High 300 DPI resolution", "Print PDF files", "Optimized CMYK colors", "Basic cut marks", "Paper specifications", "Backup files"],
@@ -2949,6 +3010,97 @@ export default function ServiceDetail() {
         timeline: "2-4 weeks",
         technologies: ["Figma", "UI Design", "Basic UX", "Component Design"],
         category: "ui_design",
+        price: "9000",
+        package: "silver"
+      },
+
+      // Packaging Design Packages
+      "تصميم تغليف متكامل - باقة بلاتينيوم": {
+        name: "تصميم تغليف متكامل - باقة بلاتينيوم",
+        description: "تصميم تغليف شامل لخط إنتاج كامل",
+        fullDescription: "باقة تصميم تغليف شاملة ومتطورة تغطي خط إنتاج كامل، مصممة للشركات الكبيرة والعلامات التجارية المتقدمة. تشمل دراسة السوق المتعمقة، تحليل المنافسين، تطوير مفاهيم التغليف المبتكرة، وتنفيذ تصاميم احترافية تجمع بين الجاذبية البصرية والوظائف العملية المتقدمة.",
+        keyFeatures: ["تصميم 5 منتجات مختلفة", "دراسة السوق والمنافسين المتعمقة", "ملفات طباعة ثلاثية الأبعاد", "عينات تجريبية ونماذج أولية", "تصاميم متعددة الأحجام", "دليل الهوية والتطبيق", "مواصفات الطباعة والإنتاج", "دعم فني شامل"],
+        technicalFeatures: ["ملفات AI/EPS عالية الدقة", "مواصفات طباعة دقيقة", "Die-cut templates جاهزة", "Color management احترافي", "ملفات 3D mockups", "Production guidelines شاملة"],
+        benefits: ["تميز كامل في السوق", "زيادة مبيعات المنتج بنسبة 60%", "هوية تغليف قوية وموحدة", "جذب العملاء وتحفيز الشراء", "تحسين تجربة العملاء", "استثمار طويل المدى"],
+        targetAudience: ["الشركات الكبرى", "العلامات التجارية الاستهلاكية", "شركات الأغذية والمشروبات", "منتجات العناية", "الشركات الصناعية"],
+        timeline: "6-8 أسابيع",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "3D Modeling", "Packaging Design", "Print Production"],
+        category: "packaging",
+        price: "22000",
+        package: "platinum"
+      },
+
+      "Complete Packaging Design - Platinum Package": {
+        name: "Complete Packaging Design - Platinum Package",
+        description: "Comprehensive packaging design for complete product line",
+        fullDescription: "Comprehensive and advanced packaging design package covering complete product line, designed for large companies and advanced brands. Includes in-depth market research, competitor analysis, innovative packaging concept development, and professional design implementation combining visual appeal with advanced practical functions.",
+        keyFeatures: ["5 different product designs", "In-depth market & competitor research", "3D printing files", "Test samples and prototypes", "Multiple size designs", "Brand identity & application guide", "Print & production specifications", "Comprehensive technical support"],
+        technicalFeatures: ["High-resolution AI/EPS files", "Precise print specifications", "Ready die-cut templates", "Professional color management", "3D mockup files", "Comprehensive production guidelines"],
+        benefits: ["Complete market distinction", "60% product sales increase", "Strong unified packaging identity", "Customer attraction & purchase motivation", "Enhanced customer experience", "Long-term investment"],
+        targetAudience: ["Large Corporations", "Consumer Brands", "Food & Beverage Companies", "Personal Care Products", "Industrial Companies"],
+        timeline: "6-8 weeks",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "3D Modeling", "Packaging Design", "Print Production"],
+        category: "packaging",
+        price: "22000",
+        package: "platinum"
+      },
+
+      "تصميم تغليف منتج - باقة ذهبية": {
+        name: "تصميم تغليف منتج - باقة ذهبية",
+        description: "تصميم تغليف لمنتج أو منتجين",
+        fullDescription: "باقة تصميم تغليف متوازنة تجمع بين الجودة والقيمة، مصممة للشركات المتوسطة والعلامات التجارية النامية. تركز على تطوير تصاميم تغليف احترافية وجذابة لمنتج أو منتجين مع ضمان التميز في السوق والفعالية في جذب العملاء.",
+        keyFeatures: ["تصميم منتجين مختلفين", "دراسة أولية للسوق", "ملفات طباعة جاهزة عالية الجودة", "مراجعات متعددة شاملة", "نماذج ثلاثية الأبعاد", "دليل التطبيق والاستخدام", "مواصفات الطباعة", "دعم فني متقدم"],
+        technicalFeatures: ["ملفات AI/EPS احترافية", "مواصفات طباعة دقيقة", "Die-cut files جاهزة", "Color profiles محسنة", "3D visualizations", "Print guidelines مفصلة"],
+        benefits: ["تصميم تغليف مميز وجذاب", "زيادة جاذبية المنتج بنسبة 45%", "تحسين مبيعات المنتج", "تعزيز الهوية التجارية", "تجربة عملاء محسنة", "قيمة ممتازة مقابل الاستثمار"],
+        targetAudience: ["الشركات المتوسطة", "العلامات التجارية النامية", "منتجات الاستهلاك", "الشركات التجارية", "المنتجات المحلية"],
+        timeline: "4-5 أسابيع",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Packaging Design", "3D Visualization"],
+        category: "packaging",
+        price: "14000",
+        package: "gold"
+      },
+
+      "Product Packaging Design - Gold Package": {
+        name: "Product Packaging Design - Gold Package",
+        description: "Packaging design for one or two products",
+        fullDescription: "Balanced packaging design package combining quality and value, designed for medium companies and growing brands. Focuses on developing professional and attractive packaging designs for one or two products ensuring market distinction and effectiveness in customer attraction.",
+        keyFeatures: ["Two different product designs", "Preliminary market research", "High-quality print-ready files", "Multiple comprehensive revisions", "3D models", "Application & usage guide", "Print specifications", "Advanced technical support"],
+        technicalFeatures: ["Professional AI/EPS files", "Precise print specifications", "Ready die-cut files", "Optimized color profiles", "3D visualizations", "Detailed print guidelines"],
+        benefits: ["Distinctive attractive packaging design", "45% product appeal increase", "Improved product sales", "Enhanced brand identity", "Improved customer experience", "Excellent value for investment"],
+        targetAudience: ["Medium Companies", "Growing Brands", "Consumer Products", "Commercial Companies", "Local Products"],
+        timeline: "4-5 weeks",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Packaging Design", "3D Visualization"],
+        category: "packaging",
+        price: "14000",
+        package: "gold"
+      },
+
+      "تصميم تغليف أساسي - باقة فضية": {
+        name: "تصميم تغليف أساسي - باقة فضية",
+        description: "تصميم تغليف أساسي لمنتج واحد",
+        fullDescription: "باقة تصميم تغليف أساسية مثالية للشركات الصغيرة والمشاريع الناشئة التي تحتاج لتغليف احترافي بقيمة ممتازة. تركز على العناصر الأساسية لتصميم التغليف مع ضمان الجودة والجاذبية البصرية اللازمة لجذب العملاء وتحقيق التميز.",
+        keyFeatures: ["تصميم منتج واحد احترافي", "مفهوم تصميم أساسي قوي", "ملفات طباعة جاهزة", "مراجعتين شاملتين", "نموذج ثلاثي الأبعاد بسيط", "دليل استخدام أساسي", "مواصفات طباعة أساسية", "دعم فني أساسي"],
+        technicalFeatures: ["ملفات AI عالية الجودة", "مواصفات طباعة أساسية", "Die-cut template أساسي", "Color guide بسيط", "Basic 3D mockup", "Print guidelines أساسية"],
+        benefits: ["تغليف احترافي وجذاب", "زيادة جاذبية المنتج بنسبة 30%", "تحسين مبيعات المنتج", "مظهر احترافي متميز", "تكلفة معقولة وقيمة ممتازة", "نقطة انطلاق مثالية"],
+        targetAudience: ["الشركات الصغيرة", "المشاريع الناشئة", "المنتجات المحلية", "رواد الأعمال", "المتاجر الصغيرة"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe Illustrator", "Basic Packaging Design", "Print Design"],
+        category: "packaging",
+        price: "9000",
+        package: "silver"
+      },
+
+      "Basic Packaging Design - Silver Package": {
+        name: "Basic Packaging Design - Silver Package",
+        description: "Basic packaging design for one product",
+        fullDescription: "Essential packaging design package perfect for small companies and startup projects needing professional packaging with excellent value. Focuses on core packaging design elements ensuring quality and visual appeal necessary to attract customers and achieve distinction.",
+        keyFeatures: ["One professional product design", "Strong basic design concept", "Print-ready files", "Two comprehensive revisions", "Simple 3D model", "Basic usage guide", "Basic print specifications", "Basic technical support"],
+        technicalFeatures: ["High-quality AI files", "Basic print specifications", "Basic die-cut template", "Simple color guide", "Basic 3D mockup", "Basic print guidelines"],
+        benefits: ["Professional attractive packaging", "30% product appeal increase", "Improved product sales", "Distinguished professional appearance", "Reasonable cost & excellent value", "Perfect starting point"],
+        targetAudience: ["Small Companies", "Startup Projects", "Local Products", "Entrepreneurs", "Small Stores"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe Illustrator", "Basic Packaging Design", "Print Design"],
+        category: "packaging",
         price: "9000",
         package: "silver"
       }
