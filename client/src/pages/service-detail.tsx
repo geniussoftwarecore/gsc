@@ -2364,6 +2364,64 @@ const getDetailedDesktopAppInfo = (appName: string) => {
   return appDetails[appName] || null;
 };
 
+// Function to get detailed marketing package information
+const getDetailedMarketingPackageInfo = (packageName: string, dir: string = 'ltr') => {
+  const packageDetails: Record<string, any> = {
+    // Social Media Packages
+    "حملة شاملة وسائل التواصل - باقة بلاتينيوم": {
+      name: "حملة شاملة وسائل التواصل - باقة بلاتينيوم",
+      fullDescription: "باقة تسويقية متطورة وشاملة لإدارة جميع منصات التواصل الاجتماعي بأعلى مستوى من الاحترافية. تتضمن استراتيجيات تسويقية متقدمة، محتوى إبداعي عالي الجودة، وإعلانات مدفوعة فعّالة مع تحليلات مفصلة للنتائج.",
+      keyFeatures: ["إدارة 6 منصات تواصل اجتماعي", "إنشاء 120 منشور شهرياً عالي الجودة", "تصميم محتوى بصري احترافي", "استراتيجية محتوى متخصصة", "إدارة التفاعل مع الجمهور", "قصص وريلز يومية", "تغطية الأحداث المباشرة", "إدارة الأزمات والسمعة الرقمية"],
+      technicalFeatures: ["إعلانات مدفوعة متقدمة بميزانية محسّنة", "استهداف دقيق للجمهور المثالي", "تحليل وتقارير يومية شاملة", "أدوات مراقبة المنافسين", "تحسين محركات البحث للمحتوى", "تكامل مع أنظمة إدارة العملاء", "أتمتة النشر والتفاعل", "تتبع التحويلات والمبيعات"],
+      benefits: ["زيادة الوعي بالعلامة التجارية بنسبة 80%", "تحسين التفاعل مع الجمهور بـ 120%", "زيادة حركة المرور للموقع بـ 200%", "تحسين معدل التحويل إلى عملاء بـ 60%", "بناء مجتمع قوي حول العلامة التجارية", "تحسين السمعة الرقمية والثقة", "زيادة المبيعات الإجمالية بـ 90%", "تحقيق عائد استثمار مرتفع"],
+      targetAudience: ["الشركات الكبيرة والمتوسطة", "العلامات التجارية الراقية", "الشركات التي تستهدف جمهور واسع", "المؤسسات التعليمية والصحية", "قطاع الضيافة والسياحة"],
+      timeline: "مستمر شهرياً مع إعداد أولي لمدة أسبوعين",
+      price: "8000",
+      package: "platinum"
+    },
+
+    "Complete Social Media Campaign - Platinum Package": {
+      name: "Complete Social Media Campaign - Platinum Package", 
+      fullDescription: "Advanced and comprehensive marketing package for managing all social media platforms with the highest level of professionalism. Includes advanced marketing strategies, high-quality creative content, and effective paid advertising with detailed analytics.",
+      keyFeatures: ["Management of 6 social media platforms", "Creation of 120 high-quality monthly posts", "Professional visual content design", "Specialized content strategy", "Audience engagement management", "Daily stories and reels", "Live event coverage", "Crisis and digital reputation management"],
+      technicalFeatures: ["Advanced paid advertising with optimized budget", "Precise ideal audience targeting", "Daily comprehensive analytics and reports", "Competitor monitoring tools", "Content search engine optimization", "CRM system integration", "Publishing and engagement automation", "Conversion and sales tracking"],
+      benefits: ["80% brand awareness increase", "120% audience engagement improvement", "200% website traffic increase", "60% customer conversion rate improvement", "Strong brand community building", "Digital reputation and trust enhancement", "90% total sales increase", "High return on investment achievement"],
+      targetAudience: ["Large and medium companies", "Premium brands", "Companies targeting wide audiences", "Educational and healthcare institutions", "Hospitality and tourism sector"],
+      timeline: "Monthly ongoing with 2-week initial setup",
+      price: "8000",
+      package: "platinum"
+    },
+
+    // Gold packages
+    "حملة متقدمة وسائل التواصل - باقة ذهبية": {
+      name: "حملة متقدمة وسائل التواصل - باقة ذهبية",
+      fullDescription: "باقة تسويقية متوازنة وقوية لإدارة وسائل التواصل الاجتماعي بمستوى احترافي متقدم. تجمع بين جودة المحتوى والفعالية التسويقية مع تحليلات شاملة للنتائج.",
+      keyFeatures: ["إدارة 4 منصات تواصل اجتماعي", "إنشاء 80 منشور شهرياً", "تصميم محتوى بصري جذاب", "استراتيجية محتوى فعّالة", "إدارة التفاعل اليومي", "قصص وريلز أسبوعية", "تقارير أداء أسبوعية"],
+      technicalFeatures: ["إعلانات مدفوعة محسّنة", "استهداف متوسط للجمهور", "تحليل أسبوعي للنتائج", "تحسين أساسي لمحركات البحث", "أتمتة جزئية للنشر", "تتبع التفاعل والوصول"],
+      benefits: ["زيادة الوعي بالعلامة التجارية بـ 60%", "تحسين التفاعل بـ 80%", "زيادة حركة المرور بـ 120%", "تحسين معدل التحويل بـ 40%", "بناء حضور رقمي قوي", "زيادة المبيعات بـ 50%"],
+      targetAudience: ["الشركات المتوسطة", "الأعمال الناشئة", "المتاجر الإلكترونية", "الخدمات المهنية"],
+      timeline: "مستمر شهرياً",
+      price: "5000",
+      package: "gold"
+    },
+
+    // Silver packages
+    "حملة أساسية وسائل التواصل - باقة فضية": {
+      name: "حملة أساسية وسائل التواصل - باقة فضية",
+      fullDescription: "باقة تسويقية أساسية وفعّالة لبدء الحضور على وسائل التواصل الاجتماعي. مناسبة للأعمال الصغيرة والناشئة التي تريد بناء حضور رقمي قوي.",
+      keyFeatures: ["إدارة 3 منصات تواصل اجتماعي", "إنشاء 50 منشور شهرياً", "تصميم محتوى بصري أساسي", "استراتيجية محتوى بسيطة", "إدارة تفاعل محدودة", "قصص أسبوعية", "تقارير شهرية"],
+      technicalFeatures: ["إعلانات مدفوعة أساسية", "استهداف عام للجمهور", "تحليل شهري للنتائج", "نشر يدوي للمحتوى", "تتبع أساسي للتفاعل"],
+      benefits: ["زيادة الوعي بالعلامة التجارية بـ 40%", "تحسين التفاعل بـ 50%", "زيادة حركة المرور بـ 70%", "بناء حضور رقمي أولي", "زيادة المبيعات بـ 30%"],
+      targetAudience: ["الأعمال الصغيرة", "رواد الأعمال", "المشاريع الناشئة", "المهنيين المستقلين"],
+      timeline: "مستمر شهرياً",
+      price: "3000",
+      package: "silver"
+    }
+  };
+
+  return packageDetails[packageName] || null;
+};
+
 export default function ServiceDetail() {
   const { id: serviceId } = useParams();
   const [, setLocation] = useLocation();
@@ -4649,7 +4707,7 @@ export default function ServiceDetail() {
                                     >
                                       <Eye className="w-4 h-4 mr-2" />
                                       <span className="font-medium">
-                                        {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                        {dir === 'rtl' ? 'تفاصيل الباقة' : 'Package Details'}
                                       </span>
                                     </Button>
                                     
@@ -5273,11 +5331,13 @@ export default function ServiceDetail() {
               <DialogHeader className="pb-4">
                 <DialogTitle className="text-xl sm:text-2xl font-bold text-brand-text-primary flex items-start sm:items-center gap-3 leading-tight">
                   {(() => {
+                    const marketingDetails = getDetailedMarketingPackageInfo(selectedAppForDetails.name, dir);
                     const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
                     const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
                     const designDetails = getDetailedDesignInfo(selectedAppForDetails.name);
                     const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
                     
+                    if (marketingDetails) return <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                     if (websiteDetails) return <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                     if (desktopDetails) return <Monitor className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                     if (designDetails) return <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
@@ -5291,11 +5351,12 @@ export default function ServiceDetail() {
               </DialogHeader>
               
               {(() => {
-                // Try to get detailed info in priority order: website -> desktop -> design -> mobile app
+                // Try to get detailed info in priority order: marketing -> website -> desktop -> design -> mobile app
+                const marketingDetails = getDetailedMarketingPackageInfo(selectedAppForDetails.name, dir);
                 const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
                 const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
                 const designDetails = getDetailedDesignInfo(selectedAppForDetails.name);
-                const appDetails = websiteDetails || desktopDetails || designDetails || getDetailedAppInfo(selectedAppForDetails.name);
+                const appDetails = marketingDetails || websiteDetails || desktopDetails || designDetails || getDetailedAppInfo(selectedAppForDetails.name);
                 if (!appDetails) {
                   // Show fallback content when detailed app info is not available
                   return (
