@@ -2707,6 +2707,251 @@ export default function ServiceDetail() {
         price: "18000",
         package: "platinum"
       },
+
+      // Gold Package - Brand Identity
+      "هوية بصرية متوسطة - باقة ذهبية": {
+        name: "هوية بصرية متوسطة - باقة ذهبية",
+        description: "هوية بصرية للشركات المتوسطة",
+        fullDescription: "باقة هوية بصرية متوازنة تجمع بين الجودة والقيمة، مصممة للشركات المتوسطة والعلامات التجارية الطموحة. تشمل العناصر الأساسية للهوية البصرية مع التركيز على التطبيقات العملية الأكثر أهمية لنمو الأعمال وبناء الثقة مع العملاء.",
+        keyFeatures: ["تصميم شعار احترافي + متغيرين", "دليل ألوان وخطوط مفصل", "5 تطبيقات عملية أساسية", "قالب مطبوعات جاهز", "ملفات نهائية عالية الجودة", "دليل استخدام بسيط", "أيقونات أساسية", "ضمان المراجعات"],
+        technicalFeatures: ["ملفات AI, EPS عالية الدقة", "ملفات PNG/JPG متعددة الأحجام", "دليل الألوان RGB/CMYK", "قوالب مطبوعات أساسية", "ملفات ويب محسنة", "Brand kit أساسي"],
+        benefits: ["هوية بصرية قوية ومتميزة", "زيادة التعرف على العلامة التجارية بنسبة 65%", "توحيد الرسائل البصرية", "تحسين المصداقية", "ميزة تنافسية واضحة", "قيمة ممتازة مقابل السعر"],
+        targetAudience: ["الشركات المتوسطة", "الأعمال النامية", "الشركات التجارية", "المكاتب المهنية", "العلامات التجارية المحلية"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Brand Guidelines", "Vector Graphics"],
+        category: "branding",
+        price: "15000",
+        package: "gold"
+      },
+
+      "Medium Visual Identity - Gold Package": {
+        name: "Medium Visual Identity - Gold Package",
+        description: "Visual identity for medium companies",
+        fullDescription: "Balanced visual identity package combining quality and value, designed for medium companies and ambitious brands. Includes essential visual identity elements focusing on the most important practical applications for business growth and customer trust building.",
+        keyFeatures: ["Professional logo design + 2 variations", "Detailed color & font guide", "5 essential practical applications", "Ready print template", "High-quality final files", "Simple usage guide", "Basic icons", "Revision guarantee"],
+        technicalFeatures: ["High-resolution AI, EPS files", "PNG/JPG files in multiple sizes", "RGB/CMYK color guide", "Basic print templates", "Optimized web files", "Basic brand kit"],
+        benefits: ["Strong & distinctive visual identity", "65% brand recognition increase", "Unified visual messages", "Improved credibility", "Clear competitive advantage", "Excellent value for money"],
+        targetAudience: ["Medium Companies", "Growing Businesses", "Commercial Companies", "Professional Offices", "Local Brands"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Brand Guidelines", "Vector Graphics"],
+        category: "branding",
+        price: "15000",
+        package: "gold"
+      },
+
+      // Silver Package - Brand Identity
+      "هوية بصرية أساسية - باقة فضية": {
+        name: "هوية بصرية أساسية - باقة فضية",
+        description: "هوية بصرية للشركات الصغيرة والناشئة",
+        fullDescription: "باقة هوية بصرية أساسية مثالية للشركات الصغيرة والناشئة التي تحتاج لبداية قوية وموثوقة. تركز على العناصر الأساسية للهوية البصرية مع ضمان الجودة المهنية والتطبيق العملي السليم لبناء أساس متين للعلامة التجارية.",
+        keyFeatures: ["تصميم شعار احترافي أساسي", "لوحة ألوان متناسقة", "3 تطبيقات عملية أساسية", "ملفات PNG/JPG عالية الجودة", "دليل استخدام مبسط", "مراجعتين مجانيتين", "ضمان الجودة", "دعم فني أساسي"],
+        technicalFeatures: ["ملفات PNG عالية الدقة", "ملفات JPG للطباعة", "لوحة ألوان RGB/CMYK", "أحجام متعددة للشعار", "ملفات ويب محسنة", "دليل استخدام بسيط"],
+        benefits: ["هوية بصرية مميزة وموثوقة", "زيادة التعرف على العلامة التجارية بنسبة 45%", "مظهر احترافي موحد", "تحسين الثقة لدى العملاء", "نقطة انطلاق قوية", "استثمار ذكي للبداية"],
+        targetAudience: ["الشركات الناشئة", "الأعمال الصغيرة", "رواد الأعمال", "المشاريع الجديدة", "الخدمات المحلية"],
+        timeline: "2-3 أسابيع",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Basic Brand Guidelines"],
+        category: "branding",
+        price: "8000",
+        package: "silver"
+      },
+
+      "Basic Visual Identity - Silver Package": {
+        name: "Basic Visual Identity - Silver Package",
+        description: "Visual identity for small companies and startups",
+        fullDescription: "Essential visual identity package perfect for small companies and startups needing a strong and reliable foundation. Focuses on core visual identity elements ensuring professional quality and proper practical application for solid brand foundation building.",
+        keyFeatures: ["Professional basic logo design", "Coordinated color palette", "3 essential practical applications", "High-quality PNG/JPG files", "Simplified usage guide", "Two free revisions", "Quality guarantee", "Basic technical support"],
+        technicalFeatures: ["High-resolution PNG files", "Print-ready JPG files", "RGB/CMYK color palette", "Multiple logo sizes", "Optimized web files", "Simple usage guide"],
+        benefits: ["Distinctive & reliable visual identity", "45% brand recognition increase", "Unified professional appearance", "Enhanced customer trust", "Strong starting point", "Smart investment for beginnings"],
+        targetAudience: ["Startups", "Small Businesses", "Entrepreneurs", "New Projects", "Local Services"],
+        timeline: "2-3 weeks",
+        technologies: ["Adobe Illustrator", "Adobe Photoshop", "Basic Brand Guidelines"],
+        category: "branding",
+        price: "8000",
+        package: "silver"
+      },
+
+      // Print Design Packages - Gold & Silver
+      "مطبوعات تسويقية - باقة ذهبية": {
+        name: "مطبوعات تسويقية - باقة ذهبية",
+        description: "مجموعة مطبوعات تسويقية احترافية",
+        fullDescription: "باقة مطبوعات تسويقية متوازنة تجمع بين التنوع والجودة، مصممة للشركات التي تحتاج لمواد تسويقية احترافية بقيمة ممتازة. تشمل التصاميم الأساسية الأكثر فعالية في التسويق مع ضمان جودة الطباعة والتأثير البصري القوي.",
+        keyFeatures: ["5 بوسترات إعلانية متنوعة", "بروشور ثلاثي الطي احترافي", "فلاير A4 جذاب", "كروت شخصية أنيقة", "ملفات طباعة عالية الجودة", "تصاميم قابلة للتعديل", "دليل الطباعة", "دعم فني شامل"],
+        technicalFeatures: ["دقة 300 DPI للطباعة", "ملفات PDF جاهزة للطباعة", "صيغ CMYK محسنة", "علامات القص والهوامش", "ملفات مصدر قابلة للتعديل", "مواصفات الورق والأحبار"],
+        benefits: ["مواد تسويقية مؤثرة وجذابة", "زيادة الاستجابة التسويقية بنسبة 50%", "مظهر احترافي موحد", "جودة طباعة ممتازة", "تكلفة معقولة", "مرونة في التطبيق"],
+        targetAudience: ["الشركات المتوسطة", "الأعمال التجارية", "المكاتب المهنية", "المعارض والفعاليات", "الخدمات المحلية"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production", "Color Management"],
+        category: "print",
+        price: "12000",
+        package: "gold"
+      },
+
+      "Marketing Materials - Gold Package": {
+        name: "Marketing Materials - Gold Package",
+        description: "Professional marketing materials collection",
+        fullDescription: "Balanced marketing materials package combining diversity and quality, designed for companies needing professional marketing materials with excellent value. Includes the most effective basic designs in marketing with guaranteed print quality and strong visual impact.",
+        keyFeatures: ["5 diverse advertising posters", "Professional tri-fold brochure", "Attractive A4 flyer", "Elegant business cards", "High-quality print files", "Editable designs", "Printing guide", "Comprehensive technical support"],
+        technicalFeatures: ["300 DPI print resolution", "Print-ready PDF files", "Optimized CMYK formats", "Cut marks and margins", "Editable source files", "Paper and ink specifications"],
+        benefits: ["Impactful & attractive marketing materials", "50% marketing response increase", "Unified professional appearance", "Excellent print quality", "Reasonable cost", "Application flexibility"],
+        targetAudience: ["Medium Companies", "Commercial Businesses", "Professional Offices", "Exhibitions & Events", "Local Services"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production", "Color Management"],
+        category: "print",
+        price: "12000",
+        package: "gold"
+      },
+
+      "مطبوعات أساسية - باقة فضية": {
+        name: "مطبوعات أساسية - باقة فضية",
+        description: "مطبوعات أساسية للشركات الصغيرة",
+        fullDescription: "باقة مطبوعات أساسية مثالية للشركات الصغيرة والناشئة التي تحتاج لمواد تسويقية مطبوعة عالية الجودة بميزانية محدودة. تركز على العناصر الأكثر أهمية والأكثر استخداماً في التسويق اليومي مع ضمان الجودة المهنية.",
+        keyFeatures: ["3 بوسترات إعلانية متنوعة", "فلاير A4 احترافي", "كروت شخصية أنيقة", "ملفات طباعة جاهزة", "تصاميم قابلة للتعديل البسيط", "دليل طباعة أساسي", "مراجعتين مجانيتين", "دعم فني أساسي"],
+        technicalFeatures: ["دقة 300 DPI عالية", "ملفات PDF للطباعة", "ألوان CMYK محسنة", "علامات قص أساسية", "مواصفات الورق", "ملفات احتياطية"],
+        benefits: ["مواد تسويقية جذابة ومؤثرة", "زيادة الوعي بالعلامة التجارية بنسبة 35%", "مظهر احترافي موثوق", "جودة طباعة عالية", "قيمة ممتازة", "سهولة الاستخدام"],
+        targetAudience: ["الشركات الصغيرة", "الأعمال المحلية", "المشاريع الناشئة", "المهنيين المستقلين", "المتاجر الصغيرة"],
+        timeline: "2-3 أسابيع",
+        technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production"],
+        category: "print",
+        price: "6000",
+        package: "silver"
+      },
+
+      "Basic Print Materials - Silver Package": {
+        name: "Basic Print Materials - Silver Package",
+        description: "Basic print materials for small businesses",
+        fullDescription: "Essential print materials package perfect for small companies and startups needing high-quality printed marketing materials on a limited budget. Focuses on the most important and frequently used elements in daily marketing while ensuring professional quality.",
+        keyFeatures: ["3 diverse advertising posters", "Professional A4 flyer", "Elegant business cards", "Ready print files", "Simple editable designs", "Basic printing guide", "Two free revisions", "Basic technical support"],
+        technicalFeatures: ["High 300 DPI resolution", "Print PDF files", "Optimized CMYK colors", "Basic cut marks", "Paper specifications", "Backup files"],
+        benefits: ["Attractive & impactful marketing materials", "35% brand awareness increase", "Reliable professional appearance", "High print quality", "Excellent value", "Easy to use"],
+        targetAudience: ["Small Companies", "Local Businesses", "Startup Projects", "Independent Professionals", "Small Stores"],
+        timeline: "2-3 weeks",
+        technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production"],
+        category: "print",
+        price: "6000",
+        package: "silver"
+      },
+
+      // Digital Design Packages - Gold & Silver
+      "محتوى سوشيال ميديا متوسط - باقة ذهبية": {
+        name: "محتوى سوشيال ميديا متوسط - باقة ذهبية",
+        description: "محتوى بصري متوازن لوسائل التواصل",
+        fullDescription: "باقة محتوى سوشيال ميديا متوازنة تجمع بين التنوع والجودة، مصممة للشركات التي تحتاج لحضور قوي ومنتظم على منصات التواصل الاجتماعي. تشمل تشكيلة متنوعة من التصاميم الجذابة والمحتوى التفاعلي المحسن لكل منصة.",
+        keyFeatures: ["20 تصميم منشورات متنوعة", "3 إنفوجرافيك احترافي", "قوالب قابلة للتخصيص", "تصاميم القصص", "أغلفة أساسية للمنصات", "محتوى للمناسبات", "دليل استخدام مبسط", "دعم تقني شامل"],
+        technicalFeatures: ["أحجام محسنة لكل منصة", "ملفات عالية الدقة", "قوالب Photoshop أساسية", "ملفات ويب محسنة", "Brand colors متسقة", "تصاميم متجاوبة"],
+        benefits: ["زيادة التفاعل بنسبة 60%", "نمو متابعين طبيعي", "محتوى احترافي منتظم", "وقت نشر مخطط", "مظهر موحد جذاب", "كفاءة في التكلفة"],
+        targetAudience: ["الشركات المتوسطة", "العلامات التجارية النامية", "الأعمال الرقمية", "وكالات التسويق الصغيرة", "المؤسسات المحلية"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe Photoshop", "Figma", "Canva", "Social Media Tools"],
+        category: "digital",
+        price: "12000",
+        package: "gold"
+      },
+
+      "Medium Social Media Content - Gold Package": {
+        name: "Medium Social Media Content - Gold Package",
+        description: "Balanced visual content for social media",
+        fullDescription: "Balanced social media content package combining diversity and quality, designed for companies needing strong and regular presence on social media platforms. Includes diverse range of attractive designs and interactive content optimized for each platform.",
+        keyFeatures: ["20 diverse post designs", "3 professional infographics", "Customizable templates", "Story designs", "Basic platform covers", "Seasonal content", "Simplified usage guide", "Comprehensive technical support"],
+        technicalFeatures: ["Optimized sizes for each platform", "High-resolution files", "Basic Photoshop templates", "Optimized web files", "Consistent brand colors", "Responsive designs"],
+        benefits: ["60% engagement increase", "Natural follower growth", "Regular professional content", "Planned publishing schedule", "Attractive unified appearance", "Cost efficiency"],
+        targetAudience: ["Medium Companies", "Growing Brands", "Digital Businesses", "Small Marketing Agencies", "Local Institutions"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe Photoshop", "Figma", "Canva", "Social Media Tools"],
+        category: "digital",
+        price: "12000",
+        package: "gold"
+      },
+
+      "محتوى سوشيال ميديا أساسي - باقة فضية": {
+        name: "محتوى سوشيال ميديا أساسي - باقة فضية",
+        description: "محتوى بصري أساسي لوسائل التواصل",
+        fullDescription: "باقة محتوى سوشيال ميديا أساسية مثالية للشركات الصغيرة والمشاريع الناشئة التي تحتاج لبداية قوية على منصات التواصل الاجتماعي. تركز على التصاميم الأساسية عالية التأثير مع سهولة الاستخدام والتطبيق.",
+        keyFeatures: ["15 تصميم منشورات أساسية", "إنفوجرافيك واحد احترافي", "قوالب أساسية قابلة للتعديل", "تصاميم قصص بسيطة", "غلاف أساسي واحد", "تصاميم مناسبات أساسية", "دليل استخدام مبسط", "مراجعتين مجانيتين"],
+        technicalFeatures: ["أحجام صحيحة لكل منصة", "ملفات PNG/JPG عالية الجودة", "قوالب بسيطة", "ألوان متناسقة", "ملفات ويب محسنة", "Brand consistency أساسي"],
+        benefits: ["بداية قوية على السوشيال ميديا", "زيادة التفاعل بنسبة 40%", "مظهر احترافي موثوق", "محتوى منظم وجذاب", "سهولة الإدارة", "استثمار ذكي للبداية"],
+        targetAudience: ["الشركات الناشئة", "الأعمال الصغيرة", "رواد الأعمال", "المشاريع الجديدة", "المهنيين المستقلين"],
+        timeline: "2-3 أسابيع",
+        technologies: ["Adobe Photoshop", "Canva", "Social Media Tools"],
+        category: "digital",
+        price: "8000",
+        package: "silver"
+      },
+
+      "Basic Social Media Content - Silver Package": {
+        name: "Basic Social Media Content - Silver Package",
+        description: "Basic visual content for social media",
+        fullDescription: "Essential social media content package perfect for small companies and startup projects needing strong start on social media platforms. Focuses on high-impact basic designs with ease of use and application.",
+        keyFeatures: ["15 basic post designs", "One professional infographic", "Basic editable templates", "Simple story designs", "One basic cover", "Basic seasonal designs", "Simplified usage guide", "Two free revisions"],
+        technicalFeatures: ["Correct sizes for each platform", "High-quality PNG/JPG files", "Simple templates", "Consistent colors", "Optimized web files", "Basic brand consistency"],
+        benefits: ["Strong social media start", "40% engagement increase", "Reliable professional appearance", "Organized attractive content", "Easy management", "Smart investment for beginnings"],
+        targetAudience: ["Startup Companies", "Small Businesses", "Entrepreneurs", "New Projects", "Independent Professionals"],
+        timeline: "2-3 weeks",
+        technologies: ["Adobe Photoshop", "Canva", "Social Media Tools"],
+        category: "digital",
+        price: "8000",
+        package: "silver"
+      },
+
+      // UI/UX Design Packages
+      "تصميم واجهة موقع - باقة ذهبية": {
+        name: "تصميم واجهة موقع - باقة ذهبية",
+        description: "تصميم واجهة موقع إلكتروني احترافي",
+        fullDescription: "تصميم واجهة موقع إلكتروني احترافي وشامل يجمع بين التصميم الجذاب والوظائف العملية المتقدمة. مصمم خصيصاً للشركات المتوسطة والكبيرة التي تسعى لحضور رقمي قوي ومؤثر يعكس احترافية العلامة التجارية ويحقق أهداف الأعمال.",
+        keyFeatures: ["15 صفحة موقع احترافية", "تصميم متجاوب لجميع الأجهزة", "نماذج أولية تفاعلية", "ملفات للمطور منظمة", "تصميم UX محسن", "أيقونات مخصصة", "دليل التصميم", "دعم فني شامل"],
+        technicalFeatures: ["تصميم Figma احترافي", "Grid system منظم", "Components قابلة لإعادة الاستخدام", "Typography متسق", "Color palette متقدم", "Responsive breakpoints"],
+        benefits: ["موقع احترافي يعكس قوة العلامة التجارية", "تحسين تجربة المستخدم بنسبة 70%", "زيادة معدلات التحويل", "سهولة التطوير والتنفيذ", "مظهر عصري وجذاب", "تجاوب مثالي مع الأجهزة"],
+        targetAudience: ["الشركات المتوسطة والكبيرة", "الأعمال التجارية", "الوكالات", "المؤسسات المهنية", "العلامات التجارية المتقدمة"],
+        timeline: "4-6 أسابيع",
+        technologies: ["Figma", "Adobe XD", "Sketch", "UI/UX Design", "Responsive Design"],
+        category: "ui_design",
+        price: "18000",
+        package: "gold"
+      },
+
+      "Website UI Design - Gold Package": {
+        name: "Website UI Design - Gold Package",
+        description: "Professional website UI design",
+        fullDescription: "Professional and comprehensive website UI design combining attractive design with advanced practical functions. Designed specifically for medium and large companies seeking strong and impactful digital presence that reflects brand professionalism and achieves business goals.",
+        keyFeatures: ["15 professional website pages", "Responsive design for all devices", "Interactive wireframes", "Organized developer files", "Optimized UX design", "Custom icons", "Design guide", "Comprehensive technical support"],
+        technicalFeatures: ["Professional Figma design", "Organized grid system", "Reusable components", "Consistent typography", "Advanced color palette", "Responsive breakpoints"],
+        benefits: ["Professional website reflecting brand strength", "70% user experience improvement", "Increased conversion rates", "Easy development & implementation", "Modern attractive appearance", "Perfect device responsiveness"],
+        targetAudience: ["Medium & Large Companies", "Commercial Businesses", "Agencies", "Professional Institutions", "Advanced Brands"],
+        timeline: "4-6 weeks",
+        technologies: ["Figma", "Adobe XD", "Sketch", "UI/UX Design", "Responsive Design"],
+        category: "ui_design",
+        price: "18000",
+        package: "gold"
+      },
+
+      "تصميم واجهة أساسية - باقة فضية": {
+        name: "تصميم واجهة أساسية - باقة فضية",
+        description: "تصميم واجهة أساسية لصفحة أو تطبيق بسيط",
+        fullDescription: "باقة تصميم واجهة أساسية مثالية للشركات الصغيرة والمشاريع الناشئة التي تحتاج لواجهة رقمية بسيطة وعملية. تركز على العناصر الأساسية لتجربة المستخدم مع ضمان الوضوح والسهولة في الاستخدام والتنفيذ.",
+        keyFeatures: ["5-7 شاشات أساسية", "تصميم بسيط وواضح", "ملفات Figma منظمة", "مراجعتين شاملتين", "دليل استخدام أساسي", "ألوان وخطوط متناسقة", "أيقونات أساسية", "دعم فني أساسي"],
+        technicalFeatures: ["ملفات Figma قابلة للتعديل", "Components أساسية", "Color palette بسيط", "Typography واضح", "Layout منظم", "Export settings محسنة"],
+        benefits: ["واجهة بسيطة وسهلة الاستخدام", "تجربة مستخدم واضحة ومباشرة", "سهولة التطوير والتنفيذ", "تكلفة معقولة وقيمة ممتازة", "نقطة انطلاق مثالية", "تصميم قابل للتطوير"],
+        targetAudience: ["الشركات الصغيرة", "المشاريع الناشئة", "التطبيقات البسيطة", "المواقع الأساسية", "رواد الأعمال"],
+        timeline: "2-4 أسابيع",
+        technologies: ["Figma", "UI Design", "Basic UX", "Component Design"],
+        category: "ui_design",
+        price: "9000",
+        package: "silver"
+      },
+
+      "Basic UI Design - Silver Package": {
+        name: "Basic UI Design - Silver Package",
+        description: "Basic UI design for page or simple app",
+        fullDescription: "Essential UI design package perfect for small companies and startup projects needing simple and practical digital interface. Focuses on core user experience elements ensuring clarity and ease of use and implementation.",
+        keyFeatures: ["5-7 basic screens", "Simple clear design", "Organized Figma files", "Two comprehensive revisions", "Basic usage guide", "Consistent colors & fonts", "Basic icons", "Basic technical support"],
+        technicalFeatures: ["Editable Figma files", "Basic components", "Simple color palette", "Clear typography", "Organized layout", "Optimized export settings"],
+        benefits: ["Simple easy-to-use interface", "Clear direct user experience", "Easy development & implementation", "Reasonable cost & excellent value", "Perfect starting point", "Scalable design"],
+        targetAudience: ["Small Companies", "Startup Projects", "Simple Applications", "Basic Websites", "Entrepreneurs"],
+        timeline: "2-4 weeks",
+        technologies: ["Figma", "UI Design", "Basic UX", "Component Design"],
+        category: "ui_design",
+        price: "9000",
+        package: "silver"
+      }
     };
 
     return designDetails[designName] || null;
