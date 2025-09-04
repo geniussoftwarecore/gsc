@@ -4632,26 +4632,51 @@ export default function ServiceDetail() {
                                   </div>
                                 </div>
 
-                                {/* Action Button */}
+                                {/* Action Buttons */}
                                 <div className="pt-4 border-t">
-                                  <Button
-                                    onClick={() => {
-                                      setLocation(`/contact?service=${encodeURIComponent(campaign.name)}&price=${campaign.price}`);
-                                    }}
-                                    className={cn(
-                                      "flex-1 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-offset-2",
-                                      campaign.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 focus:ring-yellow-400/20" :
-                                      campaign.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 focus:ring-yellow-500/20" :
-                                      "bg-primary hover:bg-primary-dark focus:ring-primary/20"
-                                    )}
-                                    size="sm"
-                                  >
-                                    <ArrowRight className={cn(
-                                      "w-4 h-4 mr-2",
-                                      dir === 'rtl' && "rotate-180 mr-0 ml-2"
-                                    )} />
-                                    {dir === 'rtl' ? 'اطلب الآن' : 'Order Now'}
-                                  </Button>
+                                  <div className="flex flex-col sm:flex-row gap-2">
+                                    {/* View Details Button */}
+                                    <Button
+                                      onClick={() => {
+                                        setSelectedAppForDetails(campaign);
+                                        setShowAppDetailsModal(true);
+                                      }}
+                                      variant="outline"
+                                      className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                      size="sm"
+                                      aria-label={`View details for ${campaign.name}`}
+                                      data-testid={`view-details-marketing-${campaign.name.replace(/\s+/g, '-')}`}
+                                    >
+                                      <Eye className="w-4 h-4 mr-2" />
+                                      <span className="font-medium">
+                                        {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                      </span>
+                                    </Button>
+                                    
+                                    {/* Order Now Button */}
+                                    <Button
+                                      onClick={() => {
+                                        setLocation(`/contact?service=${encodeURIComponent(campaign.name)}&price=${campaign.price}`);
+                                      }}
+                                      className={cn(
+                                        "flex-1 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-offset-2",
+                                        campaign.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 focus:ring-yellow-400/20" :
+                                        campaign.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 focus:ring-yellow-500/20" :
+                                        "bg-primary hover:bg-primary-dark focus:ring-primary/20"
+                                      )}
+                                      size="sm"
+                                      aria-label={`Order ${campaign.name}`}
+                                      data-testid={`order-marketing-${campaign.name.replace(/\s+/g, '-')}`}
+                                    >
+                                      <span className="font-medium">
+                                        {dir === 'rtl' ? 'اطلب الآن' : 'Order Now'}
+                                      </span>
+                                      <ArrowRight className={cn(
+                                        "w-4 h-4 ml-2 transition-transform duration-200",
+                                        dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                      )} />
+                                    </Button>
+                                  </div>
                                 </div>
                               </div>
                             </CardContent>
