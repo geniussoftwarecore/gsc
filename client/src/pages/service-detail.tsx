@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin, Target, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -1257,6 +1257,64 @@ export default function ServiceDetail() {
     },
   ];
 
+  // Desktop app categories for desktop development
+  const desktopCategories = [
+    {
+      id: "all",
+      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      icon: Monitor,
+      color: "bg-blue-500",
+    },
+    {
+      id: "business",
+      title: dir === 'rtl' ? "برامج الأعمال" : "Business Software",
+      icon: Briefcase,
+      color: "bg-green-500",
+    },
+    {
+      id: "creative",
+      title: dir === 'rtl' ? "البرامج الإبداعية" : "Creative Software",
+      icon: Palette,
+      color: "bg-purple-500",
+    },
+    {
+      id: "productivity",
+      title: dir === 'rtl' ? "أدوات الإنتاجية" : "Productivity Tools",
+      icon: Target,
+      color: "bg-orange-500",
+    },
+    {
+      id: "healthcare",
+      title: dir === 'rtl' ? "البرامج الطبية" : "Medical Software",
+      icon: Heart,
+      color: "bg-pink-500",
+    },
+    {
+      id: "education",
+      title: dir === 'rtl' ? "البرامج التعليمية" : "Educational Software",
+      icon: BookOpen,
+      color: "bg-indigo-500",
+    },
+    {
+      id: "finance",
+      title: dir === 'rtl' ? "البرامج المالية" : "Financial Software",
+      icon: Calculator,
+      color: "bg-cyan-500",
+    },
+    {
+      id: "utility",
+      title: dir === 'rtl' ? "أدوات النظام" : "System Utilities",
+      icon: Settings,
+      color: "bg-gray-500",
+    },
+    {
+      id: "entertainment",
+      title: dir === 'rtl' ? "الترفيه والألعاب" : "Entertainment & Games",
+      icon: GamepadIcon,
+      color: "bg-yellow-500",
+    },
+  ];
+
   // Website categories for web development
   const websiteCategories = [
     {
@@ -1320,6 +1378,116 @@ export default function ServiceDetail() {
       color: "bg-slate-500",
     },
   ];
+
+  // Sample desktop apps for each category
+  const sampleDesktopApps = {
+    business: [
+      {
+        name: dir === 'rtl' ? "نظام إدارة المشاريع" : "Project Management System",
+        description: dir === 'rtl' ? "نظام متكامل لإدارة المشاريع والفرق والموارد" : "Comprehensive system for managing projects, teams and resources",
+        features: dir === 'rtl' ? ["إدارة المهام", "تتبع الوقت", "التقارير", "لوحة التحكم"] : ["Task Management", "Time Tracking", "Reports", "Dashboard"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة العملاء CRM" : "CRM Management System",
+        description: dir === 'rtl' ? "برنامج شامل لإدارة علاقات العملاء والمبيعات" : "Complete customer relationship and sales management software",
+        features: dir === 'rtl' ? ["قاعدة العملاء", "إدارة المبيعات", "التقارير التحليلية", "المتابعة التلقائية"] : ["Customer Database", "Sales Management", "Analytics Reports", "Auto Follow-up"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة المخازن" : "Inventory Management System",
+        description: dir === 'rtl' ? "برنامج متطور لإدارة المخزون والمستودعات" : "Advanced software for inventory and warehouse management",
+        features: dir === 'rtl' ? ["تتبع المخزون", "إدارة المواقع", "نظام الباركود", "تقارير المخزون"] : ["Stock Tracking", "Location Management", "Barcode System", "Inventory Reports"],
+      },
+    ],
+    creative: [
+      {
+        name: dir === 'rtl' ? "برنامج تصميم جرافيكي" : "Graphic Design Software",
+        description: dir === 'rtl' ? "برنامج تصميم احترافي للمصممين والفنانين" : "Professional design software for designers and artists",
+        features: dir === 'rtl' ? ["أدوات الرسم المتقدمة", "الطبقات والأقنعة", "مكتبة الفرش", "تصدير عالي الجودة"] : ["Advanced Drawing Tools", "Layers & Masks", "Brush Library", "High-Quality Export"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج مونتاج الفيديو" : "Video Editing Software",
+        description: dir === 'rtl' ? "أداة قوية لتحرير ومونتاج الفيديوهات الاحترافية" : "Powerful tool for professional video editing and production",
+        features: dir === 'rtl' ? ["تحرير متعدد المسارات", "تأثيرات بصرية", "تحرير صوتي", "تصدير 4K/8K"] : ["Multi-track Editing", "Visual Effects", "Audio Editing", "4K/8K Export"],
+      },
+      {
+        name: dir === 'rtl' ? "برنامج تصميم ثلاثي الأبعاد" : "3D Design Software",
+        description: dir === 'rtl' ? "أداة متقدمة للنمذجة والتصميم ثلاثي الأبعاد" : "Advanced tool for 3D modeling and design",
+        features: dir === 'rtl' ? ["النمذجة ثلاثية الأبعاد", "الإضاءة والتظليل", "التحريك", "العرض المرئي"] : ["3D Modeling", "Lighting & Shading", "Animation", "Rendering"],
+      },
+    ],
+    productivity: [
+      {
+        name: dir === 'rtl' ? "حزمة أدوات المكتب" : "Office Suite",
+        description: dir === 'rtl' ? "مجموعة شاملة من أدوات المكتب للإنتاجية" : "Complete office productivity suite",
+        features: dir === 'rtl' ? ["معالج النصوص", "جداول البيانات", "العروض التقديمية", "قاعدة البيانات"] : ["Word Processor", "Spreadsheets", "Presentations", "Database"],
+      },
+      {
+        name: dir === 'rtl' ? "مدير المهام والأهداف" : "Task & Goal Manager",
+        description: dir === 'rtl' ? "أداة لتنظيم المهام والأهداف الشخصية والمهنية" : "Tool for organizing personal and professional tasks and goals",
+        features: dir === 'rtl' ? ["تنظيم المهام", "تتبع الأهداف", "التذكيرات", "تقارير الإنتاجية"] : ["Task Organization", "Goal Tracking", "Reminders", "Productivity Reports"],
+      },
+    ],
+    healthcare: [
+      {
+        name: dir === 'rtl' ? "نظام إدارة العيادات" : "Clinic Management System",
+        description: dir === 'rtl' ? "نظام شامل لإدارة العيادات والمرضى والمواعيد" : "Comprehensive system for managing clinics, patients and appointments",
+        features: dir === 'rtl' ? ["حجز المواعيد", "ملفات المرضى", "الوصفات الطبية", "نظام الفواتير"] : ["Appointment Booking", "Patient Records", "Prescriptions", "Billing System"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة المستشفيات" : "Hospital Management System",
+        description: dir === 'rtl' ? "حل متكامل لإدارة المستشفيات والأقسام الطبية" : "Integrated solution for managing hospitals and medical departments",
+        features: dir === 'rtl' ? ["إدارة الأسرة", "السجلات الطبية", "إدارة الصيدلية", "التقارير الطبية"] : ["Bed Management", "Medical Records", "Pharmacy Management", "Medical Reports"],
+      },
+    ],
+    education: [
+      {
+        name: dir === 'rtl' ? "نظام إدارة المدارس" : "School Management System",
+        description: dir === 'rtl' ? "منصة شاملة لإدارة المدارس والطلاب والدرجات" : "Comprehensive platform for managing schools, students and grades",
+        features: dir === 'rtl' ? ["سجل الدرجات", "إدارة الحضور", "التواصل مع الأهل", "الجداول الدراسية"] : ["Grade Records", "Attendance Management", "Parent Communication", "Class Schedules"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة المكتبات" : "Library Management System",
+        description: dir === 'rtl' ? "حل متقدم لإدارة المكتبات الأكاديمية والعامة" : "Advanced solution for managing academic and public libraries",
+        features: dir === 'rtl' ? ["فهرسة الكتب", "إدارة الأعضاء", "الاستعارة والإرجاع", "البحث المتقدم"] : ["Book Cataloging", "Member Management", "Borrowing & Returns", "Advanced Search"],
+      },
+    ],
+    finance: [
+      {
+        name: dir === 'rtl' ? "نظام المحاسبة المتكامل" : "Integrated Accounting System",
+        description: dir === 'rtl' ? "حل شامل للمحاسبة والإدارة المالية للشركات" : "Complete accounting and financial management solution for businesses",
+        features: dir === 'rtl' ? ["الحسابات العامة", "إدارة الفواتير", "التقارير المالية", "إدارة الضرائب"] : ["General Ledger", "Invoice Management", "Financial Reports", "Tax Management"],
+      },
+      {
+        name: dir === 'rtl' ? "نظام إدارة الرواتب" : "Payroll Management System",
+        description: dir === 'rtl' ? "برنامج متقدم لإدارة رواتب الموظفين والمزايا" : "Advanced software for employee payroll and benefits management",
+        features: dir === 'rtl' ? ["حساب الرواتب", "إدارة المزايا", "التقارير", "التكامل المصرفي"] : ["Payroll Calculation", "Benefits Management", "Reports", "Bank Integration"],
+      },
+    ],
+    utility: [
+      {
+        name: dir === 'rtl' ? "أداة تحسين النظام" : "System Optimizer",
+        description: dir === 'rtl' ? "برنامج لتحسين أداء النظام وتنظيف الملفات" : "Software for system performance optimization and file cleanup",
+        features: dir === 'rtl' ? ["تنظيف الملفات", "تحسين الأداء", "إدارة بدء التشغيل", "مراقبة النظام"] : ["File Cleanup", "Performance Boost", "Startup Management", "System Monitoring"],
+      },
+      {
+        name: dir === 'rtl' ? "أداة النسخ الاحتياطي" : "Backup Utility",
+        description: dir === 'rtl' ? "حل موثوق للنسخ الاحتياطي واستعادة البيانات" : "Reliable solution for data backup and recovery",
+        features: dir === 'rtl' ? ["النسخ التلقائي", "جدولة النسخ", "استعادة البيانات", "التشفير"] : ["Auto Backup", "Backup Scheduling", "Data Recovery", "Encryption"],
+      },
+    ],
+    entertainment: [
+      {
+        name: dir === 'rtl' ? "مشغل الوسائط المتعددة" : "Media Player Suite",
+        description: dir === 'rtl' ? "مشغل شامل لجميع أنواع الوسائط الصوتية والمرئية" : "Comprehensive player for all audio and video media formats",
+        features: dir === 'rtl' ? ["دعم جميع الصيغ", "قوائم التشغيل", "المعادل الصوتي", "البث المباشر"] : ["All Format Support", "Playlists", "Audio Equalizer", "Streaming"],
+      },
+      {
+        name: dir === 'rtl' ? "محرر الألعاب" : "Game Development IDE",
+        description: dir === 'rtl' ? "بيئة متكاملة لتطوير الألعاب ثنائية وثلاثية الأبعاد" : "Integrated environment for 2D and 3D game development",
+        features: dir === 'rtl' ? ["محرر المشاهد", "نظام الرسوميات", "محرك الفيزياء", "أدوات التطوير"] : ["Scene Editor", "Graphics Engine", "Physics Engine", "Development Tools"],
+      },
+    ],
+  };
 
   // Sample apps for each category
   const sampleApps = {
@@ -1581,6 +1749,11 @@ export default function ServiceDetail() {
         return Object.values(sampleWebsites).flat();
       }
       return sampleWebsites[selectedAppCategory as keyof typeof sampleWebsites] || [];
+    } else if (service?.category === 'desktop') {
+      if (selectedAppCategory === "all") {
+        return Object.values(sampleDesktopApps).flat();
+      }
+      return sampleDesktopApps[selectedAppCategory as keyof typeof sampleDesktopApps] || [];
     } else {
       if (selectedAppCategory === "all") {
         return Object.values(sampleApps).flat();
@@ -2062,6 +2235,187 @@ export default function ServiceDetail() {
                       {dir === 'rtl' 
                         ? 'نطور مواقع ومنصات مخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى موقع أو منصة احترافية' 
                         : 'We develop custom websites and platforms based on your specific needs - tell us your idea and we\'ll turn it into a professional solution'
+                      }
+                    </p>
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-xl px-8 py-3">
+                        {dir === 'rtl' ? 'ناقش فكرتك معنا' : 'Discuss Your Idea'}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Desktop App Categories and Examples Section - Only show for desktop service */}
+        {service && service.category === 'desktop' && (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <motion.div
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'اختر نوع البرنامج أو التطبيق الذي تريده' : 'Choose Your Desktop Software Type'}
+                  </h2>
+                  <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نطور برامج سطح المكتب المتخصصة لجميع المجالات - من برامج الأعمال إلى التطبيقات الإبداعية والطبية والتعليمية' 
+                      : 'We develop specialized desktop software for all industries - from business applications to creative, medical, and educational software'
+                    }
+                  </p>
+                </motion.div>
+
+                {/* Desktop Category Filters */}
+                <motion.div
+                  className="flex flex-wrap justify-center gap-3 mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {desktopCategories.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setSelectedAppCategory(category.id)}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium",
+                        selectedAppCategory === category.id
+                          ? `${category.color} text-white shadow-lg`
+                          : "bg-gray-100 text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-200 border border-gray-200 hover:border-gray-300"
+                      )}
+                    >
+                      <category.icon size={18} />
+                      <span>{category.title}</span>
+                    </motion.button>
+                  ))}
+                </motion.div>
+
+                {/* Desktop Apps Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedAppCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {getFilteredApps().map((desktopApp, index) => (
+                      <motion.div
+                        key={`${selectedAppCategory}-${index}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 }}
+                      >
+                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
+                          <CardHeader>
+                            <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                              <Monitor className="w-5 h-5 text-primary" />
+                              {desktopApp.name}
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-brand-text-muted mb-4 leading-relaxed">
+                              {desktopApp.description}
+                            </p>
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                  {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {desktopApp.features.map((feature, featureIndex) => (
+                                    <Badge 
+                                      key={featureIndex} 
+                                      variant="secondary" 
+                                      className="text-xs"
+                                    >
+                                      {feature}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                              
+                              {/* Action Buttons */}
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                {/* View Details Button */}
+                                <Button
+                                  onClick={() => {
+                                    setSelectedAppForDetails(desktopApp);
+                                    setShowAppDetailsModal(true);
+                                  }}
+                                  variant="outline"
+                                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`View details for ${desktopApp.name}`}
+                                  data-testid={`view-details-desktop-${desktopApp.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <Eye className="w-4 h-4 mr-2" />
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                  </span>
+                                </Button>
+                                
+                                {/* Apply Now Button */}
+                                <Button
+                                  onClick={() => {
+                                    // Navigate to contact page with desktop app name pre-selected
+                                    setLocation(`/contact?service=${encodeURIComponent(desktopApp.name)}`);
+                                  }}
+                                  className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                  size="sm"
+                                  aria-label={`Apply for ${desktopApp.name}`}
+                                  data-testid={`apply-desktop-${desktopApp.name.replace(/\s+/g, '-')}`}
+                                >
+                                  <span className="font-medium">
+                                    {dir === 'rtl' ? 'اطلب الآن' : 'Apply Now'}
+                                  </span>
+                                  <ArrowRight 
+                                    className={cn(
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                    )} 
+                                  />
+                                </Button>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Call to Action for Custom Desktop App */}
+                <motion.div
+                  className="mt-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                      {dir === 'rtl' ? 'لديك فكرة برنامج مختلفة؟' : 'Have a Different Software Idea?'}
+                    </h3>
+                    <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                      {dir === 'rtl' 
+                        ? 'نطور برامج سطح المكتب المخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى برنامج احترافي' 
+                        : 'We develop custom desktop software based on your specific needs - tell us your idea and we\'ll turn it into professional software'
                       }
                     </p>
                     <Link href="/contact">
