@@ -2576,11 +2576,16 @@ export default function ServiceDetail() {
         {/* App Details Modal */}
         {selectedAppForDetails && (
           <Dialog open={showAppDetailsModal} onOpenChange={setShowAppDetailsModal}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold text-brand-text-primary flex items-center gap-3">
-                  {getDetailedWebsiteInfo(selectedAppForDetails.name) ? <Globe className="w-6 h-6 text-primary" /> : <Smartphone className="w-6 h-6 text-primary" />}
-                  {selectedAppForDetails.name}
+            <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto 
+              sm:max-h-[90vh] sm:m-4 m-2 
+              w-[calc(100vw-16px)] sm:w-auto
+              p-4 sm:p-6 
+              rounded-xl sm:rounded-2xl
+              scroll-smooth">
+              <DialogHeader className="pb-4">
+                <DialogTitle className="text-xl sm:text-2xl font-bold text-brand-text-primary flex items-start sm:items-center gap-3 leading-tight">
+                  {getDetailedWebsiteInfo(selectedAppForDetails.name) ? <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" /> : <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />}
+                  <span className="break-words">{selectedAppForDetails.name}</span>
                 </DialogTitle>
               </DialogHeader>
               
@@ -2592,8 +2597,8 @@ export default function ServiceDetail() {
                   // Show fallback content when detailed app info is not available
                   return (
                     <div className="space-y-6 py-4">
-                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-6">
-                        <h3 className="text-xl font-bold text-brand-text-primary mb-3">
+                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
                           {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
                         </h3>
                         <p className="text-brand-text-muted leading-relaxed">
@@ -2601,7 +2606,7 @@ export default function ServiceDetail() {
                         </p>
                       </div>
 
-                      <div className="bg-green-50 rounded-lg p-4 max-w-md">
+                      <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
                         <h4 className="font-bold text-green-800 mb-2">
                           {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
                         </h4>
@@ -2611,13 +2616,13 @@ export default function ServiceDetail() {
                       </div>
 
                       <div>
-                        <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                           <Star className="w-5 h-5 text-primary" />
                           {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
                         </h3>
-                        <div className="grid md:grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {selectedAppForDetails.features?.map((feature: string, index: number) => (
-                            <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <div key={index} className="flex items-start gap-3 p-3 sm:p-4 bg-gray-50 rounded-lg touch-manipulation">
                               <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                               <span className="text-brand-text-muted">{feature}</span>
                             </div>
@@ -2625,13 +2630,13 @@ export default function ServiceDetail() {
                         </div>
                       </div>
 
-                      <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 border-t mt-2">
                         <Button
                           onClick={() => {
                             setShowAppDetailsModal(false);
                             setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
                           }}
-                          className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-3"
+                          className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-4 sm:py-3 min-h-[48px] touch-manipulation"
                           size="lg"
                         >
                           <ArrowRight className={cn(
@@ -2643,7 +2648,7 @@ export default function ServiceDetail() {
                         <Button
                           onClick={() => setShowAppDetailsModal(false)}
                           variant="outline"
-                          className="flex-1 rounded-xl py-3"
+                          className="flex-1 rounded-xl py-4 sm:py-3 min-h-[48px] border-2 touch-manipulation"
                           size="lg"
                         >
                           {dir === 'rtl' ? 'إغلاق' : 'Close'}
@@ -2654,10 +2659,10 @@ export default function ServiceDetail() {
                 }
 
                 return (
-                  <div className="space-y-6 py-4">
+                  <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
                     {/* Overview Section */}
-                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-6">
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-3">
+                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
                         {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
                       </h3>
                       <p className="text-brand-text-muted leading-relaxed">
@@ -2666,7 +2671,7 @@ export default function ServiceDetail() {
                     </div>
 
                     {/* Timeline Only */}
-                    <div className="bg-green-50 rounded-lg p-4 max-w-md">
+                    <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
                       <h4 className="font-bold text-green-800 mb-2">
                         {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
                       </h4>
@@ -2675,13 +2680,13 @@ export default function ServiceDetail() {
 
                     {/* Key Features */}
                     <div>
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                         <Star className="w-5 h-5 text-primary" />
                         {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
                       </h3>
-                      <div className="grid md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {appDetails.keyFeatures.map((feature: string, index: number) => (
-                          <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                          <div key={index} className="flex items-start gap-3 p-3 sm:p-4 bg-gray-50 rounded-lg touch-manipulation">
                             <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                             <span className="text-brand-text-muted">{feature}</span>
                           </div>
@@ -2690,12 +2695,12 @@ export default function ServiceDetail() {
                     </div>
 
                     {/* Technical Features */}
-                    <div>
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                    <div className="space-y-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                         <Globe className="w-5 h-5 text-primary" />
                         {dir === 'rtl' ? 'المميزات التقنية' : 'Technical Features'}
                       </h3>
-                      <div className="grid md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {appDetails.technicalFeatures.map((feature: string, index: number) => (
                           <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
                             <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -2707,11 +2712,11 @@ export default function ServiceDetail() {
 
                     {/* Benefits */}
                     <div>
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                         <Heart className="w-5 h-5 text-primary" />
                         {dir === 'rtl' ? 'الفوائد والمزايا' : 'Benefits & Advantages'}
                       </h3>
-                      <div className="grid md:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {appDetails.benefits.map((benefit: string, index: number) => (
                           <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
                             <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
@@ -2723,7 +2728,7 @@ export default function ServiceDetail() {
 
                     {/* Target Audience */}
                     <div>
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                         <Users className="w-5 h-5 text-primary" />
                         {dir === 'rtl' ? 'الفئة المستهدفة' : 'Target Audience'}
                       </h3>
@@ -2738,7 +2743,7 @@ export default function ServiceDetail() {
 
                     {/* Technologies */}
                     <div>
-                      <h3 className="text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                         <Brain className="w-5 h-5 text-primary" />
                         {dir === 'rtl' ? 'التقنيات المستخدمة' : 'Technologies Used'}
                       </h3>
@@ -2752,13 +2757,13 @@ export default function ServiceDetail() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 border-t mt-2">
                       <Button
                         onClick={() => {
                           setShowAppDetailsModal(false);
                           setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
                         }}
-                        className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-3"
+                        className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-4 sm:py-3 min-h-[48px] touch-manipulation"
                         size="lg"
                       >
                         <ArrowRight className={cn(
@@ -2770,7 +2775,7 @@ export default function ServiceDetail() {
                       <Button
                         onClick={() => setShowAppDetailsModal(false)}
                         variant="outline"
-                        className="flex-1 rounded-xl py-3"
+                        className="flex-1 rounded-xl py-4 sm:py-3 min-h-[48px] border-2 touch-manipulation"
                         size="lg"
                       >
                         {dir === 'rtl' ? 'إغلاق' : 'Close'}
