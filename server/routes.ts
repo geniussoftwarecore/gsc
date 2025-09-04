@@ -29,6 +29,8 @@ import { createObjectCsvWriter } from 'csv-writer';
 import { generateToken } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  console.log('=== REGISTERING ALL ROUTES ===');
+  
   // Add metrics tracking middleware
   app.use(trackMetrics());
 
@@ -212,18 +214,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all services
-  app.get("/api/services", async (req, res) => {
-    try {
-      const services = await storage.instance.getAllServices();
-      res.json(services);
-    } catch (error) {
-      res.status(500).json({ 
-        success: false, 
-        message: "Failed to fetch services" 
-      });
-    }
-  });
+  // MOVED TO AFTER SPECIFIC SERVICE ENDPOINT
 
   // Get all portfolio items
   app.get("/api/portfolio", async (req, res) => {
@@ -282,24 +273,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get service by ID
+  console.log('Registering /api/services/:id endpoint');
+  
+  // Get service by ID - MOVED TO TOP
   app.get("/api/services/:id", async (req, res) => {
+    console.log('=== SERVICE BY ID REQUEST RECEIVED ===');
     try {
       const { id } = req.params;
-      const service = await storage.getServiceById(id);
+      console.log('Looking for service ID:', id);
+      console.log('Storage instance type:', storage.instance.constructor.name);
+      
+      // Check if getAllServices method exists
+      if (typeof storage.instance.getAllServices !== 'function') {
+        console.error('getAllServices method not found on storage instance');
+        return res.status(500).json({ 
+          success: false, 
+          message: "Storage method not available" 
+        });
+      }
+      
+      const services = await storage.instance.getAllServices();
+      console.log('Found services count:', services.length);
+      const service = services.find(s => s.id === id);
       
       if (!service) {
+        console.log('Service not found with ID:', id);
         return res.status(404).json({ 
           success: false, 
           message: "Service not found" 
         });
       }
       
+      console.log('Found service:', service.title);
       res.json(service);
     } catch (error) {
+      console.error('Service fetch error:', error);
       res.status(500).json({ 
         success: false, 
         message: "Failed to fetch service" 
+      });
+    }
+  });
+  
+  // Get all services
+  app.get("/api/services", async (req, res) => {
+    try {
+      const services = await storage.instance.getAllServices();
+      res.json(services);
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch services" 
       });
     }
   });

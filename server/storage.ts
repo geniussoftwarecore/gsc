@@ -64,6 +64,25 @@ export interface IStorage {
   getServiceById(id: string): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
   
+  // Portfolio Management  
+  getAllPortfolioItems(): Promise<PortfolioItem[]>;
+  getPortfolioItemsByCategory(category: string): Promise<PortfolioItem[]>;
+  
+  // Subscription Plans
+  getAllSubscriptionPlans(): Promise<SubscriptionPlan[]>;
+  getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]>;
+  
+  // User Subscriptions
+  getUserSubscriptions(userId: string): Promise<UserSubscription[]>;
+  createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription>;
+  
+  // Service Requests
+  createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest>;
+  getServiceRequests(): Promise<ServiceRequest[]>;
+  
+  // User Management Extensions
+  getUserByUsername(username: string): Promise<User | undefined>;
+  
   // Testimonials
   getAllTestimonials(): Promise<Testimonial[]>;
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
@@ -1051,6 +1070,64 @@ export class MemStorage implements IStorage {
 
   async getServiceById(id: string): Promise<Service | undefined> {
     return this.services.get(id);
+  }
+
+  // Portfolio Management
+  async getAllPortfolioItems(): Promise<PortfolioItem[]> {
+    return Array.from(this.portfolioItems.values());
+  }
+
+  async getPortfolioItemsByCategory(category: string): Promise<PortfolioItem[]> {
+    return Array.from(this.portfolioItems.values()).filter(item => item.category === category);
+  }
+
+  // Subscription Plans
+  async getAllSubscriptionPlans(): Promise<SubscriptionPlan[]> {
+    return Array.from(this.subscriptionPlans.values());
+  }
+
+  async getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]> {
+    return Array.from(this.subscriptionPlans.values()).filter(plan => plan.serviceId === serviceId);
+  }
+
+  // User Subscriptions
+  async getUserSubscriptions(userId: string): Promise<UserSubscription[]> {
+    return Array.from(this.userSubscriptions.values()).filter(sub => sub.userId === userId);
+  }
+
+  async createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription> {
+    const newSubscription: UserSubscription = {
+      id: randomUUID(),
+      ...subscription,
+      startDate: subscription.startDate || new Date(),
+      status: subscription.status || "active",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.userSubscriptions.set(newSubscription.id, newSubscription);
+    return newSubscription;
+  }
+
+  // Service Requests
+  async createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest> {
+    const newRequest: ServiceRequest = {
+      id: randomUUID(),
+      ...request,
+      status: request.status || "pending",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.serviceRequests.set(newRequest.id, newRequest);
+    return newRequest;
+  }
+
+  async getServiceRequests(): Promise<ServiceRequest[]> {
+    return Array.from(this.serviceRequests.values());
+  }
+
+  // User Management Extensions
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    return Array.from(this.users.values()).find(user => user.username === username);
   }
 
   async createService(service: InsertService): Promise<Service> {
