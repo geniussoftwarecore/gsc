@@ -1125,6 +1125,147 @@ const getDetailedAppInfo = (appName: string) => {
   return appDetails[appName] || null;
 };
 
+// Detailed desktop app information
+const getDetailedDesktopAppInfo = (appName: string) => {
+  const appDetails: Record<string, any> = {
+    // Windows Apps
+    "تطبيق إدارة الأعمال - ويندوز": {
+      name: "تطبيق إدارة الأعمال - ويندوز",
+      description: "تطبيق ويندوز لإدارة الأعمال مع واجهة WPF",
+      fullDescription: "تطبيق إدارة أعمال احترافي مطور خصيصاً لنظام Windows مع تكامل كامل مع بيئة Microsoft. يوفر حلول شاملة لإدارة العمليات التجارية، الموارد البشرية، والمحاسبة مع واجهة WPF حديثة وسهلة الاستخدام.",
+      keyFeatures: ["واجهة WPF احترافية", "تكامل Microsoft Office", "نظام Active Directory", "خدمات Windows Services", "قواعد بيانات SQL Server", "تقارير Crystal Reports", "نظام النسخ الاحتياطي", "أمان متعدد المستويات"],
+      technicalFeatures: [".NET Framework 4.8", "WPF و XAML", "Entity Framework", "SignalR للإشعارات", "Windows Authentication", "Multi-threading Support"],
+      benefits: ["تحسين كفاءة العمل بنسبة 40%", "تقليل الأخطاء البشرية", "تكامل مثالي مع بيئة Windows", "أمان عالي المستوى", "سرعة في معالجة البيانات", "واجهة مألوفة لمستخدمي Windows"],
+      targetAudience: ["الشركات الصغيرة والمتوسطة", "المكاتب الإدارية", "الشركات التقنية", "المؤسسات التعليمية", "مراكز الخدمات"],
+      timeline: "6-8 أسابيع",
+      technologies: ["C# .NET", "WPF", "SQL Server", "Entity Framework", "Crystal Reports", "Windows Services"],
+      category: "windows"
+    },
+
+    "Windows Business Manager": {
+      name: "Windows Business Manager",
+      description: "Native Windows business management app with WPF interface",
+      fullDescription: "Professional business management application developed specifically for Windows with full Microsoft environment integration. Provides comprehensive solutions for business operations management, human resources, and accounting with modern, user-friendly WPF interface.",
+      keyFeatures: ["Professional WPF Interface", "Microsoft Office Integration", "Active Directory System", "Windows Services", "SQL Server Databases", "Crystal Reports", "Backup System", "Multi-level Security"],
+      technicalFeatures: [".NET Framework 4.8", "WPF & XAML", "Entity Framework", "SignalR Notifications", "Windows Authentication", "Multi-threading Support"],
+      benefits: ["40% Work Efficiency Improvement", "Human Error Reduction", "Perfect Windows Integration", "High-level Security", "Fast Data Processing", "Familiar Windows Interface"],
+      targetAudience: ["Small & Medium Businesses", "Administrative Offices", "Tech Companies", "Educational Institutions", "Service Centers"],
+      timeline: "6-8 weeks",
+      technologies: ["C# .NET", "WPF", "SQL Server", "Entity Framework", "Crystal Reports", "Windows Services"],
+      category: "windows"
+    },
+
+    "محرر النصوص المتقدم": {
+      name: "محرر النصوص المتقدم",
+      description: "محرر نصوص قوي مخصص لنظام ويندوز",
+      fullDescription: "محرر نصوص احترافي مطور خصيصاً لنظام Windows يجمع بين القوة والسهولة. يدعم أكثر من 100 لغة برمجة مع ميزات متقدمة للمطورين والكتاب المحترفين، مع تكامل كامل مع أدوات التطوير المختلفة.",
+      keyFeatures: ["تمييز الكود لأكثر من 100 لغة", "إكمال تلقائي ذكي", "نظام إضافات متطور", "واجهة ريبون حديثة", "البحث والاستبدال المتقدم", "تعدد علامات التبويب", "مدير المشاريع المدمج", "Git Integration"],
+      technicalFeatures: ["محرك تمييز سريع", "دعم الملفات الكبيرة", "تشفير النصوص", "نظام الماكرو", "API للإضافات", "دعم Unicode الكامل"],
+      benefits: ["زيادة سرعة الكتابة بنسبة 50%", "تقليل الأخطاء البرمجية", "واجهة مألوفة ومريحة", "أداء عالي حتى مع الملفات الكبيرة", "مرونة في التخصيص", "دعم جميع تقنيات التطوير"],
+      targetAudience: ["المطورين والمبرمجين", "كتاب المحتوى التقني", "محرري النصوص", "الباحثين والأكاديميين", "مصممي الويب"],
+      timeline: "4-6 أسابيع",
+      technologies: ["C# WPF", "Windows API", "Git Libraries", "Syntax Engines", "Plugin Framework", "Text Processing"],
+      category: "windows"
+    },
+
+    "Advanced Text Editor": {
+      name: "Advanced Text Editor",
+      description: "Powerful text editor specifically designed for Windows",
+      fullDescription: "Professional text editor developed specifically for Windows combining power and ease of use. Supports over 100 programming languages with advanced features for developers and professional writers, with full integration with various development tools.",
+      keyFeatures: ["Syntax Highlighting for 100+ Languages", "Smart Auto-completion", "Advanced Plugin System", "Modern Ribbon Interface", "Advanced Search & Replace", "Multiple Tabs", "Integrated Project Manager", "Git Integration"],
+      technicalFeatures: ["Fast Syntax Engine", "Large File Support", "Text Encryption", "Macro System", "Plugin API", "Full Unicode Support"],
+      benefits: ["50% Writing Speed Increase", "Programming Error Reduction", "Familiar & Comfortable Interface", "High Performance with Large Files", "Customization Flexibility", "All Development Tech Support"],
+      targetAudience: ["Developers & Programmers", "Technical Content Writers", "Text Editors", "Researchers & Academics", "Web Designers"],
+      timeline: "4-6 weeks",
+      technologies: ["C# WPF", "Windows API", "Git Libraries", "Syntax Engines", "Plugin Framework", "Text Processing"],
+      category: "windows"
+    },
+
+    // Linux Apps
+    "أدوات مطور لينكس": {
+      name: "أدوات مطور لينكس",
+      description: "حزمة أدوات متكاملة للتطوير على لينكس",
+      fullDescription: "مجموعة شاملة من أدوات التطوير المصممة خصيصاً لنظام Linux. تجمع أفضل أدوات التطوير في واجهة موحدة مع تكامل مثالي مع النظام وأدوات سطر الأوامر المختلفة، مما يجعلها الخيار المثالي للمطورين المحترفين.",
+      keyFeatures: ["محرر أكواد متطور", "مدبج مدمج قوي", "واجهة Git رسومية", "Terminal مدمج", "مدير الحزم", "أدوات البناء المتقدمة", "نظام إدارة المشاريع", "دعم Docker المدمج"],
+      technicalFeatures: ["تكامل Native مع Linux", "دعم جميع توزيعات Linux", "أداء محسن للذاكرة", "Multi-core Processing", "Shell Integration", "Package Manager APIs"],
+      benefits: ["بيئة تطوير متكاملة 100%", "تحسين الإنتاجية للمطورين", "استخدام أمثل لموارد النظام", "واجهة مألوفة لمستخدمي Linux", "مرونة في التخصيص", "أداء فائق السرعة"],
+      targetAudience: ["مطوري Linux المحترفين", "مدراء الأنظمة", "مهندسي DevOps", "المطورين مفتوحي المصدر", "الباحثين التقنيين"],
+      timeline: "8-10 أسابيع",
+      technologies: ["C++ Qt", "Python GTK", "Bash Scripting", "Linux APIs", "GDB Integration", "Git Libraries"],
+      category: "linux"
+    },
+
+    "Linux Developer Tools": {
+      name: "Linux Developer Tools",
+      description: "Comprehensive development toolkit for Linux",
+      fullDescription: "Comprehensive development tools suite designed specifically for Linux systems. Combines the best development tools in a unified interface with perfect integration with the system and various command-line tools, making it the ideal choice for professional developers.",
+      keyFeatures: ["Advanced Code Editor", "Powerful Integrated Debugger", "Graphical Git Interface", "Integrated Terminal", "Package Manager", "Advanced Build Tools", "Project Management System", "Built-in Docker Support"],
+      technicalFeatures: ["Native Linux Integration", "All Linux Distributions Support", "Memory-optimized Performance", "Multi-core Processing", "Shell Integration", "Package Manager APIs"],
+      benefits: ["100% Integrated Development Environment", "Developer Productivity Enhancement", "Optimal System Resource Usage", "Familiar Interface for Linux Users", "Customization Flexibility", "Superior Performance"],
+      targetAudience: ["Professional Linux Developers", "System Administrators", "DevOps Engineers", "Open Source Developers", "Technical Researchers"],
+      timeline: "8-10 weeks",
+      technologies: ["C++ Qt", "Python GTK", "Bash Scripting", "Linux APIs", "GDB Integration", "Git Libraries"],
+      category: "linux"
+    },
+
+    // macOS Apps
+    "تطبيق إنتاجية macOS": {
+      name: "تطبيق إنتاجية macOS",
+      description: "تطبيق إنتاجية مُحسَّن لنظام macOS",
+      fullDescription: "تطبيق إنتاجية متطور مصمم بتقنيات Apple الحديثة لتوفير تجربة مستخدم مثالية على macOS. يستفيد من جميع ميزات النظام المتقدمة ويتكامل بسلاسة مع التطبيقات الأخرى ومع iCloud لضمان المزامنة عبر جميع أجهزة Apple.",
+      keyFeatures: ["تصميم Cocoa الأصلي", "تكامل iCloud المتقدم", "دعم Spotlight Search", "تحسين Touch Bar", "Handoff Support", "مشاركة النشاط", "دعم Siri Shortcuts", "Dark Mode المتقدم"],
+      technicalFeatures: ["تقنيات Core Foundation", "تكامل CloudKit", "Core Data للتخزين", "Core Animation", "Metal Performance", "SwiftUI Interface"],
+      benefits: ["تجربة مستخدم مثالية", "أداء محسن لـ macOS", "مزامنة سلسة عبر الأجهزة", "تكامل مثالي مع النظام", "كفاءة في استهلاك البطارية", "واجهة جميلة ومتسقة"],
+      targetAudience: ["مستخدمي macOS المحترفين", "المبدعين والمصممين", "المطورين", "الكتاب والمحررين", "أصحاب الأعمال"],
+      timeline: "6-8 أسابيع",
+      technologies: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Core Foundation", "macOS APIs"],
+      category: "macos"
+    },
+
+    "macOS Productivity App": {
+      name: "macOS Productivity App",
+      description: "Native productivity app optimized for macOS",
+      fullDescription: "Advanced productivity application designed with modern Apple technologies to provide the perfect user experience on macOS. Leverages all advanced system features and seamlessly integrates with other applications and iCloud to ensure synchronization across all Apple devices.",
+      keyFeatures: ["Native Cocoa Design", "Advanced iCloud Integration", "Spotlight Search Support", "Touch Bar Optimization", "Handoff Support", "Activity Sharing", "Siri Shortcuts Support", "Advanced Dark Mode"],
+      technicalFeatures: ["Core Foundation Technologies", "CloudKit Integration", "Core Data Storage", "Core Animation", "Metal Performance", "SwiftUI Interface"],
+      benefits: ["Perfect User Experience", "macOS-optimized Performance", "Seamless Cross-device Sync", "Perfect System Integration", "Battery Efficiency", "Beautiful Consistent Interface"],
+      targetAudience: ["Professional macOS Users", "Creators & Designers", "Developers", "Writers & Editors", "Business Owners"],
+      timeline: "6-8 weeks",
+      technologies: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Core Foundation", "macOS APIs"],
+      category: "macos"
+    },
+
+    // Cross-Platform Apps
+    "منصة CRM متعددة الأنظمة": {
+      name: "منصة CRM متعددة الأنظمة",
+      description: "منصة إدارة علاقات العملاء تعمل على جميع الأنظمة",
+      fullDescription: "منصة CRM احترافية تعمل بسلاسة على Windows وmacOS وLinux مع واجهة موحدة وميزات متقدمة. توفر حلول شاملة لإدارة العملاء، المبيعات، والتسويق مع مزامنة سحابية فورية وأمان عالي المستوى.",
+      keyFeatures: ["واجهة موحدة عبر الأنظمة", "مزامنة سحابية فورية", "دعم جميع أنظمة التشغيل", "قاعدة بيانات مشتركة", "تقارير متقدمة", "أتمتة سير العمل", "تكامل البريد الإلكتروني", "لوحة تحكم تحليلية"],
+      technicalFeatures: ["تقنية Cross-platform", "Real-time Synchronization", "Cloud Native Architecture", "RESTful APIs", "Advanced Security", "Multi-tenant Support"],
+      benefits: ["مرونة في اختيار النظام", "إنتاجية عالية للفرق", "وصول موحد للبيانات", "تكلفة أقل للصيانة", "قابلية التوسع", "أمان متقدم"],
+      targetAudience: ["الشركات متعددة المنصات", "الفرق الموزعة", "وكالات المبيعات", "شركات التسويق", "المؤسسات الكبيرة"],
+      timeline: "10-12 أسبوع",
+      technologies: ["Electron", "React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+      category: "crossplatform"
+    },
+
+    "Cross-Platform CRM Suite": {
+      name: "Cross-Platform CRM Suite",
+      description: "Customer relationship management platform for all operating systems",
+      fullDescription: "Professional CRM platform that works seamlessly on Windows, macOS, and Linux with unified interface and advanced features. Provides comprehensive solutions for customer management, sales, and marketing with instant cloud synchronization and high-level security.",
+      keyFeatures: ["Unified Cross-platform Interface", "Instant Cloud Synchronization", "All Operating Systems Support", "Shared Database", "Advanced Reports", "Workflow Automation", "Email Integration", "Analytics Dashboard"],
+      technicalFeatures: ["Cross-platform Technology", "Real-time Synchronization", "Cloud Native Architecture", "RESTful APIs", "Advanced Security", "Multi-tenant Support"],
+      benefits: ["System Choice Flexibility", "High Team Productivity", "Unified Data Access", "Lower Maintenance Cost", "Scalability", "Advanced Security"],
+      targetAudience: ["Multi-platform Companies", "Distributed Teams", "Sales Agencies", "Marketing Companies", "Large Enterprises"],
+      timeline: "10-12 weeks",
+      technologies: ["Electron", "React", "Node.js", "PostgreSQL", "Redis", "Docker"],
+      category: "crossplatform"
+    }
+  };
+
+  return appDetails[appName] || null;
+};
+
 export default function ServiceDetail() {
   const { id: serviceId } = useParams();
   const [, setLocation] = useLocation();
@@ -2584,15 +2725,24 @@ export default function ServiceDetail() {
               scroll-smooth">
               <DialogHeader className="pb-4">
                 <DialogTitle className="text-xl sm:text-2xl font-bold text-brand-text-primary flex items-start sm:items-center gap-3 leading-tight">
-                  {getDetailedWebsiteInfo(selectedAppForDetails.name) ? <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" /> : <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />}
+                  {(() => {
+                    const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
+                    const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
+                    const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
+                    
+                    if (websiteDetails) return <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
+                    if (desktopDetails) return <Monitor className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
+                    return <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
+                  })()}
                   <span className="break-words">{selectedAppForDetails.name}</span>
                 </DialogTitle>
               </DialogHeader>
               
               {(() => {
-                // Try to get detailed website info first, then app info as fallback
+                // Try to get detailed info in priority order: website -> desktop -> mobile app
                 const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
-                const appDetails = websiteDetails || getDetailedAppInfo(selectedAppForDetails.name);
+                const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
+                const appDetails = websiteDetails || desktopDetails || getDetailedAppInfo(selectedAppForDetails.name);
                 if (!appDetails) {
                   // Show fallback content when detailed app info is not available
                   return (
