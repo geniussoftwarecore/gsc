@@ -1260,6 +1260,271 @@ const getDetailedDesktopAppInfo = (appName: string) => {
       timeline: "10-12 weeks",
       technologies: ["Electron", "React", "Node.js", "PostgreSQL", "Redis", "Docker"],
       category: "crossplatform"
+    },
+
+    // Missing Windows Apps
+    "مدير الملفات الاحترافي": {
+      name: "مدير الملفات الاحترافي",
+      description: "مدير ملفات متطور للويندوز مع ميزات احترافية",
+      fullDescription: "مدير ملفات قوي ومتطور مصمم خصيصاً لنظام Windows يوفر إدارة متقدمة للملفات والمجلدات. يجمع بين الأداء العالي والواجهة الحديثة مع ميزات احترافية متقدمة تساعد المطورين ومدراء النظم في إدارة ملفاتهم بكفاءة عالية.",
+      keyFeatures: ["علامات تبويب متعددة", "معاينة فورية للملفات", "FTP وSFTP مدمج", "أدوات المطور المتقدمة", "نظام البحث السريع", "إدارة الضغط", "نقل الملفات الذكي", "حماية متقدمة"],
+      technicalFeatures: ["Native Windows API", "Multi-threading Support", "Hardware Acceleration", "Shell Integration", "Registry Access", "Advanced File Operations"],
+      benefits: ["تحسين إنتاجية إدارة الملفات بـ 60%", "واجهة مألوفة ومريحة", "أداء فائق مع الملفات الكبيرة", "مرونة في التخصيص", "أمان عالي للبيانات", "توفير الوقت والجهد"],
+      targetAudience: ["المطورين والمبرمجين", "مدراء النظم", "المحترفين التقنيين", "مصممي الويب", "محرري المحتوى"],
+      timeline: "6-8 أسابيع",
+      technologies: ["C# WPF", "Windows API", "Shell Extensions", "FTP Libraries", "Compression Libraries", "Security APIs"],
+      category: "windows"
+    },
+
+    "Professional File Manager": {
+      name: "Professional File Manager",
+      description: "Advanced Windows file manager with professional features",
+      fullDescription: "Powerful and advanced file manager designed specifically for Windows providing advanced file and folder management. Combines high performance with modern interface and advanced professional features to help developers and system administrators manage their files efficiently.",
+      keyFeatures: ["Multiple Tabs", "Instant File Preview", "Built-in FTP/SFTP", "Advanced Developer Tools", "Fast Search System", "Compression Management", "Smart File Transfer", "Advanced Protection"],
+      technicalFeatures: ["Native Windows API", "Multi-threading Support", "Hardware Acceleration", "Shell Integration", "Registry Access", "Advanced File Operations"],
+      benefits: ["60% File Management Productivity Improvement", "Familiar and Comfortable Interface", "Superior Performance with Large Files", "Customization Flexibility", "High Data Security", "Time and Effort Savings"],
+      targetAudience: ["Developers & Programmers", "System Administrators", "Technical Professionals", "Web Designers", "Content Editors"],
+      timeline: "6-8 weeks",
+      technologies: ["C# WPF", "Windows API", "Shell Extensions", "FTP Libraries", "Compression Libraries", "Security APIs"],
+      category: "windows"
+    },
+
+    // Missing Linux Apps
+    "مراقب النظام المتقدم": {
+      name: "مراقب النظام المتقدم",
+      description: "أداة مراقبة شاملة لأنظمة لينكس",
+      fullDescription: "أداة مراقبة نظام متطورة مصممة خصيصاً لأنظمة Linux توفر رؤية شاملة لأداء النظام وحالة الموارد. تجمع بين المراقبة في الوقت الفعلي والتحليلات المتقدمة مع واجهة سهلة الاستخدام للحصول على أفضل أداء للنظام.",
+      keyFeatures: ["مراقبة العمليات في الوقت الفعلي", "تحليل استهلاك الموارد", "تحليل الأداء المتقدم", "نظام التنبيهات الذكي", "مراقبة الشبكة", "تتبع ملفات السجل", "إحصائيات تفصيلية", "أدوات التشخيص"],
+      technicalFeatures: ["Linux Kernel Integration", "System Calls Monitoring", "Real-time Data Collection", "Advanced Algorithms", "Low System Impact", "Multi-core Optimization"],
+      benefits: ["تحسين أداء النظام بـ 40%", "اكتشاف المشاكل مبكراً", "تحسين استخدام الموارد", "مراقبة فعالة 24/7", "تقليل وقت التوقف", "إدارة استباقية للنظام"],
+      targetAudience: ["مدراء أنظمة Linux", "مهندسي DevOps", "مطوري النظم", "مدراء الشبكات", "الباحثين التقنيين"],
+      timeline: "8-10 أسابيع",
+      technologies: ["C++ Qt", "Linux Kernel APIs", "System Programming", "Network Libraries", "Data Visualization", "Performance Tools"],
+      category: "linux"
+    },
+
+    "Advanced System Monitor": {
+      name: "Advanced System Monitor",
+      description: "Comprehensive monitoring tool for Linux systems",
+      fullDescription: "Advanced system monitoring tool designed specifically for Linux systems providing comprehensive view of system performance and resource status. Combines real-time monitoring with advanced analytics and user-friendly interface for optimal system performance.",
+      keyFeatures: ["Real-time Process Monitoring", "Resource Usage Analysis", "Advanced Performance Analysis", "Smart Alert System", "Network Monitoring", "Log File Tracking", "Detailed Statistics", "Diagnostic Tools"],
+      technicalFeatures: ["Linux Kernel Integration", "System Calls Monitoring", "Real-time Data Collection", "Advanced Algorithms", "Low System Impact", "Multi-core Optimization"],
+      benefits: ["40% System Performance Improvement", "Early Problem Detection", "Improved Resource Utilization", "Effective 24/7 Monitoring", "Reduced Downtime", "Proactive System Management"],
+      targetAudience: ["Linux System Administrators", "DevOps Engineers", "System Developers", "Network Administrators", "Technical Researchers"],
+      timeline: "8-10 weeks",
+      technologies: ["C++ Qt", "Linux Kernel APIs", "System Programming", "Network Libraries", "Data Visualization", "Performance Tools"],
+      category: "linux"
+    },
+
+    "أداة إدارة الحزم GUI": {
+      name: "أداة إدارة الحزم GUI",
+      description: "واجهة رسومية سهلة لإدارة حزم لينكس",
+      fullDescription: "واجهة رسومية متطورة وسهلة الاستخدام لإدارة حزم Linux تجعل إدارة البرامج والتحديثات أمراً بسيطاً ومريحاً. تدعم جميع توزيعات Linux الرئيسية وتوفر تجربة موحدة لإدارة الحزم مع ميزات متقدمة للمطورين والمستخدمين العاديين.",
+      keyFeatures: ["بحث وتصفح الحزم المتقدم", "تحديثات تلقائية للنظام", "إدارة المستودعات المتعددة", "تقارير النظام التفصيلية", "إدارة التبعيات الذكية", "نسخ احتياطية للحزم", "واجهة متعددة اللغات", "نظام الأذونات المتقدم"],
+      technicalFeatures: ["Package Manager APIs", "Repository Management", "Dependency Resolution", "System Integration", "Background Services", "Security Validation"],
+      benefits: ["تبسيط إدارة النظام بـ 70%", "تحديثات آمنة ومضمونة", "واجهة مألوفة للمبتدئين", "إدارة متقدمة للخبراء", "توفير الوقت والجهد", "حماية النظام من التعارضات"],
+      targetAudience: ["مستخدمي Linux الجدد", "مدراء النظم", "المطورين", "الطلاب والباحثين", "الشركات التقنية"],
+      timeline: "6-8 أسابيع",
+      technologies: ["Python GTK", "Package Managers", "System APIs", "Repository Tools", "Security Libraries", "Localization"],
+      category: "linux"
+    },
+
+    "Package Manager GUI": {
+      name: "Package Manager GUI",
+      description: "User-friendly graphical interface for Linux package management",
+      fullDescription: "Advanced and user-friendly graphical interface for Linux package management making software and update management simple and convenient. Supports all major Linux distributions and provides unified package management experience with advanced features for developers and regular users.",
+      keyFeatures: ["Advanced Package Search & Browse", "Automatic System Updates", "Multi-repository Management", "Detailed System Reports", "Smart Dependency Management", "Package Backups", "Multi-language Interface", "Advanced Permission System"],
+      technicalFeatures: ["Package Manager APIs", "Repository Management", "Dependency Resolution", "System Integration", "Background Services", "Security Validation"],
+      benefits: ["70% System Management Simplification", "Safe and Guaranteed Updates", "Familiar Interface for Beginners", "Advanced Management for Experts", "Time and Effort Savings", "System Protection from Conflicts"],
+      targetAudience: ["New Linux Users", "System Administrators", "Developers", "Students & Researchers", "Tech Companies"],
+      timeline: "6-8 weeks",
+      technologies: ["Python GTK", "Package Managers", "System APIs", "Repository Tools", "Security Libraries", "Localization"],
+      category: "linux"
+    },
+
+    // Missing macOS Apps
+    "أداة إدارة الوسائط": {
+      name: "أداة إدارة الوسائط",
+      description: "أداة احترافية لإدارة الوسائط على macOS",
+      fullDescription: "أداة إدارة وسائط متطورة مصممة خصيصاً لنظام macOS تستفيد من جميع التقنيات المتقدمة في النظام. توفر إدارة شاملة للصور، الفيديوهات، والملفات الصوتية مع ميزات تنظيم ذكية ومعالجة احترافية للوسائط.",
+      keyFeatures: ["معاينة سريعة متقدمة", "تنظيم ذكي للوسائط", "تصدير وتحويل متقدم", "تكامل Core Image", "مكتبة ميتاداتا شاملة", "إدارة الألبومات", "مشاركة سحابية", "أدوات تحرير أساسية"],
+      technicalFeatures: ["Core Media Framework", "Core Image Integration", "Quick Look Support", "CloudKit Sync", "Metal Performance", "AVFoundation"],
+      benefits: ["تجربة مستخدم مثالية على macOS", "أداء محسن للوسائط", "مزامنة سلسة عبر الأجهزة", "تكامل مثالي مع النظام", "كفاءة في استخدام البطارية", "واجهة جميلة ومتسقة"],
+      targetAudience: ["مستخدمي macOS المحترفين", "المصورين", "صناع المحتوى", "المصممين", "المحترفين الإبداعيين"],
+      timeline: "8-10 أسابيع",
+      technologies: ["Swift", "Core Media", "Core Image", "AVFoundation", "CloudKit", "Metal"],
+      category: "macos"
+    },
+
+    "Media Management Tool": {
+      name: "Media Management Tool",
+      description: "Professional media management tool for macOS",
+      fullDescription: "Advanced media management tool designed specifically for macOS leveraging all advanced system technologies. Provides comprehensive management for photos, videos, and audio files with smart organization features and professional media processing.",
+      keyFeatures: ["Advanced Quick Preview", "Smart Media Organization", "Advanced Export & Convert", "Core Image Integration", "Comprehensive Metadata Library", "Album Management", "Cloud Sharing", "Basic Editing Tools"],
+      technicalFeatures: ["Core Media Framework", "Core Image Integration", "Quick Look Support", "CloudKit Sync", "Metal Performance", "AVFoundation"],
+      benefits: ["Perfect macOS User Experience", "Optimized Media Performance", "Seamless Cross-device Sync", "Perfect System Integration", "Battery Efficiency", "Beautiful Consistent Interface"],
+      targetAudience: ["Professional macOS Users", "Photographers", "Content Creators", "Designers", "Creative Professionals"],
+      timeline: "8-10 weeks",
+      technologies: ["Swift", "Core Media", "Core Image", "AVFoundation", "CloudKit", "Metal"],
+      category: "macos"
+    },
+
+    "محرر الصور المتخصص": {
+      name: "محرر الصور المتخصص",
+      description: "محرر صور متخصص يستفيد من قوة macOS",
+      fullDescription: "محرر صور احترافي مطور خصيصاً لنظام macOS يستفيد من جميع تقنيات Apple المتقدمة لمعالجة الصور. يوفر أدوات تحرير متطورة مع أداء فائق السرعة وجودة عالية باستخدام تقنيات Core Graphics وMetal Performance.",
+      keyFeatures: ["محرك Core Graphics المتقدم", "تسريع Metal Performance", "نظام ColorSync المتطور", "فلاتر macOS الحصرية", "دعم HDR الكامل", "طبقات وأقنعة متقدمة", "تصحيح الألوان الاحترافي", "تصدير عالي الجودة"],
+      technicalFeatures: ["Core Graphics Engine", "Metal Performance Shaders", "ColorSync Integration", "Core Image Filters", "GPU Acceleration", "SwiftUI Interface"],
+      benefits: ["جودة معالجة فائقة", "أداء محسن لـ macOS", "استخدام أمثل للهاردوير", "تكامل مثالي مع النظام", "كفاءة عالية في الطاقة", "واجهة أنيقة ومتطورة"],
+      targetAudience: ["المصورين المحترفين", "مصممي الجرافيك", "الفنانين الرقميين", "المحررين", "استوديوهات التصوير"],
+      timeline: "10-12 أسبوع",
+      technologies: ["Swift", "Core Graphics", "Metal", "Core Image", "ColorSync", "SwiftUI"],
+      category: "macos"
+    },
+
+    "Specialized Image Editor": {
+      name: "Specialized Image Editor",
+      description: "Specialized image editor leveraging macOS capabilities",
+      fullDescription: "Professional image editor developed specifically for macOS leveraging all Apple's advanced technologies for image processing. Provides sophisticated editing tools with superior performance and high quality using Core Graphics and Metal Performance technologies.",
+      keyFeatures: ["Advanced Core Graphics Engine", "Metal Performance Acceleration", "Advanced ColorSync System", "Exclusive macOS Filters", "Full HDR Support", "Advanced Layers & Masks", "Professional Color Correction", "High-quality Export"],
+      technicalFeatures: ["Core Graphics Engine", "Metal Performance Shaders", "ColorSync Integration", "Core Image Filters", "GPU Acceleration", "SwiftUI Interface"],
+      benefits: ["Superior Processing Quality", "macOS Optimized Performance", "Optimal Hardware Utilization", "Perfect System Integration", "High Energy Efficiency", "Elegant Advanced Interface"],
+      targetAudience: ["Professional Photographers", "Graphic Designers", "Digital Artists", "Editors", "Photography Studios"],
+      timeline: "10-12 weeks",
+      technologies: ["Swift", "Core Graphics", "Metal", "Core Image", "ColorSync", "SwiftUI"],
+      category: "macos"
+    },
+
+    // Missing Cross-Platform Apps
+    "محرر الأكواد العالمي": {
+      name: "محرر الأكواد العالمي",
+      description: "محرر أكواد متطور يعمل على Windows وmacOS ولينكس",
+      fullDescription: "محرر أكواد قوي ومتطور يعمل بسلاسة على جميع أنظمة التشغيل الرئيسية مع واجهة موحدة وميزات متقدمة. يدعم أكثر من 200 لغة برمجة مع أدوات تطوير شاملة ونظام إضافات متطور لتلبية احتياجات جميع المطورين.",
+      keyFeatures: ["دعم أكثر من 200 لغة برمجة", "إضافات مشتركة عبر الأنظمة", "مزامنة الإعدادات السحابية", "تحديثات تلقائية موحدة", "Git Integration متقدم", "نظام التصحيح المدمج", "إكمال تلقائي ذكي", "واجهة قابلة للتخصيص"],
+      technicalFeatures: ["Cross-platform Framework", "Cloud Synchronization", "Plugin Architecture", "Language Servers", "Git Integration", "Advanced Parser"],
+      benefits: ["تجربة موحدة عبر الأنظمة", "إنتاجية عالية للمطورين", "مرونة في اختيار النظام", "مشاركة فعالة للمشاريع", "توفير تكاليف التدريب", "دعم جميع التقنيات"],
+      targetAudience: ["مطوري البرمجيات", "فرق التطوير الموزعة", "الشركات متعددة المنصات", "الطلاب والباحثين", "مطوري مفتوحي المصدر"],
+      timeline: "12-16 أسبوع",
+      technologies: ["Electron", "TypeScript", "Node.js", "Language Servers", "Git", "Cloud APIs"],
+      category: "crossplatform"
+    },
+
+    "Universal Code Editor": {
+      name: "Universal Code Editor",
+      description: "Advanced code editor for Windows, macOS, and Linux",
+      fullDescription: "Powerful and advanced code editor that works seamlessly on all major operating systems with unified interface and advanced features. Supports over 200 programming languages with comprehensive development tools and advanced plugin system to meet all developers' needs.",
+      keyFeatures: ["Support for 200+ Programming Languages", "Cross-platform Shared Plugins", "Cloud Settings Synchronization", "Unified Automatic Updates", "Advanced Git Integration", "Integrated Debugging System", "Smart Auto-completion", "Customizable Interface"],
+      technicalFeatures: ["Cross-platform Framework", "Cloud Synchronization", "Plugin Architecture", "Language Servers", "Git Integration", "Advanced Parser"],
+      benefits: ["Unified Experience Across Platforms", "High Developer Productivity", "Platform Choice Flexibility", "Effective Project Sharing", "Training Cost Savings", "All Technologies Support"],
+      targetAudience: ["Software Developers", "Distributed Development Teams", "Multi-platform Companies", "Students & Researchers", "Open Source Developers"],
+      timeline: "12-16 weeks",
+      technologies: ["Electron", "TypeScript", "Node.js", "Language Servers", "Git", "Cloud APIs"],
+      category: "crossplatform"
+    },
+
+    "أداة إدارة المشاريع": {
+      name: "أداة إدارة المشاريع",
+      description: "أداة شاملة لإدارة المشاريع عبر جميع المنصات",
+      fullDescription: "أداة إدارة مشاريع متطورة وشاملة تعمل على جميع أنظمة التشغيل مع واجهة موحدة وميزات متقدمة. توفر حلول كاملة لإدارة المشاريع، الفرق، والمهام مع تعاون فعال وتتبع دقيق للتقدم والموارد.",
+      keyFeatures: ["إدارة المهام المتقدمة", "تعاون الفريق في الوقت الفعلي", "تتبع الوقت والموارد", "تقارير وتحليلات متقدمة", "إدارة الميزانيات", "تتبع المعالم", "نظام الإشعارات الذكي", "تكامل مع أدوات أخرى"],
+      technicalFeatures: ["Real-time Collaboration", "Cloud Architecture", "Advanced Analytics", "API Integration", "Multi-platform Sync", "Security Framework"],
+      benefits: ["تحسين كفاءة المشاريع بـ 50%", "تعاون فعال للفرق", "وضوح في التقدم والأهداف", "إدارة أفضل للموارد", "اتخاذ قرارات مدروسة", "توفير الوقت والتكاليف"],
+      targetAudience: ["مديري المشاريع", "الفرق متعددة التخصصات", "الشركات الناشئة", "المؤسسات الكبيرة", "الوكالات الإبداعية"],
+      timeline: "10-14 أسبوع",
+      technologies: ["React", "Node.js", "Socket.io", "MongoDB", "REST APIs", "Cloud Services"],
+      category: "crossplatform"
+    },
+
+    "Project Management Tool": {
+      name: "Project Management Tool",
+      description: "Comprehensive project management tool across all platforms",
+      fullDescription: "Advanced and comprehensive project management tool that works on all operating systems with unified interface and advanced features. Provides complete solutions for project, team, and task management with effective collaboration and accurate progress and resource tracking.",
+      keyFeatures: ["Advanced Task Management", "Real-time Team Collaboration", "Time & Resource Tracking", "Advanced Reports & Analytics", "Budget Management", "Milestone Tracking", "Smart Notification System", "Integration with Other Tools"],
+      technicalFeatures: ["Real-time Collaboration", "Cloud Architecture", "Advanced Analytics", "API Integration", "Multi-platform Sync", "Security Framework"],
+      benefits: ["50% Project Efficiency Improvement", "Effective Team Collaboration", "Clear Progress & Goals Visibility", "Better Resource Management", "Informed Decision Making", "Time & Cost Savings"],
+      targetAudience: ["Project Managers", "Multi-disciplinary Teams", "Startups", "Large Enterprises", "Creative Agencies"],
+      timeline: "10-14 weeks",
+      technologies: ["React", "Node.js", "Socket.io", "MongoDB", "REST APIs", "Cloud Services"],
+      category: "crossplatform"
+    },
+
+    // Missing Web-Based Apps
+    "تطبيق المحاسبة السحابي": {
+      name: "تطبيق المحاسبة السحابي",
+      description: "تطبيق محاسبة سحابي متطور يعمل في المتصفح",
+      fullDescription: "تطبيق محاسبة سحابي متطور وشامل يعمل بالكامل في المتصفح مع تقنيات PWA المتقدمة. يوفر حلول محاسبية متكاملة للشركات الصغيرة والمتوسطة مع إمكانية العمل بدون اتصال ومزامنة تلقائية آمنة.",
+      keyFeatures: ["واجهة PWA متقدمة", "عمل بدون اتصال إنترنت", "مزامنة تلقائية آمنة", "أمان وحماية عالية", "تقارير مالية شاملة", "إدارة الفواتير", "تتبع النفقات", "نظام الضرائب"],
+      technicalFeatures: ["Progressive Web App", "Offline Storage", "Real-time Sync", "End-to-end Encryption", "Cloud Architecture", "Mobile Responsive"],
+      benefits: ["إدارة مالية احترافية", "وصول من أي جهاز", "أمان عالي للبيانات", "توفير تكاليف البرامج", "تحديثات تلقائية", "سهولة الاستخدام"],
+      targetAudience: ["الشركات الصغيرة", "المحاسبين", "المستقلين", "المؤسسات المتوسطة", "رواد الأعمال"],
+      timeline: "8-12 أسبوع",
+      technologies: ["PWA", "React", "IndexedDB", "Service Workers", "Cloud APIs", "Encryption"],
+      category: "web_based"
+    },
+
+    "Cloud Accounting App": {
+      name: "Cloud Accounting App",
+      description: "Advanced cloud-based accounting application running in browser",
+      fullDescription: "Advanced and comprehensive cloud-based accounting application that runs entirely in the browser with advanced PWA technologies. Provides integrated accounting solutions for small and medium businesses with offline capability and secure automatic synchronization.",
+      keyFeatures: ["Advanced PWA Interface", "Offline Internet Work", "Secure Automatic Sync", "High Security & Protection", "Comprehensive Financial Reports", "Invoice Management", "Expense Tracking", "Tax System"],
+      technicalFeatures: ["Progressive Web App", "Offline Storage", "Real-time Sync", "End-to-end Encryption", "Cloud Architecture", "Mobile Responsive"],
+      benefits: ["Professional Financial Management", "Access from Any Device", "High Data Security", "Software Cost Savings", "Automatic Updates", "Easy to Use"],
+      targetAudience: ["Small Businesses", "Accountants", "Freelancers", "Medium Enterprises", "Entrepreneurs"],
+      timeline: "8-12 weeks",
+      technologies: ["PWA", "React", "IndexedDB", "Service Workers", "Cloud APIs", "Encryption"],
+      category: "web_based"
+    },
+
+    "منصة التعلم الإلكتروني": {
+      name: "منصة التعلم الإلكتروني",
+      description: "منصة تعليمية تفاعلية تعمل عبر المتصفح",
+      fullDescription: "منصة تعليمية تفاعلية ومتطورة تعمل بالكامل عبر المتصفح مع تقنيات حديثة لتوفير تجربة تعلم غنية ومتميزة. تدعم التعلم التفاعلي، الفيديوهات المتقدمة، والاختبارات الذكية مع تتبع شامل للتقدم.",
+      keyFeatures: ["فيديوهات تفاعلية متقدمة", "اختبارات ذكية ومتنوعة", "تتبع التقدم المفصل", "شهادات رقمية معتمدة", "منتديات نقاش تفاعلية", "مكتبة موارد شاملة", "واجهة متعددة اللغات", "نظام تقييم متطور"],
+      technicalFeatures: ["Video Streaming", "Interactive Elements", "Progress Analytics", "Digital Certificates", "Real-time Chat", "Content Management"],
+      benefits: ["تجربة تعلم تفاعلية متميزة", "مرونة في الوقت والمكان", "تتبع دقيق للتقدم", "شهادات معترف بها", "تفاعل اجتماعي فعال", "تكلفة أقل من التعليم التقليدي"],
+      targetAudience: ["الطلاب والمتعلمين", "المعلمين والمدربين", "المؤسسات التعليمية", "الشركات التدريبية", "المنظمات"],
+      timeline: "12-16 أسبوع",
+      technologies: ["React", "WebRTC", "Video.js", "Socket.io", "LMS APIs", "Certificate Generation"],
+      category: "web_based"
+    },
+
+    "E-Learning Platform": {
+      name: "E-Learning Platform",
+      description: "Interactive educational platform running through web browser",
+      fullDescription: "Interactive and advanced educational platform that runs entirely through web browser with modern technologies to provide rich and outstanding learning experience. Supports interactive learning, advanced videos, and smart quizzes with comprehensive progress tracking.",
+      keyFeatures: ["Advanced Interactive Videos", "Smart Diverse Quizzes", "Detailed Progress Tracking", "Certified Digital Certificates", "Interactive Discussion Forums", "Comprehensive Resource Library", "Multi-language Interface", "Advanced Assessment System"],
+      technicalFeatures: ["Video Streaming", "Interactive Elements", "Progress Analytics", "Digital Certificates", "Real-time Chat", "Content Management"],
+      benefits: ["Outstanding Interactive Learning Experience", "Time & Place Flexibility", "Accurate Progress Tracking", "Recognized Certificates", "Effective Social Interaction", "Lower Cost than Traditional Education"],
+      targetAudience: ["Students & Learners", "Teachers & Trainers", "Educational Institutions", "Training Companies", "Organizations"],
+      timeline: "12-16 weeks",
+      technologies: ["React", "WebRTC", "Video.js", "Socket.io", "LMS APIs", "Certificate Generation"],
+      category: "web_based"
+    },
+
+    "أداة تصميم الجرافيك": {
+      name: "أداة تصميم الجرافيك",
+      description: "أداة تصميم جرافيكي متطورة تعمل في المتصفح",
+      fullDescription: "أداة تصميم جرافيكي قوية ومتطورة تعمل بالكامل في المتصفح مع واجهة حديثة وأدوات احترافية. توفر جميع الميزات المطلوبة للتصميم الاحترافي من الرسم المتجه إلى معالجة الصور مع مكتبة قوالب ضخمة.",
+      keyFeatures: ["محرر متجهات متقدم", "طبقات وأقنعة احترافية", "مكتبة قوالب ضخمة", "تصدير بصيغ متعددة", "أدوات رسم متطورة", "تأثيرات وفلاتر", "نظام الألوان المتقدم", "مشاركة تعاونية"],
+      technicalFeatures: ["Canvas API", "WebGL Acceleration", "Vector Graphics", "Image Processing", "Cloud Storage", "Real-time Collaboration"],
+      benefits: ["تصميم احترافي بدون تثبيت", "وصول من أي جهاز", "تعاون فعال للفرق", "توفير تكاليف البرامج", "تحديثات مستمرة", "أداء عالي"],
+      targetAudience: ["المصممين الجرافيكيين", "وكالات الإعلان", "المسوقين", "صناع المحتوى", "الشركات الصغيرة"],
+      timeline: "14-18 أسبوع",
+      technologies: ["Canvas API", "WebGL", "SVG", "WebAssembly", "Cloud APIs", "Real-time Sync"],
+      category: "web_based"
+    },
+
+    "Graphic Design Tool": {
+      name: "Graphic Design Tool",
+      description: "Advanced graphic design tool working in web browser",
+      fullDescription: "Powerful and advanced graphic design tool that works entirely in web browser with modern interface and professional tools. Provides all features required for professional design from vector drawing to image processing with huge template library.",
+      keyFeatures: ["Advanced Vector Editor", "Professional Layers & Masks", "Huge Template Library", "Multi-format Export", "Advanced Drawing Tools", "Effects & Filters", "Advanced Color System", "Collaborative Sharing"],
+      technicalFeatures: ["Canvas API", "WebGL Acceleration", "Vector Graphics", "Image Processing", "Cloud Storage", "Real-time Collaboration"],
+      benefits: ["Professional Design Without Installation", "Access from Any Device", "Effective Team Collaboration", "Software Cost Savings", "Continuous Updates", "High Performance"],
+      targetAudience: ["Graphic Designers", "Advertising Agencies", "Marketers", "Content Creators", "Small Businesses"],
+      timeline: "14-18 weeks",
+      technologies: ["Canvas API", "WebGL", "SVG", "WebAssembly", "Cloud APIs", "Real-time Sync"],
+      category: "web_based"
     }
   };
 
