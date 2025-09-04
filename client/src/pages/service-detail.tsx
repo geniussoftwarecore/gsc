@@ -4470,7 +4470,7 @@ export default function ServiceDetail() {
         )}
 
         {/* Marketing Categories and Packages Section - Only show for digital marketing service */}
-        {service && service.id === '62e8102e-50e4-4e38-8f0f-a19f6e2701e5' && (
+        {service && service.id === '31e77b8a-5cda-4826-ac0a-3146d33c2bb2' && (
           <section className="py-20 bg-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">

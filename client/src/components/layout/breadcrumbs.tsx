@@ -4,6 +4,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { Home, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 
 /**
  * Auto-generating breadcrumbs component following Services/Home design
@@ -12,6 +13,11 @@ export function Breadcrumbs() {
   const { dir } = useLanguage();
   const { t } = useTranslation();
   const [location] = useLocation();
+
+  // Fetch services data to get service names for breadcrumbs
+  const { data: services } = useQuery<any[]>({
+    queryKey: ["/api/services"],
+  });
 
   // Generate breadcrumb items from current path
   const generateBreadcrumbs = () => {
@@ -46,9 +52,21 @@ export function Breadcrumbs() {
         'our-values': 'قيمنا'
       };
 
+      // Check if this segment is a service ID (UUID format)
+      let segmentLabel = labelMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+      
+      // If this looks like a UUID and we're in services path, try to find the service name
+      if (segment.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i) && 
+          currentPath.startsWith('/services/') && services) {
+        const service = services.find(s => s.id === segment);
+        if (service) {
+          segmentLabel = service.title;
+        }
+      }
+
       breadcrumbs.push({
         href: currentPath,
-        label: labelMap[segment] || segment.charAt(0).toUpperCase() + segment.slice(1)
+        label: segmentLabel
       });
     }
 
