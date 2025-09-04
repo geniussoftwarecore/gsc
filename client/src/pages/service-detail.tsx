@@ -1261,57 +1261,39 @@ export default function ServiceDetail() {
   const desktopCategories = [
     {
       id: "all",
-      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      title: dir === 'rtl' ? "جميع الأنظمة" : "All Platforms",
       icon: Monitor,
       color: "bg-blue-500",
     },
     {
-      id: "business",
-      title: dir === 'rtl' ? "برامج الأعمال" : "Business Software",
-      icon: Briefcase,
-      color: "bg-green-500",
+      id: "windows",
+      title: dir === 'rtl' ? "ويندوز Windows" : "Windows",
+      icon: Monitor,
+      color: "bg-blue-600",
     },
     {
-      id: "creative",
-      title: dir === 'rtl' ? "البرامج الإبداعية" : "Creative Software",
-      icon: Palette,
-      color: "bg-purple-500",
-    },
-    {
-      id: "productivity",
-      title: dir === 'rtl' ? "أدوات الإنتاجية" : "Productivity Tools",
-      icon: Target,
+      id: "linux",
+      title: dir === 'rtl' ? "لينكس Linux" : "Linux",
+      icon: Settings,
       color: "bg-orange-500",
     },
     {
-      id: "healthcare",
-      title: dir === 'rtl' ? "البرامج الطبية" : "Medical Software",
-      icon: Heart,
-      color: "bg-pink-500",
+      id: "macos",
+      title: dir === 'rtl' ? "ماك macOS" : "macOS",
+      icon: Boxes,
+      color: "bg-gray-600",
     },
     {
-      id: "education",
-      title: dir === 'rtl' ? "البرامج التعليمية" : "Educational Software",
-      icon: BookOpen,
-      color: "bg-indigo-500",
+      id: "crossplatform",
+      title: dir === 'rtl' ? "متعدد المنصات" : "Cross-Platform",
+      icon: Globe,
+      color: "bg-green-500",
     },
     {
-      id: "finance",
-      title: dir === 'rtl' ? "البرامج المالية" : "Financial Software",
-      icon: Calculator,
-      color: "bg-cyan-500",
-    },
-    {
-      id: "utility",
-      title: dir === 'rtl' ? "أدوات النظام" : "System Utilities",
-      icon: Settings,
-      color: "bg-gray-500",
-    },
-    {
-      id: "entertainment",
-      title: dir === 'rtl' ? "الترفيه والألعاب" : "Entertainment & Games",
-      icon: GamepadIcon,
-      color: "bg-yellow-500",
+      id: "web_based",
+      title: dir === 'rtl' ? "تطبيقات الويب" : "Web-Based Apps",
+      icon: Globe,
+      color: "bg-purple-500",
     },
   ];
 
@@ -1379,112 +1361,91 @@ export default function ServiceDetail() {
     },
   ];
 
-  // Sample desktop apps for each category
+  // Sample desktop apps for each platform
   const sampleDesktopApps = {
-    business: [
+    windows: [
       {
-        name: dir === 'rtl' ? "نظام إدارة المشاريع" : "Project Management System",
-        description: dir === 'rtl' ? "نظام متكامل لإدارة المشاريع والفرق والموارد" : "Comprehensive system for managing projects, teams and resources",
-        features: dir === 'rtl' ? ["إدارة المهام", "تتبع الوقت", "التقارير", "لوحة التحكم"] : ["Task Management", "Time Tracking", "Reports", "Dashboard"],
+        name: dir === 'rtl' ? "تطبيق إدارة الأعمال - ويندوز" : "Windows Business Manager",
+        description: dir === 'rtl' ? "تطبيق ويندوز لإدارة الأعمال مع واجهة WPF" : "Native Windows business management app with WPF interface",
+        features: dir === 'rtl' ? ["واجهة WPF", "تكامل مع Office", "Active Directory", "Windows Services"] : ["WPF Interface", "Office Integration", "Active Directory", "Windows Services"],
       },
       {
-        name: dir === 'rtl' ? "نظام إدارة العملاء CRM" : "CRM Management System",
-        description: dir === 'rtl' ? "برنامج شامل لإدارة علاقات العملاء والمبيعات" : "Complete customer relationship and sales management software",
-        features: dir === 'rtl' ? ["قاعدة العملاء", "إدارة المبيعات", "التقارير التحليلية", "المتابعة التلقائية"] : ["Customer Database", "Sales Management", "Analytics Reports", "Auto Follow-up"],
+        name: dir === 'rtl' ? "محرر النصوص المتقدم" : "Advanced Text Editor",
+        description: dir === 'rtl' ? "محرر نصوص قوي مخصص لنظام ويندوز" : "Powerful text editor specifically designed for Windows",
+        features: dir === 'rtl' ? ["تمييز الكود", "إكمال تلقائي", "إضافات", "واجهة ريبون"] : ["Syntax Highlighting", "Auto-completion", "Plugins", "Ribbon Interface"],
       },
       {
-        name: dir === 'rtl' ? "نظام إدارة المخازن" : "Inventory Management System",
-        description: dir === 'rtl' ? "برنامج متطور لإدارة المخزون والمستودعات" : "Advanced software for inventory and warehouse management",
-        features: dir === 'rtl' ? ["تتبع المخزون", "إدارة المواقع", "نظام الباركود", "تقارير المخزون"] : ["Stock Tracking", "Location Management", "Barcode System", "Inventory Reports"],
-      },
-    ],
-    creative: [
-      {
-        name: dir === 'rtl' ? "برنامج تصميم جرافيكي" : "Graphic Design Software",
-        description: dir === 'rtl' ? "برنامج تصميم احترافي للمصممين والفنانين" : "Professional design software for designers and artists",
-        features: dir === 'rtl' ? ["أدوات الرسم المتقدمة", "الطبقات والأقنعة", "مكتبة الفرش", "تصدير عالي الجودة"] : ["Advanced Drawing Tools", "Layers & Masks", "Brush Library", "High-Quality Export"],
-      },
-      {
-        name: dir === 'rtl' ? "برنامج مونتاج الفيديو" : "Video Editing Software",
-        description: dir === 'rtl' ? "أداة قوية لتحرير ومونتاج الفيديوهات الاحترافية" : "Powerful tool for professional video editing and production",
-        features: dir === 'rtl' ? ["تحرير متعدد المسارات", "تأثيرات بصرية", "تحرير صوتي", "تصدير 4K/8K"] : ["Multi-track Editing", "Visual Effects", "Audio Editing", "4K/8K Export"],
-      },
-      {
-        name: dir === 'rtl' ? "برنامج تصميم ثلاثي الأبعاد" : "3D Design Software",
-        description: dir === 'rtl' ? "أداة متقدمة للنمذجة والتصميم ثلاثي الأبعاد" : "Advanced tool for 3D modeling and design",
-        features: dir === 'rtl' ? ["النمذجة ثلاثية الأبعاد", "الإضاءة والتظليل", "التحريك", "العرض المرئي"] : ["3D Modeling", "Lighting & Shading", "Animation", "Rendering"],
+        name: dir === 'rtl' ? "مدير الملفات الاحترافي" : "Professional File Manager",
+        description: dir === 'rtl' ? "مدير ملفات متطور للويندوز مع ميزات احترافية" : "Advanced Windows file manager with professional features",
+        features: dir === 'rtl' ? ["علامات تبويب متعددة", "معاينة الملفات", "FTP مدمج", "أدوات المطور"] : ["Multiple Tabs", "File Preview", "Built-in FTP", "Developer Tools"],
       },
     ],
-    productivity: [
+    linux: [
       {
-        name: dir === 'rtl' ? "حزمة أدوات المكتب" : "Office Suite",
-        description: dir === 'rtl' ? "مجموعة شاملة من أدوات المكتب للإنتاجية" : "Complete office productivity suite",
-        features: dir === 'rtl' ? ["معالج النصوص", "جداول البيانات", "العروض التقديمية", "قاعدة البيانات"] : ["Word Processor", "Spreadsheets", "Presentations", "Database"],
+        name: dir === 'rtl' ? "أدوات مطور لينكس" : "Linux Developer Tools",
+        description: dir === 'rtl' ? "حزمة أدوات متكاملة للتطوير على لينكس" : "Comprehensive development toolkit for Linux",
+        features: dir === 'rtl' ? ["محرر أكواد", "مدبج مدمج", "Git GUI", "Terminal مدمج"] : ["Code Editor", "Integrated Debugger", "Git GUI", "Embedded Terminal"],
       },
       {
-        name: dir === 'rtl' ? "مدير المهام والأهداف" : "Task & Goal Manager",
-        description: dir === 'rtl' ? "أداة لتنظيم المهام والأهداف الشخصية والمهنية" : "Tool for organizing personal and professional tasks and goals",
-        features: dir === 'rtl' ? ["تنظيم المهام", "تتبع الأهداف", "التذكيرات", "تقارير الإنتاجية"] : ["Task Organization", "Goal Tracking", "Reminders", "Productivity Reports"],
-      },
-    ],
-    healthcare: [
-      {
-        name: dir === 'rtl' ? "نظام إدارة العيادات" : "Clinic Management System",
-        description: dir === 'rtl' ? "نظام شامل لإدارة العيادات والمرضى والمواعيد" : "Comprehensive system for managing clinics, patients and appointments",
-        features: dir === 'rtl' ? ["حجز المواعيد", "ملفات المرضى", "الوصفات الطبية", "نظام الفواتير"] : ["Appointment Booking", "Patient Records", "Prescriptions", "Billing System"],
+        name: dir === 'rtl' ? "مراقب النظام المتقدم" : "Advanced System Monitor",
+        description: dir === 'rtl' ? "أداة مراقبة شاملة لأنظمة لينكس" : "Comprehensive monitoring tool for Linux systems",
+        features: dir === 'rtl' ? ["مراقبة العمليات", "استهلاك الموارد", "تحليل الأداء", "تنبيهات"] : ["Process Monitoring", "Resource Usage", "Performance Analysis", "Alerts"],
       },
       {
-        name: dir === 'rtl' ? "نظام إدارة المستشفيات" : "Hospital Management System",
-        description: dir === 'rtl' ? "حل متكامل لإدارة المستشفيات والأقسام الطبية" : "Integrated solution for managing hospitals and medical departments",
-        features: dir === 'rtl' ? ["إدارة الأسرة", "السجلات الطبية", "إدارة الصيدلية", "التقارير الطبية"] : ["Bed Management", "Medical Records", "Pharmacy Management", "Medical Reports"],
+        name: dir === 'rtl' ? "أداة إدارة الحزم GUI" : "Package Manager GUI",
+        description: dir === 'rtl' ? "واجهة رسومية سهلة لإدارة حزم لينكس" : "User-friendly graphical interface for Linux package management",
+        features: dir === 'rtl' ? ["بحث الحزم", "تحديثات تلقائية", "إدارة المستودعات", "تقارير النظام"] : ["Package Search", "Auto Updates", "Repository Management", "System Reports"],
       },
     ],
-    education: [
+    macos: [
       {
-        name: dir === 'rtl' ? "نظام إدارة المدارس" : "School Management System",
-        description: dir === 'rtl' ? "منصة شاملة لإدارة المدارس والطلاب والدرجات" : "Comprehensive platform for managing schools, students and grades",
-        features: dir === 'rtl' ? ["سجل الدرجات", "إدارة الحضور", "التواصل مع الأهل", "الجداول الدراسية"] : ["Grade Records", "Attendance Management", "Parent Communication", "Class Schedules"],
+        name: dir === 'rtl' ? "تطبيق إنتاجية macOS" : "macOS Productivity App",
+        description: dir === 'rtl' ? "تطبيق إنتاجية مُحسَّن لنظام macOS" : "Native productivity app optimized for macOS",
+        features: dir === 'rtl' ? ["تصميم Cocoa", "تكامل iCloud", "Spotlight Search", "Touch Bar"] : ["Cocoa Design", "iCloud Integration", "Spotlight Search", "Touch Bar"],
       },
       {
-        name: dir === 'rtl' ? "نظام إدارة المكتبات" : "Library Management System",
-        description: dir === 'rtl' ? "حل متقدم لإدارة المكتبات الأكاديمية والعامة" : "Advanced solution for managing academic and public libraries",
-        features: dir === 'rtl' ? ["فهرسة الكتب", "إدارة الأعضاء", "الاستعارة والإرجاع", "البحث المتقدم"] : ["Book Cataloging", "Member Management", "Borrowing & Returns", "Advanced Search"],
-      },
-    ],
-    finance: [
-      {
-        name: dir === 'rtl' ? "نظام المحاسبة المتكامل" : "Integrated Accounting System",
-        description: dir === 'rtl' ? "حل شامل للمحاسبة والإدارة المالية للشركات" : "Complete accounting and financial management solution for businesses",
-        features: dir === 'rtl' ? ["الحسابات العامة", "إدارة الفواتير", "التقارير المالية", "إدارة الضرائب"] : ["General Ledger", "Invoice Management", "Financial Reports", "Tax Management"],
+        name: dir === 'rtl' ? "أداة إدارة الوسائط" : "Media Management Tool",
+        description: dir === 'rtl' ? "أداة احترافية لإدارة الوسائط على macOS" : "Professional media management tool for macOS",
+        features: dir === 'rtl' ? ["معاينة سريعة", "تنظيم ذكي", "تصدير متقدم", "Core Image"] : ["Quick Look", "Smart Organization", "Advanced Export", "Core Image"],
       },
       {
-        name: dir === 'rtl' ? "نظام إدارة الرواتب" : "Payroll Management System",
-        description: dir === 'rtl' ? "برنامج متقدم لإدارة رواتب الموظفين والمزايا" : "Advanced software for employee payroll and benefits management",
-        features: dir === 'rtl' ? ["حساب الرواتب", "إدارة المزايا", "التقارير", "التكامل المصرفي"] : ["Payroll Calculation", "Benefits Management", "Reports", "Bank Integration"],
+        name: dir === 'rtl' ? "محرر الصور المتخصص" : "Specialized Image Editor",
+        description: dir === 'rtl' ? "محرر صور متخصص يستفيد من قوة macOS" : "Specialized image editor leveraging macOS capabilities",
+        features: dir === 'rtl' ? ["Core Graphics", "Metal Performance", "ColorSync", "macOS Filters"] : ["Core Graphics", "Metal Performance", "ColorSync", "macOS Filters"],
       },
     ],
-    utility: [
+    crossplatform: [
       {
-        name: dir === 'rtl' ? "أداة تحسين النظام" : "System Optimizer",
-        description: dir === 'rtl' ? "برنامج لتحسين أداء النظام وتنظيف الملفات" : "Software for system performance optimization and file cleanup",
-        features: dir === 'rtl' ? ["تنظيف الملفات", "تحسين الأداء", "إدارة بدء التشغيل", "مراقبة النظام"] : ["File Cleanup", "Performance Boost", "Startup Management", "System Monitoring"],
+        name: dir === 'rtl' ? "منصة CRM متعددة الأنظمة" : "Cross-Platform CRM Suite",
+        description: dir === 'rtl' ? "منصة إدارة علاقات العملاء تعمل على جميع الأنظمة" : "Customer relationship management platform for all operating systems",
+        features: dir === 'rtl' ? ["واجهة موحدة", "مزامنة سحابية", "دعم جميع الأنظمة", "قاعدة بيانات مشتركة"] : ["Unified Interface", "Cloud Sync", "All OS Support", "Shared Database"],
       },
       {
-        name: dir === 'rtl' ? "أداة النسخ الاحتياطي" : "Backup Utility",
-        description: dir === 'rtl' ? "حل موثوق للنسخ الاحتياطي واستعادة البيانات" : "Reliable solution for data backup and recovery",
-        features: dir === 'rtl' ? ["النسخ التلقائي", "جدولة النسخ", "استعادة البيانات", "التشفير"] : ["Auto Backup", "Backup Scheduling", "Data Recovery", "Encryption"],
+        name: dir === 'rtl' ? "محرر الأكواد العالمي" : "Universal Code Editor",
+        description: dir === 'rtl' ? "محرر أكواد متطور يعمل على Windows وmacOS ولينكس" : "Advanced code editor for Windows, macOS, and Linux",
+        features: dir === 'rtl' ? ["دعم متعدد اللغات", "إضافات مشتركة", "مزامنة الإعدادات", "تحديثات تلقائية"] : ["Multi-language Support", "Shared Plugins", "Settings Sync", "Auto Updates"],
+      },
+      {
+        name: dir === 'rtl' ? "أداة إدارة المشاريع" : "Project Management Tool",
+        description: dir === 'rtl' ? "أداة شاملة لإدارة المشاريع عبر جميع المنصات" : "Comprehensive project management tool across all platforms",
+        features: dir === 'rtl' ? ["إدارة المهام", "تعاون الفريق", "تتبع الوقت", "تقارير متقدمة"] : ["Task Management", "Team Collaboration", "Time Tracking", "Advanced Reports"],
       },
     ],
-    entertainment: [
+    web_based: [
       {
-        name: dir === 'rtl' ? "مشغل الوسائط المتعددة" : "Media Player Suite",
-        description: dir === 'rtl' ? "مشغل شامل لجميع أنواع الوسائط الصوتية والمرئية" : "Comprehensive player for all audio and video media formats",
-        features: dir === 'rtl' ? ["دعم جميع الصيغ", "قوائم التشغيل", "المعادل الصوتي", "البث المباشر"] : ["All Format Support", "Playlists", "Audio Equalizer", "Streaming"],
+        name: dir === 'rtl' ? "تطبيق المحاسبة السحابي" : "Cloud Accounting App",
+        description: dir === 'rtl' ? "تطبيق محاسبة سحابي متطور يعمل في المتصفح" : "Advanced cloud-based accounting application running in browser",
+        features: dir === 'rtl' ? ["واجهة PWA", "عمل دون اتصال", "مزامنة تلقائية", "أمان عالي"] : ["PWA Interface", "Offline Mode", "Auto Sync", "High Security"],
       },
       {
-        name: dir === 'rtl' ? "محرر الألعاب" : "Game Development IDE",
-        description: dir === 'rtl' ? "بيئة متكاملة لتطوير الألعاب ثنائية وثلاثية الأبعاد" : "Integrated environment for 2D and 3D game development",
-        features: dir === 'rtl' ? ["محرر المشاهد", "نظام الرسوميات", "محرك الفيزياء", "أدوات التطوير"] : ["Scene Editor", "Graphics Engine", "Physics Engine", "Development Tools"],
+        name: dir === 'rtl' ? "منصة التعلم الإلكتروني" : "E-Learning Platform",
+        description: dir === 'rtl' ? "منصة تعليمية تفاعلية تعمل عبر المتصفح" : "Interactive educational platform running through web browser",
+        features: dir === 'rtl' ? ["فيديوهات تفاعلية", "اختبارات ذكية", "تتبع التقدم", "شهادات رقمية"] : ["Interactive Videos", "Smart Quizzes", "Progress Tracking", "Digital Certificates"],
+      },
+      {
+        name: dir === 'rtl' ? "أداة تصميم الجرافيك" : "Graphic Design Tool",
+        description: dir === 'rtl' ? "أداة تصميم جرافيكي متطورة تعمل في المتصفح" : "Advanced graphic design tool working in web browser",
+        features: dir === 'rtl' ? ["محرر متجهات", "طبقات متقدمة", "مكتبة قوالب", "تصدير متعدد"] : ["Vector Editor", "Advanced Layers", "Template Library", "Multi Export"],
       },
     ],
   };
@@ -2263,12 +2224,12 @@ export default function ServiceDetail() {
                   viewport={{ once: true }}
                 >
                   <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
-                    {dir === 'rtl' ? 'اختر نوع البرنامج أو التطبيق الذي تريده' : 'Choose Your Desktop Software Type'}
+                    {dir === 'rtl' ? 'اختر نظام التشغيل المناسب لتطبيقك' : 'Choose the Right Platform for Your Application'}
                   </h2>
                   <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
                     {dir === 'rtl' 
-                      ? 'نطور برامج سطح المكتب المتخصصة لجميع المجالات - من برامج الأعمال إلى التطبيقات الإبداعية والطبية والتعليمية' 
-                      : 'We develop specialized desktop software for all industries - from business applications to creative, medical, and educational software'
+                      ? 'نطور تطبيقات سطح المكتب المحترفة لجميع أنظمة التشغيل - ويندوز ولينكس وماك والتطبيقات متعددة المنصات' 
+                      : 'We develop professional desktop applications for all operating systems - Windows, Linux, macOS, and cross-platform solutions'
                     }
                   </p>
                 </motion.div>
