@@ -56,6 +56,8 @@ export function ContactForm() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const serviceParam = urlParams.get('service');
+    const priceParam = urlParams.get('price');
+    
     if (serviceParam) {
       const decodedService = decodeURIComponent(serviceParam);
       
@@ -71,6 +73,12 @@ export function ContactForm() {
         "أنظمة ERPNext"
       ];
       
+      // Check if this is a marketing package or design package
+      const isMarketingPackage = decodedService.includes('تسويق') || decodedService.includes('إعلان') || decodedService.includes('حملة') || 
+                                decodedService.includes('Marketing') || decodedService.includes('Campaign') || decodedService.includes('Social Media');
+      const isDesignPackage = decodedService.includes('تصميم') || decodedService.includes('هوية') || decodedService.includes('Design') || 
+                             decodedService.includes('Identity') || decodedService.includes('Visual');
+      
       if (mainServices.includes(decodedService)) {
         // It's a main service
         setSelectedService(decodedService);
@@ -79,6 +87,42 @@ export function ContactForm() {
           title: dir === 'rtl' ? 'تم اختيار الخدمة' : 'Service Selected',
           description: dir === 'rtl' ? `تم اختيار خدمة: ${decodedService}` : `Selected service: ${decodedService}`,
         });
+      } else if (isMarketingPackage) {
+        // It's a marketing package
+        const marketingService = "التسويق الرقمي والإعلانات";
+        setSelectedService(marketingService);
+        setValue("service", marketingService);
+        setSelectedApp(decodedService);
+        setValue("selectedApp", decodedService);
+        
+        // Set budget if price is provided
+        if (priceParam) {
+          const formattedPrice = `${parseFloat(priceParam).toLocaleString()} ريال`;
+          setValue("budget", formattedPrice);
+        }
+        
+        toast({
+          title: dir === 'rtl' ? 'تم اختيار الباقة التسويقية' : 'Marketing Package Selected',
+          description: dir === 'rtl' ? `تم اختيار: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} ريال` : ''}` : `Selected: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} SAR` : ''}`,
+        });
+      } else if (isDesignPackage) {
+        // It's a design package
+        const designService = "تصميم الجرافيكس والهوية البصرية";
+        setSelectedService(designService);
+        setValue("service", designService);
+        setSelectedApp(decodedService);
+        setValue("selectedApp", decodedService);
+        
+        // Set budget if price is provided
+        if (priceParam) {
+          const formattedPrice = `${parseFloat(priceParam).toLocaleString()} ريال`;
+          setValue("budget", formattedPrice);
+        }
+        
+        toast({
+          title: dir === 'rtl' ? 'تم اختيار الباقة التصميمية' : 'Design Package Selected',
+          description: dir === 'rtl' ? `تم اختيار: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} ريال` : ''}` : `Selected: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} SAR` : ''}`,
+        });
       } else {
         // It's an app - set a default service and the specific app
         const defaultService = "تطوير تطبيقات الهواتف الذكية";
@@ -86,9 +130,16 @@ export function ContactForm() {
         setValue("service", defaultService);
         setSelectedApp(decodedService);
         setValue("selectedApp", decodedService);
+        
+        // Set budget if price is provided
+        if (priceParam) {
+          const formattedPrice = `${parseFloat(priceParam).toLocaleString()} ريال`;
+          setValue("budget", formattedPrice);
+        }
+        
         toast({
           title: dir === 'rtl' ? 'تم اختيار التطبيق' : 'App Selected',
-          description: dir === 'rtl' ? `تم اختيار تطبيق: ${decodedService}` : `Selected app: ${decodedService}`,
+          description: dir === 'rtl' ? `تم اختيار تطبيق: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} ريال` : ''}` : `Selected app: ${decodedService}${priceParam ? ` - ${parseFloat(priceParam).toLocaleString()} SAR` : ''}`,
         });
       }
     }
