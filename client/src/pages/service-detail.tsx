@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin, Target, Settings } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin, Target, Settings, Image, FileText, Package, Layers, Zap, Award, DollarSign, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -2438,6 +2438,280 @@ export default function ServiceDetail() {
     dir === 'rtl' ? 'التدريب والدعم' : 'Training and support',
   ];
 
+  // Design categories for graphic design and visual identity
+  const designCategories = [
+    {
+      id: "all",
+      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      icon: Palette,
+      color: "bg-blue-500",
+    },
+    {
+      id: "branding",
+      title: dir === 'rtl' ? "الهوية البصرية" : "Visual Identity",
+      icon: Award,
+      color: "bg-purple-500",
+    },
+    {
+      id: "print",
+      title: dir === 'rtl' ? "المطبوعات والإعلانات" : "Print & Advertising",
+      icon: FileText,
+      color: "bg-green-500",
+    },
+    {
+      id: "digital",
+      title: dir === 'rtl' ? "التصميم الرقمي" : "Digital Design",
+      icon: Image,
+      color: "bg-orange-500",
+    },
+    {
+      id: "packaging",
+      title: dir === 'rtl' ? "تصميم التغليف" : "Packaging Design",
+      icon: Package,
+      color: "bg-indigo-500",
+    },
+    {
+      id: "ui_design",
+      title: dir === 'rtl' ? "تصميم واجهات المستخدم" : "UI Design",
+      icon: Layers,
+      color: "bg-pink-500",
+    },
+  ];
+
+  // Sample designs for each category
+  const sampleDesigns = {
+    branding: [
+      {
+        name: dir === 'rtl' ? "هوية بصرية شاملة - باقة بلاتينيوم" : "Complete Visual Identity - Platinum Package",
+        description: dir === 'rtl' ? "هوية بصرية متكاملة للشركات الكبرى" : "Integrated visual identity for large corporations",
+        features: dir === 'rtl' 
+          ? ["تصميم شعار رئيسي ومتغيرات", "دليل الهوية البصرية الكامل", "التطبيقات العملية", "ملفات المصدر"] 
+          : ["Main logo design + variations", "Complete brand guidelines", "Practical applications", "Source files"],
+        price: "25000",
+        timeline: dir === 'rtl' ? "4-6 أسابيع" : "4-6 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "هوية بصرية متوسطة - باقة ذهبية" : "Medium Visual Identity - Gold Package",
+        description: dir === 'rtl' ? "هوية بصرية للشركات المتوسطة" : "Visual identity for medium companies",
+        features: dir === 'rtl' 
+          ? ["تصميم شعار + متغيرين", "دليل ألوان وخطوط", "5 تطبيقات عملية", "ملفات النهائية"] 
+          : ["Logo design + 2 variations", "Color & font guide", "5 practical applications", "Final files"],
+        price: "15000",
+        timeline: dir === 'rtl' ? "3-4 أسابيع" : "3-4 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "هوية بصرية أساسية - باقة فضية" : "Basic Visual Identity - Silver Package",
+        description: dir === 'rtl' ? "هوية بصرية للشركات الصغيرة والناشئة" : "Visual identity for small companies and startups",
+        features: dir === 'rtl' 
+          ? ["تصميم شعار أساسي", "لوحة ألوان", "3 تطبيقات عملية", "ملفات PNG/JPG"] 
+          : ["Basic logo design", "Color palette", "3 practical applications", "PNG/JPG files"],
+        price: "8000",
+        timeline: dir === 'rtl' ? "2-3 أسابيع" : "2-3 weeks",
+        package: "silver"
+      },
+    ],
+    print: [
+      {
+        name: dir === 'rtl' ? "حملة إعلانية متكاملة - باقة بلاتينيوم" : "Complete Advertising Campaign - Platinum Package",
+        description: dir === 'rtl' ? "حملة إعلانية شاملة متعددة الوسائط" : "Comprehensive multi-media advertising campaign",
+        features: dir === 'rtl' 
+          ? ["10 تصاميم بوسترات مختلفة", "بروشورات وكتالوجات", "إعلانات جرائد ومجلات", "تصاميم خارجية كبيرة"] 
+          : ["10 different poster designs", "Brochures & catalogs", "Newspaper & magazine ads", "Large outdoor designs"],
+        price: "20000",
+        timeline: dir === 'rtl' ? "5-7 أسابيع" : "5-7 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "مطبوعات تسويقية - باقة ذهبية" : "Marketing Materials - Gold Package",
+        description: dir === 'rtl' ? "مجموعة مطبوعات تسويقية احترافية" : "Professional marketing materials collection",
+        features: dir === 'rtl' 
+          ? ["5 بوسترات إعلانية", "بروشور ثلاثي الطي", "فلاير A4", "كروت شخصية"] 
+          : ["5 advertising posters", "Tri-fold brochure", "A4 flyer", "Business cards"],
+        price: "12000",
+        timeline: dir === 'rtl' ? "3-4 أسابيع" : "3-4 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "مطبوعات أساسية - باقة فضية" : "Basic Print Materials - Silver Package",
+        description: dir === 'rtl' ? "مطبوعات أساسية للشركات الصغيرة" : "Basic print materials for small businesses",
+        features: dir === 'rtl' 
+          ? ["3 بوسترات", "فلاير واحد", "كروت شخصية", "ملفات طباعة جاهزة"] 
+          : ["3 posters", "One flyer", "Business cards", "Print-ready files"],
+        price: "6000",
+        timeline: dir === 'rtl' ? "2-3 أسابيع" : "2-3 weeks",
+        package: "silver"
+      },
+    ],
+    digital: [
+      {
+        name: dir === 'rtl' ? "محتوى سوشيال ميديا شامل - باقة بلاتينيوم" : "Complete Social Media Content - Platinum Package",
+        description: dir === 'rtl' ? "محتوى بصري شامل لجميع منصات التواصل" : "Comprehensive visual content for all social platforms",
+        features: dir === 'rtl' 
+          ? ["30 تصميم سوشيال ميديا", "5 إنفوجرافيك تفاعلي", "قوالب قابلة للتعديل", "تصاميم للقصص والمنشورات"] 
+          : ["30 social media designs", "5 interactive infographics", "Editable templates", "Stories & posts designs"],
+        price: "18000",
+        timeline: dir === 'rtl' ? "4-5 أسابيع" : "4-5 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "تصاميم سوشيال ميديا - باقة ذهبية" : "Social Media Designs - Gold Package",
+        description: dir === 'rtl' ? "تصاميم احترافية للسوشيال ميديا" : "Professional social media designs",
+        features: dir === 'rtl' 
+          ? ["20 تصميم منشورات", "3 إنفوجرافيك", "قوالب أساسية", "تصاميم للغلاف"] 
+          : ["20 post designs", "3 infographics", "Basic templates", "Cover designs"],
+        price: "10000",
+        timeline: dir === 'rtl' ? "3-4 أسابيع" : "3-4 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "تصاميم رقمية أساسية - باقة فضية" : "Basic Digital Designs - Silver Package",
+        description: dir === 'rtl' ? "تصاميم رقمية أساسية للمشاريع الصغيرة" : "Basic digital designs for small projects",
+        features: dir === 'rtl' 
+          ? ["10 تصاميم منشورات", "إنفوجرافيك واحد", "غلاف فيسبوك", "ملفات ويب جاهزة"] 
+          : ["10 post designs", "One infographic", "Facebook cover", "Web-ready files"],
+        price: "5000",
+        timeline: dir === 'rtl' ? "2-3 أسابيع" : "2-3 weeks",
+        package: "silver"
+      },
+    ],
+    packaging: [
+      {
+        name: dir === 'rtl' ? "تصميم تغليف متكامل - باقة بلاتينيوم" : "Complete Packaging Design - Platinum Package",
+        description: dir === 'rtl' ? "تصميم تغليف شامل لخط إنتاج كامل" : "Comprehensive packaging design for complete product line",
+        features: dir === 'rtl' 
+          ? ["تصميم 5 منتجات مختلفة", "دراسة السوق والمنافسين", "ملفات طباعة ثلاثية الأبعاد", "عينات تجريبية"] 
+          : ["5 different product designs", "Market & competitor research", "3D printing files", "Test samples"],
+        price: "22000",
+        timeline: dir === 'rtl' ? "6-8 أسابيع" : "6-8 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "تصميم تغليف منتج - باقة ذهبية" : "Product Packaging Design - Gold Package",
+        description: dir === 'rtl' ? "تصميم تغليف لمنتج أو منتجين" : "Packaging design for one or two products",
+        features: dir === 'rtl' 
+          ? ["تصميم منتجين", "دراسة أولية", "ملفات طباعة جاهزة", "مراجعات متعددة"] 
+          : ["Two product designs", "Initial research", "Print-ready files", "Multiple revisions"],
+        price: "13000",
+        timeline: dir === 'rtl' ? "4-5 أسابيع" : "4-5 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "تصميم تغليف بسيط - باقة فضية" : "Simple Packaging Design - Silver Package",
+        description: dir === 'rtl' ? "تصميم تغليف أساسي لمنتج واحد" : "Basic packaging design for one product",
+        features: dir === 'rtl' 
+          ? ["تصميم منتج واحد", "مفاهيم أولية", "ملفات نهائية", "مراجعة واحدة"] 
+          : ["One product design", "Initial concepts", "Final files", "One revision"],
+        price: "7000",
+        timeline: dir === 'rtl' ? "3-4 أسابيع" : "3-4 weeks",
+        package: "silver"
+      },
+    ],
+    ui_design: [
+      {
+        name: dir === 'rtl' ? "تصميم واجهة تطبيق متكامل - باقة بلاتينيوم" : "Complete App UI Design - Platinum Package",
+        description: dir === 'rtl' ? "تصميم واجهة مستخدم متكاملة لتطبيق كامل" : "Complete user interface design for full application",
+        features: dir === 'rtl' 
+          ? ["30+ شاشة تطبيق", "نظام تصميم متكامل", "نماذج تفاعلية", "دليل المطور"] 
+          : ["30+ app screens", "Complete design system", "Interactive prototypes", "Developer guide"],
+        price: "30000",
+        timeline: dir === 'rtl' ? "6-8 أسابيع" : "6-8 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "تصميم واجهة موقع - باقة ذهبية" : "Website UI Design - Gold Package",
+        description: dir === 'rtl' ? "تصميم واجهة موقع إلكتروني احترافي" : "Professional website UI design",
+        features: dir === 'rtl' 
+          ? ["15 صفحة موقع", "تصميم متجاوب", "نماذج أولية", "ملفات للمطور"] 
+          : ["15 website pages", "Responsive design", "Wireframes", "Developer files"],
+        price: "18000",
+        timeline: dir === 'rtl' ? "4-6 أسابيع" : "4-6 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "تصميم واجهة أساسية - باقة فضية" : "Basic UI Design - Silver Package",
+        description: dir === 'rtl' ? "تصميم واجهة أساسية لصفحة أو تطبيق بسيط" : "Basic UI design for page or simple app",
+        features: dir === 'rtl' 
+          ? ["5-7 شاشات", "تصميم أساسي", "ملفات Figma", "مراجعتين"] 
+          : ["5-7 screens", "Basic design", "Figma files", "Two revisions"],
+        price: "9000",
+        timeline: dir === 'rtl' ? "2-4 أسابيع" : "2-4 weeks",
+        package: "silver"
+      },
+    ],
+  };
+
+  // Detailed design information
+  const getDetailedDesignInfo = (designName: string) => {
+    const designDetails: Record<string, any> = {
+      // Branding Designs
+      "هوية بصرية شاملة - باقة بلاتينيوم": {
+        name: "هوية بصرية شاملة - باقة بلاتينيوم",
+        description: "هوية بصرية متكاملة للشركات الكبرى",
+        fullDescription: "باقة هوية بصرية شاملة ومتكاملة مصممة خصيصاً للشركات الكبرى والمؤسسات التي تسعى لتميز حقيقي في السوق. تشمل تصميم شعار فريد مع جميع المتغيرات، دليل هوية بصرية مفصل، وتطبيقات عملية واسعة تغطي جميع احتياجات الشركة من المطبوعات إلى الواجهات الرقمية.",
+        keyFeatures: ["تصميم شعار رئيسي + 5 متغيرات", "دليل الهوية البصرية الكامل (50+ صفحة)", "لوحة ألوان متقدمة مع أكواد دقيقة", "مجموعة خطوط مخصصة", "15+ تطبيق عملي شامل", "قوالب مطبوعات جاهزة", "أيقونات مخصصة", "ملفات مصدر كاملة"],
+        technicalFeatures: ["ملفات AI, EPS, PDF عالية الدقة", "ملفات PNG شفافة بدقات متعددة", "دليل استخدام تفصيلي", "قوالب InDesign جاهزة", "ملفات ويب محسنة", "Brand toolkit متكامل"],
+        benefits: ["تميز كامل عن المنافسين", "زيادة التعرف على العلامة التجارية بنسبة 85%", "توحيد الرسائل البصرية", "رفع قيمة الشركة", "تحسين الثقة لدى العملاء", "استثمار طويل المدى"],
+        targetAudience: ["الشركات الكبرى", "المؤسسات المالية", "العلامات التجارية الفاخرة", "الشركات متعددة الجنسيات", "المؤسسات الحكومية"],
+        timeline: "4-6 أسابيع",
+        technologies: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Figma", "Brand Guidelines"],
+        category: "branding",
+        price: "25000",
+        package: "platinum"
+      },
+
+      "Complete Visual Identity - Platinum Package": {
+        name: "Complete Visual Identity - Platinum Package",
+        description: "Integrated visual identity for large corporations",
+        fullDescription: "Comprehensive and integrated visual identity package designed specifically for large corporations and institutions seeking true market distinction. Includes unique logo design with all variations, detailed visual identity guide, and extensive practical applications covering all company needs from print to digital interfaces.",
+        keyFeatures: ["Main logo design + 5 variations", "Complete brand guidelines (50+ pages)", "Advanced color palette with precise codes", "Custom font collection", "15+ comprehensive practical applications", "Ready-to-use print templates", "Custom icons", "Complete source files"],
+        technicalFeatures: ["High-resolution AI, EPS, PDF files", "Transparent PNG files in multiple resolutions", "Detailed usage guide", "Ready InDesign templates", "Optimized web files", "Integrated brand toolkit"],
+        benefits: ["Complete distinction from competitors", "85% brand recognition increase", "Unified visual messages", "Increased company value", "Enhanced customer trust", "Long-term investment"],
+        targetAudience: ["Large Corporations", "Financial Institutions", "Luxury Brands", "Multinational Companies", "Government Institutions"],
+        timeline: "4-6 weeks",
+        technologies: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop", "Figma", "Brand Guidelines"],
+        category: "branding",
+        price: "25000",
+        package: "platinum"
+      },
+
+      // Print Designs
+      "حملة إعلانية متكاملة - باقة بلاتينيوم": {
+        name: "حملة إعلانية متكاملة - باقة بلاتينيوم",
+        description: "حملة إعلانية شاملة متعددة الوسائط",
+        fullDescription: "حملة إعلانية متكاملة وشاملة تغطي جميع وسائل الإعلان المطبوعة والرقمية. مصممة استراتيجياً لتحقيق أقصى تأثير إعلاني مع ضمان التناسق البصري عبر جميع المنصات. تشمل دراسة الجمهور المستهدف، تطوير رسائل إعلانية فعالة، وتنفيذ تصاميم احترافية متعددة الأحجام والأشكال.",
+        keyFeatures: ["10 تصاميم بوسترات بأحجام مختلفة", "بروشورات وكتالوجات تفاعلية", "إعلانات جرائد ومجلات متخصصة", "تصاميم خارجية كبيرة الحجم", "مواد تسويقية متنوعة", "حملة رقمية متكاملة", "دراسة الجمهور والمنافسين", "استراتيجية بصرية شاملة"],
+        technicalFeatures: ["ملفات طباعة عالية الدقة", "صيغ متعددة للطباعة والنشر", "ملفات ويب محسنة", "قوالب قابلة للتعديل", "دليل استخدام الحملة", "ملفات المصدر الكاملة"],
+        benefits: ["زيادة الوعي بالعلامة التجارية بنسبة 70%", "تحسين معدلات التحويل", "وصول أوسع للجمهور المستهدف", "رسائل إعلانية موحدة ومؤثرة", "عائد استثمار مرتفع", "تميز في السوق"],
+        targetAudience: ["الشركات الكبرى", "العلامات التجارية الاستهلاكية", "الخدمات المالية", "القطاع العقاري", "الشركات التجارية"],
+        timeline: "5-7 أسابيع",
+        technologies: ["Adobe Creative Suite", "InDesign", "Photoshop", "Illustrator", "Print Production"],
+        category: "print",
+        price: "20000",
+        package: "platinum"
+      },
+
+      // Digital Designs
+      "محتوى سوشيال ميديا شامل - باقة بلاتينيوم": {
+        name: "محتوى سوشيال ميديا شامل - باقة بلاتينيوم",
+        description: "محتوى بصري شامل لجميع منصات التواصل",
+        fullDescription: "باقة محتوى سوشيال ميديا شاملة ومتطورة مصممة لإنشاء حضور قوي ومتميز عبر جميع منصات التواصل الاجتماعي. تشمل استراتيجية محتوى بصرية متكاملة، تصاميم متنوعة وجذابة، وقوالب قابلة للتخصيص لضمان استمرارية النشر بجودة عالية.",
+        keyFeatures: ["30 تصميم منشورات متنوعة", "5 إنفوجرافيك تفاعلي احترافي", "قوالب قابلة للتعديل لكل منصة", "تصاميم القصص والمنشورات", "أغلفة المنصات المختلفة", "تصاميم للإعلانات المدفوعة", "محتوى بصري للمناسبات", "دليل استخدام شامل"],
+        technicalFeatures: ["تصاميم محسنة لكل منصة", "ملفات عالية الدقة", "قوالب Photoshop قابلة للتعديل", "أحجام متعددة لكل تصميم", "ملفات ويب محسنة", "Brand kit متكامل"],
+        benefits: ["زيادة التفاعل بنسبة 80%", "نمو المتابعين بشكل طبيعي", "تحسين الوعي بالعلامة التجارية", "محتوى جاهز لشهور", "توفير وقت التصميم", "مظهر احترافي موحد"],
+        targetAudience: ["الشركات الرقمية", "العلامات التجارية الحديثة", "المؤثرين", "الشركات الناشئة", "وكالات التسويق"],
+        timeline: "4-5 أسابيع",
+        technologies: ["Adobe Creative Suite", "Figma", "Canva Pro", "Social Media Tools", "Brand Management"],
+        category: "digital",
+        price: "18000",
+        package: "platinum"
+      },
+    };
+
+    return designDetails[designName] || null;
+  };
+
   // App categories for mobile development
   const appCategories = [
     {
@@ -2954,6 +3228,11 @@ export default function ServiceDetail() {
         return Object.values(sampleDesktopApps).flat();
       }
       return sampleDesktopApps[selectedAppCategory as keyof typeof sampleDesktopApps] || [];
+    } else if (service?.category === 'design') {
+      if (selectedAppCategory === "all") {
+        return Object.values(sampleDesigns).flat();
+      }
+      return sampleDesigns[selectedAppCategory as keyof typeof sampleDesigns] || [];
     } else {
       if (selectedAppCategory === "all") {
         return Object.values(sampleApps).flat();
@@ -3259,6 +3538,244 @@ export default function ServiceDetail() {
                     <Link href="/contact">
                       <Button size="lg" className="rounded-xl px-8 py-3">
                         {dir === 'rtl' ? 'ناقش فكرتك معنا' : 'Discuss Your Idea'}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Design Categories and Packages Section - Only show for design service */}
+        {service && service.category === 'design' && (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <motion.div
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'اختر نوع التصميم والباقة المناسبة' : 'Choose Your Design Type and Package'}
+                  </h2>
+                  <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نقدم تصاميم متخصصة ومتنوعة لجميع احتياجاتك - من الهوية البصرية إلى المطبوعات والتصميم الرقمي بباقات مختلفة تناسب ميزانيتك' 
+                      : 'We offer specialized and diverse designs for all your needs - from visual identity to print and digital design with different packages to suit your budget'
+                    }
+                  </p>
+                </motion.div>
+
+                {/* Design Category Filters */}
+                <motion.div
+                  className="flex flex-wrap justify-center gap-3 mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {designCategories.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setSelectedAppCategory(category.id)}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium",
+                        selectedAppCategory === category.id
+                          ? `${category.color} text-white shadow-lg`
+                          : "bg-gray-100 text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-200 border border-gray-200 hover:border-gray-300"
+                      )}
+                    >
+                      <category.icon size={18} />
+                      <span>{category.title}</span>
+                    </motion.button>
+                  ))}
+                </motion.div>
+
+                {/* Design Packages Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedAppCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {(() => {
+                      const categoryDesigns = selectedAppCategory === "all" 
+                        ? Object.values(sampleDesigns).flat()
+                        : sampleDesigns[selectedAppCategory as keyof typeof sampleDesigns] || [];
+                      
+                      return categoryDesigns.map((design, index) => (
+                        <motion.div
+                          key={`${selectedAppCategory}-${index}`}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                        >
+                          <Card className={cn(
+                            "h-full hover:shadow-lg transition-all duration-300 border-l-4 relative overflow-hidden",
+                            design.package === 'platinum' ? "border-l-yellow-400 bg-gradient-to-br from-yellow-50 to-orange-50" :
+                            design.package === 'gold' ? "border-l-yellow-500 bg-gradient-to-br from-yellow-50/50 to-white" :
+                            "border-l-gray-400 bg-white"
+                          )}>
+                            {/* Package Badge */}
+                            <div className={cn(
+                              "absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold text-white",
+                              design.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400" :
+                              design.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600" :
+                              "bg-gradient-to-r from-gray-400 to-gray-500"
+                            )}>
+                              {design.package === 'platinum' ? (
+                                <div className="flex items-center gap-1">
+                                  <Crown className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'بلاتينيوم' : 'Platinum'}
+                                </div>
+                              ) : design.package === 'gold' ? (
+                                <div className="flex items-center gap-1">
+                                  <Award className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'ذهبي' : 'Gold'}
+                                </div>
+                              ) : (
+                                <div className="flex items-center gap-1">
+                                  <Zap className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'فضي' : 'Silver'}
+                                </div>
+                              )}
+                            </div>
+
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                                <Palette className="w-5 h-5 text-primary" />
+                                <span className="leading-tight">{design.name}</span>
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-brand-text-muted mb-4 leading-relaxed">
+                                {design.description}
+                              </p>
+                              
+                              {/* Price Display */}
+                              <div className="mb-4 p-3 bg-primary/5 rounded-lg">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-sm text-brand-text-muted">
+                                    {dir === 'rtl' ? 'السعر:' : 'Price:'}
+                                  </span>
+                                  <div className="flex items-center gap-1">
+                                    <DollarSign className="w-4 h-4 text-primary" />
+                                    <span className="text-xl font-bold text-primary">
+                                      {parseFloat(design.price).toLocaleString()}
+                                    </span>
+                                    <span className="text-sm text-brand-text-muted">
+                                      {dir === 'rtl' ? 'ريال' : 'SAR'}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between mt-2">
+                                  <span className="text-sm text-brand-text-muted">
+                                    {dir === 'rtl' ? 'المدة:' : 'Timeline:'}
+                                  </span>
+                                  <span className="text-sm font-medium text-brand-text-primary">
+                                    {design.timeline}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="space-y-4">
+                                <div>
+                                  <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                    {dir === 'rtl' ? 'يشمل الباقة:' : 'Package Includes:'}
+                                  </h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {design.features.map((feature, featureIndex) => (
+                                      <Badge 
+                                        key={featureIndex} 
+                                        variant="secondary" 
+                                        className="text-xs"
+                                      >
+                                        {feature}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+                                
+                                {/* Action Buttons */}
+                                <div className="flex flex-col sm:flex-row gap-2">
+                                  {/* View Details Button */}
+                                  <Button
+                                    onClick={() => {
+                                      setSelectedAppForDetails(design);
+                                      setShowAppDetailsModal(true);
+                                    }}
+                                    variant="outline"
+                                    className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                    size="sm"
+                                  >
+                                    <Eye className="w-4 h-4 mr-2" />
+                                    {dir === 'rtl' ? 'تفاصيل الباقة' : 'Package Details'}
+                                  </Button>
+
+                                  {/* Order Now Button */}
+                                  <Button
+                                    onClick={() => {
+                                      setLocation(`/contact?service=${encodeURIComponent(design.name)}&price=${design.price}`);
+                                    }}
+                                    className={cn(
+                                      "flex-1 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-offset-2",
+                                      design.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 focus:ring-yellow-400/20" :
+                                      design.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 focus:ring-yellow-500/20" :
+                                      "bg-primary hover:bg-primary-dark focus:ring-primary/20"
+                                    )}
+                                    size="sm"
+                                  >
+                                    <ArrowRight className={cn(
+                                      "w-4 h-4 mr-2",
+                                      dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                                    )} />
+                                    {dir === 'rtl' ? 'اطلب الآن' : 'Order Now'}
+                                  </Button>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ));
+                    })()}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Call to Action for Custom Design */}
+                <motion.div
+                  className="mt-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                      {dir === 'rtl' ? 'تحتاج تصميم مخصص أو باقة مختلفة؟' : 'Need Custom Design or Different Package?'}
+                    </h3>
+                    <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                      {dir === 'rtl' 
+                        ? 'نقدم تصاميم مخصصة حسب احتياجاتك الخاصة وميزانيتك - تواصل معنا لمناقشة مشروعك والحصول على عرض سعر مخصص' 
+                        : 'We offer custom designs based on your specific needs and budget - contact us to discuss your project and get a custom quote'
+                      }
+                    </p>
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-xl px-8 py-3">
+                        {dir === 'rtl' ? 'اطلب عرض سعر مخصص' : 'Request Custom Quote'}
                       </Button>
                     </Link>
                   </div>
@@ -3826,10 +4343,12 @@ export default function ServiceDetail() {
                   {(() => {
                     const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
                     const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
+                    const designDetails = getDetailedDesignInfo(selectedAppForDetails.name);
                     const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
                     
                     if (websiteDetails) return <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                     if (desktopDetails) return <Monitor className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
+                    if (designDetails) return <Palette className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                     return <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />;
                   })()}
                   <span className="break-words">{selectedAppForDetails.name}</span>
@@ -3837,10 +4356,11 @@ export default function ServiceDetail() {
               </DialogHeader>
               
               {(() => {
-                // Try to get detailed info in priority order: website -> desktop -> mobile app
+                // Try to get detailed info in priority order: website -> desktop -> design -> mobile app
                 const websiteDetails = getDetailedWebsiteInfo(selectedAppForDetails.name);
                 const desktopDetails = getDetailedDesktopAppInfo(selectedAppForDetails.name);
-                const appDetails = websiteDetails || desktopDetails || getDetailedAppInfo(selectedAppForDetails.name);
+                const designDetails = getDetailedDesignInfo(selectedAppForDetails.name);
+                const appDetails = websiteDetails || desktopDetails || designDetails || getDetailedAppInfo(selectedAppForDetails.name);
                 if (!appDetails) {
                   // Show fallback content when detailed app info is not available
                   return (
@@ -3891,7 +4411,7 @@ export default function ServiceDetail() {
                             "w-5 h-5 mr-2",
                             dir === 'rtl' && "rotate-180 mr-0 ml-2"
                           )} />
-                          {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                          {dir === 'rtl' ? 'اطلب هذه الخدمة الآن' : 'Request This Service Now'}
                         </Button>
                         <Button
                           onClick={() => setShowAppDetailsModal(false)}
@@ -4018,7 +4538,7 @@ export default function ServiceDetail() {
                           "w-5 h-5 mr-2",
                           dir === 'rtl' && "rotate-180 mr-0 ml-2"
                         )} />
-                        {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                        {dir === 'rtl' ? 'اطلب هذه الخدمة الآن' : 'Request This Service Now'}
                       </Button>
                       <Button
                         onClick={() => setShowAppDetailsModal(false)}
