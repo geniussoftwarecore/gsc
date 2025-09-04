@@ -1525,6 +1525,403 @@ const getDetailedDesktopAppInfo = (appName: string) => {
       timeline: "14-18 weeks",
       technologies: ["Canvas API", "WebGL", "SVG", "WebAssembly", "Cloud APIs", "Real-time Sync"],
       category: "web_based"
+    },
+
+    // New Business-Focused Desktop Applications
+    
+    // Windows Business Apps
+    "نظام إدارة الموارد البشرية": {
+      name: "نظام إدارة الموارد البشرية",
+      description: "نظام شامل لإدارة الموارد البشرية والرواتب",
+      fullDescription: "نظام إدارة موارد بشرية متطور ومتكامل مصمم خصيصاً للشركات والمؤسسات لإدارة جميع جوانب الموارد البشرية. يشمل إدارة الموظفين، الرواتب، الحضور والانصراف، وتقييم الأداء مع تقارير تحليلية شاملة لاتخاذ قرارات استراتيجية مدروسة.",
+      keyFeatures: ["إدارة بيانات الموظفين الشاملة", "نظام الرواتب والمكافآت المتقدم", "تتبع الحضور والإجازات", "تقييم الأداء الدوري", "إدارة التوظيف والتعيين", "تقارير الموارد البشرية", "نظام الخدمة الذاتية للموظفين", "إدارة التدريب والتطوير"],
+      technicalFeatures: ["قاعدة بيانات متقدمة", "أمان متعدد المستويات", "واجهات API", "تكامل مع أنظمة الحضور", "تشفير البيانات الحساسة", "نسخ احتياطية آمنة"],
+      benefits: ["تحسين كفاءة إدارة الموارد البشرية بـ 60%", "تقليل الأخطاء في الرواتب", "توفير الوقت في العمليات الإدارية", "تحسين رضا الموظفين", "اتخاذ قرارات مدروسة", "الامتثال للقوانين العمالية"],
+      targetAudience: ["إدارات الموارد البشرية", "الشركات الصغيرة والمتوسطة", "المؤسسات الكبيرة", "شركات الاستشارات", "المنظمات الحكومية"],
+      timeline: "10-14 أسبوع",
+      technologies: ["C# .NET", "SQL Server", "WPF", "Crystal Reports", "Web APIs", "Security Framework"],
+      category: "windows"
+    },
+
+    "HR Management System": {
+      name: "HR Management System",
+      description: "Comprehensive HR and payroll management system",
+      fullDescription: "Advanced and integrated human resources management system designed specifically for companies and organizations to manage all aspects of human resources. Includes employee management, payroll, attendance, and performance evaluation with comprehensive analytical reports for strategic decision-making.",
+      keyFeatures: ["Comprehensive Employee Data Management", "Advanced Payroll & Benefits System", "Attendance & Leave Tracking", "Periodic Performance Evaluation", "Recruitment & Hiring Management", "HR Reports", "Employee Self-Service System", "Training & Development Management"],
+      technicalFeatures: ["Advanced Database", "Multi-level Security", "API Interfaces", "Time Clock Integration", "Sensitive Data Encryption", "Secure Backups"],
+      benefits: ["60% HR Management Efficiency Improvement", "Payroll Error Reduction", "Administrative Time Savings", "Employee Satisfaction Improvement", "Informed Decision Making", "Labor Law Compliance"],
+      targetAudience: ["HR Departments", "Small & Medium Enterprises", "Large Organizations", "Consulting Firms", "Government Organizations"],
+      timeline: "10-14 weeks",
+      technologies: ["C# .NET", "SQL Server", "WPF", "Crystal Reports", "Web APIs", "Security Framework"],
+      category: "windows"
+    },
+
+    "نظام إدارة المخزون والمبيعات": {
+      name: "نظام إدارة المخزون والمبيعات",
+      description: "نظام متطور لإدارة المخزون والمبيعات",
+      fullDescription: "نظام إدارة مخزون ومبيعات متطور ومتكامل يوفر حلول شاملة لإدارة المخزون، المبيعات، والمشتريات. يتضمن تتبع المنتجات في الوقت الفعلي، إدارة الموردين، ونظام نقاط البيع مع تقارير مفصلة لتحليل الأداء وزيادة الأرباح.",
+      keyFeatures: ["تتبع المخزون في الوقت الفعلي", "إدارة المبيعات والفواتير", "نظام نقاط البيع POS", "إدارة الموردين والمشتريات", "تتبع انتهاء صلاحية المنتجات", "تقارير مبيعات مفصلة", "إدارة العروض والخصومات", "تكامل مع المحاسبة"],
+      technicalFeatures: ["قاعدة بيانات متقدمة", "نظام باركود", "تكامل POS", "واجهات API", "تحليلات متقدمة", "أمان البيانات"],
+      benefits: ["تحسين دقة المخزون بـ 95%", "زيادة كفاءة المبيعات", "تقليل الفاقد والتلف", "تحسين خدمة العملاء", "زيادة الأرباح", "اتخاذ قرارات مدروسة"],
+      targetAudience: ["متاجر التجزئة", "المستودعات", "شركات التوزيع", "المصانع", "الشركات التجارية"],
+      timeline: "8-12 أسبوع",
+      technologies: ["C# .NET", "SQL Server", "Barcode Systems", "POS Integration", "Crystal Reports", "Web APIs"],
+      category: "windows"
+    },
+
+    "Inventory & Sales Management": {
+      name: "Inventory & Sales Management",
+      description: "Advanced inventory and sales management system",
+      fullDescription: "Advanced and integrated inventory and sales management system providing comprehensive solutions for inventory, sales, and purchasing management. Includes real-time product tracking, supplier management, and point-of-sale system with detailed reports for performance analysis and profit increase.",
+      keyFeatures: ["Real-time Inventory Tracking", "Sales & Invoice Management", "POS Point-of-Sale System", "Supplier & Purchase Management", "Product Expiry Tracking", "Detailed Sales Reports", "Promotions & Discounts Management", "Accounting Integration"],
+      technicalFeatures: ["Advanced Database", "Barcode System", "POS Integration", "API Interfaces", "Advanced Analytics", "Data Security"],
+      benefits: ["95% Inventory Accuracy Improvement", "Sales Efficiency Increase", "Waste & Loss Reduction", "Customer Service Improvement", "Profit Increase", "Informed Decision Making"],
+      targetAudience: ["Retail Stores", "Warehouses", "Distribution Companies", "Factories", "Commercial Companies"],
+      timeline: "8-12 weeks",
+      technologies: ["C# .NET", "SQL Server", "Barcode Systems", "POS Integration", "Crystal Reports", "Web APIs"],
+      category: "windows"
+    },
+
+    "نظام المحاسبة المتقدم": {
+      name: "نظام المحاسبة المتقدم",
+      description: "نظام محاسبة شامل للشركات والمؤسسات",
+      fullDescription: "نظام محاسبة متطور وشامل مصمم للشركات والمؤسسات لإدارة جميع العمليات المالية والمحاسبية. يشمل دفتر الأستاذ العام، إدارة الحسابات، الفواتير، والتقارير المالية مع امتثال كامل للمعايير المحاسبية المحلية والدولية.",
+      keyFeatures: ["دفتر الأستاذ العام الشامل", "إدارة الحسابات المدينة والدائنة", "نظام الفواتير والمدفوعات", "التقارير المالية المعيارية", "إدارة الضرائب والزكاة", "الميزانية والتخطيط المالي", "تتبع التدفق النقدي", "تكامل مع البنوك"],
+      technicalFeatures: ["قاعدة بيانات مالية آمنة", "تشفير المعاملات", "نسخ احتياطية متعددة", "واجهات بنكية", "معايير محاسبية", "تدقيق العمليات"],
+      benefits: ["دقة محاسبية عالية 99.9%", "توفير الوقت في إعداد التقارير", "الامتثال للقوانين المالية", "تحسين الشفافية المالية", "اتخاذ قرارات مالية مدروسة", "تقليل الأخطاء البشرية"],
+      targetAudience: ["الشركات الصغيرة والمتوسطة", "المحاسبين والمراجعين", "المؤسسات المالية", "الشركات المساهمة", "المكاتب الاستشارية"],
+      timeline: "12-16 أسبوع",
+      technologies: ["C# .NET", "SQL Server", "Financial APIs", "Banking Integration", "Crystal Reports", "Security Framework"],
+      category: "windows"
+    },
+
+    "Advanced Accounting System": {
+      name: "Advanced Accounting System",
+      description: "Comprehensive accounting system for companies and organizations",
+      fullDescription: "Advanced and comprehensive accounting system designed for companies and organizations to manage all financial and accounting operations. Includes general ledger, accounts management, invoicing, and financial reports with full compliance to local and international accounting standards.",
+      keyFeatures: ["Comprehensive General Ledger", "Accounts Receivable & Payable Management", "Invoicing & Payment System", "Standard Financial Reports", "Tax & Zakat Management", "Budget & Financial Planning", "Cash Flow Tracking", "Banking Integration"],
+      technicalFeatures: ["Secure Financial Database", "Transaction Encryption", "Multiple Backups", "Banking Interfaces", "Accounting Standards", "Operation Auditing"],
+      benefits: ["99.9% Accounting Accuracy", "Report Preparation Time Savings", "Financial Law Compliance", "Financial Transparency Improvement", "Informed Financial Decision Making", "Human Error Reduction"],
+      targetAudience: ["Small & Medium Enterprises", "Accountants & Auditors", "Financial Institutions", "Public Companies", "Consulting Offices"],
+      timeline: "12-16 weeks",
+      technologies: ["C# .NET", "SQL Server", "Financial APIs", "Banking Integration", "Crystal Reports", "Security Framework"],
+      category: "windows"
+    },
+
+    // Linux Business Apps
+    "نظام إدارة أمن المعلومات": {
+      name: "نظام إدارة أمن المعلومات",
+      description: "نظام شامل لأمن المعلومات ومراقبة الشبكات",
+      fullDescription: "نظام أمن معلومات متطور ومتكامل مصمم لحماية البنية التحتية التقنية للمؤسسات. يوفر مراقبة شاملة للشبكات، كشف التهديدات، إدارة الوصول، وحماية البيانات الحساسة مع امتثال كامل لمعايير الأمان الدولية والمحلية.",
+      keyFeatures: ["مراقبة الشبكة في الوقت الفعلي", "كشف التهديدات والتسلل", "إدارة الوصول والهوية", "حماية البيانات الحساسة", "تدقيق أمني شامل", "تقارير الامتثال", "إدارة الثغرات الأمنية", "استجابة للحوادث"],
+      technicalFeatures: ["AI للكشف عن التهديدات", "تحليل سلوك الشبكة", "تشفير متقدم", "مراقبة السجلات", "تكامل SIEM", "إدارة الشهادات"],
+      benefits: ["حماية أمنية شاملة 24/7", "تقليل المخاطر الأمنية بـ 90%", "الامتثال للمعايير الأمنية", "كشف التهديدات المبكر", "حماية سمعة المؤسسة", "استمرارية العمل"],
+      targetAudience: ["الشركات الكبرى", "المؤسسات المالية", "القطاع الحكومي", "مقدمي الخدمات التقنية", "المستشفيات والعيادات"],
+      timeline: "16-20 أسبوع",
+      technologies: ["Python", "Machine Learning", "SIEM Integration", "Network Security", "Encryption", "Linux Security"],
+      category: "linux"
+    },
+
+    "Information Security Management": {
+      name: "Information Security Management",
+      description: "Comprehensive information security and network monitoring system",
+      fullDescription: "Advanced and integrated information security system designed to protect organizations' technical infrastructure. Provides comprehensive network monitoring, threat detection, access management, and sensitive data protection with full compliance to international and local security standards.",
+      keyFeatures: ["Real-time Network Monitoring", "Threat & Intrusion Detection", "Access & Identity Management", "Sensitive Data Protection", "Comprehensive Security Auditing", "Compliance Reports", "Vulnerability Management", "Incident Response"],
+      technicalFeatures: ["AI Threat Detection", "Network Behavior Analysis", "Advanced Encryption", "Log Monitoring", "SIEM Integration", "Certificate Management"],
+      benefits: ["Comprehensive 24/7 Security Protection", "90% Security Risk Reduction", "Security Standards Compliance", "Early Threat Detection", "Organization Reputation Protection", "Business Continuity"],
+      targetAudience: ["Large Enterprises", "Financial Institutions", "Government Sector", "Technology Service Providers", "Hospitals & Clinics"],
+      timeline: "16-20 weeks",
+      technologies: ["Python", "Machine Learning", "SIEM Integration", "Network Security", "Encryption", "Linux Security"],
+      category: "linux"
+    },
+
+    "نظام إدارة الخوادم": {
+      name: "نظام إدارة الخوادم",
+      description: "أداة متطورة لإدارة ومراقبة الخوادم",
+      fullDescription: "نظام إدارة خوادم متطور ومتكامل مصمم لإدارة ومراقبة البنية التحتية للخوادم في المؤسسات. يوفر مراقبة شاملة لأداء الخوادم، إدارة قواعد البيانات، النسخ الاحتياطي، والصيانة الاستباقية لضمان أعلى مستويات الأداء والموثوقية.",
+      keyFeatures: ["مراقبة شاملة للخوادم", "إدارة قواعد البيانات المتعددة", "نظام النسخ الاحتياطي الآلي", "إدارة الموارد والأداء", "صيانة استباقية", "تقارير وتحليلات متقدمة", "إدارة التحديثات", "نظام التنبيهات الذكي"],
+      technicalFeatures: ["مراقبة متعددة المنصات", "أتمتة العمليات", "تكامل APIs", "لوحات تحكم تفاعلية", "تحليلات الأداء", "إدارة الحاويات"],
+      benefits: ["تحسين وقت التشغيل بـ 99.9%", "تقليل وقت التوقف", "تحسين الأداء العام", "توفير تكاليف الصيانة", "الصيانة الاستباقية", "إدارة مركزية فعالة"],
+      targetAudience: ["مدراء أنظمة المعلومات", "مراكز البيانات", "الشركات التقنية", "مقدمي الخدمات السحابية", "المؤسسات الكبرى"],
+      timeline: "12-16 أسبوع",
+      technologies: ["Python", "Docker", "Kubernetes", "Monitoring Tools", "Database Management", "Linux Administration"],
+      category: "linux"
+    },
+
+    "Server Management System": {
+      name: "Server Management System",
+      description: "Advanced tool for server management and monitoring",
+      fullDescription: "Advanced and integrated server management system designed to manage and monitor server infrastructure in organizations. Provides comprehensive server performance monitoring, database management, automated backups, and proactive maintenance to ensure highest levels of performance and reliability.",
+      keyFeatures: ["Comprehensive Server Monitoring", "Multi-Database Management", "Automated Backup System", "Resource & Performance Management", "Proactive Maintenance", "Advanced Reports & Analytics", "Update Management", "Smart Alert System"],
+      technicalFeatures: ["Multi-platform Monitoring", "Process Automation", "API Integration", "Interactive Dashboards", "Performance Analytics", "Container Management"],
+      benefits: ["99.9% Uptime Improvement", "Downtime Reduction", "Overall Performance Enhancement", "Maintenance Cost Savings", "Proactive Maintenance", "Effective Centralized Management"],
+      targetAudience: ["IT System Managers", "Data Centers", "Technology Companies", "Cloud Service Providers", "Large Enterprises"],
+      timeline: "12-16 weeks",
+      technologies: ["Python", "Docker", "Kubernetes", "Monitoring Tools", "Database Management", "Linux Administration"],
+      category: "linux"
+    },
+
+    "نظام إدارة الوثائق": {
+      name: "نظام إدارة الوثائق",
+      description: "نظام إدارة وأرشفة الوثائق الرقمية",
+      fullDescription: "نظام إدارة وثائق رقمي متطور ومتكامل مصمم لإدارة وأرشفة جميع أنواع الوثائق والملفات الرقمية في المؤسسات. يوفر أرشفة آمنة، بحث متقدم، تحكم في الوصول، وتتبع الإصدارات مع امتثال كامل لمعايير الأرشفة الدولية.",
+      keyFeatures: ["أرشفة رقمية آمنة ومنظمة", "البحث المتقدم والفهرسة", "تحكم دقيق في الوصول", "تتبع الإصدارات والتعديلات", "سير عمل الموافقات", "توقيع رقمي متقدم", "تكامل مع المسح الضوئي", "نسخ احتياطية متعددة"],
+      technicalFeatures: ["تشفير الملفات", "فهرسة ذكية", "OCR للنصوص", "تكامل قواعد البيانات", "واجهات APIs", "أمان متعدد المستويات"],
+      benefits: ["تحسين كفاءة إدارة الوثائق بـ 80%", "توفير المساحة المكتبية", "سرعة في الوصول للمعلومات", "حماية من فقدان الوثائق", "الامتثال للقوانين", "تقليل التكاليف التشغيلية"],
+      targetAudience: ["الإدارات الحكومية", "المؤسسات الطبية", "الشركات القانونية", "البنوك والمؤسسات المالية", "الجامعات والمدارس"],
+      timeline: "10-14 أسبوع",
+      technologies: ["Python Django", "PostgreSQL", "Elasticsearch", "OCR Technology", "Digital Signatures", "File Encryption"],
+      category: "linux"
+    },
+
+    "Document Management System": {
+      name: "Document Management System",
+      description: "Digital document management and archiving system",
+      fullDescription: "Advanced and integrated digital document management system designed to manage and archive all types of digital documents and files in organizations. Provides secure archiving, advanced search, access control, and version tracking with full compliance to international archiving standards.",
+      keyFeatures: ["Secure & Organized Digital Archiving", "Advanced Search & Indexing", "Precise Access Control", "Version & Change Tracking", "Approval Workflows", "Advanced Digital Signatures", "Scanning Integration", "Multiple Backups"],
+      technicalFeatures: ["File Encryption", "Smart Indexing", "OCR for Text", "Database Integration", "API Interfaces", "Multi-level Security"],
+      benefits: ["80% Document Management Efficiency Improvement", "Office Space Savings", "Faster Information Access", "Document Loss Protection", "Legal Compliance", "Operational Cost Reduction"],
+      targetAudience: ["Government Departments", "Medical Institutions", "Legal Firms", "Banks & Financial Institutions", "Universities & Schools"],
+      timeline: "10-14 weeks",
+      technologies: ["Python Django", "PostgreSQL", "Elasticsearch", "OCR Technology", "Digital Signatures", "File Encryption"],
+      category: "linux"
+    },
+
+    // macOS Business Apps
+    "نظام إدارة العقود": {
+      name: "نظام إدارة العقود",
+      description: "نظام شامل لإدارة العقود والاتفاقيات",
+      fullDescription: "نظام إدارة عقود متطور ومتكامل مصمم خصيصاً لنظام macOS لإدارة دورة حياة العقود والاتفاقيات بالكامل. يشمل إنشاء العقود، التوقيع الرقمي، تتبع المواعيد النهائية، والامتثال القانوني مع واجهة أنيقة تستفيد من جميع مميزات macOS.",
+      keyFeatures: ["إدارة شاملة لدورة حياة العقود", "التوقيع الرقمي المتقدم والآمن", "تتبع المواعيد النهائية والتجديد", "مكتبة قوالب عقود قانونية", "تقارير قانونية ومالية مفصلة", "تكامل مع التقويم والإشعارات", "إدارة الموافقات والمراجعات", "أرشفة آمنة للعقود"],
+      technicalFeatures: ["Core Data للتخزين الآمن", "تكامل Touch ID/Face ID", "تشفير متقدم للعقود", "iCloud Sync", "Spotlight Search", "Quick Look Support"],
+      benefits: ["تحسين كفاءة إدارة العقود بـ 70%", "تقليل المخاطر القانونية", "توفير الوقت في المراجعات", "ضمان الامتثال القانوني", "تحسين الشفافية", "تقليل التكاليف القانونية"],
+      targetAudience: ["المكاتب القانونية", "إدارات الشؤون القانونية", "الشركات التجارية", "المؤسسات الحكومية", "شركات المقاولات"],
+      timeline: "8-12 أسبوع",
+      technologies: ["Swift", "Core Data", "CloudKit", "PDFKit", "CryptoKit", "UserNotifications"],
+      category: "macos"
+    },
+
+    "Contract Management System": {
+      name: "Contract Management System",
+      description: "Comprehensive contract and agreement management system",
+      fullDescription: "Advanced and integrated contract management system designed specifically for macOS to manage the complete lifecycle of contracts and agreements. Includes contract creation, digital signatures, deadline tracking, and legal compliance with elegant interface leveraging all macOS features.",
+      keyFeatures: ["Comprehensive Contract Lifecycle Management", "Advanced & Secure Digital Signatures", "Deadline & Renewal Tracking", "Legal Contract Template Library", "Detailed Legal & Financial Reports", "Calendar & Notification Integration", "Approval & Review Management", "Secure Contract Archiving"],
+      technicalFeatures: ["Core Data Secure Storage", "Touch ID/Face ID Integration", "Advanced Contract Encryption", "iCloud Sync", "Spotlight Search", "Quick Look Support"],
+      benefits: ["70% Contract Management Efficiency Improvement", "Legal Risk Reduction", "Review Time Savings", "Legal Compliance Assurance", "Transparency Improvement", "Legal Cost Reduction"],
+      targetAudience: ["Law Firms", "Legal Affairs Departments", "Commercial Companies", "Government Institutions", "Construction Companies"],
+      timeline: "8-12 weeks",
+      technologies: ["Swift", "Core Data", "CloudKit", "PDFKit", "CryptoKit", "UserNotifications"],
+      category: "macos"
+    },
+
+    "نظام إدارة المشاريع": {
+      name: "نظام إدارة المشاريع",
+      description: "مجموعة متكاملة لإدارة المشاريع والفرق",
+      fullDescription: "مجموعة إدارة مشاريع متطورة ومتكاملة مصممة خصيصاً لنظام macOS لإدارة المشاريع المعقدة والفرق المتنوعة. يوفر جدولة متقدمة للمشاريع، إدارة الموارد، تتبع التقدم، وإدارة الميزانيات مع تجربة مستخدم أنيقة ومتطورة.",
+      keyFeatures: ["جدولة المشاريع المتطورة والذكية", "إدارة الفرق والموارد البشرية", "تتبع التقدم والمعالم المهمة", "إدارة الميزانيات والتكاليف", "لوحات تحكم تحليلية متقدمة", "تعاون الفريق في الوقت الفعلي", "إدارة المهام والمسؤوليات", "تقارير أداء شاملة"],
+      technicalFeatures: ["Core Animation للرسوم البيانية", "CloudKit للمزامنة", "Core Spotlight للبحث", "EventKit للتقويم", "Metal للأداء العالي", "Combine للبرمجة التفاعلية"],
+      benefits: ["تحسين كفاءة إدارة المشاريع بـ 65%", "تحسين التعاون بين الفرق", "تقليل تأخير المشاريع", "تحسين استخدام الموارد", "زيادة معدل نجاح المشاريع", "اتخاذ قرارات مدروسة"],
+      targetAudience: ["مديري المشاريع", "الشركات الهندسية", "وكالات التسويق", "شركات تطوير البرمجيات", "المؤسسات التعليمية"],
+      timeline: "10-14 أسبوع",
+      technologies: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Core Animation", "Combine"],
+      category: "macos"
+    },
+
+    "Project Management Suite": {
+      name: "Project Management Suite",
+      description: "Comprehensive project and team management suite",
+      fullDescription: "Advanced and integrated project management suite designed specifically for macOS to manage complex projects and diverse teams. Provides advanced project scheduling, resource management, progress tracking, and budget management with elegant and sophisticated user experience.",
+      keyFeatures: ["Advanced & Smart Project Scheduling", "Team & Human Resource Management", "Progress & Milestone Tracking", "Budget & Cost Management", "Advanced Analytics Dashboards", "Real-time Team Collaboration", "Task & Responsibility Management", "Comprehensive Performance Reports"],
+      technicalFeatures: ["Core Animation for Graphics", "CloudKit for Sync", "Core Spotlight for Search", "EventKit for Calendar", "Metal for High Performance", "Combine for Reactive Programming"],
+      benefits: ["65% Project Management Efficiency Improvement", "Enhanced Team Collaboration", "Project Delay Reduction", "Improved Resource Utilization", "Increased Project Success Rate", "Informed Decision Making"],
+      targetAudience: ["Project Managers", "Engineering Companies", "Marketing Agencies", "Software Development Companies", "Educational Institutions"],
+      timeline: "10-14 weeks",
+      technologies: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Core Animation", "Combine"],
+      category: "macos"
+    },
+
+    "نظام التحليل المالي": {
+      name: "نظام التحليل المالي",
+      description: "أداة متطورة للتحليل المالي والتنبؤات",
+      fullDescription: "نظام تحليل مالي متطور ومتكامل مصمم خصيصاً لنظام macOS لتحليل البيانات المالية وإعداد التنبؤات والتقارير المالية المتقدمة. يستفيد من قوة معالجة macOS وتقنيات الذكاء الاصطناعي لتقديم رؤى مالية عميقة ودقيقة.",
+      keyFeatures: ["تحليل البيانات المالية المتقدم", "نماذج التنبؤ المالي الذكية", "لوحات معلومات تفاعلية وحديثة", "تقارير مالية تفاعلية ومرئية", "تحليل المخاطر والاستثمارات", "مقارنات الأداء المالي", "تحليل الربحية والتكاليف", "تكامل مع البيانات المحاسبية"],
+      technicalFeatures: ["Core ML للذكاء الاصطناعي", "Core Graphics للرسوم البيانية", "Metal Performance للحوسبة", "Core Data للتخزين", "Charts Framework", "CloudKit للمزامنة"],
+      benefits: ["دقة التنبؤات المالية 85%+", "توفير الوقت في إعداد التقارير", "اتخاذ قرارات مالية مدروسة", "تحسين الأداء المالي", "تقليل المخاطر المالية", "زيادة الربحية"],
+      targetAudience: ["المدراء الماليين", "المحللين الماليين", "البنوك والمؤسسات المالية", "شركات الاستثمار", "الشركات المساهمة"],
+      timeline: "12-16 أسبوع",
+      technologies: ["Swift", "Core ML", "Core Graphics", "Metal Performance", "Charts", "Core Data"],
+      category: "macos"
+    },
+
+    "Financial Analysis System": {
+      name: "Financial Analysis System",
+      description: "Advanced financial analysis and forecasting tool",
+      fullDescription: "Advanced and integrated financial analysis system designed specifically for macOS to analyze financial data and prepare forecasts and advanced financial reports. Leverages macOS processing power and AI technologies to provide deep and accurate financial insights.",
+      keyFeatures: ["Advanced Financial Data Analysis", "Smart Financial Forecasting Models", "Interactive & Modern Dashboards", "Interactive & Visual Financial Reports", "Risk & Investment Analysis", "Financial Performance Comparisons", "Profitability & Cost Analysis", "Accounting Data Integration"],
+      technicalFeatures: ["Core ML for AI", "Core Graphics for Charts", "Metal Performance for Computing", "Core Data for Storage", "Charts Framework", "CloudKit for Sync"],
+      benefits: ["85%+ Financial Forecast Accuracy", "Report Preparation Time Savings", "Informed Financial Decision Making", "Financial Performance Improvement", "Financial Risk Reduction", "Profitability Increase"],
+      targetAudience: ["Financial Managers", "Financial Analysts", "Banks & Financial Institutions", "Investment Companies", "Public Companies"],
+      timeline: "12-16 weeks",
+      technologies: ["Swift", "Core ML", "Core Graphics", "Metal Performance", "Charts", "Core Data"],
+      category: "macos"
+    },
+
+    // Cross-Platform Business Apps
+    "نظام تخطيط موارد المؤسسة": {
+      name: "نظام تخطيط موارد المؤسسة",
+      description: "نظام ERP شامل لإدارة جميع موارد المؤسسة",
+      fullDescription: "نظام تخطيط موارد المؤسسة (ERP) شامل ومتكامل يعمل على جميع أنظمة التشغيل لإدارة جميع جوانب المؤسسة. يشمل المحاسبة، الموارد البشرية، المخزون، المبيعات، والمشتريات مع تكامل كامل بين جميع الوحدات لضمان سير عمل سلس وفعال.",
+      keyFeatures: ["تكامل شامل بين جميع الأقسام", "إدارة الموارد المالية والمحاسبية", "نظام الموارد البشرية المتطور", "إدارة المخزون والمبيعات", "نظام إدارة علاقات العملاء", "تقارير الأعمال التحليلية", "سير العمل الآلي المتقدم", "لوحات تحكم تنفيذية"],
+      technicalFeatures: ["بنية سحابية متقدمة", "APIs للتكامل", "قواعد بيانات متعددة", "أمان متعدد المستويات", "نسخ احتياطية آمنة", "قابلية التوسع"],
+      benefits: ["تحسين الكفاءة التشغيلية بـ 50%", "تقليل التكاليف التشغيلية", "تحسين الشفافية والمساءلة", "اتخاذ قرارات مدروسة", "تحسين خدمة العملاء", "زيادة الربحية"],
+      targetAudience: ["الشركات الكبيرة والمتوسطة", "المؤسسات الصناعية", "الشركات التجارية", "المؤسسات الخدمية", "المنظمات الحكومية"],
+      timeline: "20-24 أسبوع",
+      technologies: ["React", "Node.js", "PostgreSQL", "Redis", "Docker", "Kubernetes"],
+      category: "crossplatform"
+    },
+
+    "Enterprise Resource Planning": {
+      name: "Enterprise Resource Planning",
+      description: "Comprehensive ERP system for managing all enterprise resources",
+      fullDescription: "Comprehensive and integrated Enterprise Resource Planning (ERP) system that works on all operating systems to manage all aspects of the organization. Includes accounting, human resources, inventory, sales, and purchasing with full integration between all modules to ensure smooth and efficient workflow.",
+      keyFeatures: ["Comprehensive Integration Between All Departments", "Financial & Accounting Resource Management", "Advanced Human Resources System", "Inventory & Sales Management", "Customer Relationship Management System", "Analytical Business Reports", "Advanced Automated Workflows", "Executive Dashboards"],
+      technicalFeatures: ["Advanced Cloud Architecture", "Integration APIs", "Multiple Databases", "Multi-level Security", "Secure Backups", "Scalability"],
+      benefits: ["50% Operational Efficiency Improvement", "Operational Cost Reduction", "Transparency & Accountability Improvement", "Informed Decision Making", "Customer Service Improvement", "Profitability Increase"],
+      targetAudience: ["Large & Medium Enterprises", "Industrial Organizations", "Commercial Companies", "Service Organizations", "Government Organizations"],
+      timeline: "20-24 weeks",
+      technologies: ["React", "Node.js", "PostgreSQL", "Redis", "Docker", "Kubernetes"],
+      category: "crossplatform"
+    },
+
+    "منصة إدارة سلسلة التوريد": {
+      name: "منصة إدارة سلسلة التوريد",
+      description: "منصة متطورة لإدارة سلسلة التوريد واللوجستيات",
+      fullDescription: "منصة إدارة سلسلة التوريد متطورة ومتكاملة تعمل على جميع المنصات لإدارة العمليات اللوجستية المعقدة. تشمل إدارة الموردين، تتبع الشحنات، تحسين المسارات، وتحليل التكاليف مع رؤية شاملة لسلسلة التوريد بالكامل.",
+      keyFeatures: ["إدارة شاملة لشبكة الموردين", "تتبع الشحنات في الوقت الفعلي", "تحسين المسارات والتوزيع", "تحليل التكاليف والأداء", "إدارة المخاطر في التوريد", "تخطيط الطلب والتنبؤ", "إدارة العقود مع الموردين", "تقارير تحليلية متقدمة"],
+      technicalFeatures: ["تكامل IoT وGPS", "ذكاء اصطناعي للتنبؤ", "APIs للتكامل الخارجي", "تحليلات البيانات الضخمة", "أنظمة إنذار مبكر", "منصة سحابية"],
+      benefits: ["تقليل تكاليف التوريد بـ 30%", "تحسين كفاءة التسليم", "تقليل المخاطر التشغيلية", "تحسين شفافية سلسلة التوريد", "زيادة رضا العملاء", "تحسين التخطيط الاستراتيجي"],
+      targetAudience: ["شركات التصنيع", "شركات التوزيع", "تجار التجزئة", "شركات اللوجستيات", "الشركات متعددة الجنسيات"],
+      timeline: "16-20 أسبوع",
+      technologies: ["React", "Node.js", "MongoDB", "IoT Integration", "AI/ML", "Microservices"],
+      category: "crossplatform"
+    },
+
+    "Supply Chain Management Platform": {
+      name: "Supply Chain Management Platform",
+      description: "Advanced supply chain and logistics management platform",
+      fullDescription: "Advanced and integrated supply chain management platform that works on all platforms to manage complex logistics operations. Includes supplier management, shipment tracking, route optimization, and cost analysis with comprehensive visibility of the entire supply chain.",
+      keyFeatures: ["Comprehensive Supplier Network Management", "Real-time Shipment Tracking", "Route & Distribution Optimization", "Cost & Performance Analysis", "Supply Risk Management", "Demand Planning & Forecasting", "Supplier Contract Management", "Advanced Analytical Reports"],
+      technicalFeatures: ["IoT & GPS Integration", "AI for Forecasting", "External Integration APIs", "Big Data Analytics", "Early Warning Systems", "Cloud Platform"],
+      benefits: ["30% Supply Cost Reduction", "Delivery Efficiency Improvement", "Operational Risk Reduction", "Supply Chain Transparency Improvement", "Customer Satisfaction Increase", "Strategic Planning Improvement"],
+      targetAudience: ["Manufacturing Companies", "Distribution Companies", "Retailers", "Logistics Companies", "Multinational Companies"],
+      timeline: "16-20 weeks",
+      technologies: ["React", "Node.js", "MongoDB", "IoT Integration", "AI/ML", "Microservices"],
+      category: "crossplatform"
+    },
+
+    "نظام ذكاء الأعمال": {
+      name: "نظام ذكاء الأعمال",
+      description: "نظام ذكاء أعمال للتحليل والتقارير المتقدمة",
+      fullDescription: "نظام ذكاء الأعمال متطور ومتكامل يعمل على جميع المنصات لتحليل البيانات التجارية وإعداد التقارير والتنبؤات المتقدمة. يستخدم تقنيات الذكاء الاصطناعي وتعلم الآلة لتقديم رؤى عميقة واستراتيجية لدعم اتخاذ القرارات التجارية المدروسة.",
+      keyFeatures: ["تحليل البيانات التجارية المتقدم", "لوحات تحكم تفاعلية وذكية", "نماذج التنبؤ والتحليل التنبؤي", "تقارير تفاعلية ومرئية متقدمة", "تحليل الأداء والمؤشرات الرئيسية", "تكامل مع مصادر البيانات المتنوعة", "تحليل العملاء والأسواق", "إنذارات ذكية للتغييرات"],
+      technicalFeatures: ["محركات الذكاء الاصطناعي", "معالجة البيانات الضخمة", "تحليلات الوقت الفعلي", "تكامل APIs متعددة", "أمان البيانات المتقدم", "قابلية التوسع السحابية"],
+      benefits: ["تحسين دقة اتخاذ القرارات بـ 80%", "زيادة الكفاءة التشغيلية", "تحديد الفرص الجديدة", "تقليل المخاطر التجارية", "تحسين الأداء المالي", "الميزة التنافسية"],
+      targetAudience: ["المدراء التنفيذيين", "محللي الأعمال", "الشركات الكبرى", "المؤسسات المالية", "شركات الاستشارات"],
+      timeline: "18-22 أسبوع",
+      technologies: ["Python", "React", "Apache Spark", "Machine Learning", "PostgreSQL", "Redis"],
+      category: "crossplatform"
+    },
+
+    "Business Intelligence System": {
+      name: "Business Intelligence System",
+      description: "Business intelligence system for advanced analytics and reporting",
+      fullDescription: "Advanced and integrated business intelligence system that works on all platforms to analyze business data and prepare advanced reports and forecasts. Uses artificial intelligence and machine learning technologies to provide deep and strategic insights to support informed business decision-making.",
+      keyFeatures: ["Advanced Business Data Analysis", "Interactive & Smart Dashboards", "Forecasting & Predictive Analysis Models", "Advanced Interactive & Visual Reports", "Performance & KPI Analysis", "Integration with Diverse Data Sources", "Customer & Market Analysis", "Smart Alerts for Changes"],
+      technicalFeatures: ["AI Engines", "Big Data Processing", "Real-time Analytics", "Multiple API Integration", "Advanced Data Security", "Cloud Scalability"],
+      benefits: ["80% Decision-Making Accuracy Improvement", "Operational Efficiency Increase", "New Opportunity Identification", "Business Risk Reduction", "Financial Performance Improvement", "Competitive Advantage"],
+      targetAudience: ["Executive Managers", "Business Analysts", "Large Corporations", "Financial Institutions", "Consulting Companies"],
+      timeline: "18-22 weeks",
+      technologies: ["Python", "React", "Apache Spark", "Machine Learning", "PostgreSQL", "Redis"],
+      category: "crossplatform"
+    },
+
+    // Web-Based Business Apps
+    "منصة التجارة الإلكترونية": {
+      name: "منصة التجارة الإلكترونية",
+      description: "منصة تجارة إلكترونية شاملة لإدارة المتاجر",
+      fullDescription: "منصة تجارة إلكترونية متطورة وشاملة تعمل عبر المتصفح لإدارة المتاجر الإلكترونية بجميع أحجامها. تشمل إدارة المنتجات، معالجة الطلبات، بوابات الدفع المتعددة، وتحليلات المبيعات المتقدمة مع تجربة تسوق متميزة للعملاء.",
+      keyFeatures: ["إدارة شاملة للمنتجات والفئات", "معالجة متقدمة للطلبات والمدفوعات", "بوابات دفع متعددة وآمنة", "تحليلات مبيعات وعملاء متقدمة", "إدارة المخزون الذكية", "نظام عروض وخصومات مرن", "تكامل مع شركات الشحن", "لوحة تحكم إدارية شاملة"],
+      technicalFeatures: ["Progressive Web App", "Payment Gateway Integration", "Real-time Inventory", "SEO Optimization", "Mobile Responsive", "API Integration"],
+      benefits: ["زيادة المبيعات بـ 40%+", "تحسين تجربة العملاء", "تقليل تكاليف التشغيل", "توسيع نطاق العمل", "تحليلات مفصلة للأداء", "نمو مستدام للأعمال"],
+      targetAudience: ["أصحاب المتاجر", "الشركات التجارية", "تجار التجزئة", "الشركات الناشئة", "رواد الأعمال"],
+      timeline: "12-16 أسبوع",
+      technologies: ["React", "Node.js", "Stripe API", "PayPal", "MongoDB", "PWA"],
+      category: "web_based"
+    },
+
+    "E-Commerce Platform": {
+      name: "E-Commerce Platform",
+      description: "Comprehensive e-commerce platform for store management",
+      fullDescription: "Advanced and comprehensive e-commerce platform that works through web browser to manage online stores of all sizes. Includes product management, order processing, multiple payment gateways, and advanced sales analytics with outstanding shopping experience for customers.",
+      keyFeatures: ["Comprehensive Product & Category Management", "Advanced Order & Payment Processing", "Multiple Secure Payment Gateways", "Advanced Sales & Customer Analytics", "Smart Inventory Management", "Flexible Promotions & Discounts System", "Shipping Company Integration", "Comprehensive Administrative Dashboard"],
+      technicalFeatures: ["Progressive Web App", "Payment Gateway Integration", "Real-time Inventory", "SEO Optimization", "Mobile Responsive", "API Integration"],
+      benefits: ["40%+ Sales Increase", "Customer Experience Improvement", "Operating Cost Reduction", "Business Scope Expansion", "Detailed Performance Analytics", "Sustainable Business Growth"],
+      targetAudience: ["Store Owners", "Commercial Companies", "Retailers", "Startups", "Entrepreneurs"],
+      timeline: "12-16 weeks",
+      technologies: ["React", "Node.js", "Stripe API", "PayPal", "MongoDB", "PWA"],
+      category: "web_based"
+    },
+
+    "نظام إدارة خدمة العملاء": {
+      name: "نظام إدارة خدمة العملاء",
+      description: "نظام متطور لإدارة خدمة ودعم العملاء",
+      fullDescription: "نظام إدارة خدمة عملاء متطور ومتكامل يعمل عبر المتصفح لإدارة جميع جوانب خدمة ودعم العملاء. يشمل نظام تذاكر الدعم، قاعدة المعرفة، الدردشة المباشرة، وتقييم رضا العملاء مع تحليلات شاملة لتحسين جودة الخدمة المقدمة.",
+      keyFeatures: ["نظام تذاكر الدعم المتقدم", "قاعدة المعرفة التفاعلية", "دردشة مباشرة مع العملاء", "استطلاعات رضا العملاء", "إدارة فريق الدعم", "تقارير أداء الخدمة", "تكامل مع وسائل التواصل", "نظام الأولويات الذكي"],
+      technicalFeatures: ["Real-time Chat", "Knowledge Base Search", "Ticket Management", "Customer Feedback", "Team Management", "Analytics Dashboard"],
+      benefits: ["تحسين رضا العملاء بـ 60%", "تقليل وقت الاستجابة", "زيادة كفاءة فريق الدعم", "تحسين جودة الخدمة", "زيادة الاحتفاظ بالعملاء", "تقليل التكاليف التشغيلية"],
+      targetAudience: ["أقسام خدمة العملاء", "الشركات الخدمية", "المتاجر الإلكترونية", "شركات التقنية", "مراكز الاتصال"],
+      timeline: "10-14 أسبوع",
+      technologies: ["React", "Socket.io", "Node.js", "MongoDB", "Real-time APIs", "Chat APIs"],
+      category: "web_based"
+    },
+
+    "Customer Service Management": {
+      name: "Customer Service Management",
+      description: "Advanced customer service and support management system",
+      fullDescription: "Advanced and integrated customer service management system that works through web browser to manage all aspects of customer service and support. Includes support ticket system, knowledge base, live chat, and customer satisfaction surveys with comprehensive analytics to improve service quality.",
+      keyFeatures: ["Advanced Support Ticket System", "Interactive Knowledge Base", "Live Customer Chat", "Customer Satisfaction Surveys", "Support Team Management", "Service Performance Reports", "Social Media Integration", "Smart Priority System"],
+      technicalFeatures: ["Real-time Chat", "Knowledge Base Search", "Ticket Management", "Customer Feedback", "Team Management", "Analytics Dashboard"],
+      benefits: ["60% Customer Satisfaction Improvement", "Response Time Reduction", "Support Team Efficiency Increase", "Service Quality Improvement", "Customer Retention Increase", "Operating Cost Reduction"],
+      targetAudience: ["Customer Service Departments", "Service Companies", "E-commerce Stores", "Technology Companies", "Call Centers"],
+      timeline: "10-14 weeks",
+      technologies: ["React", "Socket.io", "Node.js", "MongoDB", "Real-time APIs", "Chat APIs"],
+      category: "web_based"
+    },
+
+    "منصة إدارة الحملات التسويقية": {
+      name: "منصة إدارة الحملات التسويقية",
+      description: "منصة شاملة لإدارة الحملات التسويقية الرقمية",
+      fullDescription: "منصة إدارة حملات تسويقية متطورة وشاملة تعمل عبر المتصفح لإدارة جميع جوانب التسويق الرقمي. تشمل إنشاء وإدارة الحملات، تحليل الجمهور، أتمتة التسويق، وتقارير الأداء المفصلة مع تكامل مع جميع منصات التواصل الاجتماعي الرئيسية.",
+      keyFeatures: ["إدارة شاملة للحملات التسويقية", "تحليل الجمهور المستهدف المتقدم", "أتمتة التسويق والرسائل", "تقارير أداء مفصلة ومرئية", "تكامل مع منصات التواصل الاجتماعي", "إدارة المحتوى التسويقي", "تتبع التحويلات والمبيعات", "اختبار A/B للحملات"],
+      technicalFeatures: ["Marketing Automation", "Social Media APIs", "Analytics Integration", "A/B Testing", "Campaign Management", "Audience Targeting"],
+      benefits: ["زيادة عائد الاستثمار التسويقي بـ 50%", "تحسين فعالية الحملات", "توفير الوقت في إدارة الحملات", "تحسين استهداف الجمهور", "زيادة معدلات التحويل", "تحسين عائد الإنفاق الإعلاني"],
+      targetAudience: ["مديري التسويق", "وكالات الإعلان", "أقسام التسويق", "الشركات الناشئة", "المؤثرين الرقميين"],
+      timeline: "14-18 أسبوع",
+      technologies: ["React", "Node.js", "Google Analytics", "Facebook API", "Marketing APIs", "Data Analytics"],
+      category: "web_based"
+    },
+
+    "Marketing Campaign Management": {
+      name: "Marketing Campaign Management",
+      description: "Comprehensive platform for digital marketing campaign management",
+      fullDescription: "Advanced and comprehensive marketing campaign management platform that works through web browser to manage all aspects of digital marketing. Includes campaign creation and management, audience analysis, marketing automation, and detailed performance reports with integration with all major social media platforms.",
+      keyFeatures: ["Comprehensive Marketing Campaign Management", "Advanced Target Audience Analysis", "Marketing & Message Automation", "Detailed Visual Performance Reports", "Social Media Platform Integration", "Marketing Content Management", "Conversion & Sales Tracking", "A/B Testing for Campaigns"],
+      technicalFeatures: ["Marketing Automation", "Social Media APIs", "Analytics Integration", "A/B Testing", "Campaign Management", "Audience Targeting"],
+      benefits: ["50% Marketing ROI Increase", "Campaign Effectiveness Improvement", "Campaign Management Time Savings", "Audience Targeting Improvement", "Conversion Rate Increase", "Ad Spend Return Improvement"],
+      targetAudience: ["Marketing Managers", "Advertising Agencies", "Marketing Departments", "Startups", "Digital Influencers"],
+      timeline: "14-18 weeks",
+      technologies: ["React", "Node.js", "Google Analytics", "Facebook API", "Marketing APIs", "Data Analytics"],
+      category: "web_based"
     }
   };
 
@@ -1771,87 +2168,87 @@ export default function ServiceDetail() {
   const sampleDesktopApps = {
     windows: [
       {
-        name: dir === 'rtl' ? "تطبيق إدارة الأعمال - ويندوز" : "Windows Business Manager",
-        description: dir === 'rtl' ? "تطبيق ويندوز لإدارة الأعمال مع واجهة WPF" : "Native Windows business management app with WPF interface",
-        features: dir === 'rtl' ? ["واجهة WPF", "تكامل مع Office", "Active Directory", "Windows Services"] : ["WPF Interface", "Office Integration", "Active Directory", "Windows Services"],
+        name: dir === 'rtl' ? "نظام إدارة الموارد البشرية" : "HR Management System",
+        description: dir === 'rtl' ? "نظام شامل لإدارة الموارد البشرية والرواتب" : "Comprehensive HR and payroll management system",
+        features: dir === 'rtl' ? ["إدارة الموظفين", "نظام الرواتب", "تتبع الحضور", "تقييم الأداء"] : ["Employee Management", "Payroll System", "Attendance Tracking", "Performance Evaluation"],
       },
       {
-        name: dir === 'rtl' ? "محرر النصوص المتقدم" : "Advanced Text Editor",
-        description: dir === 'rtl' ? "محرر نصوص قوي مخصص لنظام ويندوز" : "Powerful text editor specifically designed for Windows",
-        features: dir === 'rtl' ? ["تمييز الكود", "إكمال تلقائي", "إضافات", "واجهة ريبون"] : ["Syntax Highlighting", "Auto-completion", "Plugins", "Ribbon Interface"],
+        name: dir === 'rtl' ? "نظام إدارة المخزون والمبيعات" : "Inventory & Sales Management",
+        description: dir === 'rtl' ? "نظام متطور لإدارة المخزون والمبيعات" : "Advanced inventory and sales management system",
+        features: dir === 'rtl' ? ["تتبع المخزون", "إدارة المبيعات", "تقارير مفصلة", "تكامل مع الموردين"] : ["Inventory Tracking", "Sales Management", "Detailed Reports", "Supplier Integration"],
       },
       {
-        name: dir === 'rtl' ? "مدير الملفات الاحترافي" : "Professional File Manager",
-        description: dir === 'rtl' ? "مدير ملفات متطور للويندوز مع ميزات احترافية" : "Advanced Windows file manager with professional features",
-        features: dir === 'rtl' ? ["علامات تبويب متعددة", "معاينة الملفات", "FTP مدمج", "أدوات المطور"] : ["Multiple Tabs", "File Preview", "Built-in FTP", "Developer Tools"],
+        name: dir === 'rtl' ? "نظام المحاسبة المتقدم" : "Advanced Accounting System",
+        description: dir === 'rtl' ? "نظام محاسبة شامل للشركات والمؤسسات" : "Comprehensive accounting system for companies and organizations",
+        features: dir === 'rtl' ? ["دفتر الأستاذ", "التقارير المالية", "إدارة الفواتير", "الضرائب"] : ["General Ledger", "Financial Reports", "Invoice Management", "Tax Management"],
       },
     ],
     linux: [
       {
-        name: dir === 'rtl' ? "أدوات مطور لينكس" : "Linux Developer Tools",
-        description: dir === 'rtl' ? "حزمة أدوات متكاملة للتطوير على لينكس" : "Comprehensive development toolkit for Linux",
-        features: dir === 'rtl' ? ["محرر أكواد", "مدبج مدمج", "Git GUI", "Terminal مدمج"] : ["Code Editor", "Integrated Debugger", "Git GUI", "Embedded Terminal"],
+        name: dir === 'rtl' ? "نظام إدارة أمن المعلومات" : "Information Security Management",
+        description: dir === 'rtl' ? "نظام شامل لأمن المعلومات ومراقبة الشبكات" : "Comprehensive information security and network monitoring system",
+        features: dir === 'rtl' ? ["مراقبة الشبكة", "كشف التهديدات", "إدارة الوصول", "تقارير الأمان"] : ["Network Monitoring", "Threat Detection", "Access Management", "Security Reports"],
       },
       {
-        name: dir === 'rtl' ? "مراقب النظام المتقدم" : "Advanced System Monitor",
-        description: dir === 'rtl' ? "أداة مراقبة شاملة لأنظمة لينكس" : "Comprehensive monitoring tool for Linux systems",
-        features: dir === 'rtl' ? ["مراقبة العمليات", "استهلاك الموارد", "تحليل الأداء", "تنبيهات"] : ["Process Monitoring", "Resource Usage", "Performance Analysis", "Alerts"],
+        name: dir === 'rtl' ? "نظام إدارة الخوادم" : "Server Management System",
+        description: dir === 'rtl' ? "أداة متطورة لإدارة ومراقبة الخوادم" : "Advanced tool for server management and monitoring",
+        features: dir === 'rtl' ? ["مراقبة الخوادم", "إدارة قواعد البيانات", "النسخ الاحتياطي", "التحليلات"] : ["Server Monitoring", "Database Management", "Backup Systems", "Analytics"],
       },
       {
-        name: dir === 'rtl' ? "أداة إدارة الحزم GUI" : "Package Manager GUI",
-        description: dir === 'rtl' ? "واجهة رسومية سهلة لإدارة حزم لينكس" : "User-friendly graphical interface for Linux package management",
-        features: dir === 'rtl' ? ["بحث الحزم", "تحديثات تلقائية", "إدارة المستودعات", "تقارير النظام"] : ["Package Search", "Auto Updates", "Repository Management", "System Reports"],
+        name: dir === 'rtl' ? "نظام إدارة الوثائق" : "Document Management System",
+        description: dir === 'rtl' ? "نظام إدارة وأرشفة الوثائق الرقمية" : "Digital document management and archiving system",
+        features: dir === 'rtl' ? ["أرشفة رقمية", "البحث المتقدم", "تحكم الوصول", "تتبع الإصدارات"] : ["Digital Archiving", "Advanced Search", "Access Control", "Version Tracking"],
       },
     ],
     macos: [
       {
-        name: dir === 'rtl' ? "تطبيق إنتاجية macOS" : "macOS Productivity App",
-        description: dir === 'rtl' ? "تطبيق إنتاجية مُحسَّن لنظام macOS" : "Native productivity app optimized for macOS",
-        features: dir === 'rtl' ? ["تصميم Cocoa", "تكامل iCloud", "Spotlight Search", "Touch Bar"] : ["Cocoa Design", "iCloud Integration", "Spotlight Search", "Touch Bar"],
+        name: dir === 'rtl' ? "نظام إدارة العقود" : "Contract Management System",
+        description: dir === 'rtl' ? "نظام شامل لإدارة العقود والاتفاقيات" : "Comprehensive contract and agreement management system",
+        features: dir === 'rtl' ? ["إدارة العقود", "التوقيع الرقمي", "تتبع المواعيد", "تقارير قانونية"] : ["Contract Management", "Digital Signatures", "Deadline Tracking", "Legal Reports"],
       },
       {
-        name: dir === 'rtl' ? "أداة إدارة الوسائط" : "Media Management Tool",
-        description: dir === 'rtl' ? "أداة احترافية لإدارة الوسائط على macOS" : "Professional media management tool for macOS",
-        features: dir === 'rtl' ? ["معاينة سريعة", "تنظيم ذكي", "تصدير متقدم", "Core Image"] : ["Quick Look", "Smart Organization", "Advanced Export", "Core Image"],
+        name: dir === 'rtl' ? "نظام إدارة المشاريع" : "Project Management Suite",
+        description: dir === 'rtl' ? "مجموعة متكاملة لإدارة المشاريع والفرق" : "Comprehensive project and team management suite",
+        features: dir === 'rtl' ? ["جدولة المشاريع", "إدارة الفرق", "تتبع التقدم", "إدارة الميزانية"] : ["Project Scheduling", "Team Management", "Progress Tracking", "Budget Management"],
       },
       {
-        name: dir === 'rtl' ? "محرر الصور المتخصص" : "Specialized Image Editor",
-        description: dir === 'rtl' ? "محرر صور متخصص يستفيد من قوة macOS" : "Specialized image editor leveraging macOS capabilities",
-        features: dir === 'rtl' ? ["Core Graphics", "Metal Performance", "ColorSync", "macOS Filters"] : ["Core Graphics", "Metal Performance", "ColorSync", "macOS Filters"],
+        name: dir === 'rtl' ? "نظام التحليل المالي" : "Financial Analysis System",
+        description: dir === 'rtl' ? "أداة متطورة للتحليل المالي والتنبؤات" : "Advanced financial analysis and forecasting tool",
+        features: dir === 'rtl' ? ["التحليل المالي", "التنبؤات", "لوحات المعلومات", "تقارير تفاعلية"] : ["Financial Analysis", "Forecasting", "Dashboards", "Interactive Reports"],
       },
     ],
     crossplatform: [
       {
-        name: dir === 'rtl' ? "منصة CRM متعددة الأنظمة" : "Cross-Platform CRM Suite",
-        description: dir === 'rtl' ? "منصة إدارة علاقات العملاء تعمل على جميع الأنظمة" : "Customer relationship management platform for all operating systems",
-        features: dir === 'rtl' ? ["واجهة موحدة", "مزامنة سحابية", "دعم جميع الأنظمة", "قاعدة بيانات مشتركة"] : ["Unified Interface", "Cloud Sync", "All OS Support", "Shared Database"],
+        name: dir === 'rtl' ? "نظام تخطيط موارد المؤسسة" : "Enterprise Resource Planning",
+        description: dir === 'rtl' ? "نظام ERP شامل لإدارة جميع موارد المؤسسة" : "Comprehensive ERP system for managing all enterprise resources",
+        features: dir === 'rtl' ? ["إدارة الموارد", "التكامل الشامل", "تقارير الأعمال", "سير العمل"] : ["Resource Management", "Full Integration", "Business Reports", "Workflow Management"],
       },
       {
-        name: dir === 'rtl' ? "محرر الأكواد العالمي" : "Universal Code Editor",
-        description: dir === 'rtl' ? "محرر أكواد متطور يعمل على Windows وmacOS ولينكس" : "Advanced code editor for Windows, macOS, and Linux",
-        features: dir === 'rtl' ? ["دعم متعدد اللغات", "إضافات مشتركة", "مزامنة الإعدادات", "تحديثات تلقائية"] : ["Multi-language Support", "Shared Plugins", "Settings Sync", "Auto Updates"],
+        name: dir === 'rtl' ? "منصة إدارة سلسلة التوريد" : "Supply Chain Management Platform",
+        description: dir === 'rtl' ? "منصة متطورة لإدارة سلسلة التوريد واللوجستيات" : "Advanced supply chain and logistics management platform",
+        features: dir === 'rtl' ? ["إدارة الموردين", "تتبع الشحنات", "تحسين المسارات", "تحليل التكاليف"] : ["Supplier Management", "Shipment Tracking", "Route Optimization", "Cost Analysis"],
       },
       {
-        name: dir === 'rtl' ? "أداة إدارة المشاريع" : "Project Management Tool",
-        description: dir === 'rtl' ? "أداة شاملة لإدارة المشاريع عبر جميع المنصات" : "Comprehensive project management tool across all platforms",
-        features: dir === 'rtl' ? ["إدارة المهام", "تعاون الفريق", "تتبع الوقت", "تقارير متقدمة"] : ["Task Management", "Team Collaboration", "Time Tracking", "Advanced Reports"],
+        name: dir === 'rtl' ? "نظام ذكاء الأعمال" : "Business Intelligence System",
+        description: dir === 'rtl' ? "نظام ذكاء أعمال للتحليل والتقارير المتقدمة" : "Business intelligence system for advanced analytics and reporting",
+        features: dir === 'rtl' ? ["تحليل البيانات", "لوحات التحكم", "التنبؤات", "تقارير تفاعلية"] : ["Data Analytics", "Dashboards", "Predictions", "Interactive Reports"],
       },
     ],
     web_based: [
       {
-        name: dir === 'rtl' ? "تطبيق المحاسبة السحابي" : "Cloud Accounting App",
-        description: dir === 'rtl' ? "تطبيق محاسبة سحابي متطور يعمل في المتصفح" : "Advanced cloud-based accounting application running in browser",
-        features: dir === 'rtl' ? ["واجهة PWA", "عمل دون اتصال", "مزامنة تلقائية", "أمان عالي"] : ["PWA Interface", "Offline Mode", "Auto Sync", "High Security"],
+        name: dir === 'rtl' ? "منصة التجارة الإلكترونية" : "E-Commerce Platform",
+        description: dir === 'rtl' ? "منصة تجارة إلكترونية شاملة لإدارة المتاجر" : "Comprehensive e-commerce platform for store management",
+        features: dir === 'rtl' ? ["إدارة المنتجات", "معالجة الطلبات", "بوابات الدفع", "تحليلات المبيعات"] : ["Product Management", "Order Processing", "Payment Gateways", "Sales Analytics"],
       },
       {
-        name: dir === 'rtl' ? "منصة التعلم الإلكتروني" : "E-Learning Platform",
-        description: dir === 'rtl' ? "منصة تعليمية تفاعلية تعمل عبر المتصفح" : "Interactive educational platform running through web browser",
-        features: dir === 'rtl' ? ["فيديوهات تفاعلية", "اختبارات ذكية", "تتبع التقدم", "شهادات رقمية"] : ["Interactive Videos", "Smart Quizzes", "Progress Tracking", "Digital Certificates"],
+        name: dir === 'rtl' ? "نظام إدارة خدمة العملاء" : "Customer Service Management",
+        description: dir === 'rtl' ? "نظام متطور لإدارة خدمة ودعم العملاء" : "Advanced customer service and support management system",
+        features: dir === 'rtl' ? ["تذاكر الدعم", "قاعدة المعرفة", "الدردشة المباشرة", "تقييم الرضا"] : ["Support Tickets", "Knowledge Base", "Live Chat", "Satisfaction Surveys"],
       },
       {
-        name: dir === 'rtl' ? "أداة تصميم الجرافيك" : "Graphic Design Tool",
-        description: dir === 'rtl' ? "أداة تصميم جرافيكي متطورة تعمل في المتصفح" : "Advanced graphic design tool working in web browser",
-        features: dir === 'rtl' ? ["محرر متجهات", "طبقات متقدمة", "مكتبة قوالب", "تصدير متعدد"] : ["Vector Editor", "Advanced Layers", "Template Library", "Multi Export"],
+        name: dir === 'rtl' ? "منصة إدارة الحملات التسويقية" : "Marketing Campaign Management",
+        description: dir === 'rtl' ? "منصة شاملة لإدارة الحملات التسويقية الرقمية" : "Comprehensive platform for digital marketing campaign management",
+        features: dir === 'rtl' ? ["إدارة الحملات", "تحليل الجمهور", "أتمتة التسويق", "تقارير الأداء"] : ["Campaign Management", "Audience Analysis", "Marketing Automation", "Performance Reports"],
       },
     ],
   };
