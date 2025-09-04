@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Code, 
   Palette, 
@@ -85,9 +86,26 @@ function ServiceCard({
   const IconComponent = getIconForService(service.icon);
   const { t } = useTranslation();
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+
+  // Check if this is the smart mobile solutions service
+  const isSmartMobileService = service.id === '75cb15d9-9c2f-44c7-bf09-da327bf41332' || 
+                               service.title?.includes('الحلول الذكية') || 
+                               service.title?.includes('Smart Mobile Solutions');
 
   const handleViewDetails = () => {
-    // Navigate to the service detail page using the service ID
+    if (isSmartMobileService) {
+      // Show toast message instead of navigating
+      toast({
+        title: dir === 'rtl' ? "الخدمة قيد التنفيذ" : "Service Under Development",
+        description: dir === 'rtl' ? 
+          "هذه الخدمة قيد التطوير وستكون متاحة قريباً. نعمل بجد لتقديم أفضل الحلول الذكية والبرمجية للهواتف الذكية." :
+          "This service is under development and will be available soon. We are working hard to provide the best smart mobile solutions.",
+        variant: "default",
+      });
+      return;
+    }
+    // Navigate to the service detail page using the service ID for other services
     setLocation(`/services/${service.id}`);
   };
 
@@ -104,7 +122,10 @@ function ServiceCard({
 
   return (
     <motion.div
-      className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary overflow-hidden cursor-pointer"
+      className={cn(
+        "group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary overflow-hidden cursor-pointer",
+        isSmartMobileService && "border-orange-200 bg-orange-50/30"
+      )}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
@@ -117,9 +138,26 @@ function ServiceCard({
       aria-label={`${t('buttons.viewDetails')} - ${service.title}`}
       data-testid={`service-card-${service.id}`}
     >
+      {/* Under Development Badge */}
+      {isSmartMobileService && (
+        <div className="absolute top-4 right-4 z-20">
+          <Badge 
+            className="bg-orange-500 text-white font-medium px-3 py-1 text-xs"
+            variant="default"
+          >
+            {dir === 'rtl' ? 'قيد التنفيذ' : 'Under Development'}
+          </Badge>
+        </div>
+      )}
+
       {/* Background Animation */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-primary/5 to-brand-sky-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className={cn(
+          "absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+          isSmartMobileService 
+            ? "from-orange-500/5 to-orange-300/10" 
+            : "from-primary/5 to-brand-sky-accent/10"
+        )}
         initial={false}
       />
 
@@ -160,7 +198,18 @@ function ServiceCard({
           <Button
             onClick={(e) => {
               e.stopPropagation();
-              // Navigate to contact page with service pre-selected
+              if (isSmartMobileService) {
+                // Show toast message for smart mobile service
+                toast({
+                  title: dir === 'rtl' ? "الخدمة قيد التنفيذ" : "Service Under Development",
+                  description: dir === 'rtl' ? 
+                    "هذه الخدمة قيد التطوير وستكون متاحة قريباً. نعمل بجد لتقديم أفضل الحلول الذكية والبرمجية للهواتف الذكية." :
+                    "This service is under development and will be available soon. We are working hard to provide the best smart mobile solutions.",
+                  variant: "default",
+                });
+                return;
+              }
+              // Navigate to contact page with service pre-selected for other services
               setLocation(`/contact?service=${encodeURIComponent(service.title)}`);
             }}
             className="w-full bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
