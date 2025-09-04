@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin, Target, Settings, Image, FileText, Package, Layers, Zap, Award, DollarSign, Crown } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartphone, Monitor, Bot, Palette, Megaphone, Boxes, Brain, ShoppingCart, Calculator, Briefcase, Heart, BookOpen, Car, Home, Camera, Music, GamepadIcon, Eye, X, Building, Landmark, Newspaper, User, Utensils, MapPin, Target, Settings, Image, FileText, Package, Layers, Zap, Award, DollarSign, Crown, Share2, Search, Mail, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -2478,6 +2478,248 @@ export default function ServiceDetail() {
     },
   ];
 
+  // Marketing categories for digital marketing and advertisements
+  const marketingCategories = [
+    {
+      id: "all",
+      title: dir === 'rtl' ? "جميع الأنواع" : "All Types",
+      icon: Megaphone,
+      color: "bg-blue-500",
+    },
+    {
+      id: "social_media",
+      title: dir === 'rtl' ? "إعلانات وسائل التواصل" : "Social Media Advertising",
+      icon: Share2,
+      color: "bg-purple-500",
+    },
+    {
+      id: "search_ads",
+      title: dir === 'rtl' ? "إعلانات محركات البحث" : "Search Engine Advertising",
+      icon: Search,
+      color: "bg-green-500",
+    },
+    {
+      id: "content_marketing",
+      title: dir === 'rtl' ? "تسويق المحتوى" : "Content Marketing",
+      icon: FileText,
+      color: "bg-orange-500",
+    },
+    {
+      id: "analytics",
+      title: dir === 'rtl' ? "التحليلات والتقارير" : "Analytics & Reports",
+      icon: BarChart3,
+      color: "bg-indigo-500",
+    },
+    {
+      id: "email_marketing",
+      title: dir === 'rtl' ? "التسويق عبر البريد الإلكتروني" : "Email Marketing",
+      icon: Mail,
+      color: "bg-pink-500",
+    },
+    {
+      id: "strategy",
+      title: dir === 'rtl' ? "الاستراتيجية التسويقية" : "Marketing Strategy",
+      icon: Target,
+      color: "bg-red-500",
+    },
+  ];
+
+  // Sample marketing packages for each category
+  const marketingSamples = {
+    social_media: [
+      {
+        name: dir === 'rtl' ? "حملة شاملة وسائل التواصل - باقة بلاتينيوم" : "Complete Social Media Campaign - Platinum Package",
+        description: dir === 'rtl' ? "إدارة شاملة لجميع منصات التواصل الاجتماعي مع استراتيجيات متقدمة" : "Comprehensive management of all social media platforms with advanced strategies",
+        features: dir === 'rtl' 
+          ? ["إدارة 6 منصات تواصل", "إنشاء 120 منشور شهرياً", "إعلانات مدفوعة متقدمة", "تحليل وتقارير يومية", "إدارة المجتمع", "استراتيجية محتوى شخصية"] 
+          : ["Manage 6 social platforms", "Create 120 posts monthly", "Advanced paid advertising", "Daily analytics & reports", "Community management", "Personalized content strategy"],
+        price: "8000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "إدارة وسائل التواصل - باقة ذهبية" : "Social Media Management - Gold Package",
+        description: dir === 'rtl' ? "إدارة احترافية لمنصات التواصل الرئيسية مع حملات إعلانية" : "Professional management of main social platforms with advertising campaigns",
+        features: dir === 'rtl' 
+          ? ["إدارة 4 منصات", "إنشاء 80 منشور شهرياً", "حملتين إعلانيتين", "تقارير أسبوعية", "رد على التعليقات"] 
+          : ["Manage 4 platforms", "Create 80 posts monthly", "2 advertising campaigns", "Weekly reports", "Comment responses"],
+        price: "5000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "إدارة أساسية وسائل التواصل - باقة فضية" : "Basic Social Media Management - Silver Package",
+        description: dir === 'rtl' ? "إدارة أساسية لمنصتين مع محتوى منتظم" : "Basic management for 2 platforms with regular content",
+        features: dir === 'rtl' 
+          ? ["إدارة منصتين", "إنشاء 40 منشور شهرياً", "حملة إعلانية واحدة", "تقرير شهري"] 
+          : ["Manage 2 platforms", "Create 40 posts monthly", "1 advertising campaign", "Monthly report"],
+        price: "2500",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "silver"
+      },
+    ],
+    search_ads: [
+      {
+        name: dir === 'rtl' ? "حملة Google Ads شاملة - باقة بلاتينيوم" : "Complete Google Ads Campaign - Platinum Package",
+        description: dir === 'rtl' ? "إدارة حملات إعلانية متقدمة على جوجل وبينغ مع تحسين مستمر" : "Advanced advertising campaigns on Google and Bing with continuous optimization",
+        features: dir === 'rtl' 
+          ? ["حملات البحث والعرض", "إعلانات فيديو YouTube", "حملات Shopping", "تحليل المنافسين", "تحسين يومي", "Landing Pages مخصصة"] 
+          : ["Search & Display campaigns", "YouTube video ads", "Shopping campaigns", "Competitor analysis", "Daily optimization", "Custom landing pages"],
+        price: "7000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "حملات Google Ads - باقة ذهبية" : "Google Ads Campaigns - Gold Package",
+        description: dir === 'rtl' ? "حملات إعلانية احترافية على محركات البحث مع تحسين أسبوعي" : "Professional search engine advertising with weekly optimization",
+        features: dir === 'rtl' 
+          ? ["حملات البحث", "إعلانات العرض", "تحليل الكلمات المفتاحية", "تحسين أسبوعي", "تقارير مفصلة"] 
+          : ["Search campaigns", "Display advertising", "Keyword analysis", "Weekly optimization", "Detailed reports"],
+        price: "4500",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "حملات إعلانية أساسية - باقة فضية" : "Basic Advertising Campaigns - Silver Package",
+        description: dir === 'rtl' ? "حملة إعلانية أساسية على جوجل للمبتدئين" : "Basic Google advertising campaign for beginners",
+        features: dir === 'rtl' 
+          ? ["حملة بحث واحدة", "إعداد أولي", "تحسين شهري", "تقرير شهري"] 
+          : ["Single search campaign", "Initial setup", "Monthly optimization", "Monthly report"],
+        price: "2000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "silver"
+      },
+    ],
+    content_marketing: [
+      {
+        name: dir === 'rtl' ? "استراتيجية محتوى شاملة - باقة بلاتينيوم" : "Complete Content Strategy - Platinum Package",
+        description: dir === 'rtl' ? "استراتيجية محتوى متكاملة مع إنتاج محتوى عالي الجودة" : "Integrated content strategy with high-quality content production",
+        features: dir === 'rtl' 
+          ? ["استراتيجية محتوى سنوية", "50 مقال شهرياً", "فيديوهات تسويقية", "إنفوجرافيك", "كتب إلكترونية", "ندوات ويب"] 
+          : ["Annual content strategy", "50 articles monthly", "Marketing videos", "Infographics", "E-books", "Webinars"],
+        price: "12000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "تسويق محتوى - باقة ذهبية" : "Content Marketing - Gold Package",
+        description: dir === 'rtl' ? "إنتاج محتوى منتظم عالي الجودة للمدونة ووسائل التواصل" : "Regular high-quality content production for blog and social media",
+        features: dir === 'rtl' 
+          ? ["25 مقال شهرياً", "تقويم محتوى", "محتوى وسائل التواصل", "تحسين SEO", "تحليل الأداء"] 
+          : ["25 articles monthly", "Content calendar", "Social media content", "SEO optimization", "Performance analysis"],
+        price: "6000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "محتوى أساسي - باقة فضية" : "Basic Content - Silver Package",
+        description: dir === 'rtl' ? "محتوى أساسي للمدونة ووسائل التواصل" : "Basic content for blog and social media",
+        features: dir === 'rtl' 
+          ? ["10 مقالات شهرياً", "محتوى وسائل التواصل", "تحسين SEO أساسي"] 
+          : ["10 articles monthly", "Social media content", "Basic SEO optimization"],
+        price: "3000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "silver"
+      },
+    ],
+    analytics: [
+      {
+        name: dir === 'rtl' ? "تحليلات وتقارير شاملة - باقة بلاتينيوم" : "Complete Analytics & Reports - Platinum Package",
+        description: dir === 'rtl' ? "تحليل شامل لجميع قنوات التسويق مع تقارير مفصلة ورؤى استراتيجية" : "Comprehensive analysis of all marketing channels with detailed reports and strategic insights",
+        features: dir === 'rtl' 
+          ? ["تقارير يومية", "تحليل متقدم للبيانات", "تتبع التحويلات", "تحليل المنافسين", "توصيات استراتيجية", "لوحة تحكم مخصصة"] 
+          : ["Daily reports", "Advanced data analysis", "Conversion tracking", "Competitor analysis", "Strategic recommendations", "Custom dashboard"],
+        price: "4000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "تحليلات وتقارير - باقة ذهبية" : "Analytics & Reports - Gold Package",
+        description: dir === 'rtl' ? "تحليل أداء الحملات التسويقية مع تقارير أسبوعية" : "Marketing campaign performance analysis with weekly reports",
+        features: dir === 'rtl' 
+          ? ["تقارير أسبوعية", "تحليل ROI", "تتبع الأهداف", "تحليل الجمهور", "توصيات التحسين"] 
+          : ["Weekly reports", "ROI analysis", "Goal tracking", "Audience analysis", "Optimization recommendations"],
+        price: "2500",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "تقارير أساسية - باقة فضية" : "Basic Reports - Silver Package",
+        description: dir === 'rtl' ? "تقارير شهرية أساسية عن أداء الحملات" : "Basic monthly reports on campaign performance",
+        features: dir === 'rtl' 
+          ? ["تقرير شهري", "مقاييس أساسية", "تحليل الزيارات"] 
+          : ["Monthly report", "Basic metrics", "Traffic analysis"],
+        price: "1000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "silver"
+      },
+    ],
+    email_marketing: [
+      {
+        name: dir === 'rtl' ? "التسويق عبر البريد الشامل - باقة بلاتينيوم" : "Complete Email Marketing - Platinum Package",
+        description: dir === 'rtl' ? "استراتيجية تسويق بريد إلكتروني متقدمة مع أتمتة وتخصيص" : "Advanced email marketing strategy with automation and personalization",
+        features: dir === 'rtl' 
+          ? ["حملات مؤتمتة", "تخصيص المحتوى", "A/B Testing", "تقسيم الجمهور", "تصميم قوالب", "تحليل متقدم"] 
+          : ["Automated campaigns", "Content personalization", "A/B Testing", "Audience segmentation", "Template design", "Advanced analytics"],
+        price: "3500",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "التسويق عبر البريد - باقة ذهبية" : "Email Marketing - Gold Package",
+        description: dir === 'rtl' ? "حملات بريد إلكتروني منتظمة مع تقسيم الجمهور" : "Regular email campaigns with audience segmentation",
+        features: dir === 'rtl' 
+          ? ["4 حملات شهرياً", "تقسيم أساسي للجمهور", "قوالب جاهزة", "تقارير الأداء"] 
+          : ["4 campaigns monthly", "Basic audience segmentation", "Ready templates", "Performance reports"],
+        price: "2000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "حملات بريد أساسية - باقة فضية" : "Basic Email Campaigns - Silver Package",
+        description: dir === 'rtl' ? "حملات بريد إلكتروني أساسية للمبتدئين" : "Basic email campaigns for beginners",
+        features: dir === 'rtl' 
+          ? ["2 حملة شهرياً", "قوالب أساسية", "تقرير شهري"] 
+          : ["2 campaigns monthly", "Basic templates", "Monthly report"],
+        price: "1000",
+        timeline: dir === 'rtl' ? "مستمر شهرياً" : "Ongoing monthly",
+        package: "silver"
+      },
+    ],
+    strategy: [
+      {
+        name: dir === 'rtl' ? "استراتيجية تسويقية شاملة - باقة بلاتينيوم" : "Complete Marketing Strategy - Platinum Package",
+        description: dir === 'rtl' ? "استراتيجية تسويقية متكاملة مع خطة عمل مفصلة وتحليل شامل" : "Integrated marketing strategy with detailed action plan and comprehensive analysis",
+        features: dir === 'rtl' 
+          ? ["تحليل السوق والمنافسين", "تحديد الجمهور المستهدف", "استراتيجية متعددة القنوات", "خطة العمل التفصيلية", "الميزانية والجدولة", "متابعة شهرية"] 
+          : ["Market & competitor analysis", "Target audience identification", "Multi-channel strategy", "Detailed action plan", "Budget & scheduling", "Monthly follow-up"],
+        price: "15000",
+        timeline: dir === 'rtl' ? "4-6 أسابيع" : "4-6 weeks",
+        package: "platinum"
+      },
+      {
+        name: dir === 'rtl' ? "استراتيجية تسويقية - باقة ذهبية" : "Marketing Strategy - Gold Package",
+        description: dir === 'rtl' ? "استراتيجية تسويقية أساسية مع تحليل السوق وخطة العمل" : "Basic marketing strategy with market analysis and action plan",
+        features: dir === 'rtl' 
+          ? ["تحليل أساسي للسوق", "تحديد الجمهور", "استراتيجية 3 قنوات", "خطة عمل أساسية"] 
+          : ["Basic market analysis", "Audience identification", "3-channel strategy", "Basic action plan"],
+        price: "8000",
+        timeline: dir === 'rtl' ? "3-4 أسابيع" : "3-4 weeks",
+        package: "gold"
+      },
+      {
+        name: dir === 'rtl' ? "استشارة تسويقية - باقة فضية" : "Marketing Consultation - Silver Package",
+        description: dir === 'rtl' ? "استشارة تسويقية أساسية مع توصيات سريعة" : "Basic marketing consultation with quick recommendations",
+        features: dir === 'rtl' 
+          ? ["مراجعة الوضع الحالي", "توصيات أساسية", "خطة مبسطة"] 
+          : ["Current status review", "Basic recommendations", "Simplified plan"],
+        price: "3000",
+        timeline: dir === 'rtl' ? "1-2 أسبوع" : "1-2 weeks",
+        package: "silver"
+      },
+    ],
+  };
+
   // Sample designs for each category
   const sampleDesigns = {
     branding: [
@@ -4213,6 +4455,229 @@ export default function ServiceDetail() {
                       {dir === 'rtl' 
                         ? 'نقدم تصاميم مخصصة حسب احتياجاتك الخاصة وميزانيتك - تواصل معنا لمناقشة مشروعك والحصول على عرض سعر مخصص' 
                         : 'We offer custom designs based on your specific needs and budget - contact us to discuss your project and get a custom quote'
+                      }
+                    </p>
+                    <Link href="/contact">
+                      <Button size="lg" className="rounded-xl px-8 py-3">
+                        {dir === 'rtl' ? 'اطلب عرض سعر مخصص' : 'Request Custom Quote'}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Marketing Categories and Packages Section - Only show for digital marketing service */}
+        {service && service.id === '62e8102e-50e4-4e38-8f0f-a19f6e2701e5' && (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <motion.div
+                  className="text-center mb-16"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'اختر نوع التسويق والباقة المناسبة' : 'Choose Your Marketing Type and Package'}
+                  </h2>
+                  <p className="text-brand-text-muted text-lg max-w-3xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نقدم حلول تسويقية شاملة ومتخصصة لجميع احتياجاتك - من إدارة وسائل التواصل إلى إعلانات محركات البحث والاستراتيجيات التسويقية المتقدمة' 
+                      : 'We offer comprehensive and specialized marketing solutions for all your needs - from social media management to search engine advertising and advanced marketing strategies'
+                    }
+                  </p>
+                </motion.div>
+
+                {/* Marketing Category Filters */}
+                <motion.div
+                  className="flex flex-wrap justify-center gap-3 mb-12"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {marketingCategories.map((category, index) => (
+                    <motion.button
+                      key={category.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      viewport={{ once: true }}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => setSelectedAppCategory(category.id)}
+                      className={cn(
+                        "flex items-center gap-2 px-4 py-3 rounded-xl transition-all duration-300 text-sm font-medium",
+                        selectedAppCategory === category.id
+                          ? `${category.color} text-white shadow-lg`
+                          : "bg-gray-100 text-brand-text-muted hover:text-brand-text-primary hover:bg-gray-200 border border-gray-200 hover:border-gray-300"
+                      )}
+                    >
+                      <category.icon size={18} />
+                      <span>{category.title}</span>
+                    </motion.button>
+                  ))}
+                </motion.div>
+
+                {/* Marketing Packages Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={selectedAppCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  >
+                    {(() => {
+                      const categoryMarketing = selectedAppCategory === "all" 
+                        ? Object.values(marketingSamples).flat()
+                        : marketingSamples[selectedAppCategory as keyof typeof marketingSamples] || [];
+                      
+                      return categoryMarketing.map((campaign, index) => (
+                        <motion.div
+                          key={`${selectedAppCategory}-${index}`}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                        >
+                          <Card className={cn(
+                            "h-full hover:shadow-lg transition-all duration-300 border-l-4 relative overflow-hidden",
+                            campaign.package === 'platinum' ? "border-l-yellow-400 bg-gradient-to-br from-yellow-50 to-orange-50" :
+                            campaign.package === 'gold' ? "border-l-yellow-500 bg-gradient-to-br from-yellow-50/50 to-white" :
+                            "border-l-gray-400 bg-white"
+                          )}>
+                            {/* Package Badge */}
+                            <div className={cn(
+                              "absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold text-white",
+                              campaign.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400" :
+                              campaign.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600" :
+                              "bg-gradient-to-r from-gray-400 to-gray-500"
+                            )}>
+                              {campaign.package === 'platinum' ? (
+                                <div className="flex items-center gap-1">
+                                  <Crown className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'بلاتينيوم' : 'Platinum'}
+                                </div>
+                              ) : campaign.package === 'gold' ? (
+                                <div className="flex items-center gap-1">
+                                  <Award className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'ذهبي' : 'Gold'}
+                                </div>
+                              ) : (
+                                <div className="flex items-center gap-1">
+                                  <Zap className="w-3 h-3" />
+                                  {dir === 'rtl' ? 'فضي' : 'Silver'}
+                                </div>
+                              )}
+                            </div>
+
+                            <CardHeader className="pb-3">
+                              <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                                <Megaphone className="w-5 h-5 text-primary" />
+                                <span className="leading-tight">{campaign.name}</span>
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <p className="text-brand-text-muted mb-4 leading-relaxed">
+                                {campaign.description}
+                              </p>
+                              
+                              {/* Price Display */}
+                              <div className="mb-4 p-3 bg-primary/5 rounded-lg">
+                                <div className="flex items-center justify-between">
+                                  <span className="text-sm text-brand-text-muted">
+                                    {dir === 'rtl' ? 'السعر:' : 'Price:'}
+                                  </span>
+                                  <div className="flex items-center gap-1">
+                                    <DollarSign className="w-4 h-4 text-primary" />
+                                    <span className="text-xl font-bold text-primary">
+                                      {parseFloat(campaign.price).toLocaleString()}
+                                    </span>
+                                    <span className="text-sm text-brand-text-muted">
+                                      {dir === 'rtl' ? 'ريال' : 'SAR'}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="flex items-center justify-between mt-2">
+                                  <span className="text-sm text-brand-text-muted">
+                                    {dir === 'rtl' ? 'المدة:' : 'Timeline:'}
+                                  </span>
+                                  <span className="text-sm font-medium text-brand-text-primary">
+                                    {campaign.timeline}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="space-y-4">
+                                <div>
+                                  <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                    {dir === 'rtl' ? 'يشمل الباقة:' : 'Package Includes:'}
+                                  </h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {campaign.features.map((feature, featureIndex) => (
+                                      <Badge 
+                                        key={featureIndex} 
+                                        variant="secondary" 
+                                        className="text-xs"
+                                      >
+                                        {feature}
+                                      </Badge>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                {/* Action Button */}
+                                <div className="pt-4 border-t">
+                                  <Button
+                                    onClick={() => {
+                                      setLocation(`/contact?service=${encodeURIComponent(campaign.name)}&price=${campaign.price}`);
+                                    }}
+                                    className={cn(
+                                      "flex-1 rounded-xl transition-all duration-300 focus:ring-2 focus:ring-offset-2",
+                                      campaign.package === 'platinum' ? "bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 focus:ring-yellow-400/20" :
+                                      campaign.package === 'gold' ? "bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 focus:ring-yellow-500/20" :
+                                      "bg-primary hover:bg-primary-dark focus:ring-primary/20"
+                                    )}
+                                    size="sm"
+                                  >
+                                    <ArrowRight className={cn(
+                                      "w-4 h-4 mr-2",
+                                      dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                                    )} />
+                                    {dir === 'rtl' ? 'اطلب الآن' : 'Order Now'}
+                                  </Button>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      ));
+                    })()}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Call to Action for Custom Marketing */}
+                <motion.div
+                  className="mt-16 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                    <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                      {dir === 'rtl' ? 'تحتاج استراتيجية تسويقية مخصصة أو باقة مختلفة؟' : 'Need Custom Marketing Strategy or Different Package?'}
+                    </h3>
+                    <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                      {dir === 'rtl' 
+                        ? 'نقدم استراتيجيات تسويقية مخصصة حسب احتياجاتك وميزانيتك - تواصل معنا لمناقشة أهدافك التسويقية والحصول على عرض سعر مخصص' 
+                        : 'We offer custom marketing strategies based on your needs and budget - contact us to discuss your marketing goals and get a custom quote'
                       }
                     </p>
                     <Link href="/contact">
