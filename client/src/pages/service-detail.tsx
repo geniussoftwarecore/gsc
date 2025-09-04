@@ -1911,7 +1911,7 @@ export default function ServiceDetail() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
                   >
                     {getFilteredApps().map((app, index) => (
                       <motion.div
@@ -1920,28 +1920,28 @@ export default function ServiceDetail() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: index * 0.1 }}
                       >
-                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary rounded-xl sm:rounded-2xl touch-manipulation">
-                          <CardHeader className="p-4 sm:p-6">
-                            <CardTitle className="text-base sm:text-lg font-bold text-brand-text-primary flex items-center gap-2 leading-tight">
-                              <Smartphone className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
-                              <span className="break-words">{app.name}</span>
+                        <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
+                          <CardHeader>
+                            <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                              <Smartphone className="w-5 h-5 text-primary" />
+                              {app.name}
                             </CardTitle>
                           </CardHeader>
-                          <CardContent className="px-4 sm:px-6 pb-4 sm:pb-6">
-                            <p className="text-brand-text-muted mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">
+                          <CardContent>
+                            <p className="text-brand-text-muted mb-4 leading-relaxed">
                               {app.description}
                             </p>
-                            <div className="space-y-3 sm:space-y-4">
+                            <div className="space-y-4">
                               <div>
                                 <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
                                   {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
                                 </h4>
-                                <div className="flex flex-wrap gap-2 sm:gap-3">
+                                <div className="flex flex-wrap gap-2">
                                   {app.features.map((feature, featureIndex) => (
                                     <Badge 
                                       key={featureIndex} 
                                       variant="secondary" 
-                                      className="text-xs px-2 py-1.5 sm:py-1 touch-manipulation"
+                                      className="text-xs"
                                     >
                                       {feature}
                                     </Badge>
@@ -1950,7 +1950,7 @@ export default function ServiceDetail() {
                               </div>
                               
                               {/* Action Buttons */}
-                              <div className="flex flex-col gap-3 sm:gap-2 mt-4">
+                              <div className="flex flex-col sm:flex-row gap-2">
                                 {/* View Details Button */}
                                 <Button
                                   onClick={() => {
@@ -1958,12 +1958,12 @@ export default function ServiceDetail() {
                                     setShowAppDetailsModal(true);
                                   }}
                                   variant="outline"
-                                  className="flex-1 border-2 border-primary text-primary hover:bg-primary hover:text-white rounded-xl py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 touch-manipulation"
+                                  className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
                                   size="sm"
                                   aria-label={`View details for ${app.name}`}
                                   data-testid={`view-details-app-${app.name.replace(/\s+/g, '-')}`}
                                 >
-                                  <Eye className="w-4 h-4 mr-2 sm:mr-1.5" />
+                                  <Eye className="w-4 h-4 mr-2" />
                                   <span className="font-medium">
                                     {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
                                   </span>
@@ -1975,7 +1975,7 @@ export default function ServiceDetail() {
                                     // Navigate to contact page with app name pre-selected
                                     setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
                                   }}
-                                  className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 touch-manipulation"
+                                  className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
                                   size="sm"
                                   aria-label={`Apply for ${app.name}`}
                                   data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
@@ -1985,8 +1985,8 @@ export default function ServiceDetail() {
                                   </span>
                                   <ArrowRight 
                                     className={cn(
-                                      "w-4 h-4 ml-2 sm:ml-1.5 transition-transform duration-200",
-                                      dir === 'rtl' && "rotate-180 ml-0 mr-2 sm:mr-1.5"
+                                      "w-4 h-4 ml-2 transition-transform duration-200",
+                                      dir === 'rtl' && "rotate-180 ml-0 mr-2"
                                     )} 
                                   />
                                 </Button>
