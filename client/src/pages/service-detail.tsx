@@ -3090,18 +3090,63 @@ export default function ServiceDetail() {
         package: "silver"
       },
 
-      "Basic Packaging Design - Silver Package": {
-        name: "Basic Packaging Design - Silver Package",
-        description: "Basic packaging design for one product",
-        fullDescription: "Essential packaging design package perfect for small companies and startup projects needing professional packaging with excellent value. Focuses on core packaging design elements ensuring quality and visual appeal necessary to attract customers and achieve distinction.",
-        keyFeatures: ["One professional product design", "Strong basic design concept", "Print-ready files", "Two comprehensive revisions", "Simple 3D model", "Basic usage guide", "Basic print specifications", "Basic technical support"],
-        technicalFeatures: ["High-quality AI files", "Basic print specifications", "Basic die-cut template", "Simple color guide", "Basic 3D mockup", "Basic print guidelines"],
-        benefits: ["Professional attractive packaging", "30% product appeal increase", "Improved product sales", "Distinguished professional appearance", "Reasonable cost & excellent value", "Perfect starting point"],
-        targetAudience: ["Small Companies", "Startup Projects", "Local Products", "Entrepreneurs", "Small Stores"],
-        timeline: "3-4 weeks",
-        technologies: ["Adobe Illustrator", "Basic Packaging Design", "Print Design"],
+      "تصميم تغليف بسيط - باقة فضية": {
+        name: "تصميم تغليف بسيط - باقة فضية",
+        description: "تصميم تغليف أساسي لمنتج واحد",
+        fullDescription: "باقة تصميم تغليف مثالية للمشاريع الصغيرة والشركات الناشئة التي تحتاج لتغليف احترافي وجذاب بتكلفة معقولة. نركز على إنشاء تصميم تغليف بسيط وفعال يبرز هوية المنتج ويجذب انتباه العملاء في نقاط البيع، مع ضمان سهولة الإنتاج والطباعة.",
+        keyFeatures: ["تصميم تغليف احترافي لمنتج واحد", "3 مفاهيم تصميم أولية مختلفة", "ملفات طباعة جاهزة عالية الجودة", "نموذج ثلاثي الأبعاد للمعاينة", "دليل استخدام الألوان والخطوط", "مراجعة شاملة واحدة مجانية", "مواصفات طباعة مفصلة", "دعم فني لمدة شهر"],
+        technicalFeatures: ["ملفات Adobe Illustrator عالية الدقة", "ملفات PDF للطباعة جاهزة", "قالب Die-cut أساسي", "دليل ألوان CMYK دقيق", "نموذج 3D بسيط للمعاينة", "إرشادات طباعة شاملة"],
+        benefits: ["تغليف احترافي يبرز المنتج", "زيادة جاذبية المنتج بنسبة 35%", "تحسين مبيعات المنتج", "تكلفة معقولة ونتائج ممتازة", "سهولة الإنتاج والطباعة", "تميز في نقاط البيع"],
+        targetAudience: ["الشركات الصغيرة", "المشاريع الناشئة", "المنتجات المحلية", "رواد الأعمال", "المتاجر المحلية"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Adobe Illustrator", "Packaging Design", "Print Design", "3D Mockup"],
         category: "packaging",
-        price: "9000",
+        price: "7000",
+        package: "silver"
+      },
+
+      "تصميم واجهة تطبيق متكامل - باقة بلاتينيوم": {
+        name: "تصميم واجهة تطبيق متكامل - باقة بلاتينيوم",
+        description: "تصميم واجهة مستخدم متكاملة لتطبيق كامل",
+        fullDescription: "باقة تصميم واجهة مستخدم شاملة ومتطورة مصممة خصيصاً للتطبيقات المتكاملة والمؤسسات الكبرى التي تسعى لتطبيق احترافي ومتميز. تشمل تصميم أكثر من 30 شاشة تطبيق مع نظام تصميم متكامل، نماذج تفاعلية متقدمة، ودليل شامل للمطورين لضمان تطبيق مثالي للتصميم.",
+        keyFeatures: ["تصميم 30+ شاشة تطبيق احترافية", "نظام تصميم متكامل وشامل", "نماذج تفاعلية متقدمة", "دليل شامل للمطورين", "تصميم تجربة مستخدم متطورة", "مكتبة أيقونات مخصصة", "دليل الاستخدام التفصيلي", "اختبارات قابلية الاستخدام"],
+        technicalFeatures: ["ملفات Figma منظمة ومرتبة", "نظام مكونات قابل للتطوير", "Grid system احترافي", "دليل ألوان وخطوط متقدم", "Responsive design لجميع الأجهزة", "ملفات تصدير منظمة للمطورين"],
+        benefits: ["تطبيق احترافي عالي الجودة", "تحسين تجربة المستخدم بنسبة 80%", "زيادة معدلات الاستخدام والتفاعل", "سهولة التطوير والتنفيذ", "تميز كامل في السوق", "استثمار طويل المدى للعلامة التجارية"],
+        targetAudience: ["الشركات الكبرى", "المؤسسات التقنية", "الشركات الناشئة المتقدمة", "المنصات الرقمية", "تطبيقات الأعمال المتخصصة"],
+        timeline: "6-8 أسابيع",
+        technologies: ["Figma", "Adobe XD", "Sketch", "UI/UX Design", "Prototyping", "User Testing"],
+        category: "ui_design",
+        price: "30000",
+        package: "platinum"
+      },
+
+      "Complete App UI Design - Platinum Package": {
+        name: "Complete App UI Design - Platinum Package",
+        description: "Complete user interface design for full application",
+        fullDescription: "Comprehensive and advanced user interface design package designed specifically for integrated applications and large corporations seeking professional and distinguished app. Includes design of 30+ app screens with integrated design system, advanced interactive models, and comprehensive developer guide to ensure perfect design implementation.",
+        keyFeatures: ["Design of 30+ professional app screens", "Comprehensive integrated design system", "Advanced interactive prototypes", "Comprehensive developer guide", "Advanced user experience design", "Custom icon library", "Detailed usage guide", "Usability testing"],
+        technicalFeatures: ["Organized and structured Figma files", "Scalable component system", "Professional grid system", "Advanced color and font guide", "Responsive design for all devices", "Organized export files for developers"],
+        benefits: ["High-quality professional application", "80% user experience improvement", "Increased usage and engagement rates", "Easy development and implementation", "Complete market distinction", "Long-term brand investment"],
+        targetAudience: ["Large Corporations", "Technology Institutions", "Advanced Startups", "Digital Platforms", "Specialized Business Applications"],
+        timeline: "6-8 weeks",
+        technologies: ["Figma", "Adobe XD", "Sketch", "UI/UX Design", "Prototyping", "User Testing"],
+        category: "ui_design",
+        price: "30000",
+        package: "platinum"
+      },
+
+      "Basic Packaging Design - Silver Package": {
+        name: "Basic Packaging Design - Silver Package", 
+        description: "Basic packaging design for one product",
+        fullDescription: "Perfect packaging design package for small businesses and startups needing professional and attractive packaging at reasonable cost. We focus on creating simple and effective packaging design that highlights product identity and attracts customer attention at sales points, ensuring easy production and printing.",
+        keyFeatures: ["Professional packaging design for one product", "3 different initial design concepts", "High-quality print-ready files", "3D model for preview", "Color and font usage guide", "One comprehensive free revision", "Detailed print specifications", "One month technical support"],
+        technicalFeatures: ["High-resolution Adobe Illustrator files", "Print-ready PDF files", "Basic die-cut template", "Accurate CMYK color guide", "Simple 3D preview model", "Comprehensive printing guidelines"],
+        benefits: ["Professional packaging that highlights product", "35% product appeal increase", "Improved product sales", "Reasonable cost with excellent results", "Easy production and printing", "Point-of-sale distinction"],
+        targetAudience: ["Small Companies", "Startup Projects", "Local Products", "Entrepreneurs", "Local Stores"],
+        timeline: "3-4 weeks",
+        technologies: ["Adobe Illustrator", "Packaging Design", "Print Design", "3D Mockup"],
+        category: "packaging",
+        price: "7000",
         package: "silver"
       }
     };
