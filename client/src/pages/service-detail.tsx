@@ -161,6 +161,251 @@ const getDetailedWebsiteInfo = (websiteName: string) => {
       category: "healthcare"
     },
 
+    // === COMPREHENSIVE DESIGN SERVICES ===
+    
+    // Brand Identity & Visual Identity
+    "تصميم الهوية البصرية المتكاملة": {
+      name: "تصميم الهوية البصرية المتكاملة",
+      description: "هوية بصرية شاملة ومتطورة للعلامات التجارية",
+      fullDescription: "تصميم هوية بصرية متكاملة ومبتكرة تعكس شخصية وقيم العلامة التجارية بطريقة احترافية ومميزة. نقدم حلول تصميم شاملة من الشعار إلى دليل الهوية الكامل مع التطبيق على جميع المواد التسويقية والرقمية لضمان تماسك وقوة الهوية البصرية.",
+      keyFeatures: ["تصميم شعار احترافي ومبتكر", "تطوير دليل الهوية البصرية الكامل", "اختيار ألوان العلامة التجارية", "تصميم الخطوط والتايبوجرافي", "أنماط بصرية ورسوميات مساعدة", "تطبيق الهوية على المواد المطبوعة", "تطبيق الهوية الرقمية", "إرشادات الاستخدام الصحيح"],
+      technicalFeatures: ["تصميم متجه قابل للتطوير", "ملفات متعددة الصيغ", "دليل ألوان CMYK/RGB/Pantone", "شبكة تصميم احترافية", "ملفات مصدر قابلة للتعديل", "معايير التطبيق الدولية"],
+      benefits: ["هوية بصرية قوية ومميزة", "تعزيز التعرف على العلامة التجارية", "زيادة ثقة العملاء بنسبة 85%", "تماسك بصري عبر جميع المنصات", "ميزة تنافسية قوية", "قيمة استثمارية طويلة المدى"],
+      targetAudience: ["الشركات الناشئة", "العلامات التجارية الجديدة", "الشركات التي تعيد تموضعها", "المؤسسات التجارية", "رواد الأعمال"],
+      timeline: "3-6 أسابيع",
+      technologies: ["Adobe Illustrator", "Adobe Photoshop", "Figma", "Adobe InDesign", "Brand Guidelines", "Vector Graphics"],
+      category: "design"
+    },
+
+    "Complete Brand Identity Design": {
+      name: "Complete Brand Identity Design",
+      description: "Comprehensive and advanced visual identity for brands",
+      fullDescription: "Complete and innovative visual identity design that reflects brand personality and values professionally and distinctively. We provide comprehensive design solutions from logo to complete identity guide with application on all marketing and digital materials to ensure identity consistency and strength.",
+      keyFeatures: ["Professional Innovative Logo Design", "Complete Visual Identity Guide Development", "Brand Color Palette Selection", "Typography & Font Design", "Visual Patterns & Supporting Graphics", "Print Material Identity Application", "Digital Identity Application", "Proper Usage Guidelines"],
+      technicalFeatures: ["Scalable Vector Design", "Multiple Format Files", "CMYK/RGB/Pantone Color Guide", "Professional Design Grid", "Editable Source Files", "International Application Standards"],
+      benefits: ["Strong Distinctive Visual Identity", "Enhanced Brand Recognition", "85% Customer Trust Increase", "Visual Consistency Across All Platforms", "Strong Competitive Advantage", "Long-term Investment Value"],
+      targetAudience: ["Startups", "New Brands", "Rebranding Companies", "Commercial Institutions", "Entrepreneurs"],
+      timeline: "3-6 weeks",
+      technologies: ["Adobe Illustrator", "Adobe Photoshop", "Figma", "Adobe InDesign", "Brand Guidelines", "Vector Graphics"],
+      category: "design"
+    },
+
+    // UI/UX Design Services
+    "تصميم واجهات المستخدم UX/UI": {
+      name: "تصميم واجهات المستخدم UX/UI",
+      description: "تصميم واجهات مستخدم حديثة وتجربة استخدام متميزة",
+      fullDescription: "تصميم واجهات مستخدم متطورة وتجربة استخدام استثنائية للتطبيقات والمواقع الإلكترونية. نعتمد على أحدث اتجاهات التصميم وأفضل الممارسات في تجربة المستخدم لضمان سهولة الاستخدام والتفاعل الفعال مع المنتج الرقمي.",
+      keyFeatures: ["بحث وتحليل المستخدمين", "تصميم رحلة المستخدم (User Journey)", "إنشاء wireframes وmockups", "تصميم واجهات تفاعلية", "نماذج أولية قابلة للاختبار", "تصميم متجاوب لجميع الأجهزة", "اختبار تجربة المستخدم", "دليل التصميم والمكونات"],
+      technicalFeatures: ["Figma Advanced Prototyping", "Adobe XD Integration", "Responsive Design System", "Interactive Components", "Design Tokens", "Accessibility Standards"],
+      benefits: ["تحسين تجربة المستخدم بنسبة 90%", "زيادة معدلات التحويل", "تقليل معدل الارتداد", "سهولة استخدام متناهية", "زيادة رضا المستخدمين", "ميزة تنافسية رقمية"],
+      targetAudience: ["مطوري التطبيقات", "أصحاب المواقع الإلكترونية", "الشركات التقنية", "المتاجر الإلكترونية", "الشركات الناشئة"],
+      timeline: "4-8 أسابيع",
+      technologies: ["Figma", "Adobe XD", "Sketch", "InVision", "User Research Tools", "Prototyping Tools"],
+      category: "design"
+    },
+
+    "UI/UX Design Services": {
+      name: "UI/UX Design Services",
+      description: "Modern user interface design and exceptional user experience",
+      fullDescription: "Advanced user interface design and exceptional user experience for apps and websites. We rely on latest design trends and best UX practices to ensure ease of use and effective interaction with digital products.",
+      keyFeatures: ["User Research & Analysis", "User Journey Design", "Wireframes & Mockups Creation", "Interactive Interface Design", "Testable Prototypes", "Responsive Design for All Devices", "User Experience Testing", "Design Guide & Components"],
+      technicalFeatures: ["Figma Advanced Prototyping", "Adobe XD Integration", "Responsive Design System", "Interactive Components", "Design Tokens", "Accessibility Standards"],
+      benefits: ["90% User Experience Improvement", "Increased Conversion Rates", "Reduced Bounce Rate", "Ultimate Ease of Use", "Increased User Satisfaction", "Digital Competitive Advantage"],
+      targetAudience: ["App Developers", "Website Owners", "Technology Companies", "E-commerce Stores", "Startups"],
+      timeline: "4-8 weeks",
+      technologies: ["Figma", "Adobe XD", "Sketch", "InVision", "User Research Tools", "Prototyping Tools"],
+      category: "design"
+    },
+
+    // Digital Marketing & Social Media Design
+    "تصميم المحتوى الرقمي والتسويقي": {
+      name: "تصميم المحتوى الرقمي والتسويقي",
+      description: "تصميم محتوى إبداعي للمنصات الرقمية ووسائل التواصل",
+      fullDescription: "تصميم محتوى رقمي مبتكر وجذاب لجميع المنصات الرقمية ووسائل التواصل الاجتماعي. نقدم حلول تصميم شاملة للحملات التسويقية، المحتوى التفاعلي، والمواد الإعلانية الرقمية لضمان وصول فعال للجمهور المستهدف وتحقيق أهداف التسويق.",
+      keyFeatures: ["تصميم منشورات وسائل التواصل", "إنفوجرافيك تفاعلي ومتحرك", "تصميم الإعلانات الرقمية", "محتوى فيديو موشن جرافيك", "تصميم البانرات والعروض", "قوالب محتوى قابلة للتخصيص", "تصميم الحملات التسويقية المتكاملة", "محتوى تفاعلي للمواقع"],
+      technicalFeatures: ["Adobe After Effects Animation", "Motion Graphics Design", "Interactive Content Creation", "Multi-platform Optimization", "Brand-consistent Templates", "Animated GIFs & Videos"],
+      benefits: ["زيادة التفاعل بنسبة 200%", "تحسين الوصول للجمهور", "زيادة المبيعات والتحويلات", "محتوى يحقق انتشار فيروسي", "تعزيز الحضور الرقمي", "عائد استثمار تسويقي أعلى"],
+      targetAudience: ["مديري التسويق", "وكالات الإعلان", "أصحاب الأعمال", "المؤثرين الرقميين", "الشركات والعلامات التجارية"],
+      timeline: "2-4 أسابيع",
+      technologies: ["Adobe Creative Suite", "After Effects", "Premiere Pro", "Canva Pro", "Motion Graphics", "Video Editing"],
+      category: "design"
+    },
+
+    "Digital Marketing Content Design": {
+      name: "Digital Marketing Content Design",
+      description: "Creative content design for digital platforms and social media",
+      fullDescription: "Innovative and engaging digital content design for all digital platforms and social media. We provide comprehensive design solutions for marketing campaigns, interactive content, and digital advertising materials to ensure effective reach to target audience and achieve marketing goals.",
+      keyFeatures: ["Social Media Posts Design", "Interactive & Animated Infographics", "Digital Advertising Design", "Motion Graphics Video Content", "Banners & Presentations Design", "Customizable Content Templates", "Integrated Marketing Campaign Design", "Interactive Website Content"],
+      technicalFeatures: ["Adobe After Effects Animation", "Motion Graphics Design", "Interactive Content Creation", "Multi-platform Optimization", "Brand-consistent Templates", "Animated GIFs & Videos"],
+      benefits: ["200% Engagement Increase", "Improved Audience Reach", "Increased Sales & Conversions", "Viral Content Achievement", "Enhanced Digital Presence", "Higher Marketing ROI"],
+      targetAudience: ["Marketing Managers", "Advertising Agencies", "Business Owners", "Digital Influencers", "Companies & Brands"],
+      timeline: "2-4 weeks",
+      technologies: ["Adobe Creative Suite", "After Effects", "Premiere Pro", "Canva Pro", "Motion Graphics", "Video Editing"],
+      category: "design"
+    },
+
+    // Print Design & Marketing Materials
+    "تصميم المواد المطبوعة والتسويقية": {
+      name: "تصميم المواد المطبوعة والتسويقية",
+      description: "تصميم مواد طباعة احترافية ومواد تسويقية متميزة",
+      fullDescription: "تصميم مواد مطبوعة احترافية ومواد تسويقية عالية الجودة تعكس هوية العلامة التجارية بطريقة مميزة وجذابة. نقدم حلول تصميم شاملة للكتيبات، الكتالوجات، البروشورات، والمواد الإعلانية مع ضمان جودة الطباعة والتأثير البصري القوي.",
+      keyFeatures: ["تصميم الكتيبات والبروشورات", "كتالوجات المنتجات المتقدمة", "تصميم أوراق الشركة الرسمية", "بطاقات العمل الاحترافية", "التقارير السنوية والعروض التقديمية", "مواد المعارض والفعاليات", "الملصقات والإعلانات المطبوعة", "تغليف المنتجات والحقائب"],
+      technicalFeatures: ["Adobe InDesign Professional", "Print-ready Files", "CMYK Color Accuracy", "High-resolution Graphics", "Bleed & Trim Marks", "Typography Excellence"],
+      benefits: ["مواد تسويقية عالية التأثير", "جودة طباعة استثنائية", "تعزيز الهوية المؤسسية", "زيادة المصداقية التجارية", "أدوات تسويق فعالة", "انطباع مهني راقي"],
+      targetAudience: ["الشركات والمؤسسات", "وكالات التسويق", "المعارض والفعاليات", "أصحاب الأعمال", "المكاتب الاستشارية"],
+      timeline: "2-5 أسابيع",
+      technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production", "Typography Design", "Color Management", "Publication Design"],
+      category: "design"
+    },
+
+    "Print & Marketing Materials Design": {
+      name: "Print & Marketing Materials Design",
+      description: "Professional print design and outstanding marketing materials",
+      fullDescription: "Professional print materials design and high-quality marketing materials that reflect brand identity distinctively and attractively. We provide comprehensive design solutions for brochures, catalogs, flyers, and advertising materials with guaranteed print quality and strong visual impact.",
+      keyFeatures: ["Brochures & Flyers Design", "Advanced Product Catalogs", "Official Company Stationery Design", "Professional Business Cards", "Annual Reports & Presentations", "Exhibition & Event Materials", "Printed Posters & Advertisements", "Product Packaging & Bags"],
+      technicalFeatures: ["Adobe InDesign Professional", "Print-ready Files", "CMYK Color Accuracy", "High-resolution Graphics", "Bleed & Trim Marks", "Typography Excellence"],
+      benefits: ["High-impact Marketing Materials", "Exceptional Print Quality", "Enhanced Corporate Identity", "Increased Business Credibility", "Effective Marketing Tools", "Elite Professional Impression"],
+      targetAudience: ["Companies & Institutions", "Marketing Agencies", "Exhibitions & Events", "Business Owners", "Consulting Offices"],
+      timeline: "2-5 weeks",
+      technologies: ["Adobe InDesign", "Adobe Illustrator", "Print Production", "Typography Design", "Color Management", "Publication Design"],
+      category: "design"
+    },
+
+    // 3D Design & Motion Graphics
+    "تصميم ثلاثي الأبعاد والموشن جرافيك": {
+      name: "تصميم ثلاثي الأبعاد والموشن جرافيك",
+      description: "تصميم ثلاثي الأبعاد متطور وموشن جرافيك احترافي",
+      fullDescription: "تصميم ثلاثي الأبعاد متطور وموشن جرافيك احترافي يجمع بين الإبداع والتقنية المتقدمة. نقدم حلول تصميم مبتكرة للنماذج ثلاثية الأبعاد، الرسوم المتحركة، والفيديوهات التفاعلية التي تحقق تأثيراً بصرياً قوياً وتجربة مشاهدة استثنائية.",
+      keyFeatures: ["نمذجة ثلاثية الأبعاد احترافية", "رسوم متحركة عالية الجودة", "فيديوهات موشن جرافيك", "تصميم شخصيات ثلاثية الأبعاد", "مشاهد بيئية واقعية", "رسوم متحركة للشعارات", "فيديوهات توضيحية وتعليمية", "مؤثرات بصرية متقدمة"],
+      technicalFeatures: ["Cinema 4D Professional", "Blender 3D Modeling", "After Effects Animation", "Maya Character Animation", "V-Ray Rendering", "Motion Capture Integration"],
+      benefits: ["محتوى بصري مذهل ومتميز", "زيادة الانتباه والتفاعل", "شرح معقد بطريقة بسيطة", "تجربة مشاهدة استثنائية", "ميزة تنافسية قوية", "تأثير تسويقي عالي"],
+      targetAudience: ["شركات الإنتاج", "وكالات الإعلان", "المطورين والمصممين", "منتجي المحتوى", "الشركات التقنية"],
+      timeline: "4-10 أسابيع",
+      technologies: ["Cinema 4D", "Blender", "After Effects", "Maya", "V-Ray", "Motion Graphics"],
+      category: "design"
+    },
+
+    "3D Design & Motion Graphics": {
+      name: "3D Design & Motion Graphics",
+      description: "Advanced 3D design and professional motion graphics",
+      fullDescription: "Advanced 3D design and professional motion graphics combining creativity with advanced technology. We provide innovative design solutions for 3D models, animations, and interactive videos that achieve strong visual impact and exceptional viewing experience.",
+      keyFeatures: ["Professional 3D Modeling", "High-quality Animations", "Motion Graphics Videos", "3D Character Design", "Realistic Environmental Scenes", "Logo Animations", "Explanatory & Educational Videos", "Advanced Visual Effects"],
+      technicalFeatures: ["Cinema 4D Professional", "Blender 3D Modeling", "After Effects Animation", "Maya Character Animation", "V-Ray Rendering", "Motion Capture Integration"],
+      benefits: ["Stunning Distinctive Visual Content", "Increased Attention & Engagement", "Complex Explanation Made Simple", "Exceptional Viewing Experience", "Strong Competitive Advantage", "High Marketing Impact"],
+      targetAudience: ["Production Companies", "Advertising Agencies", "Developers & Designers", "Content Producers", "Technology Companies"],
+      timeline: "4-10 weeks",
+      technologies: ["Cinema 4D", "Blender", "After Effects", "Maya", "V-Ray", "Motion Graphics"],
+      category: "design"
+    },
+
+    // Packaging Design
+    "تصميم العبوات والتغليف": {
+      name: "تصميم العبوات والتغليف",
+      description: "تصميم عبوات مبتكرة وتغليف جذاب للمنتجات",
+      fullDescription: "تصميم عبوات مبتكرة وتغليف جذاب يعكس جودة المنتج ويجذب انتباه المستهلكين في نقاط البيع. نقدم حلول تصميم شاملة تجمع بين الجمالية والوظائف العملية مع مراعاة معايير الاستدامة والتأثير البيئي.",
+      keyFeatures: ["تصميم عبوات المنتجات الاستهلاكية", "تغليف المواد الغذائية والمشروبات", "عبوات مستحضرات التجميل", "تصميم الصناديق والحقائب", "تغليف الهدايا والمناسبات", "عبوات صديقة للبيئة", "تصميم الملصقات والمعلومات", "نماذج أولية ثلاثية الأبعاد"],
+      technicalFeatures: ["Adobe Illustrator Packaging", "3D Mockup Visualization", "Die-cut Templates", "Print Production Specs", "Material Specifications", "Sustainability Guidelines"],
+      benefits: ["زيادة جاذبية المنتج بنسبة 75%", "تحسين تجربة العملاء", "زيادة المبيعات في نقاط البيع", "تعزيز هوية العلامة التجارية", "ميزة تنافسية في الأسواق", "حماية أفضل للمنتج"],
+      targetAudience: ["شركات الأغذية والمشروبات", "مصنعي مستحضرات التجميل", "شركات الإلكترونيات", "أصحاب العلامات التجارية", "شركات التصنيع"],
+      timeline: "3-7 أسابيع",
+      technologies: ["Adobe Illustrator", "Adobe Photoshop", "3D Packaging Mockups", "Structural Design", "Print Production", "Sustainability Design"],
+      category: "design"
+    },
+
+    "Packaging Design": {
+      name: "Packaging Design",
+      description: "Innovative packaging design and attractive product wrapping",
+      fullDescription: "Innovative packaging design and attractive wrapping that reflects product quality and attracts consumer attention at points of sale. We provide comprehensive design solutions combining aesthetics with practical functions while considering sustainability standards and environmental impact.",
+      keyFeatures: ["Consumer Product Packaging Design", "Food & Beverage Packaging", "Cosmetics Packaging", "Boxes & Bags Design", "Gift & Occasion Wrapping", "Eco-friendly Packaging", "Labels & Information Design", "3D Prototypes"],
+      technicalFeatures: ["Adobe Illustrator Packaging", "3D Mockup Visualization", "Die-cut Templates", "Print Production Specs", "Material Specifications", "Sustainability Guidelines"],
+      benefits: ["75% Product Attractiveness Increase", "Enhanced Customer Experience", "Increased Point-of-Sale Sales", "Enhanced Brand Identity", "Market Competitive Advantage", "Better Product Protection"],
+      targetAudience: ["Food & Beverage Companies", "Cosmetics Manufacturers", "Electronics Companies", "Brand Owners", "Manufacturing Companies"],
+      timeline: "3-7 weeks",
+      technologies: ["Adobe Illustrator", "Adobe Photoshop", "3D Packaging Mockups", "Structural Design", "Print Production", "Sustainability Design"],
+      category: "design"
+    },
+
+    // Interactive & Web Design
+    "التصميم التفاعلي وتجربة المستخدم الرقمية": {
+      name: "التصميم التفاعلي وتجربة المستخدم الرقمية",
+      description: "تصميم تفاعلي متطور وتجربة مستخدم رقمية مميزة",
+      fullDescription: "تصميم تفاعلي متطور يجمع بين الإبداع والتقنية لخلق تجارب رقمية استثنائية ومذهلة. نقدم حلول تصميم تفاعلية مبتكرة للمواقع والتطبيقات مع التركيز على سهولة الاستخدام وإشراك المستخدم بطرق إبداعية ومتطورة.",
+      keyFeatures: ["تصميم واجهات تفاعلية متقدمة", "رسوم متحركة وتأثيرات بصرية", "تصميم متجاوب لجميع الأجهزة", "تجربة مستخدم سلسة ومميزة", "عناصر تفاعلية ذكية", "تصميم قوائم وملاحة ذكية", "مؤثرات الانتقال الناعمة", "تحسين الأداء والسرعة"],
+      technicalFeatures: ["React/Vue.js Components", "CSS3 Animations", "WebGL Interactions", "Progressive Web App", "Touch Gestures", "Responsive Framework"],
+      benefits: ["تجربة مستخدم استثنائية", "زيادة التفاعل بنسبة 180%", "تحسين معدلات التحويل", "زمن بقاء أطول في الموقع", "انطباع احترافي متميز", "ميزة تنافسية رقمية"],
+      targetAudience: ["الشركات التقنية", "وكالات التسويق الرقمي", "أصحاب المواقع التجارية", "المطورين", "الشركات الناشئة"],
+      timeline: "6-12 أسبوع",
+      technologies: ["React.js", "Vue.js", "CSS3 Animations", "WebGL", "Three.js", "GSAP"],
+      category: "design"
+    },
+
+    "Interactive & Digital UX Design": {
+      name: "Interactive & Digital UX Design",
+      description: "Advanced interactive design and distinctive digital user experience",
+      fullDescription: "Advanced interactive design combining creativity with technology to create exceptional and amazing digital experiences. We provide innovative interactive design solutions for websites and applications focusing on ease of use and engaging users in creative and advanced ways.",
+      keyFeatures: ["Advanced Interactive Interface Design", "Animations & Visual Effects", "Responsive Design for All Devices", "Smooth Distinctive User Experience", "Smart Interactive Elements", "Intelligent Menus & Navigation Design", "Smooth Transition Effects", "Performance & Speed Optimization"],
+      technicalFeatures: ["React/Vue.js Components", "CSS3 Animations", "WebGL Interactions", "Progressive Web App", "Touch Gestures", "Responsive Framework"],
+      benefits: ["Exceptional User Experience", "180% Interaction Increase", "Improved Conversion Rates", "Longer Site Dwell Time", "Distinguished Professional Impression", "Digital Competitive Advantage"],
+      targetAudience: ["Technology Companies", "Digital Marketing Agencies", "Commercial Website Owners", "Developers", "Startups"],
+      timeline: "6-12 weeks",
+      technologies: ["React.js", "Vue.js", "CSS3 Animations", "WebGL", "Three.js", "GSAP"],
+      category: "design"
+    },
+
+    // Future Design Technologies
+    "تصميم الواقع المعزز والافتراضي AR/VR": {
+      name: "تصميم الواقع المعزز والافتراضي AR/VR",
+      description: "تصميم تجارب واقع معزز وافتراضي مبتكرة ومتطورة",
+      fullDescription: "تصميم تجارب واقع معزز وافتراضي مبتكرة تمثل مستقبل التفاعل الرقمي. نقدم حلول تصميم متطورة تجمع بين العالم الحقيقي والافتراضي لخلق تجارب غامرة ومذهلة تفتح آفاق جديدة للتسويق، التعليم، والترفيه.",
+      keyFeatures: ["تطبيقات الواقع المعزز AR", "بيئات الواقع الافتراضي VR", "تجارب تفاعلية غامرة", "نماذج ثلاثية الأبعاد تفاعلية", "واجهات مستخدم مكانية", "محاكاة بيئات واقعية", "ألعاب وتطبيقات تفاعلية", "جولات افتراضية تفاعلية"],
+      technicalFeatures: ["Unity 3D Development", "Unreal Engine", "ARKit/ARCore", "WebXR Technologies", "Spatial UI Design", "3D Asset Optimization"],
+      benefits: ["تجارب مستقبلية مذهلة", "انتباه العملاء بنسبة 300%", "تفاعل غير مسبوق", "ميزة تنافسية ثورية", "فرص تسويق جديدة", "تعزيز الابتكار"],
+      targetAudience: ["شركات التقنية المتقدمة", "وكالات الإعلان المبتكرة", "قطاع التعليم والتدريب", "صناعة الألعاب", "القطاع العقاري"],
+      timeline: "8-16 أسبوع",
+      technologies: ["Unity", "Unreal Engine", "ARKit", "ARCore", "WebXR", "Blender"],
+      category: "design"
+    },
+
+    "AR/VR Augmented & Virtual Reality Design": {
+      name: "AR/VR Augmented & Virtual Reality Design",
+      description: "Innovative and advanced augmented and virtual reality experience design",
+      fullDescription: "Innovative augmented and virtual reality experience design representing the future of digital interaction. We provide advanced design solutions combining real and virtual worlds to create immersive and amazing experiences opening new horizons for marketing, education, and entertainment.",
+      keyFeatures: ["Augmented Reality AR Applications", "Virtual Reality VR Environments", "Immersive Interactive Experiences", "Interactive 3D Models", "Spatial User Interfaces", "Realistic Environment Simulation", "Interactive Games & Applications", "Interactive Virtual Tours"],
+      technicalFeatures: ["Unity 3D Development", "Unreal Engine", "ARKit/ARCore", "WebXR Technologies", "Spatial UI Design", "3D Asset Optimization"],
+      benefits: ["Amazing Futuristic Experiences", "300% Customer Attention", "Unprecedented Interaction", "Revolutionary Competitive Advantage", "New Marketing Opportunities", "Innovation Enhancement"],
+      targetAudience: ["Advanced Technology Companies", "Innovative Advertising Agencies", "Education & Training Sector", "Gaming Industry", "Real Estate Sector"],
+      timeline: "8-16 weeks",
+      technologies: ["Unity", "Unreal Engine", "ARKit", "ARCore", "WebXR", "Blender"],
+      category: "design"
+    },
+
+    // AI-Assisted Design
+    "التصميم بمساعدة الذكاء الاصطناعي": {
+      name: "التصميم بمساعدة الذكاء الاصطناعي",
+      description: "تصميم مدعوم بالذكاء الاصطناعي والتقنيات المستقبلية",
+      fullDescription: "تصميم مدعوم بالذكاء الاصطناعي يمثل مستقبل الإبداع الرقمي. نستخدم أحدث تقنيات الذكاء الاصطناعي لتسريع عملية التصميم وإنتاج حلول إبداعية مبتكرة ومخصصة تفوق التوقعات وتحقق نتائج استثنائية في وقت قياسي.",
+      keyFeatures: ["تصميم شعارات بالذكاء الاصطناعي", "إنتاج محتوى بصري تلقائي", "تحسين الصور والرسوميات", "إنشاء أنماط وزخارف ذكية", "تخصيص التصاميم للجمهور المستهدف", "تحليل الاتجاهات البصرية", "تحسين الألوان والتركيب", "إنتاج تنويعات تصميمية متعددة"],
+      technicalFeatures: ["AI Design Algorithms", "Machine Learning Models", "Automated Design Generation", "Pattern Recognition", "Color Analysis AI", "Style Transfer Technology"],
+      benefits: ["تسريع الإنتاج بنسبة 500%", "إبداع غير محدود", "تخصيص دقيق للاحتياجات", "تكلفة أقل وجودة أعلى", "اتجاهات تصميم مبتكرة", "حلول مستقبلية فريدة"],
+      targetAudience: ["الشركات المبتكرة", "وكالات التصميم المتقدمة", "المسوقين الرقميين", "الشركات الناشئة التقنية", "المطورين والمبدعين"],
+      timeline: "1-4 أسابيع",
+      technologies: ["AI Design Tools", "Machine Learning", "Midjourney", "DALL-E", "Stable Diffusion", "Adobe Sensei"],
+      category: "design"
+    },
+
+    "AI-Assisted Design": {
+      name: "AI-Assisted Design",
+      description: "AI-supported design with future technologies",
+      fullDescription: "AI-supported design representing the future of digital creativity. We use latest AI technologies to accelerate design process and produce innovative customized creative solutions that exceed expectations and achieve exceptional results in record time.",
+      keyFeatures: ["AI Logo Design", "Automatic Visual Content Production", "Image & Graphics Enhancement", "Smart Pattern & Decoration Creation", "Design Customization for Target Audience", "Visual Trend Analysis", "Color & Composition Optimization", "Multiple Design Variations Production"],
+      technicalFeatures: ["AI Design Algorithms", "Machine Learning Models", "Automated Design Generation", "Pattern Recognition", "Color Analysis AI", "Style Transfer Technology"],
+      benefits: ["500% Production Speed Increase", "Unlimited Creativity", "Precise Need Customization", "Lower Cost Higher Quality", "Innovative Design Trends", "Unique Future Solutions"],
+      targetAudience: ["Innovative Companies", "Advanced Design Agencies", "Digital Marketers", "Tech Startups", "Developers & Creators"],
+      timeline: "1-4 weeks",
+      technologies: ["AI Design Tools", "Machine Learning", "Midjourney", "DALL-E", "Stable Diffusion", "Adobe Sensei"],
+      category: "design"
+    },
+
     "موقع مستشفى": {
       name: "موقع مستشفى",
       description: "موقع متكامل للمستشفيات والمراكز الطبية",
