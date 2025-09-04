@@ -82,6 +82,56 @@ export default function MobileDetail() {
 
   // Mobile Apps Data
   const getMobileApps = () => [
+    // System Optimization Apps
+    {
+      name: "مُحسن نظام الأندرويد",
+      description: "تطبيق متقدم لتحسين أداء نظام الأندرويد وحل المشاكل الشائعة",
+      features: ["تنظيف ذاكرة التخزين المؤقت", "إدارة الذاكرة الذكية", "تسريع الجهاز", "إصلاح أخطاء النظام", "توفير البطارية"],
+      category: "system"
+    },
+    {
+      name: "Android System Optimizer",
+      description: "Advanced app for optimizing Android system performance and fixing common issues",
+      features: ["Cache Cleaner", "Smart Memory Management", "Device Speed Booster", "System Error Fixes", "Battery Saver"],
+      category: "system"
+    },
+    {
+      name: "مُصلح مشاكل iOS",
+      description: "أداة شاملة لحل مشاكل نظام iOS وتحسين الأداء",
+      features: ["إصلاح تجمد الشاشة", "حل مشاكل التطبيقات", "تحسين سرعة النظام", "إدارة التخزين", "إصلاح أخطاء التحديث"],
+      category: "system"
+    },
+    {
+      name: "iOS Problem Solver",
+      description: "Comprehensive tool for solving iOS system issues and improving performance",
+      features: ["Screen Freeze Fix", "App Crash Solutions", "System Speed Enhancement", "Storage Management", "Update Error Fixes"],
+      category: "system"
+    },
+    {
+      name: "منظف الهاتف الذكي",
+      description: "تطبيق قوي لتنظيف وتحسين هواتف الأندرويد والايفون",
+      features: ["إزالة الملفات المؤقتة", "تنظيف الصور المكررة", "إدارة التطبيقات غير المستخدمة", "تحسين الذاكرة", "حماية الخصوصية"],
+      category: "system"
+    },
+    {
+      name: "Smart Phone Cleaner",
+      description: "Powerful app for cleaning and optimizing Android and iPhone devices",
+      features: ["Temp Files Removal", "Duplicate Photos Cleaner", "Unused Apps Manager", "Memory Optimization", "Privacy Protection"],
+      category: "system"
+    },
+    {
+      name: "حارس البطارية الذكي",
+      description: "تطبيق متطور لإدارة البطارية وتوفير الطاقة في الهواتف الذكية",
+      features: ["مراقبة استهلاك البطارية", "أوضاع الطاقة الذكية", "تحليل التطبيقات المستهلكة", "جدولة الشحن", "تنبيهات البطارية"],
+      category: "system"
+    },
+    {
+      name: "Smart Battery Guard",
+      description: "Advanced app for battery management and power saving in smartphones",
+      features: ["Battery Usage Monitor", "Smart Power Modes", "Power-Hungry Apps Analysis", "Charging Schedule", "Battery Alerts"],
+      category: "system"
+    },
+    // Existing apps...
     {
       name: "تطبيق توصيل طعام",
       description: "منصة توصيل طعام متكاملة مع تتبع مباشر وتجربة استخدام استثنائية",
@@ -134,6 +184,95 @@ export default function MobileDetail() {
 
   const getDetailedAppInfo = (appName: string) => {
     const appDetails = {
+      // System Optimization Apps Details
+      "مُحسن نظام الأندرويد": {
+        name: "مُحسن نظام الأندرويد",
+        description: "تطبيق متقدم لتحسين أداء نظام الأندرويد وحل المشاكل الشائعة",
+        fullDescription: "تطبيق شامل ومتطور مصمم خصيصاً لتحسين أداء أجهزة الأندرويد وحل المشاكل الشائعة التي تواجه المستخدمين. يستخدم خوارزميات ذكية لتحليل النظام وتنظيفه وتسريعه بشكل آمن وفعال.",
+        keyFeatures: ["تنظيف ذاكرة التخزين المؤقت", "إدارة الذاكرة الذكية", "تسريع الجهاز", "إصلاح أخطاء النظام", "توفير البطارية", "مراقبة الأداء في الوقت الفعلي", "إدارة التطبيقات المشغلة", "تنظيف الملفات غير المرغوبة"],
+        technicalFeatures: ["تحليل عميق للنظام", "خوارزميات تنظيف متقدمة", "مراقبة الأداء المستمرة", "واجهة سهلة الاستخدام", "تقارير مفصلة", "نسخ احتياطية آمنة"],
+        benefits: ["تحسين سرعة الجهاز بنسبة 40%", "توفير مساحة تخزين كبيرة", "إطالة عمر البطارية", "تقليل التجمد والإغلاق المفاجئ", "تجربة استخدام أكثر سلاسة", "حماية الخصوصية"],
+        targetAudience: ["مستخدمي أجهزة الأندرويد", "المهتمين بأداء الجهاز", "المستخدمين الذين يواجهون بطء", "أصحاب الأجهزة القديمة", "المطورين"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Android SDK", "Kotlin", "System APIs", "Background Services", "Material Design", "Performance Analytics"]
+      },
+      "Android System Optimizer": {
+        name: "Android System Optimizer",
+        description: "Advanced app for optimizing Android system performance and fixing common issues",
+        fullDescription: "Comprehensive and advanced application designed specifically to improve Android device performance and solve common user problems. Uses smart algorithms to analyze, clean, and speed up the system safely and effectively.",
+        keyFeatures: ["Cache Cleaner", "Smart Memory Management", "Device Speed Booster", "System Error Fixes", "Battery Saver", "Real-time Performance Monitoring", "Running Apps Manager", "Junk Files Cleanup"],
+        technicalFeatures: ["Deep System Analysis", "Advanced Cleaning Algorithms", "Continuous Performance Monitoring", "User-friendly Interface", "Detailed Reports", "Safe Backups"],
+        benefits: ["40% Device Speed Improvement", "Significant Storage Space Saving", "Extended Battery Life", "Reduced Freezing and Crashes", "Smoother User Experience", "Privacy Protection"],
+        targetAudience: ["Android Device Users", "Performance Enthusiasts", "Users Experiencing Slowdowns", "Older Device Owners", "Developers"],
+        timeline: "3-4 weeks",
+        technologies: ["Android SDK", "Kotlin", "System APIs", "Background Services", "Material Design", "Performance Analytics"]
+      },
+      "مُصلح مشاكل iOS": {
+        name: "مُصلح مشاكل iOS",
+        description: "أداة شاملة لحل مشاكل نظام iOS وتحسين الأداء",
+        fullDescription: "أداة متخصصة ومتطورة لحل مشاكل أجهزة الايفون والايباد التي تعمل بنظام iOS. يركز التطبيق على إصلاح المشاكل الشائعة مثل التجمد، بطء الاستجابة، ومشاكل التطبيقات، مع توفير حلول آمنة وفعالة.",
+        keyFeatures: ["إصلاح تجمد الشاشة", "حل مشاكل التطبيقات", "تحسين سرعة النظام", "إدارة التخزين", "إصلاح أخطاء التحديث", "تحسين أداء البطارية", "إصلاح مشاكل الاتصال", "استعادة البيانات المفقودة"],
+        technicalFeatures: ["تشخيص تلقائي للمشاكل", "إصلاحات آمنة ومعتمدة", "واجهة بسيطة وسهلة", "تقارير تفصيلية", "نسخ احتياطية تلقائية", "دعم جميع إصدارات iOS"],
+        benefits: ["حل سريع للمشاكل الشائعة", "تحسين الأداء العام", "توفير الوقت والجهد", "حماية البيانات", "عدم الحاجة لخبرة تقنية", "دعم فني متميز"],
+        targetAudience: ["مستخدمي أجهزة iOS", "من يواجهون مشاكل تقنية", "المستخدمين غير التقنيين", "أصحاب الأجهزة القديمة", "الشركات"],
+        timeline: "4-5 أسابيع",
+        technologies: ["iOS SDK", "Swift", "Core Foundation", "System Diagnostics", "iCloud Integration", "Apple Guidelines"]
+      },
+      "iOS Problem Solver": {
+        name: "iOS Problem Solver",
+        description: "Comprehensive tool for solving iOS system issues and improving performance",
+        fullDescription: "Specialized and advanced tool for solving iPhone and iPad problems running iOS. The app focuses on fixing common issues like freezing, slow response, and app problems, providing safe and effective solutions.",
+        keyFeatures: ["Screen Freeze Fix", "App Crash Solutions", "System Speed Enhancement", "Storage Management", "Update Error Fixes", "Battery Performance Improvement", "Connection Issues Fix", "Lost Data Recovery"],
+        technicalFeatures: ["Automatic Problem Diagnosis", "Safe and Approved Fixes", "Simple and Easy Interface", "Detailed Reports", "Automatic Backups", "Support for All iOS Versions"],
+        benefits: ["Quick Solutions for Common Problems", "Overall Performance Improvement", "Time and Effort Saving", "Data Protection", "No Technical Expertise Required", "Excellent Technical Support"],
+        targetAudience: ["iOS Device Users", "Those Facing Technical Issues", "Non-technical Users", "Older Device Owners", "Businesses"],
+        timeline: "4-5 weeks",
+        technologies: ["iOS SDK", "Swift", "Core Foundation", "System Diagnostics", "iCloud Integration", "Apple Guidelines"]
+      },
+      "منظف الهاتف الذكي": {
+        name: "منظف الهاتف الذكي",
+        description: "تطبيق قوي لتنظيف وتحسين هواتف الأندرويد والايفون",
+        fullDescription: "تطبيق شامل ومتطور للتنظيف العميق والتحسين الذكي للهواتف الذكية. يعمل مع أنظمة الأندرويد و iOS لإزالة الملفات غير الضرورية، تحسين الأداء، وحماية الخصوصية بطريقة آمنة وفعالة.",
+        keyFeatures: ["إزالة الملفات المؤقتة", "تنظيف الصور المكررة", "إدارة التطبيقات غير المستخدمة", "تحسين الذاكرة", "حماية الخصوصية", "تنظيف WhatsApp", "إدارة التنزيلات", "ضغط الفيديوهات"],
+        technicalFeatures: ["تحليل ذكي للملفات", "خوارزميات تنظيف متقدمة", "فحص أمني شامل", "واجهة تفاعلية", "تشفير البيانات", "استعادة آمنة"],
+        benefits: ["توفير مساحة تخزين كبيرة", "تحسين سرعة الجهاز", "حماية البيانات الشخصية", "إطالة عمر الجهاز", "تجربة استخدام محسنة", "راحة البال"],
+        targetAudience: ["جميع مستخدمي الهواتف الذكية", "من يعانون من نقص المساحة", "المهتمين بالخصوصية", "المستخدمين العاديين", "المحترفين"],
+        timeline: "3-4 أسابيع",
+        technologies: ["Cross-platform Framework", "File System APIs", "Security Protocols", "Image Processing", "Cloud Integration", "Machine Learning"]
+      },
+      "Smart Phone Cleaner": {
+        name: "Smart Phone Cleaner",
+        description: "Powerful app for cleaning and optimizing Android and iPhone devices",
+        fullDescription: "Comprehensive and advanced application for deep cleaning and smart optimization of smartphones. Works with Android and iOS systems to remove unnecessary files, improve performance, and protect privacy safely and effectively.",
+        keyFeatures: ["Temp Files Removal", "Duplicate Photos Cleaner", "Unused Apps Manager", "Memory Optimization", "Privacy Protection", "WhatsApp Cleaner", "Downloads Manager", "Video Compression"],
+        technicalFeatures: ["Smart File Analysis", "Advanced Cleaning Algorithms", "Comprehensive Security Scan", "Interactive Interface", "Data Encryption", "Safe Recovery"],
+        benefits: ["Significant Storage Space Saving", "Device Speed Improvement", "Personal Data Protection", "Extended Device Life", "Enhanced User Experience", "Peace of Mind"],
+        targetAudience: ["All Smartphone Users", "Those Suffering from Low Storage", "Privacy-conscious Users", "Regular Users", "Professionals"],
+        timeline: "3-4 weeks",
+        technologies: ["Cross-platform Framework", "File System APIs", "Security Protocols", "Image Processing", "Cloud Integration", "Machine Learning"]
+      },
+      "حارس البطارية الذكي": {
+        name: "حارس البطارية الذكي",
+        description: "تطبيق متطور لإدارة البطارية وتوفير الطاقة في الهواتف الذكية",
+        fullDescription: "تطبيق ذكي ومتقدم لإدارة وتحسين أداء البطارية في الهواتف الذكية. يستخدم تقنيات الذكاء الاصطناعي لتحليل عادات الاستخدام وتقديم حلول مخصصة لإطالة عمر البطارية وتحسين الأداء.",
+        keyFeatures: ["مراقبة استهلاك البطارية", "أوضاع الطاقة الذكية", "تحليل التطبيقات المستهلكة", "جدولة الشحن", "تنبيهات البطارية", "توقع عمر البطارية", "تحسين الشحن", "إحصائيات مفصلة"],
+        technicalFeatures: ["تحليل AI للاستهلاك", "خوارزميات توفير الطاقة", "مراقبة في الوقت الفعلي", "تعلم أنماط الاستخدام", "تحسينات تلقائية", "تقارير تفصيلية"],
+        benefits: ["إطالة عمر البطارية بنسبة 30%", "تحسين صحة البطارية", "توقعات دقيقة للشحن", "توفير في استهلاك الطاقة", "عمر أطول للجهاز", "راحة البال"],
+        targetAudience: ["مستخدمي الهواتف الذكية", "المستخدمين الكثيفين", "المسافرين", "أصحاب الأجهزة القديمة", "المهتمين بالتكنولوجيا"],
+        timeline: "4-5 أسابيع",
+        technologies: ["AI/ML Algorithms", "Battery APIs", "System Monitoring", "Predictive Analytics", "Power Management", "Data Visualization"]
+      },
+      "Smart Battery Guard": {
+        name: "Smart Battery Guard",
+        description: "Advanced app for battery management and power saving in smartphones",
+        fullDescription: "Smart and advanced application for managing and optimizing battery performance in smartphones. Uses artificial intelligence technologies to analyze usage habits and provide customized solutions to extend battery life and improve performance.",
+        keyFeatures: ["Battery Usage Monitor", "Smart Power Modes", "Power-Hungry Apps Analysis", "Charging Schedule", "Battery Alerts", "Battery Life Prediction", "Charging Optimization", "Detailed Statistics"],
+        technicalFeatures: ["AI Consumption Analysis", "Power Saving Algorithms", "Real-time Monitoring", "Usage Pattern Learning", "Automatic Optimizations", "Detailed Reports"],
+        benefits: ["30% Battery Life Extension", "Improved Battery Health", "Accurate Charging Predictions", "Power Consumption Savings", "Longer Device Lifespan", "Peace of Mind"],
+        targetAudience: ["Smartphone Users", "Heavy Users", "Travelers", "Older Device Owners", "Technology Enthusiasts"],
+        timeline: "4-5 weeks",
+        technologies: ["AI/ML Algorithms", "Battery APIs", "System Monitoring", "Predictive Analytics", "Power Management", "Data Visualization"]
+      },
       "تطبيق توصيل طعام": {
         name: "تطبيق توصيل طعام",
         description: "منصة توصيل طعام متكاملة مع تتبع مباشر وتجربة استخدام استثنائية",
@@ -185,6 +324,7 @@ export default function MobileDetail() {
 
   const getAppCategories = () => [
     { id: "all", name: dir === 'rtl' ? "جميع التطبيقات" : "All Apps" },
+    { id: "system", name: dir === 'rtl' ? "تحسين الأنظمة" : "System Optimization" },
     { id: "ecommerce", name: dir === 'rtl' ? "التجارة الإلكترونية" : "E-commerce" },
     { id: "finance", name: dir === 'rtl' ? "المالية" : "Finance" },
     { id: "healthcare", name: dir === 'rtl' ? "الصحة" : "Healthcare" },
