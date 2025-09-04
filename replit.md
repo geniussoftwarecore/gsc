@@ -1,75 +1,47 @@
-# Genius Software Core (GSC) - Full-Stack Web Application
+# GSC (Genius Software Core) - Replit Setup
 
 ## Project Overview
-This is a comprehensive full-stack web application for Genius Software Core, a software development company. The application includes a public-facing website, user authentication, admin panel, and CRM functionality.
+GSC is a comprehensive software development and CRM platform built with modern web technologies. The project uses a full-stack TypeScript setup with React frontend and Express backend.
+
+## Current Setup Status
+✅ **Successfully configured for Replit environment**
+- PostgreSQL database connected
+- Frontend and backend running on port 5000
+- Vite dev server configured with proxy support
+- Deployment configuration completed
 
 ## Architecture
-- **Frontend**: React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui
-- **Backend**: Express.js + TypeScript
-- **Database**: PostgreSQL (with Drizzle ORM)
-- **Routing**: Wouter (frontend)
-- **State Management**: TanStack Query v5
-- **Authentication**: Session-based with Passport.js
-- **Styling**: Tailwind CSS with custom brand colors
-- **Internationalization**: i18next (English/Arabic support)
-
-## Key Features
-- Multi-language support (EN/AR) with RTL layout
-- User authentication and protected routes
-- Admin panel with role-based access control (RBAC)
-- CRM system for customer management
-- Portfolio showcase with project galleries
-- Services catalog with detailed pages
-- Contact forms and testimonials
-- Real-time notifications
-- Responsive design
-- SEO optimization
-
-## Project Structure
-```
-├── client/               # Frontend React application
-│   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Page components
-│   │   ├── contexts/     # React contexts
-│   │   └── lib/          # Utilities and configurations
-├── server/               # Backend Express application
-│   ├── routes.ts         # API routes
-│   ├── storage.ts        # Database storage layer
-│   └── db/               # Database configuration
-├── shared/               # Shared types and schemas
-└── attached_assets/      # Asset files and images
-```
-
-## Environment Setup
-- The application runs on port 5000 (both frontend and backend)
-- PostgreSQL database is configured and connected
-- Vite dev server is configured with `allowedHosts: true` for Replit proxy
-- Database seeding runs automatically on startup
+- **Frontend**: React + TypeScript + Vite + Tailwind CSS + shadcn/ui
+- **Backend**: Express + TypeScript
+- **Database**: PostgreSQL with Drizzle ORM
+- **Full-stack**: Both served on single port (5000) with Vite middleware
 
 ## Development Workflow
-- Run `npm run dev` to start the development server
-- Backend serves API routes at `/api/*`
-- Frontend is served by Vite in development mode
-- Hot module replacement is enabled
-- Database schema changes use `npm run db:push`
+- **Start**: Run workflow "Start application" or `npm run dev`
+- **Build**: `npm run build`
+- **Deploy**: Configured for autoscale deployment
 
-## Recent Setup (2025-09-03)
-- Fixed tsx dependency issue that was preventing startup
-- Verified PostgreSQL database connection and seeding
-- Confirmed Vite proxy configuration for Replit environment
-- Set up proper workflow configuration for port 5000
-- Configured deployment settings for autoscale target
-- All systems are running properly
+## Key Configuration Changes Made
+1. Fixed tsx execution by using `npx tsx` instead of `tsx`
+2. Vite server already configured with `allowedHosts: true` for Replit proxy
+3. Express server configured to bind to `0.0.0.0:5000`
+4. Deployment configured for production builds
 
-## User Preferences
-- Project follows existing code structure and conventions
-- Uses established database schema patterns
-- Maintains existing styling and component architecture
-- Preserves multi-language functionality
+## Project Structure
+- `/client/` - React frontend application
+- `/server/` - Express backend API
+- `/shared/` - Shared TypeScript types and schemas
+- `/attached_assets/` - Project assets and uploaded files
 
-## Deployment
-- Configured for autoscale deployment
-- Build command: `npm run build`
-- Production server uses compiled static files
-- Environment variables managed through Replit secrets
+## Database & CRM Features
+The application includes:
+- Admin-only CRM system
+- User authentication and management
+- Service and testimonial management
+- Multi-language support (EN/AR)
+- Real-time notifications
+
+## Recent Changes (September 2025)
+- Configured for Replit environment
+- Fixed development server startup issues
+- Ensured proper proxy configuration for frontend preview
