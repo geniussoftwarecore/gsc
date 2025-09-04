@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle, Clock, Users, Star, Globe, Smartpho
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
@@ -4598,6 +4598,9 @@ export default function ServiceDetail() {
                   })()}
                   <span className="break-words">{selectedAppForDetails.name}</span>
                 </DialogTitle>
+                <DialogDescription className="sr-only">
+                  {selectedAppForDetails.description}
+                </DialogDescription>
               </DialogHeader>
               
               {(() => {
