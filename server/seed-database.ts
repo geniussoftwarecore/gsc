@@ -101,12 +101,12 @@ export async function seedDatabase() {
       },
       {
         title: "تصميم الجرافيكس والهوية البصرية",
-        description: "تصميم الشعارات والهوية البصرية والمواد التسويقية الإبداعية التي تعكس قيم علامتك التجارية وتجذب العملاء",
+        description: "نصمم لك هوية بصرية متكاملة وتصاميم جرافيكس احترافية تعكس شخصية علامتك التجارية وتترك انطباعًا مميزًا لدى عملائك.",
         icon: "palette",
         category: "design",
         featured: "false",
-        technologies: ["Adobe Creative Suite", "Figma", "Sketch", "Illustrator", "Photoshop"],
-        deliveryTime: "1-3 أسابيع"
+        technologies: ["Adobe Creative Suite", "Figma", "Sketch", "Illustrator", "Photoshop", "InDesign", "After Effects"],
+        deliveryTime: "2-4 أسابيع"
       },
       {
         title: "التسويق الرقمي والإعلانات",

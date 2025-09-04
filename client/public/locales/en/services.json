@@ -148,45 +148,59 @@
     },
     {
       "id": "designGraphics",
-      "name": "UI/UX & Brand Design",
-      "tagline": "Cohesive identity, delightful interfaces.",
-      "description": "We create compelling visual identities and user-centered designs that enhance your brand presence and improve user engagement.",
-      "details": "We craft a consistent visual identity across UI/UX and marketing—logos, brand guidelines, design systems, social kits, and motion graphics—so every touchpoint looks professional, on brand, and conversion-ready.",
+      "name": "Graphic Design & Visual Identity",
+      "tagline": "Complete visual identity that reflects your brand personality.",
+      "description": "We design a complete visual identity and professional graphics that reflect your brand personality and leave a lasting impression.",
+      "details": "We provide comprehensive design services including graphics design and complete visual identity. From logo design and posters to creating complete brand guidelines and practical applications, we help you build a strong and distinctive visual presence.",
       "features": [
-        "Brand identity design",
-        "UI/UX design",
-        "Responsive layouts",
-        "Design systems",
-        "User research",
-        "Accessibility compliance"
+        "Logo Design",
+        "Posters & Ads",
+        "Infographics",
+        "Social Media Designs",
+        "UI Design",
+        "Print Materials (Cards, Brochures, Catalogs)",
+        "Main & Secondary Logos",
+        "Color Palette",
+        "Typography",
+        "Visual Style & Icons",
+        "Business Applications (Business cards, stationery, packaging)",
+        "Brand Guidelines"
       ],
       "deliverables": [
-        "Brand guidelines",
-        "Design mockups",
-        "Interactive prototypes",
-        "Asset libraries",
-        "Style guides"
+        "Final design files in multiple formats",
+        "Complete visual identity guide",
+        "Print application templates",
+        "Social media templates",
+        "Custom icons and visual elements",
+        "Editable source files"
       ],
       "inputsNeeded": [
-        "Brand requirements",
-        "Target audience analysis",
-        "Design preferences",
-        "Content structure"
+        "Brand vision and message",
+        "Target audience and preferences",
+        "Preferred colors and fonts",
+        "Design inspiration examples",
+        "Required marketing materials"
       ],
       "interactiveIdeas": [
-        "Interactive prototypes",
-        "Animation concepts",
-        "User journey mapping",
-        "A/B testing designs"
+        "Interactive presentation designs",
+        "Customizable templates",
+        "Animated logo variations",
+        "Responsive designs for all platforms"
+      ],
+      "benefits": [
+        "Stand out from competitors",
+        "Build customer trust",
+        "Unify visual and advertising messages",
+        "Enhance long-term brand image"
       ],
       "category": "design",
-      "ctaLabel": "Start Design Project",
+      "ctaLabel": "Start building your brand identity with GSC today",
       "icon": "Palette",
-      "slug": "design-brand",
+      "slug": "design-graphics",
       "detailPage": {
-        "achieve": "Unify your brand and improve usability with a design system that accelerates product teams and marketing alike.",
-        "delivery": "Research & moodboards → UI kit and tokens → responsive components → interaction specs and handoff via design files & docs.",
-        "timeline": "Phased rollout: brand foundations → core components → product pages/flows → QA and adoption playbook."
+        "achieve": "Get a complete visual identity that reflects your brand values and distinguishes you from competitors in the market.",
+        "delivery": "Brand analysis → initial concept design → complete identity development → practical applications → usage guidelines.",
+        "timeline": "Planning and analysis → concept design → identity development → practical applications → final delivery with comprehensive guide."
       }
     },
     {
