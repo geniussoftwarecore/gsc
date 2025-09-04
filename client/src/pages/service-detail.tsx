@@ -724,6 +724,197 @@ const getDetailedWebsiteInfo = (websiteName: string) => {
       timeline: "5-8 weeks",
       technologies: ["React.js", "Property Management", "CRM Integration", "SEO Tools", "Lead Generation", "Analytics"],
       category: "realestate"
+    },
+
+    // === ADDITIONAL SPECIALIZED DESIGN SERVICES ===
+
+    // Exhibition & Event Design
+    "تصميم المعارض والفعاليات": {
+      name: "تصميم المعارض والفعاليات",
+      description: "تصميم احترافي للمعارض والمؤتمرات والفعاليات الخاصة",
+      fullDescription: "تصميم متكامل وإبداعي للمعارض والمؤتمرات والفعاليات الخاصة يجمع بين الجاذبية البصرية والوظائف العملية. نقدم حلول تصميم شاملة للأجنحة، الشاشات التفاعلية، المواد الترويجية، وتصميم تجربة الزوار لضمان نجاح الفعالية وتحقيق الأهداف التسويقية.",
+      keyFeatures: ["تصميم أجنحة معارض احترافية", "شاشات عرض تفاعلية ومتحركة", "مواد ترويجية وطباعة خاصة", "تصميم تجربة الزوار", "لافتات ولوحات إرشادية", "تصميم مناطق استقبال مميزة", "عروض تقديمية تفاعلية", "تصميم بيئة غامرة للعلامة التجارية"],
+      technicalFeatures: ["تصميم ثلاثي الأبعاد للمساحات", "واقع معزز للتفاعل", "شاشات LED متقدمة", "أنظمة صوتية متطورة", "إضاءة تفاعلية ذكية", "تقنيات العرض الحديثة"],
+      benefits: ["جذب زوار أكثر بنسبة 150%", "تفاعل أعلى مع العلامة التجارية", "ذكريات إيجابية دائمة", "تحقيق أهداف التسويق", "زيادة المبيعات والعقود", "تميز عن المنافسين"],
+      targetAudience: ["الشركات المشاركة في المعارض", "منظمي الفعاليات", "الوكالات التسويقية", "الشركات التجارية", "المؤسسات الحكومية"],
+      timeline: "4-8 أسابيع",
+      technologies: ["3D Design Software", "AutoCAD", "AR Technology", "LED Display Systems", "Interactive Media", "Event Technology"],
+      category: "design"
+    },
+
+    "Exhibition & Event Design": {
+      name: "Exhibition & Event Design",
+      description: "Professional design for exhibitions, conferences and special events",
+      fullDescription: "Integrated and creative design for exhibitions, conferences and special events combining visual appeal with practical functions. We provide comprehensive design solutions for booths, interactive displays, promotional materials, and visitor experience design to ensure event success and achieve marketing goals.",
+      keyFeatures: ["Professional Exhibition Booth Design", "Interactive & Animated Display Screens", "Special Promotional Materials & Printing", "Visitor Experience Design", "Directional Signs & Boards", "Distinctive Reception Area Design", "Interactive Presentations", "Immersive Brand Environment Design"],
+      technicalFeatures: ["3D Space Design", "Augmented Reality for Interaction", "Advanced LED Screens", "Advanced Audio Systems", "Smart Interactive Lighting", "Modern Display Technologies"],
+      benefits: ["150% More Visitor Attraction", "Higher Brand Interaction", "Lasting Positive Memories", "Marketing Goal Achievement", "Increased Sales & Contracts", "Stand Out from Competitors"],
+      targetAudience: ["Companies Participating in Exhibitions", "Event Organizers", "Marketing Agencies", "Commercial Companies", "Government Institutions"],
+      timeline: "4-8 weeks",
+      technologies: ["3D Design Software", "AutoCAD", "AR Technology", "LED Display Systems", "Interactive Media", "Event Technology"],
+      category: "design"
+    },
+
+    // Medical & Healthcare Design
+    "التصميم الطبي والصحي": {
+      name: "التصميم الطبي والصحي",
+      description: "تصميم متخصص للمجال الطبي والرعاية الصحية",
+      fullDescription: "تصميم متخصص ومتطور للمجال الطبي والصحي يراعي المعايير الطبية والاحتياجات الخاصة للمرضى والطاقم الطبي. نقدم حلول تصميم شاملة للمستشفيات، العيادات، التطبيقات الطبية، والمواد التوعوية الصحية مع التركيز على الوضوح والأمان والراحة النفسية.",
+      keyFeatures: ["تصميم هوية المؤسسات الطبية", "واجهات التطبيقات الطبية", "مواد توعوية صحية مبسطة", "تصميم أنظمة إرشادية للمستشفيات", "كتيبات طبية احترافية", "تصميم مساحات انتظار مريحة", "رسوم توضيحية طبية دقيقة", "تصميم يراعي إمكانية الوصول"],
+      technicalFeatures: ["معايير تصميم طبية دولية", "ألوان علاجية ومهدئة", "رموز طبية معتمدة", "تصميم يراعي ضعاف البصر", "خطوط واضحة وسهلة القراءة", "تقنيات الواقع المعزز للتشريح"],
+      benefits: ["بيئة طبية أكثر راحة وأماناً", "تحسين تجربة المريض", "فهم أفضل للمعلومات الطبية", "تقليل القلق والتوتر", "زيادة ثقة المرضى", "تحسين كفاءة العمل الطبي"],
+      targetAudience: ["المستشفيات والمراكز الطبية", "العيادات الخاصة", "شركات الأدوية", "تطبيقات الصحة الرقمية", "منظمات الصحة العامة"],
+      timeline: "3-6 أسابيع",
+      technologies: ["Medical Design Standards", "Accessibility Design", "Medical Illustration", "AR for Anatomy", "HIPAA Compliant Design", "Therapeutic Color Systems"],
+      category: "design"
+    },
+
+    "Medical & Healthcare Design": {
+      name: "Medical & Healthcare Design",
+      description: "Specialized design for medical and healthcare sector",
+      fullDescription: "Specialized and advanced design for medical and healthcare sector considering medical standards and special needs of patients and medical staff. We provide comprehensive design solutions for hospitals, clinics, medical applications, and health awareness materials focusing on clarity, safety, and psychological comfort.",
+      keyFeatures: ["Medical Institution Identity Design", "Medical Application Interfaces", "Simplified Health Awareness Materials", "Hospital Guidance Systems Design", "Professional Medical Brochures", "Comfortable Waiting Area Design", "Accurate Medical Illustrations", "Accessibility-Focused Design"],
+      technicalFeatures: ["International Medical Design Standards", "Therapeutic & Calming Colors", "Certified Medical Symbols", "Vision-Impaired Friendly Design", "Clear & Easy-to-Read Fonts", "AR Technology for Anatomy"],
+      benefits: ["More Comfortable & Safe Medical Environment", "Improved Patient Experience", "Better Medical Information Understanding", "Reduced Anxiety & Stress", "Increased Patient Trust", "Improved Medical Work Efficiency"],
+      targetAudience: ["Hospitals & Medical Centers", "Private Clinics", "Pharmaceutical Companies", "Digital Health Apps", "Public Health Organizations"],
+      timeline: "3-6 weeks",
+      technologies: ["Medical Design Standards", "Accessibility Design", "Medical Illustration", "AR for Anatomy", "HIPAA Compliant Design", "Therapeutic Color Systems"],
+      category: "design"
+    },
+
+    // Environmental & Sustainable Design
+    "التصميم البيئي والمستدام": {
+      name: "التصميم البيئي والمستدام",
+      description: "تصميم صديق للبيئة ومراعي للاستدامة والمسؤولية البيئية",
+      fullDescription: "تصميم إبداعي ومسؤول يراعي البيئة والاستدامة في جميع جوانب العمل التصميمي. نقدم حلول تصميم مبتكرة تجمع بين الجمال والوظائف العملية والمسؤولية البيئية، من استخدام مواد صديقة للبيئة إلى تصميم رسائل توعوية بيئية مؤثرة وفعالة.",
+      keyFeatures: ["تصميم بمواد صديقة للبيئة", "رسائل توعوية بيئية مؤثرة", "تصميم حملات الاستدامة", "هويات بصرية للمنظمات البيئية", "تصميم منتجات قابلة لإعادة التدوير", "مواد تعليمية عن التغير المناخي", "تصميم معارض بيئية تفاعلية", "حلول طباعة صديقة للبيئة"],
+      technicalFeatures: ["مواد تصميم متجددة", "أحبار نباتية وطبيعية", "تقنيات طباعة موفرة للطاقة", "تصميم رقمي يقلل الطباعة", "استخدام ألوان طبيعية", "تقنيات تصميم مستدامة"],
+      benefits: ["تقليل الأثر البيئي بنسبة 80%", "رسائل بيئية مؤثرة وفعالة", "تعزيز الوعي البيئي", "توفير في التكاليف طويلة المدى", "صورة علامة تجارية مسؤولة", "مساهمة في حماية البيئة"],
+      targetAudience: ["المنظمات البيئية", "الشركات المسؤولة اجتماعياً", "المؤسسات التعليمية", "الحكومات والبلديات", "منظمات التنمية المستدامة"],
+      timeline: "3-7 أسابيع",
+      technologies: ["Sustainable Design Tools", "Eco-friendly Materials", "Green Printing Technology", "Digital-First Design", "Natural Color Systems", "Life Cycle Assessment"],
+      category: "design"
+    },
+
+    "Environmental & Sustainable Design": {
+      name: "Environmental & Sustainable Design",
+      description: "Eco-friendly design considering sustainability and environmental responsibility",
+      fullDescription: "Creative and responsible design considering environment and sustainability in all design work aspects. We provide innovative design solutions combining beauty, practical functions, and environmental responsibility, from using eco-friendly materials to designing impactful and effective environmental awareness messages.",
+      keyFeatures: ["Eco-friendly Material Design", "Impactful Environmental Awareness Messages", "Sustainability Campaign Design", "Environmental Organization Visual Identity", "Recyclable Product Design", "Climate Change Educational Materials", "Interactive Environmental Exhibition Design", "Eco-friendly Printing Solutions"],
+      technicalFeatures: ["Renewable Design Materials", "Plant-based & Natural Inks", "Energy-saving Printing Techniques", "Digital Design Reducing Printing", "Natural Color Usage", "Sustainable Design Techniques"],
+      benefits: ["80% Environmental Impact Reduction", "Impactful & Effective Environmental Messages", "Enhanced Environmental Awareness", "Long-term Cost Savings", "Responsible Brand Image", "Contributing to Environmental Protection"],
+      targetAudience: ["Environmental Organizations", "Socially Responsible Companies", "Educational Institutions", "Governments & Municipalities", "Sustainable Development Organizations"],
+      timeline: "3-7 weeks",
+      technologies: ["Sustainable Design Tools", "Eco-friendly Materials", "Green Printing Technology", "Digital-First Design", "Natural Color Systems", "Life Cycle Assessment"],
+      category: "design"
+    },
+
+    // Gaming & Entertainment Design
+    "تصميم الألعاب والترفيه": {
+      name: "تصميم الألعاب والترفيه",
+      description: "تصميم إبداعي للألعاب الرقمية وصناعة الترفيه",
+      fullDescription: "تصميم إبداعي ومتطور للألعاب الرقمية وصناعة الترفيه يجمع بين الإبداع الفني والتقنيات المتقدمة. نقدم حلول تصميم شاملة للألعاب المحمولة، ألعاب الكمبيوتر، الشخصيات، البيئات، والواجهات التفاعلية لخلق تجارب ترفيهية مذهلة ومدهشة.",
+      keyFeatures: ["تصميم شخصيات الألعاب الرقمية", "بيئات وعوالم ألعاب ثلاثية الأبعاد", "واجهات ألعاب تفاعلية وجذابة", "تصميم عناصر اللعبة والكائنات", "رسوم متحركة للشخصيات", "تأثيرات بصرية مذهلة", "تصميم قوائم وأيقونات الألعاب", "مفاهيم فنية وقصص مصورة"],
+      technicalFeatures: ["محركات الألعاب الحديثة", "رسوميات ثلاثية الأبعاد متقدمة", "فيزيقا واقعية للألعاب", "تقنيات الرسوم المتحركة", "شيدرز وتأثيرات متقدمة", "تحسين للأداء العالي"],
+      benefits: ["تجربة لعب مذهلة وممتعة", "زيادة جذب اللاعبين بنسبة 250%", "رسوميات عالية الجودة", "تفاعل أعمق مع اللعبة", "تمييز في السوق التنافسي", "عائد استثمار عالي"],
+      targetAudience: ["استوديوهات تطوير الألعاب", "شركات الترفيه الرقمي", "ناشري الألعاب", "مطوري الألعاب المستقلين", "منصات الألعاب"],
+      timeline: "6-12 أسبوع",
+      technologies: ["Unity 3D", "Unreal Engine", "Blender", "Maya", "Substance Painter", "Game Art Tools"],
+      category: "design"
+    },
+
+    "Gaming & Entertainment Design": {
+      name: "Gaming & Entertainment Design",
+      description: "Creative design for digital games and entertainment industry",
+      fullDescription: "Creative and advanced design for digital games and entertainment industry combining artistic creativity with advanced technologies. We provide comprehensive design solutions for mobile games, computer games, characters, environments, and interactive interfaces to create amazing and astonishing entertainment experiences.",
+      keyFeatures: ["Digital Game Character Design", "3D Game Environments & Worlds", "Interactive & Attractive Game Interfaces", "Game Elements & Objects Design", "Character Animation", "Stunning Visual Effects", "Game Menu & Icon Design", "Art Concepts & Illustrated Stories"],
+      technicalFeatures: ["Modern Game Engines", "Advanced 3D Graphics", "Realistic Game Physics", "Animation Techniques", "Advanced Shaders & Effects", "High Performance Optimization"],
+      benefits: ["Amazing & Enjoyable Gaming Experience", "250% Player Attraction Increase", "High-Quality Graphics", "Deeper Game Interaction", "Competitive Market Distinction", "High Return on Investment"],
+      targetAudience: ["Game Development Studios", "Digital Entertainment Companies", "Game Publishers", "Indie Game Developers", "Gaming Platforms"],
+      timeline: "6-12 weeks",
+      technologies: ["Unity 3D", "Unreal Engine", "Blender", "Maya", "Substance Painter", "Game Art Tools"],
+      category: "design"
+    },
+
+    // Children & Educational Design
+    "تصميم للأطفال والتعليم": {
+      name: "تصميم للأطفال والتعليم",
+      description: "تصميم تعليمي وترفيهي مخصص للأطفال والتعليم المبكر",
+      fullDescription: "تصميم تعليمي وترفيهي متخصص للأطفال والمراحل التعليمية المبكرة يجمع بين المتعة والتعلم الفعال. نقدم حلول تصميم إبداعية تراعي علم نفس الطفل وأساليب التعلم الحديثة لخلق محتوى تعليمي جذاب ومفيد ومؤثر.",
+      keyFeatures: ["كتب أطفال مصورة تفاعلية", "ألعاب تعليمية رقمية للأطفال", "رسوم متحركة تعليمية", "تطبيقات تعليمية للأطفال", "مواد تعليمية ملونة وجذابة", "شخصيات كرتونية تعليمية", "ألعاب تنمية المهارات", "بيئات تعليمية افتراضية"],
+      technicalFeatures: ["ألوان آمنة ومحفزة للتعلم", "خطوط مناسبة للأطفال", "تفاعل بسيط وسهل", "محتوى تعليمي متدرج", "أصوات وموسيقى تعليمية", "أمان المحتوى للأطفال"],
+      benefits: ["تعلم أسرع وأكثر متعة", "تنمية قدرات الطفل الإبداعية", "زيادة الاستيعاب بنسبة 120%", "تطوير مهارات متنوعة", "حب التعلم والاستكشاف", "تأسيس قوي للمعرفة"],
+      targetAudience: ["دور النشر التعليمية", "مراكز التعليم المبكر", "تطبيقات تعليم الأطفال", "المدارس والحضانات", "المربين والمعلمين"],
+      timeline: "4-8 أسابيع",
+      technologies: ["Child Psychology Design", "Educational Animation", "Interactive Learning", "Kid-Safe Technologies", "Gamification", "Child Development Tools"],
+      category: "design"
+    },
+
+    "Children & Educational Design": {
+      name: "Children & Educational Design",
+      description: "Educational and entertaining design specialized for children and early education",
+      fullDescription: "Educational and entertaining design specialized for children and early educational stages combining fun with effective learning. We provide creative design solutions considering child psychology and modern learning methods to create engaging, useful, and impactful educational content.",
+      keyFeatures: ["Interactive Illustrated Children's Books", "Educational Digital Games for Children", "Educational Animation", "Educational Apps for Children", "Colorful & Attractive Educational Materials", "Educational Cartoon Characters", "Skill Development Games", "Virtual Educational Environments"],
+      technicalFeatures: ["Safe & Learning-Stimulating Colors", "Child-Appropriate Fonts", "Simple & Easy Interaction", "Progressive Educational Content", "Educational Sounds & Music", "Child-Safe Content"],
+      benefits: ["Faster & More Enjoyable Learning", "Developing Child's Creative Abilities", "120% Comprehension Increase", "Diverse Skill Development", "Love for Learning & Exploration", "Strong Knowledge Foundation"],
+      targetAudience: ["Educational Publishers", "Early Education Centers", "Children's Educational Apps", "Schools & Kindergartens", "Educators & Teachers"],
+      timeline: "4-8 weeks",
+      technologies: ["Child Psychology Design", "Educational Animation", "Interactive Learning", "Kid-Safe Technologies", "Gamification", "Child Development Tools"],
+      category: "design"
+    },
+
+    // Cultural & Heritage Design
+    "التصميم الثقافي والتراثي": {
+      name: "التصميم الثقافي والتراثي",
+      description: "تصميم يحتفي بالثقافة والتراث العربي والإسلامي",
+      fullDescription: "تصميم ثقافي وتراثي متخصص يحتفي بالهوية العربية والإسلامية والثقافات المحلية. نقدم حلول تصميم أصيلة تجمع بين الأصالة والحداثة لإحياء التراث وتقديمه بصورة عصرية جذابة تناسب العصر الحالي مع الحفاظ على الجوهر الثقافي.",
+      keyFeatures: ["زخارف وأنماط تراثية أصيلة", "خطوط عربية فنية جميلة", "تصميم مستوحى من التراث", "هوية بصرية للمؤسسات الثقافية", "مواد تراثية تعليمية", "تصميم معارض تراثية", "حفظ التراث رقمياً", "دمج التراث مع التكنولوجيا"],
+      technicalFeatures: ["خطوط عربية احترافية", "نقوش وزخارف دقيقة", "ألوان تراثية أصيلة", "تقنيات الحفظ الرقمي", "واقع معزز للتراث", "مكتبات تراثية رقمية"],
+      benefits: ["الحفاظ على الهوية الثقافية", "تعزيز الانتماء والفخر", "تعليم الأجيال الجديدة", "ترويج السياحة الثقافية", "تصدير الثقافة للعالم", "إحياء التراث للمستقبل"],
+      targetAudience: ["المتاحف والمؤسسات الثقافية", "وزارات الثقافة والتراث", "مراكز التراث الشعبي", "دور النشر التراثية", "السياحة الثقافية"],
+      timeline: "5-10 أسابيع",
+      technologies: ["Arabic Typography", "Cultural Patterns", "Heritage Preservation", "AR for Heritage", "Digital Archives", "Cultural Design Systems"],
+      category: "design"
+    },
+
+    "Cultural & Heritage Design": {
+      name: "Cultural & Heritage Design",
+      description: "Design celebrating Arabic and Islamic culture and heritage",
+      fullDescription: "Specialized cultural and heritage design celebrating Arabic and Islamic identity and local cultures. We provide authentic design solutions combining authenticity with modernity to revive heritage and present it in an attractive contemporary way suitable for current times while preserving cultural essence.",
+      keyFeatures: ["Authentic Heritage Patterns & Motifs", "Beautiful Artistic Arabic Fonts", "Heritage-Inspired Design", "Cultural Institution Visual Identity", "Heritage Educational Materials", "Heritage Exhibition Design", "Digital Heritage Preservation", "Heritage-Technology Integration"],
+      technicalFeatures: ["Professional Arabic Typography", "Precise Inscriptions & Decorations", "Authentic Heritage Colors", "Digital Preservation Techniques", "AR for Heritage", "Digital Heritage Libraries"],
+      benefits: ["Preserving Cultural Identity", "Enhancing Belonging & Pride", "Educating New Generations", "Promoting Cultural Tourism", "Exporting Culture to the World", "Reviving Heritage for Future"],
+      targetAudience: ["Museums & Cultural Institutions", "Culture & Heritage Ministries", "Folk Heritage Centers", "Heritage Publishers", "Cultural Tourism"],
+      timeline: "5-10 weeks",
+      technologies: ["Arabic Typography", "Cultural Patterns", "Heritage Preservation", "AR for Heritage", "Digital Archives", "Cultural Design Systems"],
+      category: "design"
+    },
+
+    // Sports & Fitness Design
+    "التصميم الرياضي واللياقة": {
+      name: "التصميم الرياضي واللياقة",
+      description: "تصميم متخصص للمجال الرياضي ولياقة البدنية",
+      fullDescription: "تصميم متخصص ومتطور للمجال الرياضي واللياقة البدنية يجمع بين الطاقة والحيوية والدافعية. نقدم حلول تصميم قوية ومحفزة للنوادي الرياضية، التطبيقات الرياضية، المعدات الرياضية، والفعاليات الرياضية لإلهام الأداء الأفضل وتحقيق الأهداف الرياضية.",
+      keyFeatures: ["هوية بصرية للنوادي الرياضية", "تطبيقات اللياقة البدنية", "تصميم معدات وملابس رياضية", "مواد تسويقية للفعاليات الرياضية", "واجهات تطبيقات التمرين", "تصميم صالات ومرافق رياضية", "برامج تدريب رياضي مرئية", "تصميم منصات رياضية رقمية"],
+      technicalFeatures: ["ألوان طاقة ونشاط", "تصميم محفز وديناميكي", "رسوميات حركة رياضية", "تقنيات تفاعلية للتمرين", "قياس الأداء البصري", "تحفيز نفسي بالتصميم"],
+      benefits: ["زيادة الدافعية للرياضة", "تحسين الأداء الرياضي", "جذب أعضاء جدد بنسبة 180%", "تجربة تمرين أفضل", "التميز في السوق الرياضي", "بناء مجتمع رياضي قوي"],
+      targetAudience: ["النوادي والصالات الرياضية", "تطبيقات اللياقة البدنية", "منظمي الفعاليات الرياضية", "المدربين الشخصيين", "شركات المعدات الرياضية"],
+      timeline: "3-6 أسابيع",
+      technologies: ["Sports App Design", "Fitness Tracking UI", "Dynamic Graphics", "Motivational Design", "Performance Visualization", "Sports Technology"],
+      category: "design"
+    },
+
+    "Sports & Fitness Design": {
+      name: "Sports & Fitness Design",
+      description: "Specialized design for sports and fitness sector",
+      fullDescription: "Specialized and advanced design for sports and fitness sector combining energy, vitality, and motivation. We provide powerful and motivating design solutions for sports clubs, sports applications, sports equipment, and sports events to inspire better performance and achieve sports goals.",
+      keyFeatures: ["Sports Club Visual Identity", "Fitness Applications", "Sports Equipment & Apparel Design", "Sports Event Marketing Materials", "Workout App Interfaces", "Sports Facility & Gym Design", "Visual Sports Training Programs", "Digital Sports Platform Design"],
+      technicalFeatures: ["Energy & Activity Colors", "Motivating & Dynamic Design", "Sports Motion Graphics", "Interactive Exercise Technologies", "Visual Performance Measurement", "Psychological Motivation Through Design"],
+      benefits: ["Increased Sports Motivation", "Improved Athletic Performance", "180% New Member Attraction", "Better Workout Experience", "Sports Market Distinction", "Strong Sports Community Building"],
+      targetAudience: ["Sports Clubs & Gyms", "Fitness Applications", "Sports Event Organizers", "Personal Trainers", "Sports Equipment Companies"],
+      timeline: "3-6 weeks",
+      technologies: ["Sports App Design", "Fitness Tracking UI", "Dynamic Graphics", "Motivational Design", "Performance Visualization", "Sports Technology"],
+      category: "design"
     }
   };
 
