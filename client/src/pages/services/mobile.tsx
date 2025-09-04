@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/i18n/lang";
+import { useLocation } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import { SEOHead } from "@/components/SEOHead";
 import { ServiceHero } from "@/components/services/mobile/ServiceHero";
 import { FeatureGrid } from "@/components/services/mobile/FeatureGrid";
@@ -10,6 +12,12 @@ import { ProcessTimeline } from "@/components/services/mobile/ProcessTimeline";
 import { Deliverables } from "@/components/services/mobile/Deliverables";
 import { GettingStarted } from "@/components/services/mobile/GettingStarted";
 import { StickyCTA } from "@/components/services/mobile/StickyCTA";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Smartphone, Eye, ArrowRight, Star, CheckCircle, Globe, Heart, Users, Brain } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface MobileServiceData {
   hero: {
@@ -64,9 +72,130 @@ interface MobileServiceData {
 }
 
 export default function MobileDetail() {
-  const { lang } = useLanguage();
+  const { lang, dir } = useLanguage();
+  const [, setLocation] = useLocation();
   const [mobileData, setMobileData] = useState<MobileServiceData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedAppCategory, setSelectedAppCategory] = useState("all");
+  const [selectedAppForDetails, setSelectedAppForDetails] = useState<any>(null);
+  const [showAppDetailsModal, setShowAppDetailsModal] = useState(false);
+
+  // Mobile Apps Data
+  const getMobileApps = () => [
+    {
+      name: "تطبيق توصيل طعام",
+      description: "منصة توصيل طعام متكاملة مع تتبع مباشر وتجربة استخدام استثنائية",
+      features: ["قوائم طعام تفاعلية", "تخصيص الطلبات", "تتبع GPS للتوصيل", "طرق دفع متعددة", "تقييم المطاعم والسائقين"],
+      category: "ecommerce"
+    },
+    {
+      name: "Food Delivery", 
+      description: "Food ordering and delivery platform with live tracking and exceptional user experience",
+      features: ["Interactive Food Menus", "Order Customization", "GPS Delivery Tracking", "Multiple Payment Methods", "Restaurant & Driver Rating"],
+      category: "ecommerce"
+    },
+    {
+      name: "المحاسبة الشخصية",
+      description: "تطبيق ذكي لإدارة الأموال والمصروفات الشخصية مع تحليل مالي متقدم",
+      features: ["تتبع المصروفات التلقائي", "إنشاء ميزانيات ذكية", "تصنيف المعاملات", "تقارير مالية مفصلة", "تنبيهات الميزانية"],
+      category: "finance"
+    },
+    {
+      name: "Personal Finance",
+      description: "Smart personal money and expense management app with advanced financial analytics", 
+      features: ["Automatic Expense Tracking", "Smart Budget Creation", "Transaction Categorization", "Detailed Financial Reports", "Budget Alerts"],
+      category: "finance"
+    },
+    {
+      name: "متابعة صحية",
+      description: "تطبيق ذكي لمراقبة الصحة اليومية وتتبع العادات الصحية",
+      features: ["تتبع الأعراض اليومية", "تذكير بالأدوية", "مراقبة العلامات الحيوية", "يوميات صحية", "تقارير طبية"],
+      category: "healthcare"
+    },
+    {
+      name: "Health Monitoring",
+      description: "Smart app for daily health monitoring and tracking healthy habits",
+      features: ["Daily Symptom Tracking", "Medication Reminders", "Vital Signs Monitoring", "Health Diary", "Medical Reports"],
+      category: "healthcare"
+    },
+    {
+      name: "Social Media Manager",
+      description: "Comprehensive platform for managing social media accounts with advanced analytics tools",
+      features: ["Multi-Account Management", "Post Scheduling", "Performance Analytics", "Comment Management", "Detailed Reports"],
+      category: "marketing"
+    },
+    {
+      name: "حملات إعلانية",
+      description: "تطبيق شامل لإدارة وتشغيل الحملات الإعلانية الرقمية بكفاءة عالية",
+      features: ["إنشاء حملات متعددة المنصات", "استهداف الجمهور الذكي", "تحليل الأداء المتقدم", "إدارة الميزانيات", "تقارير مفصلة في الوقت الفعلي"],
+      category: "marketing"
+    }
+  ];
+
+  const getDetailedAppInfo = (appName: string) => {
+    const appDetails = {
+      "تطبيق توصيل طعام": {
+        name: "تطبيق توصيل طعام",
+        description: "منصة توصيل طعام متكاملة مع تتبع مباشر وتجربة استخدام استثنائية",
+        fullDescription: "تطبيق توصيل طعام متطور يربط بين العملاء والمطاعم والسائقين. يوفر تجربة طلب سلسة مع تتبع الطلبات في الوقت الفعلي وخيارات دفع متنوعة ونظام تقييم شامل. مصمم لتبسيط عملية طلب الطعام وتحسين خدمة التوصيل.",
+        keyFeatures: ["قوائم طعام تفاعلية", "تخصيص الطلبات", "تتبع GPS للتوصيل", "طرق دفع متعددة", "تقييم المطاعم والسائقين", "عروض وكوبونات", "تاريخ الطلبات", "إشعارات فورية"],
+        technicalFeatures: ["خرائط Google المتقدمة", "معالجة مدفوعات آمنة", "إدارة الطلبات الذكية", "واجهات متعددة", "تحسين المسارات", "قاعدة بيانات مركزية"],
+        benefits: ["سهولة طلب الطعام", "توصيل سريع ودقيق", "خيارات واسعة من المطاعم", "توفير الوقت والجهد", "أسعار تنافسية", "خدمة عملاء ممتازة"],
+        targetAudience: ["محبي الطعام", "العائلات", "المهنيين المشغولين", "الطلاب", "كبار السن"],
+        timeline: "7-9 أسابيع",
+        technologies: ["React Native", "Google Maps", "Socket.io", "Payment Gateway", "Firebase", "GPS Tracking"]
+      },
+      "Food Delivery": {
+        name: "Food Delivery",
+        description: "Food ordering and delivery platform with live tracking and exceptional user experience",
+        fullDescription: "Advanced food delivery app that connects customers, restaurants, and drivers. Provides seamless ordering experience with real-time order tracking, diverse payment options, and comprehensive rating system. Designed to simplify food ordering process and improve delivery service.",
+        keyFeatures: ["Interactive Food Menus", "Order Customization", "GPS Delivery Tracking", "Multiple Payment Methods", "Restaurant & Driver Rating", "Offers & Coupons", "Order History", "Instant Notifications"],
+        technicalFeatures: ["Advanced Google Maps", "Secure Payment Processing", "Smart Order Management", "Multi-platform Interface", "Route Optimization", "Centralized Database"],
+        benefits: ["Easy Food Ordering", "Fast & Accurate Delivery", "Wide Restaurant Options", "Time & Effort Saving", "Competitive Prices", "Excellent Customer Service"],
+        targetAudience: ["Food Lovers", "Families", "Busy Professionals", "Students", "Seniors"],
+        timeline: "7-9 weeks",
+        technologies: ["React Native", "Google Maps", "Socket.io", "Payment Gateway", "Firebase", "GPS Tracking"]
+      },
+      "المحاسبة الشخصية": {
+        name: "المحاسبة الشخصية",
+        description: "تطبيق ذكي لإدارة الأموال والمصروفات الشخصية مع تحليل مالي متقدم",
+        fullDescription: "تطبيق محاسبة شخصية متطور يساعد المستخدمين على إدارة أموالهم بذكاء. يتضمن تتبع المصروفات، وضع الميزانيات، وتحليل العادات المالية. يوفر رؤى مالية قيمة ويساعد على تحقيق الأهداف المالية الشخصية.",
+        keyFeatures: ["تتبع المصروفات التلقائي", "إنشاء ميزانيات ذكية", "تصنيف المعاملات", "تقارير مالية مفصلة", "تنبيهات الميزانية", "أهداف الادخار", "تحليل الاتجاهات المالية", "إدارة الديون"],
+        technicalFeatures: ["مزامنة البنوك", "تشفير البيانات المالية", "واجهة سهلة الاستخدام", "تحليلات ذكية", "نسخ احتياطية آمنة", "تصدير التقارير"],
+        benefits: ["تحسين الإدارة المالية", "توفير المال", "تحقيق الأهداف المالية", "فهم أفضل للعادات المالية", "تقليل الديون", "زيادة الادخار"],
+        targetAudience: ["الأفراد", "العائلات", "الطلاب", "المهنيين الشباب", "أي شخص يريد إدارة أمواله"],
+        timeline: "4-5 أسابيع",
+        technologies: ["React Native", "Plaid API", "Chart.js", "SQLite", "Bank Integration", "Encryption"]
+      },
+      "Personal Finance": {
+        name: "Personal Finance",
+        description: "Smart personal money and expense management app with advanced financial analytics",
+        fullDescription: "Advanced personal finance app that helps users manage their money intelligently. Includes expense tracking, budget creation, and financial habit analysis. Provides valuable financial insights and helps achieve personal financial goals.",
+        keyFeatures: ["Automatic Expense Tracking", "Smart Budget Creation", "Transaction Categorization", "Detailed Financial Reports", "Budget Alerts", "Savings Goals", "Financial Trend Analysis", "Debt Management"],
+        technicalFeatures: ["Bank Synchronization", "Financial Data Encryption", "User-friendly Interface", "Smart Analytics", "Secure Backups", "Report Export"],
+        benefits: ["Better Financial Management", "Money Saving", "Achieving Financial Goals", "Better Understanding of Financial Habits", "Debt Reduction", "Increased Savings"],
+        targetAudience: ["Individuals", "Families", "Students", "Young Professionals", "Anyone wanting to manage money"],
+        timeline: "4-5 weeks",
+        technologies: ["React Native", "Plaid API", "Chart.js", "SQLite", "Bank Integration", "Encryption"]
+      }
+    };
+    
+    return appDetails[appName as keyof typeof appDetails];
+  };
+
+  const getAppCategories = () => [
+    { id: "all", name: dir === 'rtl' ? "جميع التطبيقات" : "All Apps" },
+    { id: "ecommerce", name: dir === 'rtl' ? "التجارة الإلكترونية" : "E-commerce" },
+    { id: "finance", name: dir === 'rtl' ? "المالية" : "Finance" },
+    { id: "healthcare", name: dir === 'rtl' ? "الصحة" : "Healthcare" },
+    { id: "marketing", name: dir === 'rtl' ? "التسويق" : "Marketing" }
+  ];
+
+  const getFilteredApps = () => {
+    const apps = getMobileApps();
+    if (selectedAppCategory === "all") return apps;
+    return apps.filter(app => app.category === selectedAppCategory);
+  };
 
   useEffect(() => {
     const loadMobileServiceData = async () => {
@@ -177,6 +306,182 @@ export default function MobileDetail() {
           items={mobileData.gettingStarted.items}
         />
 
+        {/* Mobile Apps Examples Section */}
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              {/* Section Header */}
+              <motion.div
+                className="text-center mb-16"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-brand-text-primary mb-6">
+                  {dir === 'rtl' ? 'أمثلة من التطبيقات المطورة' : 'Mobile App Examples'}
+                </h2>
+                <p className="text-xl text-brand-text-muted max-w-3xl mx-auto leading-relaxed">
+                  {dir === 'rtl' 
+                    ? 'تصفح مجموعة متنوعة من التطبيقات المحمولة التي يمكننا تطويرها لك، كل تطبيق مصمم بعناية ليلبي احتياجاتك الخاصة'
+                    : 'Browse a variety of mobile applications we can develop for you, each app carefully designed to meet your specific needs'
+                  }
+                </p>
+              </motion.div>
+
+              {/* Category Filters */}
+              <motion.div
+                className="flex flex-wrap justify-center gap-4 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {getAppCategories().map((category) => (
+                  <Button
+                    key={category.id}
+                    onClick={() => setSelectedAppCategory(category.id)}
+                    variant={selectedAppCategory === category.id ? "default" : "outline"}
+                    className={cn(
+                      "rounded-xl px-6 py-3 font-medium transition-all duration-300",
+                      selectedAppCategory === category.id
+                        ? "bg-primary text-white shadow-lg"
+                        : "hover:bg-primary/10 hover:border-primary"
+                    )}
+                    data-testid={`category-filter-${category.id}`}
+                  >
+                    {category.name}
+                  </Button>
+                ))}
+              </motion.div>
+
+              {/* Apps Grid */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedAppCategory}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+                >
+                  {getFilteredApps().map((app, index) => (
+                    <motion.div
+                      key={`${selectedAppCategory}-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                    >
+                      <Card className="h-full hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary">
+                        <CardHeader>
+                          <CardTitle className="text-lg font-bold text-brand-text-primary flex items-center gap-2">
+                            <Smartphone className="w-5 h-5 text-primary" />
+                            {app.name}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-brand-text-muted mb-4 leading-relaxed">
+                            {app.description}
+                          </p>
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-semibold text-brand-text-primary text-sm mb-2">
+                                {dir === 'rtl' ? 'الميزات الرئيسية:' : 'Key Features:'}
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {app.features.map((feature, featureIndex) => (
+                                  <Badge 
+                                    key={featureIndex} 
+                                    variant="secondary" 
+                                    className="text-xs"
+                                  >
+                                    {feature}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            {/* Action Buttons */}
+                            <div className="flex flex-col sm:flex-row gap-2">
+                              {/* View Details Button */}
+                              <Button
+                                onClick={() => {
+                                  setSelectedAppForDetails(app);
+                                  setShowAppDetailsModal(true);
+                                }}
+                                variant="outline"
+                                className="flex-1 border-primary text-primary hover:bg-primary hover:text-white rounded-xl transition-all duration-300 focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                size="sm"
+                                aria-label={`View details for ${app.name}`}
+                                data-testid={`view-details-app-${app.name.replace(/\s+/g, '-')}`}
+                              >
+                                <Eye className="w-4 h-4 mr-2" />
+                                <span className="font-medium">
+                                  {dir === 'rtl' ? 'عرض التفاصيل' : 'View Details'}
+                                </span>
+                              </Button>
+                              
+                              {/* Apply Now Button */}
+                              <Button
+                                onClick={() => {
+                                  // Navigate to contact page with app name pre-selected
+                                  setLocation(`/contact?service=${encodeURIComponent(app.name)}`);
+                                }}
+                                className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-primary/20 focus:ring-offset-2"
+                                size="sm"
+                                aria-label={`Apply for ${app.name}`}
+                                data-testid={`apply-app-${app.name.replace(/\s+/g, '-')}`}
+                              >
+                                <span className="font-medium">
+                                  {dir === 'rtl' ? 'اطلب الآن' : 'Apply Now'}
+                                </span>
+                                <ArrowRight 
+                                  className={cn(
+                                    "w-4 h-4 ml-2 transition-transform duration-200",
+                                    dir === 'rtl' && "rotate-180 ml-0 mr-2"
+                                  )} 
+                                />
+                              </Button>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Call to Action for Custom App */}
+              <motion.div
+                className="mt-16 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="bg-gradient-to-r from-primary/10 to-brand-sky-accent/10 rounded-2xl p-8">
+                  <h3 className="text-2xl font-bold text-brand-text-primary mb-4">
+                    {dir === 'rtl' ? 'لديك فكرة تطبيق مختلفة؟' : 'Have a Different App Idea?'}
+                  </h3>
+                  <p className="text-brand-text-muted mb-6 max-w-2xl mx-auto">
+                    {dir === 'rtl' 
+                      ? 'نطور تطبيقات الهواتف المحمولة المخصصة حسب احتياجاتك الخاصة - أخبرنا عن فكرتك وسنحولها إلى تطبيق احترافي' 
+                      : 'We develop custom mobile applications based on your specific needs - tell us your idea and we\'ll turn it into professional mobile app'
+                    }
+                  </p>
+                  <Button 
+                    onClick={() => setLocation('/contact')}
+                    size="lg" 
+                    className="rounded-xl px-8 py-3"
+                  >
+                    {dir === 'rtl' ? 'ناقش فكرتك معنا' : 'Discuss Your Idea'}
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA Section */}
         <section className="py-20 bg-gradient-to-br from-primary to-brand-sky-base text-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -218,6 +523,219 @@ export default function MobileDetail() {
           primaryLabel={mobileData.cta.primary}
           secondaryLabel={mobileData.cta.secondary}
         />
+
+        {/* App Details Modal */}
+        {selectedAppForDetails && (
+          <Dialog open={showAppDetailsModal} onOpenChange={setShowAppDetailsModal}>
+            <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto 
+              sm:max-h-[90vh] sm:m-4 m-2 
+              w-[calc(100vw-16px)] sm:w-auto
+              p-4 sm:p-6 
+              rounded-xl sm:rounded-2xl
+              scroll-smooth">
+              <DialogHeader className="pb-4">
+                <DialogTitle className="text-xl sm:text-2xl font-bold text-brand-text-primary flex items-start sm:items-center gap-3 leading-tight">
+                  <Smartphone className="w-5 h-5 sm:w-6 sm:h-6 text-primary mt-1 sm:mt-0 flex-shrink-0" />
+                  <span className="break-words">{selectedAppForDetails.name}</span>
+                </DialogTitle>
+              </DialogHeader>
+              
+              {(() => {
+                const appDetails = getDetailedAppInfo(selectedAppForDetails.name);
+                if (!appDetails) {
+                  // Show fallback content when detailed app info is not available
+                  return (
+                    <div className="space-y-6 py-4">
+                      <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
+                          {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                        </h3>
+                        <p className="text-brand-text-muted leading-relaxed">
+                          {selectedAppForDetails.description}
+                        </p>
+                      </div>
+
+                      <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
+                        <h4 className="font-bold text-green-800 mb-2">
+                          {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
+                        </h4>
+                        <p className="text-green-700 text-lg font-semibold">
+                          {dir === 'rtl' ? '4-6 أسابيع' : '4-6 weeks'}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                          <Star className="w-5 h-5 text-primary" />
+                          {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {selectedAppForDetails.features?.map((feature: string, index: number) => (
+                            <div key={index} className="flex items-start gap-3 p-3 sm:p-4 bg-gray-50 rounded-lg touch-manipulation">
+                              <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                              <span className="text-brand-text-muted">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 border-t mt-2">
+                        <Button
+                          onClick={() => {
+                            setShowAppDetailsModal(false);
+                            setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
+                          }}
+                          className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-4 sm:py-3 min-h-[48px] touch-manipulation"
+                          size="lg"
+                        >
+                          <ArrowRight className={cn(
+                            "w-5 h-5 mr-2",
+                            dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                          )} />
+                          {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                        </Button>
+                        <Button
+                          onClick={() => setShowAppDetailsModal(false)}
+                          variant="outline"
+                          className="flex-1 rounded-xl py-4 sm:py-3 min-h-[48px] border-2 touch-manipulation"
+                          size="lg"
+                        >
+                          {dir === 'rtl' ? 'إغلاق' : 'Close'}
+                        </Button>
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
+                    {/* Overview Section */}
+                    <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
+                        {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                      </h3>
+                      <p className="text-brand-text-muted leading-relaxed">
+                        {appDetails.fullDescription}
+                      </p>
+                    </div>
+
+                    {/* Timeline Only */}
+                    <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
+                      <h4 className="font-bold text-green-800 mb-2">
+                        {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
+                      </h4>
+                      <p className="text-green-700 text-lg font-semibold">{appDetails.timeline}</p>
+                    </div>
+
+                    {/* Key Features */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Star className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {appDetails.keyFeatures.map((feature: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 sm:p-4 bg-gray-50 rounded-lg touch-manipulation">
+                            <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="text-brand-text-muted">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Technical Features */}
+                    <div className="space-y-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Globe className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'المميزات التقنية' : 'Technical Features'}
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {appDetails.technicalFeatures.map((feature: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-blue-800">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Benefits */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Heart className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'الفوائد والمزايا' : 'Benefits & Advantages'}
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {appDetails.benefits.map((benefit: string, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                            <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span className="text-green-800">{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Target Audience */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Users className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'الفئة المستهدفة' : 'Target Audience'}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {appDetails.targetAudience.map((audience: string, index: number) => (
+                          <Badge key={index} variant="secondary" className="px-3 py-1">
+                            {audience}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Technologies */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Brain className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'التقنيات المستخدمة' : 'Technologies Used'}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {appDetails.technologies.map((tech: string, index: number) => (
+                          <Badge key={index} variant="outline" className="px-3 py-1 border-primary text-primary">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-6 border-t mt-2">
+                      <Button
+                        onClick={() => {
+                          setShowAppDetailsModal(false);
+                          setLocation(`/contact?service=${encodeURIComponent(selectedAppForDetails.name)}`);
+                        }}
+                        className="flex-1 bg-primary hover:bg-primary-dark text-white rounded-xl py-4 sm:py-3 min-h-[48px] touch-manipulation"
+                        size="lg"
+                      >
+                        <ArrowRight className={cn(
+                          "w-5 h-5 mr-2",
+                          dir === 'rtl' && "rotate-180 mr-0 ml-2"
+                        )} />
+                        {dir === 'rtl' ? 'اطلب هذا التطبيق الآن' : 'Request This App Now'}
+                      </Button>
+                      <Button
+                        onClick={() => setShowAppDetailsModal(false)}
+                        variant="outline"
+                        className="flex-1 rounded-xl py-4 sm:py-3 min-h-[48px] border-2 touch-manipulation"
+                        size="lg"
+                      >
+                        {dir === 'rtl' ? 'إغلاق' : 'Close'}
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })()}
+            </DialogContent>
+          </Dialog>
+        )}
       </main>
     </>
   );
