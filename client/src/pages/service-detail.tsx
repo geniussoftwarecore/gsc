@@ -4527,8 +4527,8 @@ export default function ServiceDetail() {
           </section>
         )}
 
-        {/* Marketing Categories and Packages Section - Only show for digital marketing service */}
-        {service && service.id === '31e77b8a-5cda-4826-ac0a-3146d33c2bb2' && (
+        {/* Marketing Categories and Packages Section - Only show for marketing services */}
+        {service && service.category === 'marketing' && (
           <section className="py-20 bg-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-6xl mx-auto">
