@@ -2377,7 +2377,12 @@ const getDetailedMarketingPackageInfo = (packageName: string, dir: string = 'ltr
       targetAudience: ["الشركات الكبيرة والمتوسطة", "العلامات التجارية الراقية", "الشركات التي تستهدف جمهور واسع", "المؤسسات التعليمية والصحية", "قطاع الضيافة والسياحة"],
       timeline: "مستمر شهرياً مع إعداد أولي لمدة أسبوعين",
       price: "8000",
-      package: "platinum"
+      package: "platinum",
+      deliverables: ["استراتيجية تسويقية شاملة", "دليل الهوية البصرية للمحتوى", "تقارير أداء شهرية مفصلة", "كتيب إرشادات إدارة الحسابات", "مكتبة محتوى بصري احترافي", "دليل أفضل الممارسات", "شهادة اعتماد لفريق العمل", "دعم فني مستمر على مدار الساعة"],
+      phases: ["المرحلة الأولى: دراسة السوق والمنافسين", "المرحلة الثانية: وضع الاستراتيجية التسويقية", "المرحلة الثالثة: إنشاء الهوية البصرية والمحتوى", "المرحلة الرابعة: إطلاق الحملات وإدارة الحسابات", "المرحلة الخامسة: المتابعة والتحليل والتحسين المستمر"],
+      roiMetrics: ["عائد استثمار مضمون 300% خلال 6 أشهر", "توفير 60% من تكاليف التسويق التقليدي", "زيادة المبيعات بنسبة 90% في أول سنة", "تحسين معدل التحويل إلى 15%"],
+      competitiveAdvantages: ["فريق متخصص مخصص لحسابكم حصرياً", "أحدث أدوات التحليل والذكاء الاصطناعي", "شراكات استراتيجية مع منصات التواصل", "ضمان النتائج أو استرداد جزئي"],
+      technologies: ["Meta Business Suite", "Google Analytics 4", "Hootsuite Enterprise", "Canva Pro", "Adobe Creative Suite", "Buffer", "Sprout Social", "AI Content Tools"]
     },
 
     "Complete Social Media Campaign - Platinum Package": {
@@ -2389,7 +2394,12 @@ const getDetailedMarketingPackageInfo = (packageName: string, dir: string = 'ltr
       targetAudience: ["Large and medium companies", "Premium brands", "Companies targeting wide audiences", "Educational and healthcare institutions", "Hospitality and tourism sector"],
       timeline: "Monthly ongoing with 2-week initial setup",
       price: "8000",
-      package: "platinum"
+      package: "platinum",
+      deliverables: ["Comprehensive marketing strategy", "Visual content identity guide", "Detailed monthly performance reports", "Account management guidebook", "Professional visual content library", "Best practices manual", "Team certification credentials", "24/7 continuous technical support"],
+      phases: ["Phase 1: Market and competitor analysis", "Phase 2: Marketing strategy development", "Phase 3: Visual identity and content creation", "Phase 4: Campaign launch and account management", "Phase 5: Continuous monitoring, analysis and optimization"],
+      roiMetrics: ["Guaranteed 300% ROI within 6 months", "60% traditional marketing cost savings", "90% sales increase in first year", "Conversion rate improvement to 15%"],
+      competitiveAdvantages: ["Dedicated specialized team exclusively for your account", "Latest AI-powered analytics tools", "Strategic partnerships with social platforms", "Results guarantee or partial refund"],
+      technologies: ["Meta Business Suite", "Google Analytics 4", "Hootsuite Enterprise", "Canva Pro", "Adobe Creative Suite", "Buffer", "Sprout Social", "AI Content Tools"]
     },
 
     // Gold packages
@@ -2402,7 +2412,12 @@ const getDetailedMarketingPackageInfo = (packageName: string, dir: string = 'ltr
       targetAudience: ["الشركات المتوسطة", "الأعمال الناشئة", "المتاجر الإلكترونية", "الخدمات المهنية"],
       timeline: "مستمر شهرياً",
       price: "5000",
-      package: "gold"
+      package: "gold",
+      deliverables: ["استراتيجية تسويق متوسطة المدى", "دليل الهوية البصرية الأساسي", "تقارير أداء أسبوعية", "كتيب إرشادات للفريق", "مكتبة محتوى بصري", "دليل الممارسات الأساسية", "دعم فني أساسي"],
+      phases: ["المرحلة الأولى: تحليل السوق الأساسي", "المرحلة الثانية: وضع استراتيجية المحتوى", "المرحلة الثالثة: إنشاء المحتوى والتصاميم", "المرحلة الرابعة: إدارة الحسابات والتفاعل", "المرحلة الخامسة: التحليل والتحسين الأسبوعي"],
+      roiMetrics: ["عائد استثمار متوقع 200% خلال 8 أشهر", "توفير 40% من تكاليف التسويق", "زيادة المبيعات بنسبة 50% في أول سنة", "تحسين معدل التحويل إلى 8%"],
+      competitiveAdvantages: ["فريق متخصص مشترك", "أدوات تحليل متقدمة", "دعم أساسي مستمر", "ضمان جودة الخدمة"],
+      technologies: ["Meta Business", "Google Analytics", "Hootsuite", "Canva", "Buffer", "Basic AI Tools"]
     },
 
     // Silver packages
@@ -2415,7 +2430,30 @@ const getDetailedMarketingPackageInfo = (packageName: string, dir: string = 'ltr
       targetAudience: ["الأعمال الصغيرة", "رواد الأعمال", "المشاريع الناشئة", "المهنيين المستقلين"],
       timeline: "مستمر شهرياً",
       price: "3000",
-      package: "silver"
+      package: "silver",
+      deliverables: ["استراتيجية محتوى أساسية", "دليل الهوية البصرية البسيط", "تقارير أداء شهرية", "إرشادات أساسية للفريق", "مجموعة قوالب تصميم", "دعم فني أساسي"],
+      phases: ["المرحلة الأولى: إعداد الحسابات والهوية", "المرحلة الثانية: وضع خطة المحتوى الأساسية", "المرحلة الثالثة: إنشاء المحتوى والنشر", "المرحلة الرابعة: إدارة التفاعل الأساسي", "المرحلة الخامسة: تقييم شهري للنتائج"],
+      roiMetrics: ["عائد استثمار متوقع 150% خلال 12 شهر", "توفير 25% من تكاليف التسويق", "زيادة المبيعات بنسبة 30% في أول سنة", "تحسين معدل التحويل إلى 5%"],
+      competitiveAdvantages: ["حل اقتصادي للشركات الناشئة", "بداية سريعة للحضور الرقمي", "دعم أساسي موثوق", "مرونة في التطوير"],
+      technologies: ["Meta Business", "Google Analytics", "Canva", "Buffer", "Basic Tools"]
+    },
+
+    // Website Development Packages
+    "تطوير موقع شركة متقدم": {
+      name: "تطوير موقع شركة متقدم",
+      fullDescription: "تطوير موقع ويب متقدم وشامل للشركات يجمع بين التصميم العصري والوظائف المتطورة. يتضمن نظام إدارة محتوى متقدم، تحسين محركات البحث، وتكامل مع أنظمة الشركة الأخرى لضمان تجربة استخدام استثنائية.",
+      keyFeatures: ["تصميم مخصص متجاوب", "نظام إدارة محتوى متقدم", "تحسين محركات البحث SEO", "تكامل أنظمة CRM", "لوحة تحكم إدارية", "نظام الحجوزات", "تحليلات متقدمة", "أمان SSL متطور"],
+      technicalFeatures: ["تقنيات ويب حديثة", "سرعة تحميل فائقة", "تصميم متجاوب 100%", "تحسين الأداء", "حماية من الاختراق", "نسخ احتياطية تلقائية", "CDN عالمي", "دعم تعدد اللغات"],
+      benefits: ["زيادة المصداقية المهنية", "تحسين تجربة العملاء", "زيادة معدلات التحويل", "تحسين الوصول للعملاء", "توفير الوقت في الإدارة", "ميزة تنافسية قوية"],
+      targetAudience: ["الشركات المتوسطة والكبيرة", "المؤسسات التعليمية", "الشركات التقنية", "مقدمي الخدمات المهنية", "الوكالات التجارية"],
+      timeline: "6-8 أسابيع",
+      price: "25000",
+      package: "premium",
+      deliverables: ["موقع ويب متكامل وجاهز", "لوحة تحكم إدارية", "دليل الاستخدام والإدارة", "ملفات المصدر والتصميم", "شهادة SSL وأمان", "تدريب فريق الإدارة", "ضمان سنة كاملة", "استضافة مجانية لـ6 أشهر"],
+      phases: ["المرحلة الأولى: التخطيط وتحليل المتطلبات", "المرحلة الثانية: التصميم وواجهة المستخدم", "المرحلة الثالثة: التطوير والبرمجة", "المرحلة الرابعة: الاختبار وضمان الجودة", "المرحلة الخامسة: النشر والتسليم والتدريب"],
+      roiMetrics: ["زيادة الإيرادات بنسبة 40% خلال سنة", "توفير 50% من تكاليف التسويق التقليدي", "تحسين معدل التحويل إلى 12%", "زيادة المصداقية والثقة بالعلامة التجارية"],
+      competitiveAdvantages: ["تصميم مخصص حصرياً لكم", "تقنيات حديثة ومتطورة", "دعم فني مدى الحياة", "ضمان الأداء والسرعة"],
+      technologies: ["React.js", "Next.js", "Node.js", "PostgreSQL", "AWS/Azure", "Cloudflare", "Google Analytics", "CMS Custom"]
     }
   };
 
@@ -5358,37 +5396,108 @@ export default function ServiceDetail() {
                 const designDetails = getDetailedDesignInfo(selectedAppForDetails.name);
                 const appDetails = marketingDetails || websiteDetails || desktopDetails || designDetails || getDetailedAppInfo(selectedAppForDetails.name);
                 if (!appDetails) {
-                  // Show fallback content when detailed app info is not available
+                  // Show enhanced fallback content when detailed app info is not available
                   return (
                     <div className="space-y-6 py-4">
+                      {/* Overview Section */}
                       <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
-                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
-                          {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3 flex items-center gap-2">
+                          <Package className="w-5 h-5 text-primary" />
+                          {dir === 'rtl' ? 'نظرة عامة عن الباقة' : 'Package Overview'}
                         </h3>
                         <p className="text-brand-text-muted leading-relaxed">
                           {selectedAppForDetails.description}
                         </p>
                       </div>
 
-                      <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
-                        <h4 className="font-bold text-green-800 mb-2">
-                          {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
-                        </h4>
-                        <p className="text-green-700 text-lg font-semibold">
-                          {dir === 'rtl' ? '4-6 أسابيع' : '4-6 weeks'}
-                        </p>
+                      {/* Pricing & Timeline Grid */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="bg-green-50 rounded-lg p-4">
+                          <h4 className="font-bold text-green-800 mb-2 flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            {dir === 'rtl' ? 'مدة التنفيذ' : 'Development Timeline'}
+                          </h4>
+                          <p className="text-green-700 text-lg font-semibold">
+                            {selectedAppForDetails.timeline || (dir === 'rtl' ? '4-6 أسابيع' : '4-6 weeks')}
+                          </p>
+                        </div>
+                        
+                        <div className="bg-blue-50 rounded-lg p-4">
+                          <h4 className="font-bold text-blue-800 mb-2 flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" />
+                            {dir === 'rtl' ? 'السعر' : 'Price'}
+                          </h4>
+                          <p className="text-blue-700 text-lg font-semibold">
+                            {selectedAppForDetails.price ? 
+                              `${selectedAppForDetails.price} ${dir === 'rtl' ? 'ريال' : 'SAR'}` : 
+                              (dir === 'rtl' ? 'يحدد حسب المتطلبات' : 'Quote on request')
+                            }
+                          </p>
+                        </div>
                       </div>
 
+                      {/* Key Features */}
                       <div>
                         <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
                           <Star className="w-5 h-5 text-primary" />
                           {dir === 'rtl' ? 'المميزات الرئيسية' : 'Key Features'}
                         </h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {selectedAppForDetails.features?.map((feature: string, index: number) => (
+                          {(selectedAppForDetails.features || [
+                            dir === 'rtl' ? 'تطوير احترافي عالي الجودة' : 'Professional high-quality development',
+                            dir === 'rtl' ? 'استخدام أحدث التقنيات' : 'Latest technology implementation',
+                            dir === 'rtl' ? 'تصميم متجاوب وعصري' : 'Responsive modern design',
+                            dir === 'rtl' ? 'اختبار شامل للجودة' : 'Comprehensive quality testing',
+                            dir === 'rtl' ? 'دعم فني متواصل' : 'Continuous technical support',
+                            dir === 'rtl' ? 'تسليم في الوقت المحدد' : 'On-time delivery'
+                          ]).map((feature: string, index: number) => (
                             <div key={index} className="flex items-start gap-3 p-3 sm:p-4 bg-gray-50 rounded-lg touch-manipulation">
                               <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
                               <span className="text-brand-text-muted">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Deliverables */}
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                          <Package className="w-5 h-5 text-primary" />
+                          {dir === 'rtl' ? 'المخرجات والتسليمات' : 'Deliverables'}
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {[
+                            dir === 'rtl' ? 'الكود المصدري كاملاً' : 'Complete source code',
+                            dir === 'rtl' ? 'دليل المستخدم النهائي' : 'End user manual',
+                            dir === 'rtl' ? 'دليل التشغيل والصيانة' : 'Operation & maintenance guide',
+                            dir === 'rtl' ? 'ملفات التصميم والمطبوعات' : 'Design files and print materials',
+                            dir === 'rtl' ? 'شهادة ضمان لمدة سنة' : 'One year warranty certificate',
+                            dir === 'rtl' ? 'تدريب فريق العمل' : 'Team training sessions'
+                          ].map((deliverable: string, index: number) => (
+                            <div key={index} className="flex items-start gap-3 p-3 bg-green-50 rounded-lg">
+                              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-green-800">{deliverable}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* ROI & Benefits */}
+                      <div className="bg-yellow-50 rounded-lg p-4 sm:p-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-yellow-800 mb-3 flex items-center gap-2">
+                          <Award className="w-5 h-5" />
+                          {dir === 'rtl' ? 'عائد الاستثمار المتوقع' : 'Expected ROI & Benefits'}
+                        </h3>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {[
+                            dir === 'rtl' ? 'توفير 40% من التكاليف التشغيلية' : '40% operational cost savings',
+                            dir === 'rtl' ? 'زيادة الكفاءة بنسبة 60%' : '60% efficiency improvement',
+                            dir === 'rtl' ? 'تحسين تجربة المستخدم' : 'Enhanced user experience',
+                            dir === 'rtl' ? 'ميزة تنافسية في السوق' : 'Competitive market advantage'
+                          ].map((benefit: string, index: number) => (
+                            <div key={index} className="flex items-start gap-3">
+                              <Crown className="w-4 h-4 text-yellow-600 mt-1 flex-shrink-0" />
+                              <span className="text-yellow-800 text-sm">{benefit}</span>
                             </div>
                           ))}
                         </div>
@@ -5407,7 +5516,7 @@ export default function ServiceDetail() {
                             "w-5 h-5 mr-2",
                             dir === 'rtl' && "rotate-180 mr-0 ml-2"
                           )} />
-                          {dir === 'rtl' ? 'اطلب هذه الخدمة الآن' : 'Request This Service Now'}
+                          {dir === 'rtl' ? 'اطلب هذه الباقة الآن' : 'Request This Package Now'}
                         </Button>
                         <Button
                           onClick={() => setShowAppDetailsModal(false)}
@@ -5426,20 +5535,51 @@ export default function ServiceDetail() {
                   <div className="space-y-4 sm:space-y-6 py-2 sm:py-4">
                     {/* Overview Section */}
                     <div className="bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg p-4 sm:p-6">
-                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3">
-                        {dir === 'rtl' ? 'نظرة عامة' : 'Overview'}
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-3 flex items-center gap-2">
+                        <Package className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'تفاصيل الباقة الشاملة' : 'Comprehensive Package Details'}
                       </h3>
                       <p className="text-brand-text-muted leading-relaxed">
                         {appDetails.fullDescription}
                       </p>
                     </div>
 
-                    {/* Timeline Only */}
-                    <div className="bg-green-50 rounded-lg p-4 w-full sm:max-w-md">
-                      <h4 className="font-bold text-green-800 mb-2">
-                        {dir === 'rtl' ? 'مدة التطوير' : 'Development Timeline'}
-                      </h4>
-                      <p className="text-green-700 text-lg font-semibold">{appDetails.timeline}</p>
+                    {/* Pricing & Timeline Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <div className="bg-green-50 rounded-lg p-4">
+                        <h4 className="font-bold text-green-800 mb-2 flex items-center gap-2">
+                          <Clock className="w-4 h-4" />
+                          {dir === 'rtl' ? 'مدة التنفيذ' : 'Development Timeline'}
+                        </h4>
+                        <p className="text-green-700 text-lg font-semibold">{appDetails.timeline}</p>
+                      </div>
+                      
+                      {appDetails.price && (
+                        <div className="bg-blue-50 rounded-lg p-4">
+                          <h4 className="font-bold text-blue-800 mb-2 flex items-center gap-2">
+                            <DollarSign className="w-4 h-4" />
+                            {dir === 'rtl' ? 'السعر' : 'Package Price'}
+                          </h4>
+                          <p className="text-blue-700 text-lg font-semibold">
+                            {appDetails.price} {dir === 'rtl' ? 'ريال' : 'SAR'}
+                            {appDetails.package && (
+                              <span className="block text-sm mt-1 capitalize">
+                                {appDetails.package} {dir === 'rtl' ? 'باقة' : 'Package'}
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      )}
+                      
+                      <div className="bg-purple-50 rounded-lg p-4">
+                        <h4 className="font-bold text-purple-800 mb-2 flex items-center gap-2">
+                          <Crown className="w-4 h-4" />
+                          {dir === 'rtl' ? 'مستوى الباقة' : 'Package Level'}
+                        </h4>
+                        <p className="text-purple-700 text-lg font-semibold capitalize">
+                          {appDetails.package || (dir === 'rtl' ? 'احترافي' : 'Professional')}
+                        </p>
+                      </div>
                     </div>
 
                     {/* Key Features */}
@@ -5505,6 +5645,55 @@ export default function ServiceDetail() {
                       </div>
                     </div>
 
+                    {/* Deliverables & Project Phases */}
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
+                        <Package className="w-5 h-5 text-primary" />
+                        {dir === 'rtl' ? 'المخرجات والتسليمات' : 'Deliverables & Project Phases'}
+                      </h3>
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {(appDetails.deliverables || [
+                            dir === 'rtl' ? 'الكود المصدري كاملاً' : 'Complete source code',
+                            dir === 'rtl' ? 'دليل المستخدم النهائي' : 'End user manual',
+                            dir === 'rtl' ? 'دليل التشغيل والصيانة' : 'Operation & maintenance guide',
+                            dir === 'rtl' ? 'ملفات التصميم والمطبوعات' : 'Design files and print materials',
+                            dir === 'rtl' ? 'شهادة ضمان لمدة سنة' : 'One year warranty certificate',
+                            dir === 'rtl' ? 'تدريب فريق العمل' : 'Team training sessions'
+                          ]).map((deliverable: string, index: number) => (
+                            <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                              <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-gray-800">{deliverable}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Project Phases */}
+                        <div className="bg-indigo-50 rounded-lg p-4">
+                          <h4 className="font-semibold text-indigo-800 mb-3 flex items-center gap-2">
+                            <Layers className="w-4 h-4" />
+                            {dir === 'rtl' ? 'مراحل المشروع' : 'Project Phases'}
+                          </h4>
+                          <div className="space-y-2">
+                            {(appDetails.phases || [
+                              dir === 'rtl' ? 'المرحلة الأولى: التخطيط والتحليل' : 'Phase 1: Planning & Analysis',
+                              dir === 'rtl' ? 'المرحلة الثانية: التصميم والنماذج الأولية' : 'Phase 2: Design & Prototyping',
+                              dir === 'rtl' ? 'المرحلة الثالثة: التطوير والبرمجة' : 'Phase 3: Development & Coding',
+                              dir === 'rtl' ? 'المرحلة الرابعة: الاختبار والمراجعة' : 'Phase 4: Testing & Review',
+                              dir === 'rtl' ? 'المرحلة الخامسة: النشر والتسليم' : 'Phase 5: Deployment & Delivery'
+                            ]).map((phase: string, index: number) => (
+                              <div key={index} className="flex items-center gap-2">
+                                <div className="w-6 h-6 bg-indigo-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                                  {index + 1}
+                                </div>
+                                <span className="text-indigo-700 text-sm">{phase}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Technologies */}
                     <div>
                       <h3 className="text-lg sm:text-xl font-bold text-brand-text-primary mb-4 flex items-center gap-2">
@@ -5517,6 +5706,46 @@ export default function ServiceDetail() {
                             {tech}
                           </Badge>
                         ))}
+                      </div>
+                    </div>
+
+                    {/* Investment & ROI Section */}
+                    <div className="bg-yellow-50 rounded-lg p-4 sm:p-6">
+                      <h3 className="text-lg sm:text-xl font-bold text-yellow-800 mb-3 flex items-center gap-2">
+                        <Award className="w-5 h-5" />
+                        {dir === 'rtl' ? 'عائد الاستثمار والقيمة المضافة' : 'ROI & Value Proposition'}
+                      </h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <h4 className="font-semibold text-yellow-800 mb-2">
+                            {dir === 'rtl' ? 'الفوائد المالية' : 'Financial Benefits'}
+                          </h4>
+                          {(appDetails.roiMetrics || [
+                            dir === 'rtl' ? 'عائد استثمار مضمون خلال 6 أشهر' : 'Guaranteed ROI within 6 months',
+                            dir === 'rtl' ? 'توفير 30-50% من التكاليف التشغيلية' : '30-50% operational cost reduction',
+                            dir === 'rtl' ? 'زيادة الإيرادات بنسبة 25-40%' : '25-40% revenue increase potential'
+                          ]).map((metric: string, index: number) => (
+                            <div key={index} className="flex items-start gap-2 mb-2">
+                              <DollarSign className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-yellow-800 text-sm">{metric}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-yellow-800 mb-2">
+                            {dir === 'rtl' ? 'المزايا التنافسية' : 'Competitive Advantages'}
+                          </h4>
+                          {(appDetails.competitiveAdvantages || [
+                            dir === 'rtl' ? 'تفوق على المنافسين في السوق' : 'Market competitive edge',
+                            dir === 'rtl' ? 'تحسين كبير في تجربة العملاء' : 'Significant customer experience improvement',
+                            dir === 'rtl' ? 'كفاءة عمليات متقدمة' : 'Advanced operational efficiency'
+                          ]).map((advantage: string, index: number) => (
+                            <div key={index} className="flex items-start gap-2 mb-2">
+                              <Crown className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-yellow-800 text-sm">{advantage}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
 
