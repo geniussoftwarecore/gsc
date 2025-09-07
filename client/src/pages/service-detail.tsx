@@ -12,6 +12,7 @@ import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import ERPNextV15Section from "@/components/erpnext/ERPNextV15Section";
 
 // Icon mapping for services
 const getIconForService = (iconName?: string) => {
@@ -4024,8 +4025,17 @@ export default function ServiceDetail() {
   return (
     <>
       <SEOHead 
-        title={`${service.title} - ${dir === 'rtl' ? 'خدماتنا' : 'Our Services'}`}
-        description={service.description}
+        title={service && service.id === '99472652-67d9-4b44-98a7-91720bdd15a2' 
+          ? (dir === 'rtl' ? 'أنظمة إدارة موارد المؤسسات - ERPNext v15' : 'Enterprise Resource Planning - ERPNext v15')
+          : `${service.title} - ${dir === 'rtl' ? 'خدماتنا' : 'Our Services'}`
+        }
+        description={service && service.id === '99472652-67d9-4b44-98a7-91720bdd15a2'
+          ? (dir === 'rtl' 
+            ? 'حوِّل عملياتك مع ERPNext v15 — نظام ERP مرن، شامل، مفتوح المصدر للمحاسبة والمبيعات والمشتريات والمخزون والتصنيع والموارد البشرية'
+            : 'Transform Your Operations with ERPNext v15 — Flexible, Comprehensive, Open-Source ERP for Accounting, Sales, Buying, Inventory, Manufacturing, HR'
+          )
+          : service.description
+        }
         type="website"
       />
       
@@ -5779,6 +5789,11 @@ export default function ServiceDetail() {
               })()}
             </DialogContent>
           </Dialog>
+        )}
+        
+        {/* ERPNext v15 Section - Only show for ERP service */}
+        {service && service.id === '99472652-67d9-4b44-98a7-91720bdd15a2' && (
+          <ERPNextV15Section />
         )}
       </div>
     </>
