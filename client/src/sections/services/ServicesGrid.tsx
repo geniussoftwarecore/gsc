@@ -93,6 +93,17 @@ function ServiceCard({
                                service.title?.includes('الحلول الذكية') || 
                                service.title?.includes('Smart Mobile Solutions');
 
+  // Check if this is the ERP service
+  const isERPService = service.id === '99472652-67d9-4b44-98a7-91720bdd15a2' || 
+                       service.title?.includes('أنظمة إدارة موارد المؤسسات') || 
+                       service.title?.includes('Enterprise Resource Planning');
+
+  const handleERPNextClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // Navigate to the ERP service detail page and scroll to ERPNext section
+    setLocation(`/services/${service.id}#erpnext-lead-form`);
+  };
+
   const handleViewDetails = () => {
     if (isSmartMobileService) {
       // Show toast message instead of navigating
@@ -227,6 +238,27 @@ function ServiceCard({
               )} 
             />
           </Button>
+          
+          {/* ERPNext v15 Button - Only for ERP Service */}
+          {isERPService && (
+            <Button
+              onClick={handleERPNextClick}
+              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-xl transition-all duration-300 shadow-md hover:shadow-lg focus:ring-2 focus:ring-green-500/20 focus:ring-offset-2"
+              size="sm"
+              aria-label={`ERPNext v15 - ${service.title}`}
+              data-testid={`erpnext-v15-${service.id}`}
+            >
+              <span className="font-medium">
+                {dir === 'rtl' ? 'ERPNext v15 🚀' : 'ERPNext v15 🚀'}
+              </span>
+              <ArrowRight 
+                className={cn(
+                  "w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200",
+                  dir === 'rtl' && "rotate-180 ml-0 mr-2 group-hover:-translate-x-1"
+                )} 
+              />
+            </Button>
+          )}
           
           {/* View Details Button */}
           <Button
