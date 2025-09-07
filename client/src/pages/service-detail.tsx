@@ -13,6 +13,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import ERPNextV15Section from "@/components/erpnext/ERPNextV15Section";
+import ERPNextV15ModulesGuide from "@/components/erpnext/ERPNextV15ModulesGuide";
 
 // Icon mapping for services
 const getIconForService = (iconName?: string) => {
@@ -5793,7 +5794,10 @@ export default function ServiceDetail() {
         
         {/* ERPNext v15 Section - Only show for ERP service */}
         {service && service.id === '99472652-67d9-4b44-98a7-91720bdd15a2' && (
-          <ERPNextV15Section />
+          <>
+            <ERPNextV15Section />
+            <ERPNextV15ModulesGuide />
+          </>
         )}
       </div>
     </>
