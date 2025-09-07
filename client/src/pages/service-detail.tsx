@@ -12,8 +12,7 @@ import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import ERPNextV15Section from "@/components/erpnext/ERPNextV15Section";
-import ERPNextV15ModulesGuide from "@/components/erpnext/ERPNextV15ModulesGuide";
+import ConsolidatedERPNextV15Section from "@/components/erpnext/ConsolidatedERPNextV15Section";
 
 // Icon mapping for services
 const getIconForService = (iconName?: string) => {
@@ -5793,11 +5792,8 @@ export default function ServiceDetail() {
         )}
         
         {/* ERPNext v15 Section - Only show for ERP service */}
-        {service && service.id === '99472652-67d9-4b44-98a7-91720bdd15a2' && (
-          <>
-            <ERPNextV15Section />
-            <ERPNextV15ModulesGuide />
-          </>
+        {service && (service.id === 'be5527f7-3381-48f8-9ff2-21132038ae59' || service.category === 'erp') && (
+          <ConsolidatedERPNextV15Section />
         )}
       </div>
     </>

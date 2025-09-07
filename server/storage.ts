@@ -520,15 +520,15 @@ export class MemStorage implements IStorage {
         startingPrice: null
       },
       {
-        id: "a1b2c3d4-e5f6-789a-bcde-f123456789ab",
-        title: "أنظمة إدارة موارد المؤسسات",
-        description: "تطبيق وتخصيص أنظمة إدارة الموارد المؤسسية الشاملة لتنظيم جميع جوانب أعمالك من المحاسبة إلى إدارة المخزون والموارد البشرية",
+        id: "be5527f7-3381-48f8-9ff2-21132038ae59",
+        title: "أنظمة إدارة موارد المؤسسات - ERPNext v15",
+        description: "أحدث إصدار من ERPNext مع تحسينات جذرية، أداء محسّن بنسبة 40%، أمان عالي المستوى، وباقات شاملة تناسب جميع أحجام الأعمال من الشركات الناشئة إلى المؤسسات الكبيرة",
         icon: "settings",
         category: "erp",
-        featured: "false",
-        technologies: ["ERPNext", "Python", "Frappe Framework", "MariaDB", "Redis"],
+        featured: "true",
+        technologies: ["ERPNext v15", "Python", "Frappe Framework", "MariaDB", "Redis", "Espresso UI"],
         deliveryTime: "8-16 أسبوع",
-        startingPrice: null
+        startingPrice: 2500
       }
     ];
 
