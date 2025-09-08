@@ -4056,18 +4056,6 @@ export default function ServiceDetail() {
                 ease: "easeInOut",
               }}
             />
-            <motion.div
-              className="absolute bottom-0 left-0 w-80 h-80 bg-brand-sky-accent/20 rounded-full blur-3xl"
-              animate={{
-                x: [0, -40, 0],
-                y: [0, 20, 0],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
