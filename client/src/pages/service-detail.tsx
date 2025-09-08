@@ -100,7 +100,7 @@ export default function ServiceDetailClean() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800" dir={dir}>
         
         {/* Hero Section - Optimized */}
-        <section className="relative py-8 lg:py-12 overflow-hidden">
+        <section className="relative py-4 lg:py-6 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-blue-600/5" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
