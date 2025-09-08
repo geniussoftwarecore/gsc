@@ -197,21 +197,6 @@ export default function ServiceDetailClean() {
                 </motion.div>
               )}
 
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                <Button
-                  onClick={() => setLocation(`/contact?service=${encodeURIComponent(service.title)}`)}
-                  size="lg"
-                  className="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-xl text-lg"
-                >
-                  {lang === 'ar' ? 'اطلب هذه الخدمة الآن' : 'Request This Service'}
-                  <ArrowRight className={cn("w-5 h-5 ml-2", dir === 'rtl' && "rotate-180 ml-0 mr-2")} />
-                </Button>
-              </motion.div>
             </div>
           </div>
         </section>
