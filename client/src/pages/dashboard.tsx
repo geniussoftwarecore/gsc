@@ -557,7 +557,7 @@ export default function Dashboard() {
                     <input 
                       type="tel" 
                       className="w-full p-3 border border-gray-300 rounded-lg"
-                      defaultValue="+966501234567"
+                      defaultValue="+967735158003"
                     />
                   </div>
                   <Button className="w-full">حفظ التغييرات</Button>

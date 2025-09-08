@@ -143,7 +143,7 @@ export function SubscriptionModal({ isOpen, onClose, plan, onSubscribe }: Subscr
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                     value={customerInfo.phone}
                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
-                    placeholder="+966 5XX XXX XXX"
+                    placeholder="+967 735158003"
                   />
                 </div>
               </div>

@@ -136,7 +136,7 @@ We offer the latest ERPNext version with revolutionary improvements and comprehe
 Personal consultation with ERPNext experts to determine the right package for your company and implementation plan.
 
 ### 📧 **Contact Us**
-- **Phone**: +966 50 123 4567
+- **Phone**: +967 735158003
 - **Email**: erpnext@geniussoftwarecore.com
 - **Website**: www.geniussoftwarecore.com
 

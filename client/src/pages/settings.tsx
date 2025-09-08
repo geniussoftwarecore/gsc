@@ -231,7 +231,7 @@ export default function Settings() {
                       id="phone"
                       value={profileData.phone}
                       onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
-                      placeholder="+966 5X XXX XXXX"
+                      placeholder="+967 735158003"
                       data-testid="input-phone"
                     />
                   </div>

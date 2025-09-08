@@ -1120,7 +1120,7 @@ export default function ERPNextV15Section() {
                         value={leadFormData.phone}
                         onChange={(e) => setLeadFormData({...leadFormData, phone: e.target.value})}
                         className="mt-2"
-                        placeholder={lang === 'ar' ? '+966 50 123 4567' : '+966 50 123 4567'}
+                        placeholder={lang === 'ar' ? '+967 735158003' : '+967 735158003'}
                       />
                     </div>
                   </div>

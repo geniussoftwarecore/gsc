@@ -2067,7 +2067,7 @@ export default function ConsolidatedERPNextV15Section() {
                         id="phone"
                         value={leadFormData.phone}
                         onChange={(e) => setLeadFormData(prev => ({ ...prev, phone: e.target.value }))}
-                        placeholder={lang === 'ar' ? '+966 50 123 4567' : '+966 50 123 4567'}
+                        placeholder={lang === 'ar' ? '+967 735158003' : '+967 735158003'}
                         required
                         data-testid="input-phone"
                       />
@@ -2170,7 +2170,7 @@ export default function ConsolidatedERPNextV15Section() {
                       <Phone className="w-5 h-5 text-blue-600" />
                       <div>
                         <p className="font-medium text-sm">{lang === 'ar' ? 'اتصل بنا مباشرة' : 'Call us directly'}</p>
-                        <p className="text-blue-600 font-semibold">+966 50 123 4567</p>
+                        <p className="text-blue-600 font-semibold">+967 735158003</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
