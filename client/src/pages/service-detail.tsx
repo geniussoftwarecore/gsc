@@ -4060,64 +4060,6 @@ export default function ServiceDetail() {
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Service Icon */}
-                <motion.div
-                  className="mb-6 flex justify-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-primary-dark rounded-3xl flex items-center justify-center shadow-lg">
-                    <IconComponent size={40} className="text-white" />
-                  </div>
-                </motion.div>
-
-                {/* Service Title */}
-                <h1 className="text-4xl md:text-5xl font-bold text-brand-text-primary mb-6 leading-tight">
-                  {service.title}
-                </h1>
-
-                {/* Service Description */}
-                <p className="text-xl text-brand-text-muted leading-relaxed max-w-3xl mx-auto">
-                  {service.description}
-                </p>
-
-                {/* Technologies */}
-                {service.technologies && (
-                  <motion.div
-                    className="mt-8 flex flex-wrap justify-center gap-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                  >
-                    {service.technologies.map((tech: string, index: number) => (
-                      <Badge key={index} variant="secondary" className="text-sm px-3 py-1">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </motion.div>
-                )}
-
-                {/* Delivery Time */}
-                {service.deliveryTime && (
-                  <motion.div
-                    className="mt-6 flex items-center justify-center gap-2 text-brand-text-muted"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                  >
-                    <Clock className="w-5 h-5" />
-                    <span>{dir === 'rtl' ? 'مدة التسليم:' : 'Delivery Time:'} {service.deliveryTime}</span>
-                  </motion.div>
-                )}
-              </motion.div>
-            </div>
           </div>
         </section>
 
