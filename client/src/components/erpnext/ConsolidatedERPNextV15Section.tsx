@@ -614,16 +614,16 @@ export default function ConsolidatedERPNextV15Section() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800" dir={dir}>
       
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-gray-100/50 bg-[size:32px_32px] opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-blue-600/5" />
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-gray-100/30 bg-[size:32px_32px] opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-blue-600/5" />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-5xl mx-auto">
             
             {/* Version Badge */}
             <motion.div
-              className="inline-flex items-center gap-3 mb-8"
+              className="inline-flex items-center gap-3 mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -639,7 +639,7 @@ export default function ConsolidatedERPNextV15Section() {
 
             {/* Main Heading */}
             <motion.h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}

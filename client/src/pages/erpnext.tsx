@@ -109,17 +109,17 @@ export default function ERPNextPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800" dir={dir}>
         
         {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 overflow-hidden">
+        <section className="relative py-12 lg:py-16 overflow-hidden">
           {/* Background Pattern */}
-          <div className="absolute inset-0 bg-grid-gray-100/50 bg-[size:32px_32px] opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-blue-600/5" />
+          <div className="absolute inset-0 bg-grid-gray-100/30 bg-[size:32px_32px] opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-blue-600/5" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
               
               {/* Content */}
               <motion.div
-                className="text-center lg:text-left space-y-8"
+                className="text-center lg:text-left space-y-6"
                 initial={{ opacity: 0, x: dir === 'rtl' ? 50 : -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -134,7 +134,7 @@ export default function ERPNextPage() {
                   </Badge>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <motion.h1
                     className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
                     initial={{ opacity: 0, y: 20 }}
@@ -224,7 +224,7 @@ export default function ERPNextPage() {
 
               {/* Statistics */}
               <motion.div
-                className="grid grid-cols-2 gap-6"
+                className="grid grid-cols-2 gap-4"
                 initial={{ opacity: 0, x: dir === 'rtl' ? -50 : 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -234,7 +234,7 @@ export default function ERPNextPage() {
                   return (
                     <motion.div
                       key={index}
-                      className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-2xl p-6 text-center border border-gray-200/50 dark:border-slate-700/50"
+                      className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-xl p-4 text-center border border-gray-200/50 dark:border-slate-700/50"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
