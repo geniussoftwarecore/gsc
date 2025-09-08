@@ -4059,29 +4059,6 @@ export default function ServiceDetail() {
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Back Button */}
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, x: dir === 'rtl' ? 20 : -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Link href="/services">
-                <Button variant="outline" className="rounded-xl">
-                  {dir === 'rtl' ? (
-                    <>
-                      <ArrowRight className="w-4 h-4 mr-2" />
-                      العودة للخدمات
-                    </>
-                  ) : (
-                    <>
-                      <ArrowLeft className="w-4 h-4 mr-2" />
-                      Back to Services
-                    </>
-                  )}
-                </Button>
-              </Link>
-            </motion.div>
 
             <div className="max-w-4xl mx-auto">
               <motion.div
