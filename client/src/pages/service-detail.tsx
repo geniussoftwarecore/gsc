@@ -5328,44 +5328,6 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-primary-dark text-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              className="max-w-3xl mx-auto text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {dir === 'rtl' ? 'جاهز لبدء مشروعك؟' : 'Ready to Start Your Project?'}
-              </h2>
-              <p className="text-xl mb-8 opacity-90">
-                {dir === 'rtl' 
-                  ? 'تواصل معنا اليوم واحصل على استشارة مجانية لمشروعك' 
-                  : 'Contact us today and get a free consultation for your project'
-                }
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/contact">
-                  <Button size="lg" className="bg-white text-primary hover:bg-gray-100 rounded-xl px-8 py-3">
-                    {dir === 'rtl' ? 'ابدأ مشروعك الآن' : 'Start Your Project Now'}
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-primary rounded-xl px-8 py-3"
-                  >
-                    {dir === 'rtl' ? 'تصفح خدمات أخرى' : 'Browse Other Services'}
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         {/* App Details Modal */}
         {selectedAppForDetails && (
