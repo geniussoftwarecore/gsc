@@ -697,6 +697,135 @@ const getModuleBenefits = (moduleId: string, language: string): string[] => {
         "تصميم متجاوب مع الأجهزة المحمولة",
         "تكامل نظام إدارة المحتوى"
       ]
+    },
+    // Industry Modules
+    manufacturing: {
+      en: [
+        "Streamlined production processes and efficiency",
+        "Real-time work order tracking and management",
+        "Quality control and compliance assurance",
+        "Optimized resource allocation and planning",
+        "Reduced waste and improved cost control"
+      ],
+      ar: [
+        "تبسيط عمليات الإنتاج والكفاءة",
+        "تتبع وإدارة أوامر العمل الفورية",
+        "ضمان مراقبة الجودة والامتثال",
+        "تحسين تخصيص الموارد والتخطيط",
+        "تقليل الهدر وتحسين مراقبة التكاليف"
+      ]
+    },
+    assets: {
+      en: [
+        "Comprehensive asset lifecycle management",
+        "Automated depreciation calculations",
+        "Preventive maintenance scheduling",
+        "Accurate asset valuation and reporting",
+        "Reduced downtime and maintenance costs"
+      ],
+      ar: [
+        "إدارة شاملة لدورة حياة الأصول",
+        "حسابات الاستهلاك الآلية",
+        "جدولة الصيانة الوقائية",
+        "تقييم وتقارير دقيقة للأصول",
+        "تقليل أوقات التوقف وتكاليف الصيانة"
+      ]
+    },
+    quality: {
+      en: [
+        "Enhanced product quality and standards",
+        "Systematic quality control processes",
+        "Compliance with industry regulations",
+        "Reduced defects and customer complaints",
+        "Improved customer satisfaction and trust"
+      ],
+      ar: [
+        "تحسين جودة المنتج والمعايير",
+        "عمليات مراقبة الجودة المنهجية",
+        "الامتثال للوائح الصناعة",
+        "تقليل العيوب وشكاوى العملاء",
+        "تحسين رضا العملاء والثقة"
+      ]
+    },
+    maintenance: {
+      en: [
+        "Proactive maintenance planning and execution",
+        "Reduced equipment downtime and failures",
+        "Optimized maintenance costs and resources",
+        "Extended asset lifespan and reliability",
+        "Improved operational efficiency"
+      ],
+      ar: [
+        "تخطيط وتنفيذ الصيانة الاستباقية",
+        "تقليل أوقات توقف المعدات والأعطال",
+        "تحسين تكاليف وموارد الصيانة",
+        "إطالة عمر الأصول والموثوقية",
+        "تحسين الكفاءة التشغيلية"
+      ]
+    },
+    agriculture: {
+      en: [
+        "Optimized crop yields and farming efficiency",
+        "Data-driven agricultural decision making",
+        "Sustainable farming practices",
+        "Reduced resource waste and costs",
+        "Improved traceability and compliance"
+      ],
+      ar: [
+        "تحسين غلة المحاصيل وكفاءة الزراعة",
+        "اتخاذ قرارات زراعية قائمة على البيانات",
+        "ممارسات زراعية مستدامة",
+        "تقليل هدر الموارد والتكاليف",
+        "تحسين التتبع والامتثال"
+      ]
+    },
+    healthcare: {
+      en: [
+        "Improved patient care and safety",
+        "Streamlined healthcare operations",
+        "Enhanced medical record management",
+        "Better regulatory compliance",
+        "Reduced administrative burden"
+      ],
+      ar: [
+        "تحسين رعاية المرضى والسلامة",
+        "تبسيط العمليات الصحية",
+        "تحسين إدارة السجلات الطبية",
+        "امتثال تنظيمي أفضل",
+        "تقليل العبء الإداري"
+      ]
+    },
+    education: {
+      en: [
+        "Enhanced educational administration",
+        "Improved student tracking and performance",
+        "Streamlined academic processes",
+        "Better parent-teacher communication",
+        "Comprehensive reporting and analytics"
+      ],
+      ar: [
+        "تحسين الإدارة التعليمية",
+        "تحسين تتبع الطلاب والأداء",
+        "تبسيط العمليات الأكاديمية",
+        "تحسين التواصل بين الوالدين والمعلمين",
+        "تقارير وتحليلات شاملة"
+      ]
+    },
+    "non-profit": {
+      en: [
+        "Transparent financial management",
+        "Enhanced donor relationship management",
+        "Improved program tracking and impact",
+        "Compliance with non-profit regulations",
+        "Better resource allocation and efficiency"
+      ],
+      ar: [
+        "إدارة مالية شفافة",
+        "تحسين إدارة علاقات المانحين",
+        "تحسين تتبع البرامج والأثر",
+        "الامتثال للوائح المنظمات غير الربحية",
+        "تحسين تخصيص الموارد والكفاءة"
+      ]
     }
   };
 
@@ -849,6 +978,135 @@ const getModuleUseCases = (moduleId: string, language: string): string[] => {
         "عرض كتالوج المنتجات",
         "بوابة العملاء والخدمة الذاتية"
       ]
+    },
+    // Industry Modules
+    manufacturing: {
+      en: [
+        "Production planning and scheduling",
+        "Work order management and tracking",
+        "Bill of materials (BOM) management",
+        "Shop floor control and monitoring",
+        "Quality control and inspection workflows"
+      ],
+      ar: [
+        "تخطيط وجدولة الإنتاج",
+        "إدارة وتتبع أوامر العمل",
+        "إدارة قوائم المواد (BOM)",
+        "مراقبة ومتابعة أرضية المصنع",
+        "سير عمل مراقبة الجودة والفحص"
+      ]
+    },
+    assets: {
+      en: [
+        "Fixed asset register and tracking",
+        "Depreciation calculation and reporting",
+        "Asset maintenance scheduling",
+        "Asset transfer and disposal management",
+        "Insurance and warranty tracking"
+      ],
+      ar: [
+        "سجل وتتبع الأصول الثابتة",
+        "حساب وتقارير الاستهلاك",
+        "جدولة صيانة الأصول",
+        "إدارة نقل وتصفية الأصول",
+        "تتبع التأمين والضمان"
+      ]
+    },
+    quality: {
+      en: [
+        "Quality procedure documentation",
+        "Inspection template creation",
+        "Quality goal setting and monitoring",
+        "Non-conformance reporting",
+        "Corrective and preventive actions"
+      ],
+      ar: [
+        "توثيق إجراءات الجودة",
+        "إنشاء قوالب الفحص",
+        "وضع ومراقبة أهداف الجودة",
+        "تقارير عدم المطابقة",
+        "الإجراءات التصحيحية والوقائية"
+      ]
+    },
+    maintenance: {
+      en: [
+        "Preventive maintenance scheduling",
+        "Equipment breakdown management",
+        "Spare parts inventory control",
+        "Maintenance cost tracking",
+        "Equipment performance monitoring"
+      ],
+      ar: [
+        "جدولة الصيانة الوقائية",
+        "إدارة أعطال المعدات",
+        "مراقبة مخزون قطع الغيار",
+        "تتبع تكاليف الصيانة",
+        "مراقبة أداء المعدات"
+      ]
+    },
+    agriculture: {
+      en: [
+        "Crop planning and rotation management",
+        "Land and field record keeping",
+        "Weather and climate tracking",
+        "Pest and disease management",
+        "Harvest and yield monitoring"
+      ],
+      ar: [
+        "تخطيط وإدارة دورة المحاصيل",
+        "حفظ سجلات الأراضي والحقول",
+        "تتبع الطقس والمناخ",
+        "إدارة الآفات والأمراض",
+        "مراقبة الحصاد والغلة"
+      ]
+    },
+    healthcare: {
+      en: [
+        "Patient registration and records",
+        "Appointment scheduling and management",
+        "Medical history and treatment tracking",
+        "Prescription and medication management",
+        "Healthcare billing and insurance"
+      ],
+      ar: [
+        "تسجيل وسجلات المرضى",
+        "جدولة وإدارة المواعيد",
+        "تتبع التاريخ الطبي والعلاج",
+        "إدارة الوصفات والأدوية",
+        "فوترة الرعاية الصحية والتأمين"
+      ]
+    },
+    education: {
+      en: [
+        "Student admission and enrollment",
+        "Academic record management",
+        "Course and curriculum planning",
+        "Fee collection and financial aid",
+        "Examination and grading systems"
+      ],
+      ar: [
+        "قبول وتسجيل الطلاب",
+        "إدارة السجلات الأكاديمية",
+        "تخطيط المقررات والمناهج",
+        "تحصيل الرسوم والمساعدات المالية",
+        "أنظمة الامتحانات والدرجات"
+      ]
+    },
+    "non-profit": {
+      en: [
+        "Donor management and fundraising",
+        "Grant tracking and compliance",
+        "Volunteer coordination and management",
+        "Program planning and impact measurement",
+        "Financial transparency and reporting"
+      ],
+      ar: [
+        "إدارة المانحين وجمع التبرعات",
+        "تتبع المنح والامتثال",
+        "تنسيق وإدارة المتطوعين",
+        "تخطيط البرامج وقياس الأثر",
+        "الشفافية المالية والتقارير"
+      ]
     }
   };
 
@@ -1000,6 +1258,135 @@ const getModuleTechnicalSpecs = (moduleId: string, language: string): string[] =
         "نظام إدارة المحتوى",
         "تكامل التجارة الإلكترونية",
         "تكامل وسائل التواصل الاجتماعي"
+      ]
+    },
+    // Industry Modules
+    manufacturing: {
+      en: [
+        "Work order routing and operations",
+        "Bill of materials (BOM) versioning",
+        "Production batch tracking",
+        "Real-time shop floor monitoring",
+        "Quality control checkpoints integration"
+      ],
+      ar: [
+        "توجيه وعمليات أوامر العمل",
+        "إصدارات قائمة المواد (BOM)",
+        "تتبع دفعة الإنتاج",
+        "مراقبة أرضية المصنع الفورية",
+        "تكامل نقاط فحص مراقبة الجودة"
+      ]
+    },
+    assets: {
+      en: [
+        "Asset category and subcategory management",
+        "Multiple depreciation methods (SLM, WDV, etc.)",
+        "Asset location and custodian tracking",
+        "Maintenance scheduling and alerts",
+        "Asset valuation and insurance tracking"
+      ],
+      ar: [
+        "إدارة فئات وفئات فرعية للأصول",
+        "طرق استهلاك متعددة (SLM، WDV، إلخ)",
+        "تتبع موقع الأصول والمسؤول",
+        "جدولة الصيانة والتنبيهات",
+        "تتبع تقييم الأصول والتأمين"
+      ]
+    },
+    quality: {
+      en: [
+        "Quality procedure templates and workflows",
+        "Inspection criteria and sampling plans",
+        "Quality goal tracking and KPIs",
+        "Non-conformance root cause analysis",
+        "CAPA (Corrective and Preventive Actions) management"
+      ],
+      ar: [
+        "قوالب وسير عمل إجراءات الجودة",
+        "معايير الفحص وخطط العينات",
+        "تتبع أهداف الجودة ومؤشرات الأداء الرئيسية",
+        "تحليل السبب الجذري لعدم المطابقة",
+        "إدارة CAPA (الإجراءات التصحيحية والوقائية)"
+      ]
+    },
+    maintenance: {
+      en: [
+        "Preventive maintenance calendars",
+        "Equipment breakdown analysis",
+        "Spare parts consumption tracking",
+        "Maintenance team scheduling",
+        "Equipment performance analytics"
+      ],
+      ar: [
+        "تقاويم الصيانة الوقائية",
+        "تحليل أعطال المعدات",
+        "تتبع استهلاك قطع الغيار",
+        "جدولة فريق الصيانة",
+        "تحليلات أداء المعدات"
+      ]
+    },
+    agriculture: {
+      en: [
+        "Crop cycle planning and monitoring",
+        "Weather station integration",
+        "Soil testing and analysis tracking",
+        "Irrigation and fertilizer scheduling",
+        "Harvest quality and yield analytics"
+      ],
+      ar: [
+        "تخطيط ومراقبة دورة المحاصيل",
+        "تكامل محطة الطقس",
+        "تتبع اختبار وتحليل التربة",
+        "جدولة الري والأسمدة",
+        "تحليلات جودة وغلة الحصاد"
+      ]
+    },
+    healthcare: {
+      en: [
+        "Electronic Health Records (EHR)",
+        "Medical appointment scheduling system",
+        "Prescription and medication tracking",
+        "Healthcare billing and insurance claims",
+        "Medical equipment and inventory management"
+      ],
+      ar: [
+        "السجلات الصحية الإلكترونية (EHR)",
+        "نظام جدولة المواعيد الطبية",
+        "تتبع الوصفات والأدوية",
+        "فوترة الرعاية الصحية ومطالبات التأمين",
+        "إدارة المعدات الطبية والمخزون"
+      ]
+    },
+    education: {
+      en: [
+        "Student information system (SIS)",
+        "Academic calendar and scheduling",
+        "Grade book and transcript management",
+        "Online learning management system",
+        "Fee management and financial aid tracking"
+      ],
+      ar: [
+        "نظام معلومات الطلاب (SIS)",
+        "التقويم الأكاديمي والجدولة",
+        "إدارة كتاب الدرجات والنسخ",
+        "نظام إدارة التعلم عبر الإنترنت",
+        "إدارة الرسوم وتتبع المساعدات المالية"
+      ]
+    },
+    "non-profit": {
+      en: [
+        "Donor management and fundraising campaigns",
+        "Grant management and compliance tracking",
+        "Volunteer registration and coordination",
+        "Program impact measurement and reporting",
+        "Financial transparency and audit trails"
+      ],
+      ar: [
+        "إدارة المانحين وحملات جمع التبرعات",
+        "إدارة المنح وتتبع الامتثال",
+        "تسجيل وتنسيق المتطوعين",
+        "قياس وتقارير أثر البرامج",
+        "الشفافية المالية ومسارات التدقيق"
       ]
     }
   };
