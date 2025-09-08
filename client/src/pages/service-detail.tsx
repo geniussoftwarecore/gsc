@@ -4058,9 +4058,6 @@ export default function ServiceDetail() {
             />
           </div>
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-          </div>
         </section>
 
         {/* App Categories and Examples Section - Only show for mobile service */}
