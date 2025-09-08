@@ -551,6 +551,462 @@ const pricingTiers: PricingTier[] = [
   }
 ];
 
+// Helper function to get module benefits
+const getModuleBenefits = (moduleId: string, language: string): string[] => {
+  const benefits: Record<string, { en: string[], ar: string[] }> = {
+    accounting: {
+      en: [
+        "Automated financial reporting and compliance",
+        "Real-time financial insights and analytics", 
+        "Multi-currency and multi-company support",
+        "Integrated tax management and VAT compliance",
+        "Streamlined accounts payable and receivable"
+      ],
+      ar: [
+        "تقارير مالية آلية ومطابقة للمعايير",
+        "رؤى مالية وتحليلات فورية",
+        "دعم العملات والشركات المتعددة", 
+        "إدارة ضرائب متكاملة ومطابقة ضريبة القيمة المضافة",
+        "تبسيط الحسابات المدينة والدائنة"
+      ]
+    },
+    selling: {
+      en: [
+        "Increase sales efficiency and customer satisfaction",
+        "Automated pricing and discount management",
+        "Real-time inventory availability checking",
+        "Streamlined order processing workflow",
+        "Comprehensive sales analytics and reporting"
+      ],
+      ar: [
+        "زيادة كفاءة المبيعات ورضا العملاء",
+        "إدارة آلية للتسعير والخصومات",
+        "فحص توافر المخزون الفوري",
+        "تبسيط سير عمل معالجة الطلبات",
+        "تحليلات وتقارير مبيعات شاملة"
+      ]
+    },
+    crm: {
+      en: [
+        "Improve customer relationship management",
+        "Track sales pipeline and conversion rates",
+        "Automate lead nurturing and follow-ups",
+        "Centralize customer communication history",
+        "Increase sales team productivity"
+      ],
+      ar: [
+        "تحسين إدارة علاقات العملاء",
+        "تتبع خط أنابيب المبيعات ومعدلات التحويل",
+        "أتمتة رعاية العملاء المحتملين والمتابعة",
+        "مركزية تاريخ التواصل مع العملاء",
+        "زيادة إنتاجية فريق المبيعات"
+      ]
+    },
+    buying: {
+      en: [
+        "Optimize procurement processes and costs",
+        "Automated supplier evaluation and selection",
+        "Streamlined purchase order management",
+        "Better vendor relationship management",
+        "Improved inventory planning and control"
+      ],
+      ar: [
+        "تحسين عمليات الشراء والتكاليف",
+        "تقييم واختيار المورد الآلي",
+        "إدارة أوامر الشراء المبسطة",
+        "إدارة أفضل لعلاقات الموردين",
+        "تحسين تخطيط ومراقبة المخزون"
+      ]
+    },
+    stock: {
+      en: [
+        "Real-time inventory tracking and control",
+        "Minimize stockouts and overstock situations",
+        "Automated reorder point management",
+        "Comprehensive inventory analytics",
+        "Multi-warehouse management capabilities"
+      ],
+      ar: [
+        "تتبع ومراقبة المخزون الفوري",
+        "تقليل نفاد المخزون وحالات التخزين الزائد",
+        "إدارة نقاط إعادة الطلب الآلية",
+        "تحليلات مخزون شاملة",
+        "قدرات إدارة مستودعات متعددة"
+      ]
+    },
+    projects: {
+      en: [
+        "Improved project delivery and profitability",
+        "Better resource allocation and planning",
+        "Real-time project tracking and monitoring",
+        "Enhanced team collaboration and communication",
+        "Accurate project cost and time estimation"
+      ],
+      ar: [
+        "تحسين تسليم المشاريع والربحية",
+        "تخصيص وتخطيط أفضل للموارد",
+        "تتبع ومراقبة المشاريع الفورية",
+        "تحسين التعاون والتواصل بين الفرق",
+        "تقدير دقيق لتكلفة ووقت المشروع"
+      ]
+    },
+    hrms: {
+      en: [
+        "Streamlined HR processes and compliance",
+        "Automated payroll processing and accuracy",
+        "Improved employee engagement and retention",
+        "Comprehensive performance management",
+        "Reduced administrative overhead"
+      ],
+      ar: [
+        "تبسيط عمليات الموارد البشرية والامتثال",
+        "معالجة الرواتب الآلية والدقة",
+        "تحسين مشاركة الموظفين والاحتفاظ بهم",
+        "إدارة أداء شاملة",
+        "تقليل النفقات الإدارية"
+      ]
+    },
+    support: {
+      en: [
+        "Improved customer satisfaction and response times",
+        "Automated ticket routing and escalation",
+        "Comprehensive support analytics and insights",
+        "Knowledge base for self-service support",
+        "SLA compliance and performance tracking"
+      ],
+      ar: [
+        "تحسين رضا العملاء وأوقات الاستجابة",
+        "توجيه وتصعيد التذاكر الآلي",
+        "تحليلات ورؤى دعم شاملة",
+        "قاعدة معرفة للدعم الذاتي",
+        "امتثال اتفاقية مستوى الخدمة وتتبع الأداء"
+      ]
+    },
+    website: {
+      en: [
+        "Professional online presence and branding",
+        "Integrated e-commerce capabilities",
+        "SEO optimization for better visibility",
+        "Mobile-responsive design",
+        "Content management system integration"
+      ],
+      ar: [
+        "وجود مهني عبر الإنترنت والعلامة التجارية",
+        "قدرات التجارة الإلكترونية المتكاملة",
+        "تحسين محركات البحث لرؤية أفضل",
+        "تصميم متجاوب مع الأجهزة المحمولة",
+        "تكامل نظام إدارة المحتوى"
+      ]
+    }
+  };
+
+  return benefits[moduleId]?.[language] || [];
+};
+
+// Helper function to get module use cases
+const getModuleUseCases = (moduleId: string, language: string): string[] => {
+  const useCases: Record<string, { en: string[], ar: string[] }> = {
+    accounting: {
+      en: [
+        "Multi-company financial consolidation",
+        "VAT and tax compliance reporting",
+        "Budget planning and variance analysis",
+        "Fixed asset depreciation management",
+        "Cost center profitability analysis"
+      ],
+      ar: [
+        "توحيد مالي متعدد الشركات",
+        "تقارير امتثال ضريبة القيمة المضافة والضرائب",
+        "تخطيط الميزانية وتحليل التباين",
+        "إدارة استهلاك الأصول الثابتة",
+        "تحليل ربحية مركز التكلفة"
+      ]
+    },
+    selling: {
+      en: [
+        "B2B and B2C sales management",
+        "Subscription and recurring billing",
+        "Territory and commission management",
+        "Product bundle and package deals",
+        "Customer loyalty program management"
+      ],
+      ar: [
+        "إدارة مبيعات B2B و B2C",
+        "الاشتراك والفوترة المتكررة",
+        "إدارة المنطقة والعمولة",
+        "حزم المنتجات والصفقات",
+        "إدارة برنامج ولاء العملاء"
+      ]
+    },
+    crm: {
+      en: [
+        "Lead qualification and scoring",
+        "Sales funnel optimization",
+        "Customer segmentation and targeting",
+        "Marketing campaign management",
+        "Customer support integration"
+      ],
+      ar: [
+        "تأهيل وتسجيل العملاء المحتملين",
+        "تحسين قمع المبيعات",
+        "تقسيم العملاء والاستهداف",
+        "إدارة الحملات التسويقية",
+        "تكامل دعم العملاء"
+      ]
+    },
+    buying: {
+      en: [
+        "Vendor evaluation and approval",
+        "Contract and blanket order management",
+        "Drop shipping and direct delivery",
+        "Quality inspection workflows",
+        "Supplier performance analytics"
+      ],
+      ar: [
+        "تقييم واعتماد المورد",
+        "إدارة العقود والطلبات الشاملة",
+        "الشحن المباشر والتسليم المباشر",
+        "سير عمل فحص الجودة",
+        "تحليلات أداء المورد"
+      ]
+    },
+    stock: {
+      en: [
+        "Multi-location inventory management",
+        "Serial and batch number tracking",
+        "Quality inspection and control",
+        "Landed cost calculation",
+        "Inventory valuation methods"
+      ],
+      ar: [
+        "إدارة مخزون متعدد المواقع",
+        "تتبع الرقم التسلسلي ورقم الدفعة",
+        "فحص ومراقبة الجودة",
+        "حساب التكلفة المتقدمة",
+        "طرق تقييم المخزون"
+      ]
+    },
+    projects: {
+      en: [
+        "Construction project management",
+        "Professional services billing",
+        "Resource capacity planning",
+        "Project profitability analysis",
+        "Gantt chart and milestone tracking"
+      ],
+      ar: [
+        "إدارة مشاريع البناء",
+        "فوترة الخدمات المهنية",
+        "تخطيط سعة الموارد",
+        "تحليل ربحية المشروع",
+        "مخطط جانت وتتبع المعالم"
+      ]
+    },
+    hrms: {
+      en: [
+        "Employee lifecycle management",
+        "Performance appraisal systems",
+        "Recruitment and onboarding",
+        "Training and skill development",
+        "Compliance and regulatory reporting"
+      ],
+      ar: [
+        "إدارة دورة حياة الموظف",
+        "أنظمة تقييم الأداء",
+        "التوظيف والإعداد",
+        "التدريب وتطوير المهارات",
+        "التقارير التنظيمية والامتثال"
+      ]
+    },
+    support: {
+      en: [
+        "Customer helpdesk and ticketing",
+        "Technical support workflows",
+        "Service level agreement tracking",
+        "Knowledge base management",
+        "Customer satisfaction surveys"
+      ],
+      ar: [
+        "مكتب المساعدة وإصدار التذاكر",
+        "سير عمل الدعم الفني",
+        "تتبع اتفاقية مستوى الخدمة",
+        "إدارة قاعدة المعرفة",
+        "استطلاعات رضا العملاء"
+      ]
+    },
+    website: {
+      en: [
+        "Corporate website management",
+        "E-commerce store integration",
+        "Blog and content publishing",
+        "Product catalog display",
+        "Customer portal and self-service"
+      ],
+      ar: [
+        "إدارة موقع الشركة",
+        "تكامل متجر التجارة الإلكترونية",
+        "نشر المدونة والمحتوى",
+        "عرض كتالوج المنتجات",
+        "بوابة العملاء والخدمة الذاتية"
+      ]
+    }
+  };
+
+  return useCases[moduleId]?.[language] || [];
+};
+
+// Helper function to get module technical specifications
+const getModuleTechnicalSpecs = (moduleId: string, language: string): string[] => {
+  const techSpecs: Record<string, { en: string[], ar: string[] }> = {
+    accounting: {
+      en: [
+        "Multi-currency support with real-time exchange rates",
+        "Advanced financial reporting with custom dimensions",
+        "Automated bank reconciliation and payment matching",
+        "Integration with payment gateways and banks",
+        "Audit trail and compliance features"
+      ],
+      ar: [
+        "دعم العملات المتعددة مع أسعار صرف فورية",
+        "تقارير مالية متقدمة مع أبعاد مخصصة",
+        "تسوية بنكية آلية ومطابقة دفعات",
+        "تكامل مع بوابات الدفع والبنوك",
+        "مسار التدقيق وميزات الامتثال"
+      ]
+    },
+    selling: {
+      en: [
+        "Advanced pricing rules and discount structures",
+        "Real-time inventory integration",
+        "Multiple tax configurations",
+        "Territory-based sales management",
+        "Sales analytics and forecasting"
+      ],
+      ar: [
+        "قواعد تسعير متقدمة وهياكل خصم",
+        "تكامل مخزون فوري",
+        "تكوينات ضريبية متعددة",
+        "إدارة مبيعات على أساس المنطقة",
+        "تحليلات المبيعات والتنبؤ"
+      ]
+    },
+    crm: {
+      en: [
+        "Email integration with tracking",
+        "Lead scoring and qualification workflows",
+        "Communication timeline and activity logs",
+        "Opportunity probability and pipeline analysis",
+        "Customer interaction tracking"
+      ],
+      ar: [
+        "تكامل البريد الإلكتروني مع التتبع",
+        "تسجيل العملاء المحتملين وسير عمل التأهيل",
+        "الجدول الزمني للتواصل وسجلات النشاط",
+        "احتمالية الفرصة وتحليل خط الأنابيب",
+        "تتبع تفاعل العملاء"
+      ]
+    },
+    buying: {
+      en: [
+        "Supplier evaluation and rating system",
+        "Purchase order automation and approvals",
+        "Quality inspection workflows",
+        "Landed cost calculation and allocation",
+        "Supplier performance analytics"
+      ],
+      ar: [
+        "نظام تقييم وتصنيف المورد",
+        "أتمتة أوامر الشراء والموافقات",
+        "سير عمل فحص الجودة",
+        "حساب وتخصيص التكلفة المتقدمة",
+        "تحليلات أداء المورد"
+      ]
+    },
+    stock: {
+      en: [
+        "Multi-warehouse inventory tracking",
+        "Serial and batch number management",
+        "Automated reorder point calculations",
+        "Inventory valuation methods (FIFO, LIFO, Moving Average)",
+        "Real-time stock level monitoring"
+      ],
+      ar: [
+        "تتبع مخزون مستودعات متعددة",
+        "إدارة الرقم التسلسلي ورقم الدفعة",
+        "حسابات نقطة إعادة الطلب الآلية",
+        "طرق تقييم المخزون (FIFO، LIFO، المتوسط المتحرك)",
+        "مراقبة مستوى المخزون الفوري"
+      ]
+    },
+    projects: {
+      en: [
+        "Gantt chart project visualization",
+        "Resource allocation and capacity planning",
+        "Timesheet integration and billing",
+        "Project costing and profitability analysis",
+        "Milestone tracking and reporting"
+      ],
+      ar: [
+        "تصور المشروع بمخطط جانت",
+        "تخصيص الموارد وتخطيط السعة",
+        "تكامل الجدول الزمني والفوترة",
+        "تكلفة المشروع وتحليل الربحية",
+        "تتبع المعالم والتقارير"
+      ]
+    },
+    hrms: {
+      en: [
+        "Biometric attendance integration",
+        "Automated payroll calculation and processing",
+        "Performance appraisal workflows",
+        "Leave management and approval system",
+        "Employee self-service portal"
+      ],
+      ar: [
+        "تكامل الحضور البيومتري",
+        "حساب ومعالجة الرواتب الآلية",
+        "سير عمل تقييم الأداء",
+        "نظام إدارة الإجازات والموافقة",
+        "بوابة الخدمة الذاتية للموظفين"
+      ]
+    },
+    support: {
+      en: [
+        "Multi-channel support (email, chat, phone)",
+        "SLA tracking and escalation rules",
+        "Knowledge base integration",
+        "Customer satisfaction surveys",
+        "Support analytics and reporting"
+      ],
+      ar: [
+        "دعم متعدد القنوات (البريد الإلكتروني، الدردشة، الهاتف)",
+        "تتبع اتفاقية مستوى الخدمة وقواعد التصعيد",
+        "تكامل قاعدة المعرفة",
+        "استطلاعات رضا العملاء",
+        "تحليلات وتقارير الدعم"
+      ]
+    },
+    website: {
+      en: [
+        "Responsive web design framework",
+        "SEO optimization tools",
+        "Content management system",
+        "E-commerce integration",
+        "Social media integration"
+      ],
+      ar: [
+        "إطار تصميم ويب متجاوب",
+        "أدوات تحسين محركات البحث",
+        "نظام إدارة المحتوى",
+        "تكامل التجارة الإلكترونية",
+        "تكامل وسائل التواصل الاجتماعي"
+      ]
+    }
+  };
+
+  return techSpecs[moduleId]?.[language] || [];
+};
+
 export default function ConsolidatedERPNextV15Section() {
   const { dir, lang } = useLanguage();
   const { toast } = useToast();
@@ -926,7 +1382,7 @@ export default function ConsolidatedERPNextV15Section() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-white dark:bg-slate-900">
+      <section data-section="pricing" className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             className="text-center mb-16"
@@ -1376,6 +1832,7 @@ export default function ConsolidatedERPNextV15Section() {
               </SheetHeader>
 
               <div className="space-y-6">
+                {/* Key Features Section */}
                 <div>
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
                     <Star className="w-5 h-5 text-yellow-500" />
@@ -1388,21 +1845,106 @@ export default function ConsolidatedERPNextV15Section() {
                   </div>
                 </div>
 
-                <div className="flex gap-3">
+                {/* Benefits Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    {lang === 'ar' ? 'الفوائد الرئيسية' : 'Key Benefits'}
+                  </h3>
+                  <div className="space-y-3">
+                    {getModuleBenefits(selectedModule.id, lang).map((benefit, index) => (
+                      <div key={index} className="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-900/10 rounded-lg">
+                        <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Use Cases Section */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Building className="w-5 h-5 text-blue-500" />
+                    {lang === 'ar' ? 'حالات الاستخدام' : 'Use Cases'}
+                  </h3>
+                  <div className="space-y-3">
+                    {getModuleUseCases(selectedModule.id, lang).map((useCase, index) => (
+                      <div key={index} className="flex items-start gap-3 p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg">
+                        <ArrowRight className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{useCase}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Technical Specifications */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Settings className="w-5 h-5 text-purple-500" />
+                    {lang === 'ar' ? 'المواصفات التقنية' : 'Technical Specifications'}
+                  </h3>
+                  <div className="bg-purple-50 dark:bg-purple-900/10 rounded-lg p-4">
+                    <div className="grid grid-cols-1 gap-3">
+                      {getModuleTechnicalSpecs(selectedModule.id, lang).map((spec, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                          <span className="text-sm text-gray-700 dark:text-gray-300">{spec}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Implementation Timeline */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <Clock className="w-5 h-5 text-orange-500" />
+                    {lang === 'ar' ? 'جدولة التنفيذ' : 'Implementation Timeline'}
+                  </h3>
+                  <div className="bg-orange-50 dark:bg-orange-900/10 rounded-lg p-4">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      {lang === 'ar' 
+                        ? 'يمكن تنفيذ هذه الوحدة خلال 2-4 أسابيع حسب تعقيد المتطلبات والتخصيص المطلوب. يشمل ذلك التثبيت والتكوين والتدريب والاختبار.'
+                        : 'This module can be implemented within 2-4 weeks depending on complexity and customization requirements. This includes installation, configuration, training, and testing.'
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                {/* Call to Action Buttons */}
+                <div className="space-y-3 pt-4 border-t">
                   <Button 
                     onClick={scrollToLeadForm} 
-                    className="flex-1"
+                    className="w-full bg-primary hover:bg-primary/90 text-white"
                     data-testid="button-get-quote-module"
                   >
-                    {lang === 'ar' ? 'احصل على عرض سعر' : 'Get Quote'}
+                    <Mail className={cn("w-4 h-4", dir === 'rtl' ? "ml-2" : "mr-2")} />
+                    {lang === 'ar' ? 'احصل على عرض سعر مخصص' : 'Get Custom Quote'}
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setIsModuleSheetOpen(false)}
-                    data-testid="button-close-module"
-                  >
-                    {lang === 'ar' ? 'إغلاق' : 'Close'}
-                  </Button>
+                  
+                  <div className="flex gap-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setIsModuleSheetOpen(false)}
+                      className="flex-1"
+                      data-testid="button-close-module"
+                    >
+                      {lang === 'ar' ? 'إغلاق' : 'Close'}
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={() => {
+                        // Scroll to pricing section
+                        const pricingSection = document.querySelector('[data-section="pricing"]');
+                        if (pricingSection) {
+                          pricingSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="flex-1"
+                    >
+                      {lang === 'ar' ? 'عرض الأسعار' : 'View Pricing'}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </>
