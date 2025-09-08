@@ -99,35 +99,28 @@ export default function ServiceDetailClean() {
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800" dir={dir}>
         
-        {/* Hero Section - Optimized */}
-        <section className="relative py-4 lg:py-6 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/3 to-blue-600/5" />
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Back Button */}
-            <motion.div 
-              className="mb-6"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button 
-                variant="ghost" 
-                onClick={() => setLocation('/services')}
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                <ArrowLeft className={cn("w-4 h-4 mr-2", dir === 'rtl' && "rotate-180 mr-0 ml-2")} />
-                {lang === 'ar' ? 'العودة للخدمات' : 'Back to Services'}
-              </Button>
-            </motion.div>
-
-          </div>
-        </section>
-
         {/* ERPNext v15 Section - Only show for ERP services */}
         {service && service.category === 'erp' && (
           <ConsolidatedERPNextV15Section />
         )}
+
+        {/* Back Button */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Button 
+              variant="ghost" 
+              onClick={() => setLocation('/services')}
+              className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+            >
+              <ArrowLeft className={cn("w-4 h-4 mr-2", dir === 'rtl' && "rotate-180 mr-0 ml-2")} />
+              {lang === 'ar' ? 'العودة للخدمات' : 'Back to Services'}
+            </Button>
+          </motion.div>
+        </div>
       </div>
     </>
   );
