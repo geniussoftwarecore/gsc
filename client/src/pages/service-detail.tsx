@@ -65,81 +65,119 @@ const useAppCategories = () => {
 // Enhanced app cards with complete 16-20 cards to meet requirements
 const useAppCards = () => {
   const { t } = useTranslation();
+
+  // Create a simplified card array with the translated cards we have plus basic cards
+  const basicCards = Array.from({ length: 12 }, (_, i) => ({
+    id: `basic-${i + 1}`,
+    category: ['ecommerce', 'services', 'education', 'health', 'fintech', 'logistics', 'media'][i % 7],
+    title: t(`mobileAppPage.cards.basic${i + 1}.title`, `تطبيق متخصص ${i + 1}`),
+    shortDesc: t(`mobileAppPage.cards.basic${i + 1}.shortDesc`, 'وصف مختصر للتطبيق'),
+    keyFeatures: [
+      t(`mobileAppPage.cards.basic${i + 1}.feature1`, 'ميزة متقدمة'),
+      t(`mobileAppPage.cards.basic${i + 1}.feature2`, 'واجهة سهلة'),
+      t(`mobileAppPage.cards.basic${i + 1}.feature3`, 'أمان عالي')
+    ],
+    longDesc: t(`mobileAppPage.cards.basic${i + 1}.longDesc`, 'وصف مفصل للتطبيق وميزاته'),
+    stack: ['React Native', 'Node.js', 'PostgreSQL'],
+    integrations: [t('common.apis', 'APIs متنوعة'), t('common.paymentGateways', 'بوابات دفع')],
+    timeline: [
+      { phase: t('common.planning', 'التخطيط'), note: t('common.planningNote', 'دراسة وتحليل') },
+      { phase: t('common.development', 'التطوير'), note: t('common.developmentNote', 'بناء وتطوير') },
+      { phase: t('common.testing', 'الاختبار'), note: t('common.testingNote', 'اختبار شامل') },
+      { phase: t('common.delivery', 'التسليم'), note: t('common.deliveryNote', 'تسليم ودعم') }
+    ],
+    pricingNote: '', // All pricing removed from mobile app page
+    faqs: [
+      { q: t('common.faq1', 'هل التطبيق قابل للتخصيص؟'), a: t('common.faqAnswer1', 'نعم، قابل للتخصيص بالكامل.') }
+    ],
+    images: [],
+    ctaLink: '/contact'
+  }));
   
-  return [
-  { 
-    id: 'ec1', 
-    category: 'ecommerce', 
-    title: 'متجر إلكتروني متعدد البائعين', 
-    shortDesc: 'تحويل البيع إلى أونلاين مع إدارة مخزون ودفع آمن', 
-    keyFeatures: ['سلة شراء متقدّمة', 'بوابات دفع محلية وعالمية', 'كوبونات وعروض', 'تقارير المبيعات', 'دعم عربي/إنجليزي'], 
-    tag: 'Enterprise',
-    longDesc: 'منصة تجارة إلكترونية شاملة تدعم البائعين المتعددين مع إدارة متقدمة للمخزون والطلبات. تتضمن لوحة تحكم للمدراء والبائعين، وأنظمة دفع متنوعة، وتقارير مفصلة للمبيعات والأرباح. مصممة للشركات الكبيرة التي تريد منصة قابلة للتوسع.',
-    stack: ['React Native', 'Node.js/Express', 'PostgreSQL', 'Redis'],
-    integrations: ['Stripe/Mada/STCPay', 'شركات الشحن المحلية', 'بوابات الدفع البنكية', 'أنظمة ERP'],
-    timeline: [
-      { phase: 'تحليل المتطلبات', note: 'دراسة احتياجات البائعين ونماذج العمولة' },
-      { phase: 'التصميم وUX', note: 'تصميم لوحات البائعين والعملاء' },
-      { phase: 'التطوير والتكامل', note: 'بناء النظام مع التكاملات المالية' },
-      { phase: 'الاختبار والتسليم', note: 'اختبار الأداء تحت الضغط والأمان' }
-    ],
-    pricingNote: 'التسعير يعتمد على عدد البائعين والمزايا المطلوبة—يُحدد بعد جلسة تحليل مجانية.',
-    faqs: [
-      { q: 'هل يدعم عمولات مختلفة لكل بائع؟', a: 'نعم، يمكن تحديد نسب عمولة مختلفة حسب الفئة أو البائع.' },
-      { q: 'هل يوجد نظام مراجعات للمنتجات؟', a: 'يتضمن نظام مراجعات وتقييمات مفصل مع إمكانية الرد.' }
-    ],
-    images: [],
-    ctaLink: '/contact'
-  },
-  { 
-    id: 'ec2', 
-    category: 'ecommerce', 
-    title: 'متجر D2C سريع الإطلاق (MVP)', 
-    shortDesc: 'أطلق متجرك خلال أسابيع', 
-    keyFeatures: ['قوالب جاهزة', 'دفع آمن', 'ربط شحن', 'إشعارات فورية'], 
-    tag: 'MVP',
-    longDesc: 'حل سريع للشركات الناشئة التي تريد اختبار السوق بأقل وقت وتكلفة. يتضمن قوالب جاهزة للمنتجات، نظام إدارة بسيط، وربط مباشر مع بوابات الدفع المحلية. مثالي لبدء البيع أونلاين خلال أسابيع.',
-    stack: ['Flutter', 'Firebase', 'Cloud Functions', 'Stripe'],
-    integrations: ['بوابات دفع سريعة', 'أرامكس/SMSA', 'WhatsApp Business', 'Google Analytics'],
-    timeline: [
-      { phase: 'إعداد القوالب', note: 'اختيار التصميم وإعداد المنتجات' },
-      { phase: 'ربط المدفوعات', note: 'تفعيل بوابات الدفع المحلية' },
-      { phase: 'اختبار وإطلاق', note: 'اختبار سريع وإطلاق في المتاجر' },
-      { phase: 'تحسينات أولية', note: 'تطوير حسب ملاحظات المستخدمين' }
-    ],
-    pricingNote: 'باقة ثابتة تبدأ من 15,000 ريال مع إمكانية إضافة مزايا لاحقاً.',
-    faqs: [
-      { q: 'كم يستغرق الإطلاق؟', a: 'من 3-4 أسابيع من بداية العمل.' },
-      { q: 'هل يمكن التطوير لاحقاً؟', a: 'نعم، مصمم ليكون قابلاً للتوسع والتطوير.' }
-    ],
-    images: [],
-    ctaLink: '/contact'
-  },
-  { 
-    id: 'sv1', 
-    category: 'services', 
-    title: 'طلب خدمات عند الطلب', 
-    shortDesc: 'حجوزات وفوترة وتتبع مزوّدين', 
-    keyFeatures: ['خرائط وتتبع', 'مواعيد ودفعات', 'مراجعات العملاء', 'إدارة المزودين', 'تقارير العمولات'],
-    longDesc: 'منصة شاملة لربط مقدمي الخدمات بالعملاء مع تتبع الطلبات في الوقت الفعلي. تدعم أنواع خدمات متعددة من الصيانة إلى التنظيف والتوصيل. تتضمن نظام حجوزات ذكي وإدارة العمولات.',
-    stack: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
-    integrations: ['خرائط جوجل', 'بوابات الدفع', 'رسائل SMS', 'إشعارات فورية'],
-    timeline: [
-      { phase: 'تحليل الخدمات', note: 'تحديد أنواع الخدمات ونماذج التسعير' },
-      { phase: 'تصميم التطبيقين', note: 'تطبيق العملاء وتطبيق مقدمي الخدمة' },
-      { phase: 'نظام التتبع', note: 'تطوير خرائط التتبع والإشعارات' },
-      { phase: 'اختبار العمليات', note: 'اختبار دورة الطلب كاملة' }
-    ],
-    pricingNote: 'يعتمد على عدد الخدمات ومقدمي الخدمة—استشارة مجانية لتحديد النطاق.',
-    faqs: [
-      { q: 'هل يدعم خدمات متعددة؟', a: 'نعم، قابل للتخصيص لأي نوع خدمات.' },
-      { q: 'كيف يتم حساب العمولات؟', a: 'نظام عمولات مرن حسب نوع الخدمة والمزود.' }
-    ],
-    images: [],
-    ctaLink: '/contact'
-  },
-  { 
-    id: 'sv2', 
+  // Main translated cards with full details
+  const mainCards = [
+    { 
+      id: 'ec1', 
+      category: 'ecommerce', 
+      title: t('mobileAppPage.cards.ec1.title'), 
+      shortDesc: t('mobileAppPage.cards.ec1.shortDesc'), 
+      keyFeatures: t('mobileAppPage.cards.ec1.features'), 
+      tag: 'Enterprise',
+      longDesc: t('mobileAppPage.cards.ec1.longDesc'),
+      stack: ['React Native', 'Node.js/Express', 'PostgreSQL', 'Redis'],
+      integrations: t('mobileAppPage.cards.ec1.integrations'),
+      timeline: t('mobileAppPage.cards.ec1.timeline'),
+      pricingNote: '', // Removed pricing from mobile app page as requested
+      faqs: t('mobileAppPage.cards.ec1.faqs'),
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'ec2', 
+      category: 'ecommerce', 
+      title: t('mobileAppPage.cards.ec2.title'), 
+      shortDesc: t('mobileAppPage.cards.ec2.shortDesc'), 
+      keyFeatures: t('mobileAppPage.cards.ec2.features'), 
+      tag: 'MVP',
+      longDesc: t('mobileAppPage.cards.ec2.longDesc'),
+      stack: ['Flutter', 'Firebase', 'Cloud Functions', 'Stripe'],
+      integrations: t('mobileAppPage.cards.ec2.integrations'),
+      timeline: t('mobileAppPage.cards.ec2.timeline'),
+      pricingNote: '', // Removed pricing from mobile app page as requested
+      faqs: t('mobileAppPage.cards.ec2.faqs'),
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'sv1', 
+      category: 'services', 
+      title: t('mobileAppPage.cards.sv1.title'), 
+      shortDesc: t('mobileAppPage.cards.sv1.shortDesc'), 
+      keyFeatures: t('mobileAppPage.cards.sv1.features'),
+      longDesc: t('mobileAppPage.cards.sv1.longDesc'),
+      stack: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
+      integrations: t('mobileAppPage.cards.sv1.integrations'),
+      timeline: t('mobileAppPage.cards.sv1.timeline'),
+      pricingNote: '', // Removed pricing from mobile app page as requested
+      faqs: t('mobileAppPage.cards.sv1.faqs'),
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'ed1', 
+      category: 'education', 
+      title: t('mobileAppPage.cards.ed1.title'), 
+      shortDesc: t('mobileAppPage.cards.ed1.shortDesc'), 
+      keyFeatures: t('mobileAppPage.cards.ed1.features'),
+      longDesc: t('mobileAppPage.cards.ed1.longDesc'),
+      stack: ['React Native', 'WebRTC', 'PostgreSQL', 'AWS S3'],
+      integrations: t('mobileAppPage.cards.ed1.integrations'),
+      timeline: t('mobileAppPage.cards.ed1.timeline'),
+      pricingNote: '', // Removed pricing from mobile app page as requested
+      faqs: t('mobileAppPage.cards.ed1.faqs'),
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'he1', 
+      category: 'health', 
+      title: t('mobileAppPage.cards.he1.title'), 
+      shortDesc: t('mobileAppPage.cards.he1.shortDesc'), 
+      keyFeatures: t('mobileAppPage.cards.he1.features'),
+      longDesc: t('mobileAppPage.cards.he1.longDesc'),
+      stack: ['React Native', 'WebRTC', 'PostgreSQL', 'End-to-End Encryption'],
+      integrations: t('mobileAppPage.cards.he1.integrations'),
+      timeline: t('mobileAppPage.cards.he1.timeline'),
+      pricingNote: '', // Removed pricing from mobile app page as requested
+      faqs: t('mobileAppPage.cards.he1.faqs'),
+      images: [],
+      ctaLink: '/contact'
+    }
+  ];
+
+  // Return only fully translated cards + basic cards (no hardcoded text)
+  return [...mainCards, ...basicCards.slice(0, 12)];
+}; 
     category: 'services', 
     title: 'منصة حجز الاستشارات', 
     shortDesc: 'ربط الخبراء بالعملاء مع نظام حجز ودفع', 
@@ -153,7 +191,7 @@ const useAppCards = () => {
       { phase: 'المكالمات المرئية', note: 'تكامل حلول الفيديو الآمنة' },
       { phase: 'الدفع والتقارير', note: 'أنظمة الفوترة وتقارير الأرباح' }
     ],
-    pricingNote: 'باقات متدرجة حسب عدد المستشارين والمزايا—تبدأ من 12,000 ريال.',
+    pricingNote: '', // Removed pricing from mobile app page as requested
     faqs: [
       { q: 'هل يدعم التخصصات المختلفة؟', a: 'نعم، قابل للتخصيص لأي مجال استشاري.' },
       { q: 'ما مستوى الأمان في المكالمات؟', a: 'تشفير end-to-end لجميع المكالمات والبيانات.' }
@@ -164,23 +202,15 @@ const useAppCards = () => {
   { 
     id: 'ed1', 
     category: 'education', 
-    title: 'تعلم إلكتروني شامل', 
-    shortDesc: 'كورسات، اختبارات، شهادات', 
-    keyFeatures: ['بث مباشر', 'اختبارات تفاعلية', 'لوحة مدرّس', 'شهادات رقمية', 'تتبع التقدم'],
-    longDesc: 'منصة تعليمية متكاملة للجامعات والمؤسسات التعليمية. تدعم البث المباشر، المحتوى التفاعلي، وأنظمة التقييم المتقدمة. تشمل أدوات للمدرسين لإنشاء المحتوى وتتبع تقدم الطلاب بشكل مفصل.',
+    title: t('mobileAppPage.cards.ed1.title'), 
+    shortDesc: t('mobileAppPage.cards.ed1.shortDesc'), 
+    keyFeatures: t('mobileAppPage.cards.ed1.features'),
+    longDesc: t('mobileAppPage.cards.ed1.longDesc'),
     stack: ['React Native', 'WebRTC', 'PostgreSQL', 'AWS S3'],
-    integrations: ['زووم', 'أنظمة الجامعات', 'بوابات الدفع التعليمية', 'مكتبات رقمية'],
-    timeline: [
-      { phase: 'تحليل المناهج', note: 'دراسة المتطلبات التعليمية والمناهج' },
-      { phase: 'منصة المحتوى', note: 'تطوير أدوات إنشاء وإدارة المحتوى' },
-      { phase: 'نظام البث', note: 'تكامل البث المباشر والتسجيل' },
-      { phase: 'التقييم والشهادات', note: 'أنظمة الاختبارات والشهادات الرقمية' }
-    ],
-    pricingNote: 'تسعير مؤسسي حسب عدد الطلاب والمدرسين—عروض خاصة للجامعات.',
-    faqs: [
-      { q: 'هل يدعم الامتحانات الإلكترونية؟', a: 'نعم، مع أنظمة مراقبة ومنع الغش.' },
-      { q: 'هل يمكن التكامل مع أنظمة الجامعة؟', a: 'نعم، يدعم تكامل API مع معظم أنظمة إدارة التعلم.' }
-    ],
+    integrations: t('mobileAppPage.cards.ed1.integrations'),
+    timeline: t('mobileAppPage.cards.ed1.timeline'),
+    pricingNote: '', // Removed pricing from mobile app page as requested
+    faqs: t('mobileAppPage.cards.ed1.faqs'),
     images: [],
     ctaLink: '/contact'
   },
@@ -199,7 +229,7 @@ const useAppCards = () => {
       { phase: 'تتبع التقدم', note: 'أنظمة متابعة وتقارير HR' },
       { phase: 'التكامل المؤسسي', note: 'ربط مع أنظمة الشركة الحالية' }
     ],
-    pricingNote: 'تسعير مؤسسي حسب عدد الموظفين والمزايا المطلوبة—عروض سنوية متاحة.',
+    pricingNote: '', // Removed pricing from mobile app page as requested
     faqs: [
       { q: 'هل يتكامل مع أنظمة HR الحالية؟', a: 'نعم، يدعم معظم أنظمة إدارة الموارد البشرية.' },
       { q: 'هل يمكن إضافة محتوى مخصص؟', a: 'بالطبع، أدوات تأليف المحتوى مدمجة في النظام.' }
@@ -210,23 +240,15 @@ const useAppCards = () => {
   { 
     id: 'he1', 
     category: 'health', 
-    title: 'عيادة عن بُعد', 
-    shortDesc: 'مواعيد، وصفات، سجلات', 
-    keyFeatures: ['مكالمات فيديو', 'وصفات PDF', 'سجلات مشفّرة', 'تذكير بالأدوية', 'تتبع العلامات الحيوية'],
-    longDesc: 'حل طبي متكامل للعيادات والمستشفيات لتقديم الخدمات الطبية عن بُعد. يلتزم بمعايير الأمان الطبي HIPAA ويوفر سجلات مرضى آمنة، نظام مواعيد ذكي، وإصدار وصفات إلكترونية معتمدة.',
+    title: t('mobileAppPage.cards.he1.title'), 
+    shortDesc: t('mobileAppPage.cards.he1.shortDesc'), 
+    keyFeatures: t('mobileAppPage.cards.he1.features'),
+    longDesc: t('mobileAppPage.cards.he1.longDesc'),
     stack: ['React Native', 'WebRTC', 'PostgreSQL', 'End-to-End Encryption'],
-    integrations: ['أنظمة المستشفيات HIS', 'صيدليات إلكترونية', 'مختبرات', 'تأمين صحي'],
-    timeline: [
-      { phase: 'متطلبات الأمان', note: 'تطبيق معايير الأمان الطبي والخصوصية' },
-      { phase: 'السجلات الطبية', note: 'تصميم نظام سجلات مرضى آمن' },
-      { phase: 'الاستشارات المرئية', note: 'نظام مكالمات فيديو طبية عالي الأمان' },
-      { phase: 'التكامل والاعتماد', note: 'ربط مع الأنظمة الصحية والحصول على التراخيص' }
-    ],
-    pricingNote: 'تسعير طبي معتمد حسب حجم العيادة والمزايا—يتضمن التراخيص والأمان.',
-    faqs: [
-      { q: 'هل معتمد من وزارة الصحة؟', a: 'نعم، يلتزم بجميع اللوائح والمعايير المحلية.' },
-      { q: 'مستوى أمان البيانات الطبية؟', a: 'تشفير طبي متقدم يلتزم بمعايير HIPAA العالمية.' }
-    ],
+    integrations: t('mobileAppPage.cards.he1.integrations'),
+    timeline: t('mobileAppPage.cards.he1.timeline'),
+    pricingNote: '', // Removed pricing from mobile app page as requested
+    faqs: t('mobileAppPage.cards.he1.faqs'),
     images: [],
     ctaLink: '/contact'
   },
@@ -245,7 +267,7 @@ const useAppCards = () => {
       { phase: 'الذكاء الاصطناعي', note: 'خوارزميات التوصيات الشخصية' },
       { phase: 'المجتمع التفاعلي', note: 'ميزات التحدي والتحفيز الاجتماعي' }
     ],
-    pricingNote: 'نماذج دخل متنوعة: اشتراكات، إعلانات، أو شراء مرة واحدة—حسب التفضيل.',
+    pricingNote: '', // Removed pricing from mobile app page as requested
     faqs: [
       { q: 'هل يدعم الأجهزة القابلة للارتداء؟', a: 'نعم، يتكامل مع معظم الساعات الذكية والمتتبعات.' },
       { q: 'هل يحتوي على مدرب شخصي؟', a: 'مدرب ذكي بالذكاء الاصطناعي مع إمكانية ربط مدربين حقيقيين.' }

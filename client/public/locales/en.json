@@ -387,6 +387,93 @@
     "cta": {
       "startProject": "Start Your Project Now",
       "browseServices": "Browse Other Services"
+    },
+    "cards": {
+      "ec1": {
+        "title": "Multi-vendor eCommerce Platform",
+        "shortDesc": "Convert selling to online with advanced inventory management and secure payments",
+        "longDesc": "A comprehensive eCommerce platform supporting multiple vendors with advanced inventory and order management. Includes admin and vendor dashboards, diverse payment systems, and detailed sales and profit reports. Designed for large companies that want a scalable platform.",
+        "features": ["Advanced shopping cart", "Local and global payment gateways", "Coupons & promotions", "Sales reports", "Arabic/English support"],
+        "integrations": ["Stripe/Mada/STCPay", "Local shipping companies", "Bank payment gateways", "ERP systems"],
+        "timeline": [
+          {"phase": "Requirements Analysis", "note": "Study vendor needs and commission models"},
+          {"phase": "Design & UX", "note": "Design vendor and customer dashboards"},
+          {"phase": "Development & Integration", "note": "Build system with financial integrations"},
+          {"phase": "Testing & Delivery", "note": "Performance testing under load and security"}
+        ],
+        "faqs": [
+          {"q": "Does it support different commissions per vendor?", "a": "Yes, different commission rates can be set by category or vendor."},
+          {"q": "Is there a product reviews system?", "a": "Includes a detailed reviews and ratings system with reply functionality."}
+        ]
+      },
+      "ec2": {
+        "title": "D2C Fast Launch Store (MVP)",
+        "shortDesc": "Launch your store within weeks",
+        "longDesc": "Quick solution for startups that want to test the market with minimal time and cost. Includes ready-made product templates, simple management system, and direct integration with local payment gateways. Perfect for starting online sales within weeks.",
+        "features": ["Ready templates", "Secure payment", "Shipping integration", "Instant notifications"],
+        "integrations": ["Quick payment gateways", "Aramex/SMSA", "WhatsApp Business", "Google Analytics"],
+        "timeline": [
+          {"phase": "Template Setup", "note": "Choose design and setup products"},
+          {"phase": "Payment Integration", "note": "Activate local payment gateways"},
+          {"phase": "Testing & Launch", "note": "Quick testing and store launch"},
+          {"phase": "Initial Improvements", "note": "Development based on user feedback"}
+        ],
+        "faqs": [
+          {"q": "How long does it take to launch?", "a": "3-4 weeks from start of work."},
+          {"q": "Can it be developed further later?", "a": "Yes, designed to be scalable and expandable."}
+        ]
+      },
+      "sv1": {
+        "title": "On-Demand Services App",
+        "shortDesc": "Bookings, billing, and provider tracking",
+        "longDesc": "A comprehensive platform connecting service providers with customers and real-time order tracking. Supports multiple service types from maintenance to cleaning and delivery. Includes smart booking system and commission management.",
+        "features": ["Maps & tracking", "Appointments & payments", "Customer reviews", "Provider management", "Commission reports"],
+        "integrations": ["Google Maps", "Payment gateways", "SMS messaging", "Push notifications"],
+        "timeline": [
+          {"phase": "Service Analysis", "note": "Define service types and pricing models"},
+          {"phase": "App Design", "note": "Customer app and service provider app"},
+          {"phase": "Tracking System", "note": "Develop tracking maps and notifications"},
+          {"phase": "Operations Testing", "note": "Test complete order cycle"}
+        ],
+        "faqs": [
+          {"q": "Does it support multiple services?", "a": "Yes, customizable for any service type."},
+          {"q": "How are commissions calculated?", "a": "Flexible commission system based on service type and provider."}
+        ]
+      },
+      "ed1": {
+        "title": "Comprehensive E-Learning",
+        "shortDesc": "Courses, tests, certificates",
+        "longDesc": "Integrated educational platform for universities and educational institutions. Supports live streaming, interactive content, and advanced assessment systems. Includes tools for teachers to create content and track student progress in detail.",
+        "features": ["Live streaming", "Interactive tests", "Teacher dashboard", "Digital certificates", "Progress tracking"],
+        "integrations": ["Zoom", "University systems", "Educational payment gateways", "Digital libraries"],
+        "timeline": [
+          {"phase": "Curriculum Analysis", "note": "Study educational requirements and curricula"},
+          {"phase": "Content Platform", "note": "Develop content creation and management tools"},
+          {"phase": "Streaming System", "note": "Integrate live streaming and recording"},
+          {"phase": "Assessment & Certificates", "note": "Testing systems and digital certificates"}
+        ],
+        "faqs": [
+          {"q": "Does it support electronic exams?", "a": "Yes, with monitoring systems and anti-cheating measures."},
+          {"q": "Can it integrate with university systems?", "a": "Yes, supports API integration with most learning management systems."}
+        ]
+      },
+      "he1": {
+        "title": "Remote Clinic",
+        "shortDesc": "Appointments, prescriptions, records",
+        "longDesc": "Integrated medical solution for clinics and hospitals to provide remote medical services. Complies with HIPAA medical security standards and provides secure patient records, smart appointment system, and certified electronic prescription issuance.",
+        "features": ["Video calls", "PDF prescriptions", "Encrypted records", "Medication reminders", "Vital signs tracking"],
+        "integrations": ["Hospital systems HIS", "Electronic pharmacies", "Laboratories", "Health insurance"],
+        "timeline": [
+          {"phase": "Security Requirements", "note": "Apply medical security and privacy standards"},
+          {"phase": "Medical Records", "note": "Design secure patient records system"},
+          {"phase": "Visual Consultations", "note": "High-security medical video call system"},
+          {"phase": "Integration & Certification", "note": "Connect with health systems and obtain licenses"}
+        ],
+        "faqs": [
+          {"q": "Is it approved by the Ministry of Health?", "a": "Yes, complies with all local regulations and standards."},
+          {"q": "Medical data security level?", "a": "Advanced medical encryption complying with global HIPAA standards."}
+        ]
+      }
     }
   }
 }
