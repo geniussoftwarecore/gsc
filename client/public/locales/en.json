@@ -325,49 +325,49 @@
     },
     "whatYouGet": {
       "title": "What You Get",
-      "points": [
-        {
+      "points": {
+        "0": {
           "title": "Continuous Technical Support",
           "desc": "Dedicated support team available 24/7"
         },
-        {
+        "1": {
           "title": "On-Time Delivery",
           "desc": "Full commitment to predetermined deadlines"
         },
-        {
+        "2": {
           "title": "Testing & Reports",
           "desc": "Comprehensive testing and detailed performance reports"
         },
-        {
+        "3": {
           "title": "Training & Support",
           "desc": "Comprehensive training for your team on app usage"
         }
-      ]
+      }
     },
     "howWeWork": {
       "title": "How We Work",
-      "steps": [
-        {
+      "steps": {
+        "0": {
           "number": "01",
           "title": "Requirements Analysis",
           "desc": "We analyze your needs and create a comprehensive project plan"
         },
-        {
+        "1": {
           "number": "02", 
           "title": "Design & User Experience",
           "desc": "We design attractive interfaces and distinctive user experience"
         },
-        {
+        "2": {
           "number": "03",
           "title": "Development & Integration", 
           "desc": "We develop the app and integrate it with required systems"
         },
-        {
+        "3": {
           "number": "04",
           "title": "Testing & Delivery",
           "desc": "We thoroughly test the app and deliver it ready to use"
         }
-      ]
+      }
     },
     "details": {
       "overview": "Overview",

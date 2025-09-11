@@ -1268,7 +1268,12 @@ export default function ServiceDetailClean() {
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              {(t('mobileAppPage.whatYouGet.points', { returnObjects: true }) as Array<{title: string, desc: string}>).map((point, index) => {
+              {[  
+                { title: t('mobileAppPage.whatYouGet.points.0.title'), desc: t('mobileAppPage.whatYouGet.points.0.desc') },
+                { title: t('mobileAppPage.whatYouGet.points.1.title'), desc: t('mobileAppPage.whatYouGet.points.1.desc') },
+                { title: t('mobileAppPage.whatYouGet.points.2.title'), desc: t('mobileAppPage.whatYouGet.points.2.desc') },
+                { title: t('mobileAppPage.whatYouGet.points.3.title'), desc: t('mobileAppPage.whatYouGet.points.3.desc') }
+              ].map((point, index) => {
                 const icons = [Shield, Clock, BarChart3, GraduationCap];
                 const IconComponent = icons[index];
                 return (
@@ -1296,7 +1301,8 @@ export default function ServiceDetailClean() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1318,7 +1324,12 @@ export default function ServiceDetailClean() {
             </motion.div>
 
             <div className="max-w-3xl mx-auto">
-              {(t('mobileAppPage.howWeWork.steps', { returnObjects: true }) as Array<{number: string, title: string, desc: string}>).map((step, index) => (
+              {[
+                { number: t('mobileAppPage.howWeWork.steps.0.number'), title: t('mobileAppPage.howWeWork.steps.0.title'), desc: t('mobileAppPage.howWeWork.steps.0.desc') },
+                { number: t('mobileAppPage.howWeWork.steps.1.number'), title: t('mobileAppPage.howWeWork.steps.1.title'), desc: t('mobileAppPage.howWeWork.steps.1.desc') },
+                { number: t('mobileAppPage.howWeWork.steps.2.number'), title: t('mobileAppPage.howWeWork.steps.2.title'), desc: t('mobileAppPage.howWeWork.steps.2.desc') },
+                { number: t('mobileAppPage.howWeWork.steps.3.number'), title: t('mobileAppPage.howWeWork.steps.3.title'), desc: t('mobileAppPage.howWeWork.steps.3.desc') }
+              ].map((step, index) => (
                 <motion.div
                   key={index}
                   className="relative"
