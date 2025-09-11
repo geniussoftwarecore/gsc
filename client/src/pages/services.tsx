@@ -120,7 +120,7 @@ export default function Services() {
           likedServices={likedServices}
           toggleLike={toggleLike}
           loading={isLoading}
-          error={error?.toString()}
+          error={error ? String(error) : null}
         />
 
         {/* Statistics Section */}

@@ -612,7 +612,7 @@ export default function ServiceDetailClean() {
               size="sm"
               onClick={handleCloseModal}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-              aria-label="إغلاق"
+              aria-label={t('mobileAppPage.details.close', 'إغلاق')}
             >
               <X className="w-5 h-5" />
             </Button>
@@ -627,7 +627,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-3">
                 <Zap className="w-5 h-5 text-primary" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">نظرة عامة</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.overview', 'نظرة عامة')}</h3>
               </div>
               <p 
                 id={`details-description-${selectedAppDetails.id}`}
@@ -645,7 +645,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-3">
                 <CheckCircle className="w-5 h-5 text-green-500" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">الميزات الرئيسية</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.keyFeatures', 'الميزات الرئيسية')}</h3>
               </div>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {selectedAppDetails.keyFeatures.map((feature, index) => (
@@ -668,7 +668,7 @@ export default function ServiceDetailClean() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Code className="w-5 h-5 text-blue-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">التقنيات المستخدمة</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.stack', 'التقنيات المستخدمة')}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {selectedAppDetails.stack.map((tech, index) => (
@@ -683,7 +683,7 @@ export default function ServiceDetailClean() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Plug className="w-5 h-5 text-purple-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">التكاملات</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.integrations', 'التكاملات')}</h3>
                 </div>
                 <ul className="space-y-1">
                   {selectedAppDetails.integrations.map((integration, index) => (
@@ -704,7 +704,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <Calendar className="w-5 h-5 text-orange-500" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">المدة المتوقعة والخط الزمني</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.timeline', 'المدة المتوقعة والخط الزمني')}</h3>
               </div>
               <div className="space-y-3">
                 {selectedAppDetails.timeline.map((phase, index) => (
@@ -721,20 +721,6 @@ export default function ServiceDetailClean() {
               </div>
             </motion.div>
 
-            {/* Pricing Notes Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.4 }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <BarChart3 className="w-5 h-5 text-green-500" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">ملاحظات التسعير</h3>
-              </div>
-              <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                <p className="text-green-800 dark:text-green-200">{selectedAppDetails.pricingNote}</p>
-              </div>
-            </motion.div>
 
             {/* FAQs Section */}
             {selectedAppDetails.faqs.length > 0 && (
@@ -745,7 +731,7 @@ export default function ServiceDetailClean() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <HelpCircle className="w-5 h-5 text-blue-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">أسئلة شائعة</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.faqs', 'أسئلة شائعة')}</h3>
                 </div>
                 <Accordion type="single" collapsible className="w-full">
                   {selectedAppDetails.faqs.map((faq, index) => (
@@ -776,7 +762,7 @@ export default function ServiceDetailClean() {
                 }}
                 data-testid={`button-start-now-${selectedAppDetails.id}`}
               >
-                ابدأ الآن
+                {t('mobileAppPage.details.startNow', 'ابدأ الآن')}
               </Button>
               <Button
                 size="lg"
@@ -788,7 +774,7 @@ export default function ServiceDetailClean() {
                 }}
                 data-testid={`button-discuss-modal-${selectedAppDetails.id}`}
               >
-                ناقش التطبيق
+                {t('mobileAppPage.details.discussApp', 'ناقش التطبيق')}
               </Button>
             </motion.div>
           </div>
