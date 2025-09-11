@@ -293,5 +293,87 @@
   "buttons": {
     "viewDetails": "View Details",
     "getStarted": "Get Started"
+  },
+  "mobileAppPage": {
+    "hero": {
+      "title": "Mobile App Development",
+      "desc": "We develop professional and responsive applications for iOS and Android systems using the latest technologies and global standards with modern user interfaces and distinctive user experience",
+      "deliveryTimeLabel": "4-8 weeks"
+    },
+    "filters": {
+      "all": "All Types",
+      "ecommerce": "E-commerce", 
+      "services": "On-Demand Services",
+      "education": "Education",
+      "health": "Healthcare",
+      "fintech": "Finance/Payments",
+      "logistics": "Delivery/Transport",
+      "media": "Media/Entertainment"
+    },
+    "cards": {
+      "details": "Details",
+      "discuss": "Discuss App",
+      "featuresTitle": "Key Features"
+    },
+    "sections": {
+      "features": "Features",
+      "whatYouGet": "What You Get",
+      "howWeWork": "How We Work",
+      "readyToStart": "Ready to Start?",
+      "contactNow": "Contact Now",
+      "browseServices": "Browse Other Services"
+    },
+    "whatYouGet": {
+      "title": "What You Get",
+      "points": [
+        "Continuous Technical Support",
+        "On-Time Delivery", 
+        "Testing & Reports",
+        "Training & Support"
+      ]
+    },
+    "howWeWork": {
+      "title": "How We Work",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Requirements Analysis",
+          "desc": "We analyze your needs and create a comprehensive project plan"
+        },
+        {
+          "number": "02", 
+          "title": "Design & User Experience",
+          "desc": "We design attractive interfaces and distinctive user experience"
+        },
+        {
+          "number": "03",
+          "title": "Development & Integration", 
+          "desc": "We develop the app and integrate it with required systems"
+        },
+        {
+          "number": "04",
+          "title": "Testing & Delivery",
+          "desc": "We thoroughly test the app and deliver it ready to use"
+        }
+      ]
+    },
+    "details": {
+      "overview": "Overview",
+      "keyFeatures": "Key Features",
+      "stack": "Tech Stack",
+      "integrations": "Integrations",
+      "timeline": "Timeline",
+      "step1": "Phase 1",
+      "step2": "Phase 2", 
+      "step3": "Phase 3",
+      "step4": "Final Phase",
+      "startNow": "Start Now",
+      "discussApp": "Discuss App",
+      "close": "Close"
+    },
+    "cta": {
+      "startProject": "Start Your Project Now",
+      "browseServices": "Browse Other Services"
+    }
   }
 }
