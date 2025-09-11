@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Clock, Smartphone, Shield, CheckCircle, Target, Palette, Globe, Plug, Store, Filter, Package, FileText, Settings, BookOpen, GraduationCap, BarChart3 } from "lucide-react";
+import { ArrowLeft, Clock, Smartphone, Shield, CheckCircle, Target, Palette, Globe, Plug, Store, Filter, Package, FileText, Settings, BookOpen, GraduationCap, BarChart3, Info, X, ChevronRight, Calendar, Code, Zap, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
 import { cn } from "@/lib/utils";
-import { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import ConsolidatedERPNextV15Section from "@/components/erpnext/ConsolidatedERPNextV15Section";
 
 // Service interface
@@ -23,6 +25,24 @@ interface Service {
   technologies: string[];
   deliveryTime: string;
   startingPrice?: number;
+}
+
+// App Card interface
+interface AppCard {
+  id: string;
+  category: string;
+  title: string;
+  shortDesc: string;
+  keyFeatures: string[];
+  tag?: string;
+  longDesc: string;
+  stack: string[];
+  integrations: string[];
+  timeline: Array<{ phase: string; note: string }>;
+  pricingNote: string;
+  faqs: Array<{ q: string; a: string }>;
+  images: string[];
+  ctaLink: string;
 }
 
 // App categories and cards data
@@ -44,7 +64,23 @@ const appCards = [
     title: 'متجر إلكتروني متعدد البائعين', 
     shortDesc: 'تحويل البيع إلى أونلاين مع إدارة مخزون ودفع آمن', 
     keyFeatures: ['سلة شراء متقدّمة', 'بوابات دفع محلية وعالمية', 'كوبونات وعروض', 'تقارير المبيعات', 'دعم عربي/إنجليزي'], 
-    tag: 'Enterprise' 
+    tag: 'Enterprise',
+    longDesc: 'منصة تجارة إلكترونية شاملة تدعم البائعين المتعددين مع إدارة متقدمة للمخزون والطلبات. تتضمن لوحة تحكم للمدراء والبائعين، وأنظمة دفع متنوعة، وتقارير مفصلة للمبيعات والأرباح. مصممة للشركات الكبيرة التي تريد منصة قابلة للتوسع.',
+    stack: ['React Native', 'Node.js/Express', 'PostgreSQL', 'Redis'],
+    integrations: ['Stripe/Mada/STCPay', 'شركات الشحن المحلية', 'بوابات الدفع البنكية', 'أنظمة ERP'],
+    timeline: [
+      { phase: 'تحليل المتطلبات', note: 'دراسة احتياجات البائعين ونماذج العمولة' },
+      { phase: 'التصميم وUX', note: 'تصميم لوحات البائعين والعملاء' },
+      { phase: 'التطوير والتكامل', note: 'بناء النظام مع التكاملات المالية' },
+      { phase: 'الاختبار والتسليم', note: 'اختبار الأداء تحت الضغط والأمان' }
+    ],
+    pricingNote: 'التسعير يعتمد على عدد البائعين والمزايا المطلوبة—يُحدد بعد جلسة تحليل مجانية.',
+    faqs: [
+      { q: 'هل يدعم عمولات مختلفة لكل بائع؟', a: 'نعم، يمكن تحديد نسب عمولة مختلفة حسب الفئة أو البائع.' },
+      { q: 'هل يوجد نظام مراجعات للمنتجات؟', a: 'يتضمن نظام مراجعات وتقييمات مفصل مع إمكانية الرد.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'ec2', 
@@ -52,133 +88,437 @@ const appCards = [
     title: 'متجر D2C سريع الإطلاق (MVP)', 
     shortDesc: 'أطلق متجرك خلال أسابيع', 
     keyFeatures: ['قوالب جاهزة', 'دفع آمن', 'ربط شحن', 'إشعارات فورية'], 
-    tag: 'MVP' 
+    tag: 'MVP',
+    longDesc: 'حل سريع للشركات الناشئة التي تريد اختبار السوق بأقل وقت وتكلفة. يتضمن قوالب جاهزة للمنتجات، نظام إدارة بسيط، وربط مباشر مع بوابات الدفع المحلية. مثالي لبدء البيع أونلاين خلال أسابيع.',
+    stack: ['Flutter', 'Firebase', 'Cloud Functions', 'Stripe'],
+    integrations: ['بوابات دفع سريعة', 'أرامكس/SMSA', 'WhatsApp Business', 'Google Analytics'],
+    timeline: [
+      { phase: 'إعداد القوالب', note: 'اختيار التصميم وإعداد المنتجات' },
+      { phase: 'ربط المدفوعات', note: 'تفعيل بوابات الدفع المحلية' },
+      { phase: 'اختبار وإطلاق', note: 'اختبار سريع وإطلاق في المتاجر' },
+      { phase: 'تحسينات أولية', note: 'تطوير حسب ملاحظات المستخدمين' }
+    ],
+    pricingNote: 'باقة ثابتة تبدأ من 15,000 ريال مع إمكانية إضافة مزايا لاحقاً.',
+    faqs: [
+      { q: 'كم يستغرق الإطلاق؟', a: 'من 3-4 أسابيع من بداية العمل.' },
+      { q: 'هل يمكن التطوير لاحقاً؟', a: 'نعم، مصمم ليكون قابلاً للتوسع والتطوير.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'sv1', 
     category: 'services', 
     title: 'طلب خدمات عند الطلب', 
     shortDesc: 'حجوزات وفوترة وتتبع مزوّدين', 
-    keyFeatures: ['خرائط وتتبع', 'مواعيد ودفعات', 'مراجعات العملاء', 'إدارة المزودين', 'تقارير العمولات'] 
+    keyFeatures: ['خرائط وتتبع', 'مواعيد ودفعات', 'مراجعات العملاء', 'إدارة المزودين', 'تقارير العمولات'],
+    longDesc: 'منصة شاملة لربط مقدمي الخدمات بالعملاء مع تتبع الطلبات في الوقت الفعلي. تدعم أنواع خدمات متعددة من الصيانة إلى التنظيف والتوصيل. تتضمن نظام حجوزات ذكي وإدارة العمولات.',
+    stack: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
+    integrations: ['خرائط جوجل', 'بوابات الدفع', 'رسائل SMS', 'إشعارات فورية'],
+    timeline: [
+      { phase: 'تحليل الخدمات', note: 'تحديد أنواع الخدمات ونماذج التسعير' },
+      { phase: 'تصميم التطبيقين', note: 'تطبيق العملاء وتطبيق مقدمي الخدمة' },
+      { phase: 'نظام التتبع', note: 'تطوير خرائط التتبع والإشعارات' },
+      { phase: 'اختبار العمليات', note: 'اختبار دورة الطلب كاملة' }
+    ],
+    pricingNote: 'يعتمد على عدد الخدمات ومقدمي الخدمة—استشارة مجانية لتحديد النطاق.',
+    faqs: [
+      { q: 'هل يدعم خدمات متعددة؟', a: 'نعم، قابل للتخصيص لأي نوع خدمات.' },
+      { q: 'كيف يتم حساب العمولات؟', a: 'نظام عمولات مرن حسب نوع الخدمة والمزود.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'sv2', 
     category: 'services', 
     title: 'منصة حجز الاستشارات', 
     shortDesc: 'ربط الخبراء بالعملاء مع نظام حجز ودفع', 
-    keyFeatures: ['حجز مواعيد', 'مكالمات فيديو', 'دفع آمن', 'تقييمات وآراء'] 
+    keyFeatures: ['حجز مواعيد', 'مكالمات فيديو', 'دفع آمن', 'تقييمات وآراء'],
+    longDesc: 'منصة متخصصة للاستشاريين والخبراء لتقديم خدماتهم أونلاين. تشمل نظام حجز مرن، مكالمات فيديو عالية الجودة، وأدوات إدارة العملاء. مثالية للمحامين، الأطباء، المستشارين الماليين، والمدربين.',
+    stack: ['Flutter', 'WebRTC', 'Firebase', 'Stripe'],
+    integrations: ['زووم/جيتسي', 'تقويم جوجل', 'بوابات دفع', 'أنظمة CRM'],
+    timeline: [
+      { phase: 'تحديد التخصصات', note: 'دراسة احتياجات المستشارين المختلفة' },
+      { phase: 'نظام الحجز', note: 'تطوير تقويم ذكي ومرن' },
+      { phase: 'المكالمات المرئية', note: 'تكامل حلول الفيديو الآمنة' },
+      { phase: 'الدفع والتقارير', note: 'أنظمة الفوترة وتقارير الأرباح' }
+    ],
+    pricingNote: 'باقات متدرجة حسب عدد المستشارين والمزايا—تبدأ من 12,000 ريال.',
+    faqs: [
+      { q: 'هل يدعم التخصصات المختلفة؟', a: 'نعم، قابل للتخصيص لأي مجال استشاري.' },
+      { q: 'ما مستوى الأمان في المكالمات؟', a: 'تشفير end-to-end لجميع المكالمات والبيانات.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'ed1', 
     category: 'education', 
     title: 'تعلم إلكتروني شامل', 
     shortDesc: 'كورسات، اختبارات، شهادات', 
-    keyFeatures: ['بث مباشر', 'اختبارات تفاعلية', 'لوحة مدرّس', 'شهادات رقمية', 'تتبع التقدم'] 
+    keyFeatures: ['بث مباشر', 'اختبارات تفاعلية', 'لوحة مدرّس', 'شهادات رقمية', 'تتبع التقدم'],
+    longDesc: 'منصة تعليمية متكاملة للجامعات والمؤسسات التعليمية. تدعم البث المباشر، المحتوى التفاعلي، وأنظمة التقييم المتقدمة. تشمل أدوات للمدرسين لإنشاء المحتوى وتتبع تقدم الطلاب بشكل مفصل.',
+    stack: ['React Native', 'WebRTC', 'PostgreSQL', 'AWS S3'],
+    integrations: ['زووم', 'أنظمة الجامعات', 'بوابات الدفع التعليمية', 'مكتبات رقمية'],
+    timeline: [
+      { phase: 'تحليل المناهج', note: 'دراسة المتطلبات التعليمية والمناهج' },
+      { phase: 'منصة المحتوى', note: 'تطوير أدوات إنشاء وإدارة المحتوى' },
+      { phase: 'نظام البث', note: 'تكامل البث المباشر والتسجيل' },
+      { phase: 'التقييم والشهادات', note: 'أنظمة الاختبارات والشهادات الرقمية' }
+    ],
+    pricingNote: 'تسعير مؤسسي حسب عدد الطلاب والمدرسين—عروض خاصة للجامعات.',
+    faqs: [
+      { q: 'هل يدعم الامتحانات الإلكترونية؟', a: 'نعم، مع أنظمة مراقبة ومنع الغش.' },
+      { q: 'هل يمكن التكامل مع أنظمة الجامعة؟', a: 'نعم، يدعم تكامل API مع معظم أنظمة إدارة التعلم.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'ed2', 
     category: 'education', 
     title: 'منصة تدريب مؤسسي', 
     shortDesc: 'تدريب الموظفين وإدارة المهارات', 
-    keyFeatures: ['مسارات تدريبية', 'إدارة المهارات', 'تقارير الأداء', 'شهادات داخلية'] 
+    keyFeatures: ['مسارات تدريبية', 'إدارة المهارات', 'تقارير الأداء', 'شهادات داخلية'],
+    longDesc: 'حل مخصص للشركات لتدريب الموظفين وتطوير مهاراتهم. يتضمن مسارات تدريبية مخصصة، تتبع المهارات، وتقارير مفصلة للموارد البشرية. يدعم التعلم المختلط والتقييم المستمر للأداء.',
+    stack: ['React Native', 'Node.js', 'MongoDB', 'AWS'],
+    integrations: ['أنظمة HR', 'Microsoft Teams', 'Slack', 'أنظمة تقييم الأداء'],
+    timeline: [
+      { phase: 'تحليل المهارات', note: 'تحديد المهارات المطلوبة والمسارات' },
+      { phase: 'المحتوى التدريبي', note: 'تطوير أدوات إنشاء المحتوى' },
+      { phase: 'تتبع التقدم', note: 'أنظمة متابعة وتقارير HR' },
+      { phase: 'التكامل المؤسسي', note: 'ربط مع أنظمة الشركة الحالية' }
+    ],
+    pricingNote: 'تسعير مؤسسي حسب عدد الموظفين والمزايا المطلوبة—عروض سنوية متاحة.',
+    faqs: [
+      { q: 'هل يتكامل مع أنظمة HR الحالية؟', a: 'نعم، يدعم معظم أنظمة إدارة الموارد البشرية.' },
+      { q: 'هل يمكن إضافة محتوى مخصص؟', a: 'بالطبع، أدوات تأليف المحتوى مدمجة في النظام.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'he1', 
     category: 'health', 
     title: 'عيادة عن بُعد', 
     shortDesc: 'مواعيد، وصفات، سجلات', 
-    keyFeatures: ['مكالمات فيديو', 'وصفات PDF', 'سجلات مشفّرة', 'تذكير بالأدوية', 'تتبع العلامات الحيوية'] 
+    keyFeatures: ['مكالمات فيديو', 'وصفات PDF', 'سجلات مشفّرة', 'تذكير بالأدوية', 'تتبع العلامات الحيوية'],
+    longDesc: 'حل طبي متكامل للعيادات والمستشفيات لتقديم الخدمات الطبية عن بُعد. يلتزم بمعايير الأمان الطبي HIPAA ويوفر سجلات مرضى آمنة، نظام مواعيد ذكي، وإصدار وصفات إلكترونية معتمدة.',
+    stack: ['React Native', 'WebRTC', 'PostgreSQL', 'End-to-End Encryption'],
+    integrations: ['أنظمة المستشفيات HIS', 'صيدليات إلكترونية', 'مختبرات', 'تأمين صحي'],
+    timeline: [
+      { phase: 'متطلبات الأمان', note: 'تطبيق معايير الأمان الطبي والخصوصية' },
+      { phase: 'السجلات الطبية', note: 'تصميم نظام سجلات مرضى آمن' },
+      { phase: 'الاستشارات المرئية', note: 'نظام مكالمات فيديو طبية عالي الأمان' },
+      { phase: 'التكامل والاعتماد', note: 'ربط مع الأنظمة الصحية والحصول على التراخيص' }
+    ],
+    pricingNote: 'تسعير طبي معتمد حسب حجم العيادة والمزايا—يتضمن التراخيص والأمان.',
+    faqs: [
+      { q: 'هل معتمد من وزارة الصحة؟', a: 'نعم، يلتزم بجميع اللوائح والمعايير المحلية.' },
+      { q: 'مستوى أمان البيانات الطبية؟', a: 'تشفير طبي متقدم يلتزم بمعايير HIPAA العالمية.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'he2', 
     category: 'health', 
     title: 'تطبيق لياقة ونمط حياة', 
     shortDesc: 'تتبع النشاط البدني والتغذية', 
-    keyFeatures: ['تتبع التمارين', 'خطط غذائية', 'مراقبة النوم', 'تحديات جماعية'] 
+    keyFeatures: ['تتبع التمارين', 'خطط غذائية', 'مراقبة النوم', 'تحديات جماعية'],
+    longDesc: 'تطبيق شامل للصحة واللياقة يساعد المستخدمين على تحقيق أهدافهم الصحية. يتكامل مع الأجهزة الذكية القابلة للارتداء، يوفر خطط تمارين مخصصة، ويتضمن مجتمع تفاعلي للتحفيز والدعم.',
+    stack: ['React Native', 'Firebase', 'HealthKit/Google Fit', 'ML/AI'],
+    integrations: ['Apple Watch', 'Fitbit', 'Samsung Health', 'MyFitnessPal'],
+    timeline: [
+      { phase: 'دراسة صحية', note: 'تحليل احتياجات اللياقة والتغذية' },
+      { phase: 'تكامل الأجهزة', note: 'ربط مع الساعات والأجهزة الذكية' },
+      { phase: 'الذكاء الاصطناعي', note: 'خوارزميات التوصيات الشخصية' },
+      { phase: 'المجتمع التفاعلي', note: 'ميزات التحدي والتحفيز الاجتماعي' }
+    ],
+    pricingNote: 'نماذج دخل متنوعة: اشتراكات، إعلانات، أو شراء مرة واحدة—حسب التفضيل.',
+    faqs: [
+      { q: 'هل يدعم الأجهزة القابلة للارتداء؟', a: 'نعم، يتكامل مع معظم الساعات الذكية والمتتبعات.' },
+      { q: 'هل يحتوي على مدرب شخصي؟', a: 'مدرب ذكي بالذكاء الاصطناعي مع إمكانية ربط مدربين حقيقيين.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'fi1', 
     category: 'fintech', 
     title: 'محفظة ومدفوعات رقمية', 
     shortDesc: 'تحصيل وسداد آمن', 
-    keyFeatures: ['KYC آمن', 'تقارير مالية', 'تصاريح دقيقة', 'تحويلات فورية', 'إدارة النقود'] 
+    keyFeatures: ['KYC آمن', 'تقارير مالية', 'تصاريح دقيقة', 'تحويلات فورية', 'إدارة النقود'],
+    longDesc: 'حل مالي رقمي يلتزم بأنظمة البنك المركزي والمالية السعودية. يوفر خدمات محفظة آمنة، تحويلات فورية، ودفع بـ QR Code. مصمم ليكون PCI DSS معتمد مع أعلى معايير الأمان المالي.',
+    stack: ['React Native', 'Microservices', 'PostgreSQL', 'Kafka', 'Redis'],
+    integrations: ['SAMA APIs', 'بنوك محلية', 'SADAD', 'Mada', 'نظام سريع'],
+    timeline: [
+      { phase: 'التراخيص المالية', note: 'الحصول على تراخيص البنك المركزي' },
+      { phase: 'الأمان والمطابقة', note: 'تطبيق معايير PCI DSS وKYC' },
+      { phase: 'التكامل المصرفي', note: 'ربط مع البنوك وأنظمة الدفع' },
+      { phase: 'الاختبار والإطلاق', note: 'اختبار الأمان والتشغيل التجريبي' }
+    ],
+    pricingNote: 'مشروع مالي معقد—تسعير حسب الخدمات والتراخيص المطلوبة، استشارة تفصيلية مطلوبة.',
+    faqs: [
+      { q: 'هل معتمد من البنك المركزي؟', a: 'نعم، نساعد في الحصول على جميع التراخيص المطلوبة.' },
+      { q: 'مستوى الأمان المالي؟', a: 'أعلى معايير الأمان PCI DSS Level 1 والتشفير المتقدم.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'fi2', 
     category: 'fintech', 
     title: 'منصة استثمار مبسطة', 
     shortDesc: 'تداول وإدارة المحافظ الاستثمارية', 
-    keyFeatures: ['محفظة استثمارية', 'تحليل السوق', 'إشعارات الأسعار', 'تقارير الأداء'] 
+    keyFeatures: ['محفظة استثمارية', 'تحليل السوق', 'إشعارات الأسعار', 'تقارير الأداء'],
+    longDesc: 'منصة استثمار رقمية سهلة الاستخدام للمستثمرين المبتدئين والمتقدمين. تتضمن أدوات تحليل السوق، محاكي تداول، وتوصيات استثمارية ذكية. تلتزم بأنظمة هيئة السوق المالية ومرخصة للتداول.',
+    stack: ['React Native', 'Real-time APIs', 'MongoDB', 'TradingView'],
+    integrations: ['أسواق الأسهم السعودية', 'بيانات مالية', 'بنوك وساطة', 'TradingView'],
+    timeline: [
+      { phase: 'تراخيص الاستثمار', note: 'الحصول على تراخيص هيئة السوق المالية' },
+      { phase: 'بيانات السوق', note: 'تكامل مع مزودي البيانات المالية' },
+      { phase: 'أدوات التحليل', note: 'تطوير لوحات التحليل والرسوم البيانية' },
+      { phase: 'نظام التداول', note: 'ربط مع منصات الوساطة المعتمدة' }
+    ],
+    pricingNote: 'تسعير استثماري متخصص—يعتمد على المزايا والتكاملات، تراخيص إضافية مطلوبة.',
+    faqs: [
+      { q: 'هل مرخص للتداول؟', a: 'نعم، نساعد في الحصول على تراخيص هيئة السوق المالية.' },
+      { q: 'أنواع الاستثمارات المدعومة؟', a: 'أسهم، صناديق، سندات حسب التراخيص المحصلة.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'lg1', 
     category: 'logistics', 
     title: 'توصيل طلبات متقدم', 
     shortDesc: 'أسطول وتتبع حي', 
-    keyFeatures: ['خرائط حيّة', 'مسارات ذكية', 'إثبات التسليم', 'إدارة الأسطول', 'تحسين المسارات'] 
+    keyFeatures: ['خرائط حيّة', 'مسارات ذكية', 'إثبات التسليم', 'إدارة الأسطول', 'تحسين المسارات'],
+    longDesc: 'نظام توصيل ذكي للشركات اللوجستية يحسن الكفاءة ويقلل التكاليف. يتضمن خوارزميات تحسين المسارات، تتبع الأسطول في الوقت الفعلي، وأدوات إدارة السائقين المتقدمة مع التنبؤ بأوقات التسليم.',
+    stack: ['React Native', 'Node.js', 'MongoDB', 'Google Maps', 'ML'],
+    integrations: ['Google Maps API', 'أجهزة تتبع GPS', 'أنظمة إدارة المخازن', 'ERP'],
+    timeline: [
+      { phase: 'دراسة العمليات', note: 'تحليل عمليات التوصيل الحالية' },
+      { phase: 'خوارزميات المسارات', note: 'تطوير ذكاء اصطناعي لتحسين الطرق' },
+      { phase: 'تتبع الأسطول', note: 'أنظمة مراقبة المركبات والسائقين' },
+      { phase: 'تحليل الأداء', note: 'تقارير وتحليلات لتحسين الكفاءة' }
+    ],
+    pricingNote: 'تسعير مؤسسي حسب حجم الأسطول والمزايا—ROI واضح من تحسين الكفاءة.',
+    faqs: [
+      { q: 'هل يدعم أنواع مركبات مختلفة؟', a: 'نعم، من الدراجات النارية إلى الشاحنات الكبيرة.' },
+      { q: 'كيف يحسن المسارات؟', a: 'خوارزميات ذكية تعتبر الزحام والمسافة والأولويات.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'lg2', 
     category: 'logistics', 
     title: 'إدارة المخازن الذكية', 
     shortDesc: 'تتبع المخزون والعمليات اللوجستية', 
-    keyFeatures: ['إدارة المخزون', 'رموز QR', 'تتبع الشحنات', 'تقارير التوزيع'] 
+    keyFeatures: ['إدارة المخزون', 'رموز QR', 'تتبع الشحنات', 'تقارير التوزيع'],
+    longDesc: 'نظام إدارة مخازن متطور يستخدم تقنيات RFID وQR Code لتتبع المخزون بدقة. يوفر تنبؤات المخزون الذكية، أتمتة إعادة الطلب، وتكامل مع أنظمة ERP للحصول على رؤية شاملة للسلسلة اللوجستية.',
+    stack: ['React Native', 'Node.js', 'PostgreSQL', 'RFID/QR', 'IoT'],
+    integrations: ['أجهزة RFID', 'طابعات الملصقات', 'أنظمة ERP', 'WMS'],
+    timeline: [
+      { phase: 'مسح المخازن', note: 'دراسة العمليات وتحديد نقاط التحسين' },
+      { phase: 'أنظمة التتبع', note: 'تركيب وبرمجة أجهزة RFID/QR' },
+      { phase: 'أتمتة العمليات', note: 'تطوير سير العمل الآلي' },
+      { phase: 'التكامل والتدريب', note: 'ربط مع الأنظمة وتدريب الفرق' }
+    ],
+    pricingNote: 'استثمار في تقنيات المخازن—تسعير حسب المساحة والتقنيات المطلوبة.',
+    faqs: [
+      { q: 'هل يدعم مخازن متعددة؟', a: 'نعم، إدارة مركزية لعدة مواقع ومخازن.' },
+      { q: 'دقة تتبع المخزون؟', a: 'دقة تصل إلى 99.9% مع تقنيات RFID المتقدمة.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'md1', 
     category: 'media', 
     title: 'منصّة محتوى تفاعلية', 
     shortDesc: 'فيديو وبث وتفاعل', 
-    keyFeatures: ['رفع وسائط', 'تعليقات تفاعلية', 'تنبيهات Push', 'بث مباشر', 'مونيتايزيشن'] 
+    keyFeatures: ['رفع وسائط', 'تعليقات تفاعلية', 'تنبيهات Push', 'بث مباشر', 'مونيتايزيشن'],
+    longDesc: 'منصة إعلامية شاملة للمحتوى المرئي والتفاعلي. تدعم البث المباشر عالي الجودة، التفاعل الفوري، وأدوات تحليل الجمهور المتقدمة. تتضمن نظام مونيتايزيشن مرن للمبدعين مع حماية حقوق الملكية الفكرية.',
+    stack: ['React Native', 'FFmpeg', 'WebRTC', 'CDN', 'ML'],
+    integrations: ['CDN عالمي', 'أنظمة دفع', 'وسائل تواصل', 'تحليلات فيديو'],
+    timeline: [
+      { phase: 'البنية التحتية', note: 'إعداد خوادم البث والتخزين السحابي' },
+      { phase: 'أدوات الإنشاء', note: 'تطوير محرر فيديو وأدوات البث' },
+      { phase: 'التفاعل الاجتماعي', note: 'نظام تعليقات وردود فعل فورية' },
+      { phase: 'تحليل وتحقيق الدخل', note: 'تقارير الجمهور وأدوات المونيتايزيشن' }
+    ],
+    pricingNote: 'مشروع إعلامي متقدم—تسعير حسب حجم الجمهور والمحتوى المتوقع.',
+    faqs: [
+      { q: 'هل يدعم البث المباشر؟', a: 'نعم، بث عالي الجودة مع تفاعل فوري.' },
+      { q: 'كيف يحقق المبدعون الدخل؟', a: 'عدة طرق: إعلانات، اشتراكات، هدايا، مبيعات.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'md2', 
     category: 'media', 
     title: 'تطبيق بودكاست ومحتوى صوتي', 
     shortDesc: 'منصة للمحتوى الصوتي والبودكاست', 
-    keyFeatures: ['تشغيل دون اتصال', 'قوائم تشغيل', 'اشتراكات', 'تسجيل بودكاست'] 
+    keyFeatures: ['تشغيل دون اتصال', 'قوائم تشغيل', 'اشتراكات', 'تسجيل بودكاست'],
+    longDesc: 'منصة بودكاست عربية شاملة تدعم المبدعين والمستمعين. تتضمن أدوات تسجيل وتحرير احترافية، توزيع تلقائي على المنصات، وتحليلات مستمعين مفصلة. تدعم المونيتايزيشن والإعلانات الصوتية المستهدفة.',
+    stack: ['React Native', 'Node.js', 'Audio Processing', 'CDN', 'Analytics'],
+    integrations: ['Spotify/Apple Podcasts', 'أدوات تحرير صوتي', 'منصات إعلانية', 'تحليلات'],
+    timeline: [
+      { phase: 'أدوات الإنتاج', note: 'تطوير استوديو التسجيل والتحرير' },
+      { phase: 'التوزيع الآلي', note: 'ربط مع منصات البودكاست العالمية' },
+      { phase: 'اكتشاف المحتوى', note: 'خوارزميات التوصية والبحث' },
+      { phase: 'تحليل وإعلانات', note: 'نظام إعلانات مستهدف وتقارير' }
+    ],
+    pricingNote: 'منصة إعلامية صوتية—تسعير حسب المزايا وحجم المحتوى المتوقع.',
+    faqs: [
+      { q: 'هل يوزع على منصات عالمية؟', a: 'نعم، توزيع تلقائي على Spotify وApple Podcasts وغيرها.' },
+      { q: 'أدوات التحرير مدمجة؟', a: 'محرر صوتي متقدم مع مؤثرات وأدوات احترافية.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'ec3', 
     category: 'ecommerce', 
     title: 'سوق محلي (Marketplace)', 
     shortDesc: 'ربط البائعين المحليين بالعملاء', 
-    keyFeatures: ['متعدد البائعين', 'جيولوكيشن', 'مراجعات', 'عمولات مرنة'] 
+    keyFeatures: ['متعدد البائعين', 'جيولوكيشن', 'مراجعات', 'عمولات مرنة'],
+    longDesc: 'سوق إلكتروني محلي يربط البائعين الصغار والمتوسطين بالعملاء في منطقتهم. يركز على المنتجات المحلية والحرفية مع دعم التوصيل السريع. يتضمن نظام تقييمات شفاف وأدوات تسويق للبائعين الصغار.',
+    stack: ['React Native', 'Node.js', 'PostgreSQL', 'Maps API', 'Payment'],
+    integrations: ['خرائط محلية', 'بوابات دفع', 'شركات التوصيل', 'وسائل التواصل'],
+    timeline: [
+      { phase: 'دراسة السوق المحلي', note: 'تحليل احتياجات البائعين المحليين' },
+      { phase: 'منصة البائعين', note: 'أدوات إدارة المتاجر والمنتجات' },
+      { phase: 'اكتشاف محلي', note: 'خوارزميات البحث الجغرافي' },
+      { phase: 'مجتمع ومراجعات', note: 'نظام تقييمات وتفاعل مجتمعي' }
+    ],
+    pricingNote: 'نموذج عمولة مرن—تسعير يدعم نمو البائعين الصغار مع النظام.',
+    faqs: [
+      { q: 'كيف يدعم البائعين الصغار؟', a: 'أدوات تسويق مبسطة ورسوم منخفضة للبداية.' },
+      { q: 'هل يركز على منطقة معينة؟', a: 'قابل للتخصيص لأي منطقة جغرافية محددة.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'sv3', 
     category: 'services', 
     title: 'حجز المناسبات والفعاليات', 
     shortDesc: 'إدارة وحجز الفعاليات والمناسبات', 
-    keyFeatures: ['إدارة الأماكن', 'حجز التذاكر', 'برنامج الفعاليات', 'مشاركة اجتماعية'] 
+    keyFeatures: ['إدارة الأماكن', 'حجز التذاكر', 'برنامج الفعاليات', 'مشاركة اجتماعية'],
+    longDesc: 'منصة شاملة لتنظيم وحجز المناسبات والفعاليات. تدعم منظمي الأحداث بأدوات إدارة متقدمة، حجز التذاكر، وتتبع الحضور. تشمل ميزات التسويق والمشاركة الاجتماعية لضمان نجاح الفعاليات.',
+    stack: ['React Native', 'Node.js', 'PostgreSQL', 'QR Codes', 'Analytics'],
+    integrations: ['بوابات دفع', 'وسائل تواصل', 'طباعة التذاكر', 'تقويم الهواتف'],
+    timeline: [
+      { phase: 'إدارة الفعاليات', note: 'أدوات إنشاء وإدارة الأحداث المختلفة' },
+      { phase: 'حجز التذاكر', note: 'نظام حجز مرن مع أنواع تذاكر متعددة' },
+      { phase: 'تجربة الحضور', note: 'تطبيق الحضور مع خرائط وبرامج' },
+      { phase: 'تحليل وتسويق', note: 'أدوات التسويق وتحليل نجاح الفعاليات' }
+    ],
+    pricingNote: 'نموذج عمولة على المبيعات أو اشتراك شهري حسب التفضيل—مرن للمنظمين.',
+    faqs: [
+      { q: 'أنواع الفعاليات المدعومة؟', a: 'جميع الأنواع: مؤتمرات، حفلات، معارض، ورش عمل.' },
+      { q: 'هل يدعم الدفع عند البوابة؟', a: 'نعم، خيارات دفع متنوعة شاملة الدفع النقدي.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'fi3', 
     category: 'fintech', 
     title: 'تطبيق مصروفات شخصية', 
     shortDesc: 'تتبع وإدارة المصروفات الشخصية', 
-    keyFeatures: ['تصنيف المصروفات', 'تقارير شهرية', 'تنبيهات الميزانية', 'ربط الحسابات البنكية'] 
+    keyFeatures: ['تصنيف المصروفات', 'تقارير شهرية', 'تنبيهات الميزانية', 'ربط الحسابات البنكية'],
+    longDesc: 'مدير مالي شخصي ذكي يساعد الأفراد على تتبع مصروفاتهم وتحقيق أهدافهم المالية. يستخدم الذكاء الاصطناعي لتحليل العادات المالية وتقديم نصائح مخصصة. يدعم ربط آمن مع البنوك السعودية.',
+    stack: ['React Native', 'Open Banking APIs', 'ML/AI', 'Secure Encryption'],
+    integrations: ['بنوك سعودية', 'بطاقات ائتمانية', 'محافظ رقمية', 'فواتير'],
+    timeline: [
+      { phase: 'التكامل البنكي', note: 'ربط آمن مع حسابات البنوك المحلية' },
+      { phase: 'تصنيف ذكي', note: 'خوارزميات تصنيف المصروفات تلقائياً' },
+      { phase: 'التحليل المالي', note: 'تقارير وتوصيات مالية شخصية' },
+      { phase: 'الأهداف والتوفير', note: 'أدوات تحديد وتتبع الأهداف المالية' }
+    ],
+    pricingNote: 'نموذج freemium—مزايا أساسية مجانية مع اشتراك للمزايا المتقدمة.',
+    faqs: [
+      { q: 'هل آمن ربط الحسابات البنكية؟', a: 'نعم، نستخدم معايير Open Banking الآمنة المعتمدة.' },
+      { q: 'هل يدعم العملات المتعددة؟', a: 'نعم، مع تحويل تلقائي وتتبع أسعار الصرف.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'ed3', 
     category: 'education', 
     title: 'تطبيق تعلم اللغات', 
     shortDesc: 'تعلم اللغات بطريقة تفاعلية وممتعة', 
-    keyFeatures: ['دروس تفاعلية', 'اختبارات نطق', 'ألعاب تعليمية', 'تتبع التقدم', 'محادثات بوت'] 
+    keyFeatures: ['دروس تفاعلية', 'اختبارات نطق', 'ألعاب تعليمية', 'تتبع التقدم', 'محادثات بوت'],
+    longDesc: 'منصة تعلم لغات تفاعلية تركز على اللغة العربية للناطقين بغيرها والإنجليزية للعرب. تستخدم الذكاء الاصطناعي للتعلم الشخصي وتقنيات الواقع المعزز للممارسة العملية. تتضمن محادثات مع ذكاء اصطناعي لتحسين النطق.',
+    stack: ['React Native', 'NLP/AI', 'Speech Recognition', 'AR', 'ML'],
+    integrations: ['خدمات الصوت AI', 'قواميس رقمية', 'منصات تعليمية', 'شبكات اجتماعية'],
+    timeline: [
+      { phase: 'المحتوى التعليمي', note: 'تطوير منهج تفاعلي ومتدرج' },
+      { phase: 'الذكاء الاصطناعي', note: 'محرك تعلم شخصي وتقييم النطق' },
+      { phase: 'التفاعل والألعاب', note: 'عناصر اللعب والتحديات الاجتماعية' },
+      { phase: 'الممارسة العملية', note: 'محادثات AI وسيناريوهات واقعية' }
+    ],
+    pricingNote: 'نموذج اشتراك تعليمي مع فترة تجريبية مجانية—خيارات شهرية وسنوية.',
+    faqs: [
+      { q: 'اللغات المدعومة؟', a: 'البداية: العربية والإنجليزية، قابل للتوسع لمزيد من اللغات.' },
+      { q: 'هل يصحح النطق؟', a: 'نعم، تقنية متقدمة لتحليل وتصحيح النطق فوريًا.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'he3', 
     category: 'health', 
     title: 'تطبيق صحة نفسية', 
     shortDesc: 'دعم الصحة النفسية والعافية', 
-    keyFeatures: ['جلسات تأمل', 'تتبع المزاج', 'استشارات نفسية', 'تمارين تنفس'] 
+    keyFeatures: ['جلسات تأمل', 'تتبع المزاج', 'استشارات نفسية', 'تمارين تنفس'],
+    longDesc: 'تطبيق صحة نفسية شامل يوفر أدوات الدعم النفسي والعلاج السلوكي المعرفي. يتضمن جلسات تأمل مخصصة، تتبع الحالة المزاجية، وإمكانية التواصل مع مختصين نفسيين مرخصين. يراعي الثقافة والخصوصية المحلية.',
+    stack: ['React Native', 'Secure Messaging', 'ML/Analytics', 'Audio/Video'],
+    integrations: ['استشاريين نفسيين', 'تأمين صحي', 'أجهزة قياس', 'تطبيقات صحية'],
+    timeline: [
+      { phase: 'البحث النفسي', note: 'دراسة الاحتياجات النفسية المحلية والثقافية' },
+      { phase: 'المحتوى العلاجي', note: 'تطوير برامج الدعم والعلاج المعرفي' },
+      { phase: 'الاستشارات المحمية', note: 'نظام آمن للتواصل مع المختصين' },
+      { phase: 'التتبع والتحليل', note: 'أدوات مراقبة التحسن والتقدم' }
+    ],
+    pricingNote: 'نموذج مختلط: محتوى مجاني أساسي واشتراك للاستشارات والبرامج المتقدمة.',
+    faqs: [
+      { q: 'هل المختصون مرخصون؟', a: 'نعم، جميع المختصين حاصلون على تراخيص معتمدة.' },
+      { q: 'مستوى الخصوصية؟', a: 'أعلى معايير الحماية مع التشفير الطبي المتقدم.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   },
   { 
     id: 'lg3', 
     category: 'logistics', 
     title: 'تطبيق مشاركة السيارات', 
     shortDesc: 'منصة مشاركة المركبات والرحلات', 
-    keyFeatures: ['حجز مركبة', 'تتبع GPS', 'دفع آمن', 'تقييم السائقين'] 
+    keyFeatures: ['حجز مركبة', 'تتبع GPS', 'دفع آمن', 'تقييم السائقين'],
+    longDesc: 'منصة مشاركة السيارات والرحلات تركز على النقل المستدام والاقتصادي. تدعم أنواع مختلفة من المركبات من السيارات العادية إلى الكهربائية. تتضمن نظام تأمين مدمج وتقييمات شفافة للحفاظ على جودة الخدمة.',
+    stack: ['React Native', 'Real-time GPS', 'Payment Systems', 'IoT Integration'],
+    integrations: ['أنظمة GPS', 'بوابات دفع', 'شركات تأمين', 'خرائط ذكية'],
+    timeline: [
+      { phase: 'نموذج العمل', note: 'تحديد أنواع المركبات ونماذج التسعير' },
+      { phase: 'الأمان والتأمين', note: 'أنظمة التحقق والحماية والتأمين' },
+      { phase: 'تجربة المستخدم', note: 'تطبيق سهل للسائقين والركاب' },
+      { phase: 'الإدارة والتشغيل', note: 'أدوات إدارة الأسطول والعمليات' }
+    ],
+    pricingNote: 'نموذج عمولة على الرحلات—استثمار في التقنية والتأمين والتسويق الأولي.',
+    faqs: [
+      { q: 'كيف يضمن الأمان؟', a: 'تحقق من الهوية، تتبع GPS، وتأمين شامل لجميع الرحلات.' },
+      { q: 'أنواع المركبات المدعومة؟', a: 'سيارات عادية، فاخرة، كهربائية حسب السوق المستهدف.' }
+    ],
+    images: [],
+    ctaLink: '/contact'
   }
 ];
 
@@ -187,6 +527,260 @@ export default function ServiceDetailClean() {
   const [, setLocation] = useLocation();
   const { lang, dir } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+
+  // Handle deep linking with hash fragments
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#details-')) {
+        const appId = hash.replace('#details-', '');
+        const app = appCards.find(card => card.id === appId);
+        if (app) {
+          setSelectedAppDetails(app);
+          setIsDetailsModalOpen(true);
+        }
+      } else if (isDetailsModalOpen) {
+        setIsDetailsModalOpen(false);
+        setSelectedAppDetails(null);
+      }
+    };
+
+    // Check initial hash
+    handleHashChange();
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [isDetailsModalOpen]);
+
+  // Handle modal close - update URL hash
+  const handleCloseModal = () => {
+    setIsDetailsModalOpen(false);
+    setSelectedAppDetails(null);
+    // Remove hash from URL without triggering navigation
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
+
+  // Handle view details click
+  const handleViewDetails = (app: AppCard) => {
+    setSelectedAppDetails(app);
+    setIsDetailsModalOpen(true);
+    // Add hash to URL for deep linking
+    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#details-${app.id}`);
+  };
+
+  // App Details Modal Component
+  const AppDetailsModal = () => {
+    if (!selectedAppDetails || !isDetailsModalOpen) return null;
+
+    return (
+      <Dialog open={isDetailsModalOpen} onOpenChange={handleCloseModal}>
+        <DialogContent 
+          className="max-w-4xl max-h-[90vh] overflow-y-auto" 
+          dir={dir}
+          aria-labelledby={`details-title-${selectedAppDetails.id}`}
+          aria-describedby={`details-description-${selectedAppDetails.id}`}
+        >
+          <DialogHeader className="flex flex-row items-center justify-between">
+            <DialogTitle 
+              id={`details-title-${selectedAppDetails.id}`}
+              className="text-xl font-bold text-gray-900 dark:text-white pr-4"
+            >
+              {selectedAppDetails.title}
+            </DialogTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleCloseModal}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              aria-label="إغلاق"
+            >
+              <X className="w-5 h-5" />
+            </Button>
+          </DialogHeader>
+
+          <div className="space-y-6 pt-4">
+            {/* Overview Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Zap className="w-5 h-5 text-primary" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">نظرة عامة</h3>
+              </div>
+              <p 
+                id={`details-description-${selectedAppDetails.id}`}
+                className="text-gray-700 dark:text-gray-300 leading-relaxed"
+              >
+                {selectedAppDetails.longDesc}
+              </p>
+            </motion.div>
+
+            {/* Key Features Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <CheckCircle className="w-5 h-5 text-green-500" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">الميزات الرئيسية</h3>
+              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                {selectedAppDetails.keyFeatures.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Tech Stack & Integrations */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="grid md:grid-cols-2 gap-6"
+            >
+              {/* Tech Stack */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Code className="w-5 h-5 text-blue-500" />
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">التقنيات المستخدمة</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {selectedAppDetails.stack.map((tech, index) => (
+                    <Badge key={index} variant="secondary" className="px-3 py-1">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Integrations */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Plug className="w-5 h-5 text-purple-500" />
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">التكاملات</h3>
+                </div>
+                <ul className="space-y-1">
+                  {selectedAppDetails.integrations.map((integration, index) => (
+                    <li key={index} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                      <ChevronRight className={cn("w-4 h-4 text-gray-400", dir === 'rtl' && "rotate-180")} />
+                      <span>{integration}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+
+            {/* Timeline Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Calendar className="w-5 h-5 text-orange-500" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">المدة المتوقعة والخط الزمني</h3>
+              </div>
+              <div className="space-y-3">
+                {selectedAppDetails.timeline.map((phase, index) => (
+                  <div key={index} className="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-medium flex-shrink-0">
+                      {index + 1}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-gray-900 dark:text-white">{phase.phase}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{phase.note}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Pricing Notes Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <BarChart3 className="w-5 h-5 text-green-500" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">ملاحظات التسعير</h3>
+              </div>
+              <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                <p className="text-green-800 dark:text-green-200">{selectedAppDetails.pricingNote}</p>
+              </div>
+            </motion.div>
+
+            {/* FAQs Section */}
+            {selectedAppDetails.faqs.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <HelpCircle className="w-5 h-5 text-blue-500" />
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">أسئلة شائعة</h3>
+                </div>
+                <Accordion type="single" collapsible className="w-full">
+                  {selectedAppDetails.faqs.map((faq, index) => (
+                    <AccordionItem key={index} value={`faq-${index}`}>
+                      <AccordionTrigger className="text-right">{faq.q}</AccordionTrigger>
+                      <AccordionContent className="text-gray-700 dark:text-gray-300">
+                        {faq.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </motion.div>
+            )}
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.6 }}
+              className="flex gap-3 pt-4 border-t border-gray-200 dark:border-gray-700"
+            >
+              <Button
+                size="lg"
+                className="flex-1"
+                onClick={() => {
+                  setLocation('/contact');
+                  handleCloseModal();
+                }}
+                data-testid={`button-start-now-${selectedAppDetails.id}`}
+              >
+                ابدأ الآن
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="flex-1"
+                onClick={() => {
+                  setLocation('/contact?service=mobile-apps');
+                  handleCloseModal();
+                }}
+                data-testid={`button-discuss-modal-${selectedAppDetails.id}`}
+              >
+                ناقش التطبيق
+              </Button>
+            </motion.div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  };
 
   // Optimized service query
   const { data: services, isLoading, error } = useQuery<Service[]>({
@@ -598,15 +1192,29 @@ export default function ServiceDetailClean() {
                           ))}
                         </ul>
                         
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="w-full border-primary text-primary hover:bg-primary hover:text-white"
-                          onClick={() => setLocation('/contact?service=mobile-apps')}
-                          data-testid={`button-discuss-${card.id}`}
-                        >
-                          ناقش هذا التطبيق
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
+                            onClick={() => handleViewDetails(card)}
+                            data-testid={`button-details-${card.id}`}
+                            aria-label={`عرض تفاصيل ${card.title}`}
+                          >
+                            <Info className="w-4 h-4 mr-1" />
+                            عرض التفاصيل
+                          </Button>
+                          
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 border-primary text-primary hover:bg-primary hover:text-white"
+                            onClick={() => setLocation('/contact?service=mobile-apps')}
+                            data-testid={`button-discuss-${card.id}`}
+                          >
+                            ناقش التطبيق
+                          </Button>
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -816,6 +1424,9 @@ export default function ServiceDetailClean() {
           </div>
         </section>
       </div>
+
+      {/* App Details Modal */}
+      <AppDetailsModal />
     </>
   );
 }
