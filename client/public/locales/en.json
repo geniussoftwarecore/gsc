@@ -326,10 +326,22 @@
     "whatYouGet": {
       "title": "What You Get",
       "points": [
-        "Continuous Technical Support",
-        "On-Time Delivery", 
-        "Testing & Reports",
-        "Training & Support"
+        {
+          "title": "Continuous Technical Support",
+          "desc": "Dedicated support team available 24/7"
+        },
+        {
+          "title": "On-Time Delivery",
+          "desc": "Full commitment to predetermined deadlines"
+        },
+        {
+          "title": "Testing & Reports",
+          "desc": "Comprehensive testing and detailed performance reports"
+        },
+        {
+          "title": "Training & Support",
+          "desc": "Comprehensive training for your team on app usage"
+        }
       ]
     },
     "howWeWork": {

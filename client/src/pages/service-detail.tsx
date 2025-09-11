@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
+import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import React, { useMemo, useState, useEffect } from "react";
 import ConsolidatedERPNextV15Section from "@/components/erpnext/ConsolidatedERPNextV15Section";
@@ -526,6 +527,7 @@ export default function ServiceDetailClean() {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
   const { lang, dir } = useLanguage();
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
@@ -1260,18 +1262,16 @@ export default function ServiceDetailClean() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                ما ستحصل عليه
+                {t('mobileAppPage.whatYouGet.title')}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-brand-sky-base rounded-full mx-auto" />
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              {[
-                { icon: Shield, title: "دعم فني متواصل", desc: "فريق دعم متخصص متاح على مدار الساعة" },
-                { icon: Clock, title: "تسليم في الوقت المحدد", desc: "التزام كامل بالمواعيد المحددة مسبقاً" },
-                { icon: BarChart3, title: "الاختبارات والتقارير", desc: "اختبارات شاملة وتقارير مفصلة للأداء" },
-                { icon: GraduationCap, title: "التدريب والدعم", desc: "تدريب شامل لفريقك على استخدام التطبيق" }
-              ].map((item, index) => (
+              {(t('mobileAppPage.whatYouGet.points', { returnObjects: true }) as Array<{title: string, desc: string}>).map((point, index) => {
+                const icons = [Shield, Clock, BarChart3, GraduationCap];
+                const IconComponent = icons[index];
+                return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -1285,13 +1285,13 @@ export default function ServiceDetailClean() {
                         className="w-12 h-12 mx-auto bg-primary/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors duration-300"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                       >
-                        <item.icon className="w-6 h-6 text-primary" />
+                        <IconComponent className="w-6 h-6 text-primary" />
                       </motion.div>
                       <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        {item.title}
+                        {point.title}
                       </h3>
                       <p className="text-gray-700 leading-relaxed text-sm group-hover:text-gray-900 transition-colors duration-300">
-                        {item.desc}
+                        {point.desc}
                       </p>
                     </CardContent>
                   </Card>
@@ -1312,18 +1312,13 @@ export default function ServiceDetailClean() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                كيف نعمل
+                {t('mobileAppPage.howWeWork.title')}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-brand-sky-base rounded-full mx-auto" />
             </motion.div>
 
             <div className="max-w-3xl mx-auto">
-              {[
-                { step: "01", title: "تحليل المتطلبات", desc: "دراسة شاملة لاحتياجاتك وأهدافك من التطبيق" },
-                { step: "02", title: "التصميم وتجربة المستخدم", desc: "تصميم واجهات مستخدم جذابة وسهلة الاستخدام" },
-                { step: "03", title: "التطوير والتكامل", desc: "برمجة التطبيق وربطه بالخدمات والأنظمة المطلوبة" },
-                { step: "04", title: "الاختبار والتسليم", desc: "اختبار شامل للتطبيق وتسليمه جاهزاً للنشر في المتاجر" }
-              ].map((item, index) => (
+              {(t('mobileAppPage.howWeWork.steps', { returnObjects: true }) as Array<{number: string, title: string, desc: string}>).map((step, index) => (
                 <motion.div
                   key={index}
                   className="relative"
@@ -1344,14 +1339,14 @@ export default function ServiceDetailClean() {
                           className="w-12 h-12 bg-gradient-to-br from-primary to-brand-sky-base rounded-2xl flex items-center justify-center flex-shrink-0 text-white font-bold text-lg group-hover:scale-110 transition-transform duration-300"
                           whileHover={{ rotate: 5 }}
                         >
-                          {item.step}
+                          {step.number}
                         </motion.div>
                         <div className="flex-1 pt-2">
                           <h3 className="font-bold text-xl text-gray-900 mb-2">
-                            {item.title}
+                            {step.title}
                           </h3>
                           <p className="text-gray-700 leading-relaxed group-hover:text-gray-900 transition-colors duration-300">
-                            {item.desc}
+                            {step.desc}
                           </p>
                         </div>
                       </div>
