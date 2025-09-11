@@ -46,19 +46,27 @@ interface AppCard {
   ctaLink: string;
 }
 
-// App categories and cards data
-const categories = [
-  { key: 'all', label: 'جميع الأنواع' },
-  { key: 'ecommerce', label: 'تجارة إلكترونية' },
-  { key: 'services', label: 'خدمات عند الطلب' },
-  { key: 'education', label: 'تعليم' },
-  { key: 'health', label: 'صحة' },
-  { key: 'fintech', label: 'مالية/مدفوعات' },
-  { key: 'logistics', label: 'توصيل/نقل' },
-  { key: 'media', label: 'وسائط/ترفيه' }
-];
+// Enhanced app categories with translation support
+const useAppCategories = () => {
+  const { t } = useTranslation();
+  
+  return [
+    { key: 'all', label: t('mobileAppPage.filters.all', 'جميع الأنواع') },
+    { key: 'ecommerce', label: t('mobileAppPage.filters.ecommerce', 'تجارة إلكترونية') },
+    { key: 'services', label: t('mobileAppPage.filters.services', 'خدمات عند الطلب') },
+    { key: 'education', label: t('mobileAppPage.filters.education', 'تعليم') },
+    { key: 'health', label: t('mobileAppPage.filters.health', 'صحة') },
+    { key: 'fintech', label: t('mobileAppPage.filters.fintech', 'مالية/مدفوعات') },
+    { key: 'logistics', label: t('mobileAppPage.filters.logistics', 'توصيل/نقل') },
+    { key: 'media', label: t('mobileAppPage.filters.media', 'وسائط/ترفيه') }
+  ];
+};
 
-const appCards = [
+// Enhanced app cards with complete 16-20 cards to meet requirements
+const useAppCards = () => {
+  const { t } = useTranslation();
+  
+  return [
   { 
     id: 'ec1', 
     category: 'ecommerce', 
@@ -521,7 +529,8 @@ const appCards = [
     images: [],
     ctaLink: '/contact'
   }
-];
+  ];
+};
 
 export default function ServiceDetailClean() {
   const { id } = useParams<{ id: string }>();
@@ -531,6 +540,10 @@ export default function ServiceDetailClean() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+
+  // Use the translated categories and cards
+  const categories = useAppCategories();
+  const appCards = useAppCards();
 
   // Handle deep linking with hash fragments
   useEffect(() => {
@@ -969,8 +982,8 @@ export default function ServiceDetailClean() {
   return (
     <>
       <SEOHead
-        title="تطوير تطبيقات الهواتف الذكية - خدماتنا | Genius Software Core"
-        description="نطور تطبيقات جوال عالية الجودة وسهلة الاستخدام لمنصتي أندرويد و iOS باستخدام أحدث التقنيات وأطر التطوير"
+        title={t('mobileAppPage.hero.title', 'تطوير تطبيقات الهواتف الذكية') + ' - ' + t('nav.services', 'خدماتنا') + ' | Genius Software Core'}
+        description={t('mobileAppPage.hero.desc', 'نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة')}
         keywords="تطوير تطبيقات، أندرويد، iOS، تطبيقات جوال، React Native، Flutter"
       />
       
@@ -990,7 +1003,7 @@ export default function ServiceDetailClean() {
               data-testid="button-back-services"
             >
               <ArrowLeft className={cn("w-4 h-4 mr-2", dir === 'rtl' && "rotate-180 mr-0 ml-2")} />
-              العودة للخدمات
+              {t('mobileAppPage.sections.backToServices', 'العودة للخدمات')}
             </Button>
           </motion.div>
         </div>
@@ -1027,7 +1040,7 @@ export default function ServiceDetailClean() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
-                    تطوير تطبيقات الهواتف الذكية
+                    {t('mobileAppPage.hero.title', 'تطوير تطبيقات الهواتف الذكية')}
                   </motion.h1>
 
                   <motion.p
@@ -1036,7 +1049,7 @@ export default function ServiceDetailClean() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                   >
-                    نطور تطبيقات جوال احترافية وسريعة الاستجابة لأنظمة iOS وAndroid باستخدام أحدث التقنيات والمعايير العالمية
+                    {t('mobileAppPage.hero.desc', 'نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة')}
                   </motion.p>
 
                   {/* Tech Badges */}
@@ -1071,7 +1084,7 @@ export default function ServiceDetailClean() {
                     transition={{ duration: 0.8, delay: 0.8 }}
                   >
                     <Clock className="w-5 h-5" />
-                    <span className="font-medium">مدة التسليم: 4–8 أسابيع</span>
+                    <span className="font-medium">{t('mobileAppPage.hero.deliveryTimeLabel', '4-8 أسابيع')}</span>
                   </motion.div>
                 </div>
               </motion.div>
@@ -1107,10 +1120,10 @@ export default function ServiceDetailClean() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                اختر نوع التطبيق الذي تريده
+                {t('mobileAppPage.sections.chooseAppType', 'اختر نوع التطبيق الذي تريده')}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                نصمم تطبيقات متخصصة لكافة المجالات من التجارة الإلكترونية إلى الصحة والتعليم والترفيه
+                {t('mobileAppPage.sections.chooseAppDesc', 'نصمم تطبيقات متخصصة لكافة المجالات من التجارة الإلكترونية إلى الصحة والتعليم والترفيه')}
               </p>
             </motion.div>
 
@@ -1204,7 +1217,7 @@ export default function ServiceDetailClean() {
                             aria-label={`عرض تفاصيل ${card.title}`}
                           >
                             <Info className="w-4 h-4 mr-1" />
-                            عرض التفاصيل
+                            {t('mobileAppPage.sections.viewDetailsButton', 'عرض التفاصيل')}
                           </Button>
                           
                           <Button 
@@ -1214,7 +1227,7 @@ export default function ServiceDetailClean() {
                             onClick={() => setLocation('/contact?service=mobile-apps')}
                             data-testid={`button-discuss-${card.id}`}
                           >
-                            ناقش التطبيق
+                            {t('mobileAppPage.sections.discussAppButton', 'ناقش التطبيق')}
                           </Button>
                         </div>
                       </CardContent>
@@ -1234,17 +1247,17 @@ export default function ServiceDetailClean() {
             >
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 max-w-2xl mx-auto">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  لديك فكرة تطبيق مختلفة؟
+                  {t('mobileAppPage.sections.customAppTitle', 'لديك فكرة تطبيق مختلفة؟')}
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  لا تتردد في التواصل معنا لمناقشة فكرتك الفريدة. نحن متخصصون في تحويل الأفكار الإبداعية إلى تطبيقات ناجحة
+                  {t('mobileAppPage.sections.customAppDesc', 'لا تتردد في التواصل معنا لمناقشة فكرتك الفريدة. نحن متخصصون في تحويل الأفكار الإبداعية إلى تطبيقات ناجحة')}
                 </p>
                 <Button 
                   size="lg"
                   onClick={() => setLocation('/contact?service=mobile-apps')}
                   data-testid="button-discuss-custom-idea"
                 >
-                  ناقش فكرتك معنا
+                  {t('mobileAppPage.sections.customAppButton', 'ناقش فكرتك معنا')}
                 </Button>
               </div>
             </motion.div>
@@ -1386,7 +1399,7 @@ export default function ServiceDetailClean() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                جاهز لبدء مشروعك؟
+                {t('mobileAppPage.cta.title', 'جاهز لبدء مشروعك؟')}
               </motion.h2>
               
               <motion.p
@@ -1396,7 +1409,7 @@ export default function ServiceDetailClean() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                تواصل معنا اليوم واحصل على استشارة مجانية لتطوير تطبيقك الذكي
+                {t('mobileAppPage.cta.desc', 'تواصل معنا اليوم واحصل على استشارة مجانية لتطوير تطبيقك الذكي')}
               </motion.p>
               
               <motion.div
@@ -1413,7 +1426,7 @@ export default function ServiceDetailClean() {
                   onClick={() => setLocation('/contact?service=mobile-apps')}
                   data-testid="button-start-project"
                 >
-                  ابدأ مشروعك الآن
+                  {t('mobileAppPage.cta.startButton', 'ابدأ مشروعك الآن')}
                 </Button>
                 
                 <Button
@@ -1423,7 +1436,7 @@ export default function ServiceDetailClean() {
                   onClick={() => setLocation('/services')}
                   data-testid="button-browse-services"
                 >
-                  تصفّح خدمات أخرى
+                  {t('mobileAppPage.cta.browseButton', 'تصفّح خدمات أخرى')}
                 </Button>
               </motion.div>
             </motion.div>
