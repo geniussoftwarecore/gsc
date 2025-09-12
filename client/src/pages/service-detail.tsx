@@ -794,7 +794,7 @@ export default function ServiceDetailClean() {
   }, [selectedCategory]);
 
   // Check if this is the mobile app development service
-  const isMobileAppService = service?.id === '0b7d8e2d-8d42-4081-bb64-ffbc86af6da5';
+  const isMobileAppService = service?.id === '916ab8db-091c-43d1-8160-42e187fa722d';
 
   // Loading state
   if (isLoading) {
