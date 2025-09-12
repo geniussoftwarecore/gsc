@@ -64,119 +64,486 @@ const useAppCategories = () => {
 
 // Enhanced app cards with complete 16-20 cards to meet requirements
 const useAppCards = () => {
-  const { t } = useTranslation();
-
-  // Create a simplified card array with the translated cards we have plus basic cards
-  const basicCards = Array.from({ length: 12 }, (_, i) => ({
-    id: `basic-${i + 1}`,
-    category: ['ecommerce', 'services', 'education', 'health', 'fintech', 'logistics', 'media'][i % 7],
-    title: t(`mobileAppPage.cards.basic${i + 1}.title`, `تطبيق متخصص ${i + 1}`),
-    shortDesc: t(`mobileAppPage.cards.basic${i + 1}.shortDesc`, 'وصف مختصر للتطبيق'),
-    keyFeatures: [
-      t(`mobileAppPage.cards.basic${i + 1}.feature1`, 'ميزة متقدمة'),
-      t(`mobileAppPage.cards.basic${i + 1}.feature2`, 'واجهة سهلة'),
-      t(`mobileAppPage.cards.basic${i + 1}.feature3`, 'أمان عالي')
-    ],
-    longDesc: t(`mobileAppPage.cards.basic${i + 1}.longDesc`, 'وصف مفصل للتطبيق وميزاته'),
-    stack: ['React Native', 'Node.js', 'PostgreSQL'],
-    integrations: [t('common.apis', 'APIs متنوعة'), t('common.paymentGateways', 'بوابات دفع')],
-    timeline: [
-      { phase: t('common.planning', 'التخطيط'), note: t('common.planningNote', 'دراسة وتحليل') },
-      { phase: t('common.development', 'التطوير'), note: t('common.developmentNote', 'بناء وتطوير') },
-      { phase: t('common.testing', 'الاختبار'), note: t('common.testingNote', 'اختبار شامل') },
-      { phase: t('common.delivery', 'التسليم'), note: t('common.deliveryNote', 'تسليم ودعم') }
-    ],
-    pricingNote: '', // All pricing removed from mobile app page
-    faqs: [
-      { q: t('common.faq1', 'هل التطبيق قابل للتخصيص؟'), a: t('common.faqAnswer1', 'نعم، قابل للتخصيص بالكامل.') }
-    ],
-    images: [],
-    ctaLink: '/contact'
-  }));
-  
-  // Main translated cards with full details
-  const mainCards = [
+  return [
+    // E-commerce Category (3 cards)
     { 
       id: 'ec1', 
       category: 'ecommerce', 
-      title: t('mobileAppPage.cards.ec1.title'), 
-      shortDesc: t('mobileAppPage.cards.ec1.shortDesc'), 
-      keyFeatures: t('mobileAppPage.cards.ec1.features'), 
+      title: 'متجر إلكتروني متعدد البائعين', 
+      shortDesc: 'تحويل البيع إلى أونلاين مع إدارة مخزون ودفع آمن', 
+      keyFeatures: ['سلة شراء متقدمة', 'بوابات دفع محلية وعالمية', 'كوبونات وعروض', 'تقارير المبيعات', 'دعم عربي/إنجليزي'], 
       tag: 'Enterprise',
-      longDesc: t('mobileAppPage.cards.ec1.longDesc'),
-      stack: ['React Native', 'Node.js/Express', 'PostgreSQL', 'Redis'],
-      integrations: t('mobileAppPage.cards.ec1.integrations'),
-      timeline: t('mobileAppPage.cards.ec1.timeline'),
-      pricingNote: '', // Removed pricing from mobile app page as requested
-      faqs: t('mobileAppPage.cards.ec1.faqs'),
+      longDesc: 'منصة تجارة إلكترونية شاملة تدعم البائعين المتعددين مع إدارة كاملة للمخزون والطلبات وتتبع الشحنات',
+      stack: ['React Native', 'Node.js/Express', 'PostgreSQL', 'Redis', 'Stripe'],
+      integrations: ['بوابات الدفع المحلية', 'خدمات الشحن', 'إدارة المخزون', 'تحليلات المبيعات'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة احتياجات العمل والمستخدمين' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهات تفاعلية وسهلة' },
+        { phase: 'التطوير والتكامل', note: 'بناء النظام وربط الخدمات' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار شامل وتدريب المستخدمين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم التطبيق عدة بائعين؟', a: 'نعم، يدعم عدد غير محدود من البائعين مع لوحة تحكم منفصلة لكل بائع.' },
+        { q: 'ما هي طرق الدفع المدعومة؟', a: 'يدعم جميع بوابات الدفع المحلية والعالمية مثل فيزا وماستركارد والتحويل البنكي.' }
+      ],
       images: [],
       ctaLink: '/contact'
     },
     { 
       id: 'ec2', 
       category: 'ecommerce', 
-      title: t('mobileAppPage.cards.ec2.title'), 
-      shortDesc: t('mobileAppPage.cards.ec2.shortDesc'), 
-      keyFeatures: t('mobileAppPage.cards.ec2.features'), 
+      title: 'متجر D2C سريع الإطلاق', 
+      shortDesc: 'أطلق متجرك خلال أسابيع', 
+      keyFeatures: ['قوالب جاهزة', 'دفع آمن', 'ربط شحن', 'إشعارات فورية'], 
       tag: 'MVP',
-      longDesc: t('mobileAppPage.cards.ec2.longDesc'),
+      longDesc: 'حل سريع لإطلاق متجر إلكتروني بسيط وفعال للشركات الناشئة والمتاجر الصغيرة',
       stack: ['Flutter', 'Firebase', 'Cloud Functions', 'Stripe'],
-      integrations: t('mobileAppPage.cards.ec2.integrations'),
-      timeline: t('mobileAppPage.cards.ec2.timeline'),
-      pricingNote: '', // Removed pricing from mobile app page as requested
-      faqs: t('mobileAppPage.cards.ec2.faqs'),
+      integrations: ['Stripe', 'Firebase Push', 'خدمات الشحن المحلية'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: '1-2 أسبوع' },
+        { phase: 'التصميم وتجربة المستخدم', note: '1 أسبوع' },
+        { phase: 'التطوير والتكامل', note: '2-3 أسابيع' },
+        { phase: 'الاختبار والتسليم', note: '1 أسبوع' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كم يستغرق إطلاق المتجر؟', a: '4-6 أسابيع من بداية العمل حتى الإطلاق.' }
+      ],
       images: [],
       ctaLink: '/contact'
     },
+    { 
+      id: 'ec3', 
+      category: 'ecommerce', 
+      title: 'تطبيق عروض وكوبونات', 
+      shortDesc: 'منصة للعروض والخصومات الذكية', 
+      keyFeatures: ['كوبونات QR', 'عروض موقعية', 'برنامج ولاء', 'تتبع الاستخدام', 'تحليلات متقدمة'], 
+      longDesc: 'تطبيق ذكي يجمع العروض والخصومات من المتاجر المختلفة مع نظام كوبونات متطور ونقاط الولاء',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Redis'],
+      integrations: ['خرائط Google', 'QR Code Scanner', 'نظام الإشعارات'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد المتطلبات والميزات' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة مستخدم مميزة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير الميزات وربط الأنظمة' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار وإطلاق التطبيق' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يعمل نظام الكوبونات؟', a: 'عبر QR codes فريدة لكل عرض مع تتبع لاستخدام الكوبونات ومنع التكرار.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Services Category (3 cards)
     { 
       id: 'sv1', 
       category: 'services', 
-      title: t('mobileAppPage.cards.sv1.title'), 
-      shortDesc: t('mobileAppPage.cards.sv1.shortDesc'), 
-      keyFeatures: t('mobileAppPage.cards.sv1.features'),
-      longDesc: t('mobileAppPage.cards.sv1.longDesc'),
+      title: 'طلب خدمات عند الطلب', 
+      shortDesc: 'حجوزات وفوترة وتتبع مزودين', 
+      keyFeatures: ['خرائط وتتبع', 'مواعيد ودفعات', 'مراجعات العملاء', 'نظام تقييم', 'دعم متعدد الخدمات'],
+      longDesc: 'منصة شاملة لحجز الخدمات عند الطلب مع تتبع المزودين ونظام دفع متكامل',
       stack: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
-      integrations: t('mobileAppPage.cards.sv1.integrations'),
-      timeline: t('mobileAppPage.cards.sv1.timeline'),
-      pricingNote: '', // Removed pricing from mobile app page as requested
-      faqs: t('mobileAppPage.cards.sv1.faqs'),
+      integrations: ['خرائط Google', 'بوابات الدفع', 'الإشعارات الفورية'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة نوع الخدمات وسير العمل' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم رحلة المستخدم والمزود' },
+        { phase: 'التطوير والتكامل', note: 'تطوير التطبيق وربط الخدمات' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار النظام وتدريب المستخدمين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم تتبع الخدمة فوريًا؟', a: 'نعم، تتبع فوري للخدمة والمزود مع إشعارات لحظية.' }
+      ],
       images: [],
       ctaLink: '/contact'
     },
+    { 
+      id: 'sv2', 
+      category: 'services', 
+      title: 'تطبيق صيانة منزلية', 
+      shortDesc: 'كهرباء، سباكة، تكييف بنقرة واحدة', 
+      keyFeatures: ['حجز فوري', 'فنيين معتمدين', 'تسعير شفاف', 'ضمان الخدمة', 'متابعة الطلب'], 
+      longDesc: 'تطبيق متخصص في الصيانة المنزلية يربط العملاء بالفنيين المعتمدين لجميع خدمات الصيانة',
+      stack: ['Flutter', 'Firebase', 'Cloud Functions', 'Google Maps'],
+      integrations: ['خرائط للموقع', 'نظام الدفع', 'تقييم الفنيين'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد أنواع الخدمات المطلوبة' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة سهلة للحجز' },
+        { phase: 'التطوير والتكامل', note: 'تطوير نظام المطابقة والحجز' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع فنيين حقيقيين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يتم اختيار الفني؟', a: 'بناءً على القرب الجغرافي والتقييمات والتخصص المطلوب.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'sv3', 
+      category: 'services', 
+      title: 'منصة خدمات تنظيف', 
+      shortDesc: 'تنظيف منازل ومكاتب بمعايير عالية', 
+      keyFeatures: ['جدولة ذكية', 'فرق مدربة', 'مواد آمنة', 'تقييم بعد الخدمة', 'اشتراكات دورية'], 
+      longDesc: 'منصة احترافية لخدمات التنظيف مع إمكانية جدولة الخدمات الدورية وضمان الجودة',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Socket.io'],
+      integrations: ['نظام الجدولة', 'تتبع الفريق', 'نظام التقييم'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة سوق خدمات التنظيف' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم نظام الحجز والجدولة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير النظام وربط الفرق' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار العمليات مع فرق التنظيف' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يمكن جدولة خدمات دورية؟', a: 'نعم، يمكن إعداد جدولة أسبوعية أو شهرية مع خصومات للاشتراكات.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Education Category (3 cards)
     { 
       id: 'ed1', 
       category: 'education', 
-      title: t('mobileAppPage.cards.ed1.title'), 
-      shortDesc: t('mobileAppPage.cards.ed1.shortDesc'), 
-      keyFeatures: t('mobileAppPage.cards.ed1.features'),
-      longDesc: t('mobileAppPage.cards.ed1.longDesc'),
+      title: 'منصة تعلم إلكتروني', 
+      shortDesc: 'كورسات، اختبارات، شهادات', 
+      keyFeatures: ['بث مباشر', 'اختبارات تفاعلية', 'لوحة مدرس', 'تتبع التقدم', 'شهادات معتمدة'],
+      longDesc: 'منصة تعليمية شاملة تدعم التعلم المباشر والتفاعلي مع نظام إدارة محتوى متقدم',
       stack: ['React Native', 'WebRTC', 'PostgreSQL', 'AWS S3'],
-      integrations: t('mobileAppPage.cards.ed1.integrations'),
-      timeline: t('mobileAppPage.cards.ed1.timeline'),
-      pricingNote: '', // Removed pricing from mobile app page as requested
-      faqs: t('mobileAppPage.cards.ed1.faqs'),
+      integrations: ['نظام الدفع', 'بث الفيديو', 'إدارة الشهادات'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد المحتوى التعليمي والميزات' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة تعلم تفاعلية' },
+        { phase: 'التطوير والتكامل', note: 'تطوير المنصة وربط الأنظمة' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع معلمين وطلاب' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم البث المباشر؟', a: 'نعم، مع إمكانية التفاعل المباشر والمشاركة والتسجيل.' }
+      ],
       images: [],
       ctaLink: '/contact'
     },
     { 
+      id: 'ed2', 
+      category: 'education', 
+      title: 'تطبيق تعلم لغات', 
+      shortDesc: 'تعلم اللغات بطريقة تفاعلية وممتعة', 
+      keyFeatures: ['دروس تفاعلية', 'تقييم النطق', 'ألعاب تعليمية', 'متابعة اليومية', 'دردشة مع ناطقين'], 
+      longDesc: 'تطبيق متطور لتعلم اللغات باستخدام الذكاء الاصطناعي لتقييم النطق والتفاعل',
+      stack: ['Flutter', 'AI/ML APIs', 'Firebase', 'Speech Recognition'],
+      integrations: ['تقييم النطق بالذكاء الاصطناعي', 'نظام التحفيز', 'مجتمع المتعلمين'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد اللغات والمنهجية' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة تعلم ممتعة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير ميزات الذكاء الاصطناعي' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار دقة النطق والتعلم' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يعمل تقييم النطق؟', a: 'باستخدام تقنيات الذكاء الاصطناعي لتحليل النطق وتقديم تصحيحات فورية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'ed3', 
+      category: 'education', 
+      title: 'مدرسة افتراضية', 
+      shortDesc: 'إدارة مدرسية شاملة ومتكاملة', 
+      keyFeatures: ['حضور وغياب', 'درجات ونتائج', 'تواصل أولياء أمور', 'جدول حصص', 'مكتبة رقمية'], 
+      longDesc: 'نظام إدارة مدرسي متكامل يربط المعلمين والطلاب وأولياء الأمور في منصة واحدة',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'WebRTC'],
+      integrations: ['نظام الحضور', 'إدارة الدرجات', 'التواصل المباشر'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة النظام التعليمي المطلوب' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهات للطلاب والمعلمين' },
+        { phase: 'التطوير والتكامل', note: 'تطوير جميع الوحدات المطلوبة' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع مدرسة حقيقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم التعلم عن بُعد؟', a: 'نعم، مع فصول افتراضية وإدارة كاملة للتعلم الإلكتروني.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Health Category (3 cards)
+    { 
       id: 'he1', 
       category: 'health', 
-      title: t('mobileAppPage.cards.he1.title'), 
-      shortDesc: t('mobileAppPage.cards.he1.shortDesc'), 
-      keyFeatures: t('mobileAppPage.cards.he1.features'),
-      longDesc: t('mobileAppPage.cards.he1.longDesc'),
+      title: 'عيادة عن بُعد', 
+      shortDesc: 'مواعيد، وصفات، سجلات', 
+      keyFeatures: ['مكالمات فيديو', 'وصفات PDF', 'سجلات مشفرة', 'تذكير بالدواء', 'تقارير طبية'],
+      longDesc: 'تطبيق طبي متقدم يربط المرضى بالأطباء مع حفظ كامل للسجلات الطبية والخصوصية',
       stack: ['React Native', 'WebRTC', 'PostgreSQL', 'End-to-End Encryption'],
-      integrations: t('mobileAppPage.cards.he1.integrations'),
-      timeline: t('mobileAppPage.cards.he1.timeline'),
-      pricingNote: '', // Removed pricing from mobile app page as requested
-      faqs: t('mobileAppPage.cards.he1.faqs'),
+      integrations: ['مكالمات الفيديو المشفرة', 'إدارة الوصفات', 'تأمين البيانات الطبية'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة المتطلبات الطبية والقانونية' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة طبية احترافية' },
+        { phase: 'التطوير والتكامل', note: 'تطوير مع معايير الأمان الطبي' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع أطباء حقيقيين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل البيانات الطبية آمنة؟', a: 'نعم، مع تشفير كامل ومعايير HIPAA للخصوصية الطبية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'he2', 
+      category: 'health', 
+      title: 'متابعة اللياقة الذكية', 
+      shortDesc: 'تمارين، تغذية، تتبع صحي شامل', 
+      keyFeatures: ['برامج تمارين مخصصة', 'تتبع السعرات', 'مراقبة الوزن', 'تحفيز ذكي', 'تقارير صحية'], 
+      longDesc: 'تطبيق لياقة شامل يستخدم الذكاء الاصطناعي لتخصيص برامج التمارين والتغذية',
+      stack: ['Flutter', 'AI/ML', 'Firebase', 'HealthKit/Google Fit'],
+      integrations: ['أجهزة اللياقة الذكية', 'حساب السعرات', 'مجتمع اللياقة'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة برامج اللياقة والتغذية' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة تحفيزية' },
+        { phase: 'التطوير والتكامل', note: 'تطوير خوارزميات التخصيص' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع مدربين ومستخدمين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يتكامل مع الأجهزة الذكية؟', a: 'نعم، مع جميع أجهزة اللياقة المشهورة مثل Fitbit وApple Watch.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'he3', 
+      category: 'health', 
+      title: 'إدارة العيادات', 
+      shortDesc: 'نظام شامل لإدارة العيادات والمرضى', 
+      keyFeatures: ['حجز المواعيد', 'ملفات المرضى', 'إدارة المخزون', 'الفوترة الطبية', 'تقارير إدارية'], 
+      longDesc: 'نظام إدارة متكامل للعيادات الطبية مع إدارة كاملة للمواعيد والملفات والفوترة',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'PDF Generation'],
+      integrations: ['أنظمة الدفع الطبية', 'أجهزة طبية', 'تأمين صحي'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة سير العمل في العيادة' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم نظام سهل للأطباء' },
+        { phase: 'التطوير والتكامل', note: 'تطوير جميع وحدات الإدارة' },
+        { phase: 'الاختبار والتسليم', note: 'تجريب في عيادة حقيقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم التأمين الصحي؟', a: 'نعم، مع ربط مباشر بشركات التأمين المحلية والدولية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Fintech Category (3 cards)
+    { 
+      id: 'fi1', 
+      category: 'fintech', 
+      title: 'محفظة ومدفوعات رقمية', 
+      shortDesc: 'تحصيل وسداد آمن مع ميزات متقدمة', 
+      keyFeatures: ['KYC متقدم', 'تقارير مالية', 'تصاريح دقيقة', 'حماية متعددة الطبقات', 'دعم عملات متعددة'],
+      longDesc: 'محفظة رقمية متقدمة مع أعلى معايير الأمان والتوافق مع اللوائح المالية',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Blockchain', 'Encryption'],
+      integrations: ['البنوك المحلية', 'أنظمة KYC', 'شبكات الدفع العالمية'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة المتطلبات المالية والقانونية' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة آمنة وسهلة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير مع أعلى معايير الأمان' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار أمني شامل وترخيص' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما هي معايير الأمان المطبقة؟', a: 'معايير PCI DSS وتشفير عسكري مع مصادقة متعددة العوامل.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fi2', 
+      category: 'fintech', 
+      title: 'منصة استثمار ذكية', 
+      shortDesc: 'استثمار آمن مع نصائح مالية ذكية', 
+      keyFeatures: ['محفظة متنوعة', 'تحليلات السوق', 'استثمار تلقائي', 'إدارة المخاطر', 'تقارير أداء'], 
+      longDesc: 'منصة استثمار متطورة تستخدم الذكاء الاصطناعي لتقديم نصائح مالية مخصصة',
+      stack: ['Flutter', 'AI/ML', 'Real-time APIs', 'Advanced Analytics'],
+      integrations: ['أسواق المال العالمية', 'تحليلات اقتصادية', 'البنوك والوسطاء'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة الأسواق المالية المستهدفة' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة استثمار بديهية' },
+        { phase: 'التطوير والتكامل', note: 'تطوير خوارزميات الاستثمار' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع بيانات سوق حقيقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل الاستثمار مضمون؟', a: 'نوفر أدوات إدارة المخاطر ولكن الاستثمار يحمل مخاطر طبيعية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fi3', 
+      category: 'fintech', 
+      title: 'نظام التمويل الجماعي', 
+      shortDesc: 'منصة تمويل جماعي للمشاريع', 
+      keyFeatures: ['إدارة المشاريع', 'نظام تبرعات', 'تتبع الأهداف', 'شفافية كاملة', 'تقارير للمانحين'], 
+      longDesc: 'منصة تمويل جماعي متطورة تربط أصحاب المشاريع بالمستثمرين والمتبرعين',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Payment Gateways'],
+      integrations: ['بوابات دفع متعددة', 'أنظمة البنوك', 'شبكات التواصل'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة نموذج التمويل الجماعي' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة جذابة للمشاريع' },
+        { phase: 'التطوير والتكامل', note: 'تطوير آليات التمويل والتتبع' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع مشاريع تجريبية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما هي شروط نشر المشروع؟', a: 'مراجعة دقيقة للمشروع والفريق مع ضمانات حماية للمستثمرين.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Logistics Category (3 cards)
+    { 
+      id: 'lg1', 
+      category: 'logistics', 
+      title: 'نظام توصيل طلبات', 
+      shortDesc: 'أسطول وتتبع حي مع إدارة شاملة', 
+      keyFeatures: ['خرائط حية', 'مسارات ذكية', 'إثبات التسليم', 'إدارة الأسطول', 'تحسين الطرق'],
+      longDesc: 'نظام توصيل متطور مع تتبع فوري وإدارة ذكية للأسطول وتحسين المسارات',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Google Maps', 'Socket.io'],
+      integrations: ['خرائط وملاحة', 'تتبع المركبات', 'أنظمة الدفع'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة احتياجات التوصيل والمناطق' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة للعملاء والسائقين' },
+        { phase: 'التطوير والتكامل', note: 'تطوير نظام التتبع والتوجيه' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع أسطول تجريبي' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يتم تحسين المسارات؟', a: 'خوارزميات ذكية تحلل حالة المرور والمسافات لأفضل مسار.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'lg2', 
+      category: 'logistics', 
+      title: 'إدارة المخازن الذكية', 
+      shortDesc: 'نظام مخازن متطور مع تتبع دقيق', 
+      keyFeatures: ['مسح QR/Barcode', 'تتبع المخزون', 'تقارير حية', 'تنبيهات نفاد', 'إدارة الموردين'], 
+      longDesc: 'نظام إدارة مخازن ذكي مع تتبع دقيق للمخزون وتحليلات متقدمة',
+      stack: ['Flutter', 'Node.js', 'PostgreSQL', 'Barcode Scanner'],
+      integrations: ['أنظمة المسح', 'إدارة الموردين', 'تقارير الأعمال'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة عمليات المخزن الحالية' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة عملية للعمال' },
+        { phase: 'التطوير والتكامل', note: 'تطوير نظام المسح والتتبع' },
+        { phase: 'الاختبار والتسليم', note: 'تجريب في مخزن حقيقي' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم المسح بالباركود؟', a: 'نعم، مع دعم جميع أنواع الباركود و QR codes.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'lg3', 
+      category: 'logistics', 
+      title: 'شحن وتتبع البضائع', 
+      shortDesc: 'نظام شحن متكامل مع تتبع عالمي', 
+      keyFeatures: ['تتبع عالمي', 'حساب التكلفة', 'جدولة الشحن', 'تأمين البضائع', 'إشعارات التسليم'], 
+      longDesc: 'نظام شحن شامل يربط مع شركات الشحن العالمية لتتبع شامل وإدارة متقدمة',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'APIs شركات الشحن'],
+      integrations: ['DHL, FedEx, UPS', 'أنظمة التأمين', 'حاسبات التكلفة'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة شركات الشحن والمتطلبات' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم نظام تتبع واضح' },
+        { phase: 'التطوير والتكامل', note: 'ربط مع APIs شركات الشحن' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع شحنات حقيقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما هي شركات الشحن المدعومة؟', a: 'جميع الشركات الرئيسية محليًا وعالميًا مع APIs موحدة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Media & Entertainment Category (3 cards)
+    { 
+      id: 'md1', 
+      category: 'media', 
+      title: 'منصة محتوى ووسائط', 
+      shortDesc: 'فيديو وبث وتفاعل مع الجمهور', 
+      keyFeatures: ['رفع وسائط متقدم', 'تعليقات وتفاعل', 'تنبيهات Push', 'بث مباشر', 'أنظمة اشتراك'],
+      longDesc: 'منصة محتوى شاملة تدعم جميع أنواع الوسائط مع تفاعل قوي ونظام اشتراكات',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'CDN', 'WebRTC'],
+      integrations: ['خدمات CDN', 'معالجة الفيديو', 'أنظمة الدفع'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد نوع المحتوى والجمهور' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة مشاهدة مميزة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير نظام الرفع والبث' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار الأداء مع محتوى كثيف' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما هي أنواع الملفات المدعومة؟', a: 'جميع صيغ الفيديو والصوت مع معالجة تلقائية للجودة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'md2', 
+      category: 'media', 
+      title: 'تطبيق ألعاب تفاعلية', 
+      shortDesc: 'ألعاب جماعية ومسابقات مع جوائز', 
+      keyFeatures: ['ألعاب متعددة اللاعبين', 'مسابقات يومية', 'نظام نقاط', 'جوائز حقيقية', 'ترتيب عالمي'], 
+      longDesc: 'منصة ألعاب تفاعلية مع مسابقات منتظمة ونظام جوائز يجذب المستخدمين',
+      stack: ['Unity/Flutter', 'Real-time Gaming', 'Node.js', 'Socket.io'],
+      integrations: ['نظام الجوائز', 'بوابات الدفع', 'شبكات التواصل'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد نوع الألعاب والمسابقات' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم تجربة لعب ممتعة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير الألعاب ونظام الجوائز' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع لاعبين حقيقيين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يتم توزيع الجوائز؟', a: 'نظام توزيع تلقائي مع تحقق هوية ونقل مباشر للجوائز.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'md3', 
+      category: 'media', 
+      title: 'شبكة تواصل إبداعية', 
+      shortDesc: 'منصة للمبدعين والفنانين', 
+      keyFeatures: ['معرض أعمال', 'شبكة احترافية', 'مبيعات مباشرة', 'تعاونات فنية', 'أدوات تحرير'], 
+      longDesc: 'شبكة تواصل متخصصة للمبدعين والفنانين مع أدوات العرض والبيع المباشر',
+      stack: ['React Native', 'Node.js', 'PostgreSQL', 'Image Processing'],
+      integrations: ['أدوات التحرير', 'بوابات الدفع', 'طباعة عند الطلب'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة احتياجات المبدعين' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهة إبداعية جذابة' },
+        { phase: 'التطوير والتكامل', note: 'تطوير أدوات العرض والبيع' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار مع فنانين ومبدعين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يمكن بيع الأعمال مباشرة؟', a: 'نعم، مع نظام دفع متكامل وخيارات شحن متعددة.' }
+      ],
       images: [],
       ctaLink: '/contact'
     }
   ];
-
-  // Return only fully translated cards + basic cards (no hardcoded text)
-  return [...mainCards, ...basicCards.slice(0, 12)];
 };
 
 export default function ServiceDetailClean() {
@@ -449,7 +816,7 @@ export default function ServiceDetailClean() {
   }, [selectedCategory]);
 
   // Check if this is the mobile app development service
-  const isMobileAppService = service?.id === '9ee84299-5465-49df-afe0-c6ff45a2f19c';
+  const isMobileAppService = service?.id === '0b7d8e2d-8d42-4081-bb64-ffbc86af6da5';
 
   // Loading state
   if (isLoading) {
