@@ -475,5 +475,90 @@
         ]
       }
     }
+  },
+  "webAppPage": {
+    "hero": {
+      "title": "Web & Platform Development",
+      "desc": "Creating advanced and responsive websites and platforms with attractive design and high performance, with easy-to-use content management systems",
+      "deliveryTimeLabel": "2-6 weeks"
+    },
+    "filters": {
+      "all": "All Types",
+      "frontend": "Frontend",
+      "backend": "Backend", 
+      "fullstack": "Full-Stack Apps",
+      "ecommerce": "E-commerce",
+      "cms": "Content Management",
+      "api": "API Development"
+    },
+    "sections": {
+      "features": "Features",
+      "whatYouGet": "What You Get",
+      "howWeWork": "How We Work",
+      "readyToStart": "Ready to Start?",
+      "contactNow": "Contact Now",
+      "browseServices": "Browse Other Services"
+    },
+    "whatYouGet": {
+      "title": "What You Get",
+      "points": {
+        "0": {
+          "title": "Responsive Modern Design",
+          "desc": "Websites that work seamlessly on all devices and screens"
+        },
+        "1": {
+          "title": "High Performance & Speed",
+          "desc": "Comprehensive optimization for speed and SEO search engines"
+        },
+        "2": {
+          "title": "Advanced Security & Protection",
+          "desc": "Protection from vulnerabilities and advanced encryption systems"
+        },
+        "3": {
+          "title": "Easy Admin Panel",
+          "desc": "Intuitive control panel for managing content and users"
+        }
+      }
+    },
+    "howWeWork": {
+      "title": "How We Work",
+      "steps": {
+        "0": {
+          "number": "01",
+          "title": "Requirements Analysis",
+          "desc": "Study your goals and target audience and determine appropriate technologies"
+        },
+        "1": {
+          "number": "02",
+          "title": "Design & User Experience", 
+          "desc": "Design attractive interfaces and distinctive, easy user experience"
+        },
+        "2": {
+          "number": "03",
+          "title": "Development & Integration",
+          "desc": "Program the website and integrate it with databases and external systems"
+        },
+        "3": {
+          "number": "04",
+          "title": "Testing & Delivery",
+          "desc": "Comprehensive testing of performance and security and website launch"
+        }
+      }
+    },
+    "details": {
+      "overview": "Overview",
+      "keyFeatures": "Key Features",
+      "stack": "Technology Stack",
+      "integrations": "Integrations", 
+      "timeline": "Timeline",
+      "faqs": "FAQ",
+      "startNow": "Start Now",
+      "discussProject": "Discuss Project",
+      "close": "Close"
+    },
+    "cta": {
+      "startProject": "Start Your Project Now",
+      "browseServices": "Browse Other Services"
+    }
   }
 }
