@@ -1355,7 +1355,7 @@ export default function ServiceDetailClean() {
           </div>
         </section>
 
-        {/* How We Work Section */}
+        {/* How We Work Section - كيف نعمل */}
         <section className="py-20 bg-gradient-to-br from-brand-sky-light/20 to-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -1366,17 +1366,33 @@ export default function ServiceDetailClean() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {t('mobileAppPage.howWeWork.title')}
+                كيف نعمل
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-brand-sky-base rounded-full mx-auto" />
             </motion.div>
 
             <div className="max-w-3xl mx-auto">
               {[
-                { number: t('mobileAppPage.howWeWork.steps.0.number'), title: t('mobileAppPage.howWeWork.steps.0.title'), desc: t('mobileAppPage.howWeWork.steps.0.desc') },
-                { number: t('mobileAppPage.howWeWork.steps.1.number'), title: t('mobileAppPage.howWeWork.steps.1.title'), desc: t('mobileAppPage.howWeWork.steps.1.desc') },
-                { number: t('mobileAppPage.howWeWork.steps.2.number'), title: t('mobileAppPage.howWeWork.steps.2.title'), desc: t('mobileAppPage.howWeWork.steps.2.desc') },
-                { number: t('mobileAppPage.howWeWork.steps.3.number'), title: t('mobileAppPage.howWeWork.steps.3.title'), desc: t('mobileAppPage.howWeWork.steps.3.desc') }
+                { 
+                  number: '1', 
+                  title: 'دراسة المشروع والتخطيط', 
+                  desc: 'نبدأ بفهم أهدافك وجمهورك المستهدف، ثم نضع استراتيجية شاملة لتطوير التطبيق مع تحديد الميزات الأساسية والتقنيات المناسبة' 
+                },
+                { 
+                  number: '2', 
+                  title: 'التصميم والنماذج الأولية', 
+                  desc: 'نصمم واجهات المستخدم وتجربة التطبيق بعناية، ننشئ نماذج تفاعلية للمراجعة والموافقة قبل البدء في التطوير' 
+                },
+                { 
+                  number: '3', 
+                  title: 'التطوير والاختبار', 
+                  desc: 'نطور التطبيق باستخدام أحدث التقنيات مع إجراء اختبارات شاملة للأداء والأمان وسهولة الاستخدام على جميع الأجهزة' 
+                },
+                { 
+                  number: '4', 
+                  title: 'النشر والدعم', 
+                  desc: 'ننشر التطبيق في المتاجر الرسمية، نقدم التدريب اللازم لفريقك، ونوفر دعم فني مجاني لمدة 6 أشهر لضمان نجاح التطبيق' 
+                }
               ].map((step, index) => (
                 <motion.div
                   key={index}
