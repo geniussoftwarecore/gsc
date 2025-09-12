@@ -662,7 +662,7 @@ export default function ServiceDetailClean() {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.keyFeatures', 'الميزات الرئيسية')}</h3>
               </div>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {selectedAppDetails.keyFeatures.map((feature, index) => (
+                {(Array.isArray(selectedAppDetails.keyFeatures) ? selectedAppDetails.keyFeatures : [selectedAppDetails.keyFeatures]).map((feature, index) => (
                   <li key={index} className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                     <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
                     <span>{feature}</span>
@@ -1199,7 +1199,7 @@ export default function ServiceDetailClean() {
                         </p>
                         
                         <ul className="space-y-1 mb-4">
-                          {card.keyFeatures.map((feature, idx) => (
+                          {(Array.isArray(card.keyFeatures) ? card.keyFeatures : [card.keyFeatures]).map((feature, idx) => (
                             <li key={idx} className="flex items-center gap-2 text-sm text-gray-700">
                               <CheckCircle className="w-3 h-3 text-green-500 flex-shrink-0" />
                               <span>{feature}</span>
@@ -1264,7 +1264,7 @@ export default function ServiceDetailClean() {
           </div>
         </section>
 
-        {/* What You Get Section */}
+        {/* What You Get Section - ما ستحصل عليه */}
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
@@ -1275,20 +1275,55 @@ export default function ServiceDetailClean() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {t('mobileAppPage.whatYouGet.title')}
+                ما ستحصل عليه
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary to-brand-sky-base rounded-full mx-auto" />
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {[  
-                { title: t('mobileAppPage.whatYouGet.points.0.title'), desc: t('mobileAppPage.whatYouGet.points.0.desc') },
-                { title: t('mobileAppPage.whatYouGet.points.1.title'), desc: t('mobileAppPage.whatYouGet.points.1.desc') },
-                { title: t('mobileAppPage.whatYouGet.points.2.title'), desc: t('mobileAppPage.whatYouGet.points.2.desc') },
-                { title: t('mobileAppPage.whatYouGet.points.3.title'), desc: t('mobileAppPage.whatYouGet.points.3.desc') }
+                { 
+                  title: 'تطبيق مخصص 100%', 
+                  desc: 'تطبيق مبني من الصفر خصيصاً لاحتياجاتك وأهدافك التجارية مع تصميم فريد',
+                  icon: Smartphone
+                },
+                { 
+                  title: 'كود مصدري كامل', 
+                  desc: 'تملك كود المصدر بالكامل مع توثيق شامل وحرية التطوير المستقبلي',
+                  icon: Code
+                },
+                { 
+                  title: 'نشر في المتاجر', 
+                  desc: 'نشر التطبيق في متجري App Store و Google Play مع إعداد حسابات المطورين',
+                  icon: Store
+                },
+                { 
+                  title: 'دعم فني 6 أشهر', 
+                  desc: 'دعم فني مجاني لمدة 6 أشهر يشمل إصلاح الأخطاء والتحديثات الضرورية',
+                  icon: Shield
+                },
+                { 
+                  title: 'تدريب شامل', 
+                  desc: 'تدريب فريقك على استخدام لوحة التحكم وإدارة المحتوى والتطبيق',
+                  icon: GraduationCap
+                },
+                { 
+                  title: 'أمان متقدم', 
+                  desc: 'حماية بيانات المستخدمين مع تشفير SSL وأمان API والامتثال للمعايير العالمية',
+                  icon: Shield
+                },
+                { 
+                  title: 'تحليلات ذكية', 
+                  desc: 'نظام تحليلات متقدم لتتبع سلوك المستخدمين والأداء والمبيعات',
+                  icon: BarChart3
+                },
+                { 
+                  title: 'سرعة عالية', 
+                  desc: 'أداء محسن وسرعة تحميل فائقة مع تقنيات التخزين المؤقت والضغط',
+                  icon: Zap
+                }
               ].map((point, index) => {
-                const icons = [Shield, Clock, BarChart3, GraduationCap];
-                const IconComponent = icons[index];
+                const IconComponent = point.icon;
                 return (
                 <motion.div
                   key={index}
