@@ -46,7 +46,7 @@ interface AppCard {
   ctaLink: string;
 }
 
-// Enhanced app categories with translation support
+// Enhanced app categories with translation support for mobile apps
 const useAppCategories = () => {
   const { t } = useTranslation();
   
@@ -59,6 +59,480 @@ const useAppCategories = () => {
     { key: 'fintech', label: t('mobileAppPage.filters.fintech', 'مالية/مدفوعات') },
     { key: 'logistics', label: t('mobileAppPage.filters.logistics', 'توصيل/نقل') },
     { key: 'media', label: t('mobileAppPage.filters.media', 'وسائط/ترفيه') }
+  ];
+};
+
+// Web development categories with translation support
+const useWebDevCategories = () => {
+  const { t } = useTranslation();
+  
+  return [
+    { key: 'all', label: t('webAppPage.filters.all', 'جميع الأنواع') },
+    { key: 'frontend', label: t('webAppPage.filters.frontend', 'واجهة أمامية') },
+    { key: 'backend', label: t('webAppPage.filters.backend', 'واجهة خلفية') },
+    { key: 'fullstack', label: t('webAppPage.filters.fullstack', 'تطبيقات شاملة') },
+    { key: 'ecommerce', label: t('webAppPage.filters.ecommerce', 'متاجر إلكترونية') },
+    { key: 'cms', label: t('webAppPage.filters.cms', 'أنظمة إدارة المحتوى') },
+    { key: 'api', label: t('webAppPage.filters.api', 'واجهات برمجية') }
+  ];
+};
+
+// Web Development cards with complete 20 cards across 6 categories
+const useWebDevCards = () => {
+  return [
+    // Frontend Category (4 cards)
+    { 
+      id: 'fe1', 
+      category: 'frontend', 
+      title: 'موقع شركة احترافي', 
+      shortDesc: 'موقع تعريفي متطور مع تصميم جذاب', 
+      keyFeatures: ['تصميم متجاوب', 'سرعة عالية', 'محسن لمحركات البحث', 'متعدد اللغات', 'لوحة إدارة'], 
+      tag: 'Professional',
+      longDesc: 'موقع شركة متطور بتصميم احترافي يعكس هوية علامتك التجارية مع أداء متميز وتحسين لمحركات البحث',
+      stack: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
+      integrations: ['Google Analytics', 'نماذج التواصل', 'خرائط Google', 'وسائل التواصل الاجتماعي'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'دراسة أهداف الشركة والجمهور المستهدف' },
+        { phase: 'التصميم وتجربة المستخدم', note: 'تصميم واجهات احترافية تعكس الهوية' },
+        { phase: 'التطوير والتكامل', note: 'تطوير الموقع مع التحسينات المطلوبة' },
+        { phase: 'الاختبار والتسليم', note: 'اختبار شامل للأداء والتوافقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم عدة لغات؟', a: 'نعم، يدعم العربية والإنجليزية مع إمكانية إضافة المزيد.' },
+        { q: 'ما مدة التحديثات المجانية؟', a: '6 أشهر من الدعم والتحديثات المجانية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fe2', 
+      category: 'frontend', 
+      title: 'محفظة أعمال تفاعلية', 
+      shortDesc: 'موقع محفظة أعمال مع معرض تفاعلي', 
+      keyFeatures: ['معرض أعمال تفاعلي', 'تأثيرات بصرية', 'تحسين الصور', 'نموذج تواصل', 'مدونة شخصية'], 
+      longDesc: 'موقع محفظة أعمال تفاعلي يعرض مشاريعك بطريقة جذابة مع معرض صور متقدم وتأثيرات بصرية مميزة',
+      stack: ['React', 'Gatsby', 'GSAP', 'Styled Components', 'GraphQL'],
+      integrations: ['CMS للمحتوى', 'معرض الصور', 'تحليلات الموقع', 'نماذج التواصل'],
+      timeline: [
+        { phase: 'تحليل الأعمال', note: 'مراجعة وتنظيم محفظة الأعمال' },
+        { phase: 'التصميم التفاعلي', note: 'تصميم تجربة تفاعلية مميزة' },
+        { phase: 'التطوير والرسوم المتحركة', note: 'إضافة التأثيرات والحركات' },
+        { phase: 'الاختبار والتحسين', note: 'تحسين الأداء والتوافقية' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يمكن إضافة أعمال جديدة؟', a: 'نعم، من خلال لوحة إدارة سهلة الاستخدام.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fe3', 
+      category: 'frontend', 
+      title: 'صفحة هبوط تحويلية', 
+      shortDesc: 'صفحة هبوط محسنة للتحويلات', 
+      keyFeatures: ['تحسين التحويلات', 'A/B Testing', 'تتبع المستخدمين', 'نماذج محسنة', 'تحليلات متقدمة'], 
+      longDesc: 'صفحة هبوط مصممة خصيصاً لزيادة التحويلات مع اختبارات A/B وتتبع دقيق لسلوك المستخدمين',
+      stack: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Analytics'],
+      integrations: ['Google Analytics', 'Facebook Pixel', 'أدوات A/B Testing', 'أنظمة CRM'],
+      timeline: [
+        { phase: 'تحليل الهدف', note: 'تحديد أهداف التحويل المطلوبة' },
+        { phase: 'التصميم المحسن', note: 'تصميم يركز على التحويلات' },
+        { phase: 'التطوير والتتبع', note: 'إضافة أدوات التتبع والتحليل' },
+        { phase: 'الاختبار والتحسين', note: 'اختبار وتحسين معدلات التحويل' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما معدل التحسن المتوقع؟', a: 'عادة نحقق تحسن 20-50% في معدلات التحويل.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fe4', 
+      category: 'frontend', 
+      title: 'تطبيق ويب تقدمي PWA', 
+      shortDesc: 'تطبيق ويب يعمل مثل التطبيقات الأصلية', 
+      keyFeatures: ['يعمل بدون إنترنت', 'إشعارات فورية', 'قابل للتثبيت', 'سرعة عالية', 'تجربة أصلية'], 
+      longDesc: 'تطبيق ويب تقدمي يوفر تجربة مستخدم مماثلة للتطبيقات الأصلية مع إمكانية العمل بدون إنترنت',
+      stack: ['React', 'PWA', 'Service Workers', 'IndexedDB', 'Web App Manifest'],
+      integrations: ['إشعارات فورية', 'تخزين محلي', 'تحديثات تلقائية', 'تحليلات الاستخدام'],
+      timeline: [
+        { phase: 'تحليل المتطلبات', note: 'تحديد الميزات المطلوبة للعمل بدون إنترنت' },
+        { phase: 'تطوير PWA', note: 'بناء التطبيق مع ميزات PWA' },
+        { phase: 'إعداد Service Workers', note: 'إضافة العمل بدون إنترنت' },
+        { phase: 'الاختبار والنشر', note: 'اختبار شامل على جميع المنصات' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يعمل على جميع المتصفحات؟', a: 'نعم، مع دعم كامل للمتصفحات الحديثة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Backend Category (3 cards)
+    { 
+      id: 'be1', 
+      category: 'backend', 
+      title: 'API متكامل للتطبيقات', 
+      shortDesc: 'واجهة برمجية شاملة وآمنة', 
+      keyFeatures: ['REST API', 'مصادقة JWT', 'قاعدة بيانات محسنة', 'تحسين الأداء', 'توثيق كامل'], 
+      longDesc: 'واجهة برمجية متطورة وآمنة تدعم جميع عمليات التطبيق مع توثيق شامل وأداء عالي',
+      stack: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'JWT'],
+      integrations: ['قواعد البيانات', 'أنظمة التخزين السحابي', 'خدمات الدفع', 'أنظمة الإشعارات'],
+      timeline: [
+        { phase: 'تصميم API', note: 'تخطيط هيكلة وتصميم نقاط النهاية' },
+        { phase: 'تطوير Backend', note: 'برمجة الوظائف الأساسية والأمان' },
+        { phase: 'التكامل والاختبار', note: 'ربط الخدمات واختبار الأداء' },
+        { phase: 'التوثيق والتسليم', note: 'كتابة التوثيق الفني الشامل' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما معايير الأمان المطبقة؟', a: 'JWT، تشفير البيانات، HTTPS، والحماية من الهجمات الشائعة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'be2', 
+      category: 'backend', 
+      title: 'نظام إدارة المستخدمين', 
+      shortDesc: 'إدارة شاملة للمستخدمين والأدوار', 
+      keyFeatures: ['إدارة الأدوار', 'مصادقة متعددة', 'سجل الأنشطة', 'إعدادات متقدمة', 'تقارير شاملة'], 
+      longDesc: 'نظام إدارة متكامل للمستخدمين مع تحكم دقيق في الأدوار والصلاحيات وتتبع شامل للأنشطة',
+      stack: ['Node.js', 'Express', 'MongoDB', 'Passport.js', 'bcrypt'],
+      integrations: ['أنظمة المراسلة', 'LDAP/AD', 'OAuth', 'أنظمة الإشعارات'],
+      timeline: [
+        { phase: 'تحليل الأدوار', note: 'تحديد الأدوار والصلاحيات المطلوبة' },
+        { phase: 'تطوير النظام', note: 'برمجة إدارة المستخدمين والأمان' },
+        { phase: 'واجهة الإدارة', note: 'تطوير لوحة تحكم المديرين' },
+        { phase: 'الاختبار والتوثيق', note: 'اختبار الأمان وكتابة دليل الاستخدام' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم المصادقة المتعددة؟', a: 'نعم، مع دعم لـ SMS، البريد الإلكتروني، وتطبيقات المصادقة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'be3', 
+      category: 'backend', 
+      title: 'خدمات سحابية متقدمة', 
+      shortDesc: 'حلول سحابية قابلة للتوسع', 
+      keyFeatures: ['توزيع التحميل', 'نسخ احتياطية تلقائية', 'مراقبة الأداء', 'تطوير مستمر', 'أمان متقدم'], 
+      longDesc: 'حلول سحابية متقدمة مع إدارة تلقائية للموارد وقابلية توسع ديناميكية حسب الحاجة',
+      stack: ['Docker', 'Kubernetes', 'AWS/GCP', 'Microservices', 'CI/CD'],
+      integrations: ['أنظمة المراقبة', 'خدمات التخزين', 'شبكات التوصيل', 'أنظمة الأمان'],
+      timeline: [
+        { phase: 'تخطيط البنية', note: 'تصميم البنية السحابية المناسبة' },
+        { phase: 'إعداد البيئة', note: 'تكوين الخوادم والخدمات السحابية' },
+        { phase: 'التطوير والنشر', note: 'إعداد أنابيب النشر المستمر' },
+        { phase: 'المراقبة والتحسين', note: 'إعداد مراقبة الأداء والتحسين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما مستوى الأمان المضمون؟', a: 'أمان على مستوى المؤسسات مع تشفير وحماية متقدمة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // Full-stack Category (4 cards)
+    { 
+      id: 'fs1', 
+      category: 'fullstack', 
+      title: 'نظام إدارة المشاريع', 
+      shortDesc: 'منصة شاملة لإدارة المشاريع والفرق', 
+      keyFeatures: ['إدارة المهام', 'تتبع الوقت', 'تقارير متقدمة', 'تعاون الفريق', 'تكامل التقويم'], 
+      longDesc: 'منصة إدارة مشاريع متكاملة تساعد الفرق على تنظيم المهام وتتبع التقدم وتحسين الإنتاجية',
+      stack: ['React', 'Node.js', 'PostgreSQL', 'Socket.io', 'Redis'],
+      integrations: ['تقويم Google', 'Slack', 'أدوات التطوير', 'أنظمة المحاسبة'],
+      timeline: [
+        { phase: 'تحليل متطلبات إدارة المشاريع', note: 'دراسة احتياجات الفريق وسير العمل' },
+        { phase: 'تطوير الواجهة الأمامية', note: 'بناء لوحة تحكم تفاعلية' },
+        { phase: 'تطوير الخادم والقاعدة', note: 'برمجة منطق العمل وقاعدة البيانات' },
+        { phase: 'الاختبار والتدريب', note: 'اختبار النظام وتدريب المستخدمين' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم العمل الجماعي؟', a: 'نعم، مع إمكانيات تعاون متقدمة ومشاركة فورية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fs2', 
+      category: 'fullstack', 
+      title: 'منصة التعلم الإلكتروني', 
+      shortDesc: 'نظام تعليمي متكامل مع إدارة المحتوى', 
+      keyFeatures: ['إدارة الكورسات', 'اختبارات تفاعلية', 'تتبع التقدم', 'شهادات رقمية', 'بث مباشر'], 
+      longDesc: 'منصة تعليمية شاملة تدعم إنشاء وإدارة الكورسات مع نظام تقييم متقدم وتتبع دقيق لتقدم الطلاب',
+      stack: ['React', 'Node.js', 'MongoDB', 'WebRTC', 'AWS S3'],
+      integrations: ['أنظمة الدفع', 'بث الفيديو', 'Zoom/Teams', 'أنظمة الإشعارات'],
+      timeline: [
+        { phase: 'تصميم البنية التعليمية', note: 'تخطيط هيكلة المحتوى التعليمي' },
+        { phase: 'تطوير منصة الطلاب', note: 'بناء واجهة الطلاب ونظام التعلم' },
+        { phase: 'تطوير منصة المعلمين', note: 'إنشاء أدوات إدارة المحتوى والتقييم' },
+        { phase: 'التكامل والاختبار', note: 'ربط الأنظمة واختبار البث المباشر' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم البث المباشر؟', a: 'نعم، مع جودة HD وتفاعل مباشر بين المعلم والطلاب.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fs3', 
+      category: 'fullstack', 
+      title: 'نظام المحاسبة السحابي', 
+      shortDesc: 'إدارة مالية شاملة للشركات', 
+      keyFeatures: ['إدارة الفواتير', 'تقارير مالية', 'تتبع المصروفات', 'ضرائب تلقائية', 'تكامل بنكي'], 
+      longDesc: 'نظام محاسبة سحابي متكامل يدير جميع العمليات المالية مع تقارير تلقائية وتكامل مع البنوك',
+      stack: ['React', 'Node.js', 'PostgreSQL', 'Chart.js', 'PDF-lib'],
+      integrations: ['البنوك المحلية', 'أنظمة الدفع', 'هيئة الزكاة والضرائب', 'ERP Systems'],
+      timeline: [
+        { phase: 'تحليل المتطلبات المحاسبية', note: 'دراسة احتياجات المحاسبة والضرائب' },
+        { phase: 'تطوير النواة المحاسبية', note: 'برمجة منطق المحاسبة الأساسي' },
+        { phase: 'واجهة المستخدم والتقارير', note: 'تطوير لوحة التحكم والتقارير' },
+        { phase: 'التكامل والاعتماد', note: 'ربط الأنظمة الخارجية والحصول على التراخيص' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يلتزم بالمعايير المحاسبية؟', a: 'نعم، متوافق مع المعايير المحاسبية السعودية والدولية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'fs4', 
+      category: 'fullstack', 
+      title: 'منصة حجز المواعيد الذكية', 
+      shortDesc: 'نظام حجز شامل للخدمات والاستشارات', 
+      keyFeatures: ['حجز ذكي', 'إدارة المواعيد', 'تذكيرات تلقائية', 'دفع إلكتروني', 'تقييم الخدمات'], 
+      longDesc: 'منصة حجز مواعيد ذكية تدير الحجوزات تلقائياً مع تذكيرات وإشعارات ونظام دفع متكامل',
+      stack: ['React', 'Node.js', 'PostgreSQL', 'Socket.io', 'Stripe'],
+      integrations: ['تقويم Google', 'WhatsApp Business', 'أنظمة الدفع', 'SMS Gateway'],
+      timeline: [
+        { phase: 'تحليل سير العمل', note: 'دراسة عملية الحجز والإدارة المطلوبة' },
+        { phase: 'تطوير نظام الحجز', note: 'برمجة آليات الحجز الذكية' },
+        { phase: 'واجهة العملاء والمقدمين', note: 'تطوير واجهات مستخدمين متخصصة' },
+        { phase: 'التكامل والاختبار', note: 'ربط الأنظمة الخارجية وتجريب النظام' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم حجز المواعيد الجماعية؟', a: 'نعم، مع إدارة متقدمة للمجموعات والفعاليات.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // E-commerce Category (3 cards)
+    { 
+      id: 'ec1', 
+      category: 'ecommerce', 
+      title: 'متجر إلكتروني متكامل', 
+      shortDesc: 'متجر شامل مع إدارة المخزون والطلبات', 
+      keyFeatures: ['سلة تسوق متقدمة', 'إدارة المخزون', 'بوابات دفع متعددة', 'تتبع الشحنات', 'تقارير المبيعات'], 
+      longDesc: 'متجر إلكتروني متطور مع إدارة كاملة للمنتجات والطلبات والمخزون مع دعم متعدد البائعين',
+      stack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Stripe'],
+      integrations: ['بوابات الدفع المحلية', 'شركات الشحن', 'أنظمة المحاسبة', 'تحليلات المبيعات'],
+      timeline: [
+        { phase: 'تحليل متطلبات المتجر', note: 'تحديد نوع المنتجات ونموذج العمل' },
+        { phase: 'تطوير كتالوج المنتجات', note: 'بناء نظام إدارة المنتجات والفئات' },
+        { phase: 'نظام الطلبات والدفع', note: 'تطوير سلة التسوق وبوابات الدفع' },
+        { phase: 'لوحة الإدارة والتقارير', note: 'إنشاء لوحة تحكم شاملة للمدراء' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم عدة بائعين؟', a: 'نعم، مع لوحة تحكم منفصلة لكل بائع وإدارة عمولات.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'ec2', 
+      category: 'ecommerce', 
+      title: 'متجر الخدمات الرقمية', 
+      shortDesc: 'بيع وإدارة الخدمات والمنتجات الرقمية', 
+      keyFeatures: ['منتجات رقمية', 'تحميل فوري', 'إدارة التراخيص', 'اشتراكات شهرية', 'حماية المحتوى'], 
+      longDesc: 'متجر متخصص في الخدمات والمنتجات الرقمية مع حماية متقدمة للمحتوى وإدارة التراخيص',
+      stack: ['React', 'Node.js', 'MongoDB', 'AWS S3', 'Stripe'],
+      integrations: ['حماية الملفات', 'أنظمة DRM', 'بوابات الدفع', 'أنظمة التسليم الآمن'],
+      timeline: [
+        { phase: 'تحليل المنتجات الرقمية', note: 'تحديد أنواع المنتجات وطرق الحماية' },
+        { phase: 'نظام الحماية والتشفير', note: 'تطوير آليات حماية المحتوى الرقمي' },
+        { phase: 'منصة البيع والتسليم', note: 'إنشاء نظام البيع والتسليم الفوري' },
+        { phase: 'إدارة التراخيص والاشتراكات', note: 'تطوير نظام إدارة التراخيص المتجددة' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كيف يتم حماية المحتوى الرقمي؟', a: 'بتشفير متقدم ونظام تراخيص يمنع النسخ غير المصرح.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'ec3', 
+      category: 'ecommerce', 
+      title: 'سوق إلكتروني B2B', 
+      shortDesc: 'منصة تجارة للشركات والموزعين', 
+      keyFeatures: ['طلبيات مجمعة', 'أسعار خاصة', 'شروط دفع مرنة', 'تكامل ERP', 'إدارة العقود'], 
+      longDesc: 'منصة تجارة إلكترونية متخصصة في التعاملات بين الشركات مع إدارة متقدمة للعقود والأسعار',
+      stack: ['React', 'Node.js', 'PostgreSQL', 'Redis', 'Microservices'],
+      integrations: ['أنظمة ERP', 'أنظمة المحاسبة', 'بوابات الدفع التجارية', 'خدمات الشحن الجماعي'],
+      timeline: [
+        { phase: 'تحليل نموذج B2B', note: 'دراسة متطلبات التجارة بين الشركات' },
+        { phase: 'نظام إدارة العملاء التجاريين', note: 'تطوير إدارة الحسابات التجارية' },
+        { phase: 'منصة الطلبيات المجمعة', note: 'بناء نظام الطلبيات الكبيرة والأسعار الخاصة' },
+        { phase: 'التكامل مع الأنظمة الخارجية', note: 'ربط أنظمة ERP والمحاسبة للشركات' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم الأسعار المتدرجة؟', a: 'نعم، مع أسعار ديناميكية حسب الكمية ونوع العميل.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // CMS Category (3 cards)
+    { 
+      id: 'cms1', 
+      category: 'cms', 
+      title: 'نظام إدارة المحتوى المتقدم', 
+      shortDesc: 'إدارة شاملة للمحتوى متعدد الوسائط', 
+      keyFeatures: ['محرر WYSIWYG', 'إدارة الوسائط', 'نشر مجدول', 'تحكم في الأدوار', 'SEO محسن'], 
+      longDesc: 'نظام إدارة محتوى متطور يدعم جميع أنواع الوسائط مع تحكم دقيق في النشر والصلاحيات',
+      stack: ['React', 'Node.js', 'MongoDB', 'AWS S3', 'ElasticSearch'],
+      integrations: ['محركات البحث', 'وسائل التواصل', 'أنظمة التحليل', 'CDN للوسائط'],
+      timeline: [
+        { phase: 'تحليل أنواع المحتوى', note: 'تحديد أنواع المحتوى والهيكلة المطلوبة' },
+        { phase: 'تطوير محرر المحتوى', note: 'بناء واجهة تحرير متقدمة وسهلة' },
+        { phase: 'نظام إدارة الوسائط', note: 'تطوير نظام رفع ومعالجة الملفات' },
+        { phase: 'إعدادات النشر والصلاحيات', note: 'تطوير نظام الأدوار والنشر المجدول' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم المحتوى متعدد اللغات؟', a: 'نعم، مع إدارة متقدمة للترجمات والمحتوى متعدد اللغات.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'cms2', 
+      category: 'cms', 
+      title: 'منصة المدونات الاحترافية', 
+      shortDesc: 'نظام تدوين متقدم للكتاب والمؤسسات', 
+      keyFeatures: ['محرر غني', 'تصنيفات متقدمة', 'تعليقات ذكية', 'رسائل إخبارية', 'تحليلات القراء'], 
+      longDesc: 'منصة تدوين احترافية مع أدوات متقدمة للنشر والتفاعل وتحليل أداء المحتوى',
+      stack: ['React', 'Next.js', 'PostgreSQL', 'Redis', 'Algolia Search'],
+      integrations: ['محركات البحث', 'وسائل التواصل', 'خدمات البريد الإلكتروني', 'أدوات التحليل'],
+      timeline: [
+        { phase: 'تصميم تجربة الكتابة', note: 'تطوير واجهة كتابة محسنة للكتاب' },
+        { phase: 'نظام النشر والتصنيف', note: 'بناء نظام تنظيم ونشر المقالات' },
+        { phase: 'منصة التفاعل والتعليقات', note: 'تطوير نظام تعليقات ذكي ومعتدل' },
+        { phase: 'التحليلات ورسائل التسويق', note: 'إضافة تحليلات المحتوى ونظام النشرات' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم الكتابة الجماعية؟', a: 'نعم، مع أدوات تعاون وإدارة فريق الكتاب متقدمة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'cms3', 
+      category: 'cms', 
+      title: 'نظام إدارة الوثائق', 
+      shortDesc: 'إدارة وأرشفة الوثائق الرقمية', 
+      keyFeatures: ['أرشفة ذكية', 'بحث متقدم', 'تحكم في الوصول', 'توقيعات رقمية', 'إدارة الإصدارات'], 
+      longDesc: 'نظام إدارة وثائق متطور مع أرشفة ذكية وبحث متقدم وحماية قانونية للوثائق المهمة',
+      stack: ['React', 'Node.js', 'PostgreSQL', 'ElasticSearch', 'PDF-lib'],
+      integrations: ['التوقيع الرقمي', 'أنظمة الأمان', 'خدمات OCR', 'النسخ الاحتياطي السحابي'],
+      timeline: [
+        { phase: 'تحليل أنواع الوثائق', note: 'تصنيف الوثائق وتحديد متطلبات الحفظ' },
+        { phase: 'نظام الرفع والفهرسة', note: 'تطوير آلية رفع وفهرسة تلقائية' },
+        { phase: 'محرك البحث المتقدم', note: 'بناء نظام بحث ذكي في المحتوى' },
+        { phase: 'الأمان والتوقيعات', note: 'إضافة طبقات الحماية والتوقيع الرقمي' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'هل يدعم البحث في محتوى الملفات؟', a: 'نعم، مع تقنية OCR للبحث داخل الصور والملفات الممسوحة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+
+    // API Category (3 cards)
+    { 
+      id: 'api1', 
+      category: 'api', 
+      title: 'واجهة REST API شاملة', 
+      shortDesc: 'API متكامل للتطبيقات والخدمات', 
+      keyFeatures: ['REST Standards', 'توثيق تفاعلي', 'مصادقة آمنة', 'تحكم في المعدل', 'مراقبة الأداء'], 
+      longDesc: 'واجهة برمجية احترافية تلتزم بمعايير REST مع توثيق شامل وأمان عالي وإدارة متقدمة للطلبات',
+      stack: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'Swagger'],
+      integrations: ['أنظمة المصادقة', 'قواعد البيانات المتعددة', 'خدمات المراقبة', 'أنظمة التخزين السحابي'],
+      timeline: [
+        { phase: 'تحليل وتصميم API', note: 'تخطيط نقاط النهاية والبيانات المطلوبة' },
+        { phase: 'تطوير الوظائف الأساسية', note: 'برمجة العمليات الأساسية والتحقق' },
+        { phase: 'الأمان والمصادقة', note: 'تطبيق طبقات الأمان والتشفير' },
+        { phase: 'التوثيق والاختبار', note: 'إنشاء توثيق تفاعلي واختبار شامل' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما معايير الأمان المطبقة؟', a: 'OAuth 2.0، JWT، HTTPS، وحماية من جميع الهجمات الشائعة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'api2', 
+      category: 'api', 
+      title: 'GraphQL API متقدم', 
+      shortDesc: 'واجهة برمجية مرنة وقابلة للاستعلام', 
+      keyFeatures: ['استعلام مرن', 'تحديد البيانات', 'أداء محسن', 'تطوير سريع', 'أدوات تطوير'], 
+      longDesc: 'واجهة GraphQL متطورة تتيح للعملاء طلب البيانات المحددة فقط مع أداء عالي وتطوير أسرع',
+      stack: ['Node.js', 'GraphQL', 'Apollo Server', 'PostgreSQL', 'DataLoader'],
+      integrations: ['أنظمة قواعد البيانات المتعددة', 'خدمات التخزين', 'أنظمة المراقبة', 'CDN'],
+      timeline: [
+        { phase: 'تصميم مخطط GraphQL', note: 'تخطيط هيكل البيانات والاستعلامات' },
+        { phase: 'تطوير Resolvers', note: 'برمجة منطق جلب ومعالجة البيانات' },
+        { phase: 'تحسين الأداء', note: 'تطبيق تقنيات التحسين والتخزين المؤقت' },
+        { phase: 'أدوات التطوير والتوثيق', note: 'إعداد بيئة التطوير والتوثيق التفاعلي' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'ما مميزات GraphQL عن REST؟', a: 'استعلام مرن، تقليل طلبات الشبكة، وتطوير أسرع للواجهات الأمامية.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    },
+    { 
+      id: 'api3', 
+      category: 'api', 
+      title: 'خدمات الويب المتقدمة', 
+      shortDesc: 'تكامل أنظمة متعددة وخدمات خارجية', 
+      keyFeatures: ['تكامل متعدد', 'معالجة البيانات', 'مزامنة فورية', 'قابلية التوسع', 'مراقبة شاملة'], 
+      longDesc: 'خدمات ويب متطورة تدير التكامل بين أنظمة متعددة مع معالجة ذكية للبيانات ومزامنة فورية',
+      stack: ['Node.js', 'Microservices', 'RabbitMQ', 'Docker', 'Kubernetes'],
+      integrations: ['أنظمة CRM/ERP', 'خدمات الدفع', 'منصات التواصل', 'أنظمة التحليل'],
+      timeline: [
+        { phase: 'تحليل التكاملات المطلوبة', note: 'دراسة الأنظمة والخدمات للربط' },
+        { phase: 'تطوير طبقة التكامل', note: 'بناء الوسطاء والمحولات المطلوبة' },
+        { phase: 'معالجة وتزامن البيانات', note: 'تطوير آليات المعالجة والمزامنة' },
+        { phase: 'المراقبة والصيانة', note: 'إعداد مراقبة شاملة ونظام تنبيهات' }
+      ],
+      pricingNote: '',
+      faqs: [
+        { q: 'كم نظام يمكن ربطه؟', a: 'لا يوجد حد أقصى، النظام قابل للتوسع حسب الحاجة.' }
+      ],
+      images: [],
+      ctaLink: '/contact'
+    }
   ];
 };
 
@@ -533,9 +1007,31 @@ export default function ServiceDetailClean() {
   const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
-  // Use the translated categories and cards
-  const categories = useAppCategories();
-  const appCards = useAppCards();
+  // Get data for both service types
+  const appCategories = useAppCategories();
+  const webDevCategories = useWebDevCategories();
+  const appCardsData = useAppCards();
+  const webDevCardsData = useWebDevCards();
+
+  // Get service info to determine which data to use
+  const { data: services, isLoading: servicesLoading, error: servicesError } = useQuery<Service[]>({
+    queryKey: ['/api/services'],
+  });
+
+  const service = useMemo(() => {
+    return services?.find(s => s.id === id);
+  }, [services, id]);
+
+  // Determine service types
+  const isMobileAppService = service?.id === '916ab8db-091c-43d1-8160-42e187fa722d';
+  const isWebDevService = service?.id === '562fce34-abbd-4ba9-abc5-bc6b4afe61c7';
+
+  // Use appropriate data based on service type
+  const categories = isWebDevService ? webDevCategories : appCategories;
+  const appCards = isWebDevService ? webDevCardsData : appCardsData;
+  
+  // Centralize translation prefix for scalability
+  const tPrefix = isWebDevService ? 'webAppPage' : 'mobileAppPage';
 
   // Handle deep linking with hash fragments
   useEffect(() => {
@@ -604,7 +1100,7 @@ export default function ServiceDetailClean() {
               size="sm"
               onClick={handleCloseModal}
               className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-              aria-label={t('mobileAppPage.details.close', 'إغلاق')}
+              aria-label={t(isWebDevService ? 'webAppPage.details.close' : 'mobileAppPage.details.close', 'إغلاق')}
             >
               <X className="w-5 h-5" />
             </Button>
@@ -619,7 +1115,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-3">
                 <Zap className="w-5 h-5 text-primary" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.overview', 'نظرة عامة')}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(isWebDevService ? 'webAppPage.details.overview' : 'mobileAppPage.details.overview', 'نظرة عامة')}</h3>
               </div>
               <p 
                 id={`details-description-${selectedAppDetails.id}`}
@@ -637,7 +1133,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-3">
                 <CheckCircle className="w-5 h-5 text-green-500" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.keyFeatures', 'الميزات الرئيسية')}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(isWebDevService ? 'webAppPage.details.keyFeatures' : 'mobileAppPage.details.keyFeatures', 'الميزات الرئيسية')}</h3>
               </div>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {(Array.isArray(selectedAppDetails.keyFeatures) ? selectedAppDetails.keyFeatures : [selectedAppDetails.keyFeatures]).map((feature, index) => (
@@ -660,7 +1156,7 @@ export default function ServiceDetailClean() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Code className="w-5 h-5 text-blue-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.stack', 'التقنيات المستخدمة')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(isWebDevService ? 'webAppPage.details.stack' : 'mobileAppPage.details.stack', 'التقنيات المستخدمة')}</h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {selectedAppDetails.stack.map((tech, index) => (
@@ -675,7 +1171,7 @@ export default function ServiceDetailClean() {
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <Plug className="w-5 h-5 text-purple-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.integrations', 'التكاملات')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(isWebDevService ? 'webAppPage.details.integrations' : 'mobileAppPage.details.integrations', 'التكاملات')}</h3>
                 </div>
                 <ul className="space-y-1">
                   {selectedAppDetails.integrations.map((integration, index) => (
@@ -696,7 +1192,7 @@ export default function ServiceDetailClean() {
             >
               <div className="flex items-center gap-2 mb-4">
                 <Calendar className="w-5 h-5 text-orange-500" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.timeline', 'المدة المتوقعة والخط الزمني')}</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(isWebDevService ? 'webAppPage.details.timeline' : 'mobileAppPage.details.timeline', 'المدة المتوقعة والخط الزمني')}</h3>
               </div>
               <div className="space-y-3">
                 {selectedAppDetails.timeline.map((phase, index) => (
@@ -723,7 +1219,7 @@ export default function ServiceDetailClean() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <HelpCircle className="w-5 h-5 text-blue-500" />
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t('mobileAppPage.details.faqs', 'أسئلة شائعة')}</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t(`${tPrefix}.details.faqs`, 'أسئلة شائعة')}</h3>
                 </div>
                 <Accordion type="single" collapsible className="w-full">
                   {selectedAppDetails.faqs.map((faq, index) => (
@@ -754,7 +1250,7 @@ export default function ServiceDetailClean() {
                 }}
                 data-testid={`button-start-now-${selectedAppDetails.id}`}
               >
-                {t('mobileAppPage.details.startNow', 'ابدأ الآن')}
+                {t(isWebDevService ? 'webAppPage.details.startNow' : 'mobileAppPage.details.startNow', 'ابدأ الآن')}
               </Button>
               <Button
                 size="lg"
@@ -766,7 +1262,7 @@ export default function ServiceDetailClean() {
                 }}
                 data-testid={`button-discuss-modal-${selectedAppDetails.id}`}
               >
-                {t('mobileAppPage.details.discussApp', 'ناقش التطبيق')}
+                {t(isWebDevService ? 'webAppPage.details.discussApp' : 'mobileAppPage.details.discussApp', 'ناقش التطبيق')}
               </Button>
             </motion.div>
           </div>
@@ -775,29 +1271,16 @@ export default function ServiceDetailClean() {
     );
   };
 
-  // Optimized service query
-  const { data: services, isLoading, error } = useQuery<Service[]>({
-    queryKey: ['/api/services'],
-  });
-
-  // Memoized service lookup
-  const service = useMemo(() => {
-    return services?.find(s => s.id === id);
-  }, [services, id]);
-
-  // Filter cards based on selected category
+  // Filter cards based on selected category (using conditionally determined appCards)
   const filteredCards = useMemo(() => {
     if (selectedCategory === 'all') {
       return appCards;
     }
     return appCards.filter(card => card.category === selectedCategory);
-  }, [selectedCategory]);
-
-  // Check if this is the mobile app development service
-  const isMobileAppService = service?.id === '916ab8db-091c-43d1-8160-42e187fa722d';
+  }, [selectedCategory, appCards]);
 
   // Loading state
-  if (isLoading) {
+  if (servicesLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800" dir={dir}>
         <div className="container mx-auto px-4 py-8">
@@ -814,7 +1297,7 @@ export default function ServiceDetailClean() {
   }
 
   // Error state
-  if (error || !service) {
+  if (servicesError || !service) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex items-center justify-center" dir={dir}>
         <div className="text-center">
@@ -834,7 +1317,7 @@ export default function ServiceDetailClean() {
   }
 
   // If not mobile app service, show the ERPNext section or basic service view
-  if (!isMobileAppService) {
+  if (!isMobileAppService && !isWebDevService) {
     const Icon = Smartphone; // Default icon for services
     
     return (
@@ -960,8 +1443,8 @@ export default function ServiceDetailClean() {
   return (
     <>
       <SEOHead
-        title={t('mobileAppPage.hero.title', 'تطوير تطبيقات الهواتف الذكية') + ' - ' + t('nav.services', 'خدماتنا') + ' | Genius Software Core'}
-        description={t('mobileAppPage.hero.desc', 'نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة')}
+        title={t(`${tPrefix}.hero.title`, 'تطوير تطبيقات الهواتف الذكية') + ' - ' + t('nav.services', 'خدماتنا') + ' | Genius Software Core'}
+        description={t(`${tPrefix}.hero.desc`, 'نطور تطبيقات احترافية وسريعة الاستجابة لأنظمة iOS و Android بأحدث التقنيات والمعايير العالمية مع واجهات مستخدم حديثة وتجربة استخدام مميزة')}
         keywords="تطوير تطبيقات، أندرويد، iOS، تطبيقات جوال، React Native، Flutter"
       />
       
