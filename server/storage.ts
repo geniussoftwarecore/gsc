@@ -279,7 +279,7 @@ export class MemStorage implements IStorage {
       department: "الإدارة",
       position: "مدير عام",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -300,7 +300,7 @@ export class MemStorage implements IStorage {
       department: "المبيعات",
       position: "مدير مبيعات",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -319,7 +319,7 @@ export class MemStorage implements IStorage {
       department: "الدعم الفني",
       position: "أخصائي دعم فني",
       avatar: null,
-      isActive: "true",
+      isActive: true,
       lastLoginAt: null,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -528,7 +528,7 @@ export class MemStorage implements IStorage {
         featured: "true",
         technologies: ["ERPNext v15", "Python", "Frappe Framework", "MariaDB", "Redis", "Espresso UI"],
         deliveryTime: "8-16 أسبوع",
-        startingPrice: 2500
+        startingPrice: "2500"
       }
     ];
 
@@ -1031,6 +1031,7 @@ export class MemStorage implements IStorage {
       id, 
       phone: submission.phone || null,
       service: submission.service || null,
+      serviceApplication: submission.serviceApplication || null,
       createdAt: new Date() 
     };
     this.contactSubmissions.set(id, contactSubmission);
@@ -1056,9 +1057,32 @@ export class MemStorage implements IStorage {
     const portfolioItem: PortfolioItem = { 
       ...item, 
       id,
+      client: item.client || null,
       projectUrl: item.projectUrl || null,
       technologies: item.technologies || null,
-      featured: item.featured || null
+      featured: item.featured || null,
+      status: item.status || null,
+      fullDescription: item.fullDescription || "",
+      industry: item.industry || "",
+      services: item.services || null,
+      imageUrl: item.imageUrl || "",
+      coverImage: item.coverImage || "",
+      gallery: item.gallery || null,
+      liveUrl: item.liveUrl || null,
+      year: item.year || "",
+      duration: item.duration || null,
+      teamSize: item.teamSize || null,
+      budget: item.budget || null,
+      kpis: item.kpis || null,
+      testimonial: item.testimonial || null,
+      tags: item.tags || null,
+      views: item.views || null,
+      likes: item.likes || null,
+      seoTitle: item.seoTitle || null,
+      seoDescription: item.seoDescription || null,
+      socialImage: item.socialImage || null,
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
     this.portfolioItems.set(id, portfolioItem);
     return portfolioItem;
@@ -1072,14 +1096,6 @@ export class MemStorage implements IStorage {
     return this.services.get(id);
   }
 
-  // Portfolio Management
-  async getAllPortfolioItems(): Promise<PortfolioItem[]> {
-    return Array.from(this.portfolioItems.values());
-  }
-
-  async getPortfolioItemsByCategory(category: string): Promise<PortfolioItem[]> {
-    return Array.from(this.portfolioItems.values()).filter(item => item.category === category);
-  }
 
   // Subscription Plans
   async getAllSubscriptionPlans(): Promise<SubscriptionPlan[]> {
@@ -1099,10 +1115,13 @@ export class MemStorage implements IStorage {
     const newSubscription: UserSubscription = {
       id: randomUUID(),
       ...subscription,
+      userId: subscription.userId || null,
+      planId: subscription.planId || null,
       startDate: subscription.startDate || new Date(),
-      status: subscription.status || "active",
-      createdAt: new Date(),
-      updatedAt: new Date()
+      endDate: subscription.endDate || null,
+      autoRenew: subscription.autoRenew || null,
+      paymentMethod: subscription.paymentMethod || null,
+      status: subscription.status || "active"
     };
     this.userSubscriptions.set(newSubscription.id, newSubscription);
     return newSubscription;
@@ -1113,6 +1132,14 @@ export class MemStorage implements IStorage {
     const newRequest: ServiceRequest = {
       id: randomUUID(),
       ...request,
+      serviceId: request.serviceId || null,
+      userId: request.userId || null,
+      requirements: request.requirements || null,
+      priority: request.priority || null,
+      startDate: request.startDate || null,
+      endDate: request.endDate || null,
+      estimatedCost: request.estimatedCost || null,
+      actualCost: request.actualCost || null,
       status: request.status || "pending",
       createdAt: new Date(),
       updatedAt: new Date()
@@ -1121,14 +1148,7 @@ export class MemStorage implements IStorage {
     return newRequest;
   }
 
-  async getServiceRequests(): Promise<ServiceRequest[]> {
-    return Array.from(this.serviceRequests.values());
-  }
 
-  // User Management Extensions
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(user => user.username === username);
-  }
 
   async createService(service: InsertService): Promise<Service> {
     const id = randomUUID();
@@ -1159,15 +1179,6 @@ export class MemStorage implements IStorage {
     return newTestimonial;
   }
 
-  async getAllSubscriptionPlans(): Promise<SubscriptionPlan[]> {
-    return Array.from(this.subscriptionPlans.values());
-  }
-
-  async getSubscriptionPlansByService(serviceId: string): Promise<SubscriptionPlan[]> {
-    return Array.from(this.subscriptionPlans.values()).filter(
-      plan => plan.serviceId === serviceId
-    );
-  }
 
   async createSubscriptionPlan(plan: InsertSubscriptionPlan): Promise<SubscriptionPlan> {
     const id = randomUUID();
@@ -1183,27 +1194,6 @@ export class MemStorage implements IStorage {
     return newPlan;
   }
 
-  async getUserSubscriptions(userId: string): Promise<UserSubscription[]> {
-    return Array.from(this.userSubscriptions.values()).filter(
-      subscription => subscription.userId === userId
-    );
-  }
-
-  async createUserSubscription(subscription: InsertUserSubscription): Promise<UserSubscription> {
-    const id = randomUUID();
-    const newSubscription: UserSubscription = { 
-      ...subscription, 
-      id,
-      userId: subscription.userId || null,
-      planId: subscription.planId || null,
-      startDate: subscription.startDate || null,
-      endDate: subscription.endDate || null,
-      autoRenew: subscription.autoRenew || null,
-      paymentMethod: subscription.paymentMethod || null
-    };
-    this.userSubscriptions.set(id, newSubscription);
-    return newSubscription;
-  }
 
   async getServiceRequests(userId?: string): Promise<ServiceRequest[]> {
     if (userId) {
@@ -1214,26 +1204,6 @@ export class MemStorage implements IStorage {
     return Array.from(this.serviceRequests.values());
   }
 
-  async createServiceRequest(request: InsertServiceRequest): Promise<ServiceRequest> {
-    const id = randomUUID();
-    const newRequest: ServiceRequest = { 
-      ...request, 
-      id,
-      userId: request.userId || null,
-      serviceId: request.serviceId || null,
-      requirements: request.requirements || null,
-      status: request.status || null,
-      priority: request.priority || null,
-      estimatedCost: request.estimatedCost || null,
-      actualCost: request.actualCost || null,
-      startDate: request.startDate || null,
-      endDate: request.endDate || null,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    this.serviceRequests.set(id, newRequest);
-    return newRequest;
-  }
 
   // User Management Methods
   async updateUser(id: string, updates: Partial<User>): Promise<User> {
@@ -1447,6 +1417,7 @@ export class MemStorage implements IStorage {
       accountId: opportunity.accountId || null,
       contactId: opportunity.contactId || null,
       stage: opportunity.stage || "prospecting",
+      stageId: opportunity.stageId || null,
       amount: opportunity.amount || null,
       probability: opportunity.probability || "0",
       expectedCloseDate: opportunity.expectedCloseDate || null,
@@ -1595,6 +1566,10 @@ export class MemStorage implements IStorage {
     const savedFilter: SavedFilter = {
       id: randomUUID(),
       ...filter,
+      userId: filter.userId || null,
+      entities: filter.entities || null,
+      filters: filter.filters || null,
+      isDefault: filter.isDefault || null,
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1623,6 +1598,10 @@ export class MemStorage implements IStorage {
     const newStage: DealStage = {
       id: randomUUID(),
       ...stage,
+      probability: stage.probability || "0",
+      color: stage.color || "#6b7280",
+      isClosed: stage.isClosed || "false",
+      isWon: stage.isWon || "false",
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -1653,6 +1632,8 @@ export class MemStorage implements IStorage {
     const newStatus: TicketStatus = {
       id: randomUUID(),
       ...status,
+      color: status.color || "#6b7280",
+      isClosed: status.isClosed || "false",
       createdAt: new Date(),
       updatedAt: new Date()
     };

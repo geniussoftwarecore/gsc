@@ -46,17 +46,44 @@ app.use((req, res, next) => {
   // Initialize storage (will use database or fall back to in-memory)
   initializeStorage();
   
-  // Seed database with initial data
-  await seedDatabase();
+  // Seed database with initial data (only in development or when explicitly enabled)
+  const isDevelopment = process.env.NODE_ENV === 'development' || app.get('env') === 'development';
+  const seedOnBoot = process.env.SEED_ON_BOOT === 'true';
+  
+  if (isDevelopment || seedOnBoot) {
+    log('Environment allows seeding - running database seed...');
+    await seedDatabase();
+  } else {
+    log('Production environment detected - skipping database seeding');
+  }
   
   const server = await registerRoutes(app);
 
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    res.status(status).json({ message });
-    log(`Error ${status}: ${message}${err.stack ? '\n' + err.stack : ''}`, 'error');
+    const isDevelopment = process.env.NODE_ENV === 'development' || app.get('env') === 'development';
+    
+    // Log full error details server-side
+    const errorDetails = `${req.method} ${req.path} - Error ${status}: ${err.message}${err.stack ? '\n' + err.stack : ''}`;
+    log(errorDetails, 'error');
+    
+    // Return appropriate message to client
+    if (isDevelopment) {
+      // In development, return detailed error information
+      res.status(status).json({ 
+        message: err.message || "Internal Server Error",
+        stack: err.stack,
+        path: req.path,
+        method: req.method
+      });
+    } else {
+      // In production, return generic error messages
+      const productionMessage = status >= 500 
+        ? "خطأ داخلي في الخادم. يرجى المحاولة لاحقاً."
+        : err.message || "حدث خطأ أثناء معالجة الطلب.";
+      
+      res.status(status).json({ message: productionMessage });
+    }
   });
 
   // importantly only setup vite in development and after

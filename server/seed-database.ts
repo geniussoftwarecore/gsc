@@ -19,6 +19,13 @@ export async function seedDatabase() {
 
   try {
     console.log("Starting database seeding...");
+    
+    // Environment check for production safety
+    const isProduction = process.env.NODE_ENV === 'production';
+    if (isProduction && process.env.SEED_ON_BOOT !== 'true') {
+      console.log("Production environment detected without SEED_ON_BOOT flag - skipping seeding for safety");
+      return;
+    }
 
     // Test database connection first
     try {
@@ -261,6 +268,15 @@ export async function seedDatabase() {
     console.log("Database seeded successfully!");
   } catch (error) {
     console.error("Error seeding database:", error);
-    throw error;
+    
+    // In production, log error but don't crash the application
+    const isProduction = process.env.NODE_ENV === 'production';
+    if (isProduction) {
+      console.error("Database seeding failed in production - continuing with existing data");
+      return;
+    } else {
+      // In development, crash the application to alert developers
+      throw error;
+    }
   }
 }
