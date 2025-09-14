@@ -1,0 +1,74 @@
+1) برومبت — تطوير المواقع والمنصات (Web & Platforms)
+
+Role: مطوّر واجهة أمامية يعمل داخل كود GSC.
+Scope: عدّل صفحة خدمة “تطوير المواقع والمنصات” فقط بنفس نسق صفحة “تطوير تطبيقات الهواتف الذكية”. لا تغيّر صفحات أخرى أو الثيم/المكوّنات المشتركة.
+
+المطلوب
+
+Hero & Badges: حافظ على الشكل العام للهيرو؛ أظهر شارات تقنيات الويب (نص/أيقونة فقط إن وُجدت).
+
+فلاتر + شبكة بطاقات (بيانات محلية فقط):
+
+الفئات (مفاتيح ثابتة، عرض بالتّرجمة):
+all, corporate, ecommerce, saas, portal, blog_news, landing
+
+بطاقتان على الأقل لكل فئة (المجموع 16–20).
+
+كل بطاقة:
+id, category, title, shortDesc, keyFeatures[] (3–5)، اختياريًا tag, stack, integrations, timeline[], faqs[], images[], ctaLink:'/contact'.
+
+زر «عرض التفاصيل» + Modal/Drawer:
+
+أقسام: overview(longDesc), keyFeatures, stack, integrations, timeline(تحليل→تصميم→تطوير→اختبار→تسليم), (اختياري) images, faqs, وأزرار CTA: “ابدأ الآن”/“ناقش الفكرة” → /contact.
+
+الوصولية: focus trap, Esc/خارج اللوحة, إرجاع التركيز, aria-labelledby/aria-describedby.
+
+الأداء: Lazy-load لمحتوى التفاصيل.
+
+i18n (AR ⇄ EN) + RTL/LTR:
+
+لا نصوص صلبة في JSX. انقل كل النصوص إلى مفاتيح الترجمة.
+
+i18n.changeLanguage('ar'|'en') + ضبط dir/lang على <html>/<body> + حفظ التفضيل في localStorage (مثل gsc:lang).
+
+إخفاء التسعير: لا تعرض price/pricing/pricingNote/cost على هذه الصفحة (ابقِ الحقول مخفية إن وجدت).
+
+مفاتيح الترجمة (اقتراح أسماء)
+
+الجذر: webAppPage.*
+
+webAppPage.hero.title/desc/deliveryTimeLabel
+
+webAppPage.filters.{all|corporate|ecommerce|saas|portal|blog_news|landing}
+
+webAppPage.cards.{cardId}.title/shortDesc/feature0..4/longDesc/stack*/integrations*/timeline*/faq*
+
+webAppPage.sections.{features|whatYouGet|howWeWork|readyToStart|contactNow|browseServices}
+
+webAppPage.details.{overview|keyFeatures|stack|integrations|timeline|step1..step4|startNow|discussApp|close}
+
+قبول العمل
+
+فلاتر تعمل 100% + 16–20 بطاقة.
+
+Modal/Drawer متوافق وصولًا ويغلق/يفتح بشكل سليم.
+
+i18n كامل + RTL/LTR + حفظ اختيار اللغة.
+
+لا تسعير ظاهر.
+
+لا تعديل خارج هذه الخدمة.
+
+Seeds (أمثلة قصيرة للبطاقات – اجعل النص من i18n):
+
+corporate: موقع شركة — ميزات: صفحات تعريف/نموذج اتصال/SEO/سرعة
+
+ecommerce: متجر — سلة/دفع/شحن/خصومات
+
+saas: واجهات اشتراك/فواتير/تقارير/Roles
+
+portal: صلاحيات/SSO/محتوى متدرّج
+
+blog_news: محرّر/تصنيف/أرشفة
+
+landing: صفحات هبوط/تحويلات/تحليلات
