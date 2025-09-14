@@ -1023,7 +1023,7 @@ export default function ServiceDetailClean() {
   }, [services, id]);
 
   // Determine service types
-  const isMobileAppService = service?.id === '917f7f56-aba4-4049-9b14-7d4f2a48a932';
+  const isMobileAppService = service?.id === '51b12ec4-58f5-49be-bf06-85cecbddf470';
   const isWebDevService = service?.id === 'fbcbce8e-9195-45fe-a423-162a906d2aad';
 
   // Use appropriate data based on service type
