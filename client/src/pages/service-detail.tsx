@@ -79,6 +79,8 @@ const useWebDevCategories = () => {
 
 // Web Development cards with complete 20 cards across 6 categories
 const useWebDevCards = () => {
+  const { t } = useTranslation();
+  
   return [
     // Frontend Category (4 cards)
     { 
