@@ -168,5 +168,43 @@
       "category": "Support",
       "ctaLabel": "Request a Proposal"
     }
-  ]
+  ],
+  "webAppPage": {
+    "hero": {
+      "title": "Web & Platforms Development",
+      "desc": "We build professional websites and platforms using the latest technologies and best practices",
+      "deliveryTimeLabel": "Delivery Time: 3-6 weeks"
+    },
+    "filters": {
+      "all": "All Types",
+      "corporate": "Corporate Websites",
+      "ecommerce": "E-commerce",
+      "saas": "SaaS Platforms",
+      "portal": "Service Portals",
+      "blog_news": "Blogs & News",
+      "landing": "Landing Pages"
+    },
+    "sections": {
+      "features": "Key Features",
+      "whatYouGet": "What You Get",
+      "howWeWork": "How We Work",
+      "readyToStart": "Ready to Start?",
+      "contactNow": "Contact Us Now",
+      "browseServices": "Browse Our Other Services"
+    },
+    "details": {
+      "overview": "Overview",
+      "keyFeatures": "Key Features",
+      "stack": "Technology Stack",
+      "integrations": "Integrations",
+      "timeline": "Timeline",
+      "step1": "Requirements Analysis",
+      "step2": "Design & Development",
+      "step3": "Testing & Optimization",
+      "step4": "Delivery & Maintenance",
+      "startNow": "Start Now",
+      "discussApp": "Discuss Idea",
+      "close": "Close"
+    }
+  }
 }

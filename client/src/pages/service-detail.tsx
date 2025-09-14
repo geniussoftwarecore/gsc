@@ -398,137 +398,167 @@ const useWebDevCards = () => {
       ctaLink: '/contact'
     },
 
-    // CMS Category (3 cards)
+    // Blog & News Category (3 cards)
     { 
-      id: 'cms1', 
-      category: 'cms', 
-      title: 'نظام إدارة المحتوى المتقدم', 
-      shortDesc: 'إدارة شاملة للمحتوى متعدد الوسائط', 
-      keyFeatures: ['محرر WYSIWYG', 'إدارة الوسائط', 'نشر مجدول', 'تحكم في الأدوار', 'SEO محسن'], 
-      longDesc: 'نظام إدارة محتوى متطور يدعم جميع أنواع الوسائط مع تحكم دقيق في النشر والصلاحيات',
-      stack: ['React', 'Node.js', 'MongoDB', 'AWS S3', 'ElasticSearch'],
-      integrations: ['محركات البحث', 'وسائل التواصل', 'أنظمة التحليل', 'CDN للوسائط'],
+      id: 'blog1', 
+      category: 'blog_news', 
+      title: t('webAppPage.cards.blog1.title', 'منصة الأخبار الإلكترونية'), 
+      shortDesc: t('webAppPage.cards.blog1.shortDesc', 'موقع أخبار شامل مع إدارة المحتوى المتقدمة'), 
+      keyFeatures: [
+        t('webAppPage.cards.blog1.feature0', 'نشر فوري للأخبار'),
+        t('webAppPage.cards.blog1.feature1', 'تصنيفات متعددة'),
+        t('webAppPage.cards.blog1.feature2', 'نظام تعليقات تفاعلي'),
+        t('webAppPage.cards.blog1.feature3', 'إدارة الصحفيين والمحررين'),
+        t('webAppPage.cards.blog1.feature4', 'تحليلات القراءة والتفاعل')
+      ], 
+      longDesc: t('webAppPage.cards.blog1.longDesc', 'منصة إخبارية متكاملة مع نظام إدارة محتوى متقدم وأدوات نشر فورية للأخبار العاجلة والتقارير المفصلة'),
+      stack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'ElasticSearch'],
+      integrations: ['وكالات الأنباء', 'وسائل التواصل الاجتماعي', 'أنظمة التحليل', 'خدمات البث المباشر'],
       timeline: [
-        { phase: 'تحليل أنواع المحتوى', note: 'تحديد أنواع المحتوى والهيكلة المطلوبة' },
-        { phase: 'تطوير محرر المحتوى', note: 'بناء واجهة تحرير متقدمة وسهلة' },
-        { phase: 'نظام إدارة الوسائط', note: 'تطوير نظام رفع ومعالجة الملفات' },
-        { phase: 'إعدادات النشر والصلاحيات', note: 'تطوير نظام الأدوار والنشر المجدول' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'دراسة احتياجات النشر الإخباري والجمهور' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'بناء نظام إدارة المحتوى الإخباري' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار سرعة النشر وقابلية القراءة' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'تدريب فريق التحرير ونظام النشر' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'هل يدعم المحتوى متعدد اللغات؟', a: 'نعم، مع إدارة متقدمة للترجمات والمحتوى متعدد اللغات.' }
+        { q: 'هل يدعم النشر المجدول؟', a: 'نعم، مع إمكانية جدولة الأخبار والتقارير للنشر في أوقات محددة.' }
       ],
       images: [],
       ctaLink: '/contact'
     },
     { 
-      id: 'cms2', 
-      category: 'cms', 
-      title: 'منصة المدونات الاحترافية', 
-      shortDesc: 'نظام تدوين متقدم للكتاب والمؤسسات', 
-      keyFeatures: ['محرر غني', 'تصنيفات متقدمة', 'تعليقات ذكية', 'رسائل إخبارية', 'تحليلات القراء'], 
-      longDesc: 'منصة تدوين احترافية مع أدوات متقدمة للنشر والتفاعل وتحليل أداء المحتوى',
-      stack: ['React', 'Next.js', 'PostgreSQL', 'Redis', 'Algolia Search'],
-      integrations: ['محركات البحث', 'وسائل التواصل', 'خدمات البريد الإلكتروني', 'أدوات التحليل'],
+      id: 'blog2', 
+      category: 'blog_news', 
+      title: t('webAppPage.cards.blog2.title', 'مدونة المؤسسات الاحترافية'), 
+      shortDesc: t('webAppPage.cards.blog2.shortDesc', 'منصة تدوين احترافية للشركات والمؤسسات'), 
+      keyFeatures: [
+        t('webAppPage.cards.blog2.feature0', 'محرر غني للمحتوى'),
+        t('webAppPage.cards.blog2.feature1', 'إدارة فريق الكتاب'),
+        t('webAppPage.cards.blog2.feature2', 'نشر متعدد المنصات'),
+        t('webAppPage.cards.blog2.feature3', 'تحسين محركات البحث'),
+        t('webAppPage.cards.blog2.feature4', 'رسائل إخبارية تلقائية')
+      ], 
+      longDesc: t('webAppPage.cards.blog2.longDesc', 'منصة تدوين احترافية مصممة للمؤسسات مع أدوات متقدمة لإدارة المحتوى والفريق وتحليل الأداء'),
+      stack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Redis'],
+      integrations: ['منصات التواصل الاجتماعي', 'أدوات SEO', 'خدمات البريد الإلكتروني', 'أنظمة التحليل'],
       timeline: [
-        { phase: 'تصميم تجربة الكتابة', note: 'تطوير واجهة كتابة محسنة للكتاب' },
-        { phase: 'نظام النشر والتصنيف', note: 'بناء نظام تنظيم ونشر المقالات' },
-        { phase: 'منصة التفاعل والتعليقات', note: 'تطوير نظام تعليقات ذكي ومعتدل' },
-        { phase: 'التحليلات ورسائل التسويق', note: 'إضافة تحليلات المحتوى ونظام النشرات' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'دراسة احتياجات المحتوى واستراتيجية النشر' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'بناء واجهة الكتابة ونظام إدارة الفريق' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار سير العمل وتحسين تجربة المستخدم' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'تدريب فريق المحتوى وإعداد النشر التلقائي' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'هل يدعم الكتابة الجماعية؟', a: 'نعم، مع أدوات تعاون وإدارة فريق الكتاب متقدمة.' }
+        { q: 'هل يدعم العمل الجماعي؟', a: 'نعم، مع أدوار مختلفة للكتاب والمحررين ونظام مراجعة متقدم.' }
       ],
       images: [],
       ctaLink: '/contact'
     },
     { 
-      id: 'cms3', 
-      category: 'cms', 
-      title: 'نظام إدارة الوثائق', 
-      shortDesc: 'إدارة وأرشفة الوثائق الرقمية', 
-      keyFeatures: ['أرشفة ذكية', 'بحث متقدم', 'تحكم في الوصول', 'توقيعات رقمية', 'إدارة الإصدارات'], 
-      longDesc: 'نظام إدارة وثائق متطور مع أرشفة ذكية وبحث متقدم وحماية قانونية للوثائق المهمة',
-      stack: ['React', 'Node.js', 'PostgreSQL', 'ElasticSearch', 'PDF-lib'],
-      integrations: ['التوقيع الرقمي', 'أنظمة الأمان', 'خدمات OCR', 'النسخ الاحتياطي السحابي'],
+      id: 'blog3', 
+      category: 'blog_news', 
+      title: t('webAppPage.cards.blog3.title', 'مجلة إلكترونية تفاعلية'), 
+      shortDesc: t('webAppPage.cards.blog3.shortDesc', 'مجلة رقمية متقدمة مع محتوى تفاعلي'), 
+      keyFeatures: [
+        t('webAppPage.cards.blog3.feature0', 'مقالات تفاعلية ووسائط متعددة'),
+        t('webAppPage.cards.blog3.feature1', 'نظام اشتراكات رقمية'),
+        t('webAppPage.cards.blog3.feature2', 'تفاعل القراء والمجتمع'),
+        t('webAppPage.cards.blog3.feature3', 'أرشيف رقمي قابل للبحث'),
+        t('webAppPage.cards.blog3.feature4', 'تحليلات القراءة والتفاعل')
+      ], 
+      longDesc: t('webAppPage.cards.blog3.longDesc', 'مجلة إلكترونية متطورة مع محتوى تفاعلي ووسائط متعددة ونظام اشتراكات رقمية ومجتمع تفاعلي'),
+      stack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'WebRTC'],
+      integrations: ['وسائل التواصل الاجتماعي', 'أنظمة الدفع الرقمية', 'منصات الفيديو', 'أدوات التحليل'],
       timeline: [
-        { phase: 'تحليل أنواع الوثائق', note: 'تصنيف الوثائق وتحديد متطلبات الحفظ' },
-        { phase: 'نظام الرفع والفهرسة', note: 'تطوير آلية رفع وفهرسة تلقائية' },
-        { phase: 'محرك البحث المتقدم', note: 'بناء نظام بحث ذكي في المحتوى' },
-        { phase: 'الأمان والتوقيعات', note: 'إضافة طبقات الحماية والتوقيع الرقمي' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'تحديد نوع المحتوى واستراتيجية التفاعل' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'بناء منصة تفاعلية مع وسائط متعددة' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار التفاعل وتحسين تجربة القراءة' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'نشر المجلة وبناء المجتمع' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'هل يدعم البحث في محتوى الملفات؟', a: 'نعم، مع تقنية OCR للبحث داخل الصور والملفات الممسوحة.' }
+        { q: 'هل يدعم الاشتراكات الرقمية؟', a: 'نعم، مع نظام اشتراكات مرن ومحتوى حصري للمشتركين.' }
       ],
       images: [],
       ctaLink: '/contact'
     },
 
-    // API Category (3 cards)
+    // Landing Category (3 cards)
     { 
-      id: 'api1', 
-      category: 'api', 
-      title: 'واجهة REST API شاملة', 
-      shortDesc: 'API متكامل للتطبيقات والخدمات', 
-      keyFeatures: ['REST Standards', 'توثيق تفاعلي', 'مصادقة آمنة', 'تحكم في المعدل', 'مراقبة الأداء'], 
-      longDesc: 'واجهة برمجية احترافية تلتزم بمعايير REST مع توثيق شامل وأمان عالي وإدارة متقدمة للطلبات',
-      stack: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'Swagger'],
-      integrations: ['أنظمة المصادقة', 'قواعد البيانات المتعددة', 'خدمات المراقبة', 'أنظمة التخزين السحابي'],
+      id: 'landing1', 
+      category: 'landing', 
+      title: t('webAppPage.cards.landing1.title', 'صفحة هبوط تحويلية'), 
+      shortDesc: t('webAppPage.cards.landing1.shortDesc', 'صفحة هبوط محسنة لزيادة التحويلات والمبيعات'), 
+      keyFeatures: [
+        t('webAppPage.cards.landing1.feature0', 'تصميم محسن للتحويلات'),
+        t('webAppPage.cards.landing1.feature1', 'اختبارات A/B Testing'),
+        t('webAppPage.cards.landing1.feature2', 'تتبع وتحليل متقدم'),
+        t('webAppPage.cards.landing1.feature3', 'نماذج التواصل المحسنة'),
+        t('webAppPage.cards.landing1.feature4', 'تحسين محركات البحث')
+      ], 
+      longDesc: t('webAppPage.cards.landing1.longDesc', 'صفحة هبوط متقدمة مصممة خصيصاً لزيادة معدلات التحويل مع اختبارات A/B وتحليلات متقدمة'),
+      stack: ['React', 'Next.js', 'TypeScript', 'Analytics', 'A/B Testing'],
+      integrations: ['Google Analytics', 'Facebook Pixel', 'أدوات A/B Testing', 'أنظمة CRM'],
       timeline: [
-        { phase: 'تحليل وتصميم API', note: 'تخطيط نقاط النهاية والبيانات المطلوبة' },
-        { phase: 'تطوير الوظائف الأساسية', note: 'برمجة العمليات الأساسية والتحقق' },
-        { phase: 'الأمان والمصادقة', note: 'تطبيق طبقات الأمان والتشفير' },
-        { phase: 'التوثيق والاختبار', note: 'إنشاء توثيق تفاعلي واختبار شامل' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'تحديد أهداف التحويل والجمهور المستهدف' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'تصميم يركز على التحويل وتجربة مستخدم مميزة' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار A/B وتحسين معدلات التحويل' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'نشر الصفحة ومراقبة الأداء' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'ما معايير الأمان المطبقة؟', a: 'OAuth 2.0، JWT، HTTPS، وحماية من جميع الهجمات الشائعة.' }
+        { q: 'ما معدل التحسن المتوقع؟', a: 'عادة نحقق تحسن 20-50% في معدلات التحويل بعد التحسين.' }
       ],
       images: [],
       ctaLink: '/contact'
     },
     { 
-      id: 'api2', 
-      category: 'api', 
-      title: 'GraphQL API متقدم', 
-      shortDesc: 'واجهة برمجية مرنة وقابلة للاستعلام', 
-      keyFeatures: ['استعلام مرن', 'تحديد البيانات', 'أداء محسن', 'تطوير سريع', 'أدوات تطوير'], 
-      longDesc: 'واجهة GraphQL متطورة تتيح للعملاء طلب البيانات المحددة فقط مع أداء عالي وتطوير أسرع',
-      stack: ['Node.js', 'GraphQL', 'Apollo Server', 'PostgreSQL', 'DataLoader'],
-      integrations: ['أنظمة قواعد البيانات المتعددة', 'خدمات التخزين', 'أنظمة المراقبة', 'CDN'],
+      id: 'landing2', 
+      category: 'landing', 
+      title: t('webAppPage.cards.landing2.title', 'صفحة هبوط للمنتجات'), 
+      shortDesc: t('webAppPage.cards.landing2.shortDesc', 'عرض منتج أو خدمة بطريقة جذابة ومقنعة'), 
+      keyFeatures: [
+        t('webAppPage.cards.landing2.feature0', 'عرض مميزات المنتج'),
+        t('webAppPage.cards.landing2.feature1', 'شهادات العملاء'),
+        t('webAppPage.cards.landing2.feature2', 'أسعار وخطط واضحة'),
+        t('webAppPage.cards.landing2.feature3', 'صور وفيديوهات مميزة'),
+        t('webAppPage.cards.landing2.feature4', 'أزرار إجراء واضحة')
+      ], 
+      longDesc: t('webAppPage.cards.landing2.longDesc', 'صفحة هبوط متخصصة في عرض المنتجات والخدمات بطريقة جذابة ومقنعة مع شهادات وعروض مقنعة'),
+      stack: ['React', 'Next.js', 'Framer Motion', 'TypeScript', 'CMS Integration'],
+      integrations: ['أنظمة الدفع', 'أدوات التحليل', 'منصات الفيديو', 'أنظمة CRM'],
       timeline: [
-        { phase: 'تصميم مخطط GraphQL', note: 'تخطيط هيكل البيانات والاستعلامات' },
-        { phase: 'تطوير Resolvers', note: 'برمجة منطق جلب ومعالجة البيانات' },
-        { phase: 'تحسين الأداء', note: 'تطبيق تقنيات التحسين والتخزين المؤقت' },
-        { phase: 'أدوات التطوير والتوثيق', note: 'إعداد بيئة التطوير والتوثيق التفاعلي' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'دراسة المنتج والجمهور المستهدف' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'عرض الميزات والفوائد بشكل جذاب' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار فعالية الرسائل والعروض' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'نشر الصفحة ومتابعة النتائج' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'ما مميزات GraphQL عن REST؟', a: 'استعلام مرن، تقليل طلبات الشبكة، وتطوير أسرع للواجهات الأمامية.' }
+        { q: 'هل يمكن إضافة فيديو توضيحي؟', a: 'نعم، مع دعم كامل للفيديوهات والعروض التقديمية التفاعلية.' }
       ],
       images: [],
       ctaLink: '/contact'
     },
     { 
-      id: 'api3', 
-      category: 'api', 
-      title: 'خدمات الويب المتقدمة', 
-      shortDesc: 'تكامل أنظمة متعددة وخدمات خارجية', 
-      keyFeatures: ['تكامل متعدد', 'معالجة البيانات', 'مزامنة فورية', 'قابلية التوسع', 'مراقبة شاملة'], 
-      longDesc: 'خدمات ويب متطورة تدير التكامل بين أنظمة متعددة مع معالجة ذكية للبيانات ومزامنة فورية',
-      stack: ['Node.js', 'Microservices', 'RabbitMQ', 'Docker', 'Kubernetes'],
-      integrations: ['أنظمة CRM/ERP', 'خدمات الدفع', 'منصات التواصل', 'أنظمة التحليل'],
+      id: 'landing3', 
+      category: 'landing', 
+      title: t('webAppPage.cards.landing3.title', 'صفحة هبوط للفعاليات'), 
+      shortDesc: t('webAppPage.cards.landing3.shortDesc', 'صفحة ترويجية للفعاليات والمؤتمرات والورش'), 
+      keyFeatures: [
+        t('webAppPage.cards.landing3.feature0', 'تفاصيل الفعالية والبرنامج'),
+        t('webAppPage.cards.landing3.feature1', 'نظام حجز وتسجيل'),
+        t('webAppPage.cards.landing3.feature2', 'معلومات المتحدثين'),
+        t('webAppPage.cards.landing3.feature3', 'عد تنازلي للحضور'),
+        t('webAppPage.cards.landing3.feature4', 'تذاكر فورية ومتابعة')
+      ], 
+      longDesc: t('webAppPage.cards.landing3.longDesc', 'صفحة هبوط متخصصة للفعاليات والمؤتمرات مع نظام حجز متطور وعد تنازلي ومعلومات شاملة'),
+      stack: ['React', 'Next.js', 'TypeScript', 'Calendar Integration', 'Payment Systems'],
+      integrations: ['أنظمة الدفع', 'تقويم Google', 'منصات الفيديو المباشر', 'أنظمة البريد الإلكتروني'],
       timeline: [
-        { phase: 'تحليل التكاملات المطلوبة', note: 'دراسة الأنظمة والخدمات للربط' },
-        { phase: 'تطوير طبقة التكامل', note: 'بناء الوسطاء والمحولات المطلوبة' },
-        { phase: 'معالجة وتزامن البيانات', note: 'تطوير آليات المعالجة والمزامنة' },
-        { phase: 'المراقبة والصيانة', note: 'إعداد مراقبة شاملة ونظام تنبيهات' }
+        { phase: t('webAppPage.details.step1', 'تحليل المتطلبات'), note: 'تحديد تفاصيل الفعالية ونوع الحجوزات' },
+        { phase: t('webAppPage.details.step2', 'التصميم والتطوير'), note: 'تصميم واجهة جذابة مع نظام حجز' },
+        { phase: t('webAppPage.details.step3', 'الاختبار والتحسين'), note: 'اختبار عملية الحجز والدفع' },
+        { phase: t('webAppPage.details.step4', 'التسليم والصيانة'), note: 'نشر الصفحة وإعداد نظام المتابعة' }
       ],
-      pricingNote: '',
       faqs: [
-        { q: 'كم نظام يمكن ربطه؟', a: 'لا يوجد حد أقصى، النظام قابل للتوسع حسب الحاجة.' }
+        { q: 'هل يدعم الحجز الجماعي؟', a: 'نعم، مع إمكانية حجز مجموعات وأسعار خاصة للفرق.' }
       ],
       images: [],
       ctaLink: '/contact'
