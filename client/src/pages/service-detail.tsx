@@ -536,7 +536,7 @@ const useWebDevCards = () => {
   ];
 };
 
-// Enhanced app cards with complete 16-20 cards to meet requirements
+// Enhanced app cards with complete 20+ cards to meet requirements
 const useAppCards = () => {
   return [
     // E-commerce Category (3 cards)
@@ -1023,8 +1023,8 @@ export default function ServiceDetailClean() {
   }, [services, id]);
 
   // Determine service types
-  const isMobileAppService = service?.id === '916ab8db-091c-43d1-8160-42e187fa722d';
-  const isWebDevService = service?.id === '562fce34-abbd-4ba9-abc5-bc6b4afe61c7';
+  const isMobileAppService = service?.id === '917f7f56-aba4-4049-9b14-7d4f2a48a932';
+  const isWebDevService = service?.id === 'fbcbce8e-9195-45fe-a423-162a906d2aad';
 
   // Use appropriate data based on service type
   const categories = isWebDevService ? webDevCategories : appCategories;
