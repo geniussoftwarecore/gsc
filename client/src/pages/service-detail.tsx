@@ -1022,8 +1022,8 @@ export default function ServiceDetailClean() {
     return services?.find(s => s.id === id);
   }, [services, id]);
 
-  // Determine service types
-  const isMobileAppService = service?.id === '51b12ec4-58f5-49be-bf06-85cecbddf470';
+  // Determine service types - check by category instead of hardcoded IDs for better flexibility
+  const isMobileAppService = service?.category === 'mobile' || service?.id === '51b12ec4-58f5-49be-bf06-85cecbddf470';
   const isWebDevService = service?.id === 'fbcbce8e-9195-45fe-a423-162a906d2aad';
 
   // Use appropriate data based on service type
