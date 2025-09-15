@@ -1224,6 +1224,13 @@ const ServiceDetailClean = memo(function ServiceDetailClean() {
     window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}#details-${app.id}`);
   };
 
+  // Handle apply now click - navigate to contact page with selected app
+  const handleApplyNow = (app: AppCard) => {
+    // Navigate to contact page with app information as URL parameters
+    const contactUrl = `/contact?service=${encodeURIComponent(service?.title || 'مطور تطبيقات الجوال')}&app=${encodeURIComponent(app.title)}&appId=${app.id}`;
+    setLocation(contactUrl);
+  };
+
   // App Details Modal Component
   const AppDetailsModal = ({ app, isOpen, onClose }: { app: AppCard | null; isOpen: boolean; onClose: () => void }) => {
     if (!app) return null;
@@ -1548,15 +1555,25 @@ const ServiceDetailClean = memo(function ServiceDetailClean() {
                       </div>
 
                       {/* CTA */}
-                      <div className="pt-4 border-t border-gray-100">
+                      <div className="pt-4 border-t border-gray-100 space-y-2">
                         <Button 
                           onClick={() => handleViewDetails(app)}
                           className="w-full"
                           size="sm"
+                          variant="outline"
                           data-testid={`button-view-details-${app.id}`}
                         >
                           <Info className="h-4 w-4 mr-2" />
                           عرض التفاصيل
+                        </Button>
+                        <Button 
+                          onClick={() => handleApplyNow(app)}
+                          className="w-full"
+                          size="sm"
+                          data-testid={`button-apply-now-${app.id}`}
+                        >
+                          <CheckCircle className="h-4 w-4 mr-2" />
+                          التقدم الآن
                         </Button>
                       </div>
                     </CardContent>
