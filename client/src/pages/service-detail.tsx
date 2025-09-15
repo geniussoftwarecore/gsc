@@ -12,7 +12,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { useLanguage } from "@/i18n/lang";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useCallback, memo } from "react";
 import ConsolidatedERPNextV15Section from "@/components/erpnext/ConsolidatedERPNextV15Section";
 
 // Service interface
@@ -45,42 +45,55 @@ interface AppCard {
   ctaLink: string;
 }
 
+// Static app categories - moved outside component for performance
+const MOBILE_APP_CATEGORIES = [
+  { key: 'all', labelKey: 'mobileAppPage.filters.all', defaultLabel: 'جميع الأنواع' },
+  { key: 'ecommerce', labelKey: 'mobileAppPage.filters.ecommerce', defaultLabel: 'تجارة إلكترونية' },
+  { key: 'services', labelKey: 'mobileAppPage.filters.services', defaultLabel: 'خدمات عند الطلب' },
+  { key: 'education', labelKey: 'mobileAppPage.filters.education', defaultLabel: 'تعليم' },
+  { key: 'health', labelKey: 'mobileAppPage.filters.health', defaultLabel: 'صحة' },
+  { key: 'fintech', labelKey: 'mobileAppPage.filters.fintech', defaultLabel: 'مالية/مدفوعات' },
+  { key: 'logistics', labelKey: 'mobileAppPage.filters.logistics', defaultLabel: 'توصيل/نقل' },
+  { key: 'media', labelKey: 'mobileAppPage.filters.media', defaultLabel: 'وسائط/ترفيه' }
+];
+
+// Static web development categories - moved outside component for performance  
+const WEB_DEV_CATEGORIES = [
+  { key: 'all', labelKey: 'webAppPage.filters.all', defaultLabel: 'جميع الأنواع' },
+  { key: 'corporate', labelKey: 'webAppPage.filters.corporate', defaultLabel: 'مواقع شركات' },
+  { key: 'ecommerce', labelKey: 'webAppPage.filters.ecommerce', defaultLabel: 'متاجر إلكترونية' },
+  { key: 'saas', labelKey: 'webAppPage.filters.saas', defaultLabel: 'منصات SaaS' },
+  { key: 'portal', labelKey: 'webAppPage.filters.portal', defaultLabel: 'بوابات إلكترونية' },
+  { key: 'blog_news', labelKey: 'webAppPage.filters.blog_news', defaultLabel: 'مدونات وأخبار' },
+  { key: 'landing', labelKey: 'webAppPage.filters.landing', defaultLabel: 'صفحات هبوط' }
+];
+
 // Enhanced app categories with translation support for mobile apps
 const useAppCategories = () => {
   const { t } = useTranslation();
   
-  return [
-    { key: 'all', label: t('mobileAppPage.filters.all', 'جميع الأنواع') },
-    { key: 'ecommerce', label: t('mobileAppPage.filters.ecommerce', 'تجارة إلكترونية') },
-    { key: 'services', label: t('mobileAppPage.filters.services', 'خدمات عند الطلب') },
-    { key: 'education', label: t('mobileAppPage.filters.education', 'تعليم') },
-    { key: 'health', label: t('mobileAppPage.filters.health', 'صحة') },
-    { key: 'fintech', label: t('mobileAppPage.filters.fintech', 'مالية/مدفوعات') },
-    { key: 'logistics', label: t('mobileAppPage.filters.logistics', 'توصيل/نقل') },
-    { key: 'media', label: t('mobileAppPage.filters.media', 'وسائط/ترفيه') }
-  ];
+  return useMemo(() => MOBILE_APP_CATEGORIES.map(cat => ({
+    key: cat.key,
+    label: t(cat.labelKey, cat.defaultLabel)
+  })), [t]);
 };
 
 // Web development categories with translation support
 const useWebDevCategories = () => {
   const { t } = useTranslation();
   
-  return [
-    { key: 'all', label: t('webAppPage.filters.all', 'جميع الأنواع') },
-    { key: 'corporate', label: t('webAppPage.filters.corporate', 'مواقع شركات') },
-    { key: 'ecommerce', label: t('webAppPage.filters.ecommerce', 'متاجر إلكترونية') },
-    { key: 'saas', label: t('webAppPage.filters.saas', 'منصات SaaS') },
-    { key: 'portal', label: t('webAppPage.filters.portal', 'بوابات إلكترونية') },
-    { key: 'blog_news', label: t('webAppPage.filters.blog_news', 'مدونات وأخبار') },
-    { key: 'landing', label: t('webAppPage.filters.landing', 'صفحات هبوط') }
-  ];
+  return useMemo(() => WEB_DEV_CATEGORIES.map(cat => ({
+    key: cat.key,
+    label: t(cat.labelKey, cat.defaultLabel)
+  })), [t]);
 };
 
 // Web Development cards with complete 18 cards across 6 categories
 const useWebDevCards = () => {
   const { t } = useTranslation();
   
-  return [
+  // Optimize with proper dependency array and reduce re-computation
+  return useMemo(() => [
     // Corporate Category (3 cards)
     { 
       id: 'corp1', 
@@ -583,9 +596,8 @@ const useWebDevCards = () => {
   ];
 };
 
-// Enhanced app cards with complete 20+ cards to meet requirements
-const useAppCards = () => {
-  return [
+// Static mobile app cards data - moved outside for performance
+const MOBILE_APP_CARDS_DATA = [
     // E-commerce Category (4 cards)
     { 
       id: 'ec1', 
@@ -1128,9 +1140,13 @@ const useAppCards = () => {
       ctaLink: '/contact'
     }
   ];
+
+// Enhanced app cards with complete 20+ cards to meet requirements
+const useAppCards = () => {
+  return useMemo(() => MOBILE_APP_CARDS_DATA, []);
 };
 
-export default function ServiceDetailClean() {
+const ServiceDetailClean = memo(function ServiceDetailClean() {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
   const { lang, dir } = useLanguage();
@@ -1139,11 +1155,11 @@ export default function ServiceDetailClean() {
   const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
-  // Get data for both service types
-  const appCategories = useAppCategories();
-  const webDevCategories = useWebDevCategories();
-  const appCardsData = useAppCards();
-  const webDevCardsData = useWebDevCards();
+  // Get data for both service types - heavily optimized with memoization to prevent re-creation
+  const appCategories = useMemo(() => useAppCategories(), []);
+  const webDevCategories = useMemo(() => useWebDevCategories(), []);
+  const appCardsData = useMemo(() => useAppCards(), []);
+  const webDevCardsData = useMemo(() => useWebDevCards(), []); 
 
   // Get service info to determine which data to use
   const { data: services, isLoading: servicesLoading, error: servicesError } = useQuery<Service[]>({
@@ -1463,7 +1479,7 @@ export default function ServiceDetailClean() {
 
           {/* Apps Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {filteredApps.map((app, index) => (
                 <motion.div
                   key={app.id}
@@ -1611,4 +1627,6 @@ export default function ServiceDetailClean() {
       </div>
     </>
   );
-}
+});
+
+export default ServiceDetailClean;
