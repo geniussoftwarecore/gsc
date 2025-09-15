@@ -1155,11 +1155,11 @@ const ServiceDetailClean = memo(function ServiceDetailClean() {
   const [selectedAppDetails, setSelectedAppDetails] = useState<AppCard | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
-  // Get data for both service types - heavily optimized with memoization to prevent re-creation
-  const appCategories = useMemo(() => useAppCategories(), []);
-  const webDevCategories = useMemo(() => useWebDevCategories(), []);
-  const appCardsData = useMemo(() => useAppCards(), []);
-  const webDevCardsData = useMemo(() => useWebDevCards(), []); 
+  // Get data for both service types - call hooks at top level (these hooks already use internal memoization)
+  const appCategories = useAppCategories();
+  const webDevCategories = useWebDevCategories();
+  const appCardsData = useAppCards();
+  const webDevCardsData = useWebDevCards(); 
 
   // Get service info to determine which data to use
   const { data: services, isLoading: servicesLoading, error: servicesError } = useQuery<Service[]>({
