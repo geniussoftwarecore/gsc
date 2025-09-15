@@ -593,7 +593,7 @@ const useWebDevCards = () => {
       images: [],
       ctaLink: '/contact'
     }
-  ];
+  ], [t]);
 };
 
 // Static mobile app cards data - moved outside for performance
