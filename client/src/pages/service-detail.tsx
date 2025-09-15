@@ -1347,6 +1347,16 @@ const ServiceDetailClean = memo(function ServiceDetailClean() {
                 <Button 
                   size="lg" 
                   className="flex-1 sm:flex-none"
+                  onClick={() => handleApplyNow(app)}
+                  data-testid="button-apply-now-modal"
+                >
+                  <CheckCircle className="h-4 w-4 mr-2" />
+                  <span>التقدم الآن</span>
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="flex-1 sm:flex-none"
                   onClick={() => setLocation('/contact')}
                   data-testid="button-contact-us"
                 >
